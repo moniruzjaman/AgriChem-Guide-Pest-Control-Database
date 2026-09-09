@@ -1,0 +1,6 @@
+{
+  "name": "AgriChem Guide & Pest Control Database",
+  "description": "Comprehensive agricultural chemical controls guide, MoA rotation planner, field dosage calculator, safety checklists, and offline field manuals.",
+  "requestFramePermissions": ["notifications"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

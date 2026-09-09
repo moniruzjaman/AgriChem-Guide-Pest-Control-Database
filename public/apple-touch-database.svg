@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>এগ্রিকেম প্রো — রাসায়নিক ডাটাবেস</title>
+    <meta name="description" content="ফসল, বালাই, ট্রেড নাম ও MoA কোড দিয়ে ডিএই নিবন্ধিত বালাইনাশক খুঁজুন। পকেট বুক গাইড ডাউনলোড করুন।" />
+    <meta name="application-name" content="এগ্রিকেম প্রো" />
+    <meta name="apple-mobile-web-app-title" content="এগ্রিকেম প্রো" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#059669" />
+    <meta name="msapplication-TileColor" content="#059669" />
+    <meta name="msapplication-TileImage" content="/icons/apple-touch-default.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/favicon.svg" color="#059669" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:title" content="এগ্রিকেম প্রো — রাসায়নিক ডাটাবেস" />
+    <meta property="og:description" content="ফসল, বালাই, ট্রেড নাম ও MoA কোড দিয়ে ডিএই নিবন্ধিত বালাইনাশক খুঁজুন। পকেট বুক গাইড ডাউনলোড করুন।" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="bn_BD" />
+    <meta property="og:site_name" content="এগ্রিকেম প্রো" />
+    <meta property="og:image" content="/icons/og-bn.svg" />
+    <meta property="og:image:alt" content="এগ্রিকেম প্রো" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="এগ্রিকেম প্রো — রাসায়নিক ডাটাবেস" />
+    <meta name="twitter:description" content="ফসল, বালাই, ট্রেড নাম ও MoA কোড দিয়ে ডিএই নিবন্ধিত বালাইনাশক খুঁজুন। পকেট বুক গাইড ডাউনলোড করুন।" />
+    <meta name="twitter:image" content="/icons/og-bn.svg" />
+    <script>
+      (function() {
+        try {
+          var _origFetch = typeof window !== 'undefined' && window.fetch ? window.fetch.bind(window) : undefined;
+          var _currentFetch = _origFetch;
+          try {
+            Object.defineProperty(window, 'fetch', {
+              get: function() {
+                return _currentFetch || _origFetch;
+              },
+              set: function(val) {
+                _currentFetch = val;
+              },
+              configurable: true,
+              enumerable: true
+            });
+          } catch (e1) {
+            try {
+              var proto = Object.getPrototypeOf(window);
+              while (proto) {
+                var desc = Object.getOwnPropertyDescriptor(proto, 'fetch');
+                if (desc && desc.configurable) {
+                  Object.defineProperty(proto, 'fetch', {
+                    get: function() { return _currentFetch || _origFetch; },
+                    set: function(val) { _currentFetch = val; },
+                    configurable: true,
+                    enumerable: true
+                  });
+                  break;
+                }
+                proto = Object.getPrototypeOf(proto);
+              }
+            } catch (e2) {}
+          }
+        } catch (e) {}
+
+        if (typeof window !== 'undefined') {
+          window.addEventListener('error', function(event) {
+            if (event && event.message && event.message.indexOf('fetch') !== -1 && event.message.indexOf('getter') !== -1) {
+              if (typeof event.preventDefault === 'function') event.preventDefault();
+              if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+              return true;
+            }
+          }, true);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx?t=1788964148923"></script>
+  </body>
+</html>
+
