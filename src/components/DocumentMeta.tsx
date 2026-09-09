@@ -126,7 +126,7 @@ export const DocumentMeta: React.FC<{ activeTab: AppTab }> = ({ activeTab }) => 
     const theme = THEME_COLOR[activeTab] || '#059669';
     const iconPng = `/icons/apple-touch-default.png`;
     const iconSvg = `/favicon.svg`;
-    const ogImage = language === 'bn' ? '/icons/og-bn.svg' : '/icons/og-en.svg';
+    const ogImage = '/icons/og-bn.svg';
     const ogImageAbs = absUrl(ogImage);
 
     document.title = copy.title;

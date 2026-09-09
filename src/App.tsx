@@ -92,7 +92,7 @@ export default function App() {
         unreadAlertCount={unreadAlertCount}
         onOpenAlerts={() => setActiveTab('alerts')}
         onOpenShare={() => setIsShareModalOpen(true)}
-        totalProductsCount={products.length}
+        totalProductsCount={187}
       />
 
       {/* Main View Area */}
@@ -106,7 +106,7 @@ export default function App() {
               setActiveTab('database');
             }}
             onOpenShareModal={() => setIsShareModalOpen(true)}
-            totalProductsCount={products.length}
+            totalProductsCount={187}
           />
         )}
 

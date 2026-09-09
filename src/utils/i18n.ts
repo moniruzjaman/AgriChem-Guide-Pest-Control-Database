@@ -75,7 +75,7 @@ export const UI_TRANSLATIONS: Record<Language, Record<string, string>> = {
     // Header & Brand
     app_title: 'AgriChem Pro',
     app_subtitle: 'Pest & Disease Controls Guide',
-    app_banner: 'Agricultural Chemical Controls Guidebook & Registration Database',
+    app_banner: 'Knowledge Sharing Field Guide — Not an official DAE directive',
     app_tagline: 'IRAC • FRAC • HRAC Resistance Rotation Protocols',
     registered_count_suffix: 'Registered Products',
     offline_ready: 'Offline-Ready Manual',
@@ -196,7 +196,7 @@ export const UI_TRANSLATIONS: Record<Language, Record<string, string>> = {
     // Header & Brand
     app_title: 'এগ্রিকেম প্রো',
     app_subtitle: 'বালাই ও রোগ নিয়ন্ত্রণ নির্দেশিকা',
-    app_banner: 'কৃষি সম্প্রসারণ অধিদপ্তর (DAE) অনুমোদিত বালাইনাশক ডাটাবেস ও ফিল্ড গাইড',
+    app_banner: 'জ্ঞান ভাগাভাগির ফিল্ড গাইড — DAE-এর অফিসিয়াল আদেশ নয়',
     app_tagline: 'আইআরএসি (IRAC) • এফআরএসি (FRAC) • এইচআরএসি (HRAC) প্রতিরোধ ব্যবস্থাপনা',
     registered_count_suffix: 'নিবন্ধিত বালাইনাশক',
     offline_ready: 'অফলাইন ফিল্ড নির্দেশিকা',
