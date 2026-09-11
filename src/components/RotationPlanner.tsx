@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { exportRotationSchedulePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
+import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 
 interface RotationPlannerProps {
   products: ChemicalProduct[];
@@ -173,6 +174,37 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
           </p>
         </div>
       </div>
+
+      {/* Collapsible User Guide */}
+      <CollapsibleUserGuide
+        pageKey="rotation"
+        titleEn="Scientific Spray Rotation Guide"
+        titleBn="বালাইনাশক বৈজ্ঞানিক আবর্তন নির্দেশিকা"
+        subtitleEn="Understand how to rotate chemical groups to prevent insect and fungal resistance mutation."
+        subtitleBn="কীটপতঙ্গ ও ছত্রাকের রোগ প্রতিরোধ ক্ষমতা বা মিউটেশন এড়াতে রাসায়নিক গোত্র পরিবর্তনের নিয়ম।"
+        stepsEn={[
+          "Select your target Crop (e.g., Rice, Tomato) and then select the target Pest or Disease you wish to control.",
+          "The planner will automatically load a recommended sequence of spraying windows (Spray #1, #2, #3, etc.).",
+          "Choose a pesticide brand for each spray window using the dropdown fields.",
+          "Observe the validation status indicators: the system automatically computes IRAC (insecticide), FRAC (fungicide), or HRAC (herbicide) codes.",
+          "If consecutive windows use the same active group code, an Amber Conflict warning will trigger - change one chemical to resolve."
+        ]}
+        stepsBn={[
+          "প্রথমে লক্ষ্যভুক্ত ফসল (যেমন: ধান, টমেটো) এবং এরপর যে বালাই বা রোগটি দমন করতে চান সেটি নির্বাচন করুন।",
+          "ক্যালকুলেটরটি স্বয়ংক্রিয়ভাবে একটি প্রস্তাবিত পর্যায়ক্রমিক স্প্রে উইন্ডো বা সূচি লোড করবে (স্প্রে #১, #২, #৩ ইত্যাদি)।",
+          "প্রতিটি স্প্রে উইন্ডোর ড্রপডাউন থেকে আপনার পছন্দের বাণিজ্যিক ব্র্যান্ডের বালাইনাশক যুক্ত করুন।",
+          "স্ট্যাটাস ইন্ডিকেটরগুলো লক্ষ করুন: সিস্টেম স্বয়ংক্রিয়ভাবে উপাদানগুলোর IRAC, FRAC বা HRAC বৈজ্ঞানিক গ্রুপ কোড হিসাব করবে।",
+          "পরপর দুটি স্প্রে-তে যদি একই গোত্র বা কোড ব্যবহৃত হয়, তবে আম্বার রঙের 'Conflict' সতর্কতা দেখাবে - সেটি পরিবর্তন করুন।"
+        ]}
+        proTipsEn={[
+          "Resistance is a genetic change. Repeated exposure to group 1A insect-killers will breed insects immune to all 1A chemistry.",
+          "Always check the MoA code on physical packaging. It is displayed clearly on the label header (e.g. 'FRAC Group 11')."
+        ]}
+        proTipsBn={[
+          "বালাইয়ের রেজিসট্যান্স ক্ষমতা একটি বংশগত পরিবর্তন। বারবার একই ওষুধ ছিটানো হলে ক্ষতিকর পোকারা ইমিউন হয়ে যায়।",
+          "বাস্তব বোতল বা প্যাকেটের লেবেলের মাথায় ইংরেজি বড় হরফে MoA কোড যেমন: 'FRAC Group 11' বা 'Group 1A' লেখা থাকে।"
+        ]}
+      />
 
       {/* Selection Control Panel */}
       <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs grid grid-cols-1 md:grid-cols-2 gap-6">

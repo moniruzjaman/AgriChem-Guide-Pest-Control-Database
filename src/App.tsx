@@ -14,6 +14,7 @@ import { SafetyView } from './components/SafetyView';
 import { Guidebook } from './components/Guidebook';
 import { NotificationCenter } from './components/NotificationCenter';
 import { DocumentMeta } from './components/DocumentMeta';
+import { NavigationDrawer } from './components/NavigationDrawer';
 import { useLanguage } from './context/LanguageContext';
 import { 
   Leaf, 
@@ -31,10 +32,44 @@ import {
 
 export default function App() {
   const { language } = useLanguage();
-  const [products] = useState<ChemicalProduct[]>(PESTICIDES_DATABASE);
+  const [products, setProducts] = useState<ChemicalProduct[]>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('agrichem_custom_products');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved) as ChemicalProduct[];
+          const existingNos = new Set(PESTICIDES_DATABASE.map(p => p.registrationNo.toLowerCase().trim()));
+          const filteredParsed = parsed.filter(p => p.registrationNo && !existingNos.has(p.registrationNo.toLowerCase().trim()));
+          return [...PESTICIDES_DATABASE, ...filteredParsed];
+        } catch (e) {
+          console.warn('Failed to parse custom products:', e);
+        }
+      }
+    }
+    return PESTICIDES_DATABASE;
+  });
+
+  const handleUpdateProducts = (newProducts: ChemicalProduct[]) => {
+    const baseRegNos = new Set(PESTICIDES_DATABASE.map(p => p.registrationNo.toLowerCase().trim()));
+    const customOnly = newProducts.filter(p => p.registrationNo && !baseRegNos.has(p.registrationNo.toLowerCase().trim()));
+    
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('agrichem_custom_products', JSON.stringify(customOnly));
+    }
+    setProducts(newProducts);
+  };
+
+  const handleResetProducts = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('agrichem_custom_products');
+    }
+    setProducts(PESTICIDES_DATABASE);
+  };
+
   const [activeTab, setActiveTab] = useState<AppTab>('home');
   const [searchQuery, setSearchQuery] = useState('');
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   // Modals state
   const [detailProduct, setDetailProduct] = useState<ChemicalProduct | null>(null);
@@ -92,7 +127,8 @@ export default function App() {
         unreadAlertCount={unreadAlertCount}
         onOpenAlerts={() => setActiveTab('alerts')}
         onOpenShare={() => setIsShareModalOpen(true)}
-        totalProductsCount={187}
+        totalProductsCount={products.length}
+        onOpenDrawer={() => setIsDrawerOpen(true)}
       />
 
       {/* Main View Area */}
@@ -106,7 +142,8 @@ export default function App() {
               setActiveTab('database');
             }}
             onOpenShareModal={() => setIsShareModalOpen(true)}
-            totalProductsCount={187}
+            totalProductsCount={products.length}
+            onOpenDrawer={() => setIsDrawerOpen(true)}
           />
         )}
 
@@ -118,6 +155,8 @@ export default function App() {
             onSelectProduct={(p) => setDetailProduct(p)}
             onOpenCalculator={(p) => setCalcProduct(p)}
             onOpenSafety={(p) => setSafetyProduct(p)}
+            onUpdateProducts={handleUpdateProducts}
+            onResetProducts={handleResetProducts}
           />
         )}
 
@@ -180,6 +219,19 @@ export default function App() {
       </main>
 
       {/* Global Modals */}
+      <NavigationDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        unreadAlertCount={unreadAlertCount}
+        totalProductsCount={products.length}
+        onOpenShare={() => {
+          setIsDrawerOpen(false);
+          setIsShareModalOpen(true);
+        }}
+      />
+
       {detailProduct && (
         <ProductDetailModal
           product={detailProduct}

@@ -12,11 +12,16 @@ import {
   HelpCircle,
   Sprout,
   Clock,
-  Printer
+  Printer,
+  Play,
+  RefreshCw,
+  Check,
+  Sparkles
 } from 'lucide-react';
 import { exportCropGuidePDF } from '../utils/pdfExport';
 import { MOA_DATABASE } from '../data/moaData';
 import { useLanguage } from '../context/LanguageContext';
+import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 
 interface GuidebookProps {
   products: ChemicalProduct[];
@@ -25,6 +30,53 @@ interface GuidebookProps {
 export const Guidebook: React.FC<GuidebookProps> = ({ products }) => {
   const { language, transCrop, formatNum } = useLanguage();
   const [activeChapter, setActiveChapter] = useState<'calibration' | 'resistance' | 'wales' | 'crops' | 'phi'>('crops');
+
+  // WALES simulator states
+  const [walesSelections, setWalesSelections] = useState({
+    wp: true,
+    sc: true,
+    ec: true,
+    st: true
+  });
+  const [simStep, setSimStep] = useState<number>(0); 
+  const [isSimulating, setIsSimulating] = useState(false);
+
+  const runSimulation = () => {
+    if (isSimulating) return;
+    setIsSimulating(true);
+    setSimStep(1); // Half water
+
+    let current = 1;
+    const interval = setInterval(() => {
+      current += 1;
+      
+      // Skip steps if the corresponding formulation is not selected
+      if (current === 2 && !walesSelections.wp) {
+        current = 3; // go to agitation
+      }
+      if (current === 4 && !walesSelections.sc) {
+        current = 5; // go to EC
+      }
+      if (current === 5 && !walesSelections.ec) {
+        current = 6; // go to Sticker
+      }
+      if (current === 6 && !walesSelections.st) {
+        current = 7; // go to Full Water
+      }
+
+      if (current > 7) {
+        clearInterval(interval);
+        setIsSimulating(false);
+      } else {
+        setSimStep(current);
+      }
+    }, 2000);
+  };
+
+  const resetSimulation = () => {
+    setSimStep(0);
+    setIsSimulating(false);
+  };
 
   // Group products by major crop
   const cropsList = ['Rice', 'Potato', 'Mango', 'Tea', 'Brinjal', 'Tomato', 'Jute', 'Stored grain in Rice'];
@@ -48,6 +100,37 @@ export const Guidebook: React.FC<GuidebookProps> = ({ products }) => {
           </p>
         </div>
       </div>
+
+      {/* Collapsible User Guide */}
+      <CollapsibleUserGuide
+        pageKey="guidebook"
+        titleEn="Field Guidebook & W.A.L.E.S. Mixing Guide"
+        titleBn="মাঠ নির্দেশিকা ও W.A.L.E.S. মিক্সিং গাইড"
+        subtitleEn="Learn standard chemical mixing order rules and sprayer calibration guidelines."
+        subtitleBn="সদস্যদের সঠিকভাবে রাসায়নিক মেশানোর বৈজ্ঞানিক অর্ডার এবং স্প্রেয়ার ক্যালিব্রেশন প্রোটোকল জানুন।"
+        stepsEn={[
+          "Navigate through the handbook chapters: Crop Schedules, Sprayer Calibration, Resistance, and W.A.L.E.S. mixing.",
+          "Use the 'Crop Schedules' tab to print or export comprehensive A5 chemical reference sheets for Rice, Potato, Tomato, etc.",
+          "Study the Calibration tab to adjust nozzle flow rates and calculate step-lengths to achieve even mist coverage.",
+          "Observe the W.A.L.E.S. Mixing sequence: Wettable powders first, Agitate next, Liquid flowables third, Emulsifiable concentrates last.",
+          "Apply the Pre-Harvest Interval (PHI) safety counts to protect consumers and meet food export rules."
+        ]}
+        stepsBn={[
+          "নির্দেশিকার চ্যাপ্টারগুলো ব্যবহার করুন: ফসলের চার্ট, স্প্রেয়ার ক্যালিব্রেশন, রেজিসট্যান্স বিজ্ঞান এবং W.A.L.E.S. মিশ্রণ বিধি।",
+          "নির্দিষ্ট ফসলের (যেমন: ধান, আলু, টমেটো) সমন্বিত স্প্রে সময়সূচী ও A5 পকেট বুক ডাউনলোড করতে 'ফসলভিত্তিক সময়সূচী' ট্যাব ব্যবহার করুন।",
+          "সুষম কভার পেতে নোজলের প্রবাহের হার এবং হাটার গতি সামঞ্জস্য করার নিয়ম জানুন।",
+          "বালাইনাশক গোলার বৈজ্ঞানিক ক্রম W.A.L.E.S. মেনে চলুন: প্রথমে পাউডার জাতীয় ওষুধ (W), ভালোমতো নাড়ানো (A), তরল বা লিকুইড (L), সবশেষে ইমালসিফাইড তরল (E.S.)।",
+          "ভোক্তাদের স্বাস্থ্য সুরক্ষিত করতে এবং রফতানি মান বজায় রাখতে PHI এর বৈজ্ঞানিক সময়সূচীগুলো মেনে চলুন।"
+        ]}
+        proTipsEn={[
+          "Following the W.A.L.E.S. protocol prevents chemical reactions that clog nozzles and cause active ingredient precipitation.",
+          "Pesticides should be sprayed in the early morning or late afternoon to avoid wind gusts and high sun degradation."
+        ]}
+        proTipsBn={[
+          "W.A.L.E.S. নিয়ম অনুসরণ করলে রাসায়নিক বিক্রিয়ার কারণে জমাট বেঁধে নোজল জ্যাম বা বন্ধ হওয়ার ঝুঁকি থাকে না।",
+          "তীব্র বাতাস ও রোদের কারণে ওষুধের কার্যকারিতা হ্রাস এড়াতে বালাইনাশক খুব সকালে অথবা পড়ন্ত বিকেলে স্প্রে করুন।"
+        ]}
+      />
 
       {/* Chapter Selection Tabs */}
       <div className="flex space-x-2 border-b border-slate-200 pb-2 overflow-x-auto text-xs font-semibold">
@@ -438,6 +521,219 @@ export const Guidebook: React.FC<GuidebookProps> = ({ products }) => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Interactive W.A.L.E.S. Tank Mixing Sequence Simulator */}
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 md:p-6 space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-teal-600 animate-pulse" />
+                <div>
+                  <h4 className="font-bold text-slate-900 text-sm md:text-base">
+                    {language === 'bn' ? '🧪 ইন্টারেক্টিভ W.A.L.E.S. ট্যাংক মিক্সিং সিমুলেটর' : '🧪 Interactive W.A.L.E.S. Tank Mix Simulator'}
+                  </h4>
+                  <p className="text-[11px] text-slate-500">
+                    {language === 'bn' ? 'মাঠপর্যায়ে ওষুধের বিক্রিয়া ও নজল ব্লকেজ এড়াতে সাহায্য করে' : 'Simulate chemical mixing sequences to avoid nozzle clogging reactions'}
+                  </p>
+                </div>
+              </div>
+              <span className="text-[10px] bg-teal-100 text-teal-800 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                {language === 'bn' ? 'স্মার্ট টুল' : 'Smart Tool'}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+              {/* Formulations Checklist */}
+              <div className="md:col-span-5 space-y-4">
+                <span className="text-xs font-bold text-slate-700 block uppercase tracking-wider">
+                  {language === 'bn' ? '১. ওষুধ নির্বাচন করুন:' : '1. Select Formulations to Mix:'}
+                </span>
+                
+                <div className="space-y-2 text-xs">
+                  <label className="flex items-center gap-2.5 p-2 rounded-lg bg-white border border-slate-100 hover:border-slate-300 transition cursor-pointer">
+                    <input 
+                      type="checkbox" 
+                      checked={walesSelections.wp} 
+                      disabled={isSimulating}
+                      onChange={(e) => setWalesSelections({ ...walesSelections, wp: e.target.checked })}
+                      className="rounded text-teal-600 focus:ring-teal-500 w-4 h-4 cursor-pointer"
+                    />
+                    <div>
+                      <span className="font-bold text-slate-800">[W] WP / WDG / DF</span>
+                      <span className="text-[10px] text-slate-500 block">{language === 'bn' ? 'পাউডার বা দানাদার বালাইনাশক' : 'Dry Powders / Water Dispersible Granules'}</span>
+                    </div>
+                  </label>
+
+                  <label className="flex items-center gap-2.5 p-2 rounded-lg bg-white border border-slate-100 hover:border-slate-300 transition cursor-pointer">
+                    <input 
+                      type="checkbox" 
+                      checked={walesSelections.sc} 
+                      disabled={isSimulating}
+                      onChange={(e) => setWalesSelections({ ...walesSelections, sc: e.target.checked })}
+                      className="rounded text-teal-600 focus:ring-teal-500 w-4 h-4 cursor-pointer"
+                    />
+                    <div>
+                      <span className="font-bold text-slate-800">[L] SC / SL / suspension</span>
+                      <span className="text-[10px] text-slate-500 block">{language === 'bn' ? 'জলীয় তরল প্রবাহী ওষুধ' : 'Liquid Flowables / Soluble Liquids'}</span>
+                    </div>
+                  </label>
+
+                  <label className="flex items-center gap-2.5 p-2 rounded-lg bg-white border border-slate-100 hover:border-slate-300 transition cursor-pointer">
+                    <input 
+                      type="checkbox" 
+                      checked={walesSelections.ec} 
+                      disabled={isSimulating}
+                      onChange={(e) => setWalesSelections({ ...walesSelections, ec: e.target.checked })}
+                      className="rounded text-teal-600 focus:ring-teal-500 w-4 h-4 cursor-pointer"
+                    />
+                    <div>
+                      <span className="font-bold text-slate-800">[E] EC / EW / oil-based</span>
+                      <span className="text-[10px] text-slate-500 block">{language === 'bn' ? 'তেলভিত্তিক ইমালসিফাইয়েবল কনসেন্ট্রেট' : 'Emulsifiable Concentrates / Oil Carriers'}</span>
+                    </div>
+                  </label>
+
+                  <label className="flex items-center gap-2.5 p-2 rounded-lg bg-white border border-slate-100 hover:border-slate-300 transition cursor-pointer">
+                    <input 
+                      type="checkbox" 
+                      checked={walesSelections.st} 
+                      disabled={isSimulating}
+                      onChange={(e) => setWalesSelections({ ...walesSelections, st: e.target.checked })}
+                      className="rounded text-teal-600 focus:ring-teal-500 w-4 h-4 cursor-pointer"
+                    />
+                    <div>
+                      <span className="font-bold text-slate-800">[S] Stickers / Surfactants</span>
+                      <span className="text-[10px] text-slate-500 block">{language === 'bn' ? 'স্টিকার, স্প্রেডার বা লিকুইড পাতা সার' : 'Stickers, Spreaders, Foliar Salts'}</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div className="flex gap-2 pt-2">
+                  <button
+                    onClick={runSimulation}
+                    disabled={isSimulating || (!walesSelections.wp && !walesSelections.sc && !walesSelections.ec && !walesSelections.st)}
+                    className="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold text-xs shadow-xs transition disabled:bg-slate-300 disabled:cursor-not-allowed cursor-pointer"
+                  >
+                    <Play className="w-4 h-4 fill-white" />
+                    <span>{language === 'bn' ? 'সিমুলেশন দেখুন' : 'Start Simulation'}</span>
+                  </button>
+                  <button
+                    onClick={resetSimulation}
+                    className="py-2 px-3 bg-white hover:bg-slate-100 text-slate-600 rounded-xl font-medium text-xs border border-slate-200 transition cursor-pointer"
+                    title={language === 'bn' ? 'পুনরায় সেট করুন' : 'Reset'}
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Animated Beaker & Text Output */}
+              <div className="md:col-span-7 bg-white rounded-2xl border border-slate-200 p-4 flex flex-col sm:flex-row items-center gap-6 shadow-2xs">
+                {/* Simulated Glass Beaker */}
+                <div className="relative w-28 h-40 bg-slate-100/50 rounded-b-2xl border-4 border-slate-300/80 overflow-hidden shrink-0 flex flex-col justify-end shadow-inner">
+                  {/* Water base line / ticks */}
+                  <div className="absolute left-2 right-2 top-8 border-t border-slate-200/50 text-[8px] text-slate-400 font-mono select-none">100%</div>
+                  <div className="absolute left-2 right-2 top-20 border-t border-slate-200/50 text-[8px] text-slate-400 font-mono select-none">50%</div>
+                  
+                  {/* Beaker fluid filling layers */}
+                  {/* Layer 5: Stickers (Teal, top layer) */}
+                  {simStep >= 6 && (
+                    <div className="h-4 bg-teal-400/90 w-full animate-pulse border-b border-teal-300/30 z-40" />
+                  )}
+                  {/* Layer 4: EC (Purple oil sheen) */}
+                  {simStep >= 5 && (
+                    <div className="h-8 bg-purple-400/90 w-full border-b border-purple-300/30 z-30 flex items-center justify-center">
+                      <div className="text-[7px] text-white font-bold select-none uppercase tracking-wide">EC Oil Emulsion</div>
+                    </div>
+                  )}
+                  {/* Layer 3: SC/SL (Liquid suspension, green) */}
+                  {simStep >= 4 && (
+                    <div className="h-10 bg-blue-500/80 w-full border-b border-blue-400/30 z-20 flex items-center justify-center">
+                      <div className="text-[7px] text-white font-bold select-none uppercase tracking-wide">SC Liquid Flowable</div>
+                    </div>
+                  )}
+                  {/* Layer 2: WP (Yellow slurry settled) */}
+                  {simStep >= 2 && simStep !== 3 && (
+                    <div className="h-12 bg-amber-300/90 w-full border-b border-amber-200/30 z-10 flex items-center justify-center relative">
+                      <div className="text-[7px] text-amber-950 font-extrabold select-none uppercase tracking-wide">WP Powder Slurry</div>
+                      {/* Speckles */}
+                      <div className="absolute w-1 h-1 bg-amber-600 rounded-full top-2 left-4 animate-bounce" />
+                      <div className="absolute w-1 h-1 bg-amber-600 rounded-full top-3 right-6 animate-ping" />
+                    </div>
+                  )}
+                  {/* Agitation step - whirlpool effect */}
+                  {simStep === 3 && (
+                    <div className="h-20 bg-blue-400/80 w-full z-20 flex items-center justify-center relative animate-pulse">
+                      <div className="text-[7px] text-white font-extrabold select-none uppercase tracking-widest animate-spin">🌀 AGITATING...</div>
+                    </div>
+                  )}
+                  {/* Layer 1: Water base (Light blue) */}
+                  {simStep >= 1 && (
+                    <div className={`w-full bg-cyan-200/70 ${simStep === 7 ? 'h-full' : 'h-14'} transition-all duration-1000 flex items-end justify-center pb-2`}>
+                      <span className="text-[8px] text-cyan-800 font-semibold uppercase tracking-wider">{language === 'bn' ? 'পানি' : 'Water'}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Simulation Guidance Output */}
+                <div className="flex-1 space-y-2">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">
+                    {language === 'bn' ? `ধাপ ${simStep} / ৭` : `STEP ${simStep} OF 7`}
+                  </span>
+                  
+                  <div className="p-3.5 rounded-xl bg-slate-100 border border-slate-200 min-h-[90px] flex items-center justify-center">
+                    <p className="text-xs font-semibold text-slate-800 leading-relaxed text-center">
+                      {simStep === 0 && (
+                        language === 'bn' 
+                          ? "যে ওষুধগুলো মেশাবেন তা নির্বাচন করুন, তারপর সঠিক এবং নিরাপদ গোলার ক্রম দেখতে 'সিমুলেশন দেখুন' ক্লিক করুন।"
+                          : "Select the formulations you plan to mix, then click 'Start Simulation' to visualize the correct, safe pouring order."
+                      )}
+                      {simStep === 1 && (
+                        language === 'bn'
+                          ? "ধাপ ১: প্রথমে স্প্রে ট্যাংক অর্ধেক (৫০%) পানি দিয়ে পূর্ণ করুন। খালি ট্যাংকে কখনো রাসায়নিক ওষুধ ঢালবেন না!"
+                          : "Step 1: Fill the spray tank 1/2 full with clean water first. Never pour dry chemicals directly into an empty tank!"
+                      )}
+                      {simStep === 2 && (
+                        language === 'bn'
+                          ? "ধাপ ২: প্রথমে পাউডার [WP] বা দানাদার [WDG] ওষুধ যোগ করুন। এগুলোকে বালতিতে আলাদা পানিতে পেস্ট করে ঢালুন এবং সম্পূর্ণ গলতে দিন।"
+                          : "Step 2: Add Wettable Powders [WP] / Granules [WDG] first. Slurry in a bucket with water first, then let dissolve completely."
+                      )}
+                      {simStep === 3 && (
+                        language === 'bn'
+                          ? "ধাপ ৩: ভালোভাবে নাড়ুন (Agitate Thoroughly)! পাউডার যাতে নিচে জমা না হতে পারে তার জন্য অনবরত নাড়তে থাকুন।"
+                          : "Step 3: Agitate thoroughly! Maintain continuous agitation so dry powders dissolve and do not settle."
+                      )}
+                      {simStep === 4 && (
+                        language === 'bn'
+                          ? "ধাপ ৪: এরপর তরল বা লিকুইড সাসপেনশন [SC/SL] ওষুধ মেশান। এগুলো পানির সাথে সহজেই মিশে যাবে।"
+                          : "Step 4: Add Liquid Flowables / Suspension Concentrates [SC] next. They mix smoothly into the water carrier."
+                      )}
+                      {simStep === 5 && (
+                        language === 'bn'
+                          ? "ধাপ ৫: এরপর তেলভিত্তিক বা ইমালসিফাইয়েবল কনসেন্ট্রেট [EC] ওষুধ মেশান। সবশেষে EC মেশালে পাউডারে তেলের আস্তরণ পড়ে না।"
+                          : "Step 5: Add Emulsifiable Concentrates [EC]. Adding oil-based EC last prevents oil coating powder granules, which stops dissolution."
+                      )}
+                      {simStep === 6 && (
+                        language === 'bn'
+                          ? "ধাপ ৬: পাতার সাথে ওষুধের লেগে থাকা ও ছড়ানো বাড়াতে সবশেষে স্টিকার বা স্প্রেডার যোগ করুন।"
+                          : "Step 6: Add Stickers, Spreaders, or Soluble Foliar Salts last to maximize chemical leaf adhesion."
+                      )}
+                      {simStep === 7 && (
+                        language === 'bn'
+                          ? "ধাপ ৭: বাকি অংশ সম্পূর্ণ পানি দিয়ে পূর্ণ করুন। বালাইনাশক এখন সঠিক নিয়মে মিশ্রিত এবং নিরাপদভাবে স্প্রে করার জন্য প্রস্তুত!"
+                          : "Step 7: Fill the remaining tank with water to full volume. Mix is complete, fully dispersed, and safe to spray!"
+                      )}
+                    </p>
+                  </div>
+                  
+                  {simStep === 7 && (
+                    <div className="flex items-center gap-1.5 text-emerald-600 text-[10px] font-bold">
+                      <Check className="w-3.5 h-3.5 text-emerald-500" />
+                      <span>{language === 'bn' ? 'সফলভাবে সম্পন্ন হয়েছে! অবশিষ্টাংশ নেই।' : 'Success! No precipitation chemical danger.'}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="p-4 bg-slate-100 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-1">

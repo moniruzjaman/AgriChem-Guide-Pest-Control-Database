@@ -23,6 +23,7 @@ import {
   checkNotificationSupport 
 } from '../utils/notifications';
 import { useLanguage } from '../context/LanguageContext';
+import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 
 interface NotificationCenterProps {
   alerts: RegulatoryAlert[];
@@ -222,6 +223,37 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Collapsible User Guide */}
+      <CollapsibleUserGuide
+        pageKey="alerts"
+        titleEn="Compliance & Seasonal Alerting Manual"
+        titleBn="কমপ্লায়েন্স ও মৌসুমী সতর্কীকরণ নির্দেশিকা"
+        subtitleEn="Learn how browser push notifications and regulatory updates guard crop health."
+        subtitleBn="ব্রাউজার পুশ নোটিফিকেশন ও নতুন সরকারি প্রবিধান কীভাবে ফসলের সুরক্ষা নিশ্চিত করে তা জানুন।"
+        stepsEn={[
+          "Click 'Enable Device Push Notifications' to receive instant offline alerts on banned pesticides or sudden pest outbreaks.",
+          "Click 'Send Sample Field Alert' to trigger an immediate browser test notification on your screen.",
+          "Filter alerts using the category chips: All, Regulatory (compliance & bans), or Seasonal (pest warnings).",
+          "Select any active alert card to expand, marking it as read and noting the required field action.",
+          "Use 'Schedule Custom Alert' to create pest early warnings for Rice Blast, Late Blight, or sudden crop outbreaks."
+        ]}
+        stepsBn={[
+          "নিষিদ্ধ বালাইনাশক বা আকস্মিক পোকার আক্রমণ সম্পর্কিত অফলাইন পুশ নোটিফিকেশন পেতে 'পুশ নোটিফিকেশন চালু করুন' এ ক্লিক করুন।",
+          "তাত্ক্ষণিকভাবে আপনার স্ক্রিনে একটি ব্রাউজার টেস্ট নোটিফিকেশন পরীক্ষা করতে 'নমুনা পুশ অ্যালার্ট পাঠান' এ ক্লিক করুন।",
+          "অ্যালার্টগুলো ফিল্টার করতে অল, রেগুলেটরি (সরকারি নিষেধাজ্ঞা ও আইন) বা মৌসুমী (বালাই ও রোগ আক্রমণ সতর্কতা) ক্যাটাগরি বেছে নিন।",
+          "যেকোনো সক্রিয় অ্যালার্টে ক্লিক করে বিস্তারিত পড়ুন এবং মাঠে কী করণীয় তা জেনে নিন।",
+          "ধানের ব্লাস্ট, আলুর লেট ব্লাইট বা আবহাওয়াজনিত বালাই সতর্কতা তৈরি করতে 'কাস্টম সতর্কতা যুক্ত করুন' ফর্মটি ব্যবহার করুন।"
+        ]}
+        proTipsEn={[
+          "Regulatory compliance keeps farmers safe from exporting residue-heavy crops. Match alerts against your database selections.",
+          "Push notifications work 100% offline using standard browser Service Workers if installed as a PWA on your device."
+        ]}
+        proTipsBn={[
+          "কমপ্লায়েন্স মেনে চললে অতিরিক্ত বালাইনাশকের অবশিষ্টাংশ মুক্ত রফতানিযোগ্য ফসল উৎপাদন করা সম্ভব হয়।",
+          "আপনার ডিভাইসে পিডব্লিউএ (PWA) ইনস্টল করা থাকলে স্ট্যান্ডার্ড ব্রাউজার সার্ভিস ওয়ার্কারের মাধ্যমে অফলাইনেও পুশ অ্যালার্ট কাজ করবে।"
+        ]}
+      />
 
       {/* Add Custom Alert Drawer / Form */}
       {showAddForm && (
