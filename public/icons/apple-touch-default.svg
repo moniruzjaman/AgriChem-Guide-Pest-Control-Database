@@ -1,16 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#065f46"/>
-      <stop offset="55%" stop-color="#059669"/>
-      <stop offset="100%" stop-color="#0f766e"/>
-    </linearGradient>
-  </defs>
-  <rect width="180" height="180" rx="40" fill="url(#g)"/>
-  <path d="M92 28c38 18 58 58 46 98-8 28-32 42-48 46-16-4-40-18-48-46C30 86 50 46 88 28c1.3-.6 2.7-.6 4 0z" fill="#ecfdf5"/>
-  <path d="M90 44c0 0 2 42 2 78" stroke="#047857" stroke-width="7" stroke-linecap="round" fill="none"/>
-  <path d="M92 72c18 8 28 22 32 36M92 96c-16 8-26 18-30 28" stroke="#047857" stroke-width="5" stroke-linecap="round" fill="none"/>
-  <circle cx="142" cy="142" r="24" fill="#022c22"/>
-  <path d="M134 142h16M142 134v16" stroke="#6ee7b7" stroke-width="3.5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Rounded container background: Bangladesh Green -->
+  <rect width="512" height="512" rx="112" fill="#006a4e"/>
+  
+  <!-- Bangladesh Red Circle (slightly left of center, like the official flag for dynamic balance) -->
+  <circle cx="236" cy="256" r="130" fill="#f42a41"/>
+  
+  <!-- Modern line-art / minimalist chemistry flask combined with a leaf in white -->
+  <g fill="none" stroke="#ffffff" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Erlenmeyer Flask Outline -->
+    <path d="M216 110 h80 M256 110 v80 M180 390 h152 M216 110 v110 L130 390 A 20 20 0 0 0 148 410 h216 a 20 20 0 0 0 18 -20 L296 220 V110" />
+    
+    <!-- Stylized Leaf inside the flask -->
+    <path d="M256 220 C290 260 290 320 256 360 C222 320 222 260 256 220 Z" fill="#ffffff" fill-opacity="0.25" />
+    <path d="M256 220 V360" stroke-width="16" />
+    <path d="M256 270 C270 280 275 295 275 295 M256 300 C238 310 235 325 235 325" stroke-width="16" />
+  </g>
 </svg>

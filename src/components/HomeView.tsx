@@ -287,13 +287,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
       id: 'database' as AppTab,
       titleEn: 'DAE Registered Chemical Database',
       titleBn: 'ডিএই নিবন্ধিত রাসায়নিক ডাটাবেস',
-      subtitleEn: '70+ Approved Formulations & Active Ingredients',
-      subtitleBn: '৭০+ অনুমোদিত সক্রিয় উপাদান ও বাণিজ্য নাম',
+      subtitleEn: '180+ Approved Formulations & Active Ingredients',
+      subtitleBn: '১৮০+ অনুমোদিত সক্রিয় উপাদান ও বাণিজ্য নাম',
       descEn: 'Instant search across Bangladesh DAE-registered insecticides, fungicides, herbicides, and miticides. Includes verified trade names, target pests, label application rates, PHI (Pre-Harvest Interval) and REI safety windows.',
       descBn: 'কৃষি সম্প্রসারণ অধিদপ্তর (DAE) নিবন্ধিত কীটনাশক, ছত্রাকনাশক, আগাছানাশক ও মাকড়নাশকের পূর্ণাঙ্গ তালিকা। অনুমোদিত বাণিজ্য নাম, লক্ষ্য বালাই, প্রতি হেক্টরে সঠিক প্রয়োগ মাত্রা, ফসল তোলার নিরাপদ বিরতি (PHI) ও রি-এন্ট্রি সময়কাল দেখুন।',
       icon: Database,
-      badgeEn: '70+ Dossiers',
-      badgeBn: '৭০+ রাসায়নিক',
+      badgeEn: '180+ Dossiers',
+      badgeBn: '১৮০+ রাসায়নিক',
       themeColor: 'from-emerald-500 to-emerald-700',
       textColor: 'text-emerald-700',
       bgColor: 'bg-emerald-50',
@@ -422,7 +422,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
   return (
     <div className="space-y-12 pb-16">
       {/* 1. HERO SECTION: Summary of Each Feature with Visual Animations */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-slate-900 text-white pt-12 pb-20 px-4 sm:px-6 lg:px-8 border-b border-emerald-800/60 shadow-xl">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#004d2e] via-[#006a4e] to-slate-900 text-white pt-12 pb-20 px-4 sm:px-6 lg:px-8 border-b border-[#f42a41]/40 shadow-xl">
         {/* Subtle decorative background light blurs */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none translate-y-1/3"></div>
@@ -469,11 +469,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
             >
               {language === 'bn' ? (
                 <>
-                  আধুনিক ফসলের <span className="text-emerald-400">বালাই ব্যবস্থাপনা</span> ও নির্ভুল <span className="text-teal-300">রাসায়নিক মাত্রা</span> সহায়িকা
+                  আধুনিক ফসলের <span className="text-emerald-400">বালাই ব্যবস্থাপনা</span> ও নির্ভুল <span className="text-[#f42a41]">রাসায়নিক মাত্রা</span> সহায়িকা
                 </>
               ) : (
                 <>
-                  Precision Agricultural <span className="text-emerald-400">Chemical Guide</span> & Field <span className="text-teal-300">Crop Protection</span>
+                  Precision Agricultural <span className="text-emerald-400">Chemical Guide</span> & Field <span className="text-[#f42a41]">Crop Protection</span>
                 </>
               )}
             </motion.h1>
@@ -511,7 +511,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <button
                 id="hero-cta-database"
                 onClick={() => onNavigateTab('database')}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold text-sm transition shadow-lg shadow-emerald-900/40 cursor-pointer"
+                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#f42a41] hover:bg-[#ff3b52] text-white font-bold text-sm transition shadow-lg shadow-rose-900/40 cursor-pointer"
               >
                 <Database className="w-4 h-4" />
                 <span>{language === 'bn' ? 'রাসায়নিক ডাটাবেস ব্রাউজ করুন' : 'Explore Chemical Database'}</span>
@@ -521,7 +521,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <button
                 id="hero-cta-calculator"
                 onClick={() => onNavigateTab('calculator')}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-800/80 hover:bg-emerald-700/90 border border-emerald-600/50 text-white font-semibold text-sm backdrop-blur-md transition shadow-sm cursor-pointer"
+                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#006a4e] hover:bg-[#00805c] border border-emerald-600/50 text-white font-bold text-sm backdrop-blur-md transition shadow-sm cursor-pointer"
               >
                 <Calculator className="w-4 h-4 text-teal-300" />
                 <span>{language === 'bn' ? 'ট্যাংক মাত্রা ক্যালকুলেটর' : 'Launch Tank Calculator'}</span>
@@ -555,7 +555,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-10 mt-10 border-t border-emerald-800/60"
           >
             <div className="bg-white/5 backdrop-blur-xs rounded-xl p-3.5 border border-white/10">
-              <span className="block text-2xl sm:text-3xl font-black text-emerald-400">
+              <span className="block text-2xl sm:text-3xl font-black text-[#f42a41]">
                 {formatNum(totalProductsCount)}+
               </span>
               <span className="text-xs text-emerald-200/80 font-medium">
@@ -573,7 +573,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
 
             <div className="bg-white/5 backdrop-blur-xs rounded-xl p-3.5 border border-white/10">
-              <span className="block text-2xl sm:text-3xl font-black text-emerald-400">
+              <span className="block text-2xl sm:text-3xl font-black text-[#f42a41]">
                 ১০০%
               </span>
               <span className="text-xs text-emerald-200/80 font-medium">
