@@ -4,8 +4,8 @@
   "description": "Agricultural chemical controls guide, MoA rotation planner, field dosage calculator, safety checklists, and offline pocket book.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#022c22",
-  "theme_color": "#059669",
+  "background_color": "#00281b",
+  "theme_color": "#006a4e",
   "lang": "bn",
   "icons": [
     {

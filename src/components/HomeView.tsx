@@ -16,7 +16,10 @@ import {
   AlertTriangle,
   FileText,
   Compass,
-  RefreshCw
+  RefreshCw,
+  FileDown,
+  Scale,
+  BookMarked
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
@@ -287,13 +290,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
       id: 'database' as AppTab,
       titleEn: 'DAE Registered Chemical Database',
       titleBn: 'ডিএই নিবন্ধিত রাসায়নিক ডাটাবেস',
-      subtitleEn: '70+ Approved Formulations & Active Ingredients',
-      subtitleBn: '৭০+ অনুমোদিত সক্রিয় উপাদান ও বাণিজ্য নাম',
+      subtitleEn: '180+ Approved Formulations & Active Ingredients',
+      subtitleBn: '১৮০+ অনুমোদিত সক্রিয় উপাদান ও বাণিজ্য নাম',
       descEn: 'Instant search across Bangladesh DAE-registered insecticides, fungicides, herbicides, and miticides. Includes verified trade names, target pests, label application rates, PHI (Pre-Harvest Interval) and REI safety windows.',
       descBn: 'কৃষি সম্প্রসারণ অধিদপ্তর (DAE) নিবন্ধিত কীটনাশক, ছত্রাকনাশক, আগাছানাশক ও মাকড়নাশকের পূর্ণাঙ্গ তালিকা। অনুমোদিত বাণিজ্য নাম, লক্ষ্য বালাই, প্রতি হেক্টরে সঠিক প্রয়োগ মাত্রা, ফসল তোলার নিরাপদ বিরতি (PHI) ও রি-এন্ট্রি সময়কাল দেখুন।',
       icon: Database,
-      badgeEn: '70+ Dossiers',
-      badgeBn: '৭০+ রাসায়নিক',
+      badgeEn: '180+ Dossiers',
+      badgeBn: '১৮০+ রাসায়নিক',
       themeColor: 'from-emerald-500 to-emerald-700',
       textColor: 'text-emerald-700',
       bgColor: 'bg-emerald-50',
@@ -422,7 +425,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
   return (
     <div className="space-y-12 pb-16">
       {/* 1. HERO SECTION: Summary of Each Feature with Visual Animations */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-slate-900 text-white pt-12 pb-20 px-4 sm:px-6 lg:px-8 border-b border-emerald-800/60 shadow-xl">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#004d2e] via-[#006a4e] to-slate-900 text-white pt-12 pb-20 px-4 sm:px-6 lg:px-8 border-b border-[#f42a41]/40 shadow-xl">
         {/* Subtle decorative background light blurs */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none translate-y-1/3"></div>
@@ -469,11 +472,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
             >
               {language === 'bn' ? (
                 <>
-                  আধুনিক ফসলের <span className="text-emerald-400">বালাই ব্যবস্থাপনা</span> ও নির্ভুল <span className="text-teal-300">রাসায়নিক মাত্রা</span> সহায়িকা
+                  আধুনিক ফসলের <span className="text-emerald-400">বালাই ব্যবস্থাপনা</span> ও নির্ভুল <span className="text-[#f42a41]">রাসায়নিক মাত্রা</span> সহায়িকা
                 </>
               ) : (
                 <>
-                  Precision Agricultural <span className="text-emerald-400">Chemical Guide</span> & Field <span className="text-teal-300">Crop Protection</span>
+                  Precision Agricultural <span className="text-emerald-400">Chemical Guide</span> & Field <span className="text-[#f42a41]">Crop Protection</span>
                 </>
               )}
             </motion.h1>
@@ -511,7 +514,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <button
                 id="hero-cta-database"
                 onClick={() => onNavigateTab('database')}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold text-sm transition shadow-lg shadow-emerald-900/40 cursor-pointer"
+                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#f42a41] hover:bg-[#ff3b52] text-white font-bold text-sm transition shadow-lg shadow-rose-900/40 cursor-pointer"
               >
                 <Database className="w-4 h-4" />
                 <span>{language === 'bn' ? 'রাসায়নিক ডাটাবেস ব্রাউজ করুন' : 'Explore Chemical Database'}</span>
@@ -521,7 +524,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <button
                 id="hero-cta-calculator"
                 onClick={() => onNavigateTab('calculator')}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-800/80 hover:bg-emerald-700/90 border border-emerald-600/50 text-white font-semibold text-sm backdrop-blur-md transition shadow-sm cursor-pointer"
+                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#006a4e] hover:bg-[#00805c] border border-emerald-600/50 text-white font-bold text-sm backdrop-blur-md transition shadow-sm cursor-pointer"
               >
                 <Calculator className="w-4 h-4 text-teal-300" />
                 <span>{language === 'bn' ? 'ট্যাংক মাত্রা ক্যালকুলেটর' : 'Launch Tank Calculator'}</span>
@@ -555,7 +558,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-10 mt-10 border-t border-emerald-800/60"
           >
             <div className="bg-white/5 backdrop-blur-xs rounded-xl p-3.5 border border-white/10">
-              <span className="block text-2xl sm:text-3xl font-black text-emerald-400">
+              <span className="block text-2xl sm:text-3xl font-black text-[#f42a41]">
                 {formatNum(totalProductsCount)}+
               </span>
               <span className="text-xs text-emerald-200/80 font-medium">
@@ -573,7 +576,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
 
             <div className="bg-white/5 backdrop-blur-xs rounded-xl p-3.5 border border-white/10">
-              <span className="block text-2xl sm:text-3xl font-black text-emerald-400">
+              <span className="block text-2xl sm:text-3xl font-black text-[#f42a41]">
                 ১০০%
               </span>
               <span className="text-xs text-emerald-200/80 font-medium">
@@ -1108,6 +1111,142 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-700 transition-transform group-hover:translate-x-0.5" />
               </button>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4.5 REGULATORY RESOURCES - Official PDF Documents */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-br from-slate-50 to-emerald-50 rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-xs">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 text-amber-800 text-[11px] font-bold border border-amber-200 mb-3">
+                <Scale className="w-3.5 h-3.5 text-amber-600" />
+                <span>{language === 'bn' ? 'আফিসিয়াল নিয়ামক সংস্থান' : 'Official Regulatory Resources'}</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+                {language === 'bn' ? 'প্রধান সরকারি আইন ও হাতের খাতা ডাউনলোড করুন' : 'Download Key Government Acts & Field Handbooks'}
+              </h3>
+              <p className="text-xs text-slate-600 mt-1 max-w-2xl">
+                {language === 'bn' 
+                  ? 'কৃষি মন্ত্রণালয় ও ডিএই অনুমোদিত অফিসিয়াল নথিগুলো আপনার ডিভাইসে সংরক্ষণ করুন। অফলাইনে মাঠে কাজ করার সময় সহজে রেফারেন্স হিসেবে ব্যবহার করুন।' 
+                  : 'Save official documents from the Ministry of Agriculture and DAE to your device. Reference them offline during field operations.'}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <button
+                onClick={() => onNavigateTab('guidebook')}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-sm transition cursor-pointer"
+              >
+                <BookOpen className="w-4 h-4" />
+                <span>{language === 'bn' ? 'গাইডবুক দেখুন' : 'View Guidebook'}</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Pesticide Act 2018 */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col shadow-sm hover:shadow-md transition-all">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-14 h-14 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center shrink-0">
+                  <Scale className="w-7 h-7 text-red-600" />
+                </div>
+                <div className="flex-1">
+                  <span className="text-[10px] uppercase font-bold text-red-700 tracking-wider block mb-1">
+                    {language === 'bn' ? 'কানুন ও বিধি' : 'Act & Legislation'}
+                  </span>
+                  <h4 className="font-bold text-lg text-slate-900">
+                    {language === 'bn' ? 'বালাইনাশক নিয়ন্ত্রণ আইন, ২০১৮' : 'The Pesticide Control Act, 2018'}
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {language === 'bn' 
+                      ? 'বাংলাদেশ সরকার, কৃষি মন্ত্রণালয়, কৃষি সম্প্রসারণ অধিদপ্তর (DAE) অনুমোদিত অফিসিয়াল নথি। বালাইনাশক নিবন্ধন, বিক্রয়, প্রজাতন্ত্র ও ব্যবহার নিয়ন্ত্রণের সম্পূর্ণ আইনি কাঠামো।' 
+                      : 'Government of Bangladesh, Ministry of Agriculture, Department of Agricultural Extension (DAE) official document. Complete legal framework for pesticide registration, sale, distribution, and usage control in Bangladesh.'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3 text-xs text-slate-600 border-t border-slate-100 pt-4 flex-1">
+                <div className="flex items-center gap-2 text-slate-700">
+                  <FileText className="w-3.5 h-3.5 text-slate-400" />
+                  <span className="font-medium">{language === 'bn' ? 'বিষয়বস্তু:' : 'Contents:'}</span>
+                </div>
+                <ul className="space-y-1.5 pl-5 list-disc text-slate-600">
+                  <li>{language === 'bn' ? 'বালাইনাশক নিবন্ধন প্রক্রিয়া ও শর্তাবলী' : 'Pesticide registration procedures & conditions'}</li>
+                  <li>{language === 'bn' ? 'লাইসেন্সিং: উত্পাদন, আমদানি, বিক্রয় ও বিতরণ' : 'Licensing: Manufacturing, import, sale & distribution'}</li>
+                  <li>{language === 'bn' ? 'গুণগত মান নিয়ন্ত্রণ ও ল্যাবেলিং নিয়মাবলী' : 'Quality control standards & labeling requirements'}</li>
+                  <li>{language === 'bn' ? 'নিষিদ্ধ ও সীমাবদ্ধ বালাইনাশকের তালিকা ও আপডেট' : 'Banned & restricted pesticide lists & updates'}</li>
+                  <li>{language === 'bn' ? 'আইন লঙ্ঘনের ক্ষেত্রে শাস্তি ও বিচারের বিধান' : 'Penalties & prosecution for violations'}</li>
+                  <li>{language === 'bn' ? 'বিশেষ অধিকারপ্রাপ্ত কর্মকর্তাদের ক্ষমতা ও কর্তব্য' : 'Powers & duties of authorized officers'}</li>
+                </ul>
+              </div>
+
+              <a 
+                href="/pesticide-act-2018.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-sm transition cursor-pointer"
+              >
+                <FileDown className="w-3.5 h-3.5" />
+                <span>{language === 'bn' ? 'আইন, ২০১৮ পিডিএফ ডাউনলোড' : 'Download Pesticide Act 2018 (PDF)'}</span>
+              </a>
+            </div>
+
+            {/* Field Guide */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col shadow-sm hover:shadow-md transition-all">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-14 h-14 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0">
+                  <BookMarked className="w-7 h-7 text-emerald-600" />
+                </div>
+                <div className="flex-1">
+                  <span className="text-[10px] uppercase font-bold text-emerald-700 tracking-wider block mb-1">
+                    {language === 'bn' ? 'ফিল্ড হ্যান্ডবুক' : 'Field Handbook'}
+                  </span>
+                  <h4 className="font-bold text-lg text-slate-900">
+                    {language === 'bn' ? 'কৃষি রাসায়নিক মাঠ নির্দেশিকা' : 'Agricultural Chemical Field Guide'}
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {language === 'bn' 
+                      ? 'মাঠপর্যায়ে কাজ করার জন্য কৃষিবিদ, সম্প্রসারণ কর্মকর্তা ও কৃষকদের জন্য প্র্যাক্টিক্যাল হাতের খাতা। নিরাপদ বালাইনাশক ব্যবহার, ম্যালেশন, ক্যালিব্রেশন ও সুরক্ষা প্রোটোকল।' 
+                      : 'Practical field handbook for agronomists, extension officers, and farmers. Covers safe pesticide handling, mixing protocols, sprayer calibration, PPE standards, and emergency procedures.'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3 text-xs text-slate-600 border-t border-slate-100 pt-4 flex-1">
+                <div className="flex items-center gap-2 text-slate-700">
+                  <FileText className="w-3.5 h-3.5 text-slate-400" />
+                  <span className="font-medium">{language === 'bn' ? 'বিষয়বস্তু:' : 'Contents:'}</span>
+                </div>
+                <ul className="space-y-1.5 pl-5 list-disc text-slate-600">
+                  <li>{language === 'bn' ? 'W.A.L.E.S. ট্যাংক মিক্সিং ক্রম ও নিরাপত্তা নিয়ম' : 'W.A.L.E.S. tank mixing sequence & safety rules'}</li>
+                  <li>{language === 'bn' ? 'ন্যাপস্যাক স্প্রেয়ার ক্যালিব্রেশন পদ্ধতি (৩-ধাপে)' : 'Knapsack sprayer calibration (3-step method)'}</li>
+                  <li>{language === 'bn' ? 'নজল নির্বাচন নির্দেশিকা: ফাঁপা, ফ্ল্যাট ফ্যান, লো-ড্রিফ্ট' : 'Nozzle selection guide: Hollow cone, Flat fan, Low-drift'}</li>
+                  <li>{language === 'bn' ? 'পিপিই (PPE) চেকলিস্ট: গ্লাভস, রেসপিরেটর, গগলস, ওভারল' : 'PPE checklist: Gloves, respirator, goggles, overalls'}</li>
+                  <li>{language === 'bn' ? 'প্রতিরোধ ব্যবস্থাপনা: IRAC, FRAC, HRAC ঘূর্ণন কৌশল' : 'Resistance management: IRAC, FRAC, HRAC rotations'}</li>
+                  <li>{language === 'bn' ? 'জরুরি বিষক্রিয়া চিকিৎসা ও প্র 備考 primeras auxilios' : 'Emergency poisoning first aid & response'}</li>
+                </ul>
+              </div>
+
+              <a 
+                href="/field-guide.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm transition cursor-pointer"
+              >
+                <FileDown className="w-3.5 h-3.5" />
+                <span>{language === 'bn' ? 'ফিল্ড গাইড পিডিএফ ডাউনলোড' : 'Download Field Guide (PDF)'}</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Disclaimer */}
+          <div className="mt-6 pt-4 border-t border-slate-200/60">
+            <p className="text-[10px] text-slate-500 text-center leading-relaxed">
+              {language === 'bn' 
+                ? '⚠️ সূত্র: বাংলাদেশ সরকার, কৃষি মন্ত্রণালয়, কৃষি সম্প্রসারণ অধিদপ্তর (DAE)। সর্বশেষ সংশোধন ও আপডেটের জন্য অফিসিয়াল ওয়েবসাইট দেখুন। এই নথিগুলো শুধুমাত্র রেফারেন্স উদ্দেশ্যে প্রদান করা হয়েছে।' 
+                : '⚠️ Source: Government of Bangladesh, Ministry of Agriculture, Dept. of Agricultural Extension (DAE). Check official websites for latest amendments. These documents are provided for reference purposes only.'}
+            </p>
           </div>
         </div>
       </section>

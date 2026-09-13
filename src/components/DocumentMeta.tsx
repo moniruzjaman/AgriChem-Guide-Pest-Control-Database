@@ -3,13 +3,13 @@ import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
 
 const THEME_COLOR: Record<AppTab, string> = {
-  home: '#059669',
-  database: '#059669',
-  calculator: '#0d9488',
-  rotation: '#2563eb',
-  safety: '#475569',
-  guidebook: '#15803d',
-  alerts: '#d97706'
+  home: '#006a4e',
+  database: '#006a4e',
+  calculator: '#006a4e',
+  rotation: '#f42a41',
+  safety: '#006a4e',
+  guidebook: '#006a4e',
+  alerts: '#f42a41'
 };
 
 const TAB_META: Record<AppTab, {
@@ -19,11 +19,11 @@ const TAB_META: Record<AppTab, {
   home: {
     en: {
       title: 'AgriChem Pro — Smart Crop Chemical & Pest Management Suite',
-      description: 'All-in-one agricultural platform: 70+ DAE pesticides, Knapsack sprayer tank calculator, MoA resistance rotation planner, WHO safety protocols, and offline pocket guidebook.'
+      description: 'All-in-one agricultural platform: 180+ DAE pesticides, Knapsack sprayer tank calculator, MoA resistance rotation planner, WHO safety protocols, and offline pocket guidebook.'
     },
     bn: {
       title: 'এগ্রিকেম প্রো — আধুনিক বালাই ব্যবস্থাপনা ও সঠিক রাসায়নিক মাত্রা সহায়িকা',
-      description: 'বাংলাদেশের মাঠ ফসলের জন্য ডিএই নিবন্ধিত ৭০+ বালাইনাশক ডাটাবেস, ন্যাপস্যাক স্প্রেয়ার ট্যাংক ক্যালকুলেটর, প্রতিরোধ রোধে MoA রোটেশন ও বিনামূল্যে পকেট বুক ম্যানুয়াল।'
+      description: 'বাংলাদেশের মাঠ ফসলের জন্য ডিএই নিবন্ধিত ১৮০+ বালাইনাশক ডাটাবেস, ন্যাপস্যাক স্প্রেয়ার ট্যাংক ক্যালকুলেটর, প্রতিরোধ রোধে MoA রোটেশন ও বিনামূল্যে পকেট বুক ম্যানুয়াল।'
     }
   },
   database: {
