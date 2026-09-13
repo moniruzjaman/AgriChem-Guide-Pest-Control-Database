@@ -14,6 +14,7 @@ import {
   HelpCircle
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 
 interface DosageCalculatorModalProps {
   products: ChemicalProduct[];
@@ -85,6 +86,37 @@ export const DosageCalculatorModal: React.FC<DosageCalculatorModalProps> = ({
 
         {/* Form Body */}
         <div className="p-6 overflow-y-auto space-y-6 text-sm text-slate-700">
+          {/* Collapsible User Guide */}
+          <CollapsibleUserGuide
+            pageKey="calculator"
+            titleEn="Dosage & Tank Calculator Guide"
+            titleBn="ডোজ ও ট্যাংক ক্যালকুলেটর নির্দেশিকা"
+            subtitleEn="Learn how to map chemical concentrations to your land size and knapsack tanks."
+            subtitleBn="জমির পরিমাপ ও ন্যাপস্যাক ট্যাংকের জন্য সঠিক রাসায়নিকের অনুপাত হিসাব করার নিয়ম।"
+            stepsEn={[
+              "Select the chemical product you intend to spray from the drop-down selector.",
+              "Input your crop area and select the local unit (Shatak/Decimal, Bigha, Acre, Hectare).",
+              "Specify your knapsack sprayer tank capacity (standard sizes are 10L, 16L, or 20L).",
+              "Verify the prescription results: it shows total water required, total refills, and exact dosage per tank.",
+              "Download the field prescription PDF to reference offline while mixing in the field."
+            ]}
+            stepsBn={[
+              "ড্রপ-ডাউন নির্বাচনকারী থেকে আপনার জমিতে ছিটানোর জন্য বালাইনাশকটি বেছে নিন।",
+              "আপনার জমির পরিমাপ লিখুন এবং স্থানীয় একক (শতক/শতাংশ, বিঘা, একর, হেক্টর) নির্বাচন করুন।",
+              "আপনার ন্যাপস্যাক স্প্রেয়ারের ট্যাংকের ধারণক্ষমতা নির্দিষ্ট করুন (সাধারণত ১০L, ১৬L বা ২০L হয়)।",
+              "ফলাফল যাচাই করুন: এতে মোট কত লিটার পানি লাগবে, কতবার ট্যাংক রিফিল করতে হবে এবং প্রতি ট্যাংকে কতটুকু ওষুধ মেশাতে হবে তা দেখাবে।",
+              "মাঠে ইন্টারনেট ছাড়া ব্যবহারের সুবিধার্থে প্রেসক্রিপশনের ডাউনলোডযোগ্য PDF টি সংরক্ষণ করুন।"
+            ]}
+            proTipsEn={[
+              "Bangladesh agricultural standard dilutes approximately 500 liters of water per hectare for standard field crops.",
+              "Do not estimate chemical portions by sight - always use a calibrated measuring cup/spoon for accuracy."
+            ]}
+            proTipsBn={[
+              "বাংলাদেশ কৃষি সম্প্রসারণ অধিদপ্তরের সাধারণ নিয়ম অনুযায়ী মাঠের ফসলে প্রতি হেক্টরে প্রায় ৫০০ লিটার পানি ব্যবহার করা হয়।",
+              "চোখের আন্দাজে ওষুধ মাপবেন না - সর্বদা প্যাকেট বা বোতলের সাথে সরবরাহকৃত পরিমাপক কাপ বা চামচ ব্যবহার করুন।"
+            ]}
+          />
+
           {/* Chemical Selector */}
           <div>
             <label className="text-xs font-semibold text-slate-700 block mb-1.5">

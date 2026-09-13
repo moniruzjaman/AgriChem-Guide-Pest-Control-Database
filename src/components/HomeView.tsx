@@ -15,11 +15,16 @@ import {
   FlaskConical, 
   AlertTriangle,
   FileText,
-  Compass
+  Compass,
+  RefreshCw,
+  FileDown,
+  Scale,
+  BookMarked
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
 import { ChemicalProduct, AppTab } from '../types';
+import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 
 interface HomeViewProps {
   products: ChemicalProduct[];
@@ -27,6 +32,7 @@ interface HomeViewProps {
   onSelectCropFilter: (crop: string) => void;
   onOpenShareModal: () => void;
   totalProductsCount: number;
+  onOpenDrawer: () => void;
 }
 
 export const HomeView: React.FC<HomeViewProps> = ({
@@ -34,10 +40,239 @@ export const HomeView: React.FC<HomeViewProps> = ({
   onNavigateTab,
   onSelectCropFilter,
   onOpenShareModal,
-  totalProductsCount
+  totalProductsCount,
+  onOpenDrawer
 }) => {
   const { language, t, formatNum, transCrop } = useLanguage();
   const [activePreviewFeature, setActivePreviewFeature] = useState<number>(0);
+
+  // Offline PWA Sync Status States
+  const [isOnline, setIsOnline] = useState(typeof window !== 'undefined' ? window.navigator.onLine : true);
+  const [syncStatus, setSyncStatus] = useState<'idle' | 'checking' | 'success'>('idle');
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  const handleTriggerSync = () => {
+    setSyncStatus('checking');
+    setTimeout(() => {
+      setSyncStatus('success');
+      setTimeout(() => setSyncStatus('idle'), 2000);
+    }, 1200);
+  };
+
+  // Quick Field Diagnostic Matcher States
+  const [selectedDiagCrop, setSelectedDiagCrop] = useState<'Rice' | 'Potato' | 'Tomato' | 'Mango'>('Rice');
+  const [selectedSymptomId, setSelectedSymptomId] = useState<string>('blast');
+
+  const diagnosticData: Record<string, {
+    cropNameEn: string;
+    cropNameBn: string;
+    symptoms: {
+      id: string;
+      titleEn: string;
+      titleBn: string;
+      symptomEn: string;
+      symptomBn: string;
+      diagnosisEn: string;
+      diagnosisBn: string;
+      ingredientEn: string;
+      ingredientBn: string;
+      moaEn: string;
+      moaBn: string;
+      rateEn: string;
+      rateBn: string;
+      phiEn: string;
+      phiBn: string;
+    }[];
+  }> = {
+    Rice: {
+      cropNameEn: "Rice",
+      cropNameBn: "ধান",
+      symptoms: [
+        {
+          id: "blast",
+          titleEn: "Leaf Blast Disease",
+          titleBn: "ধানের ব্লাস্ট রোগ",
+          symptomEn: "Diamond or eye-shaped spots on leaves, grey centers with reddish-brown margins. Severe cases lead to neck rot and blank heads.",
+          symptomBn: "পাতায় চোখ বা হীরা আকৃতির দাগ, মাঝখানে ধূসর ও চারপাশ বাদামী রঙের ক্ষতের সৃষ্টি হয়। মারাত্মক আক্রমণে গলার অংশ পচে বা শুকিয়ে শীষ ভেঙে পড়ে।",
+          diagnosisEn: "Rice Blast (Magnaporthe oryzae / Pyricularia oryzae fungus)",
+          diagnosisBn: "ধানের ব্লাস্ট রোগ (ছত্রাকজনিত বালাই)",
+          ingredientEn: "Tricyclazole (e.g. Trooper 75 WP) or Pyroquilon",
+          ingredientBn: "ট্রাইসাইক্লাজল অথবা পাইরোকুইলন",
+          moaEn: "FRAC Group 16.1 / 16.2 (Melanin Biosynthesis Inhibitor - MBI)",
+          moaBn: "FRAC গ্রুপ ১৬.১ / ১৬.২ (মেলানিন তৈরি বাধাগ্রস্তকারী)",
+          rateEn: "0.8g per Litre of water (approx. 13g per 16L Knapsack tank)",
+          rateBn: "০.৮ গ্রাম প্রতি লিটার পানি (১৬ লিটার স্প্রেয়ারে প্রায় ১৩ গ্রাম)",
+          phiEn: "21 Days safe pre-harvest interval",
+          phiBn: "ফসল তোলার ২১ দিন পূর্বে স্প্রে বন্ধ করুন"
+        },
+        {
+          id: "bph",
+          titleEn: "Brown Plant Hopper (BPH)",
+          titleBn: "বাদামী গাছ ফড়িং (কারেন্ট পোকা)",
+          symptomEn: "Circular patches of dried, straw-colored rice plants. Large numbers of tiny brown bugs visible at the base of the stems.",
+          symptomBn: "ধান খেতে বৃত্তাকার আকারে গাছ হঠাৎ শুকিয়ে খড়ের মতো পুড়ে যাওয়া রং ধারণ করে। গাছের গোড়ায় শত শত ছোট ছোট বাদামী ফড়িং বা পোকা দেখা যায়।",
+          diagnosisEn: "Brown Plant Hopper (Nilaparvata lugens)",
+          diagnosisBn: "বাদামী গাছ ফড়িং / কারেন্ট পোকা (শোষক পোকা বালাই)",
+          ingredientEn: "Pymetrozine (e.g. Plenum 50 WG) or Imidacloprid",
+          ingredientBn: "পাইমেট্রোজিন অথবা ইমিডাক্লোপ্রিড",
+          moaEn: "IRAC Group 9B / 4A (Selective Feeding Blocker / Neonicotinoid)",
+          moaBn: "IRAC গ্রুপ ৯বি / ৪এ (আহার বন্ধকারী / স্নায়ুতন্ত্রের নিকোটিনিক রিসেপ্টর ব্লক)",
+          rateEn: "0.6g per Litre of water (approx. 10g per 16L Knapsack tank)",
+          rateBn: "০.৬ গ্রাম প্রতি লিটার পানি (১৬ লিটার স্প্রেয়ারে ১০ গ্রাম)",
+          phiEn: "14 Days safe pre-harvest interval",
+          phiBn: "ফসল তোলার ১৪ দিন পূর্বে স্প্রে বন্ধ করুন"
+        },
+        {
+          id: "stemborer",
+          titleEn: "Yellow Stem Borer",
+          titleBn: "ধানের মাজরা পোকা",
+          symptomEn: "Dead central leaf whorl in vegetative stage ('dead heart') or white, papery, empty grain heads in reproductive stage ('white head').",
+          symptomBn: "বাড়ন্ত অবস্থায় মাঝখানের কুশি শুকিয়ে যায় যাকে 'ডেড হার্ট' বলে। শীষ আসার পর সমস্ত দানা চিটা ও সাদা হয়ে খড়া থাকে যাকে 'হোয়াইট হেড' বলে।",
+          diagnosisEn: "Yellow Stem Borer (Scirpophaga incertulas larva)",
+          diagnosisBn: "ধানের হলুদ মাজরা পোকা (লার্ভা আক্রান্ত বালাই)",
+          ingredientEn: "Cartap Hydrochloride (e.g. Suntaf 50 SP) or Chlorantraniliprole",
+          ingredientBn: "কারটাপ হাইড্রোক্লোরাইড অথবা ক্লোরেন্ট্রানিলিপ্রোল",
+          moaEn: "IRAC Group 14 / 28 (Nicotinic acetylcholine receptor blocker / Ryanodine receptor modulator)",
+          moaBn: "IRAC গ্রুপ ১৪ / ২৮ (নিকোটিনিক রিসেপ্টর ব্লকার / পেশী সংকোচন সংকেত বন্ধকারী)",
+          rateEn: "2.0g per Litre (Cartap) or 0.15g per Litre",
+          rateBn: "২.০ গ্রাম প্রতি লিটার (কারটাপ) অথবা ০.১৫ গ্রাম প্রতি লিটার",
+          phiEn: "21 Days safe pre-harvest interval",
+          phiBn: "ফসল তোলার ২১ দিন পূর্বে স্প্রে বন্ধ করুন"
+        }
+      ]
+    },
+    Potato: {
+      cropNameEn: "Potato",
+      cropNameBn: "আলু",
+      symptoms: [
+        {
+          id: "lateblight",
+          titleEn: "Late Blight Disease",
+          titleBn: "আলুর লেট ব্লাইট (মড়ক)",
+          symptomEn: "Rapidly spreading water-soaked dark green/brown spots starting at tips. Fuzzy white mold grows on the underside of leaves under high moisture.",
+          symptomBn: "পাতার ডগা থেকে শুরু হওয়া দ্রুত ছড়িয়ে পড়া ভেজা পচা গন্ধযুক্ত কালচে দাগ। কুয়াশাচ্ছন্ন ও স্যাঁতসেঁতে আবহাওয়ায় পাতার নিচে সাদা সুতার মতো ছত্রাক জন্মে।",
+          diagnosisEn: "Late Blight (Phytophthora infestans oomycete - highly destructive)",
+          diagnosisBn: "আলুর লেট ব্লাইট / মড়ক রোগ (উওমাইসিট বালাই)",
+          ingredientEn: "Mancozeb + Metalaxyl (e.g. Ridomil Gold) or Cymoxanil",
+          ingredientBn: "ম্যানকোজেব + মেটালাক্সিল অথবা সাইমোক্সানিল",
+          moaEn: "FRAC Group M03 + 4 (Multi-site contact activity + Systemic RNA Polymerase I)",
+          moaBn: "FRAC গ্রুপ M03 + ৪ (বহু-মুখী কন্টাক্ট অ্যাকশন + সিস্টেমিক আরএনএ পলিমারেজ ১)",
+          rateEn: "2.0g per Litre of water (approx. 32g per 16L Knapsack tank)",
+          rateBn: "২.০ গ্রাম প্রতি লিটার (১৬ লিটার স্প্রেয়ারে ৩২ গ্রাম)",
+          phiEn: "14 Days safe pre-harvest interval",
+          phiBn: "আলু তোলার ১৪ দিন পূর্বে স্প্রে বন্ধ করুন"
+        },
+        {
+          id: "earlyblight",
+          titleEn: "Early Blight Disease",
+          titleBn: "আলুর আগাম ধসা রোগ",
+          symptomEn: "Target-board like concentric dark rings or spots on older leaves near the base of the plant.",
+          symptomBn: "গাছের নিচের বয়স্ক পাতায় লক্ষ্যবস্তু বা টার্গেট-বোর্ডের মতো বৃত্তাকার বলয়যুক্ত কালচে বা বাদামী দাগ দেখা যায়।",
+          diagnosisEn: "Early Blight (Alternaria solani fungus)",
+          diagnosisBn: "আলুর আগাম ধসা রোগ (অল্টারনারিয়া ছত্রাকজনিত বালাই)",
+          ingredientEn: "Difenoconazole + Azoxystrobin (e.g. Amistar Top)",
+          ingredientBn: "ডিফেনোকোনাজল + অ্যাজক্সিস্ট্রবিন",
+          moaEn: "FRAC Group 3 + 11 (Demethylation Inhibitor - DMI + Quinone Outside Inhibitor - QoI)",
+          moaBn: "FRAC গ্রুপ ৩ + ১১ (স্টেরল বায়োসিন্থেসিস দমন + কুইনোন রেসপিরেটরি বাধা)",
+          rateEn: "1.0ml per Litre of water (approx. 16ml per 16L Knapsack tank)",
+          rateBn: "১.০ মিলি প্রতি লিটার (১৬ লিটার স্প্রেয়ারে ১৬ মিলি)",
+          phiEn: "14 Days safe pre-harvest interval",
+          phiBn: "আলু তোলার ১৪ দিন পূর্বে স্প্রে বন্ধ করুন"
+        }
+      ]
+    },
+    Tomato: {
+      cropNameEn: "Tomato",
+      cropNameBn: "টমেটো",
+      symptoms: [
+        {
+          id: "leafminer",
+          titleEn: "Tuta absoluta Leaf Miner",
+          titleBn: "টমেটোর টুটা পাতা সুরঙ্গকারী",
+          symptomEn: "Large white blotchy mines or galleries in the leaves. Small holes at the base of tomatoes with dark frass.",
+          symptomBn: "পাতার মাঝে বড় সুড়ঙ্গ বা গ্যালারির মতো ফ্যাকাশে দাগ। টমেটোর বোঁটার চারপাশে বা গায়ে ছোট ছিদ্র এবং কালো রঙের বিষ্ঠা দেখা যায়।",
+          diagnosisEn: "Tuta absoluta (South American Tomato Pinworm larva)",
+          diagnosisBn: "টমেটোর টুটা অ্যাবসোলুটা পোকা (লার্ভা বালাই)",
+          ingredientEn: "Emamectin Benzoate (e.g. Proclaim 5 SG) or Spinosad",
+          ingredientBn: "এমামেক্টিন বেনজয়েট অথবা স্পিনোস্যাড",
+          moaEn: "IRAC Group 6 / 5 (Glutamate-gated chloride channel activator / Nicotinic acetylcholine modulator)",
+          moaBn: "IRAC গ্রুপ ৬ / ৫ (স্নায়ুতন্ত্র ও পেশী পক্ষাঘাতকারী এবং কর্ডোটোনাল অ্যাক্টিভেটর)",
+          rateEn: "1.0g per Litre (Emamectin) or 0.4ml per Litre",
+          rateBn: "১.০ গ্রাম প্রতি লিটার (এমামেক্টিন) অথবা ০.৪ মিলি প্রতি লিটার",
+          phiEn: "7 Days short safe pre-harvest interval",
+          phiBn: "টমেটো তোলার ৭ দিন পূর্বে স্প্রে বন্ধ করুন"
+        },
+        {
+          id: "wilt",
+          titleEn: "Bacterial Wilt",
+          titleBn: "টমেটোর ব্যাকটেরিয়াজনিত ঢলে পড়া",
+          symptomEn: "Rapid wilting of entire plant during daytime while leaves remain green. Stems show brown discoloration when cut.",
+          symptomBn: "সবুজ পাতা থাকা সত্ত্বেও দিনের বেলায় হঠাৎ সম্পূর্ণ গাছটি ঢলে পড়ে ও মরে যায়। আক্রান্ত কাণ্ড কাটলে ভেতরের নালী বাদামী রঙের দেখায়।",
+          diagnosisEn: "Bacterial Wilt (Ralstonia solanacearum bacteria)",
+          diagnosisBn: "টমেটোর ব্যাকটেরিয়াজনিত ঢলে পড়া রোগ (ব্যাকটেরিয়া বালাই)",
+          ingredientEn: "Copper Oxychloride (e.g. Cupravit) + Agricultural Streptomycin",
+          ingredientBn: "কপার অক্সিক্লোরাইড এবং কৃষিজাত স্ট্রেপ্টোমাইসিন সালফেট",
+          moaEn: "FRAC Group M01 (Multi-site inorganic copper) + FRAC Group 25 (Hexopyranoside antibiotic)",
+          moaBn: "FRAC গ্রুপ M01 (মাল্টি-সাইট কপার) + FRAC গ্রুপ ২৫ (অ্যান্টিবায়োটিক দমন)",
+          rateEn: "4.0g per Litre of water (Copper Oxychloride)",
+          rateBn: "৪.০ গ্রাম প্রতি লিটার পানি (কপার অক্সিক্লোরাইড)",
+          phiEn: "7 Days safe pre-harvest interval",
+          phiBn: "টমেটো তোলার ৭ দিন পূর্বে স্প্রে বন্ধ করুন"
+        }
+      ]
+    },
+    Mango: {
+      cropNameEn: "Mango",
+      cropNameBn: "আম",
+      symptoms: [
+        {
+          id: "hopper",
+          titleEn: "Mango Hopper Insect",
+          titleBn: "আমের হপার পোকা",
+          symptomEn: "Large numbers of tiny brown wedge-shaped insects jumping from flower panicles. Black sticky honey-dew soot on leaves.",
+          symptomBn: "মুকুল ও কচি ডালে বসে রস চুষে খাওয়া শত শত ছোট ধূসর-বাদামী পোকা। পাতা ও মুকুলে আঠালো তরল নিঃসৃত করে যার ওপর কালো ছাইয়ের মতো ছত্রাক জন্মে।",
+          diagnosisEn: "Mango Leaf Hopper (Idioscopus clypealis)",
+          diagnosisBn: "আমের শোষক হপার পোকা (রস চোষক বালাই)",
+          ingredientEn: "Imidacloprid (e.g. Admire) or Thiamethoxam",
+          ingredientBn: "ইমিডাক্লোপ্রিড অথবা থায়ামেথক্সাম",
+          moaEn: "IRAC Group 4A (Neonicotinoid Systemic Insecticide)",
+          moaBn: "IRAC গ্রুপ ৪এ (পদ্ধতিগত অন্তর্বাহী শোষক নিষ্ক্রিয়কারী)",
+          rateEn: "0.25ml or 0.2g per Litre of water",
+          rateBn: "০.২৫ মিলি অথবা ০.২ গ্রাম প্রতি লিটার পানি",
+          phiEn: "14 Days safe pre-harvest interval",
+          phiBn: "ফল সংগ্রহের ১৪ দিন পূর্বে স্প্রে বন্ধ করুন"
+        },
+        {
+          id: "anthracnose",
+          titleEn: "Mango Anthracnose",
+          titleBn: "আমের অ্যানথ্রাকনোজ (কালো দাগ)",
+          symptomEn: "Irregular black or dark brown spots on flowers, young leaves, and developing green mangoes causing fruit drop.",
+          symptomBn: "মুকুল, পাতা ও কচি আমের ওপর ছোট কালো বা কালচে বাদামী রঙের ছোপ ছোপ পচা দাগ পড়ে যার কারণে ফল ঝরে যায়।",
+          diagnosisEn: "Mango Anthracnose (Colletotrichum gloeosporioides fungus)",
+          diagnosisBn: "আমের অ্যানথ্রাকনোজ রোগ (ছত্রাকজনিত কালো পচা বালাই)",
+          ingredientEn: "Carbendazim (e.g. Autostin) or Azoxystrobin",
+          ingredientBn: "কার্বেন্ডাজিম অথবা অ্যাজক্সিস্ট্রবিন",
+          moaEn: "FRAC Group 1 / 11 (MBC - Methyl Benzimidazole Carbamate / QoI)",
+          moaBn: "FRAC গ্রুপ ১ / ১১ (কোষ বিভাজন ব্যাহতকারী / শ্বাস-প্রশ্বাস নিষ্ক্রিয়কারী)",
+          rateEn: "1.0g per Litre (Carbendazim) or 1.0ml per Litre (Azoxystrobin)",
+          rateBn: "১.০ গ্রাম প্রতি লিটার (কার্বেন্ডাজিম) অথবা ১.০ মিলি প্রতি লিটার (অ্যাজক্সিস্ট্রবিন)",
+          phiEn: "15 Days safe pre-harvest interval",
+          phiBn: "ফল সংগ্রহের ১৫ দিন পূর্বে স্প্রে বন্ধ করুন"
+        }
+      ]
+    }
+  };
 
   // Popular crops for quick navigation
   const popularCrops = [
@@ -55,13 +290,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
       id: 'database' as AppTab,
       titleEn: 'DAE Registered Chemical Database',
       titleBn: 'ডিএই নিবন্ধিত রাসায়নিক ডাটাবেস',
-      subtitleEn: '70+ Approved Formulations & Active Ingredients',
-      subtitleBn: '৭০+ অনুমোদিত সক্রিয় উপাদান ও বাণিজ্য নাম',
+      subtitleEn: '180+ Approved Formulations & Active Ingredients',
+      subtitleBn: '১৮০+ অনুমোদিত সক্রিয় উপাদান ও বাণিজ্য নাম',
       descEn: 'Instant search across Bangladesh DAE-registered insecticides, fungicides, herbicides, and miticides. Includes verified trade names, target pests, label application rates, PHI (Pre-Harvest Interval) and REI safety windows.',
       descBn: 'কৃষি সম্প্রসারণ অধিদপ্তর (DAE) নিবন্ধিত কীটনাশক, ছত্রাকনাশক, আগাছানাশক ও মাকড়নাশকের পূর্ণাঙ্গ তালিকা। অনুমোদিত বাণিজ্য নাম, লক্ষ্য বালাই, প্রতি হেক্টরে সঠিক প্রয়োগ মাত্রা, ফসল তোলার নিরাপদ বিরতি (PHI) ও রি-এন্ট্রি সময়কাল দেখুন।',
       icon: Database,
-      badgeEn: '70+ Dossiers',
-      badgeBn: '৭০+ রাসায়নিক',
+      badgeEn: '180+ Dossiers',
+      badgeBn: '১৮০+ রাসায়নিক',
       themeColor: 'from-emerald-500 to-emerald-700',
       textColor: 'text-emerald-700',
       bgColor: 'bg-emerald-50',
@@ -190,7 +425,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
   return (
     <div className="space-y-12 pb-16">
       {/* 1. HERO SECTION: Summary of Each Feature with Visual Animations */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-slate-900 text-white pt-12 pb-20 px-4 sm:px-6 lg:px-8 border-b border-emerald-800/60 shadow-xl">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#004d2e] via-[#006a4e] to-slate-900 text-white pt-12 pb-20 px-4 sm:px-6 lg:px-8 border-b border-[#f42a41]/40 shadow-xl">
         {/* Subtle decorative background light blurs */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none translate-y-1/3"></div>
@@ -237,11 +472,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
             >
               {language === 'bn' ? (
                 <>
-                  আধুনিক ফসলের <span className="text-emerald-400">বালাই ব্যবস্থাপনা</span> ও নির্ভুল <span className="text-teal-300">রাসায়নিক মাত্রা</span> সহায়িকা
+                  আধুনিক ফসলের <span className="text-emerald-400">বালাই ব্যবস্থাপনা</span> ও নির্ভুল <span className="text-[#f42a41]">রাসায়নিক মাত্রা</span> সহায়িকা
                 </>
               ) : (
                 <>
-                  Precision Agricultural <span className="text-emerald-400">Chemical Guide</span> & Field <span className="text-teal-300">Crop Protection</span>
+                  Precision Agricultural <span className="text-emerald-400">Chemical Guide</span> & Field <span className="text-[#f42a41]">Crop Protection</span>
                 </>
               )}
             </motion.h1>
@@ -267,9 +502,19 @@ export const HomeView: React.FC<HomeViewProps> = ({
               className="flex flex-wrap items-center gap-3 pt-2"
             >
               <button
+                id="hero-cta-drawer"
+                onClick={onOpenDrawer}
+                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold text-sm transition shadow-lg shadow-amber-500/20 cursor-pointer"
+              >
+                <Compass className="w-4 h-4 text-amber-950" />
+                <span>{language === 'bn' ? 'দিকনির্দেশক গাইড মেনু' : 'Guide Menu Drawer'}</span>
+                <span className="bg-amber-600/25 text-amber-950 px-1.5 py-0.2 rounded text-[10px] font-black">New</span>
+              </button>
+
+              <button
                 id="hero-cta-database"
                 onClick={() => onNavigateTab('database')}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold text-sm transition shadow-lg shadow-emerald-900/40 cursor-pointer"
+                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#f42a41] hover:bg-[#ff3b52] text-white font-bold text-sm transition shadow-lg shadow-rose-900/40 cursor-pointer"
               >
                 <Database className="w-4 h-4" />
                 <span>{language === 'bn' ? 'রাসায়নিক ডাটাবেস ব্রাউজ করুন' : 'Explore Chemical Database'}</span>
@@ -279,7 +524,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <button
                 id="hero-cta-calculator"
                 onClick={() => onNavigateTab('calculator')}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-emerald-800/80 hover:bg-emerald-700/90 border border-emerald-600/50 text-white font-semibold text-sm backdrop-blur-md transition shadow-sm cursor-pointer"
+                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#006a4e] hover:bg-[#00805c] border border-emerald-600/50 text-white font-bold text-sm backdrop-blur-md transition shadow-sm cursor-pointer"
               >
                 <Calculator className="w-4 h-4 text-teal-300" />
                 <span>{language === 'bn' ? 'ট্যাংক মাত্রা ক্যালকুলেটর' : 'Launch Tank Calculator'}</span>
@@ -313,7 +558,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-10 mt-10 border-t border-emerald-800/60"
           >
             <div className="bg-white/5 backdrop-blur-xs rounded-xl p-3.5 border border-white/10">
-              <span className="block text-2xl sm:text-3xl font-black text-emerald-400">
+              <span className="block text-2xl sm:text-3xl font-black text-[#f42a41]">
                 {formatNum(totalProductsCount)}+
               </span>
               <span className="text-xs text-emerald-200/80 font-medium">
@@ -331,7 +576,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
 
             <div className="bg-white/5 backdrop-blur-xs rounded-xl p-3.5 border border-white/10">
-              <span className="block text-2xl sm:text-3xl font-black text-emerald-400">
+              <span className="block text-2xl sm:text-3xl font-black text-[#f42a41]">
                 ১০০%
               </span>
               <span className="text-xs text-emerald-200/80 font-medium">
@@ -347,6 +592,59 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 {language === 'bn' ? 'IRAC / FRAC / HRAC মানদণ্ড' : 'Scientific MoA Standards'}
               </span>
             </div>
+          </motion.div>
+
+          {/* PWA offline/online & Sync Status widget */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-6 flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 text-xs backdrop-blur-md"
+          >
+            <div className="flex flex-wrap items-center gap-3">
+              {isOnline ? (
+                <span className="flex items-center gap-1.5 text-emerald-300 font-bold bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  {language === 'bn' ? 'সিস্টেম অনলাইন' : 'System Online'}
+                </span>
+              ) : (
+                <span className="flex items-center gap-1.5 text-amber-300 font-bold bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20 animate-pulse">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+                  {language === 'bn' ? 'অফলাইন মোড সক্রিয়' : 'Offline Mode Active'}
+                </span>
+              )}
+              <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
+              <p className="text-emerald-100/90 font-medium">
+                {language === 'bn' 
+                  ? 'লোকাল ডেটাবেস ক্যাশ: ১৮৭টি ডিএই নিবন্ধিত রাসায়নিক সক্রিয় রয়েছে।' 
+                  : 'Local PWA Cache: DAE Registered Chemical Formulations Securely Cached.'}
+              </p>
+            </div>
+
+            <button
+              onClick={handleTriggerSync}
+              disabled={syncStatus === 'checking'}
+              className="flex items-center gap-2 px-3.5 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg font-semibold text-[11px] border border-white/10 transition disabled:opacity-50 cursor-pointer"
+            >
+              {syncStatus === 'idle' && (
+                <>
+                  <RefreshCw className="w-3.5 h-3.5 text-emerald-300" />
+                  <span>{language === 'bn' ? 'ক্যাশ রি-ভ্যালিডেট করুন' : 'Verify Local Integrity'}</span>
+                </>
+              )}
+              {syncStatus === 'checking' && (
+                <>
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin text-amber-300" />
+                  <span>{language === 'bn' ? 'যাচাই করা হচ্ছে...' : 'Checking Cache Integrity...'}</span>
+                </>
+              )}
+              {syncStatus === 'success' && (
+                <>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{language === 'bn' ? 'লোকাল ক্যাশ সচল ও নিরাপদ!' : 'Local Cache 100% Validated!'}</span>
+                </>
+              )}
+            </button>
           </motion.div>
         </div>
       </section>
@@ -365,6 +663,39 @@ export const HomeView: React.FC<HomeViewProps> = ({
               ? 'নিচে প্রতিটি ফিচারের সংক্ষিপ্ত বিবরণ দেওয়া হলো। প্রয়োজনীয় যেকোনো টুলে সরাসরি প্রবেশ করতে কার্ডটিতে ক্লিক করুন।' 
               : 'Explore each specialized tool designed to elevate farming safety, field precision, and crop protection.'}
           </p>
+        </div>
+
+        {/* Collapsible User Guide */}
+        <div className="mb-8">
+          <CollapsibleUserGuide
+            pageKey="home"
+            titleEn="AgriChem Pro Field Suite Guide"
+            titleBn="অ্যাগ্রিকেম প্রো স্যুট গাইড ও ভূমিকা"
+            subtitleEn="Learn how to navigate our integrated offline-first crop protection toolkit."
+            subtitleBn="আমাদের সমন্বিত অফলাইন ফসল সুরক্ষা টুলের সঠিক ব্যবহার ও সঠিক নেভিগেশন জানুন।"
+            stepsEn={[
+              "Open the Guide Menu Drawer (Compass button) at any time to see your recommended field spray workflow.",
+              "Search registered products, check Pre-Harvest Intervals (PHI), and view active ingredients in the Chemical Database.",
+              "Use the Knapsack Sprayer Dosage Calculator before mixing to avoid under-dosage or crop toxicity.",
+              "Coordinate anti-resistance schedules in the MoA Rotation Planner to maintain chemical effectiveness.",
+              "Check the WHO Hazard Classes and PPE Safety gear before stepping onto your farmland."
+            ]}
+            stepsBn={[
+              "দিকনির্দেশক গাইড মেনু ড্রয়ার (Compass বোতাম) যেকোনো সময় খুলে আপনার বৈজ্ঞানিক স্প্রে কাজের ধাপগুলো দেখুন।",
+              "রাসায়নিক ডাটাবেস থেকে অনুমোদিত বালাইনাশক খুঁজুন, ফসল তোলার নিরাপদ বিরতি (PHI) এবং উপাদান পরীক্ষা করুন।",
+              "অতিরিক্ত বা কম মাত্রা এড়াতে ওষুধ মেশানোর পূর্বে ন্যাপস্যাক স্প্রেয়ার ট্যাংক ক্যালকুলেটর ব্যবহার করুন।",
+              "বালাই ও ছত্রাকের রোগ প্রতিরোধ ক্ষমতা বৃদ্ধি দমন করতে MoA রোটেশন প্ল্যানার ব্যবহার করে বৈজ্ঞানিক আবর্তন তৈরি করুন।",
+              "জমিতে ওষুধ ছিটানোর পূর্বে ডব্লিউএইচও (WHO) বিপদ শ্রেণি ও পিপিই (PPE) সুরক্ষামূলক গিয়ার চেকলিস্ট মিলিয়ে নিন।"
+            ]}
+            proTipsEn={[
+              "Always reference the official DAE Registration codes printed on chemical containers.",
+              "This app is a Progressive Web App (PWA) - bookmark it or install to home screen for 100% offline field access."
+            ]}
+            proTipsBn={[
+              "সর্বদা বোতল বা প্যাকেটের গায়ে থাকা সরকারি ডিএই (DAE) নিবন্ধন কোড মিলিয়ে দেখুন।",
+              "এই অ্যাপটি পিডব্লিউএ (PWA) প্রযুক্তি সমৃদ্ধ, অফলাইনে মাঠে ব্যবহারের জন্য মোবাইলের হোম স্ক্রিনে ইনস্টল করে নিন।"
+            ]}
+          />
         </div>
 
         {/* 6 Feature Summary Cards */}
@@ -546,6 +877,198 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
+      {/* 3.5 INTERACTIVE FIELD DIAGNOSTIC MATCH TOOL */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+            <div>
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 text-[11px] font-bold border border-amber-200 mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
+                <span>{language === 'bn' ? 'স্মার্ট ফিল্ড ডায়াগনস্টিক অ্যাসিস্ট্যান্ট' : 'Smart Field Diagnostic Matcher'}</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+                {language === 'bn' ? 'উপসর্গ দেখে বালাই ও সমাধান ম্যাচ করুন' : 'Match Field Symptoms to DAE Solutions'}
+              </h3>
+              <p className="text-xs text-slate-500 mt-1">
+                {language === 'bn' 
+                  ? 'আপনার জমিতে দেখা দেওয়া লক্ষণটি সিলেক্ট করুন এবং সাথে সাথে সঠিক ওষুধ, আন্তর্জাতিক MoA গ্রুপ ও প্রয়োগ মাত্রা জেনে নিন।' 
+                  : 'Select your crop and click any observed leaf or pest symptom to instantly pull up verified active ingredients, dosage rates, and safety windows.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Left Box: Crop Selector Tabs & Symptoms Grid */}
+            <div className="lg:col-span-5 space-y-6">
+              {/* Crop Tabs */}
+              <div className="flex rounded-xl bg-slate-100 p-1">
+                {(Object.keys(diagnosticData) as Array<keyof typeof diagnosticData>).map((cropKey) => (
+                  <button
+                    key={cropKey}
+                    onClick={() => {
+                      setSelectedDiagCrop(cropKey);
+                      setSelectedSymptomId(diagnosticData[cropKey].symptoms[0].id);
+                    }}
+                    className={`flex-1 text-center py-2.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+                      selectedDiagCrop === cropKey
+                        ? 'bg-white text-emerald-800 shadow-sm'
+                        : 'text-slate-600 hover:text-emerald-700'
+                    }`}
+                  >
+                    {language === 'bn' ? diagnosticData[cropKey].cropNameBn : diagnosticData[cropKey].cropNameEn}
+                  </button>
+                ))}
+              </div>
+
+              {/* Symptoms Accordion/Grid */}
+              <div className="space-y-3">
+                <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  {language === 'bn' ? 'লক্ষণ বা উপসর্গ সমূহ' : 'Observed Symptoms'}
+                </span>
+                <div className="grid grid-cols-1 gap-2.5">
+                  {diagnosticData[selectedDiagCrop].symptoms.map((symptom) => {
+                    const isSelected = selectedSymptomId === symptom.id;
+                    return (
+                      <button
+                        key={symptom.id}
+                        onClick={() => setSelectedSymptomId(symptom.id)}
+                        className={`w-full text-left p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex items-start gap-3.5 ${
+                          isSelected
+                            ? 'bg-emerald-50 border-emerald-500/80 shadow-2xs'
+                            : 'bg-white hover:bg-slate-50 border-slate-200'
+                        }`}
+                      >
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${
+                          isSelected ? 'bg-emerald-100 text-emerald-700 border-emerald-300' : 'bg-slate-100 text-slate-500 border-slate-200'
+                        }`}>
+                          <AlertTriangle className="w-4 h-4" />
+                        </div>
+                        <div className="space-y-1">
+                          <span className={`block text-xs font-bold ${isSelected ? 'text-emerald-950' : 'text-slate-900'}`}>
+                            {language === 'bn' ? symptom.titleBn : symptom.titleEn}
+                          </span>
+                          <span className="block text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
+                            {language === 'bn' ? symptom.symptomBn : symptom.symptomEn}
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Box: Actionable Diagnosis Details */}
+            <div className="lg:col-span-7">
+              {(() => {
+                const activeSymptom = diagnosticData[selectedDiagCrop].symptoms.find(s => s.id === selectedSymptomId);
+                if (!activeSymptom) return null;
+                return (
+                  <motion.div
+                    key={activeSymptom.id}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="h-full bg-slate-50 rounded-2xl border border-slate-200 p-6 flex flex-col justify-between"
+                  >
+                    <div className="space-y-5">
+                      {/* Diagnostic Title Header */}
+                      <div className="flex items-start justify-between gap-4 pb-4 border-b border-slate-200">
+                        <div>
+                          <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider block">
+                            {language === 'bn' ? 'সম্ভাব্য রোগ / আক্রমণকারী বালাই' : 'Verified Field Diagnosis'}
+                          </span>
+                          <h4 className="text-lg font-extrabold text-slate-900 mt-0.5">
+                            {language === 'bn' ? activeSymptom.diagnosisBn : activeSymptom.diagnosisEn}
+                          </h4>
+                        </div>
+                        <span className="bg-rose-50 border border-rose-200 text-rose-800 text-[10px] font-bold px-2.5 py-1 rounded-md shrink-0">
+                          {language === 'bn' ? 'জরুরি সমাধান' : 'High Priority'}
+                        </span>
+                      </div>
+
+                      {/* Symptom Full Text */}
+                      <div>
+                        <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider block mb-1">
+                          {language === 'bn' ? 'লক্ষণ বিবরণ' : 'Observed Symptoms Description'}
+                        </span>
+                        <p className="text-xs text-slate-700 leading-relaxed bg-white border border-slate-200/80 p-3 rounded-xl">
+                          {language === 'bn' ? activeSymptom.symptomBn : activeSymptom.symptomEn}
+                        </p>
+                      </div>
+
+                      {/* Ingredient and Moa details */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-2xs">
+                          <span className="text-[10px] uppercase font-bold text-emerald-800 tracking-wider block mb-1">
+                            {language === 'bn' ? 'সুপারিশকৃত সক্রিয় উপাদান' : 'Recommended Active Ingredient'}
+                          </span>
+                          <span className="text-xs font-extrabold text-slate-900">
+                            {language === 'bn' ? activeSymptom.ingredientBn : activeSymptom.ingredientEn}
+                          </span>
+                        </div>
+
+                        <div className="bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-2xs">
+                          <span className="text-[10px] uppercase font-bold text-blue-800 tracking-wider block mb-1">
+                            {language === 'bn' ? 'আন্তর্জাতিক MoA গ্রুপ' : 'Scientific MoA Grouping'}
+                          </span>
+                          <span className="text-xs font-bold text-slate-900 block">
+                            {language === 'bn' ? activeSymptom.moaBn : activeSymptom.moaEn}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Dosage rate and PHI details */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="bg-emerald-50/50 p-3.5 rounded-xl border border-emerald-100 shadow-2xs">
+                          <span className="text-[10px] uppercase font-bold text-emerald-800 tracking-wider block mb-1">
+                            {language === 'bn' ? 'সুপারিশকৃত প্রয়োগ মাত্রা (প্রতি লিটার)' : 'Field Dosage Rate (per Litre)'}
+                          </span>
+                          <span className="text-xs font-extrabold text-emerald-950">
+                            {language === 'bn' ? activeSymptom.rateBn : activeSymptom.rateEn}
+                          </span>
+                        </div>
+
+                        <div className="bg-amber-50/50 p-3.5 rounded-xl border border-amber-100 shadow-2xs">
+                          <span className="text-[10px] uppercase font-bold text-amber-800 tracking-wider block mb-1">
+                            {language === 'bn' ? 'ফসল তোলার নিরাপদ বিরতি (PHI)' : 'Pre-Harvest Interval (PHI)'}
+                          </span>
+                          <span className="text-xs font-extrabold text-amber-950 block">
+                            {language === 'bn' ? activeSymptom.phiBn : activeSymptom.phiEn}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Quick Database Search Action Button */}
+                    <div className="mt-6 pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                      <p className="text-[10px] text-slate-500 font-medium text-center sm:text-left">
+                        {language === 'bn'
+                          ? 'নিচের বোতামটিতে ক্লিক করলে সরাসরি এই সক্রিয় উপাদানটি ডাটাবেসে সার্চ হয়ে অনুমোদিত ব্র্যান্ডগুলোর তালিকা দেখাবে।'
+                          : 'Click below to instantly query the chemical database for this active ingredient and explore registered brand trade names.'}
+                      </p>
+                      <button
+                        onClick={() => {
+                          const queryVal = activeSymptom.ingredientEn.includes(' or ')
+                            ? activeSymptom.ingredientEn.split(' or ')[0]
+                            : activeSymptom.ingredientEn.split(' (')[0];
+                          onSelectCropFilter(queryVal);
+                        }}
+                        className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm transition cursor-pointer"
+                      >
+                        <Database className="w-4 h-4 text-emerald-100" />
+                        <span>{language === 'bn' ? 'অনুমোদিত ব্র্যান্ডসমূহ দেখুন' : 'Explore Approved Brands'}</span>
+                        <ArrowRight className="w-3.5 h-3.5 text-emerald-200" />
+                      </button>
+                    </div>
+                  </motion.div>
+                );
+              })()}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 4. QUICK POPULAR CROPS SHORTCUTS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
@@ -588,6 +1111,142 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-700 transition-transform group-hover:translate-x-0.5" />
               </button>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4.5 REGULATORY RESOURCES - Official PDF Documents */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-br from-slate-50 to-emerald-50 rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-xs">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 text-amber-800 text-[11px] font-bold border border-amber-200 mb-3">
+                <Scale className="w-3.5 h-3.5 text-amber-600" />
+                <span>{language === 'bn' ? 'আফিসিয়াল নিয়ামক সংস্থান' : 'Official Regulatory Resources'}</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+                {language === 'bn' ? 'প্রধান সরকারি আইন ও হাতের খাতা ডাউনলোড করুন' : 'Download Key Government Acts & Field Handbooks'}
+              </h3>
+              <p className="text-xs text-slate-600 mt-1 max-w-2xl">
+                {language === 'bn' 
+                  ? 'কৃষি মন্ত্রণালয় ও ডিএই অনুমোদিত অফিসিয়াল নথিগুলো আপনার ডিভাইসে সংরক্ষণ করুন। অফলাইনে মাঠে কাজ করার সময় সহজে রেফারেন্স হিসেবে ব্যবহার করুন।' 
+                  : 'Save official documents from the Ministry of Agriculture and DAE to your device. Reference them offline during field operations.'}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <button
+                onClick={() => onNavigateTab('guidebook')}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-sm transition cursor-pointer"
+              >
+                <BookOpen className="w-4 h-4" />
+                <span>{language === 'bn' ? 'গাইডবুক দেখুন' : 'View Guidebook'}</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Pesticide Act 2018 */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col shadow-sm hover:shadow-md transition-all">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-14 h-14 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center shrink-0">
+                  <Scale className="w-7 h-7 text-red-600" />
+                </div>
+                <div className="flex-1">
+                  <span className="text-[10px] uppercase font-bold text-red-700 tracking-wider block mb-1">
+                    {language === 'bn' ? 'কানুন ও বিধি' : 'Act & Legislation'}
+                  </span>
+                  <h4 className="font-bold text-lg text-slate-900">
+                    {language === 'bn' ? 'বালাইনাশক নিয়ন্ত্রণ আইন, ২০১৮' : 'The Pesticide Control Act, 2018'}
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {language === 'bn' 
+                      ? 'বাংলাদেশ সরকার, কৃষি মন্ত্রণালয়, কৃষি সম্প্রসারণ অধিদপ্তর (DAE) অনুমোদিত অফিসিয়াল নথি। বালাইনাশক নিবন্ধন, বিক্রয়, প্রজাতন্ত্র ও ব্যবহার নিয়ন্ত্রণের সম্পূর্ণ আইনি কাঠামো।' 
+                      : 'Government of Bangladesh, Ministry of Agriculture, Department of Agricultural Extension (DAE) official document. Complete legal framework for pesticide registration, sale, distribution, and usage control in Bangladesh.'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3 text-xs text-slate-600 border-t border-slate-100 pt-4 flex-1">
+                <div className="flex items-center gap-2 text-slate-700">
+                  <FileText className="w-3.5 h-3.5 text-slate-400" />
+                  <span className="font-medium">{language === 'bn' ? 'বিষয়বস্তু:' : 'Contents:'}</span>
+                </div>
+                <ul className="space-y-1.5 pl-5 list-disc text-slate-600">
+                  <li>{language === 'bn' ? 'বালাইনাশক নিবন্ধন প্রক্রিয়া ও শর্তাবলী' : 'Pesticide registration procedures & conditions'}</li>
+                  <li>{language === 'bn' ? 'লাইসেন্সিং: উত্পাদন, আমদানি, বিক্রয় ও বিতরণ' : 'Licensing: Manufacturing, import, sale & distribution'}</li>
+                  <li>{language === 'bn' ? 'গুণগত মান নিয়ন্ত্রণ ও ল্যাবেলিং নিয়মাবলী' : 'Quality control standards & labeling requirements'}</li>
+                  <li>{language === 'bn' ? 'নিষিদ্ধ ও সীমাবদ্ধ বালাইনাশকের তালিকা ও আপডেট' : 'Banned & restricted pesticide lists & updates'}</li>
+                  <li>{language === 'bn' ? 'আইন লঙ্ঘনের ক্ষেত্রে শাস্তি ও বিচারের বিধান' : 'Penalties & prosecution for violations'}</li>
+                  <li>{language === 'bn' ? 'বিশেষ অধিকারপ্রাপ্ত কর্মকর্তাদের ক্ষমতা ও কর্তব্য' : 'Powers & duties of authorized officers'}</li>
+                </ul>
+              </div>
+
+              <a 
+                href="/pesticide-act-2018.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-sm transition cursor-pointer"
+              >
+                <FileDown className="w-3.5 h-3.5" />
+                <span>{language === 'bn' ? 'আইন, ২০১৮ পিডিএফ ডাউনলোড' : 'Download Pesticide Act 2018 (PDF)'}</span>
+              </a>
+            </div>
+
+            {/* Field Guide */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col shadow-sm hover:shadow-md transition-all">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-14 h-14 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0">
+                  <BookMarked className="w-7 h-7 text-emerald-600" />
+                </div>
+                <div className="flex-1">
+                  <span className="text-[10px] uppercase font-bold text-emerald-700 tracking-wider block mb-1">
+                    {language === 'bn' ? 'ফিল্ড হ্যান্ডবুক' : 'Field Handbook'}
+                  </span>
+                  <h4 className="font-bold text-lg text-slate-900">
+                    {language === 'bn' ? 'কৃষি রাসায়নিক মাঠ নির্দেশিকা' : 'Agricultural Chemical Field Guide'}
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {language === 'bn' 
+                      ? 'মাঠপর্যায়ে কাজ করার জন্য কৃষিবিদ, সম্প্রসারণ কর্মকর্তা ও কৃষকদের জন্য প্র্যাক্টিক্যাল হাতের খাতা। নিরাপদ বালাইনাশক ব্যবহার, ম্যালেশন, ক্যালিব্রেশন ও সুরক্ষা প্রোটোকল।' 
+                      : 'Practical field handbook for agronomists, extension officers, and farmers. Covers safe pesticide handling, mixing protocols, sprayer calibration, PPE standards, and emergency procedures.'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3 text-xs text-slate-600 border-t border-slate-100 pt-4 flex-1">
+                <div className="flex items-center gap-2 text-slate-700">
+                  <FileText className="w-3.5 h-3.5 text-slate-400" />
+                  <span className="font-medium">{language === 'bn' ? 'বিষয়বস্তু:' : 'Contents:'}</span>
+                </div>
+                <ul className="space-y-1.5 pl-5 list-disc text-slate-600">
+                  <li>{language === 'bn' ? 'W.A.L.E.S. ট্যাংক মিক্সিং ক্রম ও নিরাপত্তা নিয়ম' : 'W.A.L.E.S. tank mixing sequence & safety rules'}</li>
+                  <li>{language === 'bn' ? 'ন্যাপস্যাক স্প্রেয়ার ক্যালিব্রেশন পদ্ধতি (৩-ধাপে)' : 'Knapsack sprayer calibration (3-step method)'}</li>
+                  <li>{language === 'bn' ? 'নজল নির্বাচন নির্দেশিকা: ফাঁপা, ফ্ল্যাট ফ্যান, লো-ড্রিফ্ট' : 'Nozzle selection guide: Hollow cone, Flat fan, Low-drift'}</li>
+                  <li>{language === 'bn' ? 'পিপিই (PPE) চেকলিস্ট: গ্লাভস, রেসপিরেটর, গগলস, ওভারল' : 'PPE checklist: Gloves, respirator, goggles, overalls'}</li>
+                  <li>{language === 'bn' ? 'প্রতিরোধ ব্যবস্থাপনা: IRAC, FRAC, HRAC ঘূর্ণন কৌশল' : 'Resistance management: IRAC, FRAC, HRAC rotations'}</li>
+                  <li>{language === 'bn' ? 'জরুরি বিষক্রিয়া চিকিৎসা ও প্র 備考 primeras auxilios' : 'Emergency poisoning first aid & response'}</li>
+                </ul>
+              </div>
+
+              <a 
+                href="/field-guide.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm transition cursor-pointer"
+              >
+                <FileDown className="w-3.5 h-3.5" />
+                <span>{language === 'bn' ? 'ফিল্ড গাইড পিডিএফ ডাউনলোড' : 'Download Field Guide (PDF)'}</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Disclaimer */}
+          <div className="mt-6 pt-4 border-t border-slate-200/60">
+            <p className="text-[10px] text-slate-500 text-center leading-relaxed">
+              {language === 'bn' 
+                ? '⚠️ সূত্র: বাংলাদেশ সরকার, কৃষি মন্ত্রণালয়, কৃষি সম্প্রসারণ অধিদপ্তর (DAE)। সর্বশেষ সংশোধন ও আপডেটের জন্য অফিসিয়াল ওয়েবসাইট দেখুন। এই নথিগুলো শুধুমাত্র রেফারেন্স উদ্দেশ্যে প্রদান করা হয়েছে।' 
+                : '⚠️ Source: Government of Bangladesh, Ministry of Agriculture, Dept. of Agricultural Extension (DAE). Check official websites for latest amendments. These documents are provided for reference purposes only.'}
+            </p>
           </div>
         </div>
       </section>

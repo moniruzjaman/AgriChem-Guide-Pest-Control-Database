@@ -12,7 +12,9 @@ import {
   Download,
   Search,
   Languages,
-  Share2
+  Share2,
+  Compass,
+  Menu
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
@@ -27,6 +29,7 @@ interface NavbarProps {
   onOpenAlerts: () => void;
   onOpenShare: () => void;
   totalProductsCount: number;
+  onOpenDrawer: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -37,14 +40,29 @@ export const Navbar: React.FC<NavbarProps> = ({
   unreadAlertCount,
   onOpenAlerts,
   onOpenShare,
-  totalProductsCount
+  totalProductsCount,
+  onOpenDrawer
 }) => {
   const { language, toggleLanguage, t, formatNum } = useLanguage();
+  const navRef = React.useRef<HTMLElement>(null);
+
+  React.useEffect(() => {
+    if (navRef.current) {
+      const activeEl = navRef.current.querySelector(`#tab-btn-${activeTab}`);
+      if (activeEl) {
+        activeEl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
+    }
+  }, [activeTab]);
 
   return (
     <header className="sticky top-0 z-30 bg-white border-b border-slate-200 shadow-xs">
       {/* Top Banner */}
-      <div className="bg-emerald-900 text-emerald-100 text-xs px-4 py-1.5 flex flex-wrap justify-between items-center gap-2">
+      <div className="bg-[#006a4e] text-emerald-100 text-xs px-4 py-1.5 flex flex-wrap justify-between items-center gap-2 border-b-2 border-[#f42a41]">
         <div className="flex items-center gap-2">
           <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span className="font-medium text-white">{t('app_banner')}</span>
@@ -62,23 +80,36 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Main Header Row */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
-          {/* Logo / Brand */}
-          <div 
-            id="brand-logo"
-            className="flex items-center gap-3 cursor-pointer select-none shrink-0" 
-            onClick={() => setActiveTab('home')}
-          >
-            <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm">
-              <Leaf className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-lg text-slate-900 tracking-tight leading-none">{t('app_title')}</span>
-                <span className="text-xs font-semibold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">
-                  {language === 'bn' ? 'প্রো' : 'Pro'}
-                </span>
+          <div className="flex items-center gap-3">
+            {/* Drawer Hamburger Toggle */}
+            <button
+              id="navbar-drawer-hamburger"
+              onClick={onOpenDrawer}
+              className="p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-emerald-800 transition shadow-2xs cursor-pointer select-none"
+              title={language === 'bn' ? 'নেভিগেশন গাইড ড্রয়ার খুলুন' : 'Open Navigation Guide Drawer'}
+            >
+              <Menu className="w-5 h-5 text-emerald-700" />
+            </button>
+
+            {/* Logo / Brand */}
+            <div 
+              id="brand-logo"
+              className="flex items-center gap-3 cursor-pointer select-none shrink-0" 
+              onClick={() => setActiveTab('home')}
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#006a4e] text-white flex items-center justify-center shadow-sm relative overflow-hidden">
+                <div className="absolute w-5 h-5 rounded-full bg-[#f42a41] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                <Leaf className="w-5 h-5 text-white relative z-10" />
               </div>
-              <p className="text-[11px] text-slate-500 font-medium">{t('app_subtitle')}</p>
+              <div>
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-lg text-slate-900 tracking-tight leading-none">{t('app_title')}</span>
+                  <span className="text-xs font-semibold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                    {language === 'bn' ? 'প্রো' : 'Pro'}
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-500 font-medium">{t('app_subtitle')}</p>
+              </div>
             </div>
           </div>
 
@@ -158,15 +189,15 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Navigation Tabs Bar */}
-        <nav className="flex space-x-1 sm:space-x-2 overflow-x-auto pb-2 scrollbar-none text-sm font-medium border-t border-slate-100 pt-2">
+        <nav ref={navRef} className="flex space-x-1 sm:space-x-2 overflow-x-auto pb-2 scrollbar-none text-sm font-medium border-t border-slate-100 pt-2 items-center">
           {/* Home Tab */}
           <button
             id="tab-btn-home"
             onClick={() => setActiveTab('home')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer ${
               activeTab === 'home'
-                ? 'bg-emerald-600 text-white shadow-xs font-bold'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
+                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
             }`}
           >
             <Home className="w-4 h-4" />
@@ -178,8 +209,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setActiveTab('database')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer ${
               activeTab === 'database'
-                ? 'bg-emerald-600 text-white shadow-xs font-bold'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
+                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
             }`}
           >
             <Database className="w-4 h-4" />
@@ -191,8 +222,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setActiveTab('calculator')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
               activeTab === 'calculator'
-                ? 'bg-emerald-600 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
+                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
             }`}
           >
             <Calculator className="w-4 h-4" />
@@ -204,8 +235,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setActiveTab('rotation')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
               activeTab === 'rotation'
-                ? 'bg-emerald-600 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
+                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
             }`}
           >
             <RotateCw className="w-4 h-4" />
@@ -217,8 +248,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setActiveTab('safety')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
               activeTab === 'safety'
-                ? 'bg-emerald-600 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
+                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
             }`}
           >
             <ShieldCheck className="w-4 h-4" />
@@ -230,8 +261,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setActiveTab('guidebook')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
               activeTab === 'guidebook'
-                ? 'bg-emerald-600 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
+                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
             }`}
           >
             <BookOpen className="w-4 h-4" />
@@ -243,19 +274,29 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setActiveTab('alerts')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
               activeTab === 'alerts'
-                ? 'bg-emerald-600 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
+                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
             }`}
           >
             <Bell className="w-4 h-4" />
             <span>{t('tab_alerts')}</span>
             {unreadAlertCount > 0 && (
               <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-                activeTab === 'alerts' ? 'bg-white text-emerald-800' : 'bg-amber-100 text-amber-800'
+                activeTab === 'alerts' ? 'bg-[#f42a41] text-white' : 'bg-[#f42a41] text-white'
               }`}>
                 {formatNum(unreadAlertCount)}
               </span>
             )}
+          </button>
+
+          {/* Quick Tab-Bar Compass Drawer Trigger */}
+          <button
+            onClick={onOpenDrawer}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg whitespace-nowrap bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-extrabold transition cursor-pointer select-none shrink-0"
+            title={language === 'bn' ? 'দিকনির্দেশক মেনু ড্রয়ার খুলুন' : 'Open Quick Guide Drawer'}
+          >
+            <Compass className="w-3.5 h-3.5 text-amber-600 animate-spin-slow" />
+            <span>{language === 'bn' ? 'গাইড মেনু 🧭' : 'Guide Menu 🧭'}</span>
           </button>
         </nav>
       </div>

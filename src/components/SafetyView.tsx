@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { exportSingleProductPDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
+import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 
 interface SafetyViewProps {
   products: ChemicalProduct[];
@@ -121,6 +122,37 @@ export const SafetyView: React.FC<SafetyViewProps> = ({ products, onOpenSafetyMo
           </p>
         </div>
       </div>
+
+      {/* Collapsible User Guide */}
+      <CollapsibleUserGuide
+        pageKey="safety"
+        titleEn="Occupational Health & Safety Guide"
+        titleBn="পেশাগত স্বাস্থ্য ও নিরাপত্তা গাইড"
+        subtitleEn="Understand pesticide toxicity colors, mixing safety, and knapsack handling."
+        subtitleBn="বালাইনাশকের বিষাক্ততার কালার ব্যান্ড, মিশ্রণ সুরক্ষা ও স্প্রে করার নিয়ম।"
+        stepsEn={[
+          "Run through the Interactive 10-Point Checklist to verify nozzle and wind conditions before opening chemical bottles.",
+          "Inspect the WHO Hazard Class Bands (Red represents extreme hazard, green is relatively safe) to prepare PPE equipment.",
+          "Wear mandatory PPE layers (eye goggles, rubber gloves, mask, and tall boots) while opening and mixing chemical powders.",
+          "Never stand downwind while spraying - always move in a direction that blows the mist away from your face and skin.",
+          "Execute Triple-Rinsing of empty plastic bottles, puncture them, and dispose of them in dedicated chemical recycle pits."
+        ]}
+        stepsBn={[
+          "রাসায়নিক বোতল খোলার পূর্বে নোজল ও বাতাসের দিক পরীক্ষা করতে ১০-দফার ইন্টারেক্টিভ নিরাপত্তা চেকলিস্টটি পূরণ করুন।",
+          "উপযুক্ত পিপিই (PPE) বা সুরক্ষামূলক গিয়ার প্রস্তুত করতে ডব্লিউএইচও (WHO) বিপদ শ্রেণি ব্যান্ড (লাল মানে তীব্র বিপজ্জনক, সবুজ মানে তুলনামূলক নিরাপদ) দেখে নিন।",
+          "ওষুধ তৈরি ও মেশানোর সময় অবশ্যই মাস্ক, রাবারের গ্লাভস, গগলস ও বুট জুতা পরিধান করুন।",
+          "কখনো বাতাসের বিপরীতে দাঁড়িয়ে স্প্রে করবেন না - এমন অবস্থানে থাকুন যেন বাতাসের কারণে স্প্রে আপনার ত্বকে বা চোখে উড়ে না আসে।",
+          "খালি বোতলগুলো ট্রিপল রিন্স বা ৩ বার ধুয়ে ছিদ্র করুন এবং নির্দিষ্ট ডাস্টবিন বা মাটিতে গর্ত করে পুঁতে ফেলুন।"
+        ]}
+        proTipsEn={[
+          "If chemical makes skin contact, immediately wash with running soap water for 15 minutes. Seek medical assistance if irritation persists.",
+          "Never use domestic kitchen utensils to mix chemical formulations - reserve dedicated containers for agricultural usage."
+        ]}
+        proTipsBn={[
+          "ত্বকে ওষুধ লাগলে সাথে সাথে সাবান পানি দিয়ে অন্তত ১৫ মিনিট ভালো করে ধুয়ে নিন। সমস্যা গুরুতর হলে ডাক্তারের শরণাপন্ন হোন।",
+          "রান্নাঘরের হাঁড়ি-পাতিল বা চামচ দিয়ে বালাইনাশক গুলবেন না - বালাইনাশক গোলার জন্য সর্বদা আলাদা পাত্র ও কাঠি নির্দিষ্ট রাখুন।"
+        ]}
+      />
 
       {/* Interactive Field Checklist with Progress Bar */}
       <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-6">
