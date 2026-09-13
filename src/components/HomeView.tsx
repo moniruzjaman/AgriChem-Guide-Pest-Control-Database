@@ -290,13 +290,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
       id: 'database' as AppTab,
       titleEn: 'DAE Registered Chemical Database',
       titleBn: 'ডিএই নিবন্ধিত রাসায়নিক ডাটাবেস',
-      subtitleEn: '180+ Approved Formulations & Active Ingredients',
-      subtitleBn: '১৮০+ অনুমোদিত সক্রিয় উপাদান ও বাণিজ্য নাম',
+      subtitleEn: `${totalProductsCount}+ Approved Formulations & Active Ingredients`,
+      subtitleBn: `${formatNum(totalProductsCount)}+ অনুমোদিত সক্রিয় উপাদান ও বাণিজ্য নাম`,
       descEn: 'Instant search across Bangladesh DAE-registered insecticides, fungicides, herbicides, and miticides. Includes verified trade names, target pests, label application rates, PHI (Pre-Harvest Interval) and REI safety windows.',
       descBn: 'কৃষি সম্প্রসারণ অধিদপ্তর (DAE) নিবন্ধিত কীটনাশক, ছত্রাকনাশক, আগাছানাশক ও মাকড়নাশকের পূর্ণাঙ্গ তালিকা। অনুমোদিত বাণিজ্য নাম, লক্ষ্য বালাই, প্রতি হেক্টরে সঠিক প্রয়োগ মাত্রা, ফসল তোলার নিরাপদ বিরতি (PHI) ও রি-এন্ট্রি সময়কাল দেখুন।',
       icon: Database,
-      badgeEn: '180+ Dossiers',
-      badgeBn: '১৮০+ রাসায়নিক',
+      badgeEn: `${totalProductsCount}+ Dossiers`,
+      badgeBn: `${formatNum(totalProductsCount)}+ রাসায়নিক`,
       themeColor: 'from-emerald-500 to-emerald-700',
       textColor: 'text-emerald-700',
       bgColor: 'bg-emerald-50',
@@ -499,53 +499,53 @@ export const HomeView: React.FC<HomeViewProps> = ({
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-3 pt-2"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap items-center gap-3 pt-3 w-full"
             >
               <button
                 id="hero-cta-drawer"
                 onClick={onOpenDrawer}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold text-sm transition shadow-lg shadow-amber-500/20 cursor-pointer"
+                className="flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold text-sm transition shadow-lg shadow-amber-500/20 cursor-pointer w-full lg:w-auto"
               >
-                <Compass className="w-4 h-4 text-amber-950" />
-                <span>{language === 'bn' ? 'দিকনির্দেশক গাইড মেনু' : 'Guide Menu Drawer'}</span>
-                <span className="bg-amber-600/25 text-amber-950 px-1.5 py-0.2 rounded text-[10px] font-black">New</span>
+                <Compass className="w-4 h-4 text-amber-950 shrink-0" />
+                <span className="truncate">{language === 'bn' ? 'দিকনির্দেশক গাইড মেনু' : 'Guide Menu Drawer'}</span>
+                <span className="bg-amber-600/25 text-amber-950 px-1.5 py-0.2 rounded text-[10px] font-black shrink-0">New</span>
               </button>
 
               <button
                 id="hero-cta-database"
                 onClick={() => onNavigateTab('database')}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#f42a41] hover:bg-[#ff3b52] text-white font-bold text-sm transition shadow-lg shadow-rose-900/40 cursor-pointer"
+                className="flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-[#f42a41] hover:bg-[#ff3b52] text-white font-bold text-sm transition shadow-lg shadow-rose-900/40 cursor-pointer w-full lg:w-auto"
               >
-                <Database className="w-4 h-4" />
-                <span>{language === 'bn' ? 'রাসায়নিক ডাটাবেস ব্রাউজ করুন' : 'Explore Chemical Database'}</span>
-                <ArrowRight className="w-4 h-4 ml-0.5" />
+                <Database className="w-4 h-4 shrink-0" />
+                <span className="truncate">{language === 'bn' ? 'রাসায়নিক ডাটাবেস ব্রাউজ করুন' : 'Explore Chemical Database'}</span>
+                <ArrowRight className="w-4 h-4 ml-0.5 shrink-0" />
               </button>
 
               <button
                 id="hero-cta-calculator"
                 onClick={() => onNavigateTab('calculator')}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#006a4e] hover:bg-[#00805c] border border-emerald-600/50 text-white font-bold text-sm backdrop-blur-md transition shadow-sm cursor-pointer"
+                className="flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-[#006a4e] hover:bg-[#00805c] border border-emerald-600/50 text-white font-bold text-sm backdrop-blur-md transition shadow-sm cursor-pointer w-full lg:w-auto"
               >
-                <Calculator className="w-4 h-4 text-teal-300" />
-                <span>{language === 'bn' ? 'ট্যাংক মাত্রা ক্যালকুলেটর' : 'Launch Tank Calculator'}</span>
+                <Calculator className="w-4 h-4 text-teal-300 shrink-0" />
+                <span className="truncate">{language === 'bn' ? 'ট্যাংক মাত্রা ক্যালকুলেটর' : 'Launch Tank Calculator'}</span>
               </button>
 
               <button
                 id="hero-cta-share"
                 onClick={onOpenShareModal}
-                className="flex items-center gap-2 px-4 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-emerald-200 hover:text-white font-semibold text-sm backdrop-blur-md transition cursor-pointer"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-emerald-200 hover:text-white font-semibold text-sm backdrop-blur-md transition cursor-pointer w-full lg:w-auto"
               >
-                <Share2 className="w-4 h-4 text-emerald-400" />
-                <span>{language === 'bn' ? 'অ্যাপটি শেয়ার করুন' : 'Share with Others'}</span>
+                <Share2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span className="truncate">{language === 'bn' ? 'অ্যাপটি শেয়ার করুন' : 'Share with Others'}</span>
               </button>
 
               <button
                 id="hero-cta-guidebook"
                 onClick={() => onNavigateTab('guidebook')}
-                className="flex items-center gap-2 px-4 py-3 rounded-xl text-emerald-300 hover:text-white font-medium text-sm transition cursor-pointer"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-emerald-300 hover:text-white font-medium text-sm transition cursor-pointer w-full lg:w-auto"
               >
-                <Download className="w-4 h-4" />
-                <span>{language === 'bn' ? 'A5 পকেট বুক গাইড' : 'A5 Pocket Book'}</span>
+                <Download className="w-4 h-4 shrink-0" />
+                <span className="truncate">{language === 'bn' ? 'A5 পকেট বুক গাইড' : 'A5 Pocket Book'}</span>
               </button>
             </motion.div>
           </div>
@@ -789,7 +789,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </p>
 
               {/* Feature Tab Buttons */}
-              <div className="space-y-2 pt-2">
+              <div className="flex lg:flex-col overflow-x-auto lg:overflow-visible pb-3 lg:pb-0 gap-2 lg:space-y-2 pt-2 scrollbar-none snap-x">
                 {features.map((item, fIdx) => {
                   const Icon = item.icon;
                   const isSelected = activePreviewFeature === fIdx;
@@ -797,17 +797,17 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <button
                       key={item.id}
                       onClick={() => setActivePreviewFeature(fIdx)}
-                      className={`w-full flex items-center justify-between p-3 rounded-xl text-left text-xs transition cursor-pointer ${
+                      className={`flex items-center justify-between p-3 rounded-xl text-xs transition cursor-pointer shrink-0 snap-align-start ${
                         isSelected 
                           ? 'bg-emerald-500 text-emerald-950 font-bold shadow-md' 
                           : 'bg-white/5 hover:bg-white/10 text-slate-300 border border-white/5'
-                      }`}
+                      } w-[220px] lg:w-full`}
                     >
-                      <div className="flex items-center gap-2.5">
-                        <Icon className={`w-4 h-4 ${isSelected ? 'text-emerald-950' : 'text-emerald-400'}`} />
-                        <span>{language === 'bn' ? item.titleBn : item.titleEn}</span>
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-emerald-950' : 'text-emerald-400'}`} />
+                        <span className="truncate">{language === 'bn' ? item.titleBn : item.titleEn}</span>
                       </div>
-                      <ArrowRight className={`w-3.5 h-3.5 transition-transform ${isSelected ? 'translate-x-0.5' : 'opacity-40'}`} />
+                      <ArrowRight className={`w-3.5 h-3.5 transition-transform shrink-0 ${isSelected ? 'translate-x-0.5' : 'opacity-40'}`} />
                     </button>
                   );
                 })}
