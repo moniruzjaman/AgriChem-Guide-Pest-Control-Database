@@ -19,7 +19,8 @@ import {
   RefreshCw,
   FileDown,
   Scale,
-  BookMarked
+  BookMarked,
+  ExternalLink
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
@@ -464,6 +465,33 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
           {/* Main Hero Header & Call to Action */}
           <div className="max-w-4xl space-y-5">
+            {/* Pesticide Act 2018 Companion Highlight Banner */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.05 }}
+              className="inline-flex flex-wrap items-center gap-3 p-1.5 pr-4 rounded-2xl bg-gradient-to-r from-red-500/20 via-emerald-500/10 to-transparent border border-red-500/30 backdrop-blur-md text-white text-xs max-w-full"
+            >
+              <span className="px-2.5 py-1 rounded-xl bg-[#f42a41] text-white font-bold text-[10px] uppercase tracking-wider animate-pulse shrink-0">
+                {language === 'bn' ? 'ফিচার্ড অ্যাপ' : 'Featured App'}
+              </span>
+              <span className="font-semibold text-slate-100 flex items-center gap-1.5 min-w-0">
+                <Scale className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                <span className="truncate">{language === 'bn' 
+                  ? 'কীটনাশক আইন, ২০১৮ ইন্টারেক্টিভ ডিজিটাল প্ল্যাটফর্ম চালু হয়েছে!' 
+                  : 'Pesticide Act 2018 Interactive Digital Assistant is live!'}</span>
+              </span>
+              <a
+                href="https://pesticideact2018.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-emerald-300 hover:text-emerald-200 font-bold transition ml-auto border-b border-emerald-300/40 hover:border-emerald-200 pb-0.5 shrink-0"
+              >
+                <span>{language === 'bn' ? 'অনলাইন অ্যাপ দেখুন' : 'Explore App'}</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </motion.div>
+
             <motion.h1 
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1181,15 +1209,27 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 </ul>
               </div>
 
-              <a 
-                href="/pesticide-act-2018.pdf" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-sm transition cursor-pointer"
-              >
-                <FileDown className="w-3.5 h-3.5" />
-                <span>{language === 'bn' ? 'আইন, ২০১৮ পিডিএফ ডাউনলোড' : 'Download Pesticide Act 2018 (PDF)'}</span>
-              </a>
+              <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                <a 
+                  href="https://pesticideact2018.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-sm transition cursor-pointer"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>{language === 'bn' ? 'ইন্টারেক্টিভ অনলাইন অ্যাপ' : 'Explore Interactive App'}</span>
+                </a>
+
+                <a 
+                  href="/pesticide-act-2018.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs border border-slate-200 transition cursor-pointer"
+                >
+                  <FileDown className="w-3.5 h-3.5" />
+                  <span>{language === 'bn' ? 'পিডিএফ ডাউনলোড' : 'Download Act PDF'}</span>
+                </a>
+              </div>
             </div>
 
             {/* Field Guide */}

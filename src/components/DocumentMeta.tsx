@@ -189,7 +189,8 @@ export const DocumentMeta: React.FC<{ activeTab: AppTab }> = ({ activeTab }) => 
 
     upsertMeta('link[rel="icon"][type="image/svg+xml"]', { rel: 'icon', type: 'image/svg+xml', href: iconSvg }, 'link');
     upsertMeta('link[rel="icon"][type="image/png"]', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' }, 'link');
-    upsertMeta('link[rel="apple-touch-icon"]', { rel: 'apple-touch-icon', sizes: '180x180', href: iconPng }, 'link');
+    upsertMeta('link[rel="apple-touch-icon"]:not([sizes])', { rel: 'apple-touch-icon', href: iconSvg }, 'link');
+    upsertMeta('link[rel="apple-touch-icon"][sizes="180x180"]', { rel: 'apple-touch-icon', sizes: '180x180', href: iconPng }, 'link');
     upsertMeta('link[rel="manifest"]', { rel: 'manifest', href: '/site.webmanifest' }, 'link');
 
     document.documentElement.style.setProperty('--app-theme', theme);
