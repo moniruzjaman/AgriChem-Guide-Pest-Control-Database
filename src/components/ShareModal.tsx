@@ -286,17 +286,27 @@ export const ShareModal: React.FC<ShareModalProps> = ({
               </a>
 
               {/* Messenger */}
-              <a
-                href={messengerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col sm:flex-row items-center justify-center gap-1.5 py-2 px-1 rounded-xl bg-[#006AFF]/10 hover:bg-[#006AFF]/20 border border-[#006AFF]/30 text-[#006AFF] font-semibold text-[11px] sm:text-xs transition shadow-2xs text-center"
+              <button
+                onClick={() => {
+                  const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+                  if (isMobile) {
+                    // Direct deep-link trigger to open the native Messenger mobile app sharing sheet
+                    window.location.href = `fb-messenger://share/?link=${encodeURIComponent(shareUrl)}`;
+                    // Quick web fallback if the app is not installed on the user device
+                    setTimeout(() => {
+                      window.open(messengerUrl, '_blank', 'noopener,noreferrer');
+                    }, 1200);
+                  } else {
+                    window.open(messengerUrl, '_blank', 'noopener,noreferrer');
+                  }
+                }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-1.5 py-2 px-1 rounded-xl bg-[#006AFF]/10 hover:bg-[#006AFF]/20 border border-[#006AFF]/30 text-[#006AFF] font-semibold text-[11px] sm:text-xs transition shadow-2xs text-center cursor-pointer w-full"
               >
                 <svg className="w-4 h-4 shrink-0 text-[#006AFF]" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C6.5 2 2 6.14 2 11.25c0 2.91 1.45 5.51 3.7 7.21V22l3.39-1.85c.91.25 1.89.39 2.91.39 5.5 0 10-4.14 10-9.25S17.5 2 12 2zm1.19 12.06L10.7 11.5l-4.12 2.81 4.51-4.78 2.5 2.56 4.12-2.81-4.52 4.78z" />
                 </svg>
                 <span>Messenger</span>
-              </a>
+              </button>
 
               {/* Twitter / X */}
               <a

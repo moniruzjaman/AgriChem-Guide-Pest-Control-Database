@@ -30,7 +30,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
         return saved;
       }
     }
-    return 'en';
+    return 'bn';
   });
 
   const setLanguage = (lang: Language) => {

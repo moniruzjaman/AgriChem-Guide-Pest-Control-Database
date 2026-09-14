@@ -11,30 +11,30 @@ async function startServer() {
 
   const DATA_FILE = path.join(process.cwd(), "visitor_counts.json");
   
-  // Load data helper
-  const loadData = () => {
-    let fileData = { total: 0, uniqueIps: [] as string[] };
-    try {
-      if (fs.existsSync(DATA_FILE)) {
-        const fileContent = fs.readFileSync(DATA_FILE, "utf8");
-        if (fileContent.trim()) {
-          fileData = JSON.parse(fileContent);
-        }
+  // Initialize and load visitor data once on server startup
+  let visitorData = { total: 0, uniqueIps: [] as string[] };
+  try {
+    if (fs.existsSync(DATA_FILE)) {
+      const fileContent = fs.readFileSync(DATA_FILE, "utf8");
+      if (fileContent.trim()) {
+        visitorData = JSON.parse(fileContent);
       }
-    } catch (e) {
-      console.error("Failed to load visitor data:", e);
     }
-    // Safeguard array and number structures
-    if (typeof fileData.total !== "number") fileData.total = 0;
-    if (!Array.isArray(fileData.uniqueIps)) fileData.uniqueIps = [];
-    return fileData;
-  };
+  } catch (e) {
+    console.error("Failed to load initial visitor data on startup:", e);
+  }
+  // Safeguard array and number structures
+  if (typeof visitorData.total !== "number") visitorData.total = 0;
+  if (!Array.isArray(visitorData.uniqueIps)) visitorData.uniqueIps = [];
 
-  const saveData = (fileData: { total: number; uniqueIps: string[] }) => {
+  // Atomic file save helper to prevent concurrent file truncations or corruptions
+  const saveVisitorDataAtomic = () => {
     try {
-      fs.writeFileSync(DATA_FILE, JSON.stringify(fileData, null, 2), "utf8");
+      const tempPath = DATA_FILE + ".tmp";
+      fs.writeFileSync(tempPath, JSON.stringify(visitorData, null, 2), "utf8");
+      fs.renameSync(tempPath, DATA_FILE);
     } catch (e) {
-      console.error("Failed to save visitor data:", e);
+      console.error("Failed to save visitor data atomically:", e);
     }
   };
 
@@ -56,20 +56,19 @@ async function startServer() {
       const ip = getClientIp(req);
       const { isNewSession } = req.body;
 
-      const fileData = loadData();
-
       // Check if it's a new unique IP
-      const isNewUnique = !fileData.uniqueIps.includes(ip);
+      const isNewUnique = !visitorData.uniqueIps.includes(ip);
       if (isNewUnique) {
-        fileData.uniqueIps.push(ip);
+        visitorData.uniqueIps.push(ip);
       }
 
       // If it's a new session, increment total visitors
       if (isNewSession || isNewUnique) {
-        fileData.total += 1;
+        visitorData.total += 1;
       }
 
-      saveData(fileData);
+      // Persist atomically
+      saveVisitorDataAtomic();
 
       // Track active user activity
       const now = Date.now();
@@ -83,8 +82,8 @@ async function startServer() {
       }
 
       res.json({
-        total: fileData.total,
-        unique: fileData.uniqueIps.length,
+        total: visitorData.total,
+        unique: visitorData.uniqueIps.length,
         active: Math.max(1, activeUsers.size) // ensure at least 1 (the current user) is active
       });
     } catch (error) {
@@ -97,7 +96,6 @@ async function startServer() {
   app.get("/api/visitors/stats", (req, res) => {
     try {
       const ip = getClientIp(req);
-      const fileData = loadData();
 
       // Ensure current user is tracked as active
       const now = Date.now();
@@ -111,8 +109,8 @@ async function startServer() {
       }
 
       res.json({
-        total: fileData.total,
-        unique: fileData.uniqueIps.length,
+        total: visitorData.total,
+        unique: visitorData.uniqueIps.length,
         active: Math.max(1, activeUsers.size)
       });
     } catch (error) {

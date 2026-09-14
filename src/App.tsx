@@ -34,7 +34,7 @@ import {
 } from 'lucide-react';
 
 export default function App() {
-  const { language } = useLanguage();
+  const { language, formatNum } = useLanguage();
   const [products, setProducts] = useState<ChemicalProduct[]>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('agrichem_custom_products');
@@ -349,7 +349,7 @@ export default function App() {
                   <Users className="w-3.5 h-3.5 text-emerald-600" />
                   <span>
                     {language === 'bn' ? 'ইউনিক ভিজিটর:' : 'Unique Visitors:'}{' '}
-                    <strong className="text-slate-800">{visitorStats.unique}</strong>
+                    <strong className="text-slate-800">{formatNum(visitorStats.unique)}</strong>
                   </span>
                 </div>
                 <div className="h-3 w-px bg-slate-200" />
@@ -357,7 +357,7 @@ export default function App() {
                   <Eye className="w-3.5 h-3.5 text-blue-600" />
                   <span>
                     {language === 'bn' ? 'মোট ভিজিট:' : 'Total Visits:'}{' '}
-                    <strong className="text-slate-800">{visitorStats.total}</strong>
+                    <strong className="text-slate-800">{formatNum(visitorStats.total)}</strong>
                   </span>
                 </div>
                 <div className="h-3 w-px bg-slate-200" />
@@ -368,7 +368,7 @@ export default function App() {
                   </span>
                   <span>
                     {language === 'bn' ? 'অনলাইন:' : 'Online:'}{' '}
-                    <strong className="text-slate-800">{visitorStats.active}</strong>
+                    <strong className="text-slate-800">{formatNum(visitorStats.active)}</strong>
                   </span>
                 </div>
               </div>
