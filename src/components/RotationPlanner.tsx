@@ -247,6 +247,21 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
         </div>
       </div>
 
+      {/* Official DAE Advisory Disclaimer */}
+      <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-3">
+        <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
+        <div className="text-xs space-y-0.5 leading-relaxed">
+          <strong className="text-amber-950 block font-bold">
+            {language === 'bn' ? 'অফিসিয়াল ডিএই পরামর্শ সতর্কতা ও নির্দেশিকা:' : 'Official DAE Rotation Advisory Disclaimer:'}
+          </strong>
+          <p className="text-slate-700 font-medium">
+            {language === 'bn' 
+              ? 'এখানে তৈরিকৃত আবর্তন বা স্প্রে শিডিউল শুধুমাত্র বালাই প্রতিরোধ ব্যবস্থাপনার বৈজ্ঞানিক নীতির ওপর ভিত্তি করে তৈরি। বাস্তবে জমিতে ওষুধ ছিটানোর পূর্বে সর্বদা আপনার স্থানীয় উপ-সহকারী কৃষি কর্মকর্তা বা কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্মকর্তার সরাসরি অনুমোদন ও প্রেসক্রিপশন গ্রহণ করুন।'
+              : 'The generated spray sequence is based purely on anti-resistance scientific principles. Always consult with your local Department of Agricultural Extension (DAE) officials or agricultural field extension officers before execution.'}
+          </p>
+        </div>
+      </div>
+
       {/* Available MoA Groups for this Target */}
       <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4">
         <div className="flex items-center justify-between">

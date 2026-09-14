@@ -97,10 +97,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center gap-3 cursor-pointer select-none shrink-0" 
               onClick={() => setActiveTab('home')}
             >
-              <div className="w-10 h-10 rounded-xl bg-[#006a4e] text-white flex items-center justify-center shadow-sm relative overflow-hidden">
-                <div className="absolute w-5 h-5 rounded-full bg-[#f42a41] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-                <Leaf className="w-5 h-5 text-white relative z-10" />
-              </div>
+              <img 
+                src="/favicon.svg" 
+                alt="AgriChem Pro Logo" 
+                className="w-10 h-10 rounded-xl object-contain shadow-sm"
+                referrerPolicy="no-referrer"
+              />
               <div>
                 <div className="flex items-center gap-1.5">
                   <span className="font-bold text-lg text-slate-900 tracking-tight leading-none">{t('app_title')}</span>

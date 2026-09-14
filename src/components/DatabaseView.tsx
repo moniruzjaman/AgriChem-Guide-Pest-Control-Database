@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ChemicalProduct } from '../types';
+import { PESTICIDES_DATABASE } from '../data/pesticidesData';
 import { ProductCard } from './ProductCard';
 import { 
   Search, 
@@ -324,47 +325,139 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     const hasTabs = firstLine.includes('\t');
     const separator = hasTabs ? '\t' : ',';
     
-    const parsedRows: ChemicalProduct[] = [];
-    let startIndex = 0;
+    // Simple state machine CSV parsing to support quoted fields with commas
+    const parseLine = (line: string): string[] => {
+      const result: string[] = [];
+      let current = '';
+      let inQuotes = false;
+      for (let j = 0; j < line.length; j++) {
+        const char = line[j];
+        if (char === '"' && (j === 0 || line[j-1] !== '\\')) {
+          inQuotes = !inQuotes;
+        } else if (char === separator && !inQuotes) {
+          result.push(current.trim().replace(/^"|"$/g, ''));
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      result.push(current.trim().replace(/^"|"$/g, ''));
+      return result;
+    };
+
+    const firstLineCols = parseLine(firstLine);
     
-    // Header detection (looks for trade, common, ingredient, registration, holder, crop, pests)
-    const lowerFirst = firstLine.toLowerCase();
+    // Default column indices mapping
+    let tradeIdx = 0;
+    let commonIdx = 1;
+    let typeIdx = 2;
+    let regNoIdx = 3;
+    let holderIdx = 4;
+    let cropsIdx = 5;
+    let pestsIdx = 6;
+    let dosageIdx = 7;
+    let moaIdx = -1;
+    let toxicityIdx = -1;
+
+    let hasHeader = false;
+    const lowerFirstCols = firstLineCols.map(c => c.toLowerCase().trim());
+    
+    // Detect if first line is a header
     if (
-      lowerFirst.includes('trade') || 
-      lowerFirst.includes('common') || 
-      lowerFirst.includes('ingredient') || 
-      lowerFirst.includes('registration') || 
-      lowerFirst.includes('holder') ||
-      lowerFirst.includes('crop')
+      lowerFirstCols.some(c => 
+        c.includes('trade') || 
+        c.includes('common') || 
+        c.includes('ingredient') || 
+        c.includes('registration') || 
+        c.includes('holder') ||
+        c.includes('crop') ||
+        c.includes('type')
+      )
     ) {
-      startIndex = 1;
+      hasHeader = true;
+      // Map columns dynamically based on header text
+      lowerFirstCols.forEach((col, idx) => {
+        if (col.includes('trade')) {
+          tradeIdx = idx;
+        } else if (col.includes('common') || col.includes('ingredient')) {
+          commonIdx = idx;
+        } else if (col.includes('type')) {
+          typeIdx = idx;
+        } else if (col.includes('registration no') || col.includes('reg no') || col.includes('registration_no') || col.includes('regno') || (col.includes('registration') && !col.includes('holder'))) {
+          regNoIdx = idx;
+        } else if (col.includes('holder') || col.includes('registration holder') || col.includes('name of registration')) {
+          holderIdx = idx;
+        } else if (col.includes('crop')) {
+          cropsIdx = idx;
+        } else if (col.includes('pest')) {
+          pestsIdx = idx;
+        } else if (col.includes('dosage') || col.includes('rate')) {
+          dosageIdx = idx;
+        } else if (col.includes('moa') || col.includes('code')) {
+          moaIdx = idx;
+        } else if (col.includes('toxicity') || col.includes('hazard')) {
+          toxicityIdx = idx;
+        }
+      });
+      
+      // Secondary explicit check to make sure Holder and RegNo indices are distinct
+      const regHolderColIdx = lowerFirstCols.findIndex(c => c.includes('registration holder') || c.includes('name of registration'));
+      if (regHolderColIdx !== -1) {
+        holderIdx = regHolderColIdx;
+      }
+      const regNoColIdx = lowerFirstCols.findIndex(c => c === 'registration no' || c === 'reg no' || c === 'registration_no' || c === 'regno' || (c.includes('registration') && !c.includes('holder')));
+      if (regNoColIdx !== -1) {
+        regNoIdx = regNoColIdx;
+      }
+    } else {
+      // No header line. Auto-detect if columns match the DAE pattern:
+      // Column 0 is chemical type (Insecticide, Fungicide, etc.)
+      const firstVal = firstLineCols[0]?.toLowerCase().trim() || '';
+      if (['insecticide', 'fungicide', 'herbicide', 'miticide', 'rodenticide', 'bio pesticide'].includes(firstVal)) {
+        // DAE CSV format: Type, Common Name, Trade Name, Reg No, Holder, Crops, Pests, Dosage
+        typeIdx = 0;
+        commonIdx = 1;
+        tradeIdx = 2;
+        regNoIdx = 3;
+        holderIdx = 4;
+        cropsIdx = 5;
+        pestsIdx = 6;
+        dosageIdx = 7;
+        moaIdx = -1;
+        toxicityIdx = -1;
+      }
     }
+
+    const parsedRows: ChemicalProduct[] = [];
+    const startIndex = hasHeader ? 1 : 0;
     
     for (let i = startIndex; i < lines.length; i++) {
-      const columns = lines[i].split(separator).map(col => col.trim().replace(/^"|"$/g, ''));
-      if (columns.length < 2 || !columns[0] || !columns[1]) continue; // Skip empty/invalid lines
+      const columns = parseLine(lines[i]);
+      if (columns.length < 2) continue; // Skip invalid lines
       
-      const tradeName = columns[0];
-      const commonName = columns[1];
-      let typeInput = columns[2] || 'Insecticide';
+      const tradeName = columns[tradeIdx] || '';
+      const commonName = columns[commonIdx] || '';
+      if (!tradeName || !commonName) continue; // Skip lines missing essential name fields
+      
+      const typeInput = typeIdx !== -1 && columns[typeIdx] ? columns[typeIdx] : 'Insecticide';
       
       // Match type safely
       let type: 'Insecticide' | 'Fungicide' | 'Herbicide' | 'Miticide' | 'Bio Pesticide' | 'Stored Grain' | 'Rodenticide' = 'Insecticide';
       const typeLower = typeInput.toLowerCase();
       if (typeLower.includes('fungi')) type = 'Fungicide';
       else if (typeLower.includes('herb') || typeLower.includes('weed')) type = 'Herbicide';
-      else if (typeLower.includes('miti') || typeLower.includes('spider')) type = 'Miticide';
+      else if (typeLower.includes('miti') || typeLower.includes('spider') || typeLower.includes('bromopropylate') || typeLower.includes('sulphur')) type = 'Miticide';
       else if (typeLower.includes('bio') || typeLower.includes('organic')) type = 'Bio Pesticide';
       else if (typeLower.includes('store') || typeLower.includes('grain')) type = 'Stored Grain';
       else if (typeLower.includes('rodent') || typeLower.includes('rat')) type = 'Rodenticide';
       
-      const registrationNo = columns[3] || `AP-CUST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
-      const registrationHolder = columns[4] || 'Custom Importer';
-      const crops = columns[5] ? columns[5].split(/[;|]/).map(c => c.trim()).filter(Boolean) : ['All Crops'];
-      const pests = columns[6] ? columns[6].split(/[;|]/).map(p => p.trim()).filter(Boolean) : ['Insects/Pests'];
-      const dosageRate = columns[7] || '1.5 - 2.0 L/ha';
-      const moaCode = columns[8] || 'UN';
-      const toxicityClass = columns[9] || 'III - Slightly Hazardous';
+      const registrationNo = regNoIdx !== -1 && columns[regNoIdx] ? columns[regNoIdx] : `AP-CUST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+      const registrationHolder = holderIdx !== -1 && columns[holderIdx] ? columns[holderIdx] : 'Custom Importer';
+      const crops = cropsIdx !== -1 && columns[cropsIdx] ? columns[cropsIdx].split(/[;|]/).map(c => c.trim()).filter(Boolean) : ['All Crops'];
+      const pests = pestsIdx !== -1 && columns[pestsIdx] ? columns[pestsIdx].split(/[;|]/).map(p => p.trim()).filter(Boolean) : ['Target pests'];
+      const dosageRate = dosageIdx !== -1 && columns[dosageIdx] ? columns[dosageIdx] : '1.5 - 2.0 L/ha';
+      const moaCode = moaIdx !== -1 && columns[moaIdx] ? columns[moaIdx] : 'UN';
+      const toxicityClass = toxicityIdx !== -1 && columns[toxicityIdx] ? columns[toxicityIdx] : 'III - Slightly Hazardous';
       
       // Infer WHO color
       let whoColor = '#3b82f6'; // Blue default
@@ -428,21 +521,53 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       return;
     }
 
-    // Filter out duplicates based on Registration No
-    const existingNos = new Set(products.map(p => p.registrationNo.toLowerCase().trim()));
-    const uniqueNewRows = parsedPreview.filter(p => p.registrationNo && !existingNos.has(p.registrationNo.toLowerCase().trim()));
-    
-    if (uniqueNewRows.length === 0) {
-      setImportError(language === 'bn' ? 'সকল আইটেম ইতোমধ্যে ডাটাবেজে রয়েছে (রেজি. নম্বরের ডুপ্লিকেট)।' : 'All parsed items already exist in the database (Duplicate Registration Nos).');
-      return;
-    }
-    
-    const updatedCatalog = [...products, ...uniqueNewRows];
+    // Merge duplicate rows in the parsed preview first
+    const mergedPreviewMap = new Map<string, ChemicalProduct>();
+    parsedPreview.forEach(p => {
+      const key = `${p.registrationNo.toLowerCase().trim()}-${p.tradeName.toLowerCase().trim()}-${p.commonName.toLowerCase().trim()}`;
+      if (!mergedPreviewMap.has(key)) {
+        mergedPreviewMap.set(key, { ...p });
+      } else {
+        const existing = mergedPreviewMap.get(key)!;
+        existing.crops = [...new Set([...existing.crops, ...p.crops])];
+        existing.pests = [...new Set([...existing.pests, ...p.pests])];
+        if (p.dosageRate && !existing.dosageRate.toLowerCase().includes(p.dosageRate.toLowerCase())) {
+          existing.dosageRate += `; ${p.dosageRate}`;
+        }
+      }
+    });
+    const mergedPreview = Array.from(mergedPreviewMap.values());
+
+    // Group or merge with existing catalog
+    const catalogMap = new Map<string, ChemicalProduct>();
+    products.forEach(p => {
+      const key = `${p.registrationNo.toLowerCase().trim()}-${p.tradeName.toLowerCase().trim()}-${p.commonName.toLowerCase().trim()}`;
+      catalogMap.set(key, { ...p });
+    });
+
+    let newAddedCount = 0;
+    mergedPreview.forEach(p => {
+      const key = `${p.registrationNo.toLowerCase().trim()}-${p.tradeName.toLowerCase().trim()}-${p.commonName.toLowerCase().trim()}`;
+      if (catalogMap.has(key)) {
+        // Merge crops and pests to existing product instead of creating a duplicate row!
+        const existing = catalogMap.get(key)!;
+        existing.crops = [...new Set([...existing.crops, ...p.crops])];
+        existing.pests = [...new Set([...existing.pests, ...p.pests])];
+        if (p.dosageRate && !existing.dosageRate.toLowerCase().includes(p.dosageRate.toLowerCase())) {
+          existing.dosageRate += `; ${p.dosageRate}`;
+        }
+      } else {
+        catalogMap.set(key, p);
+        newAddedCount++;
+      }
+    });
+
+    const updatedCatalog = Array.from(catalogMap.values());
     onUpdateProducts(updatedCatalog);
     
     setImportSuccess(language === 'bn' 
-      ? `সফলভাবে ${formatNum(uniqueNewRows.length)}টি নতুন বালাইনাশক ডাটাবেজে যুক্ত করা হয়েছে!` 
-      : `Successfully added ${formatNum(uniqueNewRows.length)} approved products to your database!`);
+      ? `সফলভাবে ${formatNum(newAddedCount)}টি নতুন বালাইনাশক ডাটাবেজে যুক্ত করা হয়েছে!` 
+      : `Successfully added ${formatNum(newAddedCount)} approved products to your database!`);
     
     setParsedPreview([]);
     setPastedData('');
@@ -676,9 +801,9 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
             </div>
           </div>
           <div className="flex items-center gap-3">
-            {products.length > 187 && (
+            {products.length > PESTICIDES_DATABASE.length && (
               <span className="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-emerald-200">
-                {language === 'bn' ? `+${formatNum(products.length - 187)} কাস্টম` : `+${formatNum(products.length - 187)} Custom`}
+                {language === 'bn' ? `+${formatNum(products.length - PESTICIDES_DATABASE.length)} কাস্টম` : `+${formatNum(products.length - PESTICIDES_DATABASE.length)} Custom`}
               </span>
             )}
             {isImporterOpen ? <ChevronUp className="w-5 h-5 text-slate-400" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
@@ -736,7 +861,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                     {language === 'bn' ? 'সমগ্র ডাটাবেজ এক্সপোর্ট (CSV)' : 'Export Full Database (CSV)'}
                   </button>
 
-                  {products.length > 187 && (
+                  {products.length > PESTICIDES_DATABASE.length && (
                     <button
                       onClick={purgeCustomData}
                       className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-red-200 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 font-bold shadow-3xs cursor-pointer transition"

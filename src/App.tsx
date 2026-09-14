@@ -15,6 +15,7 @@ import { Guidebook } from './components/Guidebook';
 import { NotificationCenter } from './components/NotificationCenter';
 import { DocumentMeta } from './components/DocumentMeta';
 import { NavigationDrawer } from './components/NavigationDrawer';
+import { OfflineIndicator } from './components/OfflineIndicator';
 import { useLanguage } from './context/LanguageContext';
 import { 
   Leaf, 
@@ -27,7 +28,9 @@ import {
   ExternalLink,
   CheckCircle2,
   Sparkles,
-  Share2
+  Share2,
+  Users,
+  Eye
 } from 'lucide-react';
 
 export default function App() {
@@ -70,6 +73,55 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  // Real-time visitor counts state
+  const [visitorStats, setVisitorStats] = useState<{ total: number; unique: number; active: number } | null>(null);
+
+  useEffect(() => {
+    let isNewSession = false;
+    if (typeof window !== 'undefined') {
+      if (!sessionStorage.getItem('agrichem_session_started')) {
+        sessionStorage.setItem('agrichem_session_started', 'true');
+        isNewSession = true;
+      }
+    }
+
+    const fetchHit = async () => {
+      try {
+        const response = await fetch('/api/visitors/hit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ isNewSession }),
+        });
+        const contentType = response.headers.get('content-type');
+        if (response.ok && contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          setVisitorStats(data);
+        }
+      } catch (err) {
+        console.warn('Failed to log visitor hit:', err);
+      }
+    };
+
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('/api/visitors/stats');
+        const contentType = response.headers.get('content-type');
+        if (response.ok && contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          setVisitorStats(data);
+        }
+      } catch (err) {
+        console.warn('Failed to fetch visitor stats:', err);
+      }
+    };
+
+    fetchHit();
+    const interval = setInterval(fetchStats, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Modals state
   const [detailProduct, setDetailProduct] = useState<ChemicalProduct | null>(null);
@@ -266,13 +318,19 @@ export default function App() {
         activeTab={activeTab}
       />
 
+      {/* PWA Floating Offline Indicator */}
+      <OfflineIndicator />
+
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 mt-12 py-8 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold">
-              <Leaf className="w-4 h-4" />
-            </div>
+            <img 
+              src="/favicon.svg" 
+              alt="AgriChem Pro Logo" 
+              className="w-8 h-8 rounded-lg object-contain shadow-xs"
+              referrerPolicy="no-referrer"
+            />
             <div>
               <p className="font-bold text-slate-900">
                 {language === 'bn' ? 'অ্যাগ্রিকেম প্রো — ফিল্ড কন্ট্রোলস ও ডাটাবেস গাইডবুক' : 'AgriChem Pro — Field Controls & Database Guidebook'}
@@ -284,6 +342,38 @@ export default function App() {
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-xs">
+            {/* Live Traffic Counters */}
+            {visitorStats && (
+              <div className="flex flex-wrap items-center gap-3 bg-slate-50 border border-slate-100 rounded-xl px-3 py-1.5 text-[11px] font-medium text-slate-500">
+                <div className="flex items-center gap-1">
+                  <Users className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>
+                    {language === 'bn' ? 'ইউনিক ভিজিটর:' : 'Unique Visitors:'}{' '}
+                    <strong className="text-slate-800">{visitorStats.unique}</strong>
+                  </span>
+                </div>
+                <div className="h-3 w-px bg-slate-200" />
+                <div className="flex items-center gap-1">
+                  <Eye className="w-3.5 h-3.5 text-blue-600" />
+                  <span>
+                    {language === 'bn' ? 'মোট ভিজিট:' : 'Total Visits:'}{' '}
+                    <strong className="text-slate-800">{visitorStats.total}</strong>
+                  </span>
+                </div>
+                <div className="h-3 w-px bg-slate-200" />
+                <div className="flex items-center gap-1">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <span>
+                    {language === 'bn' ? 'অনলাইন:' : 'Online:'}{' '}
+                    <strong className="text-slate-800">{visitorStats.active}</strong>
+                  </span>
+                </div>
+              </div>
+            )}
+
             <button onClick={() => setActiveTab('home')} className="hover:text-emerald-700 cursor-pointer font-bold text-slate-800">
               {language === 'bn' ? 'হোম' : 'Home'}
             </button>

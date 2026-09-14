@@ -644,7 +644,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
               <p className="text-emerald-100/90 font-medium">
                 {language === 'bn' 
-                  ? 'লোকাল ডেটাবেস ক্যাশ: ১৮৭টি ডিএই নিবন্ধিত রাসায়নিক সক্রিয় রয়েছে।' 
+                  ? 'লোকাল ডেটাবেস ক্যাশ: ৪২৬২টি ডিএই নিবন্ধিত রাসায়নিক সক্রিয় রয়েছে।' 
                   : 'Local PWA Cache: DAE Registered Chemical Formulations Securely Cached.'}
               </p>
             </div>
@@ -1064,6 +1064,21 @@ export const HomeView: React.FC<HomeViewProps> = ({
                           <span className="text-xs font-extrabold text-amber-950 block">
                             {language === 'bn' ? activeSymptom.phiBn : activeSymptom.phiEn}
                           </span>
+                        </div>
+                      </div>
+
+                      {/* DAE Diagnostic Disclaimer */}
+                      <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2.5 text-amber-950">
+                        <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                        <div className="text-[11px] space-y-0.5 leading-relaxed">
+                          <strong className="text-amber-950 block font-bold">
+                            {language === 'bn' ? 'জরুরি ডিএই পরামর্শ সতর্কবার্তা:' : 'Critical DAE Solution Disclaimer:'}
+                          </strong>
+                          <p className="text-slate-700 font-medium">
+                            {language === 'bn' 
+                              ? 'প্রদর্শিত চিকিৎসা সমাধান ও সক্রিয় উপাদান শুধুমাত্র সাধারণ তথ্য নির্দেশ করে। বালাইনাশক জমিতে ছিটানোর পূর্বে সর্বদা আপনার স্থানীয় উপ-সহকারী কৃষি কর্মকর্তা বা ডিএই (DAE) কৃষি সম্প্রসারণ কর্মকর্তার কাছ থেকে সরাসরি পরামর্শ ও অনুমোদন নিন।'
+                              : 'Recommended active ingredients and dosage rates are for generic reference. Always seek direct prescription and approval from your local Department of Agricultural Extension (DAE) official before field application.'}
+                          </p>
                         </div>
                       </div>
                     </div>

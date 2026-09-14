@@ -82,6 +82,21 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
         {/* Scrollable Content */}
         <div className="p-6 overflow-y-auto space-y-6 text-sm text-slate-700">
+          {/* Official DAE Advisory Disclaimer */}
+          <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2.5 text-amber-850">
+            <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+            <div className="text-xs space-y-0.5 leading-relaxed">
+              <strong className="text-amber-950 block font-bold">
+                {language === 'bn' ? 'গুরুত্বপূর্ণ ডিএই সরকারি নির্দেশিকা ও সতর্কবার্তা:' : 'Official DAE Advisory Disclaimer:'}
+              </strong>
+              <p className="text-slate-700 font-medium">
+                {language === 'bn' 
+                  ? 'জমিতে যেকোনো রাসায়নিক বালাইনাশক ক্রয় বা ছিটানোর পূর্বে সর্বদা আপনার নিকটস্থ উপ-সহকারী কৃষি কর্মকর্তা বা কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্মকর্তার সরাসরি পরামর্শ গ্রহণ করুন।'
+                  : 'Always consult with your local Department of Agricultural Extension (DAE) officials or a certified agricultural officer to verify treatment suitability before purchasing or applying any chemical pesticide.'}
+              </p>
+            </div>
+          </div>
+
           {/* Key Metric Highlights */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">

@@ -298,6 +298,21 @@ export const DosageCalculatorModal: React.FC<DosageCalculatorModalProps> = ({
               <li>{language === 'bn' ? `${formatNum(tankVolumeL)} লিটার দাগ পর্যন্ত অবশিষ্ট পানি যোগ করে মুখ বন্ধ করে ঝাঁকিয়ে নিন।` : `Fill the tank with remaining water up to the ${tankVolumeL}L mark, close the lid tightly, and gently agitate.`}</li>
             </ol>
           </div>
+
+          {/* Official DAE Advisory Disclaimer */}
+          <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2.5 text-amber-950">
+            <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+            <div className="text-xs space-y-0.5 leading-relaxed">
+              <strong className="text-amber-950 block font-bold">
+                {language === 'bn' ? 'গুরুত্বপূর্ণ বালাই পরামর্শ সতর্কতা (DAE):' : 'Important Chemical Advice Disclaimer (DAE):'}
+              </strong>
+              <p className="text-slate-700 font-medium">
+                {language === 'bn' 
+                  ? 'এই ক্যালকুলেটরের ফলাফল শুধুমাত্র হিসাবের মাত্রা নির্দেশ করে। কীটনাশকের মাঠপর্যায়ে কোনো ধরনের প্রয়োগ করার পূর্বে অবশ্যই আপনার স্থানীয় উপ-সহকারী কৃষি কর্মকর্তা বা কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্মকর্তার কাছ থেকে প্রেসক্রিপশন যাচাই করুন।'
+                  : 'Calculated mixing rates are reference estimates only. Always consult and verify field application guidelines with your local Department of Agricultural Extension (DAE) officer before chemical spraying.'}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Footer Actions */}
