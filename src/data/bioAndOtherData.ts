@@ -795,7 +795,7 @@ export const BIO_AND_OTHER_DATABASE: ChemicalProduct[] = [
   },
   {
     "id": "str-0003",
-    "type": "Stored Grain",
+    "type": "Store Grain Insecticide",
     "commonName": "Aluminium phosphide",
     "tradeName": "Aciphos",
     "registrationNo": "AP-1779",
@@ -825,7 +825,7 @@ export const BIO_AND_OTHER_DATABASE: ChemicalProduct[] = [
   },
   {
     "id": "str-1254",
-    "type": "Stored Grain",
+    "type": "Store Grain Insecticide",
     "commonName": "Aluminium Phosphide 56% Tablets",
     "tradeName": "Celphos / Quickphos 56% Tab",
     "registrationNo": "AP-28",
@@ -861,7 +861,7 @@ export const BIO_AND_OTHER_DATABASE: ChemicalProduct[] = [
   },
   {
     "id": "str-0001",
-    "type": "Stored Grain",
+    "type": "Store Grain Insecticide",
     "commonName": "Aluminium phosphide",
     "tradeName": "Gastoxin",
     "registrationNo": "AP-247",
@@ -891,7 +891,7 @@ export const BIO_AND_OTHER_DATABASE: ChemicalProduct[] = [
   },
   {
     "id": "str-1255",
-    "type": "Stored Grain",
+    "type": "Store Grain Insecticide",
     "commonName": "Deltamethrin 2.5% WP (Residual Grain Protectant)",
     "tradeName": "K-Obiol 25 WP",
     "registrationNo": "AP-1160",
@@ -924,7 +924,7 @@ export const BIO_AND_OTHER_DATABASE: ChemicalProduct[] = [
   },
   {
     "id": "str-0002",
-    "type": "Stored Grain",
+    "type": "Store Grain Insecticide",
     "commonName": "Aluminium phosphide",
     "tradeName": "Phostoxin",
     "registrationNo": "AP-376",
@@ -954,7 +954,7 @@ export const BIO_AND_OTHER_DATABASE: ChemicalProduct[] = [
   },
   {
     "id": "str-0006",
-    "type": "Stored Grain",
+    "type": "Store Grain Insecticide",
     "commonName": "Aluminium Phosphide",
     "tradeName": "Phostoxine 57% / Celphos 57% / Quick-Fume 57%",
     "registrationNo": "AP-122",
@@ -991,7 +991,7 @@ export const BIO_AND_OTHER_DATABASE: ChemicalProduct[] = [
   },
   {
     "id": "str-0007",
-    "type": "Stored Grain",
+    "type": "Store Grain Insecticide",
     "commonName": "Pirimiphos methyl",
     "tradeName": "Super Guard 50 EC",
     "registrationNo": "AP-580",
@@ -1023,7 +1023,7 @@ export const BIO_AND_OTHER_DATABASE: ChemicalProduct[] = [
   },
   {
     "id": "str-0004",
-    "type": "Stored Grain",
+    "type": "Store Grain Insecticide",
     "commonName": "Aluminium phosphide",
     "tradeName": "Synphos",
     "registrationNo": "AP-2263",
