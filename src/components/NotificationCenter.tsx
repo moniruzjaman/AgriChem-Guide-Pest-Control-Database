@@ -50,7 +50,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   const [newTitle, setNewTitle] = useState('');
   const [newCategory, setNewCategory] = useState<'regulatory' | 'seasonal'>('seasonal');
   const [newSeverity, setNewSeverity] = useState<'high' | 'medium' | 'info'>('medium');
-  const [newCrops, setNewCrops] = useState('Rice');
+  const [newCrops, setNewCrops] = useState('ধান');
   const [newSummary, setNewSummary] = useState('');
   const [newDetails, setNewDetails] = useState('');
 
@@ -306,7 +306,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 type="text"
                 value={newCrops}
                 onChange={(e) => setNewCrops(e.target.value)}
-                placeholder="Rice, Potato, Jute"
+                placeholder={language === 'bn' ? 'ধান, আলু, পাট' : 'Rice, Potato, Jute'}
                 className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
               />
             </div>

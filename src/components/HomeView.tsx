@@ -459,7 +459,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             >
               <Share2 className="w-3.5 h-3.5 text-emerald-200" />
               <span>{language === 'bn' ? 'শেয়ার করুন' : 'Share Platform'}</span>
-              <span className="bg-emerald-800 px-1.5 py-0.2 rounded text-[10px] text-emerald-200 font-bold">1-Click</span>
+              <span className="bg-emerald-800 px-1.5 py-0.2 rounded text-[10px] text-emerald-200 font-bold">{language === 'bn' ? 'এক ক্লিকে' : '1-Click'}</span>
             </motion.button>
           </motion.div>
 
@@ -536,7 +536,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               >
                 <Compass className="w-4 h-4 text-amber-950 shrink-0" />
                 <span className="truncate">{language === 'bn' ? 'দিকনির্দেশক গাইড মেনু' : 'Guide Menu Drawer'}</span>
-                <span className="bg-amber-600/25 text-amber-950 px-1.5 py-0.2 rounded text-[10px] font-black shrink-0">New</span>
+                <span className="bg-amber-600/25 text-amber-950 px-1.5 py-0.2 rounded text-[10px] font-black shrink-0">{language === 'bn' ? 'নতুন' : 'New'}</span>
               </button>
 
               <button
@@ -1279,7 +1279,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   <li>{language === 'bn' ? 'নজল নির্বাচন নির্দেশিকা: ফাঁপা, ফ্ল্যাট ফ্যান, লো-ড্রিফ্ট' : 'Nozzle selection guide: Hollow cone, Flat fan, Low-drift'}</li>
                   <li>{language === 'bn' ? 'পিপিই (PPE) চেকলিস্ট: গ্লাভস, রেসপিরেটর, গগলস, ওভারল' : 'PPE checklist: Gloves, respirator, goggles, overalls'}</li>
                   <li>{language === 'bn' ? 'প্রতিরোধ ব্যবস্থাপনা: IRAC, FRAC, HRAC ঘূর্ণন কৌশল' : 'Resistance management: IRAC, FRAC, HRAC rotations'}</li>
-                  <li>{language === 'bn' ? 'জরুরি বিষক্রিয়া চিকিৎসা ও প্র 備考 primeras auxilios' : 'Emergency poisoning first aid & response'}</li>
+                  <li>{language === 'bn' ? 'জরুরি বিষক্রিয়া চিকিৎসা ও প্রাথমিক চিকিৎসা ব্যবস্থা' : 'Emergency poisoning first aid & response'}</li>
                 </ul>
               </div>
 

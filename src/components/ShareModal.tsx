@@ -223,7 +223,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
             <div className="flex items-center justify-between text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
               <span>{language === 'bn' ? 'সোশ্যাল মিডিয়া প্রিভিউ কেমন দেখাবে:' : 'Social Link Preview Card:'}</span>
               <span className="text-emerald-700 font-bold bg-emerald-100/60 px-2 py-0.5 rounded">
-                OpenGraph 1200x630 (og-bn)
+                সোশ্যাল প্রিভিউ কার্ড (1200×630)
               </span>
             </div>
             <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-2xs space-y-0">

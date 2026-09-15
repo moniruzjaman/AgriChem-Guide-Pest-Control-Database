@@ -1,3 +1,5 @@
+import { translatePest, translateCrop as translateCropBn, translateToxicity, translateDosage, translateNote, lookupNoteBn } from './bnAgri';
+
 export type Language = 'en' | 'bn';
 
 export const toBnNumber = (input: number | string): string => {
@@ -337,10 +339,16 @@ export const getTranslation = (key: string, lang: Language): string => {
 
 export const translateCrop = (crop: string, lang: Language): string => {
   if (lang === 'bn') {
-    return CROP_TRANSLATIONS[crop] || crop;
+    return CROP_TRANSLATIONS[crop] || translateCropBn(crop, lang);
   }
   return crop;
 };
+
+export const transPest = (pest: string, lang: Language): string => translatePest(pest, lang);
+export const transToxicity = (t: string, lang: Language): string => translateToxicity(t, lang);
+export const transDosage = (d: string, lang: Language): string => translateDosage(d, lang);
+export const transNote = (n: string, lang: Language): string => translateNote(n, lang);
+export { lookupNoteBn };
 
 export const translateCategory = (cat: string, lang: Language): string => {
   if (lang === 'bn') {

@@ -440,7 +440,7 @@ export default function App() {
           <div className="flex items-center gap-3">
             <img
               src="/favicon.svg"
-              alt="AgriChem Pro Logo"
+              alt={language === 'bn' ? 'এগ্রিকেম প্রো লোগো' : 'AgriChem Pro Logo'}
               className="w-8 h-8 rounded-lg object-contain shadow-xs"
               referrerPolicy="no-referrer"
             />

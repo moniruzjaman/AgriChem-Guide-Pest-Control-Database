@@ -27,7 +27,7 @@ export const SafetyChecklistModal: React.FC<SafetyChecklistModalProps> = ({
   product,
   onClose
 }) => {
-  const { language, formatNum } = useLanguage();
+  const { language, transTox, formatNum } = useLanguage();
   if (!product) return null;
 
   // Interactive Checklist states
@@ -110,7 +110,7 @@ export const SafetyChecklistModal: React.FC<SafetyChecklistModalProps> = ({
               </span>
             </div>
             <p className="text-sm font-semibold text-slate-900">
-              {product.toxicityClass || band.label}
+              {product.toxicityClass ? transTox(product.toxicityClass) : band.label}
             </p>
             <p className="text-xs text-slate-500">
               {language === 'bn' ? 'রেজিস্ট্রেশন কোড:' : 'Official registration code:'}{' '}

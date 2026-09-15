@@ -177,7 +177,13 @@ export const DocumentMeta: React.FC<{ activeTab: AppTab }> = ({ activeTab }) => 
         'price': '0',
         'priceCurrency': 'BDT'
       },
-      'featureList': [
+      'featureList': language === 'bn' ? [
+        'DAE অনুমোদিত বালাইনাশক ডাটাবেস',
+        'ন্যাপস্যাক স্প্রেয়ার মাত্রা ক্যালকুলেটর',
+        'IRAC ও FRAC ক্রিয়া কৌশল প্রতিরোধ ঘূর্ণন',
+        'WHO বিষাক্ততা ব্যান্ড ও PPE চেকলিস্ট',
+        'W.A.L.E.S. ট্যাংক মিক্সিং ক্রম ফিল্ড গাইড'
+      ] : [
         'DAE Approved Pesticide Database',
         'Knapsack Sprayer Tank Dosage Calculator',
         'IRAC and FRAC Mode-of-Action Resistance Rotation',

@@ -95,7 +95,7 @@ export const SafetyView: React.FC<SafetyViewProps> = ({ products, onOpenSafetyMo
     { 
       id: 'c10', 
       phase: language === 'bn' ? 'স্প্রে পরবর্তী' : 'Post-Spray', 
-      title: language === 'bn' ? 'জমিতে প্রবেশের ব্যবধান (REI) ও লাল নিশানা' : 'Field Re-Entry & PHI Warning', 
+      title: language === 'bn' ? 'জমিতে প্রবেশের ব্যবধান (REI) ও লাল নিশানা' : 'Post red warning tape or caution signage around the field so that no person or livestock enters before the specified safe period.', 
       desc: language === 'bn' ? 'জমির চারপাশে লাল ফিতা বা সতর্কীকরণ সাইনবোর্ড টানিয়ে রাখুন যাতে নির্দিষ্ট সময়ের পূর্বে কোনো মানুষ বা গবাদিপশু জমিতে না ঢোকে।' : 'Field Re-Entry & PHI Warning' 
     }
   ];
