@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { ChemicalProduct } from '../types';
-import { PESTICIDES_DATABASE } from '../data/pesticidesData';
 import { ProductCard } from './ProductCard';
 import { 
   Search, 
@@ -18,7 +17,6 @@ import {
   LayoutGrid,
   Layers,
   ArrowUpDown,
-  BookOpen,
   Info,
   Sliders,
   Sparkles,
@@ -28,7 +26,9 @@ import {
   Clock,
   Trash2,
   Upload,
-  Table
+  Table,
+  Warehouse,
+  HeartPulse
 } from 'lucide-react';
 import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
@@ -36,6 +36,8 @@ import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 
 interface DatabaseViewProps {
   products: ChemicalProduct[];
+  /** Count of built-in catalogue entries (before user-imported customs). */
+  baselineCount: number;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   onSelectProduct: (product: ChemicalProduct) => void;
@@ -74,6 +76,7 @@ const CROP_EMOJIS: Record<string, string> = {
 
 export const DatabaseView: React.FC<DatabaseViewProps> = ({
   products,
+  baselineCount,
   searchQuery,
   setSearchQuery,
   onSelectProduct,
@@ -445,14 +448,15 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       const typeInput = typeIdx !== -1 && columns[typeIdx] ? columns[typeIdx] : 'Insecticide';
       
       // Match type safely
-      let type: 'Insecticide' | 'Fungicide' | 'Herbicide' | 'Miticide' | 'Bio Pesticide' | 'Stored Grain' | 'Rodenticide' = 'Insecticide';
+      let type: 'Insecticide' | 'Fungicide' | 'Herbicide' | 'Miticide' | 'Bio Pesticide' | 'Store Grain Insecticide' | 'Rodenticide' | 'Public Health' = 'Insecticide';
       const typeLower = typeInput.toLowerCase();
       if (typeLower.includes('fungi')) type = 'Fungicide';
       else if (typeLower.includes('herb') || typeLower.includes('weed')) type = 'Herbicide';
       else if (typeLower.includes('miti') || typeLower.includes('spider') || typeLower.includes('bromopropylate') || typeLower.includes('sulphur')) type = 'Miticide';
       else if (typeLower.includes('bio') || typeLower.includes('organic')) type = 'Bio Pesticide';
-      else if (typeLower.includes('store') || typeLower.includes('grain')) type = 'Stored Grain';
+      else if (typeLower.includes('store') || typeLower.includes('grain')) type = 'Store Grain Insecticide';
       else if (typeLower.includes('rodent') || typeLower.includes('rat')) type = 'Rodenticide';
+      else if (typeLower.includes('public health') || typeLower.includes('mosquito') || typeLower.includes('vector')) type = 'Public Health';
       
       const registrationNo = regNoIdx !== -1 && columns[regNoIdx] ? columns[regNoIdx] : `AP-CUST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
       const registrationHolder = holderIdx !== -1 && columns[holderIdx] ? columns[holderIdx] : 'Custom Importer';
@@ -659,8 +663,10 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       case 'Herbicide': return <Layers className={className} />;
       case 'Miticide': return <Activity className={className} />;
       case 'Bio Pesticide': return <ShieldCheck className={className} />;
-      case 'Stored Grain': return <BookOpen className={className} />;
+      case 'Stored Grain':
+      case 'Store Grain Insecticide': return <Warehouse className={className} />;
       case 'Rodenticide': return <ShieldAlert className={className} />;
+      case 'Public Health': return <HeartPulse className={className} />;
       default: return <Tag className={className} />;
     }
   };
@@ -672,8 +678,10 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       case 'Herbicide': return 'text-emerald-700 bg-emerald-50 hover:bg-emerald-100/70 border-emerald-200/60';
       case 'Miticide': return 'text-rose-700 bg-rose-50 hover:bg-rose-100/70 border-rose-200/60';
       case 'Bio Pesticide': return 'text-teal-700 bg-teal-50 hover:bg-teal-100/70 border-teal-200/60';
-      case 'Stored Grain': return 'text-indigo-700 bg-indigo-50 hover:bg-indigo-100/70 border-indigo-200/60';
+      case 'Stored Grain':
+      case 'Store Grain Insecticide': return 'text-indigo-700 bg-indigo-50 hover:bg-indigo-100/70 border-indigo-200/60';
       case 'Rodenticide': return 'text-purple-700 bg-purple-50 hover:bg-purple-100/70 border-purple-200/60';
+      case 'Public Health': return 'text-cyan-700 bg-cyan-50 hover:bg-cyan-100/70 border-cyan-200/60';
       default: return 'text-slate-700 bg-slate-50 hover:bg-slate-100 border-slate-200';
     }
   };
@@ -804,9 +812,9 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
             </div>
           </div>
           <div className="flex items-center gap-3">
-            {products.length > PESTICIDES_DATABASE.length && (
+            {products.length > baselineCount && (
               <span className="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-emerald-200">
-                {language === 'bn' ? `+${formatNum(products.length - PESTICIDES_DATABASE.length)} কাস্টম` : `+${formatNum(products.length - PESTICIDES_DATABASE.length)} Custom`}
+                {language === 'bn' ? `+${formatNum(products.length - baselineCount)} কাস্টম` : `+${formatNum(products.length - baselineCount)} Custom`}
               </span>
             )}
             {isImporterOpen ? <ChevronUp className="w-5 h-5 text-slate-400" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
@@ -864,7 +872,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                     {language === 'bn' ? 'সমগ্র ডাটাবেজ এক্সপোর্ট (CSV)' : 'Export Full Database (CSV)'}
                   </button>
 
-                  {products.length > PESTICIDES_DATABASE.length && (
+                  {products.length > baselineCount && (
                     <button
                       onClick={purgeCustomData}
                       className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-red-200 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 font-bold shadow-3xs cursor-pointer transition"

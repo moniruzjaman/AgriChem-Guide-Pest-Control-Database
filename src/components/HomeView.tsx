@@ -643,9 +643,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
               )}
               <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
               <p className="text-emerald-100/90 font-medium">
-                {language === 'bn' 
-                  ? 'লোকাল ডেটাবেস ক্যাশ: ৪২৬২টি ডিএই নিবন্ধিত রাসায়নিক সক্রিয় রয়েছে।' 
-                  : 'Local PWA Cache: DAE Registered Chemical Formulations Securely Cached.'}
+                {language === 'bn'
+                  ? `লোকাল ডেটাবেস ক্যাশ: ${formatNum(totalProductsCount)}টি ডিএই নিবন্ধিত রাসায়নিক সক্রিয় রয়েছে।`
+                  : `Local PWA Cache: ${formatNum(totalProductsCount)} DAE Registered Chemical Formulations Securely Cached.`}
               </p>
             </div>
 

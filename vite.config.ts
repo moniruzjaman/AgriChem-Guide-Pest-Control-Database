@@ -119,12 +119,17 @@ export default defineConfig(() => {
         },
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2,json,webmanifest}'],
-          // The AgriChem Pro bundle now embeds the full DAE registered
-          // pesticides register (5,000+ products) which pushes the main
-          // JS chunk above the Workbox default 2 MiB precache ceiling.
-          // Raise the limit to 8 MiB so the service worker still precaches
-          // the app shell for offline field use.
-          maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
+          // Take over from any previous service worker IMMEDIATELY and purge
+          // old precaches. Without this, returning visitors keep getting the
+          // stale cached bundle (e.g. the old 1,256-product dataset) instead
+          // of the merged 5,711-product catalogue.
+          skipWaiting: true,
+          clientsClaim: true,
+          cleanupOutdatedCaches: true,
+          // The heavy product data now lives in dedicated async chunks
+          // (code-split via loadDatabase.ts), so no single precache entry
+          // exceeds the default-ish range. Keep a 4 MiB ceiling for safety.
+          maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
           runtimeCaching: [
             {
               urlPattern: /^\/api\/.*/i,

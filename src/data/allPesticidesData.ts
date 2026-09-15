@@ -205,6 +205,32 @@ const TOXICITY_BY_RESISTANCE: Record<NonNullable<ChemicalProduct['resistanceRisk
 //  Mapping: PesticideProduct -> ChemicalProduct
 // ---------------------------------------------------------------------------
 
+/**
+ * Clean a crop/pest label coming from the CSV dump: strip stray surrounding
+ * quotes, whitespace, and separators. A handful of source rows (9) carry
+ * artifacts like `"` as the whole field — those collapse to empty strings
+ * and are dropped by the caller.
+ */
+function cleanLabel(raw: string): string {
+  return raw
+    .replace(/^[\s"'.,;:]+/, '')
+    .replace(/[\s"'.,;:]+$/, '')
+    .trim();
+}
+
+function cleanLabels(raw: string[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const entry of raw) {
+    const cleaned = cleanLabel(entry);
+    const key = cleaned.toLowerCase();
+    if (!cleaned || seen.has(key)) continue;
+    seen.add(key);
+    out.push(cleaned);
+  }
+  return out;
+}
+
 function toChemicalProduct(
   p: (typeof pesticides)[number],
   index: number
@@ -222,6 +248,10 @@ function toChemicalProduct(
   // for field crops (rice, jute, vegetables) and 1000 L/ha for tea.
   const hasTea = p.recommendedCrops.some((c) => c.toLowerCase() === 'tea');
   const waterVolumeLPerHa = hasTea ? 1000 : 500;
+
+  // Sanitised crop / pest labels (drops stray-quote artifacts and dedupes).
+  const crops = cleanLabels(p.recommendedCrops);
+  const pests = cleanLabels(p.recommendedPests);
 
   // Split recommendations string on newline into a structured array.
   // Empty / whitespace-only entries are filtered out.
@@ -246,8 +276,8 @@ function toChemicalProduct(
     tradeName: p.brandName,
     registrationNo: p.registrationNo,
     registrationHolder: p.registrationHolder,
-    crops: p.recommendedCrops,
-    pests: p.recommendedPests,
+    crops,
+    pests,
     dosageRate: p.dosageRate,
     moaCode,
     moaGroup: moa?.name,
