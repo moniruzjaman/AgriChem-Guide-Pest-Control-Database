@@ -1,7 +1,9 @@
 import { ChemicalProduct } from '../types';
+import { SOURCE_PESTICIDES } from './sourcePesticidesData';
 import { ADDITIONAL_PESTICIDES } from './additionalPesticides';
 
 export const PESTICIDES_DATABASE: ChemicalProduct[] = [
+  ...SOURCE_PESTICIDES,
   // ================= MITICIDES =================
   {
     id: 'mit-001',

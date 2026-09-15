@@ -1,316 +1,281 @@
 import fs from 'fs';
 import path from 'path';
 
-// MoA mapping based on common names
+const DEFAULT_SOURCE_DIR = '/tmp/attachments/agent_755884cf-a912-46d4-9339-87abd012fab2/4d4d6a95-d659-49d3-a74a-2cc6d4bbbe57/9a460028-5eea-4c6a-9eaa-986180fb86c2';
+const OUTPUT_PATH = path.resolve(__dirname, 'src/data/sourcePesticidesData.ts');
+
+const sourcePaths = process.argv.slice(2);
+const csvFiles = sourcePaths.length > 0
+  ? sourcePaths.map((p) => (p.endsWith('.csv') ? p : path.join(p, '*.csv')).replace(/\/\*$/, '')).flatMap((p) => {
+      if (p.endsWith('.csv')) return [p];
+      const dir = p;
+      if (!fs.existsSync(dir)) return [];
+      return fs.readdirSync(dir).filter((f) => f.endsWith('.csv')).map((f) => path.join(dir, f));
+    })
+  : fs.readdirSync(DEFAULT_SOURCE_DIR).filter((f) => f.endsWith('.csv')).map((f) => path.join(DEFAULT_SOURCE_DIR, f)).sort();
+
+const CATEGORY_MAP = { insecticides: 'Insecticide', fungicides: 'Fungicide', herbicides: 'Herbicide', miticides: 'Miticide' };
+
+function parseCSVLine(line) {
+  const fields = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') {
+      if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+      else { inQuotes = !inQuotes; }
+    } else if (c === ',' && !inQuotes) { fields.push(current); current = ''; }
+    else { current += c; }
+  }
+  fields.push(current);
+  return fields;
+}
+
+function parseCSVFile(content) {
+  const rows = [];
+  let cur = '';
+  let inQ = false;
+  for (let i = 0; i < content.length; i++) {
+    const c = content[i];
+    if (c === '"') {
+      if (inQ && content[i + 1] === '"') { cur += '"'; i++; }
+      else { inQ = !inQ; }
+    } else if (c === '\n' && !inQ) {
+      const row = parseCSVLine(cur);
+      if (row.some((f) => f.trim())) rows.push(row);
+      cur = '';
+    } else if (c !== '\r') { cur += c; }
+  }
+  if (cur.trim()) { const row = parseCSVLine(cur); if (row.some((f) => f.trim())) rows.push(row); }
+  return rows;
+}
+
+function inferCategory(filePath) {
+  const base = path.basename(filePath).toLowerCase();
+  for (const [k, v] of Object.entries(CATEGORY_MAP)) { if (base.includes(k)) return v; }
+  return 'Insecticide';
+}
+
 const MOA_MAPPING = {
-  // MITICIDES
-  'Bromopropylate': { moaCode: 'IRAC UN', moaGroup: 'Unknown / Multi-target', resistanceRisk: 'Low', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Ethion': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Fenpropathrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Hexythiazox': { moaCode: 'IRAC 10A', moaGroup: 'Hexythiazox (Growth inhibitor - chitin synthesis)', resistanceRisk: 'Low to Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Propargite': { moaCode: 'IRAC 12C', moaGroup: 'Organosulfurs (Inhibitor of oxidative phosphorylation)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Sulphur': { moaCode: 'IRAC UN / FRAC M02', moaGroup: 'Inorganic sulfur (Multi-site contact)', resistanceRisk: 'Low', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-
-  // FUNGICIDES
-  'Azoxystrobin': { moaCode: 'FRAC 11', moaGroup: 'QoI (Quinone outside Inhibitor - strobilurin)', resistanceRisk: 'High', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Azoxystrobin (20% ) + Cyproconazole (8%)': { moaCode: 'FRAC 11 + 3', moaGroup: 'QoI + DMI (Demethylation inhibitor)', resistanceRisk: 'Medium to High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Azoxystrobin (20% ) + Difenoconazole (12.5%)': { moaCode: 'FRAC 11 + 3', moaGroup: 'QoI + DMI (Demethylation inhibitor)', resistanceRisk: 'Medium to High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Benalaxyl (8%) + Mancozeb (64%)': { moaCode: 'FRAC 4 + M03', moaGroup: 'PA (Phenylamide) + Multi-site contact', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Carbendazim': { moaCode: 'FRAC 1', moaGroup: 'MBC (Methyl Benzimidazole Carbamates)', resistanceRisk: 'High', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Chlorothalonil': { moaCode: 'FRAC M05', moaGroup: 'Multi-site contact (Chloronitriles)', resistanceRisk: 'Low', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Copper hydroxide': { moaCode: 'FRAC M01', moaGroup: 'Inorganic copper (Multi-site)', resistanceRisk: 'Low', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Copper oxychloride': { moaCode: 'FRAC M01', moaGroup: 'Inorganic copper (Multi-site)', resistanceRisk: 'Low', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Dichloran': { moaCode: 'FRAC 14', moaGroup: 'Aromatic hydrocarbons', resistanceRisk: 'Medium', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Difenoconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Demethylation inhibitor - Triazoles)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Dimethomorph (9%) + Mancozeb (60%)': { moaCode: 'FRAC 40 + M03', moaGroup: 'CAAs (Carboxylic acid amides) + Multi-site', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Diniconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Edifenphos': { moaCode: 'FRAC 20', moaGroup: 'Organophosphates', resistanceRisk: 'Medium', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Epoxiconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Epoxiconazol (12.5%) + Carbendazim (12.5%)': { moaCode: 'FRAC 3 + 1', moaGroup: 'DMI + MBC', resistanceRisk: 'Medium to High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Flusilazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Flusilazole (12.5%) + Carbendazim (25%)': { moaCode: 'FRAC 3 + 1', moaGroup: 'DMI + MBC', resistanceRisk: 'Medium to High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Hexaconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Iprodione': { moaCode: 'FRAC 2', moaGroup: 'Dicarboximides', resistanceRisk: 'Medium to High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Iprodione (35%) + Carbendazim (17.5%)': { moaCode: 'FRAC 2 + 1', moaGroup: 'Dicarboximides + MBC', resistanceRisk: 'High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Isoprothiolane': { moaCode: 'FRAC 32', moaGroup: 'Isoprothiolane (Thiophene carboxylate)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Kasugamycin': { moaCode: 'FRAC 24', moaGroup: 'Kasugamycin (Aminoglycoside antibiotic)', resistanceRisk: 'Low to Medium', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Mancozeb': { moaCode: 'FRAC M03', moaGroup: 'Dithiocarbamates (Multi-site contact)', resistanceRisk: 'Low', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Mancozeb (63%) + Carbendazim (12%)': { moaCode: 'FRAC M03 + 1', moaGroup: 'Multi-site + MBC', resistanceRisk: 'Medium', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Mancozeb (12%) + Copper (30%)': { moaCode: 'FRAC M03 + M01', moaGroup: 'Dithiocarbamate + Inorganic copper', resistanceRisk: 'Low', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Mancozeb (64%) + Cymoxanil (8%)': { moaCode: 'FRAC M03 + 27', moaGroup: 'Dithiocarbamate + Cyanoacetamide-oximes', resistanceRisk: 'Medium', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Mancozeb (64%) + Metalaxyl (8%)': { moaCode: 'FRAC M03 + 4', moaGroup: 'Dithiocarbamate + PA (Phenylamide)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Mancozeb (64%) + Metalaxyl (4%)': { moaCode: 'FRAC M03 + 4', moaGroup: 'Dithiocarbamate + PA (Phenylamide)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Mancozeb (45%) + Fosetyl AI (25%)': { moaCode: 'FRAC M03 + 33', moaGroup: 'Dithiocarbamate + Fosetyl-Al', resistanceRisk: 'Medium', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Mancozeb (50%) + Phenamidone (10%)': { moaCode: 'FRAC M03 + 22', moaGroup: 'Dithiocarbamate + Phenamidone', resistanceRisk: 'Low to Medium', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Metalaxyl': { moaCode: 'FRAC 4', moaGroup: 'PA (Phenylamide - RNA polymerase I)', resistanceRisk: 'High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Metiram complex': { moaCode: 'FRAC M03', moaGroup: 'Dithiocarbamates (Multi-site contact)', resistanceRisk: 'Low', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Mismarthiozol': { moaCode: 'FRAC 38', moaGroup: 'Thiazole carboxamide', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Propamocarb': { moaCode: 'FRAC 28', moaGroup: 'Carbamates (Cell membrane permeability)', resistanceRisk: 'Low to Medium', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Propiconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Propiconazole (12.5%) + Tricyclazole (40%)': { moaCode: 'FRAC 3 + 30', moaGroup: 'DMI + Melanin biosynthesis inhibitor', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Propineb': { moaCode: 'FRAC M03', moaGroup: 'Dithiocarbamates (Multi-site contact)', resistanceRisk: 'Low', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Propineb (70%) + Cymoxanil (6%)': { moaCode: 'FRAC M03 + 27', moaGroup: 'Dithiocarbamate + Cyanoacetamide-oximes', resistanceRisk: 'Medium', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Propineb (70%) + Iprovalicarb': { moaCode: 'FRAC M03 + 40', moaGroup: 'Dithiocarbamate + CAA', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Pyraclostrobin (5%) + Metiram (55%)': { moaCode: 'FRAC 11 + M03', moaGroup: 'QoI + Dithiocarbamate', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Quardartary Ammonium': { moaCode: 'FRAC UN', moaGroup: 'Quaternary ammonium', resistanceRisk: 'Unknown', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Stretomycin Sulphate (9%)+Tetracycline Hydrochloride (1%)': { moaCode: 'FRAC 25 + 25', moaGroup: 'Antibiotics (Aminoglycoside + Tetracycline)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Tebuconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Tebuconazole (50%) + Trifloxystrobin (25%)': { moaCode: 'FRAC 3 + 11', moaGroup: 'DMI + QoI', resistanceRisk: 'Medium to High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Tetraconazole (125%) + Carbendazim (150%)': { moaCode: 'FRAC 3 + 1', moaGroup: 'DMI + MBC', resistanceRisk: 'High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Thiophanate-methyl': { moaCode: 'FRAC 1', moaGroup: 'MBC (Thiophanates)', resistanceRisk: 'High', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Tri Basic Copper Sulpha': { moaCode: 'FRAC M01', moaGroup: 'Inorganic copper (Multi-site)', resistanceRisk: 'Low', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Tricyclazole': { moaCode: 'FRAC 30', moaGroup: 'Melanin biosynthesis inhibitors (MBI)', resistanceRisk: 'Low to Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Tridemorph': { moaCode: 'FRAC 5', moaGroup: 'Morpholines (Sterol biosynthesis inhibitor)', resistanceRisk: 'Medium', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Zineb': { moaCode: 'FRAC M03', moaGroup: 'Dithiocarbamates (Multi-site contact)', resistanceRisk: 'Low', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Carboxin (17.5%) + Thiram (17.5%)': { moaCode: 'FRAC 7 + M03', moaGroup: 'SDHI + Dithiocarbamate', resistanceRisk: 'Medium', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Carbendazim (17.5%)+Iprodione (35%)': { moaCode: 'FRAC 1 + 2', moaGroup: 'MBC + Dicarboximides', resistanceRisk: 'High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-
-  // INSECTICIDES
-  'Abamectin': { moaCode: 'IRAC 6', moaGroup: 'Avermectins (GluCl allosteric modulators)', resistanceRisk: 'Medium', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Abamectin (1%) +Acetamiprid (3%)': { moaCode: 'IRAC 6 + 4A', moaGroup: 'Avermectin + Neonicotinoid', resistanceRisk: 'Medium to High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Abamectin (1%) +Beta Cypermethrin (2%)': { moaCode: 'IRAC 6 + 3A', moaGroup: 'Avermectin + Pyrethroid', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Abamectin (2%) + Matrine (1%)': { moaCode: 'IRAC 6 + UN', moaGroup: 'Avermectin + Botanical', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Acephate': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Fipronil': { moaCode: 'IRAC 2B', moaGroup: 'Phenylpyrazoles (GABA-gated chloride channel blockers)', resistanceRisk: 'Medium to High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Chlorantraniliprole': { moaCode: 'IRAC 28', moaGroup: 'Diamides (Ryanodine receptor modulators)', resistanceRisk: 'Low to Medium', toxicityClass: 'U - Unlikely to Present Hazard', whoColor: '#10b981' },
-  'Imidacloprid': { moaCode: 'IRAC 4A', moaGroup: 'Neonicotinoids (nAChR competitive modulators)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Acetamiprid': { moaCode: 'IRAC 4A', moaGroup: 'Neonicotinoids (nAChR competitive modulators)', resistanceRisk: 'High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Thiamethoxam': { moaCode: 'IRAC 4A', moaGroup: 'Neonicotinoids (nAChR competitive modulators)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Thiacloprid': { moaCode: 'IRAC 4A', moaGroup: 'Neonicotinoids (nAChR competitive modulators)', resistanceRisk: 'High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Clothianidin': { moaCode: 'IRAC 4A', moaGroup: 'Neonicotinoids (nAChR competitive modulators)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Pymetrozine': { moaCode: 'IRAC 9B', moaGroup: 'Pyridine azomethines (Selective feeding blockers)', resistanceRisk: 'Low to Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Buprofezin': { moaCode: 'IRAC 16', moaGroup: 'Buprofezin (Chitin synthesis inhibitor)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Spirotetramat': { moaCode: 'IRAC 23', moaGroup: 'Tetramic acid derivatives (Lipid biosynthesis inhibitor)', resistanceRisk: 'Low to Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Cartap Hydrochloride': { moaCode: 'IRAC 14', moaGroup: 'Nereistoxin analogues (nAChR blocker)', resistanceRisk: 'Medium', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Cypermethrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Alpha Cypermethrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Beta Cypermethrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Zeta Cypermethrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Deltamethrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Lambda Cyhalothrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Bifenthrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Fenvalerate': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Esfenvalerate': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Chlorpyrifos': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Diazinon': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Dimethoate': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Fenitrothion': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Fenthion': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Malathion': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Phenthoate': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Quinalphos': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Profenofos': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Triazophos': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Endosulfan': { moaCode: 'IRAC 2A', moaGroup: 'Cyclodiene organochlorines (GABA-gated chloride channel blockers)', resistanceRisk: 'High', toxicityClass: 'Ib - Highly Hazardous', whoColor: '#ef4444' },
-  'Chlordane': { moaCode: 'IRAC 2A', moaGroup: 'Cyclodiene organochlorines', resistanceRisk: 'High', toxicityClass: 'Ib - Highly Hazardous', whoColor: '#ef4444' },
-  'Ethiprole': { moaCode: 'IRAC 2B', moaGroup: 'Phenylpyrazoles', resistanceRisk: 'Medium', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Spinosad': { moaCode: 'IRAC 5', moaGroup: 'Spinosyns (nAChR allosteric modulators)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Spinetoram': { moaCode: 'IRAC 5', moaGroup: 'Spinosyns (nAChR allosteric modulators)', resistanceRisk: 'Medium', toxicityClass: 'III - Slightly Hazardous', whoColor: '#3b82f6' },
-  'Milbemycins': { moaCode: 'IRAC 6', moaGroup: 'Milbemycins (GluCl allosteric modulators)', resistanceRisk: 'Medium', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Carbaryl': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Carbofuran': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'Ib - Highly Hazardous', whoColor: '#ef4444' },
-  'Carbosulfan': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'Ib - Highly Hazardous', whoColor: '#ef4444' },
-  'Isoprocarb (MIPC)': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Methomyl': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'Ib - Highly Hazardous', whoColor: '#ef4444' },
-  'Thiodicarb': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'II - Moderately Hazardous', whoColor: '#eab308' },
-  'Aldicarb': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High', toxicityClass: 'Ia - Extremely Hazardous', whoColor: '#ef4444' },
+  'abamectin': { moaCode: 'IRAC 6', moaGroup: 'Avermectins (GluCl allosteric modulators)', resistanceRisk: 'Medium' },
+  'acetamiprid': { moaCode: 'IRAC 4A', moaGroup: 'Neonicotinoids (nAChR competitive modulators)', resistanceRisk: 'High' },
+  'acephate': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High' },
+  'alpha cypermethrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High' },
+  'azoxystrobin': { moaCode: 'FRAC 11', moaGroup: 'QoI (Quinone outside Inhibitor - strobilurin)', resistanceRisk: 'High' },
+  'bifenthrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High' },
+  'bromopropylate': { moaCode: 'IRAC UN', moaGroup: 'Unknown / Multi-target', resistanceRisk: 'Low' },
+  'buprofezin': { moaCode: 'IRAC 16', moaGroup: 'Buprofezin (Chitin synthesis inhibitor)', resistanceRisk: 'Medium' },
+  'carbaryl': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High' },
+  'carbofuran': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High' },
+  'carbosulfan': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High' },
+  'cartap hydrochloride': { moaCode: 'IRAC 14', moaGroup: 'Nereistoxin analogues (nAChR blocker)', resistanceRisk: 'Medium' },
+  'chlorantraniliprole': { moaCode: 'IRAC 28', moaGroup: 'Diamides (Ryanodine receptor modulators)', resistanceRisk: 'Low to Medium' },
+  'chlorfenapyr': { moaCode: 'IRAC 13', moaGroup: 'Pyrroles (Uncouplers of oxidative phosphorylation)', resistanceRisk: 'Medium' },
+  'chlorpyrifos': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High' },
+  'cypermethrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High' },
+  'deltamethrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High' },
+  'dimethoate': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High' },
+  'difenoconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Demethylation inhibitor - Triazoles)', resistanceRisk: 'Medium' },
+  'diniconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium' },
+  'endosulfan': { moaCode: 'IRAC 2A', moaGroup: 'Cyclodiene organochlorines (GABA-gated chloride channel blockers)', resistanceRisk: 'High' },
+  'epoxiconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium' },
+  'ethion': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High' },
+  'ethiprole': { moaCode: 'IRAC 2B', moaGroup: 'Phenylpyrazoles', resistanceRisk: 'Medium' },
+  'fenthion': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High' },
+  'fenitrothion': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High' },
+  'fenpropathrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High' },
+  'fenvalerate': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High' },
+  'fipronil': { moaCode: 'IRAC 2B', moaGroup: 'Phenylpyrazoles (GABA-gated chloride channel blockers)', resistanceRisk: 'Medium to High' },
+  'flusilazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium' },
+  'glyphosate': { moaCode: 'HRAC 9', moaGroup: 'EPSP Synthase Inhibitors (Glycines)', resistanceRisk: 'Medium to High' },
+  'hexaconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium' },
+  'hexythiazox': { moaCode: 'IRAC 10A', moaGroup: 'Hexythiazox (Growth inhibitor - chitin synthesis)', resistanceRisk: 'Low to Medium' },
+  'imidacloprid': { moaCode: 'IRAC 4A', moaGroup: 'Neonicotinoids (nAChR competitive modulators)', resistanceRisk: 'High' },
+  'indoxacarb': { moaCode: 'IRAC 22A', moaGroup: 'Oxadiazines (Voltage-dependent Na channel blockers)', resistanceRisk: 'Medium' },
+  'iprodione': { moaCode: 'FRAC 2', moaGroup: 'Dicarboximides', resistanceRisk: 'Medium to High' },
+  'isoprothiolane': { moaCode: 'FRAC 6', moaGroup: 'Phosphorothiolates', resistanceRisk: 'Medium' },
+  'kasugamycin': { moaCode: 'FRAC 24', moaGroup: 'Kasugamycin (Aminoglycoside antibiotic)', resistanceRisk: 'Low to Medium' },
+  'lambda cyhalothrin': { moaCode: 'IRAC 3A', moaGroup: 'Pyrethroids (Sodium channel modulator)', resistanceRisk: 'High' },
+  'lufenuron': { moaCode: 'IRAC 15', moaGroup: 'Benzoylureas (Chitin biosynthesis inhibitors, type 0)', resistanceRisk: 'Medium' },
+  'malathion': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High' },
+  'mancozeb': { moaCode: 'FRAC M03', moaGroup: 'Dithiocarbamates (Multi-site contact)', resistanceRisk: 'Low' },
+  'methomyl': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High' },
+  'metalaxyl': { moaCode: 'FRAC 4', moaGroup: 'PA (Phenylamide - RNA polymerase I)', resistanceRisk: 'High' },
+  'milbemycins': { moaCode: 'IRAC 6', moaGroup: 'Milbemycins (GluCl allosteric modulators)', resistanceRisk: 'Medium' },
+  'pymetrozine': { moaCode: 'IRAC 9B', moaGroup: 'Pyridine azomethines (Selective feeding blockers)', resistanceRisk: 'Low to Medium' },
+  'propamocarb': { moaCode: 'FRAC 28', moaGroup: 'Carbamates (Cell membrane permeability)', resistanceRisk: 'Low to Medium' },
+  'propiconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium' },
+  'propineb': { moaCode: 'FRAC M03', moaGroup: 'Dithiocarbamates (Multi-site contact)', resistanceRisk: 'Low' },
+  'propargite': { moaCode: 'IRAC 12C', moaGroup: 'Organosulfurs (Inhibitor of oxidative phosphorylation)', resistanceRisk: 'Medium' },
+  'pyraclostrobin': { moaCode: 'FRAC 11', moaGroup: 'QoI (Quinone outside Inhibitor - strobilurin)', resistanceRisk: 'High' },
+  'quinalphos': { moaCode: 'IRAC 1B', moaGroup: 'Organophosphates (AChE inhibitor)', resistanceRisk: 'High' },
+  'spinosad': { moaCode: 'IRAC 5', moaGroup: 'Spinosyns (nAChR allosteric modulators)', resistanceRisk: 'Medium' },
+  'spinetoram': { moaCode: 'IRAC 5', moaGroup: 'Spinosyns (nAChR allosteric modulators)', resistanceRisk: 'Medium' },
+  'spirotetramat': { moaCode: 'IRAC 23', moaGroup: 'Tetramic acid derivatives (Lipid biosynthesis inhibitor)', resistanceRisk: 'Low to Medium' },
+  'sulphur': { moaCode: 'FRAC M02 / IRAC UN', moaGroup: 'Inorganic sulfur (Multi-site contact)', resistanceRisk: 'Low' },
+  'tebuconazole': { moaCode: 'FRAC 3', moaGroup: 'DMI (Triazoles)', resistanceRisk: 'Medium' },
+  'thiodicarb': { moaCode: 'IRAC 1A', moaGroup: 'Carbamates (AChE inhibitor)', resistanceRisk: 'High' },
+  'thiamethoxam': { moaCode: 'IRAC 4A', moaGroup: 'Neonicotinoids (nAChR competitive modulators)', resistanceRisk: 'High' },
+  'thiophanate-methyl': { moaCode: 'FRAC 1', moaGroup: 'MBC (Methyl Benzimidazole Carbamates)', resistanceRisk: 'High' },
+  'tricyclazole': { moaCode: 'FRAC 30', moaGroup: 'Melanin biosynthesis inhibitors (MBI)', resistanceRisk: 'Low to Medium' },
+  'tridemorph': { moaCode: 'FRAC 5', moaGroup: 'Morpholines (Sterol biosynthesis inhibitor)', resistanceRisk: 'Medium' },
+  'zineb': { moaCode: 'FRAC M03', moaGroup: 'Dithiocarbamates (Multi-site contact)', resistanceRisk: 'Low' },
 };
 
-// Parse CSV function
-function parseCSV(csvContent) {
-  const lines = csvContent.trim().split('\n');
-  const header = lines[0].split(',');
-  const data = [];
-  
-  for (let i = 1; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (!line) continue;
-    
-    // Simple CSV parsing - handle quoted fields
-    const fields = [];
-    let current = '';
-    let inQuotes = false;
-    
-    for (let j = 0; j < line.length; j++) {
-      const char = line[j];
-      if (char === '"' && (j === 0 || line[j-1] !== '\\')) {
-        inQuotes = !inQuotes;
-      } else if (char === ',' && !inQuotes) {
-        fields.push(current.trim());
-        current = '';
-      } else {
-        current += char;
-      }
+function resolveMoAJS(name) {
+  if (!name || !name.trim()) return { moaCode: 'Unknown', moaGroup: 'Unknown' };
+  const lower = name.trim().toLowerCase();
+  if (MOA_MAPPING[lower]) return MOA_MAPPING[lower];
+  if (name.includes('+')) {
+    const parts = name.split('+').map((p) => p.trim());
+    const codes = []; const groups = []; let hasUnknown = false;
+    for (const part of parts) {
+      const r = resolveMoAJS(part);
+      if (r.moaCode === 'Unknown') hasUnknown = true;
+      codes.push(r.moaCode); groups.push(r.moaGroup);
     }
-    fields.push(current.trim());
-    
-    if (fields.length >= 8) {
-      data.push({
-        type: fields[0],
-        commonName: fields[1],
-        tradeName: fields[2],
-        registrationNo: fields[3],
-        registrationHolder: fields[4],
-        crops: fields[5].split(',').map(c => c.trim()),
-        pests: fields[6].split(',').map(p => p.trim()),
-        dosageRate: fields[7]
-      });
+    return { moaCode: hasUnknown ? 'Unknown' : codes.join(' + '), moaGroup: hasUnknown ? 'Unknown' : groups.join(' + ') };
+  }
+  if (name.includes('(') && name.includes(')')) {
+    const m = name.match(/\(([^)]+)\)/);
+    if (m) {
+      const r = resolveMoAJS(m[1]);
+      if (r.moaCode !== 'Unknown') return r;
     }
   }
-  
-  return data;
+  return { moaCode: 'Unknown', moaGroup: 'Unknown' };
 }
 
-// Convert to ChemicalProduct format
-function convertToChemicalProduct(row, index) {
-  const moaInfo = MOA_MAPPING[row.commonName] || { 
-    moaCode: 'Unknown', 
-    moaGroup: 'Unknown', 
-    resistanceRisk: 'Unknown', 
-    toxicityClass: 'III - Slightly Hazardous', 
-    whoColor: '#3b82f6' 
-  };
-  
-  // Determine formulation from trade name
-  let formulation = 'Unknown';
-  const tradeNameUpper = row.tradeName.toUpperCase();
-  if (tradeNameUpper.includes('EC')) formulation = 'EC';
-  else if (tradeNameUpper.includes('SC')) formulation = 'SC';
-  else if (tradeNameUpper.includes('WP')) formulation = 'WP';
-  else if (tradeNameUpper.includes('WDG') || tradeNameUpper.includes('WG')) formulation = 'WDG';
-  else if (tradeNameUpper.includes('DF')) formulation = 'DF';
-  else if (tradeNameUpper.includes('GR')) formulation = 'GR';
-  else if (tradeNameUpper.includes('SL')) formulation = 'SL';
-  else if (tradeNameUpper.includes('SP')) formulation = 'SP';
-  else if (tradeNameUpper.includes('ULV')) formulation = 'ULV';
-  else if (tradeNameUpper.includes('EW')) formulation = 'EW';
-  else if (tradeNameUpper.includes('FS')) formulation = 'FS';
-  else if (tradeNameUpper.includes('OD')) formulation = 'OD';
-  else if (tradeNameUpper.includes('SE')) formulation = 'SE';
-  else if (tradeNameUpper.includes('CS')) formulation = 'CS';
-  else if (tradeNameUpper.includes('DC')) formulation = 'DC';
-  else if (tradeNameUpper.includes('MC')) formulation = 'MC';
-  else if (tradeNameUpper.includes('ZC')) formulation = 'ZC';
-  
-  // Generate unique ID
-  const typePrefix = row.type.toLowerCase().substring(0, 3);
-  const id = `${typePrefix}-${String(index + 1).padStart(3, '0')}`;
-  
-  // Estimate PHI and REI based on toxicity class
-  let phiDays = 14;
-  let reiHours = 24;
-  
-  if (moaInfo.toxicityClass.includes('Ia')) { phiDays = 30; reiHours = 72; }
-  else if (moaInfo.toxicityClass.includes('Ib')) { phiDays = 21; reiHours = 48; }
-  else if (moaInfo.toxicityClass.includes('II')) { phiDays = 14; reiHours = 24; }
-  else if (moaInfo.toxicityClass.includes('III')) { phiDays = 7; reiHours = 12; }
-  else if (moaInfo.toxicityClass.includes('U')) { phiDays = 3; reiHours = 4; }
-  
-  // Water volume based on crop type
-  const hasRice = row.crops.some(c => c.toLowerCase().includes('rice'));
-  const hasTea = row.crops.some(c => c.toLowerCase().includes('tea'));
-  const hasJute = row.crops.some(c => c.toLowerCase().includes('jute'));
-  let waterVolumeLPerHa = 500;
-  if (hasTea) waterVolumeLPerHa = 1000;
-  else if (hasRice) waterVolumeLPerHa = 500;
-  else if (hasJute) waterVolumeLPerHa = 500;
-  else waterVolumeLPerHa = 500;
-  
-  return {
-    id,
-    type: row.type,
-    commonName: row.commonName,
-    tradeName: row.tradeName,
-    registrationNo: row.registrationNo,
-    registrationHolder: row.registrationHolder,
-    crops: row.crops,
-    pests: row.pests,
-    dosageRate: row.dosageRate,
-    moaCode: moaInfo.moaCode,
-    moaGroup: moaInfo.moaGroup,
-    resistanceRisk: moaInfo.resistanceRisk,
-    toxicityClass: moaInfo.toxicityClass,
-    whoColor: moaInfo.whoColor,
-    formulation,
-    phiDays,
-    reiHours,
-    waterVolumeLPerHa,
-    safetyNotes: [],
-    rotationNotes: ''
-  };
+function detectFormulation(tradeName) {
+  if (!tradeName) return 'Unknown';
+  const u = tradeName.toUpperCase();
+  const patterns: [RegExp, string][] = [
+    [/\bEC\b/, 'EC'], [/\bSC\b/, 'SC'], [/\bWP\b/, 'WP'], [/\bWDG\b/, 'WDG'], [/\bWG\b/, 'WG'],
+    [/\bDF\b/, 'DF'], [/\bGR\b/, 'GR'], [/\bSL\b/, 'SL'], [/\bSP\b/, 'SP'], [/\bULV\b/, 'ULV'],
+    [/\bEW\b/, 'EW'], [/\bFS\b/, 'FS'], [/\bOD\b/, 'OD'], [/\bSE\b/, 'SE'], [/\bCS\b/, 'CS'],
+    [/\bDC\b/, 'DC'], [/\bMC\b/, 'MC'], [/\bZC\b/, 'ZC'], [/\bSG\b/, 'SG'], [/\bLURE?\b/, 'Lure'],
+    [/\bTABLET\b/, 'Tablet'], [/\bPOWDER\b/, 'Powder'],
+  ];
+  for (const [p, f] of patterns) { if (p.test(u)) return f; }
+  return 'Unknown';
 }
 
-// Read and process CSV
-const csvPath = '/tmp/attachments/agent_ea7e9559-60bd-4d21-a748-b165930aee56/4d4d6a95-d659-49d3-a74a-2cc6d4bbbe57/3578efd0-b01c-4ac0-bef5-5a4f3b4dcc58/930e3fe5-9366-44b5-b810-03686421a256.csv';
-const csvContent = fs.readFileSync(csvPath, 'utf-8');
+function extractProducts(filePath) {
+  const content = fs.readFileSync(filePath, 'utf-8');
+  const category = inferCategory(filePath);
+  const rows = parseCSVFile(content);
 
-const parsedData = parseCSV(csvContent);
-console.log(`Parsed ${parsedData.length} rows from CSV`);
+  let headerIdx = -1;
+  let fileTitle = '';
+  for (let i = 0; i < rows.length; i++) {
+    const t = rows[i].join(' ').toLowerCase();
+    if (t.includes('registered') && (t.includes('insecticides') || t.includes('fungicides') || t.includes('herbicides') || t.includes('miticides'))) {
+      fileTitle = rows[i].join(' ').trim();
+    }
+    if (t.includes('common name') && t.includes('brand name') && t.includes('registration no')) { headerIdx = i; break; }
+  }
+  if (headerIdx === -1) headerIdx = 4;
 
-// Convert to ChemicalProduct
-const products = parsedData.map((row, index) => convertToChemicalProduct(row, index));
+  const products = [];
+  let lastCN = '';
 
-// Group by registration number to handle duplicates (same product registered for multiple crops/pests)
-const productMap = new Map();
-products.forEach(p => {
-  const key = `${p.registrationNo}-${p.tradeName}-${p.commonName}`;
-  if (!productMap.has(key)) {
-    productMap.set(key, { ...p });
-  } else {
-    // Merge crops and pests
-    const existing = productMap.get(key);
-    existing.crops = [...new Set([...existing.crops, ...p.crops])];
-    existing.pests = [...new Set([...existing.pests, ...p.pests])];
-    // Use the more specific dosage rate if available
-    if (p.dosageRate && !existing.dosageRate.includes(p.dosageRate)) {
-      existing.dosageRate += `; ${p.dosageRate}`;
+  for (let i = headerIdx + 1; i < rows.length; i++) {
+    const row = rows[i];
+    if (row.length < 10) continue;
+
+    let cn = row[2] ? row[2].trim() : '';
+    if (!cn) cn = lastCN;
+    else lastCN = cn;
+    if (!cn) continue;
+
+    const crops = row[7] ? row[7].split(',').map((c) => c.trim()).filter(Boolean) : [];
+    const pests = row[8] ? row[8].split(',').map((p) => p.trim()).filter(Boolean) : [];
+    const moa = resolveMoAJS(cn);
+
+    products.push({
+      type: inferCategory(filePath),
+      commonName: cn,
+      tradeName: row[4] ? row[4].trim() : '',
+      registrationNo: row[5] ? row[5].trim() : '',
+      registrationHolder: row[6] ? row[6].trim() : '',
+      crops, pests, dosageRate: row[9] ? row[9].trim() : '',
+      moaCode: moa.moaCode, moaGroup: moa.moaGroup, resistanceRisk: moa.moaCode === 'Unknown' ? 'Unknown' : (MOA_MAPPING[cn.toLowerCase()]?.resistanceRisk || 'Medium'),
+      toxicityClass: 'III - Slightly Hazardous',
+      whoColor: moa.moaCode === 'Unknown' || moa.moaCode.includes('UN') ? '#3b82f6' : '#eab308',
+      formulation: detectFormulation(row[4] || ''),
+      phiDays: 14, reiHours: 24, waterVolumeLPerHa: 500,
+      safetyNotes: [], rotationNotes: '',
+    });
+  }
+  return products;
+}
+
+function escapeTS(s) {
+  return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '\\r');
+}
+
+function main() {
+  console.log(`Found ${csvFiles.length} CSV files:`);
+  csvFiles.forEach((f) => console.log(`  ${path.basename(f)}`));
+
+  const allProducts = [];
+  for (const fp of csvFiles) {
+    const prods = extractProducts(fp);
+    console.log(`  ${path.basename(fp)}: ${prods.length} raw rows`);
+    allProducts.push(...prods);
+  }
+  console.log(`Total raw rows: ${allProducts.length}`);
+
+  const productMap = new Map<string, any>();
+  const typeCounts: Record<string, number> = {};
+
+  for (const row of allProducts) {
+    const key = `${row.registrationNo}|${row.tradeName}|${row.commonName}`;
+    if (productMap.has(key)) {
+      const ex = productMap.get(key);
+      ex.crops = [...new Set([...ex.crops, ...row.crops])];
+      ex.pests = [...new Set([...ex.pests, ...row.pests])];
+      if (row.dosageRate && !ex.dosageRate.includes(row.dosageRate)) ex.dosageRate += `; ${row.dosageRate}`;
+    } else {
+      const prefix = row.type.toLowerCase().substring(0, 3);
+      const idx = typeCounts[row.type] || 0;
+      typeCounts[row.type] = idx + 1;
+      productMap.set(key, { id: `${prefix}-${String(idx + 1).padStart(3, '0')}`, ...row });
     }
   }
-});
 
-const uniqueProducts = Array.from(productMap.values());
-console.log(`Unique products after merging: ${uniqueProducts.length}`);
+  const unique = Array.from(productMap.values());
+  console.log(`Unique products after merging: ${unique.length}`);
+  console.log(`By type:`, typeCounts);
 
-// Count by type
-const typeCounts = {};
-uniqueProducts.forEach(p => {
-  typeCounts[p.type] = (typeCounts[p.type] || 0) + 1;
-});
-console.log('Products by type:', typeCounts);
+  let unresolved = 0;
+  unique.forEach((p) => { if (p.moaCode === 'Unknown' || p.moaCode.includes('UN')) unresolved++; });
+  console.log(`Unresolved MoA entries: ${unresolved}`);
 
-// Generate the new pesticidesData.ts content
-const output = `import { ChemicalProduct } from '../types';
+  const sources = csvFiles.map((f) => path.basename(f));
+  const date = new Date().toISOString().split('T')[0];
 
-export const PESTICIDES_DATABASE: ChemicalProduct[] = [
-${uniqueProducts.map(p => `  {
-    id: '${p.id}',
-    type: '${p.type}',
-    commonName: '${p.commonName.replace(/'/g, "\\'")}',
-    tradeName: '${p.tradeName.replace(/'/g, "\\'")}',
-    registrationNo: '${p.registrationNo}',
-    registrationHolder: '${p.registrationHolder.replace(/'/g, "\\'")}',
-    crops: [${p.crops.map(c => `'${c.replace(/'/g, "\\'")}'`).join(', ')}],
-    pests: [${p.pests.map(c => `'${c.replace(/'/g, "\\'")}'`).join(', ')}],
-    dosageRate: '${p.dosageRate.replace(/'/g, "\\'")}',
-    moaCode: '${p.moaCode}',
-    moaGroup: '${p.moaGroup.replace(/'/g, "\\'")}',
-    resistanceRisk: '${p.resistanceRisk}',
-    toxicityClass: '${p.toxicityClass}',
-    whoColor: '${p.whoColor}',
-    formulation: '${p.formulation}',
-    phiDays: ${p.phiDays},
-    reiHours: ${p.reiHours},
-    waterVolumeLPerHa: ${p.waterVolumeLPerHa},
-    safetyNotes: ${JSON.stringify(p.safetyNotes)},
-    rotationNotes: '${p.rotationNotes.replace(/'/g, "\\'")}'
-  }`).join(',\n')}
+  const entries = unique
+    .map((p) => `  {\n    id: '${p.id}',\n    type: '${p.type}',\n    commonName: '${escapeTS(p.commonName)}',\n    tradeName: '${escapeTS(p.tradeName)}',\n    registrationNo: '${escapeTS(p.registrationNo)}',\n    registrationHolder: '${escapeTS(p.registrationHolder)}',\n    crops: [${p.crops.map((c) => `'${escapeTS(c)}'`).join(', ')}],\n    pests: [${p.pests.map((q) => `'${escapeTS(q)}'`).join(', ')}],\n    dosageRate: '${escapeTS(p.dosageRate)}',\n    moaCode: '${p.moaCode}',\n    moaGroup: '${escapeTS(p.moaGroup)}',\n    resistanceRisk: '${p.resistanceRisk}',\n    toxicityClass: '${p.toxicityClass}',\n    whoColor: '${p.whoColor}',\n    formulation: '${p.formulation}',\n    phiDays: ${p.phiDays},\n    reiHours: ${p.reiHours},\n    waterVolumeLPerHa: ${p.waterVolumeLPerHa},\n    safetyNotes: ${JSON.stringify(p.safetyNotes)},\n    rotationNotes: '${escapeTS(p.rotationNotes)}'\n  }`)
+    .join(',\n');
+
+  const output = `import { ChemicalProduct } from '../types';
+
+export const SOURCE_META = {
+  sources: ${JSON.stringify(sources, null, 2)},
+  meeting: '81st PTAC Meeting',
+  extractionDate: '${date}',
+} as const;
+
+export const SOURCE_PESTICIDES: ChemicalProduct[] = [
+${entries}
 ];
 `;
 
-fs.writeFileSync(
-  '/workspace/4d4d6a95-d659-49d3-a74a-2cc6d4bbbe57/sessions/agent_ea7e9559-60bd-4d21-a748-b165930aee56/src/data/pesticidesData.ts',
-  output
-);
+  fs.writeFileSync(OUTPUT_PATH, output);
+  console.log(`Generated: ${OUTPUT_PATH}`);
+  console.log(`Total products in sourcePesticidesData.ts: ${unique.length}`);
+}
 
-console.log('Updated pesticidesData.ts written successfully!');
-console.log(`Total products: ${uniqueProducts.length}`);
+main();
