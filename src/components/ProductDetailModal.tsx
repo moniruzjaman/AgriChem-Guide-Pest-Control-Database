@@ -13,7 +13,8 @@ import {
   RotateCw, 
   CheckCircle2, 
   AlertOctagon,
-  Droplet
+  Droplet,
+  ClipboardList
 } from 'lucide-react';
 import { exportSingleProductPDF, exportDosagePrescriptionPDF } from '../utils/pdfExport';
 import { calculateDosage } from '../utils/calculator';
@@ -189,6 +190,76 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
             </div>
           </div>
+
+          {/* Official DAE Recommendations (Crop | Pest | Dosage) */}
+          {(() => {
+            const recs = product.recommendations ?? [];
+            const hasRecs = recs.length > 0;
+            return (
+              <div className="p-4 border border-slate-200 bg-white rounded-xl space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <h4 className="font-semibold text-slate-900 flex items-center gap-1.5 text-xs uppercase tracking-wider">
+                    <ClipboardList className="w-4 h-4 text-slate-700" />
+                    {t('dae_recommendations_title')}
+                  </h4>
+                  {hasRecs && (
+                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-900 text-white">
+                      {formatNum(recs.length)} {t('dae_rec_count_suffix')}
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {t('dae_recommendations_desc')}
+                </p>
+
+                {hasRecs ? (
+                  <div className="overflow-x-auto -mx-1 px-1">
+                    <table className="w-full text-xs border border-slate-200 rounded-lg overflow-hidden">
+                      <thead>
+                        <tr className="bg-slate-50 text-slate-600 text-left">
+                          <th className="px-2.5 py-1.5 font-semibold w-1/4">{t('dae_crop_col')}</th>
+                          <th className="px-2.5 py-1.5 font-semibold w-1/3">{t('dae_pest_col')}</th>
+                          <th className="px-2.5 py-1.5 font-semibold w-2/5">{t('dae_dosage_col')}</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {recs.map((line, idx) => {
+                          // Each recommendation line uses the format
+                          // "Crop | Pest | Dosage". Split on the first two
+                          // pipe characters; if parsing fails, fall back to
+                          // rendering the raw line in a single cell.
+                          const parts = line.split('|').map((s) => (s ?? '').trim());
+                          const crop = parts[0] ?? '';
+                          const pest = parts[1] ?? '';
+                          const dosage = parts.slice(2).join(' | ').trim();
+                          const isParsable = parts.length >= 2 && (crop || pest || dosage);
+                          return (
+                            <tr key={idx} className="align-top hover:bg-slate-50/60">
+                              {isParsable ? (
+                                <>
+                                  <td className="px-2.5 py-1.5 text-slate-900 font-medium">
+                                    {crop ? transCrop(crop) : '—'}
+                                  </td>
+                                  <td className="px-2.5 py-1.5 text-slate-700">{pest || '—'}</td>
+                                  <td className="px-2.5 py-1.5 text-emerald-800 font-mono">{dosage || '—'}</td>
+                                </>
+                              ) : (
+                                <td colSpan={3} className="px-2.5 py-1.5 text-slate-700">{line}</td>
+                              )}
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="p-3 bg-slate-50 border border-dashed border-slate-300 rounded-lg text-xs text-slate-500">
+                    {t('dae_recommendations_empty')}
+                  </div>
+                )}
+              </div>
+            );
+          })()}
 
           {/* Mode of Action & Resistance Management */}
           <div className="p-4 border border-blue-100 bg-blue-50/30 rounded-xl space-y-2">

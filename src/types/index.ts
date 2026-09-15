@@ -5,7 +5,9 @@ export type ChemicalType =
   | 'Miticide'
   | 'Bio Pesticide'
   | 'Stored Grain'
-  | 'Rodenticide';
+  | 'Store Grain Insecticide'
+  | 'Rodenticide'
+  | 'Public Health';
 
 export interface ChemicalProduct {
   id: string;
@@ -32,6 +34,16 @@ export interface ChemicalProduct {
   safetyNotes?: string[];
   targetLifeCycle?: string;
   rotationNotes?: string;
+  /**
+   * Structured crop | pest | dosage recommendations sourced from the DAE
+   * registered pesticides CSV. Each entry corresponds to one row of the
+   * original multi-line ``Recommendations (Crop | Pest | Dosage)`` field.
+   * Populated for products imported via ``ALL_PESTICIDES_DATABASE``; legacy
+   * hand-curated entries may leave this undefined.
+   */
+  recommendations?: string[];
+  /** Source dataset tag — used for diagnostics and dedupe priority. */
+  source?: 'curated' | 'dae-register';
 }
 
 export interface MoAClassification {
