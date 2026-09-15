@@ -57,7 +57,9 @@ export const CATEGORY_TRANSLATIONS: Record<string, string> = {
   'Miticide': 'মাকড়নাশক',
   'Bio Pesticide': 'জৈব বালাইনাশক',
   'Stored Grain': 'গুদামজাত শস্য সংরক্ষণ',
-  'Rodenticide': 'ইঁদুরনাশক'
+  'Store Grain Insecticide': 'গুদামজাত শস্য কীটনাশক',
+  'Rodenticide': 'ইঁদুরনাশক',
+  'Public Health': 'জনস্বাস্থ্য বালাইনাশক'
 };
 
 export const RISK_TRANSLATIONS: Record<string, string> = {
@@ -136,6 +138,13 @@ export const UI_TRANSLATIONS: Record<Language, Record<string, string>> = {
     spray_water_volume: 'Recommended Water Volume',
     resistance_guideline: 'Resistance Management Guideline',
     safety_cautions: 'Safety Precautions',
+    dae_recommendations_title: 'Official DAE Use Recommendations',
+    dae_recommendations_desc: 'Crop | Pest | Dosage prescriptions authorised by the Department of Agricultural Extension (DAE) for this registration.',
+    dae_recommendations_empty: 'No structured recommendations on file. Refer to the product label or contact your nearest DAE office.',
+    dae_crop_col: 'Crop',
+    dae_pest_col: 'Target Pest / Disease',
+    dae_dosage_col: 'Authorised Dosage',
+    dae_rec_count_suffix: 'approved recommendations on file',
 
     // Dosage Calculator
     calc_header_title: 'Interactive Field Dosage & Tank Mix Station',
@@ -257,6 +266,13 @@ export const UI_TRANSLATIONS: Record<Language, Record<string, string>> = {
     spray_water_volume: 'প্রস্তাবিত পানির পরিমাণ',
     resistance_guideline: 'প্রতিরোধ ক্ষমতা রোধের নির্দেশিকা',
     safety_cautions: 'ব্যবহারিক সতর্কতা',
+    dae_recommendations_title: 'DAE অনুমোদিত প্রয়োগ নির্দেশিকা',
+    dae_recommendations_desc: 'এই নিবন্ধনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) অনুমোদিত ফসল | বালাই | মাত্রা তালিকা।',
+    dae_recommendations_empty: 'কোনো কাঠামোগত সুপারিশ নেই। পণ্যের লেবেল দেখুন বা নিকটস্থ DAE অফিসে যোগাযোগ করুন।',
+    dae_crop_col: 'ফসল',
+    dae_pest_col: 'লক্ষ্য বালাই / রোগ',
+    dae_dosage_col: 'অনুমোদিত মাত্রা',
+    dae_rec_count_suffix: 'টি অনুমোদিত সুপারিশ রেকর্ডে আছে',
 
     // Dosage Calculator
     calc_header_title: 'ন্যাSplit-Knapsack স্প্রেয়ার মাত্রা ও ট্যাংক মিশ্রণ স্টেশন',

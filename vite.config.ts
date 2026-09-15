@@ -119,6 +119,12 @@ export default defineConfig(() => {
         },
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2,json,webmanifest}'],
+          // The AgriChem Pro bundle now embeds the full DAE registered
+          // pesticides register (5,000+ products) which pushes the main
+          // JS chunk above the Workbox default 2 MiB precache ceiling.
+          // Raise the limit to 8 MiB so the service worker still precaches
+          // the app shell for offline field use.
+          maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
           runtimeCaching: [
             {
               urlPattern: /^\/api\/.*/i,
