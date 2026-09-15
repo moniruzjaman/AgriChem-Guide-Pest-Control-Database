@@ -803,6 +803,22 @@ export const Guidebook: React.FC<GuidebookProps> = ({ products }) => {
           </div>
         </div>
       )}
+
+      {/* Official Agronomist Handbook Source & Technical Disclaimer */}
+      <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl flex items-start gap-3 mt-6">
+        <AlertTriangle className="w-5 h-5 text-slate-500 shrink-0 mt-0.5" />
+        <div className="text-xs space-y-1">
+          <strong className="text-slate-900 block font-bold">
+            {language === 'bn' ? 'অফিসিয়াল হ্যান্ডবুক তথ্যসূত্র ও বৈজ্ঞানিক ডিসক্লেইমার:' : 'Official Handbook Sources & Scientific Disclaimer:'}
+          </strong>
+          <p className="text-slate-600 leading-relaxed font-medium">
+            {language === 'bn' 
+              ? 'এই হ্যান্ডবুক ও বৈজ্ঞানিক নির্দেশিকাগুলো বাংলাদেশ कृषि গবেষণা ইনস্টিটিউট (BARI), বাংলাদেশ ধান গবেষণা ইনস্টিটিউট (BRRI), কৃষি সম্প্রসারণ অধিদপ্তর (DAE) এবং আন্তর্জাতিক IRAC / FRAC প্রতিরোধ কমিটির বালাইনাশক নীতি অনুসরণ করে সংকলিত হয়েছে। এটি শুধুমাত্র মাঠ কর্মকর্তা ও শিক্ষার্থীদের সাধারণ প্রশিক্ষণের জন্য তৈরি। জমিতে যেকোনো রাসায়নিক বালাইনাশক ছিটানোর পূর্বে সর্বদা আপনার স্থানীয় উপ-সহকারী কৃষি কর্মকর্তা বা ডিএই কর্মকর্তাদের পরামর্শ নিন।'
+              : 'The agronomist reference charts, mixing hierarchies, and resistance prevention models provided in this handbook are compiled from official publications by BARI, BRRI, the Department of Agricultural Extension (DAE), and international stewardship networks (IRAC / FRAC). They are intended for educational and field orientation purposes. Always verify exact product labels and consult with local DAE agronomists before application.'}
+          </p>
+        </div>
+      </div>
+
     </div>
   );
 };
