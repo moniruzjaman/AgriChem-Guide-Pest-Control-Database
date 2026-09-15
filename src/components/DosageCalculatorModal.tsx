@@ -29,7 +29,10 @@ export const DosageCalculatorModal: React.FC<DosageCalculatorModalProps> = ({
   onClose,
   onSelectProduct
 }) => {
-  const { language, t, transCrop, transCat, formatNum } = useLanguage();
+  const { language, t, transCrop, transCat, transDose, formatNum } = useLanguage();
+
+  const areaUnitBn = (u: DosageInput['areaUnit']): string =>
+    ({ bigha: 'বিঘা', katha: 'কাঠা', acre: 'একর', hectare: 'হেক্টর', sqm: 'বর্গমিটার' } as Record<string, string>)[u] || u;
 
   const [currentProduct, setCurrentProduct] = useState<ChemicalProduct>(
     selectedProduct || products[0]
@@ -51,7 +54,7 @@ export const DosageCalculatorModal: React.FC<DosageCalculatorModalProps> = ({
     areaUnit,
     tankVolumeL,
     sprayVolumePerHaL: sprayVolumePerHa
-  });
+  }, language);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
@@ -78,7 +81,7 @@ export const DosageCalculatorModal: React.FC<DosageCalculatorModalProps> = ({
             id="close-calculator-modal-btn"
             onClick={onClose}
             className="p-1.5 text-teal-200 hover:text-white rounded-lg hover:bg-teal-700 transition cursor-pointer"
-            aria-label="Close calculator"
+            aria-label={language === 'bn' ? 'ক্যালকুলেটর বন্ধ করুন' : 'Close calculator'}
           >
             <X className="w-5 h-5" />
           </button>
@@ -148,13 +151,13 @@ export const DosageCalculatorModal: React.FC<DosageCalculatorModalProps> = ({
               <span className="text-slate-400 block text-[10px] uppercase font-bold">
                 {language === 'bn' ? 'নিবন্ধিত মাত্রা' : 'Registered Dosage Rate'}
               </span>
-              <span className="font-bold text-teal-900 text-sm">{currentProduct.dosageRate}</span>
+              <span className="font-bold text-teal-900 text-sm">{transDose(currentProduct.dosageRate)}</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">
                 {language === 'bn' ? 'শ্রেণী ও MoA' : 'Category & MoA'}
               </span>
-              <span className="font-medium text-slate-800">{transCat(currentProduct.type)} | {currentProduct.moaCode || 'Standard'}</span>
+              <span className="font-medium text-slate-800">{transCat(currentProduct.type)} | {currentProduct.moaCode || (language === 'bn' ? 'স্ট্যান্ডার্ড' : 'Standard')}</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">
@@ -189,11 +192,11 @@ export const DosageCalculatorModal: React.FC<DosageCalculatorModalProps> = ({
                   onChange={(e) => setAreaUnit(e.target.value as any)}
                   className="col-span-3 px-2 py-2 bg-white border border-slate-300 rounded-lg text-xs font-medium focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
-                  <option value="bigha">Bigha (বিঘা ≈ 0.33 একর)</option>
-                  <option value="katha">Katha (কাঠা ≈ ১/২০ বিঘা)</option>
-                  <option value="acre">Acre (একর)</option>
-                  <option value="hectare">Hectare (হেক্টর)</option>
-                  <option value="sqm">Square Meters (বর্গমিটার)</option>
+                  <option value="bigha">{language === 'bn' ? 'বিঘা (≈ ০.৩৩ একর)' : 'Bigha (বিঘা ≈ 0.33 একর)'}</option>
+                  <option value="katha">{language === 'bn' ? 'কাঠা (≈ ১/২০ বিঘা)' : 'Katha (কাঠা ≈ ১/২০ বিঘা)'}</option>
+                  <option value="acre">{language === 'bn' ? 'একর' : 'Acre (একর)'}</option>
+                  <option value="hectare">{language === 'bn' ? 'হেক্টর' : 'Hectare (হেক্টর)'}</option>
+                  <option value="sqm">{language === 'bn' ? 'বর্গমিটার' : 'Square Meters (বর্গমিটার)'}</option>
                 </select>
               </div>
               <p className="text-[11px] text-slate-400 mt-1">
@@ -246,7 +249,7 @@ export const DosageCalculatorModal: React.FC<DosageCalculatorModalProps> = ({
                   {calculation.totalChemicalNeeded}
                 </p>
                 <span className="text-[11px] text-slate-500">
-                  {language === 'bn' ? `মোট ${formatNum(areaValue)} ${areaUnit} জমির জন্য` : `For total ${areaValue} ${areaUnit} area`}
+                  {language === 'bn' ? `মোট ${formatNum(areaValue)} ${areaUnitBn(areaUnit)} জমির জন্য` : `For total ${areaValue} ${areaUnit} area`}
                 </span>
               </div>
 

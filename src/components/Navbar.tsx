@@ -160,7 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={toggleLanguage}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-600/30 bg-emerald-50 hover:bg-emerald-100/90 text-emerald-900 font-bold text-xs transition shadow-2xs cursor-pointer select-none"
               title={language === 'en' ? 'বাংলা ভাষায় পরিবর্তন করুন (Switch to Bangla)' : 'Switch interface to English'}
-              aria-label="Toggle language between Bangla and English"
+              aria-label={language === 'bn' ? 'ভাষা পরিবর্তন করুন' : 'Toggle language between Bangla and English'}
             >
               <Languages className="w-4 h-4 text-emerald-700 shrink-0" />
               <span className="font-bold tracking-tight">{language === 'en' ? 'বাংলা' : 'English'}</span>
@@ -174,7 +174,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               id="header-alerts-btn"
               onClick={onOpenAlerts}
               className="relative p-2 text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition"
-              title="Regulatory compliance updates & seasonal alerts"
+              title={language === 'bn' ? 'নিয়ন্ত্রণ আদেশ ও মৌসুমী সতর্কবার্তা' : 'Regulatory compliance updates & seasonal alerts'}
             >
               {unreadAlertCount > 0 ? (
                 <BellRing className="w-5 h-5 text-amber-600 animate-bounce" />

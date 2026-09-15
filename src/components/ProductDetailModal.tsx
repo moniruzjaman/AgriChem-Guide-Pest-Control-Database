@@ -19,6 +19,8 @@ import {
 import { exportSingleProductPDF, exportDosagePrescriptionPDF } from '../utils/pdfExport';
 import { calculateDosage } from '../utils/calculator';
 import { useLanguage } from '../context/LanguageContext';
+import { MOA_DATABASE } from '../data/moaData';
+import { lookupNoteBn } from '../utils/i18n';
 
 interface ProductDetailModalProps {
   product: ChemicalProduct | null;
@@ -31,9 +33,18 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   onClose,
   onOpenDosageCalculator
 }) => {
-  const { language, t, transCrop, transCat, transRisk, formatNum } = useLanguage();
+  const { language, t, transCrop, transCat, transRisk, transPest, transTox, transDose, transNote, formatNum } = useLanguage();
 
   if (!product) return null;
+
+  // MoA info lookup — prefer Bangla metadata in bn mode
+  const moaInfo = product.moaCode ? MOA_DATABASE.find(m => m.code === product.moaCode) : undefined;
+  const moaGroupDisplay = language === 'bn'
+    ? (moaInfo?.nameBn || product.moaGroup || 'ক্রিয়ার লক্ষ্যস্থল-ভিত্তিক প্রক্রিয়া')
+    : (product.moaGroup || 'Target site physiological process');
+  const rotationDisplay = language === 'bn'
+    ? (lookupNoteBn(product.rotationNotes || '') || moaInfo?.rotationStrategyBn || 'প্রতিরোধ রোধে পরপর ২ বারের বেশি একই গ্রুপের ওষুধ প্রয়োগ করবেন না। ভিন্ন MoA গ্রুপের ওষুধ দিয়ে ঘূর্ণন করুন।')
+    : (product.rotationNotes || 'Do not make more than 2 consecutive applications. Rotate with a chemical from an alternate MoA family to prevent target-site resistance.');
 
   // Mini quick calculator state inside modal
   const [areaVal, setAreaVal] = useState<number>(1);
@@ -45,7 +56,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
     areaUnit: areaUnit,
     tankVolumeL: tankSize,
     sprayVolumePerHaL: product.waterVolumeLPerHa || 500
-  });
+  }, language);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
@@ -75,7 +86,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             id="close-detail-modal-btn"
             onClick={onClose}
             className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition cursor-pointer"
-            aria-label="Close modal"
+            aria-label={language === 'bn' ? 'মোডাল বন্ধ করুন' : 'Close modal'}
           >
             <X className="w-5 h-5" />
           </button>
@@ -104,13 +115,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <span className="text-[11px] uppercase font-semibold text-slate-400 block">
                 {language === 'bn' ? 'অনুমোদিত মাত্রা' : 'Dosage Rate'}
               </span>
-              <span className="font-bold text-slate-900 text-sm mt-0.5 block">{product.dosageRate}</span>
+              <span className="font-bold text-slate-900 text-sm mt-0.5 block">{transDose(product.dosageRate)}</span>
             </div>
             <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
               <span className="text-[11px] uppercase font-semibold text-slate-400 block">
                 {language === 'bn' ? 'ক্রিয়া কোড (MoA)' : 'MoA Code'}
               </span>
-              <span className="font-bold text-slate-900 text-sm mt-0.5 block">{product.moaCode || 'Standard'}</span>
+              <span className="font-bold text-slate-900 text-sm mt-0.5 block">{product.moaCode || (language === 'bn' ? 'স্ট্যান্ডার্ড' : 'Standard')}</span>
             </div>
             <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
               <span className="text-[11px] uppercase font-semibold text-slate-400 block">
@@ -151,11 +162,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
               <div>
                 <span className="text-slate-400">{language === 'bn' ? 'ফর্মুলেশন টাইপ: ' : 'Formulation: '}</span>
-                <span className="font-medium text-slate-800">{product.formulation || 'Standard formulation'}</span>
+                <span className="font-medium text-slate-800">{product.formulation || (language === 'bn' ? 'স্ট্যান্ডার্ড ফর্মুলেশন' : 'Standard formulation')}</span>
               </div>
               <div>
                 <span className="text-slate-400">{language === 'bn' ? 'বিষাক্ততার শ্রেণী: ' : 'Toxicity Classification: '}</span>
-                <span className="font-medium text-slate-800">{product.toxicityClass || 'WHO Class II / III'}</span>
+                <span className="font-medium text-slate-800">{product.toxicityClass ? transTox(product.toxicityClass) : (language === 'bn' ? 'WHO শ্রেণি II / III' : 'WHO Class II / III')}</span>
               </div>
             </div>
           </div>
@@ -184,7 +195,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <div className="flex flex-wrap gap-1.5">
                 {product.pests.map((pest, i) => (
                   <span key={i} className="px-2.5 py-1 bg-white text-amber-900 border border-amber-200 rounded-lg text-xs font-medium shadow-2xs">
-                    {pest}
+                    {transPest(pest)}
                   </span>
                 ))}
               </div>
@@ -240,8 +251,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                                   <td className="px-2.5 py-1.5 text-slate-900 font-medium">
                                     {crop ? transCrop(crop) : '—'}
                                   </td>
-                                  <td className="px-2.5 py-1.5 text-slate-700">{pest || '—'}</td>
-                                  <td className="px-2.5 py-1.5 text-emerald-800 font-mono">{dosage || '—'}</td>
+                                  <td className="px-2.5 py-1.5 text-slate-700">{pest ? transPest(pest) : '—'}</td>
+                                  <td className="px-2.5 py-1.5 text-emerald-800 font-mono">{dosage ? transDose(dosage) : '—'}</td>
                                 </>
                               ) : (
                                 <td colSpan={3} className="px-2.5 py-1.5 text-slate-700">{line}</td>
@@ -277,11 +288,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </span>
             </div>
             <p className="text-xs text-slate-700 leading-relaxed">
-              <strong className="text-slate-900">{language === 'bn' ? 'MoA গ্রুপ:' : 'MoA Group:'}</strong> {product.moaGroup || 'Target site physiological process'}.
+              <strong className="text-slate-900">{language === 'bn' ? 'MoA গ্রুপ:' : 'MoA Group:'}</strong> {moaGroupDisplay}.
             </p>
             <p className="text-xs text-slate-600 bg-white p-3 rounded-lg border border-blue-100 leading-relaxed">
               <strong className="text-blue-900">{language === 'bn' ? 'আবর্তন নির্দেশিকা: ' : 'Rotation Directive: '}</strong>
-              {product.rotationNotes || 'Do not make more than 2 consecutive applications. Rotate with a chemical from an alternate MoA family to prevent target-site resistance.'}
+              {rotationDisplay}
             </p>
           </div>
 
@@ -319,7 +330,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   {product.safetyNotes.map((note, i) => (
                     <li key={i} className="text-xs text-amber-900 bg-amber-50 px-2.5 py-1 rounded border border-amber-200/60 flex items-center gap-1.5">
                       <AlertOctagon className="w-3.5 h-3.5 text-amber-700 shrink-0" />
-                      {note}
+                      {transNote(note)}
                     </li>
                   ))}
                 </ul>
@@ -382,9 +393,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   onChange={(e) => setTankSize(parseInt(e.target.value))}
                   className="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500"
                 >
-                  <option value="16">{formatNum(16)} Litre Backpack</option>
-                  <option value="10">{formatNum(10)} Litre Small</option>
-                  <option value="20">{formatNum(20)} Litre Large</option>
+                  <option value="16">{formatNum(16)} {language === 'bn' ? 'লিটার ব্যাকপ্যাক' : 'Litre Backpack'}</option>
+                  <option value="10">{formatNum(10)} {language === 'bn' ? 'লিটার ছোট' : 'Litre Small'}</option>
+                  <option value="20">{formatNum(20)} {language === 'bn' ? 'লিটার বড়' : 'Litre Large'}</option>
                 </select>
               </div>
             </div>

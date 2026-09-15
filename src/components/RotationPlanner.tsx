@@ -23,7 +23,7 @@ interface RotationPlannerProps {
 }
 
 export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) => {
-  const { language, transCrop, formatNum } = useLanguage();
+  const { language, transCrop, transPest, formatNum } = useLanguage();
 
   // Available crops
   const availableCrops = useMemo(() => {
@@ -83,9 +83,9 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
     sprayWindow: string;
     productId: string;
   }[]>([
-    { sprayNumber: 1, sprayWindow: 'Early Vegetative / Seedling', productId: '' },
-    { sprayNumber: 2, sprayWindow: 'Active Tillering / Growth', productId: '' },
-    { sprayNumber: 3, sprayWindow: 'Flowering / Panicle / Fruit', productId: '' }
+    { sprayNumber: 1, sprayWindow: 'শৈশবাবস্থা / চারা রোপণ', productId: '' },
+    { sprayNumber: 2, sprayWindow: 'সক্রিয় শীর্ষবিভাজন / বৃদ্ধি', productId: '' },
+    { sprayNumber: 3, sprayWindow: 'মুকুল / শীষ / ফল গঠন', productId: '' }
   ]);
 
   // Auto-populate initial rotation steps when eligible products change
@@ -145,8 +145,8 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
         productId: prod.id,
         productName: prod.tradeName,
         commonName: prod.commonName,
-        moaCode: prod.moaCode || 'Unknown',
-        moaGroup: prod.moaGroup || 'Unclassified',
+        moaCode: prod.moaCode || 'অজানা',
+        moaGroup: prod.moaGroup || 'শ্রেণিবহির্ভূত',
         status: conflict ? 'conflict' : 'valid',
         conflictReason: reason
       };
@@ -162,7 +162,7 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
         <div className="max-w-3xl relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/80 border border-blue-700 text-blue-200 text-xs font-semibold mb-3">
             <RotateCw className="w-3.5 h-3.5" />
-            IRAC • FRAC • HRAC Mode of Action Resistance Framework
+            {language === 'bn' ? 'IRAC • FRAC • HRAC ক্রিয়া কৌশল প্রতিরোধ কাঠামো' : 'IRAC • FRAC • HRAC Mode of Action Resistance Framework'}
           </div>
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
             {language === 'bn' ? 'বালাইনাশক আবর্তন ও রেজিসট্যান্স প্রতিরোধ পরিকল্পনাকারী' : 'Anti-Resistance Spray Rotation Planner'}
@@ -240,7 +240,7 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
           >
             {availablePests.map((pest) => (
               <option key={pest} value={pest}>
-                {pest}
+                {transPest(pest)}
               </option>
             ))}
           </select>
@@ -267,7 +267,7 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-bold text-slate-900 text-base">
-              {transCrop(selectedCrop)}-এ {selectedPest}-এর জন্য অনুমোদিত MoA গ্রুপসমূহ
+              {transCrop(selectedCrop)}-এ {transPest(selectedPest)}-এর জন্য অনুমোদিত MoA গ্রুপসমূহ
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
               {language === 'bn'
@@ -291,10 +291,10 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
                   </span>
                 </div>
                 <h4 className="font-bold text-xs text-slate-800">
-                  {moaInfo?.name || prods[0].moaGroup || 'Target site specified'}
+                  {language === 'bn' ? (moaInfo?.nameBn || prods[0].moaGroup || 'ক্রিয়ার লক্ষ্যস্থল উল্লেখিত') : (moaInfo?.name || prods[0].moaGroup || 'Target site specified')}
                 </h4>
                 <p className="text-[11px] text-slate-500 line-clamp-2">
-                  {moaInfo?.targetSite || 'Cellular metabolic biochemical pathway.'}
+                  {language === 'bn' ? (moaInfo?.targetSiteBn || 'কোষীয় বিপাকীয় জৈব রাসায়নিক প্রক্রিয়া।') : (moaInfo?.targetSite || 'Cellular metabolic biochemical pathway.')}
                 </p>
                 <div className="text-[10px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded inline-block font-medium">
                   {prods.map((p) => p.tradeName).slice(0, 3).join(', ')}
@@ -424,7 +424,7 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
                       <option value="">{language === 'bn' ? '-- বালাইনাশক বাছাই করুন --' : '-- Choose chemical --'}</option>
                       {eligibleProducts.map((p) => (
                         <option key={p.id} value={p.id}>
-                          {p.tradeName} ({p.commonName}) — [{p.moaCode || 'Standard'}]
+                          {p.tradeName} ({p.commonName}) — [{p.moaCode || 'স্ট্যান্ডার্ড'}]
                         </option>
                       ))}
                     </select>

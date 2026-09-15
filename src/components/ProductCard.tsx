@@ -28,7 +28,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onOpenCalculator,
   onOpenSafety
 }) => {
-  const { language, transCat, transRisk, transCrop, formatNum } = useLanguage();
+  const { language, transCat, transRisk, transCrop, transPest, transDose, formatNum } = useLanguage();
 
   const getCategoryBadgeClass = (type: ChemicalProduct['type']) => {
     switch (type) {
@@ -139,7 +139,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               {language === 'bn' ? 'লক্ষ্য বালাই / রোগ / আগাছা' : 'Target Pests / Diseases / Weeds'}
             </span>
             <p className="text-xs text-slate-700 line-clamp-2 leading-relaxed bg-slate-50 p-2 rounded-lg border border-slate-100">
-              {product.pests.join(', ')}
+              {product.pests.map(p => transPest(p)).join(', ')}
             </p>
           </div>
         </div>
@@ -151,7 +151,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               {language === 'bn' ? 'অনুমোদিত মাত্রা' : 'Registered Dosage'}
             </span>
             <p className="text-xs font-bold text-emerald-950 truncate max-w-[200px]" title={product.dosageRate}>
-              {product.dosageRate}
+              {transDose(product.dosageRate)}
             </p>
           </div>
           {product.phiDays ? (
@@ -173,7 +173,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           id={`btn-calc-${product.id}`}
           onClick={() => onOpenCalculator(product)}
           className="flex flex-col items-center justify-center p-1.5 text-xs text-slate-700 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg border border-slate-200 transition cursor-pointer"
-          title="Calculate field dosage and tank mix"
+          title={language === 'bn' ? 'মাঠের মাত্রা ও ট্যাংক মিশ্রণ হিসাব করুন' : 'Calculate field dosage and tank mix'}
         >
           <Calculator className="w-4 h-4 text-emerald-600 mb-0.5" />
           <span className="text-[10px] font-medium">{language === 'bn' ? 'মাত্রা হিসাব' : 'Dosage'}</span>
@@ -183,7 +183,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           id={`btn-safety-${product.id}`}
           onClick={() => onOpenSafety(product)}
           className="flex flex-col items-center justify-center p-1.5 text-xs text-slate-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg border border-slate-200 transition cursor-pointer"
-          title="Safety precautions and PPE checklist"
+          title={language === 'bn' ? 'নিরাপত্তা সতর্কতা ও পিপিই চেকলিস্ট' : 'Safety precautions and PPE checklist'}
         >
           <ShieldCheck className="w-4 h-4 text-amber-600 mb-0.5" />
           <span className="text-[10px] font-medium">{language === 'bn' ? 'সুরক্ষা' : 'Safety'}</span>
@@ -193,7 +193,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           id={`btn-pdf-${product.id}`}
           onClick={() => exportSingleProductPDF(product)}
           className="flex flex-col items-center justify-center p-1.5 text-xs text-slate-700 hover:text-blue-700 hover:bg-blue-50 rounded-lg border border-slate-200 transition cursor-pointer"
-          title="Export offline field card PDF"
+          title={language === 'bn' ? 'অফলাইন ফিল্ড কার্ড PDF ডাউনলোড' : 'Export offline field card PDF'}
         >
           <FileDown className="w-4 h-4 text-blue-600 mb-0.5" />
           <span className="text-[10px] font-medium">{language === 'bn' ? 'কার্ড PDF' : 'PDF Card'}</span>
@@ -203,7 +203,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           id={`btn-details-${product.id}`}
           onClick={() => onSelectProduct(product)}
           className="flex flex-col items-center justify-center p-1.5 text-xs bg-slate-900 text-white hover:bg-emerald-700 rounded-lg transition cursor-pointer"
-          title="View full chemical dossier"
+          title={language === 'bn' ? 'সম্পূর্ণ প্রযুক্তিগত বিবরণ দেখুন' : 'View full chemical dossier'}
         >
           <Info className="w-4 h-4 mb-0.5" />
           <span className="text-[10px] font-medium">{language === 'bn' ? 'বিস্তারিত' : 'Details'}</span>
