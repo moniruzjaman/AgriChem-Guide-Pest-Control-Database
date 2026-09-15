@@ -12,7 +12,8 @@ import {
   Fish, 
   Flower2, 
   Droplet,
-  FileDown
+  FileDown,
+  Info
 } from 'lucide-react';
 import { exportSingleProductPDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
@@ -282,6 +283,23 @@ export const SafetyChecklistModal: React.FC<SafetyChecklistModalProps> = ({
                 <li>{language === 'bn' ? 'খালি পাত্রে কখনো পানি, তেল বা খাদ্যসামগ্রী রাখবেন না।' : 'NEVER reuse pesticide containers for storing water, oil, or food.'}</li>
                 <li>{language === 'bn' ? 'নির্দিষ্ট কৃষি বর্জ্য স্থানে মাটিতে পুঁতে ফেলুন।' : 'Bury or dispose of in designated hazardous agricultural waste bins.'}</li>
               </ol>
+            </div>
+          </div>
+
+          {/* Statutory Advisory Disclaimer & Regulatory Source Citation */}
+          <div className="p-3 bg-amber-50/70 border border-amber-200/80 rounded-xl flex items-start gap-2.5 text-[11px] text-amber-900">
+            <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+            <div className="space-y-0.5 leading-relaxed">
+              <span className="font-bold">
+                {language === 'bn' 
+                  ? 'আইনি সতর্কবার্তা ও তথ্যের উৎস (DAE / WHO): ' 
+                  : 'Statutory Disclaimer & Authority Source (DAE / WHO): '}
+              </span>
+              <span>
+                {language === 'bn'
+                  ? 'উক্ত নিরাপত্তা নির্দেশিকা ও কীটনাশক ব্যবহারের পরামর্শ বাংলাদেশ কৃষি সম্প্রসারণ অধিদপ্তর (DAE), বিশ্ব স্বাস্থ্য সংস্থা (WHO), এবং IRAC/FRAC/HRAC আন্তর্জাতিক বালাইনাশক কমিটির বৈজ্ঞানিক নির্দেশিকা অনুসারে প্রণীত। যেকোনো রাসায়নিক বালাইনাশক ক্রয়ের পূর্বে বোতলের অনুমোদিত সরকারি লেবেল ও ব্যবহারের তারিখ সতর্কতার সাথে যাচাই করুন।'
+                  : 'All safety protocols, PPE mandates, and toxicological advisories are curated strictly from the Bangladesh Department of Agricultural Extension (DAE), World Health Organization (WHO), and IRAC/FRAC/HRAC scientific monographs. Always read the approved physical product label before application.'}
+              </span>
             </div>
           </div>
         </div>

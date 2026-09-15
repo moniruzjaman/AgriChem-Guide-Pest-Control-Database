@@ -405,6 +405,22 @@ export const SafetyView: React.FC<SafetyViewProps> = ({ products, onOpenSafetyMo
           </button>
         </div>
       </div>
+
+      {/* Official WHO & DAE Health Advisory Citation */}
+      <div className="p-4 bg-amber-50/50 border border-amber-200/80 rounded-2xl flex items-start gap-3">
+        <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
+        <div className="text-xs space-y-1">
+          <strong className="text-amber-950 block font-bold">
+            {language === 'bn' ? 'অফিসিয়াল স্বাস্থ্য ও বালাইনাশক বিষক্রিয়া নির্দেশিকা ডিসক্লেইমার:' : 'Official Toxicology Reference & Safety Disclaimer:'}
+          </strong>
+          <p className="text-slate-700 font-medium">
+            {language === 'bn' 
+              ? 'এখানে উল্লিখিত বালাইনাশক ঝুঁকি শ্রেণীবিভাগ বিশ্ব স্বাস্থ্য সংস্থা (WHO) গাইডলাইন এবং প্রাথমিক চিকিৎসা ও অ্যান্টিডোট প্রোটোকলগুলো ডিএই (DAE) ও উদ্ভিদ রোগতত্ত্ব ম্যানুয়াল অনুসরণে প্রণীত। এই নির্দেশিকা শুধুমাত্র সাধারণ শিক্ষার উদ্দেশ্যে তৈরি। তীব্র বিষক্রিয়া বা বালাইনাশক এক্সপোজারের ক্ষেত্রে কোনো বিলম্ব না করে আক্রান্ত ব্যক্তিকে নিকটস্থ উপজেলা স্বাস্থ্য কমপ্লেক্স বা সরকারি মেডিকেল কলেজ হাসপাতালে নিয়ে যান এবং চিকিৎসকের সরাসরি পরামর্শ নিন।'
+              : 'The chemical hazard classifications shown are matched to official World Health Organization (WHO) toxicity indices, and the first-aid and antidote recommendations are referenced from published Department of Agricultural Extension (DAE) guidelines. This sheet is for reference purposes only. In the event of severe chemical poisoning or exposure, do not delay—immediately transport the patient to the nearest Upazila Health Complex or government hospital and consult a medical practitioner.'}
+          </p>
+        </div>
+      </div>
+
     </div>
   );
 };

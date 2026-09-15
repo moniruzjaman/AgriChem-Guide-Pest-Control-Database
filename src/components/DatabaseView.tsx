@@ -27,7 +27,8 @@ import {
   ShieldAlert,
   Clock,
   Trash2,
-  Upload
+  Upload,
+  Table
 } from 'lucide-react';
 import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
@@ -101,9 +102,10 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   const [sortBy, setSortBy] = useState<'name' | 'type' | 'phi' | 'reg'>('name');
   
   // View mode & UX controls
-  const [groupedView, setGroupedView] = useState<boolean>(true);
+  const [viewMode, setViewMode] = useState<'table' | 'grouped' | 'grid'>('table');
   const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
   const [expandedIngredients, setExpandedIngredients] = useState<Record<string, boolean>>({});
+  const [visibleLimit, setVisibleLimit] = useState<number>(50);
 
   // Dynamic list of unique categories in entire catalog
   const categories = useMemo(() => {
@@ -304,6 +306,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     setSelectedMoA('all');
     setSelectedRisk('all');
     setSortBy('name');
+    setVisibleLimit(48);
   };
 
   const parsePastedData = (text: string) => {
@@ -1258,31 +1261,43 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                   </select>
                 </div>
 
-                {/* View Mode Toggle: Grouped Ingredient vs Flat List */}
+                {/* View Mode Toggle: Table (with MoA column) vs Grouped vs Card Grid */}
                 <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/60 text-xs shrink-0">
                   <button
-                    onClick={() => setGroupedView(true)}
+                    onClick={() => setViewMode('table')}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-all ${
-                      groupedView 
+                      viewMode === 'table'
+                        ? 'bg-white text-emerald-800 shadow-2xs' 
+                        : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                    title={language === 'bn' ? 'টেবিল ভিউ (IRAC MoA কলাম সহ)' : 'Table View (with MoA Column)'}
+                  >
+                    <Table className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">{language === 'bn' ? 'টেবিল ভিউ' : 'Table'}</span>
+                  </button>
+                  <button
+                    onClick={() => setViewMode('grouped')}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-all ${
+                      viewMode === 'grouped'
                         ? 'bg-white text-emerald-800 shadow-2xs' 
                         : 'text-slate-500 hover:text-slate-800'
                     }`}
                     title={language === 'bn' ? 'সক্রিয় উপাদান ভিত্তিক গ্রুপ' : 'Grouped by Ingredient'}
                   >
                     <Layers className="w-3.5 h-3.5" />
-                    <span className="hidden md:inline">{language === 'bn' ? 'গ্রুপ ভিউ' : 'Grouped'}</span>
+                    <span className="hidden sm:inline">{language === 'bn' ? 'গ্রুপ ভিউ' : 'Grouped'}</span>
                   </button>
                   <button
-                    onClick={() => setGroupedView(false)}
+                    onClick={() => setViewMode('grid')}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-all ${
-                      !groupedView 
+                      viewMode === 'grid'
                         ? 'bg-white text-emerald-800 shadow-2xs' 
                         : 'text-slate-500 hover:text-slate-800'
                     }`}
-                    title={language === 'bn' ? 'সকল বাণিজ্যিক ব্র্যান্ডের তালিকা' : 'Flat List View'}
+                    title={language === 'bn' ? 'কার্ড গ্রিড তালিকা' : 'Card Grid View'}
                   >
                     <LayoutGrid className="w-3.5 h-3.5" />
-                    <span className="hidden md:inline">{language === 'bn' ? 'ব্র্যান্ড তালিকা' : 'Flat Grid'}</span>
+                    <span className="hidden sm:inline">{language === 'bn' ? 'কার্ড গ্রিড' : 'Cards'}</span>
                   </button>
                 </div>
 
@@ -1368,15 +1383,208 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
           {/* ================= D. PRIMARY VISUAL RESULTS CONTAINER ================= */}
           {filteredProducts.length > 0 ? (
             
-            // View Mode 1: Compact, Grouped by Active Ingredient
-            groupedView ? (
+            // View Mode 1: Tabular Registry View (With dedicated IRAC/FRAC MoA Column for each row)
+            viewMode === 'table' ? (
+              <div className="space-y-4">
+                <div className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-slate-100/90 border-b border-slate-200 text-slate-700 font-bold text-[11px] uppercase tracking-wider whitespace-nowrap select-none">
+                          <th className="py-3 px-3.5 text-center text-slate-400 font-mono w-10">#</th>
+                          <th className="py-3 px-3.5">{language === 'bn' ? 'বাণিজ্যিক নাম ও ফর্মুলেশন' : 'Trade Name & Form.'}</th>
+                          <th className="py-3 px-3.5">{language === 'bn' ? 'সক্রিয় উপাদান' : 'Active Ingredient'}</th>
+                          {/* Dedicated IRAC/FRAC/HRAC MoA Column */}
+                          <th className="py-3 px-3.5 bg-emerald-50 text-emerald-950 border-x border-emerald-200/70 font-black">
+                            <div className="flex items-center gap-1.5">
+                              <Sparkles className="w-3 h-3 text-emerald-600" />
+                              <span>{language === 'bn' ? 'MoA নম্বর (IRAC/FRAC)' : 'MoA Number (IRAC/FRAC)'}</span>
+                            </div>
+                          </th>
+                          <th className="py-3 px-3.5">{language === 'bn' ? 'নিবন্ধন নং' : 'Reg. No'}</th>
+                          <th className="py-3 px-3.5">{language === 'bn' ? 'রেজিস্ট্রেশন হোল্ডার' : 'Company'}</th>
+                          <th className="py-3 px-3.5">{language === 'bn' ? 'অনুমোদিত ফসল' : 'Crops'}</th>
+                          <th className="py-3 px-3.5">{language === 'bn' ? 'অনুমোদিত পোকা/রোগ' : 'Target Pests'}</th>
+                          <th className="py-3 px-3.5">{language === 'bn' ? 'প্রয়োগ মাত্রা' : 'Dosage Rate'}</th>
+                          <th className="py-3 px-3.5 text-center">{language === 'bn' ? 'তোলার বিরতি' : 'PHI'}</th>
+                          <th className="py-3 px-3.5 text-center">{language === 'bn' ? 'অ্যাকশন' : 'Actions'}</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 font-normal text-slate-800">
+                        {filteredProducts.slice(0, visibleLimit).map((product, idx) => (
+                          <tr 
+                            key={product.id}
+                            className="hover:bg-slate-50/80 transition-colors"
+                          >
+                            {/* Index */}
+                            <td className="py-2.5 px-3.5 text-center text-slate-400 font-mono text-[11px]">
+                              {formatNum(idx + 1)}
+                            </td>
+
+                            {/* Trade Name */}
+                            <td className="py-2.5 px-3.5 whitespace-nowrap">
+                              <div className="flex items-center gap-1.5">
+                                <button
+                                  onClick={() => onSelectProduct(product)}
+                                  className="font-bold text-slate-900 hover:text-emerald-700 transition text-left cursor-pointer"
+                                >
+                                  {product.tradeName}
+                                </button>
+                                {product.formulation && (
+                                  <span className="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded text-[10px] font-bold border border-slate-200">
+                                    {product.formulation}
+                                  </span>
+                                )}
+                              </div>
+                              <span className={`inline-flex items-center gap-1 text-[9px] font-semibold px-1.5 py-0.2 rounded-full border mt-0.5 ${getCategoryTheme(product.type)}`}>
+                                {transCat(product.type)}
+                              </span>
+                            </td>
+
+                            {/* Active Ingredient */}
+                            <td className="py-2.5 px-3.5 text-slate-700 font-medium max-w-[170px]">
+                              <span className="truncate block font-semibold text-slate-800" title={product.commonName}>
+                                {product.commonName}
+                              </span>
+                            </td>
+
+                            {/* DEDICATED COLUMN: IRAC / FRAC / HRAC MoA Number */}
+                            <td className="py-2.5 px-3.5 bg-emerald-50/40 border-x border-emerald-100 whitespace-nowrap">
+                              <div className="flex flex-col items-start gap-0.5">
+                                <span 
+                                  className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-[11px] font-mono font-black tracking-tight border shadow-2xs ${
+                                    product.moaCode?.startsWith('IRAC')
+                                      ? 'bg-emerald-900 text-emerald-200 border-emerald-700'
+                                      : product.moaCode?.startsWith('FRAC')
+                                      ? 'bg-sky-900 text-sky-200 border-sky-700'
+                                      : product.moaCode?.startsWith('HRAC')
+                                      ? 'bg-amber-900 text-amber-200 border-amber-700'
+                                      : 'bg-slate-800 text-slate-200 border-slate-700'
+                                  }`}
+                                  title={product.moaGroup}
+                                >
+                                  {product.moaCode || 'IRAC UN'}
+                                </span>
+                                <span className="text-[10px] text-slate-500 font-medium truncate max-w-[160px] block" title={product.moaGroup}>
+                                  {product.moaGroup}
+                                </span>
+                              </div>
+                            </td>
+
+                            {/* Registration No */}
+                            <td className="py-2.5 px-3.5 whitespace-nowrap font-mono text-[11px] font-bold text-slate-600">
+                              {product.registrationNo}
+                            </td>
+
+                            {/* Registration Holder */}
+                            <td className="py-2.5 px-3.5 text-slate-600 max-w-[170px]">
+                              <span className="truncate block text-[11px]" title={product.registrationHolder}>
+                                {product.registrationHolder}
+                              </span>
+                            </td>
+
+                            {/* Recommended Crops */}
+                            <td className="py-2.5 px-3.5 max-w-[160px]">
+                              <div className="flex flex-wrap gap-1">
+                                {product.crops.slice(0, 2).map((crop: string) => (
+                                  <span key={crop} className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-[10px] font-medium">
+                                    {transCrop(crop)}
+                                  </span>
+                                ))}
+                                {product.crops.length > 2 && (
+                                  <span className="text-slate-400 text-[10px] font-semibold" title={product.crops.join(', ')}>
+                                    +{product.crops.length - 2}
+                                  </span>
+                                )}
+                              </div>
+                            </td>
+
+                            {/* Recommended Pests */}
+                            <td className="py-2.5 px-3.5 max-w-[160px]">
+                              <span className="text-[11px] text-slate-600 truncate block" title={product.pests.join(', ')}>
+                                {product.pests.join(', ') || '—'}
+                              </span>
+                            </td>
+
+                            {/* Dosage */}
+                            <td className="py-2.5 px-3.5 max-w-[140px] font-medium text-slate-700">
+                              <span className="truncate block text-[11px]" title={product.dosageRate}>
+                                {product.dosageRate}
+                              </span>
+                            </td>
+
+                            {/* PHI */}
+                            <td className="py-2.5 px-3.5 text-center whitespace-nowrap font-bold">
+                              {product.phiDays ? (
+                                <span className="bg-slate-100 text-slate-800 px-2 py-0.5 rounded-full text-[10px]">
+                                  {formatNum(product.phiDays)} {language === 'bn' ? 'দিন' : 'd'}
+                                </span>
+                              ) : (
+                                <span className="text-slate-400">—</span>
+                              )}
+                            </td>
+
+                            {/* Actions */}
+                            <td className="py-2.5 px-3.5 whitespace-nowrap text-center">
+                              <div className="flex items-center justify-center gap-1">
+                                <button
+                                  onClick={() => onOpenCalculator(product)}
+                                  className="p-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg transition cursor-pointer"
+                                  title={language === 'bn' ? 'ডোজ হিসাব' : 'Dosage'}
+                                >
+                                  <Calculator className="w-3.5 h-3.5" />
+                                </button>
+                                <button
+                                  onClick={() => onOpenSafety(product)}
+                                  className="p-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-lg transition cursor-pointer"
+                                  title={language === 'bn' ? 'নিরাপত্তা শিট' : 'Safety'}
+                                >
+                                  <ShieldCheck className="w-3.5 h-3.5" />
+                                </button>
+                                <button
+                                  onClick={() => onSelectProduct(product)}
+                                  className="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition cursor-pointer"
+                                  title={language === 'bn' ? 'বিস্তারিত' : 'Details'}
+                                >
+                                  <Info className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            </td>
+
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {filteredProducts.length > visibleLimit && (
+                    <div className="flex flex-col items-center justify-center py-5 border-t border-slate-100 bg-slate-50/50 space-y-2">
+                      <p className="text-xs font-semibold text-slate-500">
+                        {language === 'bn'
+                          ? `মোট ${formatNum(filteredProducts.length)} টির মধ্যে ${formatNum(Math.min(visibleLimit, filteredProducts.length))} টি পণ্য প্রদর্শিত হচ্ছে`
+                          : `Showing ${Math.min(visibleLimit, filteredProducts.length)} of ${filteredProducts.length} registered products`}
+                      </p>
+                      <button
+                        onClick={() => setVisibleLimit((prev) => prev + 50)}
+                        className="px-5 py-2 rounded-xl bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-bold text-xs shadow-xs transition flex items-center gap-2 cursor-pointer"
+                      >
+                        <Layers className="w-4 h-4 text-emerald-600" />
+                        <span>{language === 'bn' ? 'আরও ৫০টি পণ্য লোড করুন' : 'Load 50 More Products'}</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : viewMode === 'grouped' ? (
+              
+              // View Mode 2: Compact, Grouped by Active Ingredient
               <div className="space-y-4">
                 
                 {/* Expand / Collapse All control triggers */}
                 <div className="flex justify-end gap-3 text-[11px] font-bold text-emerald-800">
-                  <button onClick={expandAll} className="hover:underline">{language === 'bn' ? 'সবগুলো গ্রুপ খুলুন' : 'Expand All Groups'}</button>
+                  <button onClick={expandAll} className="hover:underline cursor-pointer">{language === 'bn' ? 'সবগুলো গ্রুপ খুলুন' : 'Expand All Groups'}</button>
                   <span className="text-slate-300">|</span>
-                  <button onClick={collapseAll} className="hover:underline">{language === 'bn' ? 'সবগুলো গ্রুপ বন্ধ করুন' : 'Collapse All Groups'}</button>
+                  <button onClick={collapseAll} className="hover:underline cursor-pointer">{language === 'bn' ? 'সবগুলো গ্রুপ বন্ধ করুন' : 'Collapse All Groups'}</button>
                 </div>
 
                 {groupedByIngredient.map((group) => {
@@ -1403,7 +1611,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                               <span>{transCat(group.type)}</span>
                             </span>
                             {group.moaCode && (
-                              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-white tracking-wide">
+                              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-emerald-300 tracking-wide">
                                 MoA {group.moaCode}
                               </span>
                             )}
@@ -1469,10 +1677,10 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                             {group.products.map((brand) => (
                               <div 
                                 key={brand.id} 
-                                className="py-3 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs first:pt-0 last:pb-0"
+                                className="py-3 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs first:pt-0 last:pb-0 hover:bg-slate-50/60 px-2 rounded-lg transition-colors"
                               >
-                                {/* Left Side: Name and Reg Details */}
-                                <div className="space-y-1">
+                                {/* Column 1: Brand Name and Reg Details */}
+                                <div className="space-y-1 min-w-[220px]">
                                   <div className="flex items-baseline gap-2">
                                     <h4 className="font-bold text-sm text-slate-900">{brand.tradeName}</h4>
                                     {brand.formulation && (
@@ -1488,7 +1696,20 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                   </div>
                                 </div>
 
-                                {/* Center Details: Dosage and PHI */}
+                                {/* Column 2: Dedicated MoA Number Column */}
+                                <div className="bg-slate-50 p-2 rounded-lg border border-slate-100 min-w-[130px] shrink-0">
+                                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">
+                                    {brand.moaCode?.startsWith('IRAC') ? 'IRAC MoA' : brand.moaCode?.startsWith('FRAC') ? 'FRAC MoA' : brand.moaCode?.startsWith('HRAC') ? 'HRAC MoA' : 'MoA নম্বর'}
+                                  </span>
+                                  <span className="inline-block mt-0.5 px-2 py-0.5 rounded text-[11px] font-mono font-black bg-slate-800 text-emerald-300">
+                                    {brand.moaCode || 'IRAC UN'}
+                                  </span>
+                                  <span className="text-[10px] text-slate-500 truncate block max-w-[140px] mt-0.5" title={brand.moaGroup}>
+                                    {brand.moaGroup}
+                                  </span>
+                                </div>
+
+                                {/* Column 3: Dosage and PHI */}
                                 <div className="grid grid-cols-2 gap-4 text-[11px] md:max-w-xs w-full md:w-auto bg-slate-50 p-2 rounded-lg border border-slate-100">
                                   <div>
                                     <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{language === 'bn' ? 'প্রয়োগ মাত্রা' : 'Dosage'}</span>
@@ -1502,13 +1723,13 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                   </div>
                                 </div>
 
-                                {/* Right Side: Actions Triggers */}
+                                {/* Column 4: Actions Triggers */}
                                 <div className="flex items-center gap-1.5 shrink-0 self-end md:self-auto pt-2 md:pt-0">
                                   
                                   {/* Mixing Dosage Station Trigger */}
                                   <button
                                     onClick={() => onOpenCalculator(brand)}
-                                    className="p-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/70 text-emerald-700 rounded-lg font-bold transition flex items-center gap-1"
+                                    className="p-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/70 text-emerald-700 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
                                     title={language === 'bn' ? 'হিসাবকারী স্টেশন খুলুন' : 'Open Dosage Station'}
                                   >
                                     <Calculator className="w-4 h-4" />
@@ -1518,7 +1739,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                   {/* Safety Assessment Checklist */}
                                   <button
                                     onClick={() => onOpenSafety(brand)}
-                                    className="p-2 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/70 text-indigo-700 rounded-lg font-bold transition flex items-center gap-1"
+                                    className="p-2 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/70 text-indigo-700 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
                                     title={language === 'bn' ? 'নিরাপত্তা চেকলিস্ট' : 'Safety Protocols'}
                                   >
                                     <ShieldCheck className="w-4 h-4" />
@@ -1528,7 +1749,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                   {/* Detail Specs Panel */}
                                   <button
                                     onClick={() => onSelectProduct(brand)}
-                                    className="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 rounded-lg font-bold transition flex items-center gap-1"
+                                    className="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
                                     title={language === 'bn' ? 'বিস্তারিত তথ্য' : 'Product Technical Datasheet'}
                                   >
                                     <Info className="w-4 h-4" />
@@ -1550,17 +1771,36 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
               </div>
             ) : (
               
-              // View Mode 2: Standard flat list with ProductCard grid
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProducts.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    onSelectProduct={onSelectProduct}
-                    onOpenCalculator={onOpenCalculator}
-                    onOpenSafety={onOpenSafety}
-                  />
-                ))}
+              // View Mode 3: Standard flat list with ProductCard grid
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredProducts.slice(0, visibleLimit).map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      onSelectProduct={onSelectProduct}
+                      onOpenCalculator={onOpenCalculator}
+                      onOpenSafety={onOpenSafety}
+                    />
+                  ))}
+                </div>
+
+                {filteredProducts.length > visibleLimit && (
+                  <div className="flex flex-col items-center justify-center pt-8 pb-4 space-y-3">
+                    <p className="text-xs font-semibold text-slate-500">
+                      {language === 'bn'
+                        ? `মোট ${formatNum(filteredProducts.length)} টির মধ্যে ${formatNum(Math.min(visibleLimit, filteredProducts.length))} টি পণ্য প্রদর্শিত হচ্ছে`
+                        : `Showing ${Math.min(visibleLimit, filteredProducts.length)} of ${filteredProducts.length} registered products`}
+                    </p>
+                    <button
+                      onClick={() => setVisibleLimit((prev) => prev + 48)}
+                      className="px-6 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 font-bold text-xs shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+                    >
+                      <Layers className="w-4 h-4 text-emerald-600" />
+                      <span>{language === 'bn' ? 'আরও পণ্য লোড করুন' : 'Load More Products'}</span>
+                    </button>
+                  </div>
+                )}
               </div>
             )
 
@@ -1588,6 +1828,23 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
 
         </div>
 
+      </div>
+
+      {/* Official DAE Registry Disclaimer & Source Verification Footnote */}
+      <div className="mt-8 p-4 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <ShieldAlert className="w-5 h-5 text-slate-500 shrink-0 mt-0.5" />
+          <div className="text-xs space-y-1">
+            <strong className="text-slate-900 block font-bold">
+              {language === 'bn' ? 'অফিসিয়াল ডিএই তথ্যসূত্র ও আইনি ডিসক্লেইমার:' : 'Official DAE Database Citation & Regulatory Disclaimer:'}
+            </strong>
+            <p className="text-slate-600 leading-relaxed font-medium">
+              {language === 'bn' 
+                ? 'এই ডেটাবেসের সকল তথ্য বাংলাদেশ সরকারের কৃষি সম্প্রসারণ অধিদপ্তর (DAE) ও উদ্ভিদ সংরক্ষণ উইং কর্তৃক অনুমোদিত এবং নিবন্ধিত বালাইনাশকের গেজেট তালিকা থেকে সংগৃহীত। ব্যবহারের পূর্বে প্যাকেজের গায়ে খোদাইকৃত বালাইনাশক রেজি. নম্বর মিলিয়ে আসল পণ্য যাচাই করুন। জমিতে প্রয়োগের পূর্বে সর্বদা উপ-সহকারী কৃষি কর্মকর্তা বা ডিএই ফিল্ড অফিসারের প্রত্যক্ষ প্রেসক্রিপশন ও পরামর্শ গ্রহণ করুন।'
+                : 'All chemical registry details, trade formulations, and registration numbers displayed in this catalog are sourced directly from the gazetted registers compiled by the Plant Protection Wing of the Department of Agricultural Extension (DAE), Ministry of Agriculture, Government of Bangladesh. Always cross-verify the registration numbers printed on chemical packaging to identify genuine formulations, and consult with certified DAE agronomy field officers before actual crop spraying.'}
+            </p>
+          </div>
+        </div>
       </div>
 
     </div>
