@@ -14635,7 +14635,8 @@ export const FUNGICIDES_DATABASE: ChemicalProduct[] = [
       "Diamondback moth",
       "Pod borer",
       "Leaf blight",
-      "Sheath blight"
+      "Sheath blight",
+      "BPH"
     ],
     "dosageRate": "350 ml/ha (0.7 ml/L water)",
     "moaCode": "FRAC 3",

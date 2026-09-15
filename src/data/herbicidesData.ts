@@ -5811,11 +5811,15 @@ export const HERBICIDES_DATABASE: ChemicalProduct[] = [
     "registrationNo": "AP-1241",
     "registrationHolder": "Surovi Agro Industries Limited",
     "crops": [
-      "Tea"
+      "Tea",
+      "Rice",
+      "Brinjal"
     ],
     "pests": [
       "Broad leaf",
-      "Deep rooted perennial weeds"
+      "Deep rooted perennial weeds",
+      "Red spider mite",
+      "BPH"
     ],
     "dosageRate": "3.70 Litre",
     "moaCode": "HRAC 9 (G)",
@@ -7374,11 +7378,13 @@ export const HERBICIDES_DATABASE: ChemicalProduct[] = [
     "registrationNo": "AP-1141",
     "registrationHolder": "United Phosphorus (Bangladesh) Ltd",
     "crops": [
-      "Tea"
+      "Tea",
+      "Brinjal"
     ],
     "pests": [
       "Broad leaf",
-      "Deep rooted perennial weeds"
+      "Deep rooted perennial weeds",
+      "Red spider mite"
     ],
     "dosageRate": "3.70 Litre",
     "moaCode": "HRAC 9 (G)",

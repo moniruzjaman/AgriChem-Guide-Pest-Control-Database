@@ -921,7 +921,51 @@ for (let i = 1; i < lines.length; i++) {
   }
 }
 
-console.log(`Parsed ${csvProductMap.size} unique products from CSV.`);
+// Also load registered insecticides from PTAC 81 dataset
+const ptacCsvPath = path.resolve('data_raw/insecticides_ptac81_part1.csv');
+if (fs.existsSync(ptacCsvPath)) {
+  const ptacContent = fs.readFileSync(ptacCsvPath, 'utf-8');
+  const ptacLines = ptacContent.trim().split('\n');
+  for (let i = 1; i < ptacLines.length; i++) {
+    const line = ptacLines[i].trim();
+    if (!line) continue;
+    const fields = parseCSVLine(line);
+    if (fields.length < 7) continue;
+
+    const commonName = fields[2] || 'Abamectin';
+    const tradeName = fields[4];
+    const regNo = fields[5];
+    const holder = fields[6];
+    const crops = (fields[7] || '').split(/[,|/]/).map(c => c.trim()).filter(Boolean);
+    const pests = (fields[8] || '').split(/[,|/]/).map(p => p.trim()).filter(Boolean);
+    const dose = fields[9] || '1.25 L/ha (1.25 ml/L of water)';
+
+    if (!tradeName) continue;
+
+    const key = regNo ? regNo.trim().toUpperCase() : `${tradeName.trim().toUpperCase()}::${commonName.trim().toUpperCase()}`;
+    if (!csvProductMap.has(key)) {
+      csvProductMap.set(key, {
+        rawType: 'Insecticide',
+        commonName,
+        tradeName,
+        registrationNo: regNo,
+        registrationHolder: holder,
+        crops: crops.length > 0 ? crops : ['Tea', 'Brinjal', 'Jujube'],
+        pests: pests.length > 0 ? pests : ['Red spider mite', 'Mite', 'BPH'],
+        dosageRate: dose
+      });
+    } else {
+      const existing = csvProductMap.get(key);
+      existing.crops = Array.from(new Set([...existing.crops, ...crops]));
+      existing.pests = Array.from(new Set([...existing.pests, ...pests]));
+      if (dose && !existing.dosageRate.includes(dose)) {
+        existing.dosageRate += '; ' + dose;
+      }
+    }
+  }
+}
+
+console.log(`Parsed ${csvProductMap.size} unique products from combined CSV datasets.`);
 
 // Index existing curated products
 const existingByRegNo = new Map<string, ChemicalProduct>();

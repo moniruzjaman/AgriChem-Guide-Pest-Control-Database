@@ -9,10 +9,13 @@ export const BIO_AND_OTHER_DATABASE: ChemicalProduct[] = [
     "registrationNo": "AP-2268",
     "registrationHolder": "National AgriCare Import & Export Ltd",
     "crops": [
-      "Brinjal"
+      "Brinjal",
+      "Rice"
     ],
     "pests": [
-      "Brinjal Shoot & Fruit Borer"
+      "Brinjal Shoot & Fruit Borer",
+      "Red Spider mite",
+      "BPH"
     ],
     "dosageRate": "2 gm/Litre of water",
     "moaCode": "IRAC UNF",
@@ -445,10 +448,14 @@ export const BIO_AND_OTHER_DATABASE: ChemicalProduct[] = [
     "registrationNo": "AP-2269",
     "registrationHolder": "Omnichem Limited",
     "crops": [
-      "Tomato"
+      "Tomato",
+      "Tea",
+      "Rice"
     ],
     "pests": [
-      "Fruit borer"
+      "Fruit borer",
+      "Red spider mites",
+      "BPH"
     ],
     "dosageRate": "0.2-0.4 ml/Litre of water",
     "moaCode": "IRAC 31",

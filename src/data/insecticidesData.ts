@@ -2,7 +2,7 @@ import { ChemicalProduct } from '../types';
 
 export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
   {
-    "id": "ins-0001",
+    "id": "ins-0026",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Abamex 1.8EC",
@@ -33,7 +33,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0002",
+    "id": "ins-0108",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Abamos 1.8EC",
@@ -64,7 +64,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0003",
+    "id": "ins-0106",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Abasun 1.8EC",
@@ -97,7 +97,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0004",
+    "id": "ins-0003",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Abatin 1.8EC",
@@ -128,7 +128,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0005",
+    "id": "ins-0046",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Abaton 1.8EC",
@@ -159,7 +159,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0006",
+    "id": "ins-0002",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Abom 1.8EC",
@@ -193,7 +193,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0007",
+    "id": "ins-0073",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Abom Super 3EW",
@@ -224,7 +224,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0008",
+    "id": "ins-0064",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Abtin 1.8EC",
@@ -257,7 +257,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0009",
+    "id": "ins-0008",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Acamite 1.8EC",
@@ -290,7 +290,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0010",
+    "id": "ins-0051",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Acar 1.8EC",
@@ -321,7 +321,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0011",
+    "id": "ins-1149",
     "type": "Insecticide",
     "commonName": "Thiamethoxam",
     "tradeName": "Actara 25 WG",
@@ -364,44 +364,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Do not use repeatedly against hoppers. Alternate with Pymetrozine (9B) or Buprofezin (16)"
   },
   {
-    "id": "ins-0012",
-    "type": "Insecticide",
-    "commonName": "Thiamethoxam",
-    "tradeName": "Actara 25 WG",
-    "registrationNo": "AP-890",
-    "registrationHolder": "Syngenta Bangladesh Ltd",
-    "crops": [
-      "Rice",
-      "Mango",
-      "Brinjal",
-      "Potato",
-      "Tea"
-    ],
-    "pests": [
-      "Brown planthopper (BPH)",
-      "Green leafhopper",
-      "Mango hopper (Idioscopus)",
-      "Jassids",
-      "Aphids"
-    ],
-    "dosageRate": "100 g/ha (0.2 g/L water)",
-    "moaCode": "IRAC 4A",
-    "moaGroup": "Neonicotinoids (Second generation thianicotinyl)",
-    "resistanceRisk": "High",
-    "toxicityClass": "III - Slightly Hazardous",
-    "whoColor": "#3b82f6",
-    "formulation": "WDG",
-    "phiDays": 14,
-    "reiHours": 24,
-    "waterVolumeLPerHa": 500,
-    "safetyNotes": [
-      "High systemic xylem mobility",
-      "RESTRICTED: Never apply to blooming crops during daylight to protect honeybees and pollinators"
-    ],
-    "rotationNotes": "Rotate with Pymetrozine (9B) or Dinotefuran (4A alternative) or Triflumezopyrim"
-  },
-  {
-    "id": "ins-0013",
+    "id": "ins-0086",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Actin 1.8EC",
@@ -432,7 +395,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0014",
+    "id": "ins-0105",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Actin 1.8EC",
@@ -465,7 +428,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0015",
+    "id": "ins-0092",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Actos 1.8EC",
@@ -498,7 +461,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0016",
+    "id": "ins-1150",
     "type": "Insecticide",
     "commonName": "Imidacloprid",
     "tradeName": "Admire 20 SL",
@@ -539,7 +502,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Severe resistance in BPH documented when overused. Alternate with Pymetrozine (9B) or Buprofezin (16)"
   },
   {
-    "id": "ins-0017",
+    "id": "ins-0028",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Agree 1.8EC",
@@ -570,7 +533,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0018",
+    "id": "ins-0023",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Agrotin 1.8EC",
@@ -601,7 +564,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0019",
+    "id": "ins-0072",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Alatin 1.8EC",
@@ -634,7 +597,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0020",
+    "id": "ins-0009",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Alba 1.8EC",
@@ -666,7 +629,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0021",
+    "id": "ins-0057",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Albacin 1.8EC",
@@ -697,7 +660,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0022",
+    "id": "ins-0089",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Allion 1.8EC",
@@ -728,7 +691,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0023",
+    "id": "ins-1151",
     "type": "Insecticide",
     "commonName": "Acephate",
     "tradeName": "Asataf 75 SP",
@@ -767,7 +730,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Neonicotinoids (4A) or Diamides (28)"
   },
   {
-    "id": "ins-0024",
+    "id": "ins-1152",
     "type": "Insecticide",
     "commonName": "Acephate",
     "tradeName": "Asataf 75 SP / Stargap 75 SP",
@@ -803,7 +766,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Follow with Neonicotinoid (4A) or IGR (15)"
   },
   {
-    "id": "ins-0025",
+    "id": "ins-0090",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Astin 1.8EC",
@@ -834,7 +797,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0026",
+    "id": "ins-0015",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Avast 1.8EC",
@@ -865,7 +828,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0027",
+    "id": "ins-0030",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Avid 1.8EC",
@@ -896,7 +859,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0028",
+    "id": "ins-1153",
     "type": "Insecticide",
     "commonName": "Buprofezin",
     "tradeName": "Award 25 SC / Applaud 25 SC",
@@ -931,7 +894,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Pair with adulticide like Dinotefuran (4A) or Pymetrozine (9B)"
   },
   {
-    "id": "ins-0029",
+    "id": "ins-1154",
     "type": "Insecticide",
     "commonName": "Buprofezin",
     "tradeName": "Award 40 SC",
@@ -965,7 +928,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Best applied at early nymphal hatch. Combine or rotate with adulticide if needed"
   },
   {
-    "id": "ins-0030",
+    "id": "ins-0032",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "B-Dayoo 1.8EC",
@@ -996,7 +959,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0031",
+    "id": "ins-0111",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Baci 1.8EC",
@@ -1027,7 +990,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0032",
+    "id": "ins-0011",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Basket 1.8EC",
@@ -1060,7 +1023,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0033",
+    "id": "ins-1155",
     "type": "Insecticide",
     "commonName": "Diazinon",
     "tradeName": "Basudin 60 EC / Subash 60 EC",
@@ -1095,7 +1058,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Cartap (14) or Fipronil (2B)"
   },
   {
-    "id": "ins-0034",
+    "id": "ins-1156",
     "type": "Insecticide",
     "commonName": "Flubendiamide",
     "tradeName": "Belt 24 WG",
@@ -1131,7 +1094,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Strict rotation window requirement: alternate with Cartap (14) or Emamectin (6)"
   },
   {
-    "id": "ins-0035",
+    "id": "ins-0110",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Beni 1.8EC",
@@ -1162,7 +1125,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0036",
+    "id": "ins-0017",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Benten 1.8EC",
@@ -1193,7 +1156,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0037",
+    "id": "ins-0095",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Best Albatin 1.8EC",
@@ -1226,7 +1189,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0038",
+    "id": "ins-0059",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Bestin 1.8EC",
@@ -1257,7 +1220,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0039",
+    "id": "ins-0022",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Bicotin 1.8EC",
@@ -1288,7 +1251,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0040",
+    "id": "ins-0094",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Biotin 1.8EC",
@@ -1354,7 +1317,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0042",
+    "id": "ins-0024",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Bona 1.8EC",
@@ -1385,7 +1348,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0043",
+    "id": "ins-0054",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Border Plus 1.8EC",
@@ -1416,7 +1379,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0044",
+    "id": "ins-1157",
     "type": "Insecticide",
     "commonName": "Chlorpyrifos 50% + Cypermethrin 5%",
     "tradeName": "Cannon 55 EC / Nuvan Combi 55 EC",
@@ -1452,7 +1415,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Reserve for heavy pest outbreaks; follow with Diamide (28) or Bt (11A)"
   },
   {
-    "id": "ins-0045",
+    "id": "ins-1158",
     "type": "Insecticide",
     "commonName": "Pymetrozine",
     "tradeName": "Chess 50 WDG / Plenum 50 WG",
@@ -1486,7 +1449,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Primary rotational partner for neonicotinoids to overcome BPH resistance"
   },
   {
-    "id": "ins-0046",
+    "id": "ins-0029",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Choice 1.8EC",
@@ -1517,7 +1480,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0047",
+    "id": "ins-0069",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Churanto 1.8EC",
@@ -1548,7 +1511,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0048",
+    "id": "ins-1159",
     "type": "Insecticide",
     "commonName": "Chlorpyrifos",
     "tradeName": "Classic 20 EC / Pyrifos 20 EC",
@@ -1584,7 +1547,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Follow with synthetic pyrethroid or biological control"
   },
   {
-    "id": "ins-0049",
+    "id": "ins-0066",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Cleanmectin 1.8EC",
@@ -1615,7 +1578,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0050",
+    "id": "ins-0065",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Concord 1.8EC",
@@ -1646,7 +1609,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0051",
+    "id": "ins-1160",
     "type": "Insecticide",
     "commonName": "Chlorantraniliprole",
     "tradeName": "Coragen 18.5 SC",
@@ -1679,7 +1642,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Follow the \"One Generation Window\" rule. Rotate with Cartap (14) or Indoxacarb (22A)"
   },
   {
-    "id": "ins-0052",
+    "id": "ins-1161",
     "type": "Insecticide",
     "commonName": "Chlorantraniliprole",
     "tradeName": "Coragen 20 SC / Ferterra 0.4 GR",
@@ -1716,7 +1679,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Strict limit of maximum 2 applications per crop season to avoid diamide target-site resistance"
   },
   {
-    "id": "ins-0053",
+    "id": "ins-0014",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Crop Well 1.8EC",
@@ -1747,7 +1710,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0054",
+    "id": "ins-0078",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Croptin 1.8EC",
@@ -1778,7 +1741,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0055",
+    "id": "ins-1162",
     "type": "Insecticide",
     "commonName": "Profenofos",
     "tradeName": "Curacron 500 EC / Profen 50 EC",
@@ -1813,7 +1776,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Follow with Emamectin Benzoate (6) or Chlorantraniliprole (28)"
   },
   {
-    "id": "ins-0056",
+    "id": "ins-1163",
     "type": "Insecticide",
     "commonName": "Deltamethrin",
     "tradeName": "Decis 2.5 EC",
@@ -1848,7 +1811,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Spinosad (5) or Flubendiamide (28)"
   },
   {
-    "id": "ins-0057",
+    "id": "ins-1164",
     "type": "Insecticide",
     "commonName": "Deltamethrin",
     "tradeName": "Decis 2.5 EC / Sukanto 2.5 EC",
@@ -1885,7 +1848,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Bio-pesticides (Bt) or Diamides (28)"
   },
   {
-    "id": "ins-0058",
+    "id": "ins-0076",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Delbatin 1.8EC",
@@ -1916,7 +1879,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0059",
+    "id": "ins-0033",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Demectin 1.8 EC",
@@ -1951,7 +1914,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0060",
+    "id": "ins-0048",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Desert Extra 1.8EC",
@@ -1982,7 +1945,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0061",
+    "id": "ins-0016",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Divine 1.8EC",
@@ -2013,7 +1976,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0062",
+    "id": "ins-0103",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Dril 3EW",
@@ -2044,7 +2007,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0063",
+    "id": "ins-1165",
     "type": "Insecticide",
     "commonName": "Chlorpyrifos",
     "tradeName": "Dursban 20 EC",
@@ -2084,7 +2047,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Do not use repeatedly. Alternate with Pyrethroids or Diamides"
   },
   {
-    "id": "ins-0064",
+    "id": "ins-0093",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Ecotin 1.8EC",
@@ -2115,7 +2078,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0065",
+    "id": "ins-0063",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "EG-Mectin 1.8EC",
@@ -2148,7 +2111,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0066",
+    "id": "ins-0043",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Faithrin 1.8EC",
@@ -2179,7 +2142,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0067",
+    "id": "ins-0036",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Fasal Max 1.8EC",
@@ -2212,7 +2175,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0068",
+    "id": "ins-1166",
     "type": "Insecticide",
     "commonName": "Alphacypermethrin",
     "tradeName": "Fastac 10 EC / Supertac 10 EC",
@@ -2247,7 +2210,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Limit to 1 application per cycle"
   },
   {
-    "id": "ins-0069",
+    "id": "ins-1167",
     "type": "Insecticide",
     "commonName": "Alpha Cypermethrin",
     "tradeName": "Fastac 2 EC",
@@ -2285,7 +2248,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Limit to 1-2 sprays. Alternate with Spinosad (5) or Diamides (28)"
   },
   {
-    "id": "ins-0070",
+    "id": "ins-1168",
     "type": "Insecticide",
     "commonName": "Carbofuran",
     "tradeName": "Furadan 5G",
@@ -2322,7 +2285,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Limit use. Prefer seedling treatment or rotate to Cartap 4G / Fipronil 3GR"
   },
   {
-    "id": "ins-0071",
+    "id": "ins-1169",
     "type": "Insecticide",
     "commonName": "Malathion",
     "tradeName": "Fyfanon 57 EC",
@@ -2364,7 +2327,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate outside Group 1B to avoid widespread resistance"
   },
   {
-    "id": "ins-0072",
+    "id": "ins-1170",
     "type": "Insecticide",
     "commonName": "Malathion",
     "tradeName": "Fyfanon 57 EC / Malataf 57 EC",
@@ -2400,7 +2363,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Cypermethrin (3A) or Neonicotinoids (4A)"
   },
   {
-    "id": "ins-0073",
+    "id": "ins-0044",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "G-Aba 1.8EC",
@@ -2431,7 +2394,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0074",
+    "id": "ins-0067",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "G-Mectin 1.8EC",
@@ -2464,7 +2427,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0075",
+    "id": "ins-0088",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "G-Mectin 1.8EC",
@@ -2495,7 +2458,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0076",
+    "id": "ins-0061",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Gherao 1.8EC",
@@ -2528,7 +2491,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0077",
+    "id": "ins-0020",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Greel 1.8EC",
@@ -2559,7 +2522,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0078",
+    "id": "ins-0031",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Greenba 1.8EC",
@@ -2590,7 +2553,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0079",
+    "id": "ins-0050",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Greenectin 1.8EC",
@@ -2621,7 +2584,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0080",
+    "id": "ins-0012",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Habamec 1.8EC",
@@ -2652,7 +2615,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0081",
+    "id": "ins-0100",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Helico 1.8EC",
@@ -2685,7 +2648,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0082",
+    "id": "ins-0096",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Himectin 1.8EC",
@@ -2718,7 +2681,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0083",
+    "id": "ins-0045",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Holometin 1.8EC",
@@ -2749,7 +2712,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0084",
+    "id": "ins-0035",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Hosot 1.8EC",
@@ -2780,7 +2743,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0085",
+    "id": "ins-1171",
     "type": "Insecticide",
     "commonName": "Triazophos",
     "tradeName": "Hostathion 40 EC / Truphos 40 EC",
@@ -2816,7 +2779,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Alternate with Spiromesifen (23) or Flonicamid (29)"
   },
   {
-    "id": "ins-0086",
+    "id": "ins-1172",
     "type": "Insecticide",
     "commonName": "Chlorfenapyr",
     "tradeName": "Intrepid 10 SC",
@@ -2850,7 +2813,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Outstanding resistance breaker where pyrethroid or avermectin resistance exists"
   },
   {
-    "id": "ins-0087",
+    "id": "ins-0010",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Iprotin 1.8EC",
@@ -2881,7 +2844,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0088",
+    "id": "ins-0025",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Jarmitec 1.8EC",
@@ -2912,7 +2875,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0089",
+    "id": "ins-0070",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Jubel 1.8EC",
@@ -2943,7 +2906,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0090",
+    "id": "ins-0116",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "K-Mectin 1.8EC",
@@ -2974,7 +2937,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0091",
+    "id": "ins-1173",
     "type": "Insecticide",
     "commonName": "Lambda Cyhalothrin",
     "tradeName": "Karate 2.5 EC",
@@ -3011,7 +2974,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Alternate with biologicals or Cartap"
   },
   {
-    "id": "ins-0092",
+    "id": "ins-0109",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "KB Mite 1.8EC",
@@ -3042,7 +3005,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0093",
+    "id": "ins-0074",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Keyatin 1.8EC",
@@ -3076,7 +3039,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0094",
+    "id": "ins-0056",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Kheya 1.8EC",
@@ -3109,7 +3072,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0095",
+    "id": "ins-0027",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Killmite Plus 1.8EC",
@@ -3140,7 +3103,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0096",
+    "id": "ins-0060",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Killpop 1.8EC",
@@ -3171,7 +3134,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0097",
+    "id": "ins-1174",
     "type": "Insecticide",
     "commonName": "Quinalphos",
     "tradeName": "Kinalux 25 EC",
@@ -3202,7 +3165,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Cartap (14) or Flubendiamide (28)"
   },
   {
-    "id": "ins-0098",
+    "id": "ins-1175",
     "type": "Insecticide",
     "commonName": "Quinalphos",
     "tradeName": "Kinalux 25 EC / Ekalux 25 EC",
@@ -3237,7 +3200,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Diamide (28) or Spinosyn (5)"
   },
   {
-    "id": "ins-0099",
+    "id": "ins-0039",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Kitten 1.8 EC",
@@ -3268,7 +3231,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0100",
+    "id": "ins-0077",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "L-Mectin 1.8EC",
@@ -3299,7 +3262,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0101",
+    "id": "ins-0007",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Lakad 1.8EC",
@@ -3331,7 +3294,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0102",
+    "id": "ins-0084",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Libectin 1.8EC",
@@ -3363,7 +3326,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0103",
+    "id": "ins-0006",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Licar 1.8EC",
@@ -3394,7 +3357,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0104",
+    "id": "ins-0101",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Lilimite 1.8EC",
@@ -3427,7 +3390,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0105",
+    "id": "ins-0040",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Lintec 1.8 EC",
@@ -3460,7 +3423,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0106",
+    "id": "ins-0062",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Makor 1.8EC",
@@ -3493,7 +3456,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0107",
+    "id": "ins-0104",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Makton 1.8EC",
@@ -3524,7 +3487,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0108",
+    "id": "ins-0099",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Mapin 1.8EC",
@@ -3555,7 +3518,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0109",
+    "id": "ins-1176",
     "type": "Insecticide",
     "commonName": "Carbosulfan",
     "tradeName": "Marshal 20 EC",
@@ -3593,7 +3556,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Cartap (14) or Chlorantraniliprole (28)"
   },
   {
-    "id": "ins-0110",
+    "id": "ins-1177",
     "type": "Insecticide",
     "commonName": "Carbosulfan",
     "tradeName": "Marshal 20 EC",
@@ -3629,7 +3592,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Cartap (14) or Fipronil (2B)"
   },
   {
-    "id": "ins-0111",
+    "id": "ins-1178",
     "type": "Insecticide",
     "commonName": "Lufenuron",
     "tradeName": "Match 50 EC",
@@ -3663,7 +3626,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Apply when young larvae are spotted. Alternate with Diamides (28)"
   },
   {
-    "id": "ins-0112",
+    "id": "ins-1179",
     "type": "Insecticide",
     "commonName": "Spirotetramat",
     "tradeName": "Movento 150 OD",
@@ -3694,7 +3657,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Pymetrozine (9B) or Neonicotinoids (4A)"
   },
   {
-    "id": "ins-0113",
+    "id": "ins-0075",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Nevson 5EC",
@@ -3725,7 +3688,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0114",
+    "id": "ins-0049",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Nubumectin 1.8EC",
@@ -3756,7 +3719,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0115",
+    "id": "ins-0102",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Onemectin 1.8EC",
@@ -3787,7 +3750,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0116",
+    "id": "ins-1180",
     "type": "Insecticide",
     "commonName": "Dinotefuran",
     "tradeName": "Oshin 20 SG / Venom 20 SG",
@@ -3823,7 +3786,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Alternate with Pymetrozine (9B) or Triflumezopyrim (4E)"
   },
   {
-    "id": "ins-0117",
+    "id": "ins-0034",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Pafec 1.8EC",
@@ -3886,7 +3849,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "High cross-resistance with Imidacloprid. Rotate with Pymetrozine (9B) or Cartap (14)"
   },
   {
-    "id": "ins-0119",
+    "id": "ins-0042",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Player 1.8EC",
@@ -3917,7 +3880,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0120",
+    "id": "ins-0021",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Pmectin 1.8EC",
@@ -4022,7 +3985,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Alternate with Spinosyns (IRAC 5) or Diamides (IRAC 28) to stop DBM resistance"
   },
   {
-    "id": "ins-0123",
+    "id": "ins-0037",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "R-Batin 1.8EC",
@@ -4088,7 +4051,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Diamides (Group 28) or Avermectins (Group 6)"
   },
   {
-    "id": "ins-0125",
+    "id": "ins-0114",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Rain-Bag 1.8EC",
@@ -4187,7 +4150,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Chlorantraniliprole (28) or Cartap (14) to preserve efficacy"
   },
   {
-    "id": "ins-0128",
+    "id": "ins-0013",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Reximectin 1.8EC",
@@ -4218,7 +4181,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0129",
+    "id": "ins-0082",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Ricotec 1.8EC",
@@ -4249,7 +4212,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0130",
+    "id": "ins-0098",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Rima 1.8EC",
@@ -4356,7 +4319,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Neonicotinoids (4A) or Pyrethroids (3A)"
   },
   {
-    "id": "ins-0133",
+    "id": "ins-0107",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Roly-Poly 1.8EC",
@@ -4425,7 +4388,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with Neonicotinoids (4A) or Diamides (28)"
   },
   {
-    "id": "ins-0135",
+    "id": "ins-0071",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Sacta 1.8EC",
@@ -4457,7 +4420,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0136",
+    "id": "ins-0079",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Saitin 1.8EC",
@@ -4488,7 +4451,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0137",
+    "id": "ins-0113",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "SB-Care 1.8EC",
@@ -4519,7 +4482,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0138",
+    "id": "ins-0055",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Serfimectin 1.8EC",
@@ -4588,7 +4551,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate outside Group 1 to avoid target site cross-resistance"
   },
   {
-    "id": "ins-0140",
+    "id": "ins-0087",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Shitol 1.8EC",
@@ -4619,7 +4582,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0141",
+    "id": "ins-0058",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Sultan 1.8EC",
@@ -4650,7 +4613,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0142",
+    "id": "ins-0004",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Sunmectin 1.8EC",
@@ -4726,7 +4689,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Premier rotation partner against stem borers to break pyrethroid / OP resistance"
   },
   {
-    "id": "ins-0144",
+    "id": "ins-0018",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Suntec 1.8EC",
@@ -4800,7 +4763,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Rotate with non-pyrethroid MoA groups"
   },
   {
-    "id": "ins-0146",
+    "id": "ins-0019",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Tartar 1.8EC",
@@ -4835,7 +4798,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0147",
+    "id": "ins-0115",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Tata-Aba 1.8EC",
@@ -4866,7 +4829,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0148",
+    "id": "ins-0085",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Thriler 1.8EC",
@@ -4897,7 +4860,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0149",
+    "id": "ins-0052",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Tonu 1.8EC",
@@ -4928,7 +4891,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0150",
+    "id": "ins-0005",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Toptin 1.8EC",
@@ -4959,7 +4922,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0151",
+    "id": "ins-0053",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Toximite 1.8EC",
@@ -5024,7 +4987,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Alternate with Emamectin Benzoate (6) or Chlorantraniliprole (28) for brinjal borer"
   },
   {
-    "id": "ins-0153",
+    "id": "ins-0081",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Tuktak 1.8EC",
@@ -5055,7 +5018,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0154",
+    "id": "ins-0112",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Tuning 1.8EC",
@@ -5086,7 +5049,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0155",
+    "id": "ins-0047",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Tytin 1.8EC",
@@ -5117,7 +5080,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0156",
+    "id": "ins-0083",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Uniba 1.8EC",
@@ -5150,7 +5113,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0157",
+    "id": "ins-0068",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Vastin 1.8EC",
@@ -5183,7 +5146,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0158",
+    "id": "ins-0038",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Vertex 1.8EC",
@@ -5214,10 +5177,10 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0159",
+    "id": "ins-0001",
     "type": "Insecticide",
     "commonName": "Abamectin",
-    "tradeName": "Vertimec 1.8 EC",
+    "tradeName": "Vertimec 1.8EC",
     "registrationNo": "AP-890",
     "registrationHolder": "Syngenta Bangladesh Limited",
     "crops": [
@@ -5250,7 +5213,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Do not exceed 2 sprays per generation. Rotate with MoA 10A (Hexythiazox) or 12C (Propargite)"
   },
   {
-    "id": "ins-0160",
+    "id": "ins-0080",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "Vimactin 1.8EC",
@@ -5319,7 +5282,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Follow-up sprays MUST NOT contain Group 4A or Group 28 compounds"
   },
   {
-    "id": "ins-0162",
+    "id": "ins-0091",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "World 1.8EC",
@@ -5352,7 +5315,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "rotationNotes": "Maximum 2 applications per crop cycle. Rotate with IRAC 10A (Hexythiazox), 12C (Propargite), or 21A (Fenazaquin) to manage mite resistance."
   },
   {
-    "id": "ins-0163",
+    "id": "ins-0097",
     "type": "Insecticide",
     "commonName": "Abamectin",
     "tradeName": "X-Ten 1.8EC",
