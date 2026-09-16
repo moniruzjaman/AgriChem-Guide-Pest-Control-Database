@@ -6,6 +6,10 @@ import {
   translateCategory, 
   translateRisk, 
   formatNumberWithLang,
+  transPest,
+  transToxicity,
+  transDosage,
+  transNote,
   toBnNumber 
 } from '../utils/i18n';
 
@@ -17,6 +21,10 @@ interface LanguageContextType {
   transCrop: (crop: string) => string;
   transCat: (cat: string) => string;
   transRisk: (risk: string) => string;
+  transPest: (pest: string) => string;
+  transTox: (tox: string) => string;
+  transDose: (dose: string) => string;
+  transNote: (note: string) => string;
   formatNum: (num: number | string) => string;
 }
 
@@ -64,6 +72,11 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     return formatNumberWithLang(num, language);
   };
 
+  const transPestFn = (pest: string): string => transPest(pest, language);
+  const transToxFn = (tox: string): string => transToxicity(tox, language);
+  const transDoseFn = (dose: string): string => transDosage(dose, language);
+  const transNoteFn = (note: string): string => transNote(note, language);
+
   return (
     <LanguageContext.Provider
       value={{
@@ -74,6 +87,10 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
         transCrop,
         transCat,
         transRisk,
+        transPest: transPestFn,
+        transTox: transToxFn,
+        transDose: transDoseFn,
+        transNote: transNoteFn,
         formatNum
       }}
     >

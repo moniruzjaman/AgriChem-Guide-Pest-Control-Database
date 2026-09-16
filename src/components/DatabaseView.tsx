@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
+import { MOA_DATABASE } from '../data/moaData';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 
 interface DatabaseViewProps {
@@ -85,7 +86,8 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   onUpdateProducts,
   onResetProducts
 }) => {
-  const { language, t, transCrop, transCat, transRisk, formatNum } = useLanguage();
+  const { language, t, transCrop, transCat, transRisk, transPest, transDose, formatNum } = useLanguage();
+  const moaInfoMap = useMemo(() => Object.fromEntries(MOA_DATABASE.map(m => [m.code, m])), []);
 
   // Importer & Registry States
   const [isImporterOpen, setIsImporterOpen] = useState<boolean>(false);
@@ -459,9 +461,9 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       else if (typeLower.includes('public health') || typeLower.includes('mosquito') || typeLower.includes('vector')) type = 'Public Health';
       
       const registrationNo = regNoIdx !== -1 && columns[regNoIdx] ? columns[regNoIdx] : `AP-CUST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
-      const registrationHolder = holderIdx !== -1 && columns[holderIdx] ? columns[holderIdx] : 'Custom Importer';
+      const registrationHolder = holderIdx !== -1 && columns[holderIdx] ? columns[holderIdx] : 'কাস্টম আমদানিকারক';
       const crops = cropsIdx !== -1 && columns[cropsIdx] ? columns[cropsIdx].split(/[;|]/).map(c => c.trim()).filter(Boolean) : ['All Crops'];
-      const pests = pestsIdx !== -1 && columns[pestsIdx] ? columns[pestsIdx].split(/[;|]/).map(p => p.trim()).filter(Boolean) : ['Target pests'];
+      const pests = pestsIdx !== -1 && columns[pestsIdx] ? columns[pestsIdx].split(/[;|]/).map(p => p.trim()).filter(Boolean) : ['লক্ষ্য বালাই'];
       const dosageRate = dosageIdx !== -1 && columns[dosageIdx] ? columns[dosageIdx] : '1.5 - 2.0 L/ha';
       const moaCode = moaIdx !== -1 && columns[moaIdx] ? columns[moaIdx] : 'UN';
       const toxicityClass = toxicityIdx !== -1 && columns[toxicityIdx] ? columns[toxicityIdx] : 'III - Slightly Hazardous';
@@ -482,10 +484,10 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
         registrationNo,
         registrationHolder,
         crops: crops.length > 0 ? crops : ['All Crops'],
-        pests: pests.length > 0 ? pests : ['Target pests'],
+        pests: pests.length > 0 ? pests : ['লক্ষ্য বালাই'],
         dosageRate,
         moaCode,
-        moaGroup: `IRAC/FRAC group ${moaCode}`,
+        moaGroup: `IRAC/FRAC গ্রুপ ${moaCode}`,
         resistanceRisk: 'Medium',
         toxicityClass: toxicityClass as any,
         whoColor,
@@ -493,8 +495,8 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
         phiDays: 14,
         reiHours: 24,
         waterVolumeLPerHa: 500,
-        safetyNotes: ['Verify product label before use', 'Always wear full protective gear'],
-        rotationNotes: 'Rotate with alternate MoA to avoid resistance.'
+        safetyNotes: ['ব্যবহারের পূর্বে পণ্যের লেবেল যাচাই করুন', 'প্রয়োগের সময় সম্পূর্ণ সুরক্ষা সামগ্রী পরিধান করুন'],
+        rotationNotes: 'প্রতিরোধ রোধে ভিন্ন MoA গ্রুপের ওষুধ দিয়ে ঘূর্ণন করুন।'
       });
     }
     
@@ -581,7 +583,9 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   };
 
   const downloadCSVTemplate = () => {
-    const headers = "Trade Name,Active Ingredient,Category,Registration No,Registration Holder,Crops (separated by semicolon),Pests (separated by semicolon),Dosage Rate,MoA Code,Toxicity Class\n";
+    const headers = language === 'bn'
+      ? "বাণিজ্যিক নাম (Trade Name),মূল উপাদান (Active Ingredient),ধরণ (Category),নিবন্ধন নং (Registration No),কোম্পানি (Registration Holder),ফসল (Crops - সেমিকোলন দিয়ে),বালাই (Pests - সেমিকোলন দিয়ে),মাত্রা (Dosage Rate),MoA কোড (MoA Code),বিষাক্ততা (Toxicity Class)\n"
+      : "Trade Name,Active Ingredient,Category,Registration No,Registration Holder,Crops (separated by semicolon),Pests (separated by semicolon),Dosage Rate,MoA Code,Toxicity Class\n";
     const exampleRow = "Demo-Guard 250 EC,Deltamethrin,Insecticide,AP-CUST-999,Demo Agri Solutions Ltd,Rice;Tomato;Brinjal,Stem borer;Leafminer;Aphids,1.50 L/ha,IRAC 3A,II - Moderately Hazardous\n";
     const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(headers + exampleRow);
     const link = document.createElement("a");
@@ -593,7 +597,9 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   };
 
   const exportFullDatabaseToCSV = () => {
-    const headers = "ID,Category,Common Name,Trade Name,Registration No,Registration Holder,Crops,Pests,Dosage Rate,MoA Code,Toxicity Class,PHI Days,REI Hours,Formulation\n";
+    const headers = language === 'bn'
+      ? "আইডি (ID),ধরণ (Category),মূল উপাদান (Common Name),বাণিজ্যিক নাম (Trade Name),নিবন্ধন নং (Registration No),কোম্পানি (Registration Holder),ফসল (Crops),বালাই (Pests),মাত্রা (Dosage Rate),MoA কোড (MoA Code),বিষাক্ততা (Toxicity Class),PHI (দিন),REI (ঘণ্টা),ফর্মুলেশন (Formulation)\n"
+      : "ID,Category,Common Name,Trade Name,Registration No,Registration Holder,Crops,Pests,Dosage Rate,MoA Code,Toxicity Class,PHI Days,REI Hours,Formulation\n";
     const rows = products.map(p => {
       return [
         p.id,
@@ -606,7 +612,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
         `"${(p.pests || []).join('; ').replace(/"/g, '""')}"`,
         `"${(p.dosageRate || '').replace(/"/g, '""')}"`,
         `"${p.moaCode || 'UN'}"`,
-        `"${p.toxicityClass || 'U - Unlikely to Present Hazard'}"`,
+        `"${p.toxicityClass || 'U - বিপদমুক্ত (Unlikely)'}"`,
         p.phiDays || 0,
         p.reiHours || 0,
         p.formulation || ''
@@ -1021,7 +1027,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
               )}
             </div>
-            <span className="text-[10px] text-slate-400">{showMobileFilters ? '✕ CLOSE' : '▶ BROWSE'}</span>
+            <span className="text-[10px] text-slate-400">{showMobileFilters ? (language === 'bn' ? '✕ বন্ধ' : '✕ CLOSE') : (language === 'bn' ? '▶ ফিল্টার' : '▶ BROWSE')}</span>
           </button>
 
           {/* Sidebar container */}
@@ -1348,7 +1354,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
 
                 {selectedRisk !== 'all' && (
                   <span className="bg-rose-50 text-rose-800 border border-rose-200/50 px-2 py-0.5 rounded-md font-semibold flex items-center gap-1">
-                    <span>{transRisk(selectedRisk)} Risk</span>
+                    <span>{language === 'bn' ? transRisk(selectedRisk) : `${transRisk(selectedRisk)} Risk`}</span>
                     <button onClick={() => setSelectedRisk('all')} className="hover:text-rose-600 font-bold">✕</button>
                   </span>
                 )}
@@ -1510,14 +1516,14 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                             {/* Recommended Pests */}
                             <td className="py-2.5 px-3.5 max-w-[160px]">
                               <span className="text-[11px] text-slate-600 truncate block" title={product.pests.join(', ')}>
-                                {product.pests.join(', ') || '—'}
+                                {product.pests.map((pest) => transPest(pest)).join(', ') || '—'}
                               </span>
                             </td>
 
                             {/* Dosage */}
                             <td className="py-2.5 px-3.5 max-w-[140px] font-medium text-slate-700">
                               <span className="truncate block text-[11px]" title={product.dosageRate}>
-                                {product.dosageRate}
+                                {transDose(product.dosageRate)}
                               </span>
                             </td>
 
@@ -1625,7 +1631,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                             )}
                             {group.resistanceRisk && (
                               <span className={`text-[9px] font-bold px-2 py-0.5 rounded border ${getRiskColor(group.resistanceRisk)}`}>
-                                {transRisk(group.resistanceRisk)} Risk
+                                {language === 'bn' ? transRisk(group.resistanceRisk) : `${transRisk(group.resistanceRisk)} Risk`}
                               </span>
                             )}
                           </div>
@@ -1640,7 +1646,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                           <div className="text-xs text-slate-500 space-y-1">
                             {group.moaGroup && (
                               <p className="font-medium text-slate-600">
-                                {language === 'bn' ? 'ক্রিয়া কৌশলের গ্রুপ:' : 'Mode of Action Group:'} <strong className="text-slate-800">{group.moaGroup}</strong>
+                                {language === 'bn' ? 'ক্রিয়া কৌশলের গ্রুপ:' : 'Mode of Action Group:'} <strong className="text-slate-800">{language === 'bn' ? (moaInfoMap[group.moaCode || '']?.nameBn || group.moaGroup) : group.moaGroup}</strong>
                               </p>
                             )}
                             <div className="flex flex-wrap gap-1 items-center pt-1">
@@ -1713,7 +1719,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                     {brand.moaCode || 'IRAC UN'}
                                   </span>
                                   <span className="text-[10px] text-slate-500 truncate block max-w-[140px] mt-0.5" title={brand.moaGroup}>
-                                    {brand.moaGroup}
+                                    {language === 'bn' ? (moaInfoMap[brand.moaCode || '']?.nameBn || brand.moaGroup) : brand.moaGroup}
                                   </span>
                                 </div>
 
@@ -1721,7 +1727,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                 <div className="grid grid-cols-2 gap-4 text-[11px] md:max-w-xs w-full md:w-auto bg-slate-50 p-2 rounded-lg border border-slate-100">
                                   <div>
                                     <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{language === 'bn' ? 'প্রয়োগ মাত্রা' : 'Dosage'}</span>
-                                    <span className="font-bold text-slate-800 truncate block max-w-[110px]" title={brand.dosageRate}>{brand.dosageRate}</span>
+                                    <span className="font-bold text-slate-800 truncate block max-w-[110px]" title={brand.dosageRate}>{transDose(brand.dosageRate)}</span>
                                   </div>
                                   <div>
                                     <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{language === 'bn' ? 'তোলার বিরতি' : 'PHI Days'}</span>

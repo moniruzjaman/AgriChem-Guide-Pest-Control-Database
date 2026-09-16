@@ -82,7 +82,7 @@ export const CollapsibleUserGuide: React.FC<CollapsibleUserGuideProps> = ({
 
         <button 
           className="p-1.5 rounded-lg hover:bg-emerald-100/80 text-emerald-800 transition"
-          aria-label={isOpen ? 'Collapse user guide' : 'Expand user guide'}
+          aria-label={isOpen ? 'ব্যবহারকারী গাইড বন্ধ করুন' : 'ব্যবহারকারী গাইড খুলুন'}
         >
           {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
