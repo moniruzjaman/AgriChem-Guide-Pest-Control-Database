@@ -8,6 +8,7 @@ import { ShareModal } from './components/ShareModal';
 import { DocumentMeta } from './components/DocumentMeta';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { useLanguage } from './context/LanguageContext';
+import { Analytics } from '@vercel/analytics/react';
 import {
   Leaf,
   Share2,
@@ -433,6 +434,9 @@ export default function App() {
 
       {/* PWA Floating Offline Indicator */}
       <OfflineIndicator />
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
 
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 mt-12 py-8 text-xs text-slate-500">
