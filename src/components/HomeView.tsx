@@ -677,6 +677,43 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
+      {/* 1.5 CROSS-APP PROMO: Link to উদ্ভিদ গোয়েন্দা (Plant Detective / CABI Diagnosis) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
+        <a
+          href="https://cabi-diagnosis.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative overflow-hidden flex flex-col sm:flex-row items-center gap-5 sm:gap-6 rounded-2xl p-5 sm:p-6 shadow-lg border border-[#00863d]/30 bg-gradient-to-r from-[#00381e] via-[#006028] to-[#00863d] text-white transition hover:shadow-xl hover:brightness-[1.03]"
+        >
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
+
+          <img
+            src="/plant-detective-icon.png"
+            alt={language === 'bn' ? 'উদ্ভিদ গোয়েন্দা লোগো' : 'Plant Detective logo'}
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shadow-md shrink-0 relative z-10"
+          />
+
+          <div className="flex-1 text-center sm:text-left relative z-10">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider bg-white/15 text-emerald-50 px-2.5 py-1 rounded-full mb-2">
+              {language === 'bn' ? 'সহযোগী অ্যাপ' : 'Partner App'}
+            </span>
+            <h3 className="text-lg sm:text-xl font-bold tracking-tight">
+              {language === 'bn' ? 'উদ্ভিদ গোয়েন্দা — ফসলের রোগ নির্ণয় করুন AI দিয়ে' : 'উদ্ভিদ গোয়েন্দা — Diagnose Crop Diseases with AI'}
+            </h3>
+            <p className="text-xs sm:text-sm text-emerald-100/90 mt-1.5 max-w-2xl">
+              {language === 'bn'
+                ? 'ছবি তুলুন বা লক্ষণ বলুন — CABI Plantwise প্রোটোকল অনুসরণ করে তাৎক্ষণিক রোগ নির্ণয়, প্রতিকার ও IPM পরামর্শ পান।'
+                : 'Snap a photo or describe symptoms and get instant diagnosis, treatment, and IPM guidance — powered by the CABI Plantwise protocol.'}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0 relative z-10 bg-white text-[#00552a] font-bold text-sm px-4 py-2.5 rounded-xl shadow-sm group-hover:bg-emerald-50 transition">
+            {language === 'bn' ? 'রোগ নির্ণয় করুন' : 'Diagnose Now'}
+            <ExternalLink className="w-4 h-4" />
+          </div>
+        </a>
+      </section>
+
       {/* 2. CORE FEATURES SUMMARY GRID (Animated Cards with Icons & Direct Navigation) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
         <div className="text-center mb-8">
