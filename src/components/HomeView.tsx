@@ -27,6 +27,53 @@ import { useLanguage } from '../context/LanguageContext';
 import { ChemicalProduct, AppTab } from '../types';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 
+// ── Cross-app partner branding ───────────────────────────────────────────────
+// The partner apps (উদ্ভিদ গোয়েন্দা / Plant Detective and the Pesticide Act 2018
+// assistant) are linked with the logo asset served by their OWN deployment
+// instead of a bundled copy. This keeps the Agrichem bundle light and means the
+// artwork always matches the partner app's latest deploy — when they rebrand,
+// these cards update themselves with no stale local file to maintain. If their
+// asset cannot be reached (offline field use), we fall back to a lightweight
+// icon so the card never renders broken.
+const CABI_APP_URL = 'https://cabi.krishiai.live/';
+const CABI_APP_LOGO = 'https://cabi.krishiai.live/cabi-logo.png';
+const CABI_APP_LOGO_FALLBACK = '/partner-plant-detective-logo.png';
+const PESTICIDE_ACT_APP_URL = 'https://pesticideact2018.vercel.app/';
+const PESTICIDE_ACT_APP_LOGO = 'https://pesticideact2018.vercel.app/apple-touch-icon.png';
+const PESTICIDE_ACT_APP_LOGO_FALLBACK = '/partner-pesticide-act-logo.png';
+
+interface PartnerAppLogoProps {
+  src: string;
+  fallbackSrc: string;
+  icon: React.ReactNode;
+  alt: string;
+  className?: string;
+}
+
+/**
+ * Partner app logo, resolved in three light steps:
+ *   1. the partner app's own live asset — so the newest branding shows up here
+ *      automatically as soon as that app is updated,
+ *   2. a small local copy shipped with this app — covers a slow or offline
+ *      partner host (which would otherwise leave the card on the icon),
+ *   3. a plain icon, so the card can never render broken.
+ */
+const PartnerAppLogo: React.FC<PartnerAppLogoProps> = ({ src, fallbackSrc, icon, alt, className }) => {
+  const [stage, setStage] = useState(0);
+  if (stage >= 2) return <>{icon}</>;
+  return (
+    <img
+      src={stage === 0 ? src : fallbackSrc}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      referrerPolicy="no-referrer"
+      className={className}
+      onError={() => setStage(current => (current === 0 ? 1 : 2))}
+    />
+  );
+};
+
 interface HomeViewProps {
   products: ChemicalProduct[];
   onNavigateTab: (tab: AppTab) => void;
@@ -465,33 +512,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
           {/* Main Hero Header & Call to Action */}
           <div className="max-w-4xl space-y-5">
-            {/* Pesticide Act 2018 Companion Highlight Banner */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.05 }}
-              className="inline-flex flex-wrap items-center gap-3 p-1.5 pr-4 rounded-2xl bg-gradient-to-r from-red-500/20 via-emerald-500/10 to-transparent border border-red-500/30 backdrop-blur-md text-white text-xs max-w-full"
-            >
-              <span className="px-2.5 py-1 rounded-xl bg-[#f42a41] text-white font-bold text-[10px] uppercase tracking-wider animate-pulse shrink-0">
-                {language === 'bn' ? 'ফিচার্ড অ্যাপ' : 'Featured App'}
-              </span>
-              <span className="font-semibold text-slate-100 flex items-center gap-1.5 min-w-0">
-                <Scale className="w-3.5 h-3.5 text-red-400 shrink-0" />
-                <span className="truncate">{language === 'bn' 
-                  ? 'কীটনাশক আইন, ২০১৮ ইন্টারেক্টিভ ডিজিটাল প্ল্যাটফর্ম চালু হয়েছে!' 
-                  : 'Pesticide Act 2018 Interactive Digital Assistant is live!'}</span>
-              </span>
-              <a
-                href="https://pesticideact2018.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-emerald-300 hover:text-emerald-200 font-bold transition ml-auto border-b border-emerald-300/40 hover:border-emerald-200 pb-0.5 shrink-0"
-              >
-                <span>{language === 'bn' ? 'অনলাইন অ্যাপ দেখুন' : 'Explore App'}</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
-            </motion.div>
-
             <motion.h1 
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -675,43 +695,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </button>
           </motion.div>
         </div>
-      </section>
-
-      {/* 1.5 CROSS-APP PROMO: Link to উদ্ভিদ গোয়েন্দা (Plant Detective / CABI Diagnosis) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
-        <a
-          href="https://cabi-diagnosis.vercel.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative overflow-hidden flex flex-col sm:flex-row items-center gap-5 sm:gap-6 rounded-2xl p-5 sm:p-6 shadow-lg border border-[#00863d]/30 bg-gradient-to-r from-[#00381e] via-[#006028] to-[#00863d] text-white transition hover:shadow-xl hover:brightness-[1.03]"
-        >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
-
-          <img
-            src="/plant-detective-icon.png"
-            alt={language === 'bn' ? 'উদ্ভিদ গোয়েন্দা লোগো' : 'Plant Detective logo'}
-            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shadow-md shrink-0 relative z-10"
-          />
-
-          <div className="flex-1 text-center sm:text-left relative z-10">
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider bg-white/15 text-emerald-50 px-2.5 py-1 rounded-full mb-2">
-              {language === 'bn' ? 'সহযোগী অ্যাপ' : 'Partner App'}
-            </span>
-            <h3 className="text-lg sm:text-xl font-bold tracking-tight">
-              {language === 'bn' ? 'উদ্ভিদ গোয়েন্দা — ফসলের রোগ নির্ণয় করুন AI দিয়ে' : 'উদ্ভিদ গোয়েন্দা — Diagnose Crop Diseases with AI'}
-            </h3>
-            <p className="text-xs sm:text-sm text-emerald-100/90 mt-1.5 max-w-2xl">
-              {language === 'bn'
-                ? 'ছবি তুলুন বা লক্ষণ বলুন — CABI Plantwise প্রোটোকল অনুসরণ করে তাৎক্ষণিক রোগ নির্ণয়, প্রতিকার ও IPM পরামর্শ পান।'
-                : 'Snap a photo or describe symptoms and get instant diagnosis, treatment, and IPM guidance — powered by the CABI Plantwise protocol.'}
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2 shrink-0 relative z-10 bg-white text-[#00552a] font-bold text-sm px-4 py-2.5 rounded-xl shadow-sm group-hover:bg-emerald-50 transition">
-            {language === 'bn' ? 'রোগ নির্ণয় করুন' : 'Diagnose Now'}
-            <ExternalLink className="w-4 h-4" />
-          </div>
-        </a>
       </section>
 
       {/* 2. CORE FEATURES SUMMARY GRID (Animated Cards with Icons & Direct Navigation) */}
@@ -1228,8 +1211,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
             {/* Pesticide Act 2018 */}
             <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col shadow-sm hover:shadow-md transition-all">
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-14 h-14 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center shrink-0">
-                  <Scale className="w-7 h-7 text-red-600" />
+                <div className="w-14 h-14 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center shrink-0 overflow-hidden">
+                  <PartnerAppLogo
+                    src={PESTICIDE_ACT_APP_LOGO}
+                    fallbackSrc={PESTICIDE_ACT_APP_LOGO_FALLBACK}
+                    icon={<Scale className="w-7 h-7 text-red-600" />}
+                    alt={language === 'bn' ? 'বালাইনাশক নিয়ন্ত্রণ আইন, ২০১৮ অ্যাপ লোগো' : 'Pesticide Act 2018 app logo'}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="flex-1">
                   <span className="text-[10px] uppercase font-bold text-red-700 tracking-wider block mb-1">
@@ -1263,7 +1252,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               <div className="mt-4 flex flex-col sm:flex-row gap-3">
                 <a 
-                  href="https://pesticideact2018.vercel.app/" 
+                  href={PESTICIDE_ACT_APP_URL} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-sm transition cursor-pointer"
@@ -1280,6 +1269,58 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 >
                   <FileDown className="w-3.5 h-3.5" />
                   <span>{language === 'bn' ? 'পিডিএফ ডাউনলোড' : 'Download Act PDF'}</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Partner App — উদ্ভিদ গোয়েন্দা (CABI Smart Crop Diagnosis) */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col shadow-sm hover:shadow-md transition-all">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-14 h-14 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0 overflow-hidden">
+                  <PartnerAppLogo
+                    src={CABI_APP_LOGO}
+                    fallbackSrc={CABI_APP_LOGO_FALLBACK}
+                    icon={<FlaskConical className="w-7 h-7 text-emerald-600" />}
+                    alt={language === 'bn' ? 'উদ্ভিদ গোয়েন্দা অ্যাপ লোগো' : 'Plant Detective (CABI) app logo'}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="flex-1">
+                  <span className="text-[10px] uppercase font-bold text-emerald-700 tracking-wider block mb-1">
+                    {language === 'bn' ? 'সহযোগী অ্যাপ' : 'Partner App'}
+                  </span>
+                  <h4 className="font-bold text-lg text-slate-900">
+                    {language === 'bn' ? 'উদ্ভিদ গোয়েন্দা — স্মার্ট ফসল রোগ নির্ণয়' : 'Plant Detective — Smart Crop Diagnosis'}
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {language === 'bn'
+                      ? 'ছবি তুলুন বা লক্ষণ বলুন — CABI Plantwise প্রোটোকল অনুসরণ করে তাৎক্ষণিক রোগ নির্ণয়, প্রতিকার ও IPM পরামর্শ পান।'
+                      : 'Snap a photo or describe the symptoms to get instant diagnosis, treatment and IPM guidance following the CABI Plantwise protocol.'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3 text-xs text-slate-600 border-t border-slate-100 pt-4 flex-1">
+                <div className="flex items-center gap-2 text-slate-700">
+                  <Sparkles className="w-3.5 h-3.5 text-slate-400" />
+                  <span className="font-medium">{language === 'bn' ? 'অ্যাপে যা পাবেন:' : 'Inside the app:'}</span>
+                </div>
+                <ul className="space-y-1.5 pl-5 list-disc text-slate-600">
+                  <li>{language === 'bn' ? 'ছবি দিয়ে তাৎক্ষণিক রোগ নির্ণয় (AI ভিশন)' : 'Instant disease diagnosis from a leaf photo (AI vision)'}</li>
+                  <li>{language === 'bn' ? 'CABI Plantwise চিকিৎসা ও IPM সুপারিশ' : 'CABI Plantwise treatment & IPM recommendations'}</li>
+                  <li>{language === 'bn' ? 'রোগ নির্ণয় শেখার ইন্টারেক্টিভ গেম হাব' : 'Interactive game hub to practise diagnosis'}</li>
+                </ul>
+              </div>
+
+              <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                <a
+                  href={CABI_APP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm transition cursor-pointer"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>{language === 'bn' ? 'রোগ নির্ণয় করুন' : 'Diagnose Crop Disease'}</span>
                 </a>
               </div>
             </div>
