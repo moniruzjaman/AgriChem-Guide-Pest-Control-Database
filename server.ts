@@ -128,9 +128,58 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    // IMPORTANT: `index: false` disables express.static's auto-serving of
+    // index.html for "/" and "/index.html". Without this, the catch-all
+    // below never runs and OG_IMAGE_ORIGIN placeholders would never be
+    // rewritten — social crawlers would see URLs pointing at the wrong
+    // domain. All other static assets (JS, CSS, PNG, SVG, fonts, manifest)
+    // are still served directly by express.static.
+    app.use(express.static(distPath, { index: false }));
+
+    // Cached index.html with OG_IMAGE_ORIGIN placeholders rewritten to the
+    // real request origin. Social crawlers (WhatsApp, Facebook, Telegram,
+    // Twitter-X, LinkedIn) do NOT execute JavaScript, so they only ever see
+    // the raw HTML the server returns. If that HTML points at the wrong
+    // domain (or worse, a relative path), the crawler either fetches a 404
+    // for the OG image or drops the preview entirely. This middleware makes
+    // the same built bundle work on agrichem-pro.live, preview deploys,
+    // localhost, and any custom domain — crawlers always see fully-qualified
+    // absolute URLs that match the host they actually fetched the page from.
+    const PROD_PLACEHOLDER = "https://agrichem-pro.live";
+    let cachedIndexHtml: string | null = null;
+    const getIndexHtml = (): string => {
+      if (cachedIndexHtml === null) {
+        cachedIndexHtml = fs.readFileSync(
+          path.join(distPath, "index.html"),
+          "utf8"
+        );
+      }
+      return cachedIndexHtml;
+    };
+
+    const rewriteOrigin = (html: string, req: express.Request): string => {
+      // Trust the proxy headers (X-Forwarded-*) if present, since the app is
+      // typically deployed behind Vercel/Cloudflare/Nginx. Otherwise fall back
+      // to req.protocol which correctly reports "http" for direct localhost
+      // connections and "https" for direct TLS connections.
+      const proto =
+        (req.headers["x-forwarded-proto"] as string)?.split(",")[0]?.trim() ||
+        req.protocol ||
+        "https";
+      const host =
+        (req.headers["x-forwarded-host"] as string) || req.headers.host || "";
+      if (!host) return html;
+      const origin = `${proto}://${host}`;
+      // Replace all occurrences of the placeholder origin with the real one.
+      // This covers og:image, og:image:secure_url, og:url, twitter:image,
+      // and the <link rel="canonical"> tag in a single pass.
+      return html.split(PROD_PLACEHOLDER).join(origin);
+    };
+
+    // Catch-all: serve the rewritten index.html for any non-asset URL.
+    // Required for SPA hash-routing AND for per-request origin rewriting.
     app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+      res.type("html").send(rewriteOrigin(getIndexHtml(), req));
     });
   }
 

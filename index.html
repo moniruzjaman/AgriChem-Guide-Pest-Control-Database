@@ -16,20 +16,33 @@
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-default.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <!--
+      OG_IMAGE_ORIGIN placeholder: the production server (server.ts) rewrites
+      this string at request time to the real origin (protocol + host) seen by
+      the client. This way the same index.html works on any deployment domain
+      (agrichem-pro.live, preview deploys, localhost) AND social crawlers that
+      never execute JavaScript still see fully-qualified absolute URLs, which
+      WhatsApp / Facebook / Telegram / LinkedIn / Twitter-X all require.
+    -->
     <meta property="og:title" content="এগ্রিকেম প্রো — আধুনিক বালাই ব্যবস্থাপনা ও সঠিক রাসায়নিক মাত্রা সহায়িকা" />
     <meta property="og:description" content="বাংলাদেশের মাঠ ফসলের জন্য ডিএই নিবন্ধিত ৫,৭১১+ বালাইনাশক ডাটাবেস, ন্যাপস্যাক স্প্রেয়ার ট্যাংক ক্যালকুলেটর, প্রতিরোধ রোধে MoA রোটেশন ও বিনামূল্যে পকেট বুক ম্যানুয়াল।" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="bn_BD" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:site_name" content="এগ্রিকেম প্রো" />
-    <meta property="og:image" content="/icons/og-bn.svg" />
-    <meta property="og:image:alt" content="এগ্রিকেম প্রো (AgriChem Pro)" />
+    <meta property="og:url" content="https://agrichem-pro.live/" />
+    <meta property="og:image" content="https://agrichem-pro.live/icons/og-bn.png" />
+    <meta property="og:image:secure_url" content="https://agrichem-pro.live/icons/og-bn.png" />
+    <meta property="og:image:alt" content="এগ্রিকেম প্রো (AgriChem Pro) — DAE-approved pest-control platform preview" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:type" content="image/png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="এগ্রিকেম প্রো — আধুনিক বালাই ব্যবস্থাপনা ও সঠিক রাসায়নিক মাত্রা সহায়িকা" />
     <meta name="twitter:description" content="বাংলাদেশের মাঠ ফসলের জন্য ডিএই নিবন্ধিত ৫,৭১১+ বালাইনাশক ডাটাবেস, ন্যাপস্যাক স্প্রেয়ার ট্যাংক ক্যালকুলেটর, প্রতিরোধ রোধে MoA রোটেশন ও বিনামূল্যে পকেট বুক ম্যানুয়াল।" />
-    <meta name="twitter:image" content="/icons/og-bn.svg" />
+    <meta name="twitter:image" content="https://agrichem-pro.live/icons/og-bn.png" />
+    <meta name="twitter:image:alt" content="এগ্রিকেম প্রো (AgriChem Pro) — DAE-approved pest-control platform preview" />
+    <link rel="canonical" href="https://agrichem-pro.live/" />
     <script>
       (function() {
         try {

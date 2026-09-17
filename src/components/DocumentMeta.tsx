@@ -126,8 +126,14 @@ export const DocumentMeta: React.FC<{ activeTab: AppTab }> = ({ activeTab }) => 
     const theme = THEME_COLOR[activeTab] || '#059669';
     const iconPng = `/icons/apple-touch-default.png`;
     const iconSvg = `/favicon.svg`;
-    const ogImage = language === 'bn' ? '/icons/og-bn.svg' : '/icons/og-en.svg';
+    // PNG, not SVG: WhatsApp / Facebook / Twitter-X / Telegram / LinkedIn
+    // silently reject SVG for og:image, leaving the preview card without an
+    // image. The matching 1200x630 PNGs are generated from the SVGs by
+    // scripts/generate_og_pngs.py and live next to the originals.
+    const ogImage = language === 'bn' ? '/icons/og-bn.png' : '/icons/og-en.png';
     const ogImageAbs = absUrl(ogImage);
+    const canonicalUrl = absUrl('/');
+    const ogImageAlt = `${appName} — DAE-approved pest-control platform preview`;
 
     document.title = copy.title;
     document.documentElement.lang = language === 'bn' ? 'bn' : 'en';
@@ -146,17 +152,21 @@ export const DocumentMeta: React.FC<{ activeTab: AppTab }> = ({ activeTab }) => 
     setNamedMeta('property', 'og:description', copy.description);
     setNamedMeta('property', 'og:type', 'website');
     setNamedMeta('property', 'og:locale', language === 'bn' ? 'bn_BD' : 'en_US');
+    setNamedMeta('property', 'og:locale:alternate', language === 'bn' ? 'en_US' : 'bn_BD');
     setNamedMeta('property', 'og:site_name', appName);
+    setNamedMeta('property', 'og:url', canonicalUrl);
     setNamedMeta('property', 'og:image', ogImageAbs);
-    setNamedMeta('property', 'og:image:alt', appName);
+    setNamedMeta('property', 'og:image:secure_url', ogImageAbs);
+    setNamedMeta('property', 'og:image:alt', ogImageAlt);
     setNamedMeta('property', 'og:image:width', '1200');
     setNamedMeta('property', 'og:image:height', '630');
-    setNamedMeta('property', 'og:image:type', 'image/svg+xml');
+    setNamedMeta('property', 'og:image:type', 'image/png');
 
     setNamedMeta('name', 'twitter:card', 'summary_large_image');
     setNamedMeta('name', 'twitter:title', copy.title);
     setNamedMeta('name', 'twitter:description', copy.description);
     setNamedMeta('name', 'twitter:image', ogImageAbs);
+    setNamedMeta('name', 'twitter:image:alt', ogImageAlt);
 
     // Schema.org WebApplication JSON-LD
     let scriptEl = document.head.querySelector('script[type="application/ld+json"]');
@@ -198,6 +208,7 @@ export const DocumentMeta: React.FC<{ activeTab: AppTab }> = ({ activeTab }) => 
     upsertMeta('link[rel="apple-touch-icon"]:not([sizes])', { rel: 'apple-touch-icon', href: iconSvg }, 'link');
     upsertMeta('link[rel="apple-touch-icon"][sizes="180x180"]', { rel: 'apple-touch-icon', sizes: '180x180', href: iconPng }, 'link');
     upsertMeta('link[rel="manifest"]', { rel: 'manifest', href: '/site.webmanifest' }, 'link');
+    upsertMeta('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl }, 'link');
 
     document.documentElement.style.setProperty('--app-theme', theme);
   }, [activeTab, language]);

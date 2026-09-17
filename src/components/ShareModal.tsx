@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, 
   Share2, 
@@ -22,18 +22,34 @@ import { AppTab } from '../types';
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
-  defaultTab?: AppTab;
+  /** Current tab so the share modal opens pre-selecting the same section the
+   *  user is viewing. Was previously called `defaultTab`, which silently
+   *  mismatched the `activeTab` prop passed by App.tsx and caused the modal
+   *  to always open at "home". */
+  activeTab?: AppTab;
 }
 
 export const ShareModal: React.FC<ShareModalProps> = ({
   isOpen,
   onClose,
-  defaultTab = 'home'
+  activeTab = 'home'
 }) => {
   const { language } = useLanguage();
-  const [selectedTarget, setSelectedTarget] = useState<AppTab>(defaultTab);
+  const [selectedTarget, setSelectedTarget] = useState<AppTab>(activeTab);
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
+
+  // Sync the selected share target with the active tab whenever the modal is
+  // (re)opened. Without this, useState's lazy initialiser only captures the
+  // tab that was active on first mount — navigating to "Calculator" then
+  // opening Share would still show the previous tab's preview.
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedTarget(activeTab);
+      setShowQR(false);
+      setCopied(false);
+    }
+  }, [isOpen, activeTab]);
 
   if (!isOpen) return null;
 
@@ -157,17 +173,18 @@ export const ShareModal: React.FC<ShareModalProps> = ({
         transition={{ duration: 0.2 }}
         className="w-full max-w-lg rounded-2xl bg-white shadow-2xl border border-slate-200 overflow-hidden my-6"
       >
-        {/* Modal Header */}
-        <div className="bg-gradient-to-r from-emerald-800 to-teal-800 p-5 text-white flex items-center justify-between">
+        {/* Modal Header — brand palette: Bangladesh green (#006a4e) → deep teal,
+            no longer the off-brand Tailwind emerald-800/teal-800 */}
+        <div className="bg-gradient-to-r from-[#006a4e] to-[#004f3a] p-5 text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xs flex items-center justify-center text-emerald-200">
+            <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xs flex items-center justify-center text-emerald-100">
               <Share2 className="w-5 h-5" />
             </div>
             <div>
               <h3 className="font-bold text-lg text-white">
                 {language === 'bn' ? 'এগ্রিকেম প্রো শেয়ার করুন' : 'Share AgriChem Pro'}
               </h3>
-              <p className="text-xs text-emerald-200">
+              <p className="text-xs text-emerald-100/90">
                 {language === 'bn' 
                   ? 'কৃষক, উপসহকারী কর্মকর্তা ও ডিলারদের কাছে প্ল্যাটফর্মটি পৌঁছে দিন' 
                   : 'Empower farmers, agronomists, and field officers'}
@@ -229,10 +246,21 @@ export const ShareModal: React.FC<ShareModalProps> = ({
             <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-2xs space-y-0">
               <div className="w-full aspect-[1.91/1] bg-slate-100 relative border-b border-slate-100 overflow-hidden">
                 <img
-                  src="/icons/og-bn.svg"
+                  src={language === 'bn' ? '/icons/og-bn.png' : '/icons/og-en.png'}
                   alt="AgriChem Pro OG Preview"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
+                  // Falls back to the SVG only if the PNG is somehow missing —
+                  // the PNG is the canonical format for OG previews because
+                  // WhatsApp / Facebook / Twitter-X reject SVG.
+                  onError={(e) => {
+                    const img = e.currentTarget;
+                    const fallback = language === 'bn' ? '/icons/og-bn.svg' : '/icons/og-en.svg';
+                    if (img.src !== fallback && !img.dataset.fallbackUsed) {
+                      img.dataset.fallbackUsed = '1';
+                      img.src = fallback;
+                    }
+                  }}
                 />
               </div>
               <div className="p-3 space-y-1.5">
