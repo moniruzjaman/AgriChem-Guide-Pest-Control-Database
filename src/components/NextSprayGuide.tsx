@@ -2,6 +2,7 @@ import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { ChemicalProduct, MoAClassification } from '../types';
 import { MOA_DATABASE } from '../data/moaData';
 import { useLanguage } from '../context/LanguageContext';
+import { SearchableSelect, SearchableSelectOption } from './SearchableSelect';
 import {
   Search,
   X,
@@ -246,6 +247,17 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
     products.forEach((p) => p.pests.forEach((p2) => set.add(p2)));
     return Array.from(set).sort();
   }, [products]);
+
+  // ---------- Searchable dynamic dropdown options for the scope filters ----------
+  const scopeCropOptions = useMemo<SearchableSelectOption[]>(
+    () => availableCrops.map((c) => ({ value: c, label: transCrop(c), keywords: c })),
+    [availableCrops, transCrop]
+  );
+
+  const scopePestOptions = useMemo<SearchableSelectOption[]>(
+    () => availablePests.map((p) => ({ value: p, label: transPest(p), keywords: p })),
+    [availablePests, transPest]
+  );
 
   // ---------- Combobox search results ----------
   const searchResults = useMemo<ChemicalProduct[]>(() => {
@@ -516,31 +528,29 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
               <label className="block text-[11px] font-semibold text-slate-500">
                 {language === 'bn' ? 'সুপারিশ এই ফসলের জন্য সীমাবদ্ধ করুন (ঐচ্ছিক)' : 'Scope recommendation to this crop (optional)'}
               </label>
-              <select
+              <SearchableSelect
                 value={scopeCrop}
-                onChange={(e) => setScopeCrop(e.target.value)}
-                className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              >
-                <option value="">{language === 'bn' ? 'সকল ফসল' : 'All crops'}</option>
-                {availableCrops.map((c) => (
-                  <option key={c} value={c}>{transCrop(c)}</option>
-                ))}
-              </select>
+                onChange={(v) => setScopeCrop(v)}
+                options={scopeCropOptions}
+                size="sm"
+                ariaLabel={language === 'bn' ? 'ফসল স্কোপ নির্বাচন' : 'Select crop scope'}
+                placeholder={language === 'bn' ? 'সকল ফসল — সার্চ করুন…' : 'All crops — search…'}
+                emptyLabel={language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No crops match your search'}
+              />
             </div>
             <div className="space-y-1">
               <label className="block text-[11px] font-semibold text-slate-500">
                 {language === 'bn' ? 'সুপারিশ এই বালাইয়ের জন্য সীমাবদ্ধ করুন (ঐচ্ছিক)' : 'Scope recommendation to this pest (optional)'}
               </label>
-              <select
+              <SearchableSelect
                 value={scopePest}
-                onChange={(e) => setScopePest(e.target.value)}
-                className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              >
-                <option value="">{language === 'bn' ? 'সকল বালাই' : 'All pests'}</option>
-                {availablePests.map((p) => (
-                  <option key={p} value={p}>{transPest(p)}</option>
-                ))}
-              </select>
+                onChange={(v) => setScopePest(v)}
+                options={scopePestOptions}
+                size="sm"
+                ariaLabel={language === 'bn' ? 'বালাই স্কোপ নির্বাচন' : 'Select pest scope'}
+                placeholder={language === 'bn' ? 'সকল বালাই — সার্চ করুন…' : 'All pests — search…'}
+                emptyLabel={language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No pests match your search'}
+              />
             </div>
           </div>
 

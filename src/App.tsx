@@ -345,7 +345,12 @@ export default function App() {
 
         {activeTab === 'rotation' && (
           <Suspense fallback={<DatabaseSplash language={language} />}>
-            <RotationPlanner products={products} />
+            <RotationPlanner
+              products={products}
+              onSelectProduct={(p) => setDetailProduct(p)}
+              onOpenCalculator={(p) => setCalcProduct(p)}
+              onOpenSafety={(p) => setSafetyProduct(p)}
+            />
           </Suspense>
         )}
 
