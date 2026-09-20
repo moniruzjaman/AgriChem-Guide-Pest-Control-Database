@@ -10,6 +10,7 @@ import {
   ShieldAlert,
   RotateCw,
   ChevronDown,
+  ChevronUp,
   Info,
   Calculator,
   ShieldCheck,
@@ -21,10 +22,54 @@ import {
   HeartPulse,
   Sparkles,
   ArrowRight,
+  ArrowLeftRight,
   Ban,
   Clock,
   TrendingDown,
+  Medal,
+  Award,
+  FlaskConical,
+  Leaf,
+  Wheat,
+  Atom,
+  ListFilter,
+  ChevronsUpDown,
+  Check,
+  Warehouse,
+  MousePointerClick,
 } from 'lucide-react';
+
+// Crop emoji map for visual dropdown entries
+const CROP_EMOJIS: Record<string, string> = {
+  'Rice': '🌾',
+  'Potato': '🥔',
+  'Tomato': '🍅',
+  'Brinjal': '🍆',
+  'Mango': '🥭',
+  'Tea': '🍵',
+  'Jute': '🌱',
+  'Cotton': '☁️',
+  'Wheat': '🌾',
+  'Mustard': '🌼',
+  'Sugarcane': '🎋',
+  'Bean': '🫛',
+  'Cauliflower': '🥦',
+  'Cabbage': '🥬',
+  'Chilli': '🌶️',
+  'Cucumber': '🥒',
+  'Cucurbits': '🎃',
+  'Maize': '🌽',
+  'Onion': '🧅',
+  'Garlic': '🧄',
+  'Pulses': '🫘',
+  'Groundnut': '🥜',
+  'Citrus': '🍊',
+  'All Crops': '🌟',
+};
+
+function getCropEmoji(crop: string): string {
+  return CROP_EMOJIS[crop] || '🌱';
+}
 
 interface NextSprayGuideProps {
   products: ChemicalProduct[];
@@ -230,9 +275,20 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
   const [comboOpen, setComboOpen] = useState<boolean>(false);
   const comboRef = useRef<HTMLDivElement>(null);
 
+  // ---------- Quick-pick category filter chip state ----------
+  const [activeCategoryChip, setActiveCategoryChip] = useState<string>('all');
+
   // ---------- Optional scope filters ----------
   const [scopeCrop, setScopeCrop] = useState<string>('');
   const [scopePest, setScopePest] = useState<string>('');
+
+  // ---------- Custom icon-dropdown open state for crop & pest ----------
+  const [cropDropdownOpen, setCropDropdownOpen] = useState<boolean>(false);
+  const [pestDropdownOpen, setPestDropdownOpen] = useState<boolean>(false);
+  const [cropSearch, setCropSearch] = useState<string>('');
+  const [pestSearch, setPestSearch] = useState<string>('');
+  const cropDropdownRef = useRef<HTMLDivElement>(null);
+  const pestDropdownRef = useRef<HTMLDivElement>(null);
 
   // ---------- Available crops / pests (derived from full catalog) ----------
   const availableCrops = useMemo(() => {
@@ -247,14 +303,37 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
     return Array.from(set).sort();
   }, [products]);
 
-  // ---------- Combobox search results ----------
+  // ---------- Crop & pest counts for dropdown badges ----------
+  const cropCounts = useMemo(() => {
+    const m: Record<string, number> = {};
+    products.forEach((p) => p.crops.forEach((c) => { m[c] = (m[c] || 0) + 1; }));
+    return m;
+  }, [products]);
+  const pestCounts = useMemo(() => {
+    const m: Record<string, number> = {};
+    products.forEach((p) => p.pests.forEach((pe) => { m[pe] = (m[pe] || 0) + 1; }));
+    return m;
+  }, [products]);
+
+  // ---------- Category list for quick-pick chips ----------
+  const categoryChips = useMemo(() => {
+    const set = new Set<string>();
+    products.forEach((p) => p.type && set.add(p.type));
+    return Array.from(set).sort();
+  }, [products]);
+
+  // ---------- Combobox search results (filtered by active category chip) ----------
   const searchResults = useMemo<ChemicalProduct[]>(() => {
     const q = appliedQuery.toLowerCase().trim();
+    let pool = products;
+    if (activeCategoryChip !== 'all') {
+      pool = pool.filter((p) => p.type === activeCategoryChip);
+    }
     if (!q) {
       // Show some sensible defaults (a mix of common categories) when nothing is typed
-      return products.slice(0, 8);
+      return pool.slice(0, 10);
     }
-    return products
+    return pool
       .filter((p) => {
         return (
           p.tradeName.toLowerCase().includes(q) ||
@@ -265,15 +344,38 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
           p.pests.some((pest) => pest.toLowerCase().includes(q))
         );
       })
-      .slice(0, 12);
-  }, [appliedQuery, products]);
+      .slice(0, 14);
+  }, [appliedQuery, products, activeCategoryChip]);
 
-  // ---------- Close combobox on outside click ----------
+  // ---------- Group search results by category for the rich dropdown ----------
+  const groupedSearchResults = useMemo(() => {
+    const map = new Map<string, ChemicalProduct[]>();
+    searchResults.forEach((p) => {
+      if (!map.has(p.type)) map.set(p.type, []);
+      map.get(p.type)!.push(p);
+    });
+    return Array.from(map.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+  }, [searchResults]);
+
+  // ---------- Filtered crop / pest dropdown options ----------
+  const filteredCrops = useMemo(() => {
+    const q = cropSearch.toLowerCase().trim();
+    if (!q) return availableCrops;
+    return availableCrops.filter((c) => c.toLowerCase().includes(q) || transCrop(c).toLowerCase().includes(q));
+  }, [availableCrops, cropSearch, transCrop]);
+
+  const filteredPests = useMemo(() => {
+    const q = pestSearch.toLowerCase().trim();
+    if (!q) return availablePests;
+    return availablePests.filter((p) => p.toLowerCase().includes(q) || transPest(p).toLowerCase().includes(q));
+  }, [availablePests, pestSearch, transPest]);
+
+  // ---------- Close dropdowns on outside click ----------
   useEffect(() => {
     function handleOutside(e: MouseEvent) {
-      if (comboRef.current && !comboRef.current.contains(e.target as Node)) {
-        setComboOpen(false);
-      }
+      if (comboRef.current && !comboRef.current.contains(e.target as Node)) setComboOpen(false);
+      if (cropDropdownRef.current && !cropDropdownRef.current.contains(e.target as Node)) setCropDropdownOpen(false);
+      if (pestDropdownRef.current && !pestDropdownRef.current.contains(e.target as Node)) setPestDropdownOpen(false);
     }
     document.addEventListener('mousedown', handleOutside);
     return () => document.removeEventListener('mousedown', handleOutside);
@@ -295,14 +397,56 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
     setComboOpen(false);
   };
 
+  // Swap: re-run the guide with a recommended product as the new applied pesticide
+  const handleSwapApplied = (p: ChemicalProduct) => {
+    setAppliedProduct(p);
+    setAppliedQuery(p.tradeName);
+    // Smooth-scroll back to the top of the guide so the user sees the new state
+    if (typeof window !== 'undefined') {
+      const el = document.getElementById('next-spray-guide');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const handleClearApplied = () => {
     setAppliedProduct(null);
     setAppliedQuery('');
     setScopeCrop('');
     setScopePest('');
+    setActiveCategoryChip('all');
   };
 
   // ---------- Render helpers ----------
+  const renderRankBadge = (rank: number) => {
+    // Top 3 get medal icons (gold/silver/bronze), rest get numbered circles
+    if (rank === 1) {
+      return (
+        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 text-white shadow-md shrink-0" title={language === 'bn' ? 'শীর্ষ সুপারিশ' : 'Top recommendation'}>
+          <Medal className="w-4 h-4" />
+        </span>
+      );
+    }
+    if (rank === 2) {
+      return (
+        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-slate-300 to-slate-400 text-white shadow-md shrink-0" title={language === 'bn' ? 'দ্বিতীয় সুপারিশ' : 'Second pick'}>
+          <Award className="w-4 h-4" />
+        </span>
+      );
+    }
+    if (rank === 3) {
+      return (
+        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-orange-400 to-amber-700 text-white shadow-md shrink-0" title={language === 'bn' ? 'তৃতীয় সুপারিশ' : 'Third pick'}>
+          <Award className="w-4 h-4" />
+        </span>
+      );
+    }
+    return (
+      <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-700 text-white text-[11px] font-black shrink-0">
+        {formatNum(rank)}
+      </span>
+    );
+  };
+
   const renderProductRow = (p: ChemicalProduct, rank?: number) => {
     const whoBand = getWhoBand(p.whoColor);
     return (
@@ -310,14 +454,10 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
         key={p.id}
         className="py-3 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs border-b border-slate-100 last:border-b-0 px-2 rounded-lg hover:bg-slate-50/60 transition-colors"
       >
-        {/* Col 1: rank + brand + AI */}
+        {/* Col 1: rank medal + brand + AI */}
         <div className="space-y-1 min-w-[220px] flex-1">
           <div className="flex items-baseline gap-2">
-            {typeof rank === 'number' && (
-              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-700 text-white text-[10px] font-black shrink-0">
-                {formatNum(rank)}
-              </span>
-            )}
+            {typeof rank === 'number' && renderRankBadge(rank)}
             <h4 className="font-bold text-sm text-slate-900">{p.tradeName}</h4>
             {p.formulation && (
               <span className="bg-slate-100 text-slate-700 px-1.5 py-0.2 rounded text-[10px] font-bold border border-slate-200">
@@ -326,15 +466,19 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
             )}
           </div>
           <div className="text-[11px] text-slate-500 font-medium flex flex-wrap items-center gap-x-2 gap-y-0.5">
-            <span>{language === 'bn' ? 'উপাদান:' : 'AI:'} <strong className="text-slate-700">{p.commonName}</strong></span>
+            <span className="inline-flex items-center gap-1">
+              <FlaskConical className="w-3 h-3 text-slate-400" />
+              {language === 'bn' ? 'উপাদান:' : 'AI:'} <strong className="text-slate-700">{p.commonName}</strong>
+            </span>
             <span className="text-slate-300">|</span>
             <span>{language === 'bn' ? 'রেজি নং:' : 'Reg:'} <strong className="font-mono text-slate-700">{p.registrationNo}</strong></span>
           </div>
         </div>
 
-        {/* Col 2: MoA badge */}
+        {/* Col 2: MoA badge with atom icon */}
         <div className="bg-slate-50 p-2 rounded-lg border border-slate-100 min-w-[130px] shrink-0">
-          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">
+          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+            <Atom className="w-2.5 h-2.5" />
             {p.moaCode?.startsWith('IRAC') ? 'IRAC MoA' : p.moaCode?.startsWith('FRAC') ? 'FRAC MoA' : p.moaCode?.startsWith('HRAC') ? 'HRAC MoA' : 'MoA'}
           </span>
           <span className={`inline-block mt-0.5 px-2 py-0.5 rounded text-[11px] font-mono font-black border ${getMoABadgeClass(p.moaCode)}`}>
@@ -345,43 +489,61 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
           </span>
         </div>
 
-        {/* Col 3: dosage + PHI */}
+        {/* Col 3: dosage + PHI with icons */}
         <div className="grid grid-cols-2 gap-4 text-[11px] md:max-w-xs w-full md:w-auto bg-slate-50 p-2 rounded-lg border border-slate-100">
           <div>
-            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{language === 'bn' ? 'প্রয়োগ মাত্রা' : 'Dosage'}</span>
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+              <Calculator className="w-2.5 h-2.5" />
+              {language === 'bn' ? 'প্রয়োগ মাত্রা' : 'Dosage'}
+            </span>
             <span className="font-bold text-slate-800 truncate block max-w-[110px]" title={p.dosageRate}>{transDose(p.dosageRate)}</span>
           </div>
           <div>
-            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{language === 'bn' ? 'তোলার বিরতি' : 'PHI Days'}</span>
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+              <Clock className="w-2.5 h-2.5" />
+              {language === 'bn' ? 'তোলার বিরতি' : 'PHI Days'}
+            </span>
             <span className="font-bold text-slate-800 block">
               {p.phiDays ? `${formatNum(p.phiDays)} ${language === 'bn' ? 'দিন' : 'days'}` : '—'}
             </span>
           </div>
         </div>
 
-        {/* Col 4: WHO band + risk */}
+        {/* Col 4: WHO band + risk with shield/leaf icons */}
         <div className="flex flex-col gap-1 min-w-[120px] shrink-0">
           {whoBand && (
-            <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded text-[9px] font-bold ${whoBand.cls}`}>
+            <span className={`inline-flex items-center justify-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold ${whoBand.cls}`} title={language === 'bn' ? whoBand.labelBn : whoBand.labelEn}>
+              <ShieldCheck className="w-2.5 h-2.5" />
               {language === 'bn' ? whoBand.labelBn : whoBand.labelEn}
             </span>
           )}
           {p.resistanceRisk && (
-            <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded text-[9px] font-bold border ${getRiskChipClass(p.resistanceRisk)}`}>
+            <span className={`inline-flex items-center justify-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold border ${getRiskChipClass(p.resistanceRisk)}`}>
+              <TrendingDown className="w-2.5 h-2.5" />
               {language === 'bn' ? transRisk(p.resistanceRisk) : `${transRisk(p.resistanceRisk)} Risk`}
             </span>
           )}
         </div>
 
-        {/* Col 5: actions */}
+        {/* Col 5: actions — swap + dosage + safety + details */}
         <div className="flex items-center gap-1.5 shrink-0 self-end lg:self-auto pt-2 lg:pt-0">
+          {typeof rank === 'number' && (
+            <button
+              onClick={() => handleSwapApplied(p)}
+              className="p-2 bg-violet-50 hover:bg-violet-100 border border-violet-200/70 text-violet-700 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
+              title={language === 'bn' ? 'এটিকে নতুন "প্রয়োগকৃত" হিসেবে ব্যবহার করুন' : 'Use this as the new "applied" pesticide'}
+            >
+              <ArrowLeftRight className="w-4 h-4" />
+              <span className="text-[10px] font-bold hidden xl:inline">{language === 'bn' ? 'অদল' : 'Swap'}</span>
+            </button>
+          )}
           <button
             onClick={() => onOpenCalculator(p)}
             className="p-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/70 text-emerald-700 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
             title={language === 'bn' ? 'হিসাবকারী স্টেশন খুলুন' : 'Open Dosage Station'}
           >
             <Calculator className="w-4 h-4" />
-            <span className="text-[10px] font-bold">{language === 'bn' ? 'ডোজ হিসাব' : 'Dosage'}</span>
+            <span className="text-[10px] font-bold hidden xl:inline">{language === 'bn' ? 'ডোজ হিসাব' : 'Dosage'}</span>
           </button>
           <button
             onClick={() => onOpenSafety(p)}
@@ -389,7 +551,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
             title={language === 'bn' ? 'নিরাপত্তা চেকলিস্ট' : 'Safety Protocols'}
           >
             <ShieldCheck className="w-4 h-4" />
-            <span className="text-[10px] font-bold">{language === 'bn' ? 'নিরাপত্তা' : 'Safety'}</span>
+            <span className="text-[10px] font-bold hidden xl:inline">{language === 'bn' ? 'নিরাপত্তা' : 'Safety'}</span>
           </button>
           <button
             onClick={() => onSelectProduct(p)}
@@ -432,7 +594,47 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
 
         {/* ---------------- Search + scope filters ---------------- */}
         <div className="bg-white/95 backdrop-blur rounded-2xl p-4 sm:p-5 shadow-md space-y-4 text-slate-900">
-          {/* Applied-pesticide searchable combobox */}
+
+          {/* Quick-pick category filter chips — narrows the combobox below */}
+          <div className="space-y-1.5">
+            <label className="block text-[11px] font-bold text-slate-500 flex items-center gap-1.5 uppercase tracking-wider">
+              <ListFilter className="w-3 h-3 text-emerald-600" />
+              {language === 'bn' ? 'দ্রুত ক্যাটাগরি ফিল্টার' : 'Quick Category Filter'}
+            </label>
+            <div className="flex flex-wrap gap-1.5">
+              {/* "All" chip */}
+              <button
+                onClick={() => setActiveCategoryChip('all')}
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-bold border transition-all cursor-pointer ${
+                  activeCategoryChip === 'all'
+                    ? 'bg-emerald-800 text-white border-emerald-800 shadow-xs'
+                    : 'bg-white text-slate-700 border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50'
+                }`}
+              >
+                <Sparkles className="w-3 h-3" />
+                {language === 'bn' ? 'সকল শ্রেণী' : 'All Classes'}
+              </button>
+              {categoryChips.map((cat) => {
+                const isActive = activeCategoryChip === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategoryChip(cat)}
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-bold border transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-emerald-800 text-white border-emerald-800 shadow-xs'
+                        : 'bg-white text-slate-700 border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50'
+                    }`}
+                  >
+                    {getCategoryIcon(cat, `w-3 h-3 ${isActive ? 'text-emerald-200' : 'text-slate-400'}`)}
+                    {transCat(cat)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Applied-pesticide searchable combobox (rich, grouped, with icons) */}
           <div className="space-y-1.5" ref={comboRef}>
             <label className="block text-xs font-bold text-slate-700 flex items-center gap-1.5">
               <Search className="w-3.5 h-3.5 text-emerald-600" />
@@ -467,87 +669,220 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
                 </button>
               )}
 
-              {/* Dropdown results */}
+              {/* Rich grouped dropdown results */}
               {comboOpen && (
-                <div className="absolute z-30 mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-xl max-h-72 overflow-y-auto">
-                  {searchResults.length === 0 ? (
-                    <div className="p-4 text-xs text-slate-500 text-center">
-                      {language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No matches found'}
+                <div className="absolute z-30 mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-xl max-h-80 overflow-y-auto">
+                  {groupedSearchResults.length === 0 ? (
+                    <div className="p-6 text-xs text-slate-500 text-center space-y-1">
+                      <AlertTriangle className="w-5 h-5 text-amber-400 mx-auto" />
+                      <p className="font-bold">{language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No matches found'}</p>
+                      <p className="text-[10px] text-slate-400">{language === 'bn' ? 'অন্য নাম বা ক্যাটাগরি চেষ্টা করুন' : 'Try a different name or category'}</p>
                     </div>
                   ) : (
-                    <ul className="divide-y divide-slate-100">
-                      {searchResults.map((p) => (
-                        <li key={p.id}>
-                          <button
-                            onClick={() => handlePickProduct(p)}
-                            className="w-full px-3 py-2.5 text-left hover:bg-emerald-50/60 transition flex items-center justify-between gap-3 cursor-pointer"
-                          >
-                            <div className="min-w-0 flex-1">
-                              <div className="flex items-center gap-1.5">
-                                <span className="font-bold text-sm text-slate-900 truncate">{p.tradeName}</span>
-                                {p.formulation && (
-                                  <span className="bg-slate-100 text-slate-600 px-1 py-0.2 rounded text-[9px] font-bold border border-slate-200">
-                                    {p.formulation}
-                                  </span>
-                                )}
-                              </div>
-                              <div className="text-[10px] text-slate-500 truncate">
-                                {p.commonName} · {transCat(p.type)} · {p.registrationNo}
-                              </div>
-                            </div>
-                            {p.moaCode && (
-                              <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-black border shrink-0 ${getMoABadgeClass(p.moaCode)}`}>
-                                {p.moaCode}
-                              </span>
-                            )}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
+                    groupedSearchResults.map(([cat, items]) => (
+                      <div key={cat} className="border-b border-slate-100 last:border-b-0">
+                        {/* Group header */}
+                        <div className="sticky top-0 bg-slate-50 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5 border-b border-slate-100">
+                          {getCategoryIcon(cat, 'w-3 h-3 text-slate-400')}
+                          {transCat(cat)}
+                          <span className="ml-auto bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded text-[9px] font-bold">
+                            {formatNum(items.length)}
+                          </span>
+                        </div>
+                        {/* Items */}
+                        <ul className="divide-y divide-slate-50">
+                          {items.map((p) => {
+                            const whoBand = getWhoBand(p.whoColor);
+                            return (
+                              <li key={p.id}>
+                                <button
+                                  onClick={() => handlePickProduct(p)}
+                                  className="w-full px-3 py-2.5 text-left hover:bg-emerald-50/60 transition flex items-center justify-between gap-3 cursor-pointer"
+                                >
+                                  <div className="min-w-0 flex-1">
+                                    <div className="flex items-center gap-1.5 flex-wrap">
+                                      <span className="font-bold text-sm text-slate-900 truncate">{p.tradeName}</span>
+                                      {p.formulation && (
+                                        <span className="bg-slate-100 text-slate-600 px-1 py-0.2 rounded text-[9px] font-bold border border-slate-200">
+                                          {p.formulation}
+                                        </span>
+                                      )}
+                                      {/* WHO color dot */}
+                                      {p.whoColor && (
+                                        <span
+                                          className="inline-block w-2 h-2 rounded-full border border-slate-300 shrink-0"
+                                          style={{ backgroundColor: p.whoColor }}
+                                          title={whoBand ? (language === 'bn' ? whoBand.labelBn : whoBand.labelEn) : ''}
+                                        />
+                                      )}
+                                    </div>
+                                    <div className="text-[10px] text-slate-500 truncate flex items-center gap-1">
+                                      <FlaskConical className="w-2.5 h-2.5 shrink-0" />
+                                      {p.commonName}
+                                      <span className="text-slate-300">·</span>
+                                      <span className="font-mono">{p.registrationNo}</span>
+                                    </div>
+                                  </div>
+                                  {p.moaCode && (
+                                    <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-black border shrink-0 ${getMoABadgeClass(p.moaCode)}`}>
+                                      {p.moaCode}
+                                    </span>
+                                  )}
+                                </button>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    ))
                   )}
                 </div>
               )}
             </div>
           </div>
 
-          {/* Scope filters (optional) */}
+          {/* Scope filters — custom icon dropdowns with search */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="space-y-1">
-              <label className="block text-[11px] font-semibold text-slate-500">
+            {/* Crop scope dropdown */}
+            <div className="space-y-1" ref={cropDropdownRef}>
+              <label className="block text-[11px] font-semibold text-slate-500 flex items-center gap-1">
+                <Sprout className="w-3 h-3 text-emerald-600" />
                 {language === 'bn' ? 'সুপারিশ এই ফসলের জন্য সীমাবদ্ধ করুন (ঐচ্ছিক)' : 'Scope recommendation to this crop (optional)'}
               </label>
-              <select
-                value={scopeCrop}
-                onChange={(e) => setScopeCrop(e.target.value)}
-                className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              >
-                <option value="">{language === 'bn' ? 'সকল ফসল' : 'All crops'}</option>
-                {availableCrops.map((c) => (
-                  <option key={c} value={c}>{transCrop(c)}</option>
-                ))}
-              </select>
+              <div className="relative">
+                <button
+                  onClick={() => { setCropDropdownOpen(!cropDropdownOpen); setPestDropdownOpen(false); }}
+                  className="w-full flex items-center justify-between gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-white hover:border-emerald-400 transition cursor-pointer"
+                >
+                  <span className="flex items-center gap-2 min-w-0">
+                    <span className="text-base leading-none shrink-0">{scopeCrop ? getCropEmoji(scopeCrop) : '🌟'}</span>
+                    <span className="truncate">{scopeCrop ? transCrop(scopeCrop) : (language === 'bn' ? 'সকল ফসল' : 'All crops')}</span>
+                    {scopeCrop && cropCounts[scopeCrop] && (
+                      <span className="bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded text-[9px] font-bold shrink-0">
+                        {formatNum(cropCounts[scopeCrop])}
+                      </span>
+                    )}
+                  </span>
+                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                </button>
+                {cropDropdownOpen && (
+                  <div className="absolute z-30 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-xl">
+                    <div className="p-2 border-b border-slate-100 relative">
+                      <Search className="w-3 h-3 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type="text"
+                        value={cropSearch}
+                        onChange={(e) => setCropSearch(e.target.value)}
+                        placeholder={language === 'bn' ? 'ফসল খুঁজুন…' : 'Search crop…'}
+                        className="w-full pl-7 pr-2 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                        autoFocus
+                      />
+                    </div>
+                    <div className="max-h-56 overflow-y-auto">
+                      {/* "All crops" option */}
+                      <button
+                        onClick={() => { setScopeCrop(''); setCropDropdownOpen(false); setCropSearch(''); }}
+                        className={`w-full flex items-center gap-2 px-3 py-2 text-left text-xs hover:bg-emerald-50/60 transition cursor-pointer ${!scopeCrop ? 'bg-emerald-50/60 font-bold text-emerald-800' : 'text-slate-700'}`}
+                      >
+                        <span className="text-base leading-none">🌟</span>
+                        <span className="flex-1">{language === 'bn' ? 'সকল ফসল' : 'All crops'}</span>
+                        {!scopeCrop && <Check className="w-3.5 h-3.5 text-emerald-600" />}
+                      </button>
+                      {filteredCrops.map((c) => (
+                        <button
+                          key={c}
+                          onClick={() => { setScopeCrop(c); setCropDropdownOpen(false); setCropSearch(''); }}
+                          className={`w-full flex items-center gap-2 px-3 py-2 text-left text-xs hover:bg-emerald-50/60 transition cursor-pointer ${scopeCrop === c ? 'bg-emerald-50/60 font-bold text-emerald-800' : 'text-slate-700'}`}
+                        >
+                          <span className="text-base leading-none">{getCropEmoji(c)}</span>
+                          <span className="flex-1 truncate">{transCrop(c)}</span>
+                          <span className="bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded text-[9px] font-bold shrink-0">
+                            {formatNum(cropCounts[c] || 0)}
+                          </span>
+                          {scopeCrop === c && <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />}
+                        </button>
+                      ))}
+                      {filteredCrops.length === 0 && (
+                        <div className="p-3 text-[10px] text-slate-400 text-center">{language === 'bn' ? 'কোনো ফসল মেলেনি' : 'No crop matches'}</div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="space-y-1">
-              <label className="block text-[11px] font-semibold text-slate-500">
+
+            {/* Pest scope dropdown */}
+            <div className="space-y-1" ref={pestDropdownRef}>
+              <label className="block text-[11px] font-semibold text-slate-500 flex items-center gap-1">
+                <Bug className="w-3 h-3 text-rose-600" />
                 {language === 'bn' ? 'সুপারিশ এই বালাইয়ের জন্য সীমাবদ্ধ করুন (ঐচ্ছিক)' : 'Scope recommendation to this pest (optional)'}
               </label>
-              <select
-                value={scopePest}
-                onChange={(e) => setScopePest(e.target.value)}
-                className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              >
-                <option value="">{language === 'bn' ? 'সকল বালাই' : 'All pests'}</option>
-                {availablePests.map((p) => (
-                  <option key={p} value={p}>{transPest(p)}</option>
-                ))}
-              </select>
+              <div className="relative">
+                <button
+                  onClick={() => { setPestDropdownOpen(!pestDropdownOpen); setCropDropdownOpen(false); }}
+                  className="w-full flex items-center justify-between gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-white hover:border-rose-400 transition cursor-pointer"
+                >
+                  <span className="flex items-center gap-2 min-w-0">
+                    <Bug className={`w-3.5 h-3.5 shrink-0 ${scopePest ? 'text-rose-600' : 'text-slate-400'}`} />
+                    <span className="truncate">{scopePest ? transPest(scopePest) : (language === 'bn' ? 'সকল বালাই' : 'All pests')}</span>
+                    {scopePest && pestCounts[scopePest] && (
+                      <span className="bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded text-[9px] font-bold shrink-0">
+                        {formatNum(pestCounts[scopePest])}
+                      </span>
+                    )}
+                  </span>
+                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                </button>
+                {pestDropdownOpen && (
+                  <div className="absolute z-30 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-xl">
+                    <div className="p-2 border-b border-slate-100 relative">
+                      <Search className="w-3 h-3 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type="text"
+                        value={pestSearch}
+                        onChange={(e) => setPestSearch(e.target.value)}
+                        placeholder={language === 'bn' ? 'বালাই খুঁজুন…' : 'Search pest…'}
+                        className="w-full pl-7 pr-2 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded focus:bg-white focus:outline-none focus:ring-1 focus:ring-rose-500"
+                        autoFocus
+                      />
+                    </div>
+                    <div className="max-h-56 overflow-y-auto">
+                      <button
+                        onClick={() => { setScopePest(''); setPestDropdownOpen(false); setPestSearch(''); }}
+                        className={`w-full flex items-center gap-2 px-3 py-2 text-left text-xs hover:bg-rose-50/60 transition cursor-pointer ${!scopePest ? 'bg-rose-50/60 font-bold text-rose-800' : 'text-slate-700'}`}
+                      >
+                        <Sparkles className="w-3.5 h-3.5" />
+                        <span className="flex-1">{language === 'bn' ? 'সকল বালাই' : 'All pests'}</span>
+                        {!scopePest && <Check className="w-3.5 h-3.5 text-rose-600" />}
+                      </button>
+                      {filteredPests.map((p) => (
+                        <button
+                          key={p}
+                          onClick={() => { setScopePest(p); setPestDropdownOpen(false); setPestSearch(''); }}
+                          className={`w-full flex items-center gap-2 px-3 py-2 text-left text-xs hover:bg-rose-50/60 transition cursor-pointer ${scopePest === p ? 'bg-rose-50/60 font-bold text-rose-800' : 'text-slate-700'}`}
+                        >
+                          <Bug className={`w-3.5 h-3.5 ${scopePest === p ? 'text-rose-600' : 'text-slate-400'}`} />
+                          <span className="flex-1 truncate">{transPest(p)}</span>
+                          <span className="bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded text-[9px] font-bold shrink-0">
+                            {formatNum(pestCounts[p] || 0)}
+                          </span>
+                          {scopePest === p && <Check className="w-3.5 h-3.5 text-rose-600 shrink-0" />}
+                        </button>
+                      ))}
+                      {filteredPests.length === 0 && (
+                        <div className="p-3 text-[10px] text-slate-400 text-center">{language === 'bn' ? 'কোনো বালাই মেলেনি' : 'No pest matches'}</div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Hint: empty state */}
           {!appliedProduct && (
             <div className="bg-emerald-50/70 border border-emerald-200/70 rounded-xl p-3.5 flex items-start gap-3 text-xs">
-              <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <MousePointerClick className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
               <p className="text-emerald-900 font-medium leading-relaxed">
                 {language === 'bn'
                   ? 'শুরু করতে উপরের সার্চ বক্সে আপনার প্রয়োগকৃত বালাইনাশকের নাম লিখুন অথবা তালিকা থেকে নির্বাচন করুন। সিস্টেমটি স্বয়ংক্রিয়ভাবে ভিন্ন MoA গ্রুপের পরবর্তী স্প্রে সুপারিশ করবে।'
