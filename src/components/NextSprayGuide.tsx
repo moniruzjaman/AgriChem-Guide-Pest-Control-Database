@@ -32,6 +32,16 @@ interface NextSprayGuideProps {
   onSelectProduct: (product: ChemicalProduct) => void;
   onOpenCalculator: (product: ChemicalProduct) => void;
   onOpenSafety: (product: ChemicalProduct) => void;
+  /**
+   * Optional workflow panels rendered INSIDE the Dynamic Field Guide card,
+   * aligned beneath the next-spray recommendation engine. The MoA Rotation
+   * tab uses this slot to host the Interactive Spray Rotation Sequence
+   * builder (plus its crop/pest scope pickers and the available-MoA-groups
+   * reference), so the operator can move from "what did I just spray?" →
+   * "what should I spray next?" → "build my full season rotation" without
+   * jumping between separate cards.
+   */
+  children?: React.ReactNode;
 }
 
 /**
@@ -222,6 +232,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
   onSelectProduct,
   onOpenCalculator,
   onOpenSafety,
+  children,
 }) => {
   const { language, transCrop, transCat, transRisk, transPest, transDose, formatNum } = useLanguage();
 
@@ -416,12 +427,21 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
   };
 
   return (
-    <div id="next-spray-guide" className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 rounded-3xl p-5 sm:p-7 shadow-lg relative overflow-hidden">
-      {/* Decorative leaf accent */}
-      <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-emerald-700/30 blur-2xl pointer-events-none" />
-      <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-teal-700/20 blur-3xl pointer-events-none" />
+    <div id="next-spray-guide" className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 rounded-3xl shadow-lg relative">
+      {/*
+        Decorative leaf accent — kept on its own absolutely-positioned
+        inset-0 layer with `overflow-hidden` so the blurred halos stay
+        clipped to the card's rounded bounds. The content layer below is
+        NOT clipped, which lets the SearchableSelect dropdowns injected via
+        `children` (Interactive Spray Rotation Sequence) extend past the
+        card's bottom edge without being cut off.
+      */}
+      <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-emerald-700/30 blur-2xl" />
+        <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-teal-700/20 blur-3xl" />
+      </div>
 
-      <div className="relative z-10 space-y-5">
+      <div className="relative z-10 p-5 sm:p-7 space-y-5">
         {/* ---------------- Header ---------------- */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-700 text-emerald-200 text-[11px] font-semibold">
@@ -776,6 +796,17 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
             </div>
           </div>
         )}
+
+        {/* ----------------------------------------------------------------
+            Children slot — used by the MoA Rotation tab to host the
+            Interactive Spray Rotation Sequence builder (plus its crop /
+            pest scope pickers and the available-MoA reference) directly
+            inside the Dynamic Field Guide card. Aligned as additional
+            white sub-panels beneath the next-spray recommendation engine
+            so the whole rotation workflow lives as one easy-to-operate
+            block.
+           ---------------------------------------------------------------- */}
+        {children}
       </div>
     </div>
   );
