@@ -17,12 +17,37 @@ import {
 import { exportRotationSchedulePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
+import { NextSprayGuide } from './NextSprayGuide';
+import { SearchableSelect, SearchableSelectOption } from './SearchableSelect';
 
 interface RotationPlannerProps {
   products: ChemicalProduct[];
+  /** Opens the full product datasheet modal (wired by App.tsx). */
+  onSelectProduct?: (product: ChemicalProduct) => void;
+  /** Opens the dosage / tank-mix calculator modal (wired by App.tsx). */
+  onOpenCalculator?: (product: ChemicalProduct) => void;
+  /** Opens the PPE safety checklist modal (wired by App.tsx). */
+  onOpenSafety?: (product: ChemicalProduct) => void;
 }
 
-export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) => {
+/**
+ * Light chip styling for MoA codes inside searchable dropdown rows — keeps
+ * the same IRAC/FRAC/HRAC colour language used across the app.
+ */
+function moaBadgeClass(code?: string): string {
+  if (!code) return 'bg-slate-100 text-slate-600 border-slate-200';
+  if (code.startsWith('IRAC')) return 'bg-emerald-100 text-emerald-800 border-emerald-200';
+  if (code.startsWith('FRAC')) return 'bg-sky-100 text-sky-800 border-sky-200';
+  if (code.startsWith('HRAC')) return 'bg-amber-100 text-amber-800 border-amber-200';
+  return 'bg-slate-100 text-slate-700 border-slate-200';
+}
+
+export const RotationPlanner: React.FC<RotationPlannerProps> = ({
+  products,
+  onSelectProduct = () => {},
+  onOpenCalculator = () => {},
+  onOpenSafety = () => {}
+}) => {
   const { language, transCrop, transPest, formatNum } = useLanguage();
 
   // Available crops
@@ -155,6 +180,34 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
 
   const hasConflict = analyzedSteps.some((s) => s.status === 'conflict');
 
+  // ---------------------------------------------------------------------------
+  // Searchable dynamic dropdown option lists (crop / pest / per-spray product)
+  // Mirrors the NextSprayGuide combobox: every picker in this tab is type-to-
+  // filter, so no plain native <select> remains in the MoA Rotation tab.
+  // ---------------------------------------------------------------------------
+  const cropOptions = useMemo<SearchableSelectOption[]>(
+    () => availableCrops.map((c) => ({ value: c, label: transCrop(c), keywords: c })),
+    [availableCrops, transCrop]
+  );
+
+  const pestOptions = useMemo<SearchableSelectOption[]>(
+    () => availablePests.map((p) => ({ value: p, label: transPest(p), keywords: p })),
+    [availablePests, transPest]
+  );
+
+  const productOptions = useMemo<SearchableSelectOption[]>(
+    () =>
+      eligibleProducts.map((p) => ({
+        value: p.id,
+        label: p.tradeName,
+        sublabel: `${p.commonName} · ${p.registrationNo}`,
+        badge: p.moaCode || 'UN',
+        badgeClass: moaBadgeClass(p.moaCode),
+        keywords: `${p.commonName} ${p.moaCode || ''} ${p.moaGroup || ''} ${p.registrationNo}`
+      })),
+    [eligibleProducts]
+  );
+
   return (
     <div id="rotation-planner-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Intro Header */}
@@ -175,6 +228,20 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
         </div>
       </div>
 
+      {/* ============================================================
+          DYNAMIC NEXT-SPRAY GUIDE (moved out of the Chemical Database tab)
+          The searchable "which pesticide should I apply next?" workflow
+          now lives here, inside the MoA Rotation tab, where it belongs:
+          it is a Mode-of-Action rotation engine. All callbacks route to
+          the global modals (datasheet, dosage calculator, safety).
+          ============================================================ */}
+      <NextSprayGuide
+        products={products}
+        onSelectProduct={onSelectProduct}
+        onOpenCalculator={onOpenCalculator}
+        onOpenSafety={onOpenSafety}
+      />
+
       {/* Collapsible User Guide */}
       <CollapsibleUserGuide
         pageKey="rotation"
@@ -185,14 +252,14 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
         stepsEn={[
           "Select your target Crop (e.g., Rice, Tomato) and then select the target Pest or Disease you wish to control.",
           "The planner will automatically load a recommended sequence of spraying windows (Spray #1, #2, #3, etc.).",
-          "Choose a pesticide brand for each spray window using the dropdown fields.",
+          "Choose a pesticide brand for each spray window using the searchable dynamic dropdown fields - type to filter by brand name, active ingredient, registration number, or MoA code.",
           "Observe the validation status indicators: the system automatically computes IRAC (insecticide), FRAC (fungicide), or HRAC (herbicide) codes.",
           "If consecutive windows use the same active group code, an Amber Conflict warning will trigger - change one chemical to resolve."
         ]}
         stepsBn={[
           "প্রথমে লক্ষ্যভুক্ত ফসল (যেমন: ধান, টমেটো) এবং এরপর যে বালাই বা রোগটি দমন করতে চান সেটি নির্বাচন করুন।",
           "ক্যালকুলেটরটি স্বয়ংক্রিয়ভাবে একটি প্রস্তাবিত পর্যায়ক্রমিক স্প্রে উইন্ডো বা সূচি লোড করবে (স্প্রে #১, #২, #৩ ইত্যাদি)।",
-          "প্রতিটি স্প্রে উইন্ডোর ড্রপডাউন থেকে আপনার পছন্দের বাণিজ্যিক ব্র্যান্ডের বালাইনাশক যুক্ত করুন।",
+          "প্রতিটি স্প্রে উইন্ডোর সার্চযোগ্য ডায়নামিক ড্রপডাউন থেকে ব্র্যান্ডের নাম, উপাদান, রেজি নম্বর বা MoA কোড টাইপ করে খুঁজে আপনার পছন্দের বাণিজ্যিক বালাইনাশক নির্বাচন করুন।",
           "স্ট্যাটাস ইন্ডিকেটরগুলো লক্ষ করুন: সিস্টেম স্বয়ংক্রিয়ভাবে উপাদানগুলোর IRAC, FRAC বা HRAC বৈজ্ঞানিক গ্রুপ কোড হিসাব করবে।",
           "পরপর দুটি স্প্রে-তে যদি একই গোত্র বা কোড ব্যবহৃত হয়, তবে আম্বার রঙের 'Conflict' সতর্কতা দেখাবে - সেটি পরিবর্তন করুন।"
         ]}
@@ -213,18 +280,15 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
             <Sprout className="w-4 h-4 text-emerald-600" />
             {language === 'bn' ? '১. ফসল নির্বাচন করুন' : '1. Select Target Crop'}
           </label>
-          <select
+          <SearchableSelect
             id="rotation-crop-select"
             value={selectedCrop}
-            onChange={(e) => setSelectedCrop(e.target.value)}
-            className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            {availableCrops.map((crop) => (
-              <option key={crop} value={crop}>
-                {transCrop(crop)}
-              </option>
-            ))}
-          </select>
+            onChange={(v) => setSelectedCrop(v)}
+            options={cropOptions}
+            ariaLabel={language === 'bn' ? 'ফসল নির্বাচন' : 'Select target crop'}
+            placeholder={language === 'bn' ? 'ফসল সার্চ করুন…' : 'Search crops…'}
+            emptyLabel={language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No crops match your search'}
+          />
         </div>
 
         <div>
@@ -232,18 +296,15 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
             <Bug className="w-4 h-4 text-amber-600" />
             {language === 'bn' ? '২. লক্ষ্য বালাই / রোগ / আগাছা নির্বাচন করুন' : '2. Select Target Pest / Disease / Weed'}
           </label>
-          <select
+          <SearchableSelect
             id="rotation-pest-select"
             value={selectedPest}
-            onChange={(e) => setSelectedPest(e.target.value)}
-            className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            {availablePests.map((pest) => (
-              <option key={pest} value={pest}>
-                {transPest(pest)}
-              </option>
-            ))}
-          </select>
+            onChange={(v) => setSelectedPest(v)}
+            options={pestOptions}
+            ariaLabel={language === 'bn' ? 'লক্ষ্য বালাই নির্বাচন' : 'Select target pest'}
+            placeholder={language === 'bn' ? 'বালাই / রোগ সার্চ করুন…' : 'Search pests / diseases…'}
+            emptyLabel={language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No pests match your search'}
+          />
         </div>
       </div>
 
@@ -412,22 +473,25 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({ products }) =>
                     <label className="text-[11px] font-semibold text-slate-500 block mb-1">
                       {language === 'bn' ? `স্প্রে #${formatNum(step.sprayNumber)}-এর জন্য বালাইনাশক নির্বাচন` : `Choose Chemical for Spray #${step.sprayNumber}`}
                     </label>
-                    <select
+                    <SearchableSelect
                       value={step.productId}
-                      onChange={(e) => {
+                      onChange={(v) => {
                         const next = [...rotationSteps];
-                        next[index].productId = e.target.value;
+                        next[index].productId = v;
                         setRotationSteps(next);
                       }}
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    >
-                      <option value="">{language === 'bn' ? '-- বালাইনাশক বাছাই করুন --' : '-- Choose chemical --'}</option>
-                      {eligibleProducts.map((p) => (
-                        <option key={p.id} value={p.id}>
-                          {p.tradeName} ({p.commonName}) — [{p.moaCode || 'স্ট্যান্ডার্ড'}]
-                        </option>
-                      ))}
-                    </select>
+                      options={productOptions}
+                      size="sm"
+                      ariaLabel={language === 'bn' ? `স্প্রে ${formatNum(step.sprayNumber)}-এর বালাইনাশক` : `Chemical for spray #${step.sprayNumber}`}
+                      placeholder={
+                        language === 'bn'
+                          ? 'বালাইনাশক সার্চ করুন (ব্র্যান্ড / উপাদান / MoA)…'
+                          : 'Search chemical (brand / AI / MoA)…'
+                      }
+                      emptyLabel={
+                        language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No chemicals match your search'
+                      }
+                    />
                   </div>
 
                   {currentProd && (

@@ -34,7 +34,6 @@ import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
 import { MOA_DATABASE } from '../data/moaData';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
-import { NextSprayGuide } from './NextSprayGuide';
 
 interface DatabaseViewProps {
   products: ChemicalProduct[];
@@ -704,24 +703,6 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-
-      {/* ============================================================
-          🌱 DYNAMIC FIELD GUIDE — "Which pesticide to apply next?"
-          A searchable advisory front door for the chemical database.
-          User picks the pesticide they JUST applied, the engine uses
-          IRAC/FRAC/HRAC MoA rotation principles to recommend the next
-          spray from a different MoA group (preventing resistance),
-          while surfacing an AVOID list (same-MoA products) and the
-          rotation strategy text from the MoA database.
-          The full list/table/grid catalog still lives below this block
-          for reference browsing.
-      ============================================================ */}
-      <NextSprayGuide
-        products={products}
-        onSelectProduct={onSelectProduct}
-        onOpenCalculator={onOpenCalculator}
-        onOpenSafety={onOpenSafety}
-      />
 
       {/* 🚀 1. Visual Crop Focus Bar (Horizontal scrolling Carousel) */}
       <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-3xs space-y-2.5">
