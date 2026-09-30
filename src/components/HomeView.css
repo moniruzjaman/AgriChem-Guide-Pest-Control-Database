@@ -25,7 +25,7 @@
   --ink: #14261d;
   --muted: #5d6f64;
   --line: #dfe5dd;
-  --serif: 'Noto Serif Bengali', Georgia, serif;
+  --display: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
   --sans: 'Hind Siliguri', system-ui, -apple-system, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'Hind Siliguri', monospace;
 
@@ -100,7 +100,7 @@
 }
 
 .acg-h1 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 700;
   font-size: clamp(38px, 5.6vw, 68px);
   line-height: 1.12;
@@ -272,7 +272,7 @@
 }
 
 .acg-dialog__quote {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 16.5px;
   line-height: 1.45;
   color: var(--ink);
@@ -308,7 +308,7 @@
 .acg-stat:last-child { border-right: 0; }
 
 .acg-stat__value {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 700;
   font-size: 34px;
   letter-spacing: -0.02em;
@@ -354,7 +354,7 @@
 
 .acg-h2 {
   margin-top: 14px;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 700;
   font-size: clamp(30px, 3.6vw, 46px);
   line-height: 1.14;
@@ -394,7 +394,7 @@
 }
 
 .acg-logic__title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 700;
   font-size: 21px;
   line-height: 1.25;
@@ -493,7 +493,7 @@
 
 .acg-moa__name {
   margin-top: 18px;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 700;
   font-size: 19px;
   line-height: 1.3;
@@ -569,7 +569,7 @@
 .acg-tool--ghost .acg-tool__icon { background: rgba(0, 106, 78, 0.09); color: var(--green); }
 
 .acg-tool__title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 700;
   font-size: 21px;
   line-height: 1.3;

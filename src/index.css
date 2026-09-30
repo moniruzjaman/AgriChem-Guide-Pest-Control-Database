@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+/*
+ * App-wide typography (all tabs).
+ * Hind Siliguri is the default Bangla + Latin face; previously the tabs other
+ * than Home fell back to the system font for Bengali text. IBM Plex Mono is
+ * the mono face for registration numbers, codes and micro-labels (it powers
+ * Tailwind's font-mono utility everywhere). Both are loaded in index.html.
+ */
+@theme {
+  --font-sans: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system,
+    'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Bulletproof default independent of preflight behavior. */
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
