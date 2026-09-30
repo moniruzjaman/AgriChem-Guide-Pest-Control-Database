@@ -1,24 +1,23 @@
 import React, { useState, useMemo } from 'react';
 import { ChemicalProduct, SprayRotationStep } from '../types';
 import { MOA_DATABASE } from '../data/moaData';
-import { 
-  RotateCw, 
-  AlertTriangle, 
-  CheckCircle2, 
-  FileDown, 
-  ShieldAlert, 
-  Sprout, 
-  Bug, 
-  Layers, 
-  Info,
-  HelpCircle,
-  Sparkles
+import {
+  AlertTriangle,
+  Bug,
+  CheckCircle2,
+  ChevronDown,
+  FileDown,
+  Layers,
+  ShieldAlert,
+  Sparkles,
+  Sprout
 } from 'lucide-react';
 import { exportRotationSchedulePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 import { NextSprayGuide } from './NextSprayGuide';
 import { SearchableSelect, SearchableSelectOption } from './SearchableSelect';
+import './RotationPlanner.css';
 
 interface RotationPlannerProps {
   products: ChemicalProduct[];
@@ -31,15 +30,32 @@ interface RotationPlannerProps {
 }
 
 /**
- * Light chip styling for MoA codes inside searchable dropdown rows — keeps
- * the same IRAC/FRAC/HRAC colour language used across the app.
+ * Light chip styling for MoA codes inside searchable dropdown rows — the
+ * same scheme-tone language as the Home tab, but as Tailwind classes
+ * (official palette: IRAC red tint, FRAC golden tint, HRAC green tint).
  */
 function moaBadgeClass(code?: string): string {
-  if (!code) return 'bg-slate-100 text-slate-600 border-slate-200';
-  if (code.startsWith('IRAC')) return 'bg-emerald-100 text-emerald-800 border-emerald-200';
-  if (code.startsWith('FRAC')) return 'bg-sky-100 text-sky-800 border-sky-200';
-  if (code.startsWith('HRAC')) return 'bg-amber-100 text-amber-800 border-amber-200';
-  return 'bg-slate-100 text-slate-700 border-slate-200';
+  if (!code) return 'bg-[#e7eee8] text-[#5d6f64] border-[#dfe5dd]';
+  if (code.startsWith('IRAC')) return 'bg-[#fde4e7] text-[#b31d31] border-[#f5bfc8]';
+  if (code.startsWith('FRAC')) return 'bg-[#f6eccf] text-[#8a6d1d] border-[#ead9a5]';
+  if (code.startsWith('HRAC')) return 'bg-[#dcece4] text-[#006a4e] border-[#c5ddd0]';
+  return 'bg-[#e7eee8] text-[#5d6f64] border-[#dfe5dd]';
+}
+
+/** Scheme tone → small chip class in the .acg-rp design system. */
+function schemeChipClass(code?: string): string {
+  if (!code) return 'acg-rp-chip';
+  if (code.startsWith('FRAC')) return 'acg-rp-chip acg-rp-chip--gold';
+  if (code.startsWith('HRAC')) return 'acg-rp-chip acg-rp-chip--green';
+  return 'acg-rp-chip'; // IRAC keeps the red chip
+}
+
+/** Scheme tone → group-card class (drives the 3px top border colour). */
+function schemeCardClass(code?: string): string {
+  if (!code) return 'acg-rp-gcard';
+  if (code.startsWith('FRAC')) return 'acg-rp-gcard acg-rp-gcard--frac';
+  if (code.startsWith('HRAC')) return 'acg-rp-gcard acg-rp-gcard--hrac';
+  return 'acg-rp-gcard'; // IRAC keeps the red top border
 }
 
 export const RotationPlanner: React.FC<RotationPlannerProps> = ({
@@ -49,6 +65,10 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({
   onOpenSafety = () => {}
 }) => {
   const { language, transCrop, transPest, formatNum } = useLanguage();
+
+  // Mobile header collapse — the emotional lede, framework chips and trust
+  // list hide behind a toggle on small screens (CSS forces them open on md+).
+  const [headOpen, setHeadOpen] = useState(false);
 
   // Available crops
   const availableCrops = useMemo(() => {
@@ -176,7 +196,7 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({
         conflictReason: reason
       };
     });
-  }, [rotationSteps, products, language]);
+  }, [rotationSteps, products, language, formatNum]);
 
   const hasConflict = analyzedSteps.some((s) => s.status === 'conflict');
 
@@ -209,427 +229,530 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({
   );
 
   return (
-    <div id="rotation-planner-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Intro Header */}
-      <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-3xl p-6 sm:p-8 shadow-md relative overflow-hidden">
-        <div className="max-w-3xl relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/80 border border-blue-700 text-blue-200 text-xs font-semibold mb-3">
-            <RotateCw className="w-3.5 h-3.5" />
-            {language === 'bn' ? 'IRAC • FRAC • HRAC ক্রিয়া কৌশল প্রতিরোধ কাঠামো' : 'IRAC • FRAC • HRAC Mode of Action Resistance Framework'}
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
-            {language === 'bn' ? 'বালাইনাশক আবর্তন ও রেজিসট্যান্স প্রতিরোধ পরিকল্পনাকারী' : 'Anti-Resistance Spray Rotation Planner'}
-          </h1>
-          <p className="text-sm text-blue-100 mt-2 leading-relaxed">
-            {language === 'bn'
-              ? 'পরপর একই গোত্রের বিষ ব্যবহার না করে ভিন্ন MoA গ্রুপের বালাইনাশক পর্যায়ক্রমিকভাবে স্প্রে করুন। ফসল ও বালাই নির্বাচন করে রেজিসট্যান্স মুক্ত বিজ্ঞানসম্মত স্প্রে তালিকা প্রস্তুত করুন।'
-              : 'Prevent pesticide failure by rotating chemical groups across application windows. Select your crop and target pest to verify that consecutive sprays target different biochemical sites, breaking resistance selection pressure.'}
-          </p>
-        </div>
-      </div>
-
-      {/* ============================================================
-          DYNAMIC FIELD GUIDE CARD (MoA Rotation tab)
-          The next-spray recommendation engine AND the Interactive
-          Spray Rotation Sequence builder now live TOGETHER inside one
-          aligned card. The whole MoA workflow — "what did I just
-          spray?" → "what should I spray next?" → "build my full-season
-          rotation" — aligns as one easy-to-operate block. All
-          callbacks route to the global modals (datasheet, dosage
-          calculator, safety).
-          ============================================================ */}
-      <NextSprayGuide
-        products={products}
-        onSelectProduct={onSelectProduct}
-        onOpenCalculator={onOpenCalculator}
-        onOpenSafety={onOpenSafety}
-      >
-        {/* Section divider: marks the transition from the next-spray
-            recommendation engine (above) to the Interactive Spray
-            Rotation Sequence builder (below). Both workflows now live
-            inside the same Dynamic Field Guide card so the operator
-            can move between them without scrolling between cards. */}
-        <div className="flex items-center gap-3 pt-2">
-          <div className="h-px flex-1 bg-emerald-700/40" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-emerald-100 bg-emerald-950/70 border border-emerald-600 rounded-full px-3 py-1 flex items-center gap-1.5">
-            <Layers className="w-3 h-3" />
-            {language === 'bn' ? 'অথবা সম্পূর্ণ মৌসুমের স্প্রে ক্রম তৈরি করুন' : 'Or build your full-season rotation'}
-          </span>
-          <div className="h-px flex-1 bg-emerald-700/40" />
-        </div>
-
-        {/* ---------- Sub-panel: Crop + Pest scope pickers for the
-            Interactive Spray Rotation Sequence builder. Drives both
-            the available-MoA reference grid and the per-window
-            dropdowns below. ---------- */}
-        <div className="bg-white/95 backdrop-blur rounded-2xl p-4 sm:p-5 shadow-md text-slate-900 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div id="rotation-planner-container" className="acg-rp">
+      <div className="acg-rp-shell">
+        {/* -------------------------------------------- EDITORIAL HEADER --
+            The old blue gradient banner is gone. The tab now opens the way
+            the Home tab does: red mono eyebrow, pain-point Hind Siliguri
+            headline, and the resistance story in the farmer's own words.
+            On mobile the lede + framework chips + trust list collapse
+            behind a "show details" toggle; md+ always shows them. */}
+        <header className={`acg-rp-head${headOpen ? ' acg-rp-head--open' : ''}`}>
           <div>
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2 flex items-center gap-1.5">
-              <Sprout className="w-4 h-4 text-emerald-600" />
-              {language === 'bn' ? '১. ফসল নির্বাচন করুন' : '1. Select Target Crop'}
-            </label>
-            <SearchableSelect
-              id="rotation-crop-select"
-              value={selectedCrop}
-              onChange={(v) => setSelectedCrop(v)}
-              options={cropOptions}
-              ariaLabel={language === 'bn' ? 'ফসল নির্বাচন' : 'Select target crop'}
-              placeholder={language === 'bn' ? 'ফসল সার্চ করুন…' : 'Search crops…'}
-              emptyLabel={language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No crops match your search'}
-            />
-          </div>
-
-          <div>
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2 flex items-center gap-1.5">
-              <Bug className="w-4 h-4 text-amber-600" />
-              {language === 'bn' ? '২. লক্ষ্য বালাই / রোগ / আগাছা নির্বাচন করুন' : '2. Select Target Pest / Disease / Weed'}
-            </label>
-            <SearchableSelect
-              id="rotation-pest-select"
-              value={selectedPest}
-              onChange={(v) => setSelectedPest(v)}
-              options={pestOptions}
-              ariaLabel={language === 'bn' ? 'লক্ষ্য বালাই নির্বাচন' : 'Select target pest'}
-              placeholder={language === 'bn' ? 'বালাই / রোগ সার্চ করুন…' : 'Search pests / diseases…'}
-              emptyLabel={language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No pests match your search'}
-            />
-          </div>
-        </div>
-
-        {/* ---------- Sub-panel: Official DAE advisory for the generated
-            spray sequence. Kept adjacent to the rotation scope pickers
-            so the disclaimer is visible right where the operator
-            commits their crop / pest selections. ---------- */}
-        <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-3">
-          <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
-          <div className="text-xs space-y-0.5 leading-relaxed">
-            <strong className="text-amber-950 block font-bold">
-              {language === 'bn' ? 'অফিসিয়াল ডিএই পরামর্শ সতর্কতা ও নির্দেশিকা:' : 'Official DAE Rotation Advisory Disclaimer:'}
-            </strong>
-            <p className="text-slate-700 font-medium">
+            <p className="acg-rp-eyebrow">
+              <span className="acg-rp-dot" />
               {language === 'bn'
-                ? 'এখানে তৈরিকৃত আবর্তন বা স্প্রে শিডিউল শুধুমাত্র বালাই প্রতিরোধ ব্যবস্থাপনার বৈজ্ঞানিক নীতির ওপর ভিত্তি করে তৈরি। বাস্তবে জমিতে ওষুধ ছিটানোর পূর্বে সর্বদা আপনার স্থানীয় উপ-সহকারী কৃষি কর্মকর্তা বা কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্মকর্তার সরাসরি অনুমোদন ও প্রেসক্রিপশন গ্রহণ করুন।'
-                : 'The generated spray sequence is based purely on anti-resistance scientific principles. Always consult with your local Department of Agricultural Extension (DAE) officials or agricultural field extension officers before execution.'}
+                ? 'ঘূর্ণ পরিবর্তন ইঞ্জিন • IRAC – FRAC – HRAC'
+                : 'Rotation engine • IRAC – FRAC – HRAC'}
             </p>
-          </div>
-        </div>
+            <h1 className="acg-rp-h1">
+              {language === 'bn' ? (
+                <>একই ওষুধ বারবার — <em>আর কাজ করে না।</em></>
+              ) : (
+                <>Same spray, again and again — <em>and it stops working.</em></>
+              )}
+            </h1>
 
-        {/* ---------- Sub-panel: Available MoA groups for the selected
-            crop + pest target. Mirrors what the Sequence Builder can
-            draw from — seeing the available groups side-by-side with
-            the per-window dropdowns helps the operator pick diverse
-            chemistries without trial-and-error. ---------- */}
-        <div className="bg-white/95 backdrop-blur rounded-2xl p-4 sm:p-5 shadow-md space-y-4 text-slate-900">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="font-bold text-slate-900 text-base">
-                {transCrop(selectedCrop)}-এ {transPest(selectedPest)}-এর জন্য অনুমোদিত MoA গ্রুপসমূহ
+            <div className="acg-rp-head__more">
+              <p className="acg-rp-lede">
+                {language === 'bn'
+                  ? 'পরপর স্প্রেতে একই MoA গ্রুপ গেলে বালাই প্রতিরোধী হয়ে ওঠে — ওষুধ দোষ দেয় না, ক্রমই দোষী। ফসল ও বালাই বেছে নিন, প্রতিটি স্প্রে উইন্ডোতে ভিন্ন ক্রিয়াপদ্ধতির ওষুধ বসান — সংঘাত ধরা পড়লেই লাল সতর্কতা দেখাবে এখানেই।'
+                  : 'Repeat the same Mode-of-Action group in consecutive sprays and the pest turns resistant — the product is not at fault, the sequence is. Pick your crop and pest, assign a different chemistry to each spray window, and get an instant red conflict alert the moment two consecutive sprays share a group.'}
+              </p>
+
+              <div className="acg-rp-frame">
+                <span className="acg-rp-frame__chip">
+                  IRAC — {language === 'bn' ? 'কীটনাশক' : 'Insecticides'}
+                </span>
+                <span className="acg-rp-frame__chip acg-rp-frame__chip--gold">
+                  FRAC — {language === 'bn' ? 'ছত্রাকনাশক' : 'Fungicides'}
+                </span>
+                <span className="acg-rp-frame__chip acg-rp-frame__chip--green">
+                  HRAC — {language === 'bn' ? 'আগাছানাশক' : 'Herbicides'}
+                </span>
+              </div>
+
+              <ul className="acg-rp-trust">
+                <li>
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  {language === 'bn'
+                    ? 'প্রতিটি স্প্রে উইন্ডোর MoA কোড স্বয়ংক্রিয়ভাবে যাচাই হয়'
+                    : 'Every spray window gets its MoA code validated automatically'}
+                </li>
+                <li>
+                  <AlertTriangle className="w-3.5 h-3.5" />
+                  {language === 'bn'
+                    ? 'সংঘাত শনাক্ত হলে সঙ্গে সঙ্গে লাল রেজিসট্যান্স সতর্কতা'
+                    : 'Instant red resistance alert the moment a conflict is detected'}
+                </li>
+                <li>
+                  <FileDown className="w-3.5 h-3.5" />
+                  {language === 'bn'
+                    ? 'চূড়ান্ত ঘূর্ণন শিডিউল এক ক্লিকে PDF ডাউনলোড'
+                    : 'Export the final rotation schedule as a one-click PDF'}
+                </li>
+              </ul>
+            </div>
+
+            <button
+              type="button"
+              className="acg-rp-head__toggle"
+              aria-expanded={headOpen}
+              onClick={() => setHeadOpen((o) => !o)}
+            >
+              {headOpen
+                ? (language === 'bn' ? 'কমিয়ে দেখুন' : 'Show less')
+                : (language === 'bn' ? 'বিস্তারিত দেখুন' : 'Show details')}
+              <ChevronDown className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          {/* Window-strategy sticker card — teaches this tab's core rule the
+              way the Home stamp teaches the frameworks. Desktop only. */}
+          <aside className="acg-rp-win" aria-hidden="true">
+            <p className="acg-rp-win__kicker">
+              {language === 'bn'
+                ? 'উইন্ডো স্ট্র্যাটেজি — কীভাবে ঘুরিয়ে স্প্রে করবেন'
+                : 'Window strategy — what a safe rotation looks like'}
+            </p>
+            <div className="acg-rp-win__row">
+              <span className="acg-rp-win__num">{language === 'bn' ? '০১' : '01'}</span>
+              <span className="acg-rp-chip acg-rp-chip--gold">FRAC 11</span>
+              <span className="acg-rp-win__label">
+                {language === 'bn' ? 'প্রথম স্প্রে — একক-সাইট সিস্টেমিক' : 'First spray — single-site systemic'}
+              </span>
+            </div>
+            <div className="acg-rp-win__row">
+              <span className="acg-rp-win__num">{language === 'bn' ? '০২' : '02'}</span>
+              <span className="acg-rp-chip acg-rp-chip--green">FRAC M03</span>
+              <span className="acg-rp-win__label">
+                {language === 'bn' ? 'দ্বিতীয় স্প্রে — মাল্টি-সাইট রক্ষাকবচ' : 'Second spray — multi-site anchor'}
+              </span>
+            </div>
+            <div className="acg-rp-win__row">
+              <span className="acg-rp-win__num">{language === 'bn' ? '০৩' : '03'}</span>
+              <span className="acg-rp-chip acg-rp-chip--gold">FRAC 7</span>
+              <span className="acg-rp-win__label">
+                {language === 'bn' ? 'তৃতীয় স্প্রে — সম্পূর্ণ ভিন্ন গ্রুপ' : 'Third spray — a completely different group'}
+              </span>
+            </div>
+            <p className="acg-rp-win__foot">
+              <CheckCircle2 className="w-4 h-4" />
+              {language === 'bn'
+                ? 'প্রতি উইন্ডোতে ভিন্ন MoA — রেজিসট্যান্স ঝুঁকি নেই'
+                : 'A different MoA in every window — no resistance pressure'}
+            </p>
+          </aside>
+        </header>
+
+        {/* ============================================================
+            DYNAMIC FIELD GUIDE CARD (MoA Rotation tab)
+            The next-spray recommendation engine AND the Interactive
+            Spray Rotation Sequence builder live TOGETHER inside one
+            aligned card. All callbacks route to the global modals
+            (datasheet, dosage calculator, safety).
+            ============================================================ */}
+        <div className="acg-rp-main">
+          <NextSprayGuide
+            products={products}
+            onSelectProduct={onSelectProduct}
+            onOpenCalculator={onOpenCalculator}
+            onOpenSafety={onOpenSafety}
+          >
+            {/* Section divider: mono label on hairlines — the editorial
+                transition from the next-spray engine to the season
+                rotation builder. */}
+            <div className="acg-rp-divider">
+              <span className="acg-rp-divider__label">
+                <Layers className="w-3 h-3" />
+                {language === 'bn'
+                  ? 'অথবা সম্পূর্ণ মৌসুমের স্প্রে ক্রম তৈরি করুন'
+                  : 'Or build your full-season rotation'}
+              </span>
+            </div>
+
+            {/* ---- Step 1: crop + pest scope pickers + DAE advisory ---- */}
+            <div className="acg-rp-panel">
+              <p className="acg-rp-panel__kicker">
+                {language === 'bn' ? 'ধাপ ১ — সুযোগ নির্ধারণ' : 'Step 1 — set the scope'}
+              </p>
+              <h3 className="acg-rp-panel__title">
+                {language === 'bn' ? 'ফসল ও বালাই বেছে নিন' : 'Pick the crop and the target pest'}
               </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+
+              <div className="acg-rp-scope">
+                <div>
+                  <p className="acg-rp-fieldlabel">
+                    <Sprout className="w-3.5 h-3.5" />
+                    {language === 'bn' ? '১. ফসল নির্বাচন করুন' : '1. Select target crop'}
+                  </p>
+                  <SearchableSelect
+                    id="rotation-crop-select"
+                    value={selectedCrop}
+                    onChange={(v) => setSelectedCrop(v)}
+                    options={cropOptions}
+                    ariaLabel={language === 'bn' ? 'ফসল নির্বাচন' : 'Select target crop'}
+                    placeholder={language === 'bn' ? 'ফসল সার্চ করুন…' : 'Search crops…'}
+                    emptyLabel={language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No crops match your search'}
+                  />
+                </div>
+
+                <div>
+                  <p className="acg-rp-fieldlabel acg-rp-fieldlabel--red">
+                    <Bug className="w-3.5 h-3.5" />
+                    {language === 'bn' ? '২. লক্ষ্য বালাই / রোগ / আগাছা নির্বাচন করুন' : '2. Select target pest / disease / weed'}
+                  </p>
+                  <SearchableSelect
+                    id="rotation-pest-select"
+                    value={selectedPest}
+                    onChange={(v) => setSelectedPest(v)}
+                    options={pestOptions}
+                    ariaLabel={language === 'bn' ? 'লক্ষ্য বালাই নির্বাচন' : 'Select target pest'}
+                    placeholder={language === 'bn' ? 'বালাই / রোগ সার্চ করুন…' : 'Search pests / diseases…'}
+                    emptyLabel={language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No pests match your search'}
+                  />
+                </div>
+              </div>
+
+              <div className="acg-rp-advisory">
+                <ShieldAlert className="w-4 h-4" />
+                <div>
+                  <strong>
+                    {language === 'bn'
+                      ? 'অফিসিয়াল ডিএই পরামর্শ সতর্কতা ও নির্দেশিকা:'
+                      : 'Official DAE Rotation Advisory Disclaimer:'}
+                  </strong>
+                  <p>
+                    {language === 'bn'
+                      ? 'এখানে তৈরিকৃত আবর্তন বা স্প্রে শিডিউল শুধুমাত্র বালাই প্রতিরোধ ব্যবস্থাপনার বৈজ্ঞানিক নীতির ওপর ভিত্তি করে তৈরি। বাস্তবে জমিতে ওষুধ ছিটানোর পূর্বে সর্বদা আপনার স্থানীয় উপ-সহকারী কৃষি কর্মকর্তা বা কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্মকর্তার সরাসরি অনুমোদন ও প্রেসক্রিপশন গ্রহণ করুন।'
+                      : 'The generated spray sequence is based purely on anti-resistance scientific principles. Always consult with your local Department of Agricultural Extension (DAE) officials or agricultural field extension officers before execution.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* ---- Step 2: approved MoA groups for the selection ---- */}
+            <div className="acg-rp-panel">
+              <p className="acg-rp-panel__kicker">
+                {language === 'bn' ? 'ধাপ ২ — অস্ত্রাগার দেখে নিন' : 'Step 2 — survey your arsenal'}
+              </p>
+              <h3 className="acg-rp-panel__title">
+                {language === 'bn'
+                  ? `${transCrop(selectedCrop)}-এ ${transPest(selectedPest)}-এর জন্য অনুমোদিত MoA গ্রুপসমূহ`
+                  : `Approved MoA groups for ${transPest(selectedPest)} on ${transCrop(selectedCrop)}`}
+              </h3>
+              <p className="acg-rp-panel__sub">
                 {language === 'bn'
                   ? `মোট ${formatNum(eligibleProducts.length)} টি নিবন্ধিত বালাইনাশক এবং ${formatNum(availableMoAGroups.length)} টি স্বতন্ত্র MoA গ্রুপ পাওয়া গেছে।`
                   : `Found ${eligibleProducts.length} registered products spanning ${availableMoAGroups.length} distinct MoA groups.`}
               </p>
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {availableMoAGroups.map(([moaCode, prods]) => {
-              const moaInfo = MOA_DATABASE.find((m) => m.code === moaCode);
-              return (
-                <div key={moaCode} className="p-3.5 bg-white border border-slate-200 rounded-xl shadow-2xs space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-slate-900 text-white">
-                      {moaCode}
-                    </span>
-                    <span className="text-[11px] font-semibold text-slate-500">
-                      {formatNum(prods.length)} {language === 'bn' ? 'টি পণ্য' : 'Products'}
-                    </span>
-                  </div>
-                  <h4 className="font-bold text-xs text-slate-800">
-                    {language === 'bn' ? (moaInfo?.nameBn || prods[0].moaGroup || 'ক্রিয়ার লক্ষ্যস্থল উল্লেখিত') : (moaInfo?.name || prods[0].moaGroup || 'Target site specified')}
-                  </h4>
-                  <p className="text-[11px] text-slate-500 line-clamp-2">
-                    {language === 'bn' ? (moaInfo?.targetSiteBn || 'কোষীয় বিপাকীয় জৈব রাসায়নিক প্রক্রিয়া।') : (moaInfo?.targetSite || 'Cellular metabolic biochemical pathway.')}
+              <div className="acg-rp-gcards">
+                {availableMoAGroups.map(([moaCode, prods]) => {
+                  const moaInfo = MOA_DATABASE.find((m) => m.code === moaCode);
+                  return (
+                    <div key={moaCode} className={schemeCardClass(moaCode)}>
+                      <div className="acg-rp-gcard__top">
+                        <span className={schemeChipClass(moaCode)}>{moaCode}</span>
+                        <span className="acg-rp-gcard__count">
+                          {formatNum(prods.length)} {language === 'bn' ? 'টি পণ্য' : 'products'}
+                        </span>
+                      </div>
+                      <h4 className="acg-rp-gcard__name">
+                        {language === 'bn'
+                          ? (moaInfo?.nameBn || prods[0].moaGroup || 'ক্রিয়ার লক্ষ্যস্থল উল্লেখিত')
+                          : (moaInfo?.name || prods[0].moaGroup || 'Target site specified')}
+                      </h4>
+                      <p className="acg-rp-gcard__site">
+                        {language === 'bn'
+                          ? (moaInfo?.targetSiteBn || 'কোষীয় বিপাকীয় জৈব রাসায়নিক প্রক্রিয়া।')
+                          : (moaInfo?.targetSite || 'Cellular metabolic biochemical pathway.')}
+                      </p>
+                      <span className="acg-rp-gcard__prods">
+                        {prods.map((p) => p.tradeName).slice(0, 3).join(', ')}
+                        {prods.length > 3 ? '…' : ''}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* ---- Step 3: interactive spray rotation sequence ---- */}
+            <div className="acg-rp-panel">
+              <div className="acg-rp-panel__headrow">
+                <div>
+                  <p className="acg-rp-panel__kicker">
+                    {language === 'bn' ? 'ধাপ ৩ — ক্রম বসান' : 'Step 3 — set the sequence'}
                   </p>
-                  <div className="text-[10px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded inline-block font-medium">
-                    {prods.map((p) => p.tradeName).slice(0, 3).join(', ')}
-                    {prods.length > 3 ? '...' : ''}
+                  <h3 className="acg-rp-panel__title">
+                    {language === 'bn' ? 'ইন্টারেক্টিভ স্প্রে আবর্তন ক্রম' : 'Interactive Spray Rotation Sequence'}
+                  </h3>
+                  <p className="acg-rp-panel__sub">
+                    {language === 'bn'
+                      ? 'ফসলের বিভিন্ন বৃদ্ধি ধাপে বিকল্প রাসায়নিক গ্রুপ নির্বাচন করে পূর্ণাঙ্গ স্প্রে শিডিউল তৈরি করুন।'
+                      : 'Build a sequential spray schedule across crop development stages to maintain chemical susceptibility.'}
+                  </p>
+                </div>
+
+                <button
+                  id="export-rotation-pdf-btn"
+                  onClick={() => exportRotationSchedulePDF(selectedCrop, selectedPest, analyzedSteps)}
+                  className="acg-rp-btn"
+                >
+                  <FileDown className="w-4 h-4" />
+                  <span>
+                    {language === 'bn' ? 'শিডিউল ডাউনলোড (PDF)' : 'Export Schedule (PDF)'}
+                  </span>
+                </button>
+              </div>
+
+              {/* Verdict banner — conflict (red) or validated (green) */}
+              {hasConflict ? (
+                <div className="acg-rp-verdict acg-rp-verdict--bad">
+                  <AlertTriangle className="w-4 h-4" />
+                  <div>
+                    <h4>
+                      {language === 'bn'
+                        ? 'রেজিসট্যান্স সতর্কতা: একই MoA গ্রুপ একাধিকবার শনাক্ত হয়েছে!'
+                        : 'Resistance Alert: Repeated Mode of Action Detected!'}
+                    </h4>
+                    <p>
+                      {language === 'bn'
+                        ? 'আপনি পরপর দুটি স্প্রেতে একই MoA গ্রুপের কীটনাশক নির্বাচন করেছেন। একই ক্রিয়াপদ্ধতির বিষ বারবার প্রয়োগ করলে বালাই খুব দ্রুত বিষের প্রতি প্রতিরোধী হয়ে ওঠে। লাল চিহ্নিত স্প্রেতে ড্রপডাউন থেকে অন্য কোনো MoA কোডের ওষুধ বাছাই করুন।'
+                        : 'You have selected identical MoA groups in consecutive spray windows. Using the same chemical mode of action repeatedly will accelerate pest resistance. Please switch the flagged spray to a product with a different MoA code from the dropdown.'}
+                    </p>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              ) : (
+                <div className="acg-rp-verdict acg-rp-verdict--ok">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <div>
+                    <h4>
+                      {language === 'bn'
+                        ? 'বিজ্ঞানসম্মত রেজিসট্যান্স-মুক্ত স্প্রে ক্রম নির্ভুলভাবে যাচাইকৃত'
+                        : 'Optimal Anti-Resistance Sequence Validated'}
+                    </h4>
+                    <p>
+                      {language === 'bn'
+                        ? 'প্রতিটি ধারাবাহিক স্প্রে ভিন্ন ভিন্ন জৈবরাসায়নিক সাইটকে লক্ষ্যবস্তু করে। এই আবর্তন বালাই দমন ক্ষমতা দীর্ঘস্থায়ী ও সর্বোচ্চ রাখবে।'
+                        : 'Each sequential spray window employs a distinct biochemical mode of action. This rotation maximizes control efficacy and safeguards chemical life.'}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Steps */}
+              <div className="acg-rp-steps">
+                {rotationSteps.map((step, index) => {
+                  const analyzed = analyzedSteps[index];
+                  const currentProd = products.find((p) => p.id === step.productId);
+
+                  return (
+                    <div
+                      key={step.sprayNumber}
+                      className={`acg-rp-step${analyzed.status === 'conflict' ? ' acg-rp-step--conflict' : ''}`}
+                    >
+                      <div className="acg-rp-step__top">
+                        <div className="acg-rp-step__id">
+                          <span className="acg-rp-step__num">{formatNum(step.sprayNumber)}</span>
+                          <input
+                            type="text"
+                            value={step.sprayWindow}
+                            onChange={(e) => {
+                              const next = [...rotationSteps];
+                              next[index].sprayWindow = e.target.value;
+                              setRotationSteps(next);
+                            }}
+                            className="acg-rp-step__win"
+                            aria-label={
+                              language === 'bn'
+                                ? `স্প্রে ${formatNum(step.sprayNumber)}-এর উইন্ডো নাম`
+                                : `Spray #${step.sprayNumber} window name`
+                            }
+                          />
+                        </div>
+
+                        <div className="acg-rp-step__flags">
+                          {analyzed.moaCode && (
+                            <span className={schemeChipClass(analyzed.moaCode)}>
+                              {analyzed.moaCode}
+                            </span>
+                          )}
+                          {analyzed.status === 'conflict' && (
+                            <span className="acg-rp-step__conflictchip">
+                              <AlertTriangle className="w-3 h-3" />
+                              {language === 'bn' ? 'সংঘাত' : 'Conflict'}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="acg-rp-step__grid">
+                        <div>
+                          <p className="acg-rp-fieldlabel">
+                            {language === 'bn'
+                              ? `স্প্রে #${formatNum(step.sprayNumber)}-এর জন্য বালাইনাশক নির্বাচন`
+                              : `Choose chemical for spray #${step.sprayNumber}`}
+                          </p>
+                          <SearchableSelect
+                            value={step.productId}
+                            onChange={(v) => {
+                              const next = [...rotationSteps];
+                              next[index].productId = v;
+                              setRotationSteps(next);
+                            }}
+                            options={productOptions}
+                            size="sm"
+                            ariaLabel={language === 'bn' ? `স্প্রে ${formatNum(step.sprayNumber)}-এর বালাইনাশক` : `Chemical for spray #${step.sprayNumber}`}
+                            placeholder={
+                              language === 'bn'
+                                ? 'বালাইনাশক সার্চ করুন (ব্র্যান্ড / উপাদান / MoA)…'
+                                : 'Search chemical (brand / AI / MoA)…'
+                            }
+                            emptyLabel={
+                              language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No chemicals match your search'
+                            }
+                          />
+                        </div>
+
+                        {currentProd && (
+                          <div className="acg-rp-step__prodinfo">
+                            <div>
+                              <b>{currentProd.tradeName}</b>
+                              <p className="acg-rp-step__proddose">
+                                {currentProd.commonName} | {language === 'bn' ? 'মাত্রা:' : 'Rate:'} {currentProd.dosageRate}
+                              </p>
+                            </div>
+                            <span className="acg-rp-step__regno">{currentProd.registrationNo}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {analyzed.conflictReason && (
+                        <p className="acg-rp-step__reason">{analyzed.conflictReason}</p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Sequence control actions */}
+              <div className="acg-rp-stepctrl">
+                {rotationSteps.length < 4 && (
+                  <button
+                    onClick={() => {
+                      setRotationSteps([
+                        ...rotationSteps,
+                        {
+                          sprayNumber: rotationSteps.length + 1,
+                          sprayWindow: language === 'bn' ? `স্প্রে পর্যায় #${formatNum(rotationSteps.length + 1)}` : `Spray Window #${rotationSteps.length + 1}`,
+                          productId: eligibleProducts[0]?.id || ''
+                        }
+                      ]);
+                    }}
+                    className="acg-rp-linkbtn"
+                  >
+                    + {language === 'bn' ? 'আরেকটি প্রয়োগ পর্যায় যোগ করুন' : 'Add another application window'}
+                  </button>
+                )}
+
+                {rotationSteps.length > 2 && (
+                  <button
+                    onClick={() => {
+                      setRotationSteps(rotationSteps.slice(0, rotationSteps.length - 1));
+                    }}
+                    className="acg-rp-linkbtn acg-rp-linkbtn--muted"
+                  >
+                    {language === 'bn' ? 'সর্বশেষ পর্যায়টি বাতিল করুন' : 'Remove last window'}
+                  </button>
+                )}
+              </div>
+            </div>
+          </NextSprayGuide>
         </div>
 
-        {/* ---------- Sub-panel: Interactive Spray Rotation Sequence
-            builder. This is the "Interactive spray list" the MoA
-            Rotation tab is built around — now aligned inside the
-            Dynamic Field Guide card so the operator can build the
-            full-season rotation right next to the next-spray
-            recommendation engine, with the crop / pest scope pickers
-            and the available-MoA reference grid all in view. ---------- */}
-        <div className="bg-white/95 backdrop-blur rounded-2xl p-4 sm:p-5 shadow-md space-y-6 text-slate-900">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
-            <div>
-              <h3 className="font-bold text-lg text-slate-900">
-                {language === 'bn' ? 'ইন্টারেক্টিভ স্প্রে আবর্তন ক্রম' : 'Interactive Spray Rotation Sequence'}
-              </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+        {/* Collapsible user guide — kept BELOW the workflow card, wrapped in
+            the Home tab's emerald → official-green remap scope. */}
+        <div className="acg-guide-wrap">
+          <CollapsibleUserGuide
+            pageKey="rotation"
+            titleEn="Scientific Spray Rotation Guide"
+            titleBn="বালাইনাশক বৈজ্ঞানিক আবর্তন নির্দেশিকা"
+            subtitleEn="Understand how to rotate chemical groups to prevent insect and fungal resistance mutation."
+            subtitleBn="কীটপতঙ্গ ও ছত্রাকের রোগ প্রতিরোধ ক্ষমতা বা মিউটেশন এড়াতে রাসায়নিক গোত্র পরিবর্তনের নিয়ম।"
+            stepsEn={[
+              "Select your target Crop (e.g., Rice, Tomato) and then select the target Pest or Disease you wish to control.",
+              "The planner will automatically load a recommended sequence of spraying windows (Spray #1, #2, #3, etc.).",
+              "Choose a pesticide brand for each spray window using the searchable dynamic dropdown fields - type to filter by brand name, active ingredient, registration number, or MoA code.",
+              "Observe the validation status indicators: the system automatically computes IRAC (insecticide), FRAC (fungicide), or HRAC (herbicide) codes.",
+              "If consecutive windows use the same active group code, a red Conflict warning will trigger - change one chemical to resolve."
+            ]}
+            stepsBn={[
+              "প্রথমে লক্ষ্যভুক্ত ফসল (যেমন: ধান, টমেটো) এবং এরপর যে বালাই বা রোগটি দমন করতে চান সেটি নির্বাচন করুন।",
+              "ক্যালকুলেটরটি স্বয়ংক্রিয়ভাবে একটি প্রস্তাবিত পর্যায়ক্রমিক স্প্রে উইন্ডো বা সূচি লোড করবে (স্প্রে #১, #২, #৩ ইত্যাদি)।",
+              "প্রতিটি স্প্রে উইন্ডোর সার্চযোগ্য ডায়নামিক ড্রপডাউন থেকে ব্র্যান্ডের নাম, উপাদান, রেজি নম্বর বা MoA কোড টাইপ করে খুঁজে আপনার পছন্দের বাণিজ্যিক বালাইনাশক নির্বাচন করুন।",
+              "স্ট্যাটাস ইন্ডিকেটরগুলো লক্ষ করুন: সিস্টেম স্বয়ংক্রিয়ভাবে উপাদানগুলোর IRAC, FRAC বা HRAC বৈজ্ঞানিক গ্রুপ কোড হিসাব করবে।",
+              "পরপর দুটি স্প্রে-তে যদি একই গোত্র বা কোড ব্যবহৃত হয়, তবে লাল রঙের 'Conflict' সতর্কতা দেখাবে - সেটি পরিবর্তন করুন।"
+            ]}
+            proTipsEn={[
+              "Resistance is a genetic change. Repeated exposure to group 1A insect-killers will breed insects immune to all 1A chemistry.",
+              "Always check the MoA code on physical packaging. It is displayed clearly on the label header (e.g. 'FRAC Group 11')."
+            ]}
+            proTipsBn={[
+              "বালাইয়ের রেজিসট্যান্স ক্ষমতা একটি বংশগত পরিবর্তন। বারবার একই ওষুধ ছিটানো হলে ক্ষতিকর পোকারা ইমিউন হয়ে যায়।",
+              "বাস্তব বোতল বা প্যাকেটের লেবেলের মাথায় ইংরেজি বড় হরফে MoA কোড যেমন: 'FRAC Group 11' বা 'Group 1A' লেখা থাকে।"
+            ]}
+          />
+        </div>
+
+        {/* -------------------------------- THE 4 GOLDEN RULES (deep green)
+            Same emotional weight as the Home logic card: bottle-green
+            panel, golden mono numbers, golden offset shadow. */}
+        <div className="acg-rp-rules">
+          <h3 className="acg-rp-rules__title">
+            <Sparkles className="w-5 h-5" />
+            {language === 'bn'
+              ? 'বালাইনাশক প্রতিরোধ (MoA) ব্যবস্থাপনার ৪টি সুবর্ণ নিয়ম'
+              : 'The 4 Golden Rules of MoA Resistance Management'}
+          </h3>
+          <div className="acg-rp-rules__grid">
+            <div className="acg-rp-rules__card">
+              <span className="acg-rp-rules__num">{language === 'bn' ? `নিয়ম ${formatNum(1)}` : `Rule ${formatNum(1)}`}</span>
+              <p>
+                <b>{language === 'bn' ? 'উইন্ডো স্ট্র্যাটেজি (পর্যায় নীতি)' : 'The Window Strategy'}</b>
                 {language === 'bn'
-                  ? 'ফসলের বিভিন্ন বৃদ্ধি ধাপে বিকল্প রাসায়নিক গ্রুপ নির্বাচন করে পূর্ণাঙ্গ স্প্রে শিডিউল তৈরি করুন।'
-                  : 'Build a sequential spray schedule across crop development stages to maintain chemical susceptibility.'}
+                  ? 'বালাইয়ের একটি প্রজন্মে (সাধারণত ৩০ দিন) একটি MoA প্রয়োগ শেষ করে পরবর্তী প্রজন্মের জন্য সম্পূর্ণ ভিন্ন MoA গ্রুপে চলে যান।'
+                  : 'Treat all sprays within a pest generation (typically 30 days) with the same MoA, then switch completely to a different group for the next generation.'}
               </p>
             </div>
-
-            <button
-              id="export-rotation-pdf-btn"
-              onClick={() => exportRotationSchedulePDF(selectedCrop, selectedPest, analyzedSteps)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-xl font-semibold text-xs shadow-xs transition cursor-pointer"
-            >
-              <FileDown className="w-4 h-4" />
-              <span>{language === 'bn' ? 'আবর্তন শিডিউল ডাউনলোড (PDF)' : 'Export Rotation Schedule (PDF)'}</span>
-            </button>
-          </div>
-
-          {/* Conflict Warning Banner */}
-          {hasConflict ? (
-            <div className="p-4 bg-rose-50 border border-rose-200 rounded-xl flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="font-bold text-rose-900 text-sm">
-                  {language === 'bn' ? 'রেজিসট্যান্স সতর্কতা: একই MoA গ্রুপ একাধিকবার শনাক্ত হয়েছে!' : 'Resistance Alert: Repeated Mode of Action Detected!'}
-                </h4>
-                <p className="text-xs text-rose-700 mt-1 leading-relaxed">
-                  {language === 'bn'
-                    ? 'আপনি পরপর দুটি স্প্রেতে একই MoA গ্রুপের কীটনাশক নির্বাচন করেছেন। একই ক্রিয়াপদ্ধতির বিষ বারবার প্রয়োগ করলে বালাই খুব দ্রুত বিষের প্রতি প্রতিরোধী হয়ে ওঠে। লাল চিহ্নিত স্প্রেতে ড্রপডাউন থেকে অন্য কোনো MoA কোডের ওষুধ বাছাই করুন।'
-                    : 'You have selected identical MoA groups in consecutive spray windows. Using the same chemical mode of action repeatedly will accelerate pest resistance. Please switch the flagged spray to a product with a different MoA code from the dropdown.'}
-                </p>
-              </div>
+            <div className="acg-rp-rules__card">
+              <span className="acg-rp-rules__num">{language === 'bn' ? `নিয়ম ${formatNum(2)}` : `Rule ${formatNum(2)}`}</span>
+              <p>
+                <b>{language === 'bn' ? 'মাল্টি-সাইট রক্ষাকবচ' : 'Multi-Site Anchors'}</b>
+                {language === 'bn'
+                  ? 'ম্যানকোজেব (M03), কপার (M01) বা সালফার (M02)-এর মতো বহুমুখী স্পর্শক বালাইনাশক ব্যবহার করুন যা একক-সাইট বিষকে প্রতিরোধ হতে রক্ষা করে।'
+                  : 'Incorporate multi-site protectants like Mancozeb (FRAC M03), Copper (FRAC M01), or Sulfur (FRAC M02) to shield single-site systemic chemicals.'}
+              </p>
             </div>
-          ) : (
-            <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="font-bold text-emerald-900 text-sm">
-                  {language === 'bn' ? 'বিজ্ঞানসম্মত রেজিসট্যান্স-মুক্ত স্প্রে ক্রম নির্ভুলভাবে যাচাইকৃত' : 'Optimal Anti-Resistance Sequence Validated'}
-                </h4>
-                <p className="text-xs text-emerald-700 mt-1">
-                  {language === 'bn'
-                    ? 'প্রতিটি ধারাবাহিক স্প্রে ভিন্ন ভিন্ন জৈবরাসায়নিক সাইটকে লক্ষ্যবস্তু করে। এই আবর্তন বালাই দমন ক্ষমতা দীর্ঘস্থায়ী ও সর্বোচ্চ রাখবে।'
-                    : 'Each sequential spray window employs a distinct biochemical mode of action. This rotation maximizes control efficacy and safeguards chemical life.'}
-                </p>
-              </div>
+            <div className="acg-rp-rules__card">
+              <span className="acg-rp-rules__num">{language === 'bn' ? `নিয়ম ${formatNum(3)}` : `Rule ${formatNum(3)}`}</span>
+              <p>
+                <b>{language === 'bn' ? 'কম মাত্রায় প্রয়োগ নিষিদ্ধ' : 'Never Underdose'}</b>
+                {language === 'bn'
+                  ? 'অনুমোদিত মাত্রার চেয়ে কম বিষ দিলে বালাই না মরে বরং প্রতিরোধ ক্ষমতা অর্জন করে বংশবৃদ্ধি ঘটায়, যা দ্রুত ওষুধের কার্যকারিতা নষ্ট করে।'
+                  : 'Applying sub-lethal concentrations lets marginally tolerant individuals survive and reproduce, accelerating resistance development.'}
+              </p>
             </div>
-          )}
-
-          {/* Steps Grid */}
-          <div className="space-y-4">
-            {rotationSteps.map((step, index) => {
-              const analyzed = analyzedSteps[index];
-              const currentProd = products.find((p) => p.id === step.productId);
-
-              return (
-                <div
-                  key={step.sprayNumber}
-                  className={`p-4 rounded-xl border transition-all ${
-                    analyzed.status === 'conflict'
-                      ? 'border-rose-300 bg-rose-50/40'
-                      : 'border-slate-200 bg-white hover:border-blue-300'
-                  }`}
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                    <div className="flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-full bg-slate-900 text-white font-bold text-xs flex items-center justify-center">
-                        {formatNum(step.sprayNumber)}
-                      </span>
-                      <input
-                        type="text"
-                        value={step.sprayWindow}
-                        onChange={(e) => {
-                          const next = [...rotationSteps];
-                          next[index].sprayWindow = e.target.value;
-                          setRotationSteps(next);
-                        }}
-                        className="text-xs font-bold text-slate-800 bg-transparent border-b border-dashed border-slate-300 px-1 py-0.5 focus:outline-none focus:border-blue-600"
-                      />
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      {analyzed.moaCode && (
-                        <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-blue-900 text-white">
-                          {analyzed.moaCode}
-                        </span>
-                      )}
-                      {analyzed.status === 'conflict' && (
-                        <span className="text-[11px] font-bold text-rose-700 bg-rose-100 px-2 py-0.5 rounded border border-rose-200 flex items-center gap-1">
-                          <AlertTriangle className="w-3 h-3" /> {language === 'bn' ? 'সংঘাত' : 'Conflict'}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
-                    <div>
-                      <label className="text-[11px] font-semibold text-slate-500 block mb-1">
-                        {language === 'bn' ? `স্প্রে #${formatNum(step.sprayNumber)}-এর জন্য বালাইনাশক নির্বাচন` : `Choose Chemical for Spray #${step.sprayNumber}`}
-                      </label>
-                      <SearchableSelect
-                        value={step.productId}
-                        onChange={(v) => {
-                          const next = [...rotationSteps];
-                          next[index].productId = v;
-                          setRotationSteps(next);
-                        }}
-                        options={productOptions}
-                        size="sm"
-                        ariaLabel={language === 'bn' ? `স্প্রে ${formatNum(step.sprayNumber)}-এর বালাইনাশক` : `Chemical for spray #${step.sprayNumber}`}
-                        placeholder={
-                          language === 'bn'
-                            ? 'বালাইনাশক সার্চ করুন (ব্র্যান্ড / উপাদান / MoA)…'
-                            : 'Search chemical (brand / AI / MoA)…'
-                        }
-                        emptyLabel={
-                          language === 'bn' ? 'কোনো মিল পাওয়া যায়নি' : 'No chemicals match your search'
-                        }
-                      />
-                    </div>
-
-                    {currentProd && (
-                      <div className="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-lg border border-slate-100 flex items-center justify-between">
-                        <div>
-                          <span className="font-bold text-slate-900">{currentProd.tradeName}</span>
-                          <p className="text-[11px] text-slate-500">{currentProd.commonName} | {language === 'bn' ? 'মাত্রা:' : 'Rate:'} {currentProd.dosageRate}</p>
-                        </div>
-                        <span className="text-[10px] text-slate-400 font-mono">{currentProd.registrationNo}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {analyzed.conflictReason && (
-                    <p className="text-xs text-rose-700 font-medium mt-2.5 pl-2 border-l-2 border-rose-500">
-                      {analyzed.conflictReason}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Sequence Control Actions */}
-          <div className="flex items-center justify-between pt-2">
-            {rotationSteps.length < 4 && (
-              <button
-                onClick={() => {
-                  setRotationSteps([
-                    ...rotationSteps,
-                    {
-                      sprayNumber: rotationSteps.length + 1,
-                      sprayWindow: language === 'bn' ? `স্প্রে পর্যায় #${formatNum(rotationSteps.length + 1)}` : `Spray Window #${rotationSteps.length + 1}`,
-                      productId: eligibleProducts[0]?.id || ''
-                    }
-                  ]);
-                }}
-                className="text-xs font-semibold text-blue-700 hover:text-blue-900 flex items-center gap-1.5 cursor-pointer"
-              >
-                + {language === 'bn' ? 'আরেকটি প্রয়োগ পর্যায় যোগ করুন' : 'Add Another Application Window'}
-              </button>
-            )}
-
-            {rotationSteps.length > 2 && (
-              <button
-                onClick={() => {
-                  setRotationSteps(rotationSteps.slice(0, rotationSteps.length - 1));
-                }}
-                className="text-xs font-semibold text-slate-500 hover:text-slate-700 cursor-pointer"
-              >
-                {language === 'bn' ? 'সর্বশেষ পর্যায়টি বাতিল করুন' : 'Remove Last Window'}
-              </button>
-            )}
-          </div>
-        </div>
-      </NextSprayGuide>
-
-      {/* Collapsible User Guide (kept BELOW the Dynamic Field Guide card
-          so the interactive workflow stays uninterrupted at the top of
-          the page — the operator first picks & builds, then reads the
-          detailed rationale if they need it). */}
-      <CollapsibleUserGuide
-        pageKey="rotation"
-        titleEn="Scientific Spray Rotation Guide"
-        titleBn="বালাইনাশক বৈজ্ঞানিক আবর্তন নির্দেশিকা"
-        subtitleEn="Understand how to rotate chemical groups to prevent insect and fungal resistance mutation."
-        subtitleBn="কীটপতঙ্গ ও ছত্রাকের রোগ প্রতিরোধ ক্ষমতা বা মিউটেশন এড়াতে রাসায়নিক গোত্র পরিবর্তনের নিয়ম।"
-        stepsEn={[
-          "Select your target Crop (e.g., Rice, Tomato) and then select the target Pest or Disease you wish to control.",
-          "The planner will automatically load a recommended sequence of spraying windows (Spray #1, #2, #3, etc.).",
-          "Choose a pesticide brand for each spray window using the searchable dynamic dropdown fields - type to filter by brand name, active ingredient, registration number, or MoA code.",
-          "Observe the validation status indicators: the system automatically computes IRAC (insecticide), FRAC (fungicide), or HRAC (herbicide) codes.",
-          "If consecutive windows use the same active group code, an Amber Conflict warning will trigger - change one chemical to resolve."
-        ]}
-        stepsBn={[
-          "প্রথমে লক্ষ্যভুক্ত ফসল (যেমন: ধান, টমেটো) এবং এরপর যে বালাই বা রোগটি দমন করতে চান সেটি নির্বাচন করুন।",
-          "ক্যালকুলেটরটি স্বয়ংক্রিয়ভাবে একটি প্রস্তাবিত পর্যায়ক্রমিক স্প্রে উইন্ডো বা সূচি লোড করবে (স্প্রে #১, #২, #৩ ইত্যাদি)।",
-          "প্রতিটি স্প্রে উইন্ডোর সার্চযোগ্য ডায়নামিক ড্রপডাউন থেকে ব্র্যান্ডের নাম, উপাদান, রেজি নম্বর বা MoA কোড টাইপ করে খুঁজে আপনার পছন্দের বাণিজ্যিক বালাইনাশক নির্বাচন করুন।",
-          "স্ট্যাটাস ইন্ডিকেটরগুলো লক্ষ করুন: সিস্টেম স্বয়ংক্রিয়ভাবে উপাদানগুলোর IRAC, FRAC বা HRAC বৈজ্ঞানিক গ্রুপ কোড হিসাব করবে।",
-          "পরপর দুটি স্প্রে-তে যদি একই গোত্র বা কোড ব্যবহৃত হয়, তবে আম্বার রঙের 'Conflict' সতর্কতা দেখাবে - সেটি পরিবর্তন করুন।"
-        ]}
-        proTipsEn={[
-          "Resistance is a genetic change. Repeated exposure to group 1A insect-killers will breed insects immune to all 1A chemistry.",
-          "Always check the MoA code on physical packaging. It is displayed clearly on the label header (e.g. 'FRAC Group 11')."
-        ]}
-        proTipsBn={[
-          "বালাইয়ের রেজিসট্যান্স ক্ষমতা একটি বংশগত পরিবর্তন। বারবার একই ওষুধ ছিটানো হলে ক্ষতিকর পোকারা ইমিউন হয়ে যায়।",
-          "বাস্তব বোতল বা প্যাকেটের লেবেলের মাথায় ইংরেজি বড় হরফে MoA কোড যেমন: 'FRAC Group 11' বা 'Group 1A' লেখা থাকে।"
-        ]}
-      />
-
-      {/* Rotation Principles Reference Card */}
-      <div className="bg-slate-900 text-white rounded-2xl p-6 space-y-4">
-        <h3 className="font-bold text-base flex items-center gap-2 text-white">
-          <Sparkles className="w-5 h-5 text-amber-400" />
-          {language === 'bn' ? 'বালাইনাশক প্রতিরোধ (MoA) ব্যবস্থাপনার ৪টি সুবর্ণ নিয়ম' : 'The 4 Golden Rules of MoA Resistance Management'}
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-          <div className="p-3.5 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1">
-            <span className="text-amber-400 font-bold block">
-              {language === 'bn' ? '১. উইন্ডো স্ট্র্যাটেজি (পর্যায় নীতি)' : '1. The Window Strategy'}
-            </span>
-            <p className="text-slate-300 leading-relaxed">
-              {language === 'bn'
-                ? 'বালাইয়ের একটি প্রজন্মে (সাধারণত ৩০ দিন) একটি MoA প্রয়োগ শেষ করে পরবর্তী প্রজন্মের জন্য সম্পূর্ণ ভিন্ন MoA গ্রুপে চলে যান।'
-                : 'Treat all sprays within a pest generation (typically 30 days) with the same MoA, then switch completely to a different group for the next generation.'}
-            </p>
-          </div>
-          <div className="p-3.5 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1">
-            <span className="text-amber-400 font-bold block">
-              {language === 'bn' ? '২. মাল্টি-সাইট রক্ষাকবচ' : '2. Multi-Site Anchors'}
-            </span>
-            <p className="text-slate-300 leading-relaxed">
-              {language === 'bn'
-                ? 'ম্যানকোজেব (M03), কপার (M01) বা সালফার (M02)-এর মতো বহুমুখী স্পর্শক বালাইনাশক ব্যবহার করুন যা একক-সাইট বিষকে প্রতিরোধ হতে রক্ষা করে।'
-                : 'Incorporate multi-site protectants like Mancozeb (FRAC M03), Copper (FRAC M01), or Sulfur (FRAC M02) to shield single-site systemic chemicals.'}
-            </p>
-          </div>
-          <div className="p-3.5 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1">
-            <span className="text-amber-400 font-bold block">
-              {language === 'bn' ? '৩. কম মাত্রায় প্রয়োগ নিষিদ্ধ' : '3. Never Underdose'}
-            </span>
-            <p className="text-slate-300 leading-relaxed">
-              {language === 'bn'
-                ? 'অনুমোদিত মাত্রার চেয়ে কম বিষ দিলে বালাই না মরে বরং প্রতিরোধ ক্ষমতা অর্জন করে বংশবৃদ্ধি ঘটায়, যা দ্রুত ওষুধের কার্যকারিতা নষ্ট করে।'
-                : 'Applying sub-lethal concentrations lets marginally tolerant individuals survive and reproduce, accelerating resistance development.'}
-            </p>
-          </div>
-          <div className="p-3.5 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1">
-            <span className="text-amber-400 font-bold block">
-              {language === 'bn' ? '৪. সমন্বিত বালাই ব্যবস্থাপনা (IPM)' : '4. Integrated Tactics (IPM)'}
-            </span>
-            <p className="text-slate-300 leading-relaxed">
-              {language === 'bn'
-                ? 'রাসায়নিক বিষের ওপর একক নির্ভরতা কমাতে সেক্স ফেরোমোন ট্র্যাপ (Cuelure), বন্ধু পোকা ও পরভোজী সংরক্ষণ এবং প্রতিরোধী জাত চাষ করুন।'
-                : 'Combine chemical sprays with sex pheromone traps (Cuelure), natural biological predators, and resistant crop varieties to reduce spray frequency.'}
-            </p>
+            <div className="acg-rp-rules__card">
+              <span className="acg-rp-rules__num">{language === 'bn' ? `নিয়ম ${formatNum(4)}` : `Rule ${formatNum(4)}`}</span>
+              <p>
+                <b>{language === 'bn' ? 'সমন্বিত বালাই ব্যবস্থাপনা (IPM)' : 'Integrated Tactics (IPM)'}</b>
+                {language === 'bn'
+                  ? 'রাসায়নিক বিষের ওপর একক নির্ভরতা কমাতে সেক্স ফেরোমোন ট্র্যাপ (Cuelure), বন্ধু পোকা ও পরভোজী সংরক্ষণ এবং প্রতিরোধী জাত চাষ করুন।'
+                  : 'Combine chemical sprays with sex pheromone traps (Cuelure), natural biological predators, and resistant crop varieties to reduce spray frequency.'}
+              </p>
+            </div>
           </div>
         </div>
       </div>
