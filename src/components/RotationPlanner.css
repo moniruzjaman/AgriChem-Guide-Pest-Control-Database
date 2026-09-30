@@ -636,3 +636,295 @@
 /* user guide spacing (reuses the Home tab's emerald → official-green
    remap via .acg-guide-wrap defined in HomeView.css) */
 .acg-rp .acg-guide-wrap { margin-top: 56px; }
+
+/* ==========================================================================
+   STEP 2 REBUILD — classification tables, context-aware accents, stage &
+   life-cycle grouping, sources footer (Task 8)
+   ========================================================================== */
+
+/* Default context: neutral (panel border green, kicker brand red). The
+   shell-level --ctx-* overrides make the whole working area re-tint to the
+   chemistry family of the current crop × pest selection. */
+.acg-rp {
+  --ctx: var(--green);
+  --ctx-ink: var(--red);
+  --ctx-tint: var(--red-tint);
+}
+.acg-rp--ctx-irac {
+  --ctx: var(--red);
+  --ctx-ink: var(--red-800);
+  --ctx-tint: var(--red-tint);
+}
+.acg-rp--ctx-frac {
+  --ctx: var(--golden);
+  --ctx-ink: var(--golden-ink);
+  --ctx-tint: var(--golden-tint);
+}
+.acg-rp--ctx-hrac {
+  --ctx: var(--green);
+  --ctx-ink: var(--green);
+  --ctx-tint: #dcece4;
+}
+
+/* The arsenal panel takes the context accent on its 3px top border. */
+.acg-rp-panel--accent { border-top-color: var(--ctx); }
+.acg-rp-panel--accent .acg-rp-panel__kicker { color: var(--ctx-ink); }
+
+/* ------------------------------------------------------------ risk badges */
+.acg-rp-risk {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 1px 8px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.acg-rp-risk--high { background: var(--red-tint); color: var(--red-800); border-color: #f5bfc8; }
+.acg-rp-risk--mid { background: var(--golden-tint); color: var(--golden-ink); border-color: #ead9a5; }
+.acg-rp-risk--low { background: #dcece4; color: var(--green); border-color: #c5ddd0; }
+
+.acg-rp-risklegend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.acg-rp-risklegend__sep { color: var(--line); }
+.acg-rp-risklegend__note {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------- crop-stage cards --
+   Same three windows the Step-3 builder uses; golden offset shadow like
+   the Home logic cards. */
+.acg-rp-stages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+.acg-rp-stage {
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: 4px 4px 0 0 var(--golden-tint);
+  padding: 13px 14px 12px;
+}
+.acg-rp-stage__top { display: flex; align-items: baseline; gap: 8px; }
+.acg-rp-stage__num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--golden-ink);
+}
+.acg-rp-stage__title {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--green-900);
+  line-height: 1.4;
+}
+.acg-rp-stage__body {
+  margin-top: 7px;
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.acg-rp-stage__live {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+}
+.acg-rp-stage__live i { font-style: normal; }
+
+/* ------------------------------------------------- pest life-cycle strip */
+.acg-rp-cycle {
+  margin-top: 14px;
+  border: 1px dashed var(--line);
+  background: #fbfdfb;
+  padding: 12px 14px 11px;
+}
+.acg-rp-cycle__label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ctx-ink);
+  font-weight: 500;
+}
+.acg-rp-cycle__stages {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 9px;
+}
+.acg-rp-cycle__stage {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green-900);
+}
+.acg-rp-cycle__arrow {
+  font-family: var(--mono);
+  color: var(--ctx-ink);
+  font-size: 11px;
+}
+.acg-rp-cycle__tip {
+  margin-top: 9px;
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+/* per-scheme overrides (strip colour follows its own chemistry family) */
+.acg-rp-cycle--irac { --ctx: var(--red); --ctx-ink: var(--red-800); }
+.acg-rp-cycle--frac { --ctx: var(--golden); --ctx-ink: var(--golden-ink); }
+.acg-rp-cycle--hrac { --ctx: var(--green); --ctx-ink: var(--green); }
+
+/* --------------------------------------------------- classification tables */
+.acg-rp-tgroup { margin-top: 20px; }
+.acg-rp-tgroup__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.acg-rp-tgroup__count {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--muted);
+}
+.acg-rp-tablewrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  background: var(--card);
+  -webkit-overflow-scrolling: touch;
+}
+.acg-rp-table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.acg-rp-table thead th {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: left;
+  padding: 10px 12px;
+  background: #fbfdfb;
+  border-bottom: 2px solid var(--ctx);
+  white-space: nowrap;
+}
+.acg-rp-tgroup--irac { --ctx: var(--red); }
+.acg-rp-tgroup--frac { --ctx: var(--golden); }
+.acg-rp-tgroup--hrac { --ctx: var(--green); }
+.acg-rp-table tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.acg-rp-table tbody tr:last-child td { border-bottom: none; }
+.acg-rp-table tbody tr:hover { background: #f7faf7; }
+.acg-rp-table__name {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--green-900);
+  min-width: 130px;
+}
+.acg-rp-table__site { color: var(--muted); max-width: 260px; line-height: 1.55; }
+.acg-rp-table__partners i {
+  display: inline-block;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  background: var(--paper-muted);
+  border: 1px solid var(--line);
+  padding: 1px 6px;
+  margin: 1px 4px 1px 0;
+  white-space: nowrap;
+}
+.acg-rp-table__prods { white-space: nowrap; font-weight: 700; color: var(--green-900); }
+.acg-rp-table__prods span {
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.acg-rp-unclass {
+  margin-top: 14px;
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--golden-ink);
+  background: var(--golden-tint);
+  border: 1px solid #ead9a5;
+  padding: 10px 12px;
+}
+
+/* -------------------------------------------------- sources & disclaimer */
+.acg-rp-src {
+  margin-top: 48px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--green);
+  padding: 18px 20px 16px;
+}
+.acg-rp-src__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.acg-rp-src__body {
+  margin-top: 9px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.acg-rp-src__links {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+.acg-rp-src__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--green);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 2px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.acg-rp-src__links a:hover {
+  color: var(--green-900);
+  border-bottom-color: var(--green);
+}
+.acg-rp-src__links svg { opacity: 0.55; flex: none; }
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 899px) {
+  .acg-rp-stages { grid-template-columns: 1fr; gap: 12px; }
+}
+@media (min-width: 640px) {
+  .acg-rp-src__links { grid-template-columns: repeat(2, 1fr); gap: 8px 22px; }
+}

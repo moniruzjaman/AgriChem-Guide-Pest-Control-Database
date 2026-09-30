@@ -6,8 +6,10 @@ import {
   Bug,
   CheckCircle2,
   ChevronDown,
+  ExternalLink,
   FileDown,
   Layers,
+  ScrollText,
   ShieldAlert,
   Sparkles,
   Sprout
@@ -50,12 +52,73 @@ function schemeChipClass(code?: string): string {
   return 'acg-rp-chip'; // IRAC keeps the red chip
 }
 
-/** Scheme tone → group-card class (drives the 3px top border colour). */
-function schemeCardClass(code?: string): string {
-  if (!code) return 'acg-rp-gcard';
-  if (code.startsWith('FRAC')) return 'acg-rp-gcard acg-rp-gcard--frac';
-  if (code.startsWith('HRAC')) return 'acg-rp-gcard acg-rp-gcard--hrac';
-  return 'acg-rp-gcard'; // IRAC keeps the red top border
+/**
+ * Official classification-table order (IRAC/FRAC/HRAC code lists): numbered
+ * groups first in numeric order, then M (multi-site), then P (plant
+ * activators), then U (uncertain biology). Letters after the number keep
+ * sub-groups in order (1A < 1B < 2A…).
+ */
+function moaSortKey(code: string): [number, number, number, string] {
+  // Trailing "(K3)" style legacy HRAC letter codes are kept for display but
+  // ignored for ordering.
+  const m = code.match(/^(IRAC|FRAC|HRAC)\s+([MPU])?(\d+)([A-Z]*)(?:\s*\(.+\))?$/);
+  if (!m) return [3, 9, 9999, code];
+  const schemeRank = m[1] === 'IRAC' ? 0 : m[1] === 'FRAC' ? 1 : 2;
+  const prefixRank = m[2] === 'M' ? 1 : m[2] === 'P' ? 2 : m[2] === 'U' ? 3 : 0;
+  return [schemeRank, prefixRank, parseInt(m[3], 10), m[4]];
+}
+
+function moaCompare(a: string, b: string): number {
+  const ka = moaSortKey(a);
+  const kb = moaSortKey(b);
+  return ka[0] - kb[0] || ka[1] - kb[1] || ka[2] - kb[2] || ka[3].localeCompare(kb[3]);
+}
+
+/** Resistance risk → 3 context buckets driving the badge colour. */
+function riskBucket(risk?: string): 'high' | 'mid' | 'low' {
+  if (risk === 'High' || risk === 'Medium to High') return 'high';
+  if (risk === 'Low') return 'low';
+  return 'mid'; // Medium, Low to Medium, Unknown
+}
+
+function riskLabel(risk: string | undefined, lang: 'bn' | 'en'): string {
+  if (!risk) return lang === 'bn' ? 'অজানা' : 'Unknown';
+  if (lang === 'en') return risk;
+  switch (risk) {
+    case 'High': return 'উচ্চ';
+    case 'Medium to High': return 'মধ্যম-উচ্চ';
+    case 'Medium': return 'মধ্যম';
+    case 'Low to Medium': return 'নিম্ন-মধ্যম';
+    case 'Low': return 'নিম্ন';
+    default: return 'অজানা';
+  }
+}
+
+function schemeOf(code?: string): 'IRAC' | 'FRAC' | 'HRAC' | null {
+  if (!code) return null;
+  if (code.startsWith('IRAC')) return 'IRAC';
+  if (code.startsWith('FRAC')) return 'FRAC';
+  if (code.startsWith('HRAC')) return 'HRAC';
+  return null;
+}
+
+/**
+ * Rotation partners parsed from the committee's own rotationStrategy text —
+ * same parsing language the Home tab uses for its MoA stickers. Same-scheme
+ * codes only; at most 3 partners per group.
+ */
+function strategyPartners(code: string): string[] {
+  const entry = MOA_DATABASE.find((m) => m.code === code);
+  if (!entry) return [];
+  const allCodes = new Set(MOA_DATABASE.map((m) => m.code));
+  const out: string[] = [];
+  const tokens = (entry.rotationStrategy || '').match(/\b[A-Z]?\d{1,3}[A-Z]?\b/g) || [];
+  for (const tok of tokens) {
+    const full = `${entry.type} ${tok}`;
+    if (full !== code && allCodes.has(full) && !out.includes(full)) out.push(full);
+    if (out.length >= 3) break;
+  }
+  return out;
 }
 
 export const RotationPlanner: React.FC<RotationPlannerProps> = ({
@@ -121,6 +184,43 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({
     });
     return Array.from(map.entries());
   }, [eligibleProducts]);
+
+  // -----------------------------------------------------------------
+  // CONTEXT-AWARE COLOURS — the tab's accent follows the chemistry
+  // family of the current crop × pest selection (IRAC → red,
+  // FRAC → golden, HRAC → green, mixed → neutral green).
+  // -----------------------------------------------------------------
+  const contextScheme = useMemo<'irac' | 'frac' | 'hrac' | ''>(() => {
+    const counts: Record<'IRAC' | 'FRAC' | 'HRAC', number> = { IRAC: 0, FRAC: 0, HRAC: 0 };
+    eligibleProducts.forEach((p) => {
+      const s = schemeOf(p.moaCode);
+      if (s) counts[s] += 1;
+    });
+    const present = (Object.entries(counts) as ['IRAC' | 'FRAC' | 'HRAC', number][])
+      .filter(([, n]) => n > 0)
+      .sort((a, b) => b[1] - a[1]);
+    if (!present.length) return '';
+    if (present.length > 1 && present[0][1] === present[1][1]) return '';
+    return present[0][0].toLowerCase() as 'irac' | 'frac' | 'hrac';
+  }, [eligibleProducts]);
+
+  // Arsenal grouped per scheme family, rows in official table order.
+  const schemeTables = useMemo(() => {
+    const families: ('IRAC' | 'FRAC' | 'HRAC')[] = ['IRAC', 'FRAC', 'HRAC'];
+    return families
+      .map((scheme) => ({
+        scheme,
+        rows: availableMoAGroups
+          .filter(([code]) => code.startsWith(scheme))
+          .sort(([a], [b]) => moaCompare(a, b))
+      }))
+      .filter((t) => t.rows.length > 0);
+  }, [availableMoAGroups]);
+
+  const unclassifiedGroups = useMemo(
+    () => availableMoAGroups.filter(([code]) => !schemeOf(code)),
+    [availableMoAGroups]
+  );
 
   // Multi-step spray rotation sequence state (up to 4 sprays)
   const [rotationSteps, setRotationSteps] = useState<{
@@ -229,7 +329,7 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({
   );
 
   return (
-    <div id="rotation-planner-container" className="acg-rp">
+    <div id="rotation-planner-container" className={`acg-rp${contextScheme ? ` acg-rp--ctx-${contextScheme}` : ''}`}>
       <div className="acg-rp-shell">
         {/* -------------------------------------------- EDITORIAL HEADER --
             The old blue gradient banner is gone. The tab now opens the way
@@ -432,9 +532,9 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({
             </div>
 
             {/* ---- Step 2: approved MoA groups for the selection ---- */}
-            <div className="acg-rp-panel">
+            <div className="acg-rp-panel acg-rp-panel--accent">
               <p className="acg-rp-panel__kicker">
-                {language === 'bn' ? 'ধাপ ২ — অস্ত্রাগার দেখে নিন' : 'Step 2 — survey your arsenal'}
+                {language === 'bn' ? 'ধাপ ২ — অস্ত্রাগার, শ্রেণি-ছক অনুসারে' : 'Step 2 — your arsenal, in classification-table order'}
               </p>
               <h3 className="acg-rp-panel__title">
                 {language === 'bn'
@@ -443,39 +543,187 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({
               </h3>
               <p className="acg-rp-panel__sub">
                 {language === 'bn'
-                  ? `মোট ${formatNum(eligibleProducts.length)} টি নিবন্ধিত বালাইনাশক এবং ${formatNum(availableMoAGroups.length)} টি স্বতন্ত্র MoA গ্রুপ পাওয়া গেছে।`
-                  : `Found ${eligibleProducts.length} registered products spanning ${availableMoAGroups.length} distinct MoA groups.`}
+                  ? `মোট ${formatNum(eligibleProducts.length)} টি নিবন্ধিত বালাইনাশক এবং ${formatNum(availableMoAGroups.length)} টি স্বতন্ত্র MoA গ্রুপ — আন্তর্জাতিক শ্রেণিবিন্যাস ছকের ক্রমে সাজানো।`
+                  : `${eligibleProducts.length} registered products across ${availableMoAGroups.length} distinct MoA groups — listed in official classification-table order.`}
               </p>
 
-              <div className="acg-rp-gcards">
-                {availableMoAGroups.map(([moaCode, prods]) => {
-                  const moaInfo = MOA_DATABASE.find((m) => m.code === moaCode);
+              {/* Risk legend — the colours on every row badge, explained. */}
+              <div className="acg-rp-risklegend">
+                <span className="acg-rp-risk acg-rp-risk--high">{language === 'bn' ? 'উচ্চ ঝুঁকি' : 'High risk'}</span>
+                <span className="acg-rp-risklegend__sep">·</span>
+                <span className="acg-rp-risk acg-rp-risk--mid">{language === 'bn' ? 'মধ্যম ঝুঁকি' : 'Medium risk'}</span>
+                <span className="acg-rp-risklegend__sep">·</span>
+                <span className="acg-rp-risk acg-rp-risk--low">{language === 'bn' ? 'নিম্ন ঝুঁকি' : 'Low risk'}</span>
+                <span className="acg-rp-risklegend__note">
+                  {language === 'bn' ? '— ঝুঁকি = রেজিসট্যান্স তৈরির প্রবণতা' : '— risk = tendency to develop resistance'}
+                </span>
+              </div>
+
+              {/* Crop-stage strategy cards — the same three windows the
+                  Step-3 builder uses, so grouping and workflow match. */}
+              <div className="acg-rp-stages">
+                {[
+                  {
+                    num: language === 'bn' ? '০১' : '01',
+                    title: language === 'bn' ? 'চারা / প্রাথমিক বৃদ্ধি' : 'Seedling / early growth',
+                    body: language === 'bn'
+                      ? 'প্রতিরক্ষামূলক ভিত্তি: মাল্টি-সাইট (M-গ্রুপ) বা নিম্ন-ঝুঁকির গ্রুপ দিয়ে শুরু করুন; ক্ষতিকারক সীমা (ETL) অতিক্রম করলেই স্প্রে।'
+                      : 'Protective base: start with a multi-site (M) or low-risk group; spray once the ETL is crossed.'
+                  },
+                  {
+                    num: language === 'bn' ? '০২' : '02',
+                    title: language === 'bn' ? 'সক্রিয় বৃদ্ধি / কুশি' : 'Active growth / tillering',
+                    body: language === 'bn'
+                      ? 'সর্বোচ্চ কার্যকারিতার উইন্ডো: একটি শক্তিশালী একক-সাইট সিস্টেমিক গ্রুপ বেছে নিন এবং কোন গ্রুপ ব্যবহার করলেন তা লিখে রাখুন।'
+                      : 'Peak-efficacy window: pick one strong single-site systemic and record which group you used.'
+                  },
+                  {
+                    num: language === 'bn' ? '০৩' : '03',
+                    title: language === 'bn' ? 'মুকুল / শীষ / ফল গঠন' : 'Flowering / panicle / fruit set',
+                    body: language === 'bn'
+                      ? 'সম্পূর্ণ ভিন্ন গ্রুপে ঘোরান এবং ফসল তোলার অপেক্ষাকাল (PHI) মেনে চলুন।'
+                      : 'Rotate to a completely different group and respect the pre-harvest interval (PHI).'
+                  }
+                ].map((stage, i) => {
+                  const liveChip = analyzedSteps[i]?.moaCode;
                   return (
-                    <div key={moaCode} className={schemeCardClass(moaCode)}>
-                      <div className="acg-rp-gcard__top">
-                        <span className={schemeChipClass(moaCode)}>{moaCode}</span>
-                        <span className="acg-rp-gcard__count">
-                          {formatNum(prods.length)} {language === 'bn' ? 'টি পণ্য' : 'products'}
-                        </span>
+                    <div key={stage.num} className="acg-rp-stage">
+                      <div className="acg-rp-stage__top">
+                        <span className="acg-rp-stage__num">{stage.num}</span>
+                        <span className="acg-rp-stage__title">{stage.title}</span>
                       </div>
-                      <h4 className="acg-rp-gcard__name">
-                        {language === 'bn'
-                          ? (moaInfo?.nameBn || prods[0].moaGroup || 'ক্রিয়ার লক্ষ্যস্থল উল্লেখিত')
-                          : (moaInfo?.name || prods[0].moaGroup || 'Target site specified')}
-                      </h4>
-                      <p className="acg-rp-gcard__site">
-                        {language === 'bn'
-                          ? (moaInfo?.targetSiteBn || 'কোষীয় বিপাকীয় জৈব রাসায়নিক প্রক্রিয়া।')
-                          : (moaInfo?.targetSite || 'Cellular metabolic biochemical pathway.')}
-                      </p>
-                      <span className="acg-rp-gcard__prods">
-                        {prods.map((p) => p.tradeName).slice(0, 3).join(', ')}
-                        {prods.length > 3 ? '…' : ''}
-                      </span>
+                      <p className="acg-rp-stage__body">{stage.body}</p>
+                      {liveChip && (
+                        <span className="acg-rp-stage__live">
+                          <i className={schemeChipClass(liveChip)}>{liveChip}</i>
+                          {language === 'bn' ? 'এই উইন্ডোতে নির্বাচিত' : 'assigned below'}
+                        </span>
+                      )}
                     </div>
                   );
                 })}
               </div>
+
+              {/* Pest life-cycle strip — one row per chemistry family present,
+                  so the grouping mirrors how resistance actually builds. */}
+              {schemeTables.map(({ scheme }) => {
+                const cycle = {
+                  IRAC: {
+                    stages: language === 'bn' ? ['ডিম', 'কীড় / নিম্ফ', 'পিউপা', 'প্রাপ্তবয়স্ক'] : ['Egg', 'Larva / nymph', 'Pupa', 'Adult'],
+                    tip: language === 'bn'
+                      ? 'একই প্রজন্মের (~৩০ দিন) ভেতরে একই MoA নয় — অল্প বয়সী কীড়/নিম্ফে স্প্রে সবচেয়ে কার্যকর।'
+                      : 'Never repeat one MoA within a generation (~30 days) — early larva / nymph is the most effective window.'
+                  },
+                  FRAC: {
+                    stages: language === 'bn' ? ['স্পোর অঙ্কুরোদ্গম', 'সংক্রমণ', 'উপসর্গ', 'বীজগণিত বিস্তার'] : ['Spore germination', 'Infection', 'Symptoms', 'Sporulation'],
+                    tip: language === 'bn'
+                      ? 'সংক্রমণের আগে মাল্টি-সাইট প্রতিরক্ষামূলক (M-গ্রুপ), প্রাথমিক উপসর্গে একক-সাইট সিস্টেমিক — পরের প্রজন্মে গ্রুপ বদলান।'
+                      : 'Multi-site protectants (M groups) before infection, single-site systemics at early symptoms — then switch groups next generation.'
+                  },
+                  HRAC: {
+                    stages: language === 'bn' ? ['অঙ্কুরোদ্গম-পূর্ব', 'চারা', 'কুশি', 'পরিণত'] : ['Pre-emergence', 'Seedling', 'Tillering', 'Mature'],
+                    tip: language === 'bn'
+                      ? 'অঙ্কুরোদ্গম-পূর্ব আগাছানাশকের পরে ভিন্ন HRAC গ্রুপের পোস্ট-ইমার্জেন্ট প্রয়োগ করুন।'
+                      : 'Follow pre-emergence chemistry with a post-emergence spray from a different HRAC group.'
+                  }
+                }[scheme];
+                return (
+                  <div key={scheme} className={`acg-rp-cycle acg-rp-cycle--${scheme.toLowerCase()}`}>
+                    <p className="acg-rp-cycle__label">
+                      {language === 'bn'
+                        ? `${scheme === 'IRAC' ? 'কীট' : scheme === 'FRAC' ? 'রোগ' : 'আগাছা'}-এর জীবনচক্র — কখন স্প্রে কাজ করে`
+                        : `${scheme === 'IRAC' ? 'Insect' : scheme === 'FRAC' ? 'Disease' : 'Weed'} life cycle — when a spray actually works`}
+                    </p>
+                    <div className="acg-rp-cycle__stages">
+                      {cycle.stages.map((s, i) => (
+                        <React.Fragment key={s}>
+                          {i > 0 && <span className="acg-rp-cycle__arrow">→</span>}
+                          <span className="acg-rp-cycle__stage">{s}</span>
+                        </React.Fragment>
+                      ))}
+                    </div>
+                    <p className="acg-rp-cycle__tip">{cycle.tip}</p>
+                  </div>
+                );
+              })}
+
+              {/* Classification tables — one per chemistry family, rows in
+                  official code-list order. Scrolls horizontally on mobile. */}
+              {schemeTables.map(({ scheme, rows }) => (
+                <div key={scheme} className={`acg-rp-tgroup acg-rp-tgroup--${scheme.toLowerCase()}`}>
+                  <div className="acg-rp-tgroup__head">
+                    <span className={schemeChipClass(`${scheme} 0`)}>{scheme}</span>
+                    <span className="acg-rp-tgroup__count">
+                      {language === 'bn'
+                        ? `${formatNum(rows.length)} টি গ্রুপ`
+                        : `${rows.length} groups`}
+                    </span>
+                  </div>
+                  <div className="acg-rp-tablewrap">
+                    <table className="acg-rp-table">
+                      <thead>
+                        <tr>
+                          <th>{language === 'bn' ? 'MoA কোড' : 'MoA code'}</th>
+                          <th>{language === 'bn' ? 'রাসায়নিক গোত্র' : 'Chemical group'}</th>
+                          <th>{language === 'bn' ? 'ক্রিয়ার লক্ষ্য' : 'Target site'}</th>
+                          <th>{language === 'bn' ? 'ঝুঁকি' : 'Risk'}</th>
+                          <th>{language === 'bn' ? 'ঘূর্ণন সঙ্গী' : 'Rotation partners'}</th>
+                          <th>{language === 'bn' ? 'পণ্য' : 'Products'}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {rows.map(([code, prods]) => {
+                          const info = MOA_DATABASE.find((m) => m.code === code);
+                          const partners = strategyPartners(code);
+                          return (
+                            <tr key={code}>
+                              <td><span className={schemeChipClass(code)}>{code}</span></td>
+                              <td className="acg-rp-table__name">
+                                {language === 'bn'
+                                  ? (info?.nameBn || prods[0].moaGroup || '—')
+                                  : (info?.name || prods[0].moaGroup || '—')}
+                              </td>
+                              <td className="acg-rp-table__site">
+                                {language === 'bn'
+                                  ? (info?.targetSiteBn || '—')
+                                  : (info?.targetSite || '—')}
+                              </td>
+                              <td>
+                                <span className={`acg-rp-risk acg-rp-risk--${riskBucket(info?.resistanceRisk)}`}>
+                                  {riskLabel(info?.resistanceRisk, language === 'bn' ? 'bn' : 'en')}
+                                </span>
+                              </td>
+                              <td>
+                                {partners.length > 0 ? (
+                                  <span className="acg-rp-table__partners">
+                                    {partners.map((p) => (
+                                      <i key={p}>{p}</i>
+                                    ))}
+                                  </span>
+                                ) : '—'}
+                              </td>
+                              <td className="acg-rp-table__prods">
+                                {formatNum(prods.length)}
+                                <span title={prods.map((p) => p.tradeName).join(', ')}>
+                                  {' '}· {prods.slice(0, 2).map((p) => p.tradeName).join(', ')}{prods.length > 2 ? '…' : ''}
+                                </span>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ))}
+
+              {unclassifiedGroups.length > 0 && (
+                <p className="acg-rp-unclass">
+                  {language === 'bn'
+                    ? `${formatNum(unclassifiedGroups.reduce((n, [, ps]) => n + ps.length, 0))} টি পণ্যের নিবন্ধন-তালিকায় MoA কোড পাওয়া যায়নি (${unclassifiedGroups.flatMap(([, ps]) => ps.slice(0, 2).map((p) => p.tradeName)).slice(0, 3).join(', ')}) — প্যাকেটের লেবেল দেখে গ্রুপ যাচাই করুন।`
+                    : `${unclassifiedGroups.reduce((n, [, ps]) => n + ps.length, 0)} product(s) carry no MoA code in the register (${unclassifiedGroups.flatMap(([, ps]) => ps.slice(0, 2).map((p) => p.tradeName)).slice(0, 3).join(', ')}) — verify the group from the pack label.`}
+                </p>
+              )}
             </div>
 
             {/* ---- Step 3: interactive spray rotation sequence ---- */}
@@ -754,6 +1002,48 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({
               </p>
             </div>
           </div>
+        </div>
+
+        {/* ------------------------------------ SOURCES & DISCLAIMER --
+            Every MoA code on this tab is somebody's published science.
+            Show the receipts: the three resistance-action committees and
+            the DAE register, each with a direct link. */}
+        <div className="acg-rp-src">
+          <p className="acg-rp-src__title">
+            <ScrollText className="w-4 h-4" />
+            {language === 'bn' ? 'তথ্যসূত্র ও দাবিত্যাগ' : 'Sources & disclaimer'}
+          </p>
+          <p className="acg-rp-src__body">
+            {language === 'bn'
+              ? 'এই ট্যাবের MoA শ্রেণিবিন্যাস IRAC (কীটনাশক), FRAC (ছত্রাকনাশক) ও HRAC (আগাছানাশক) — আন্তর্জাতিক প্রতিরোধ-ব্যবস্থাপনা কমিটির প্রকাশিত শ্রেণি-ছক অনুসরণ করে; নিবন্ধিত বালাইনাশকের তথ্য বাংলাদেশ কৃষি সম্প্রসারণ অধিদপ্তরের (DAE) তালিকা থেকে নেওয়া। সবকিছু শিক্ষামূলক রেফারেন্স মাত্র — এটি প্রেসক্রিপশন নয়। প্রয়োগের আগে প্যাকেটের লেবেল ও স্থানীয় DAE কর্মকর্তার পরামর্শই চূড়ান্ত কথা।'
+              : 'The MoA classification on this tab follows the published code lists of IRAC (insecticides), FRAC (fungicides) and HRAC (herbicides); registered product data comes from the Bangladesh Department of Agricultural Extension (DAE) register. Everything here is an educational reference — not a prescription. The product label and your local DAE officer always have the final say.'}
+          </p>
+          <ul className="acg-rp-src__links">
+            <li>
+              <a href="https://irac-online.org/modes-of-action/" target="_blank" rel="noopener noreferrer">
+                IRAC — {language === 'bn' ? 'কীটনাশক MoA শ্রেণিবিন্যাস' : 'Insecticide MoA Classification'}
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.frac.info/" target="_blank" rel="noopener noreferrer">
+                FRAC — {language === 'bn' ? 'ছত্রাকনাশক কোড তালিকা ও প্রস্তাবনা' : 'Fungicide Code List & Recommendations'}
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </li>
+            <li>
+              <a href="https://hracglobal.com/tools/group-classification/" target="_blank" rel="noopener noreferrer">
+                HRAC — {language === 'bn' ? 'আগাছানাশক গোত্র শ্রেণিবিন্যাস' : 'Global Herbicide Classification'}
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </li>
+            <li>
+              <a href="https://dae.gov.bd/" target="_blank" rel="noopener noreferrer">
+                {language === 'bn' ? 'কৃষি সম্প্রসারণ অধিদপ্তর (DAE) — নিবন্ধিত বালাইনাশক তালিকা' : 'Department of Agricultural Extension (DAE) — registered pesticide list'}
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
