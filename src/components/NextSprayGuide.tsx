@@ -180,9 +180,9 @@ function getWhoBand(whoColor?: string) {
 
 function getMoABadgeClass(moaCode?: string) {
   if (!moaCode) return 'bg-slate-800 text-slate-200 border-slate-700';
-  if (moaCode.startsWith('IRAC')) return 'bg-emerald-900 text-emerald-200 border-emerald-700';
-  if (moaCode.startsWith('FRAC')) return 'bg-sky-900 text-sky-200 border-sky-700';
-  if (moaCode.startsWith('HRAC')) return 'bg-amber-900 text-amber-200 border-amber-700';
+  if (moaCode.startsWith('IRAC')) return 'bg-[#f42a41]/20 text-[#ffd0d6] border-[#f42a41]/45';
+  if (moaCode.startsWith('FRAC')) return 'bg-[#e3b341]/20 text-[#f3ddb0] border-[#e3b341]/45';
+  if (moaCode.startsWith('HRAC')) return 'bg-[#006a4e]/35 text-[#d5ece1] border-[#3a8570]';
   return 'bg-slate-800 text-slate-200 border-slate-700';
 }
 
@@ -337,7 +337,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
         <div className="space-y-1 min-w-[220px] flex-1">
           <div className="flex items-baseline gap-2">
             {typeof rank === 'number' && (
-              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-700 text-white text-[10px] font-black shrink-0">
+              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#006a4e] text-white text-[10px] font-black shrink-0">
                 {formatNum(rank)}
               </span>
             )}
@@ -400,7 +400,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
         <div className="flex items-center gap-1.5 shrink-0 self-end lg:self-auto pt-2 lg:pt-0">
           <button
             onClick={() => onOpenCalculator(p)}
-            className="p-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/70 text-emerald-700 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
+            className="p-2 bg-[#eef5ef] hover:bg-[#dcece4] border border-[#c5ddd0] text-[#006a4e] rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
             title={language === 'bn' ? 'হিসাবকারী স্টেশন খুলুন' : 'Open Dosage Station'}
           >
             <Calculator className="w-4 h-4" />
@@ -408,7 +408,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
           </button>
           <button
             onClick={() => onOpenSafety(p)}
-            className="p-2 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/70 text-indigo-700 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
+            className="p-2 bg-[#f6eccf] hover:bg-[#ead9a5] border border-[#ead9a5] text-[#8a6d1d] rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
             title={language === 'bn' ? 'নিরাপত্তা চেকলিস্ট' : 'Safety Protocols'}
           >
             <ShieldCheck className="w-4 h-4" />
@@ -427,7 +427,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
   };
 
   return (
-    <div id="next-spray-guide" className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 rounded-3xl shadow-lg relative">
+    <div id="next-spray-guide" className="bg-gradient-to-br from-[#004d38] via-[#005940] to-[#003d2c] rounded-3xl shadow-lg relative">
       {/*
         Decorative leaf accent — kept on its own absolutely-positioned
         inset-0 layer with `overflow-hidden` so the blurred halos stay
@@ -437,14 +437,14 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
         card's bottom edge without being cut off.
       */}
       <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none" aria-hidden="true">
-        <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-emerald-700/30 blur-2xl" />
-        <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-teal-700/20 blur-3xl" />
+        <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-[#006a4e]/30 blur-2xl" />
+        <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-[#004d38]/25 blur-3xl" />
       </div>
 
       <div className="relative z-10 p-5 sm:p-7 space-y-5">
         {/* ---------------- Header ---------------- */}
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-700 text-emerald-200 text-[11px] font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#003d2c]/70 border border-[#3a8570] text-[#c9e5d8] text-[11px] font-semibold">
             <Sparkles className="w-3.5 h-3.5" />
             {language === 'bn'
               ? 'ডায়নামিক ফিল্ড গাইড — কোন বালাইনাশক এরপর প্রয়োগ করবেন'
@@ -455,7 +455,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
               ? 'প্রয়োগকৃত বালাইনাশক দিন → পরবর্তী স্প্রের সুপারিশ পান'
               : 'Enter the Pesticide You Applied → Get the Next Spray Recommendation'}
           </h2>
-          <p className="text-xs sm:text-sm text-emerald-100 leading-relaxed max-w-3xl">
+          <p className="text-xs sm:text-sm text-[#c9e5d8] leading-relaxed max-w-3xl">
             {language === 'bn'
               ? 'আপনি সবেমাত্র জমিতে যে বালাইনাশক প্রয়োগ করেছেন সেটি নির্বাচন করুন। সিস্টেমটি IRAC/FRAC/HRAC ক্রিয়াপদ্ধতি (MoA) অনুযায়ী এমন একটি ভিন্ন গ্রুপের বালাইনাশক সুপারিশ করবে যা রেজিস্ট্যান্স প্রতিরোধ করবে এবং একই বালাই দমন করবে।'
               : 'Select the pesticide you just sprayed in the field. The system uses IRAC/FRAC/HRAC Mode-of-Action (MoA) rotation to recommend a different chemical group that prevents resistance buildup while still controlling the same pest.'}
@@ -467,7 +467,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
           {/* Applied-pesticide searchable combobox */}
           <div className="space-y-1.5" ref={comboRef}>
             <label className="block text-xs font-bold text-slate-700 flex items-center gap-1.5">
-              <Search className="w-3.5 h-3.5 text-emerald-600" />
+              <Search className="w-3.5 h-3.5 text-[#006a4e]" />
               {language === 'bn' ? 'প্রয়োগকৃত বালাইনাশক (সার্চ করুন)' : 'Applied Pesticide (search by brand, AI, reg. no, crop, or pest)'}
               <span className="text-rose-500">*</span>
             </label>
@@ -487,7 +487,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
                     ? 'যেমন: Karate, Imidacloprid, Reg-1234…'
                     : 'e.g. Karate, Imidacloprid, Reg-1234…'
                 }
-                className="w-full pl-10 pr-10 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition font-medium"
+                className="w-full pl-10 pr-10 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#006a4e]/30 focus:border-[#006a4e] transition font-medium"
               />
               {appliedQuery && (
                 <button
@@ -512,7 +512,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
                         <li key={p.id}>
                           <button
                             onClick={() => handlePickProduct(p)}
-                            className="w-full px-3 py-2.5 text-left hover:bg-emerald-50/60 transition flex items-center justify-between gap-3 cursor-pointer"
+                            className="w-full px-3 py-2.5 text-left hover:bg-[#eef5ef]/70 transition flex items-center justify-between gap-3 cursor-pointer"
                           >
                             <div className="min-w-0 flex-1">
                               <div className="flex items-center gap-1.5">
@@ -576,9 +576,9 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
 
           {/* Hint: empty state */}
           {!appliedProduct && (
-            <div className="bg-emerald-50/70 border border-emerald-200/70 rounded-xl p-3.5 flex items-start gap-3 text-xs">
-              <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-              <p className="text-emerald-900 font-medium leading-relaxed">
+            <div className="bg-[#eef5ef]/70 border border-[#c5ddd0] rounded-xl p-3.5 flex items-start gap-3 text-xs">
+              <Info className="w-4 h-4 text-[#006a4e] shrink-0 mt-0.5" />
+              <p className="text-[#004d38] font-medium leading-relaxed">
                 {language === 'bn'
                   ? 'শুরু করতে উপরের সার্চ বক্সে আপনার প্রয়োগকৃত বালাইনাশকের নাম লিখুন অথবা তালিকা থেকে নির্বাচন করুন। সিস্টেমটি স্বয়ংক্রিয়ভাবে ভিন্ন MoA গ্রুপের পরবর্তী স্প্রে সুপারিশ করবে।'
                   : 'To begin, type the name of the pesticide you just applied (or pick from the dropdown). The system will automatically recommend next sprays from a different MoA group.'}
@@ -591,10 +591,10 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
         {recommendation && (
           <div className="space-y-5">
             {/* Applied-pesticide summary card */}
-            <div className="bg-white rounded-2xl p-4 sm:p-5 shadow-md border-l-4 border-emerald-600">
+            <div className="bg-white rounded-2xl p-4 sm:p-5 shadow-md border-l-4 border-[#006a4e]">
               <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
                 <h3 className="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <CheckCircle2 className="w-4 h-4 text-[#006a4e]" />
                   {language === 'bn' ? 'আপনি যে বালাইনাশক প্রয়োগ করেছেন' : 'Applied Pesticide'}
                 </h3>
                 <button
@@ -654,7 +654,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
                 {/* Scope summary */}
                 <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-100 space-y-1.5 text-[10px]">
                   <div className="flex items-start gap-1.5">
-                    <Sprout className="w-3 h-3 text-emerald-600 shrink-0 mt-0.5" />
+                    <Sprout className="w-3 h-3 text-[#006a4e] shrink-0 mt-0.5" />
                     <div>
                       <div className="font-bold text-slate-400 uppercase text-[9px]">{language === 'bn' ? 'ফসল সুপারিশ' : 'Crop Scope'}</div>
                       <div className="font-bold text-slate-800">
@@ -693,12 +693,12 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
 
             {/* RECOMMENDED NEXT SPRAYS panel */}
             <div className="bg-white rounded-2xl p-4 sm:p-5 shadow-md">
-              <div className="flex items-center justify-between mb-3 pb-2 border-b border-emerald-100">
-                <h3 className="text-xs font-black text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
-                  <ArrowRight className="w-4 h-4 text-emerald-600" />
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-[#c5ddd0]">
+                <h3 className="text-xs font-black text-[#004d38] uppercase tracking-wider flex items-center gap-1.5">
+                  <ArrowRight className="w-4 h-4 text-[#006a4e]" />
                   {language === 'bn' ? 'পরবর্তী স্প্রের জন্য সুপারিশকৃত বালাইনাশক' : 'Recommended Next Sprays'}
                 </h3>
-                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-bold text-[#006a4e] bg-[#eef5ef] border border-[#c5ddd0] px-2 py-0.5 rounded-full">
                   {formatNum(recommendation.recommended.length)} {language === 'bn' ? 'টি বিকল্প' : 'options'}
                 </span>
               </div>
