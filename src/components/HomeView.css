@@ -5,6 +5,8 @@
    flag bottle green (#006A4E), flag red (#F42A41) with white surfaces,
    and golden accents. Bengali serif display, mono micro-labels,
    red-top-border cards.
+   page: cream paper, deep brand green, rust accents, Bengali serif display,
+   mono micro-labels, rust-top-border cards.
 
    Everything is scoped under .acg so Tailwind/app chrome never collides.
    ========================================================================== */
@@ -26,6 +28,17 @@
   --muted: #5d6f64;
   --line: #dfe5dd;
   --display: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+  --green: #006a4e;
+  --green-900: #0b4634;
+  --rust: #b04a26;
+  --rust-soft: #e0a58c;
+  --bg: #f5f2ea;
+  --card: #faf7f0;
+  --paper-muted: #e6e2d7;
+  --ink: #1c2a22;
+  --muted: #6f7d72;
+  --line: #ded7c6;
+  --serif: 'Noto Serif Bengali', Georgia, serif;
   --sans: 'Hind Siliguri', system-ui, -apple-system, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'Hind Siliguri', monospace;
 
@@ -46,6 +59,7 @@
    (.acg-btn / .acg-moa / .acg-tool) and leave them transparent. */
 .acg button { font: inherit; cursor: pointer; border: 0; }
 .acg em { font-style: normal; color: var(--red); }
+.acg em { font-style: normal; color: var(--rust); }
 
 .acg-shell {
   max-width: 1240px;
@@ -83,6 +97,7 @@
   align-items: center;
   gap: 10px;
   color: var(--red);
+  color: var(--rust);
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.14em;
@@ -96,11 +111,14 @@
   border-radius: 50%;
   background: var(--red);
   box-shadow: 0 0 0 4px rgba(244, 42, 65, 0.13);
+  background: var(--rust);
+  box-shadow: 0 0 0 4px rgba(176, 74, 38, 0.13);
   flex: none;
 }
 
 .acg-h1 {
   font-family: var(--display);
+  font-family: var(--serif);
   font-weight: 700;
   font-size: clamp(38px, 5.6vw, 68px);
   line-height: 1.12;
@@ -130,6 +148,7 @@
   gap: 9px;
   background: var(--green);
   color: #ffffff;
+  color: #f2f7f3;
   border-radius: 8px;
   padding: 13px 21px;
   font-weight: 600;
@@ -188,11 +207,19 @@
 }
 
 /* offset red frame behind the photo panel */
+    linear-gradient(160deg, rgba(11, 70, 52, 0.38), rgba(11, 70, 52, 0.04) 55%, rgba(28, 42, 34, 0.3)),
+    url('/hero-field.jpg') center/cover no-repeat,
+    linear-gradient(160deg, #7ea15f, #3f6b3a 55%, #2c4a2b);
+  box-shadow: 0 24px 48px rgba(28, 42, 34, 0.18);
+}
+
+/* offset rust frame behind the photo panel */
 .acg-photo-frame {
   position: absolute;
   inset: 0 6% 22% 10%;
   transform: rotate(1.6deg) translate(12px, 12px);
   border: 1px solid var(--red);
+  border: 1px solid var(--rust);
   border-radius: 6px;
   opacity: 0.55;
   pointer-events: none;
@@ -211,6 +238,8 @@
   gap: 2px;
   border: 1px solid rgba(244, 42, 65, 0.62);
   color: var(--red);
+  border: 1px solid rgba(176, 74, 38, 0.68);
+  color: var(--rust);
   transform: rotate(-11deg);
   border-radius: 50%;
   font-family: var(--mono);
@@ -218,6 +247,7 @@
   line-height: 1.15;
   letter-spacing: 0.07em;
   background: rgba(255, 255, 255, 0.85);
+  background: rgba(245, 242, 234, 0.82);
   backdrop-filter: blur(2px);
 }
 .acg-stamp b { font-weight: 500; color: var(--green-900); }
@@ -234,12 +264,15 @@
   border: 1px solid var(--line);
   border-top: 3px solid var(--red);
   box-shadow: 0 24px 48px rgba(20, 38, 29, 0.16);
+  border-top: 3px solid var(--rust);
+  box-shadow: 0 24px 48px rgba(28, 42, 34, 0.16);
   animation: acg-rise 0.85s 0.18s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 .acg-dialog__kicker {
   display: block;
   color: var(--red);
+  color: var(--rust);
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -273,6 +306,11 @@
 
 .acg-dialog__quote {
   font-family: var(--display);
+  color: #f2f7f3;
+}
+
+.acg-dialog__quote {
+  font-family: var(--serif);
   font-size: 16.5px;
   line-height: 1.45;
   color: var(--ink);
@@ -309,6 +347,7 @@
 
 .acg-stat__value {
   font-family: var(--display);
+  font-family: var(--serif);
   font-weight: 700;
   font-size: 34px;
   letter-spacing: -0.02em;
@@ -349,12 +388,14 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--red);
+  color: var(--rust);
   font-weight: 500;
 }
 
 .acg-h2 {
   margin-top: 14px;
   font-family: var(--display);
+  font-family: var(--serif);
   font-weight: 700;
   font-size: clamp(30px, 3.6vw, 46px);
   line-height: 1.14;
@@ -377,6 +418,8 @@
   background: var(--green-900);
   color: #ffffff;
   box-shadow: 15px 15px 0 rgba(227, 179, 65, 0.28);
+  color: #f2f7f3;
+  box-shadow: 15px 15px 0 rgba(176, 74, 38, 0.16);
 }
 
 .acg-logic__step {
@@ -388,6 +431,7 @@
 
 .acg-logic__num {
   color: var(--golden);
+  color: var(--rust-soft);
   font-family: var(--mono);
   font-size: 12px;
   padding-top: 5px;
@@ -395,6 +439,7 @@
 
 .acg-logic__title {
   font-family: var(--display);
+  font-family: var(--serif);
   font-weight: 700;
   font-size: 21px;
   line-height: 1.25;
@@ -402,6 +447,7 @@
 
 .acg-logic__desc {
   color: rgba(255, 255, 255, 0.76);
+  color: rgba(242, 247, 243, 0.72);
   font-size: 12.5px;
   line-height: 1.6;
   margin-top: 4px;
@@ -411,6 +457,7 @@
   height: 26px;
   margin: 10px 0 8px 6px;
   border-left: 1px dashed rgba(255, 255, 255, 0.35);
+  border-left: 1px dashed rgba(242, 247, 243, 0.35);
 }
 
 /* -------------------------------------------------------------- groups -- */
@@ -436,11 +483,13 @@
   padding: 6px 0;
   text-decoration: underline;
   text-decoration-color: var(--red);
+  text-decoration-color: var(--rust);
   text-underline-offset: 6px;
   white-space: nowrap;
   transition: color 0.18s ease;
 }
 .acg-link:hover { color: var(--red); }
+.acg-link:hover { color: var(--rust); }
 
 .acg-grid {
   display: grid;
@@ -456,6 +505,7 @@
   background: var(--card);
   border: 1px solid var(--line);
   border-top: 3px solid var(--red);
+  border-top: 3px solid var(--rust);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
@@ -463,6 +513,7 @@
 .acg-moa:hover {
   transform: translateY(-4px);
   box-shadow: 0 13px 28px rgba(0, 77, 56, 0.12);
+  box-shadow: 0 13px 28px rgba(25, 55, 46, 0.1);
 }
 
 .acg-moa__top {
@@ -494,6 +545,16 @@
 .acg-moa__name {
   margin-top: 18px;
   font-family: var(--display);
+  background: #f0ded6;
+  color: #995138;
+  white-space: nowrap;
+}
+.acg-chip--green { background: #dfeadb; color: #396044; }
+.acg-chip--blue { background: #dce7e9; color: #436a77; }
+
+.acg-moa__name {
+  margin-top: 18px;
+  font-family: var(--serif);
   font-weight: 700;
   font-size: 19px;
   line-height: 1.3;
@@ -517,6 +578,7 @@
   background: var(--paper-muted);
 }
 .acg-moa__bar span { display: block; height: 100%; background: var(--golden); }
+.acg-moa__bar span { display: block; height: 100%; background: var(--rust); }
 
 /* --------------------------------------------------------------- tools -- */
 .acg-tools {
@@ -547,11 +609,19 @@
 .acg-tool--primary .acg-tool__title { color: #ffffff; }
 .acg-tool--primary .acg-tool__desc { color: rgba(255, 255, 255, 0.8); }
 .acg-tool--primary .acg-tool__go { color: #f3ddb0; }
+  color: #f2f7f3;
+  box-shadow: 0 16px 34px rgba(0, 106, 78, 0.22);
+}
+.acg-tool--primary:hover { box-shadow: 0 20px 40px rgba(0, 106, 78, 0.28); }
+.acg-tool--primary .acg-tool__title { color: #f2f7f3; }
+.acg-tool--primary .acg-tool__desc { color: rgba(242, 247, 243, 0.78); }
+.acg-tool--primary .acg-tool__go { color: #d9ead9; }
 
 .acg-tool--ghost {
   background: var(--card);
   border: 1px solid var(--line);
   border-top: 3px solid var(--red);
+  border-top: 3px solid var(--rust);
 }
 .acg-tool--ghost .acg-tool__title { color: var(--green-900); }
 .acg-tool--ghost .acg-tool__desc { color: var(--muted); }
@@ -570,6 +640,11 @@
 
 .acg-tool__title {
   font-family: var(--display);
+.acg-tool--primary .acg-tool__icon { background: rgba(242, 247, 243, 0.14); color: #f2f7f3; }
+.acg-tool--ghost .acg-tool__icon { background: rgba(0, 106, 78, 0.09); color: var(--green); }
+
+.acg-tool__title {
+  font-family: var(--serif);
   font-weight: 700;
   font-size: 21px;
   line-height: 1.3;

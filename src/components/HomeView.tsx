@@ -17,6 +17,13 @@ import {
   Share2,
   ShieldCheck,
   Sparkles,
+import React, { useMemo } from 'react';
+import {
+  ArrowUpRight,
+  BookOpen,
+  Calculator,
+  Search,
+  ShieldCheck,
 } from 'lucide-react';
 import { ChemicalProduct, AppTab, MoAClassification } from '../types';
 import { MOA_DATABASE } from '../data/moaData';
@@ -94,6 +101,70 @@ const PartnerAppLogo: React.FC<{
     />
   );
 };
+import './HomeView.css';
+
+// ---------------------------------------------------------------------------
+// HomeView — "pain-point editorial" redesign.
+//
+// The home tab now opens the way the FIELD/GUIDE reference site does: it
+// names the farmer's silent frustration ("ওষুধ দিয়েছি, তবু পোকা মরছে না!"),
+// reframes the blame (it is not the product — it is repeating the same MoA
+// group), and then hands over the tools that break the cycle.
+//
+// Every number on the page is computed live from the merged product
+// catalogue that App.tsx hydrates (curated + DAE register), and every CTA
+// navigates through the app's real tab switch — no dead buttons.
+// ---------------------------------------------------------------------------
+
+/**
+ * Rotation partner codes for a MoA group, derived from the group's own
+ * rotation strategy text (codes such as "3A", "28", "M3" are validated
+ * against the controlled MoA database). Falls back to the biggest
+ * alternative groups of the same scheme when parsing yields nothing.
+ */
+function rotationPartners(
+  group: MoAClassification,
+  codesInUse: Map<string, number>
+): string[] {
+  const allCodes = new Set(MOA_DATABASE.map((m) => m.code));
+  const out: string[] = [];
+  const seen = new Set<string>();
+  const push = (code: string) => {
+    if (code !== group.code && allCodes.has(code) && !seen.has(code)) {
+      seen.add(code);
+      out.push(code);
+    }
+  };
+
+  const strategy = group.rotationStrategy || '';
+  const tokens = strategy.match(/\b[A-Z]?\d{1,3}[A-Z]?\b/g) || [];
+  for (const tok of tokens) {
+    // Same-scheme only: a cross-system code (e.g. "FRAC 1" as a partner of
+    // the insecticide IRAC 1B) would be agronomically meaningless.
+    push(`${group.type} ${tok}`);
+    if (out.length >= 3) break;
+  }
+
+  // Fallback: most-used remaining groups of the same scheme (only when the
+  // strategy text left room; never exceed 3 partners).
+  if (out.length < 3) {
+    const sameScheme = [...codesInUse.entries()]
+      .filter(([code]) => code !== group.code && code.startsWith(group.type))
+      .sort((a, b) => b[1] - a[1]);
+    for (const [code] of sameScheme) {
+      if (out.length >= 3) break;
+      push(code);
+    }
+  }
+  return out;
+}
+
+/** Chip accent per MoA system, mirroring the reference card palette. */
+const schemeTone = (type: string): string => {
+  if (type === 'FRAC') return 'acg-chip--blue';
+  if (type === 'HRAC') return 'acg-chip--green';
+  return ''; // IRAC keeps the rust chip
+};
 
 /**
  * Rotation partner codes for a MoA group, derived from the group's own
@@ -141,7 +212,6 @@ function rotationPartners(
 export const HomeView: React.FC<HomeViewProps> = ({
   products,
   onNavigateTab,
-  onSelectCropFilter,
   onOpenShareModal,
   totalProductsCount,
   onOpenDrawer,
@@ -184,6 +254,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
   // --------------------------------------- Feature previewer active tab --
   const [activeFeature, setActiveFeature] = useState(0);
+
+}) => {
+  const { language, formatNum, transRisk } = useLanguage();
+  const bn = language === 'bn';
+
+  const go = (tab: AppTab) => {
+    onNavigateTab(tab);
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0 });
+  };
 
   // ---------------------------------------------------------------------
   // Real catalogue statistics — recomputed only when the database changes.
@@ -483,6 +562,43 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <div className="acg-stat__label">{copy.stat1Label}</div>
           <div className="acg-stat__detail">{copy.stat1Detail}</div>
         </div>
+        </div>
+
+        <div className="acg-hero__visual">
+          <div className="acg-photo-frame" />
+          <div className="acg-photo" />
+          <div className="acg-stamp" aria-hidden="true">
+            <span>IRAC</span>
+            <b>FRAC</b>
+            <span>HRAC</span>
+          </div>
+
+          <figure className="acg-dialog">
+            <span className="acg-dialog__kicker">{copy.dialogKicker}</span>
+            <div className="acg-dialog__row">
+              <span className="acg-dialog__who">{copy.farmer}</span>
+              <blockquote className="acg-dialog__quote" style={{ margin: 0 }}>
+                {copy.farmerQuote}
+              </blockquote>
+            </div>
+            <div className="acg-dialog__row acg-dialog__row--guide">
+              <span className="acg-dialog__who">{copy.guide}</span>
+              <blockquote className="acg-dialog__quote" style={{ margin: 0 }}>
+                {copy.guideQuote}
+              </blockquote>
+            </div>
+            <figcaption className="acg-dialog__foot">{copy.dialogFoot}</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------ STATS BAND ---- */}
+      <section className="acg-stats acg-shell" aria-label="Database statistics">
+        <div className="acg-stat">
+          <div className="acg-stat__value">{totalLabel}</div>
+          <div className="acg-stat__label">{copy.stat1Label}</div>
+          <div className="acg-stat__detail">{copy.stat1Detail}</div>
+        </div>
         <div className="acg-stat">
           <div className="acg-stat__value">{mappedLabel}</div>
           <div className="acg-stat__label">{copy.stat2Label}</div>
@@ -565,7 +681,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
           </div>
         </div>
-      </section>
 
       {/* ------------------------------------------------ TOP GROUPS ---- */}
       <section className="acg-groups acg-shell">
@@ -1036,6 +1151,66 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </a>
             </div>
           </div>
+        <div className="acg-logic">
+          <div className="acg-logic__step">
+            <span className="acg-logic__num">{bn ? '০১' : '01'}</span>
+            <div>
+              <div className="acg-logic__title">{copy.step1}</div>
+              <p className="acg-logic__desc">{copy.step1Desc}</p>
+            </div>
+          </div>
+          <div className="acg-logic__line" />
+          <div className="acg-logic__step">
+            <span className="acg-logic__num">{bn ? '০২' : '02'}</span>
+            <div>
+              <div className="acg-logic__title">{copy.step2}</div>
+              <p className="acg-logic__desc">{copy.step2Desc}</p>
+            </div>
+          </div>
+          <div className="acg-logic__line" />
+          <div className="acg-logic__step">
+            <span className="acg-logic__num">{bn ? '০৩' : '03'}</span>
+            <div>
+              <div className="acg-logic__title">{copy.step3}</div>
+              <p className="acg-logic__desc">{copy.step3Desc}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------ TOP GROUPS ---- */}
+      <section className="acg-groups acg-shell">
+        <div className="acg-section-head">
+          <div>
+            <span className="acg-kicker">{copy.groupsKicker}</span>
+            <h2 className="acg-h2">{copy.groupsH2}</h2>
+          </div>
+          <button className="acg-link" onClick={() => go('rotation')}>
+            {copy.groupsLink} <ArrowUpRight size={15} />
+          </button>
+        </div>
+
+        <div className="acg-grid">
+          {topGroups.map((g) => (
+            <button key={g.key} className="acg-moa" onClick={() => go('rotation')}>
+              <div className="acg-moa__top">
+                <span className={`acg-chip ${g.tone}`}>{g.chip}</span>
+                <span>{g.countLabel}</span>
+              </div>
+              <h3 className="acg-moa__name">{g.name}</h3>
+              <div className="acg-moa__meta">
+                <span>
+                  {copy.riskLabel} <b>{g.risk}</b>
+                </span>
+                <span>
+                  {copy.partnerLabel} <b>{g.partners || '—'}</b>
+                </span>
+              </div>
+              <div className="acg-moa__bar">
+                <span style={{ width: `${g.barWidth}%` }} />
+              </div>
+            </button>
+          ))}
         </div>
 
         <p className="acg-disclaimer">
@@ -1071,6 +1246,42 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <FileDown size={15} /> {bn ? 'পকেট গাইড' : 'Pocket guide'}
             </button>
           </div>
+      {/* ------------------------------------------------ QUICK TOOLS --- */}
+      <section className="acg-shell">
+        <div className="acg-section-head" style={{ marginTop: 24 }}>
+          <div>
+            <span className="acg-kicker">{copy.toolsKicker}</span>
+            <h2 className="acg-h2">
+              {copy.toolsH2a} <em>{copy.toolsH2b}</em>
+            </h2>
+          </div>
+          <button className="acg-link" onClick={onOpenShareModal}>
+            {bn ? 'অ্যাপটি শেয়ার করুন' : 'Share the app'} <ArrowUpRight size={15} />
+          </button>
+        </div>
+
+        <div className="acg-tools">
+          <button className="acg-tool acg-tool--primary" onClick={() => go('calculator')}>
+            <span className="acg-tool__icon">
+              <Calculator size={20} />
+            </span>
+            <span className="acg-tool__title">{copy.tool1Title}</span>
+            <span className="acg-tool__desc">{copy.tool1Desc}</span>
+            <span className="acg-tool__go">
+              {copy.tool1Btn} <ArrowUpRight size={15} />
+            </span>
+          </button>
+
+          <button className="acg-tool acg-tool--ghost" onClick={() => go('guidebook')}>
+            <span className="acg-tool__icon">
+              <BookOpen size={20} />
+            </span>
+            <span className="acg-tool__title">{copy.tool2Title}</span>
+            <span className="acg-tool__desc">{copy.tool2Desc}</span>
+            <span className="acg-tool__go">
+              {copy.tool2Btn} <ArrowUpRight size={15} />
+            </span>
+          </button>
         </div>
       </section>
     </div>
