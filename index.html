@@ -17,6 +17,17 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-default.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <!--
+      Home tab editorial fonts: Noto Serif Bengali (display headlines),
+      Hind Siliguri (body), IBM Plex Mono (micro-labels & chips).
+      Loaded with display=swap so Bengali text never renders invisibly.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+Bengali:wght@600;700;800&display=swap"
+    />
+    <!--
       OG_IMAGE_ORIGIN placeholder: the production server (server.ts) rewrites
       this string at request time to the real origin (protocol + host) seen by
       the client. This way the same index.html works on any deployment domain
