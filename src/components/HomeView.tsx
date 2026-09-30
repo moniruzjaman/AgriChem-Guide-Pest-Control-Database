@@ -33,11 +33,11 @@ interface HomeViewProps {
   onOpenDrawer: () => void;
 }
 
-/** Chip accent per MoA system, mirroring the reference card palette. */
+/** Chip accent per MoA system, mirroring the Bangladesh palette. */
 const schemeTone = (type: string): string => {
-  if (type === 'FRAC') return 'acg-chip--blue';
+  if (type === 'FRAC') return 'acg-chip--gold';
   if (type === 'HRAC') return 'acg-chip--green';
-  return ''; // IRAC keeps the rust chip
+  return ''; // IRAC keeps the red chip
 };
 
 /**
@@ -300,7 +300,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
         <div className="acg-hero__visual">
           <div className="acg-photo-frame" />
-          <div className="acg-photo" />
+          <div
+            className="acg-photo"
+            role="img"
+            aria-label={
+              bn
+                ? 'পেঁপে ফলে রোগের উপসর্গ — মাঠ থেকে তোলা ছবি'
+                : 'Papaya fruit with anthracnose lesions — photo from the field'
+            }
+          />
           <div className="acg-stamp" aria-hidden="true">
             <span>IRAC</span>
             <b>FRAC</b>
