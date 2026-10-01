@@ -9,12 +9,14 @@ import { DocumentMeta } from './components/DocumentMeta';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { useLanguage } from './context/LanguageContext';
 import { useReadAloud } from './hooks/useReadAloud';
+import { detectSharedVisit, flushPendingDownloads } from './utils/analytics';
 import { Analytics } from '@vercel/analytics/react';
 import {
   Leaf,
   Share2,
   Users,
-  Eye
+  Eye,
+  Download
 } from 'lucide-react';
 
 // ---------------------------------------------------------------------------
@@ -160,8 +162,16 @@ export default function App() {
     readAloud.toggle(el.innerText);
   };
 
+  // On load: detect if this visit came from a shared link (?from=share etc.)
+  // and retry any download events that failed while offline. This powers the
+  // "did the shared person actually open it?" analytics on the server.
+  useEffect(() => {
+    detectSharedVisit();
+    flushPendingDownloads();
+  }, []);
+
   // Real-time visitor counts state
-  const [visitorStats, setVisitorStats] = useState<{ total: number; unique: number; active: number } | null>(null);
+  const [visitorStats, setVisitorStats] = useState<{ total: number; unique: number; active: number; downloads: number; shareDownloads: number } | null>(null);
 
   useEffect(() => {
     let isNewSession = false;
@@ -517,6 +527,26 @@ export default function App() {
                     <strong className="text-slate-800">{formatNum(visitorStats.active)}</strong>
                   </span>
                 </div>
+                <div className="h-3 w-px bg-slate-200" />
+                <div className="flex items-center gap-1">
+                  <Download className="w-3.5 h-3.5 text-violet-600" />
+                  <span title={language === 'bn' ? 'মোট ডাউনলোড (PDF/গাইড)' : 'Total PDF/guide downloads'}>
+                    {language === 'bn' ? 'ডাউনলোড:' : 'Downloads:'}{' '}
+                    <strong className="text-slate-800">{formatNum(visitorStats.downloads ?? 0)}</strong>
+                  </span>
+                </div>
+                {(visitorStats.shareDownloads ?? 0) > 0 && (
+                  <>
+                    <div className="h-3 w-px bg-slate-200" />
+                    <div className="flex items-center gap-1">
+                      <Share2 className="w-3.5 h-3.5 text-emerald-600" />
+                      <span title={language === 'bn' ? 'শেয়ার করা লিংক খুলে ডাউনলোড হয়েছে' : 'Downloads made by visitors who opened a shared link'}>
+                        {language === 'bn' ? 'শেয়ার থেকে:' : 'Via share:'}{' '}
+                        <strong className="text-slate-800">{formatNum(visitorStats.shareDownloads)}</strong>
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
             )}
 

@@ -11,8 +11,26 @@ async function startServer() {
 
   const DATA_FILE = path.join(process.cwd(), "visitor_counts.json");
   
+  interface DownloadRecord {
+    kind: string;
+    label: string;
+    ts: number;
+    /** True when the download was performed by a visitor who arrived through
+     *  a shared link (?from=share / ?ref=share / #sh- hash). This is how we
+     *  tell whether a person we shared with actually opened the app and
+     *  downloaded something. */
+    viaShare: boolean;
+  }
+
+  // Keep only the most recent download records so the JSON file stays small.
+  const MAX_DOWNLOAD_RECORDS = 1000;
+
   // Initialize and load visitor data once on server startup
-  let visitorData = { total: 0, uniqueIps: [] as string[] };
+  let visitorData = {
+    total: 0,
+    uniqueIps: [] as string[],
+    downloads: [] as DownloadRecord[],
+  };
   try {
     if (fs.existsSync(DATA_FILE)) {
       const fileContent = fs.readFileSync(DATA_FILE, "utf8");
@@ -26,6 +44,7 @@ async function startServer() {
   // Safeguard array and number structures
   if (typeof visitorData.total !== "number") visitorData.total = 0;
   if (!Array.isArray(visitorData.uniqueIps)) visitorData.uniqueIps = [];
+  if (!Array.isArray(visitorData.downloads)) visitorData.downloads = [];
 
   // Atomic file save helper to prevent concurrent file truncations or corruptions
   const saveVisitorDataAtomic = () => {
@@ -49,6 +68,85 @@ async function startServer() {
     }
     return req.socket.remoteAddress || "127.0.0.1";
   };
+
+  // Shared stats payload for all API responses. `downloads` is the total
+  // number of PDF/guide downloads recorded server-side; `shareDownloads`
+  // counts only those made by visitors who arrived via a shared link —
+  // i.e. evidence that the person you shared with actually opened the app.
+  const buildStatsPayload = () => ({
+    total: visitorData.total,
+    unique: visitorData.uniqueIps.length,
+    active: Math.max(1, activeUsers.size),
+    downloads: visitorData.downloads.length,
+    shareDownloads: visitorData.downloads.filter((d) => d.viaShare).length,
+  });
+
+  // Log a content download (PDF guide, prescription, rotation schedule…).
+  // The client sends `viaShare` when the visitor arrived through a shared
+  // link (?from=share / ?ref=share / #sh- hash), so we can attribute
+  // downloads back to shares.
+  app.post("/api/downloads/log", (req, res) => {
+    try {
+      const { kind, label, viaShare } = req.body || {};
+      visitorData.downloads.push({
+        kind: String(kind || "unknown").slice(0, 40),
+        label: String(label || "").slice(0, 120),
+        ts: Date.now(),
+        viaShare: Boolean(viaShare),
+      });
+      // Trim oldest records beyond the cap.
+      if (visitorData.downloads.length > MAX_DOWNLOAD_RECORDS) {
+        visitorData.downloads = visitorData.downloads.slice(-MAX_DOWNLOAD_RECORDS);
+      }
+      saveVisitorDataAtomic();
+      res.json(buildStatsPayload());
+    } catch (error) {
+      console.error("Error in download log route:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  // Lightweight beacon endpoint used by navigator.sendBeacon on unload, so
+  // downloads triggered right before closing the tab still get counted.
+  app.post("/api/downloads/beacon", express.text({ type: "*/*" }), (req, res) => {
+    try {
+      let body: any = {};
+      if (typeof req.body === "string" && req.body.trim()) {
+        try {
+          body = JSON.parse(req.body);
+        } catch {
+          const params = new URLSearchParams(req.body);
+          body = {
+            kind: params.get("kind"),
+            label: params.get("label"),
+            viaShare: params.get("viaShare") === "true",
+          };
+        }
+      } else if (req.query && Object.keys(req.query).length) {
+        body = {
+          kind: req.query.kind,
+          label: req.query.label,
+          viaShare: req.query.viaShare === "true",
+        };
+      }
+      if (body && body.kind) {
+        visitorData.downloads.push({
+          kind: String(body.kind).slice(0, 40),
+          label: String(body.label || "").slice(0, 120),
+          ts: Date.now(),
+          viaShare: Boolean(body.viaShare),
+        });
+        if (visitorData.downloads.length > MAX_DOWNLOAD_RECORDS) {
+          visitorData.downloads = visitorData.downloads.slice(-MAX_DOWNLOAD_RECORDS);
+        }
+        saveVisitorDataAtomic();
+      }
+      res.status(204).end();
+    } catch (error) {
+      console.error("Error in download beacon route:", error);
+      res.status(500).end();
+    }
+  });
 
   // Log a visitor hit and fetch updated stats
   app.post("/api/visitors/hit", (req, res) => {
@@ -81,11 +179,7 @@ async function startServer() {
         }
       }
 
-      res.json({
-        total: visitorData.total,
-        unique: visitorData.uniqueIps.length,
-        active: Math.max(1, activeUsers.size) // ensure at least 1 (the current user) is active
-      });
+      res.json(buildStatsPayload());
     } catch (error) {
       console.error("Error in visitor hit route:", error);
       res.status(500).json({ error: "Internal server error" });
@@ -108,11 +202,7 @@ async function startServer() {
         }
       }
 
-      res.json({
-        total: visitorData.total,
-        unique: visitorData.uniqueIps.length,
-        active: Math.max(1, activeUsers.size)
-      });
+      res.json(buildStatsPayload());
     } catch (error) {
       console.error("Error in visitor stats route:", error);
       res.status(500).json({ error: "Internal server error" });

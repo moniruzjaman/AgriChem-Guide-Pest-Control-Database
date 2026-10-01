@@ -1,4 +1,5 @@
 import { ChemicalProduct, DosageResult, DosageInput, SprayRotationStep } from '../types';
+import { logDownload } from './analytics';
 
 // Lazy loader for PDF generation libraries to prevent heavy upfront evaluation
 async function loadPdfEngines() {
@@ -94,6 +95,8 @@ export async function exportSingleProductPDF(product: ChemicalProduct) {
   doc.text('PesticideNext Guidebook - Department of Agricultural Extension / Agricultural Field Reference.', 14, pageHeight - 8);
 
   doc.save(`${product.tradeName.replace(/[^a-zA-Z0-9]/g, '_')}_Field_Guide.pdf`);
+  // Analytics: count this download server-side (share-attributed if applicable)
+  logDownload('product-guide', product.tradeName);
 }
 
 export async function exportCropGuidePDF(cropName: string, products: ChemicalProduct[]) {
@@ -151,6 +154,7 @@ export async function exportCropGuidePDF(cropName: string, products: ChemicalPro
   }
 
   doc.save(`${cropName.replace(/\s+/g, '_')}_Pest_Control_Guide.pdf`);
+  logDownload('crop-guide', cropName);
 }
 
 export async function exportDosagePrescriptionPDF(
@@ -220,6 +224,7 @@ export async function exportDosagePrescriptionPDF(
   });
 
   doc.save(`${product.tradeName}_Dosage_Prescription.pdf`);
+  logDownload('dosage-prescription', product.tradeName);
 }
 
 export async function exportRotationSchedulePDF(crop: string, pest: string, steps: SprayRotationStep[]) {
@@ -256,4 +261,5 @@ export async function exportRotationSchedulePDF(crop: string, pest: string, step
   });
 
   doc.save(`${crop}_${pest}_Rotation_Schedule.pdf`);
+  logDownload('rotation-schedule', `${crop} - ${pest}`);
 }

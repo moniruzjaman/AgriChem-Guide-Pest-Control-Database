@@ -126,10 +126,12 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   const currentTitle = language === 'bn' ? currentInfo.titleBn : currentInfo.titleEn;
   const currentDesc = language === 'bn' ? currentInfo.descBn : currentInfo.descEn;
   
-  // URL with hash or param
-  const shareUrl = selectedTarget === 'home' 
-    ? origin 
-    : `${origin}/#${selectedTarget}`;
+  // URL with hash or param. `?from=share` tags the link so that when the
+  // recipient opens it, the app records the visit as share-originated — this
+  // is what lets us tell whether a shared person actually opened the app
+  // (and whether they downloaded anything).
+  const shareBase = selectedTarget === 'home' ? origin : `${origin}/#${selectedTarget}`;
+  const shareUrl = `${shareBase}${shareBase.includes('?') ? '&' : '?'}from=share`;
 
   const fullShareText = `${currentTitle}\n\n${currentDesc}\n\n🔗 ${shareUrl}\n\n${currentInfo.tag}`;
 
