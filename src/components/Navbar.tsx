@@ -14,7 +14,9 @@ import {
   Languages,
   Share2,
   Compass,
-  Menu
+  Menu,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
@@ -28,6 +30,12 @@ interface NavbarProps {
   unreadAlertCount: number;
   onOpenAlerts: () => void;
   onOpenShare: () => void;
+  /** TTS availability in this browser (Web Speech API). */
+  readAloudSupported?: boolean;
+  /** True while the read-aloud utterance is playing. */
+  readAloudSpeaking?: boolean;
+  /** Toggle read-aloud for the current page content. */
+  onToggleReadAloud?: () => void;
   totalProductsCount: number;
   onOpenDrawer: () => void;
 }
@@ -40,6 +48,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   unreadAlertCount,
   onOpenAlerts,
   onOpenShare,
+  readAloudSupported = true,
+  readAloudSpeaking = false,
+  onToggleReadAloud,
   totalProductsCount,
   onOpenDrawer
 }) => {
@@ -150,6 +161,41 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Share2 className="w-3.5 h-3.5 text-emerald-600" />
               <span className="hidden sm:inline">{t('btn_share')}</span>
             </button>
+
+            {/* Read-Aloud (TTS) Button — beside Share */}
+            {readAloudSupported && (
+              <button
+                id="header-read-aloud-btn"
+                onClick={onToggleReadAloud}
+                aria-pressed={readAloudSpeaking}
+                className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-xl border font-semibold text-xs transition shadow-2xs cursor-pointer select-none ${
+                  readAloudSpeaking
+                    ? 'border-emerald-600 bg-emerald-600 text-white'
+                    : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-emerald-800'
+                }`}
+                title={
+                  language === 'bn'
+                    ? readAloudSpeaking
+                      ? 'শোনা থামান'
+                      : 'এই পাতাটি জোরে পড়ে শোনান (Read Aloud)'
+                    : readAloudSpeaking
+                      ? 'Stop reading aloud'
+                      : 'Read this page aloud (Text-to-Speech)'
+                }
+                aria-label={
+                  language === 'bn' ? 'জোরে পড়ুন / টেক্সট-টু-স্পিচ' : 'Read aloud / Text-to-Speech'
+                }
+              >
+                {readAloudSpeaking ? (
+                  <VolumeX className="w-3.5 h-3.5" />
+                ) : (
+                  <Volume2 className="w-3.5 h-3.5 text-emerald-600" />
+                )}
+                <span className="hidden sm:inline">
+                  {language === 'bn' ? 'শুনুন' : 'Listen'}
+                </span>
+              </button>
+            )}
 
             {/* PWA In-App Install Button */}
             <PWAInstallButton />

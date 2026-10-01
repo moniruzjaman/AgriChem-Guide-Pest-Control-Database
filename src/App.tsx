@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { ChemicalProduct, RegulatoryAlert, AppTab } from './types';
 import { loadDatabase } from './data/loadDatabase';
 import { INITIAL_REGULATORY_ALERTS } from './data/regulatoryAlertsData';
@@ -8,6 +8,7 @@ import { ShareModal } from './components/ShareModal';
 import { DocumentMeta } from './components/DocumentMeta';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { useLanguage } from './context/LanguageContext';
+import { useReadAloud } from './hooks/useReadAloud';
 import { Analytics } from '@vercel/analytics/react';
 import {
   Leaf,
@@ -138,6 +139,26 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  // ---------------------------------------------------------------------------
+  // Read-aloud (TTS) — Web Speech API hook surfaced as a speaker icon in the
+  // navbar right beside the Share button. The main content region is captured
+  // via ref so the current tab's visible text can be spoken on demand.
+  // ---------------------------------------------------------------------------
+  const readAloud = useReadAloud(language);
+  const mainContentRef = useRef<HTMLElement | null>(null);
+
+  // Stop any active speech whenever the user navigates to a different tab.
+  useEffect(() => {
+    readAloud.stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
+
+  const handleReadAloudToggle = () => {
+    const el = mainContentRef.current;
+    if (!el) return;
+    readAloud.toggle(el.innerText);
+  };
 
   // Real-time visitor counts state
   const [visitorStats, setVisitorStats] = useState<{ total: number; unique: number; active: number } | null>(null);
@@ -272,12 +293,15 @@ export default function App() {
         unreadAlertCount={unreadAlertCount}
         onOpenAlerts={() => setActiveTab('alerts')}
         onOpenShare={() => setIsShareModalOpen(true)}
+        readAloudSupported={readAloud.supported}
+        readAloudSpeaking={readAloud.speaking}
+        onToggleReadAloud={handleReadAloudToggle}
         totalProductsCount={products.length}
         onOpenDrawer={() => setIsDrawerOpen(true)}
       />
 
       {/* Main View Area */}
-      <main className="flex-1">
+      <main className="flex-1" ref={mainContentRef}>
         {activeTab === 'home' && (
           <HomeView
             products={products}
