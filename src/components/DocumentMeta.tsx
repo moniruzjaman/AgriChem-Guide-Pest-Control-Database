@@ -19,11 +19,11 @@ const TAB_META: Record<AppTab, {
   home: {
     en: {
       title: 'PesticideNext — Smart Crop Chemical & Pest Management Suite',
-      description: 'All-in-one agricultural platform: 5,711+ DAE pesticides, Knapsack sprayer tank calculator, MoA resistance rotation planner, WHO safety protocols, and offline pocket guidebook.'
+      description: 'The next spray, without the mistake — 5,711+ DAE pesticides, MoA rotation, tank calculator, and pocket book for Bangladesh.'
     },
     bn: {
       title: 'পেস্টিসাইডনেক্সট — আধুনিক বালাই ব্যবস্থাপনা ও সঠিক রাসায়নিক মাত্রা সহায়িকা',
-      description: 'বাংলাদেশের মাঠ ফসলের জন্য ডিএই নিবন্ধিত ৫,৭১১+ বালাইনাশক ডাটাবেস, ন্যাপস্যাক স্প্রেয়ার ট্যাংক ক্যালকুলেটর, প্রতিরোধ রোধে MoA রোটেশন ও বিনামূল্যে পকেট বুক ম্যানুয়াল।'
+      description: 'পরের স্প্রে, আর ভুল হবে না — বাংলাদেশের মাঠ ফসলের জন্য ৫,৭১১+ DAE বালাইনাশক, MoA রোটেশন, ট্যাংক ক্যালকুলেটর ও পকেট বুক।'
     }
   },
   database: {
@@ -162,13 +162,18 @@ export const DocumentMeta: React.FC<{ activeTab: AppTab }> = ({ activeTab }) => 
     setNamedMeta('property', 'og:image:height', '630');
     setNamedMeta('property', 'og:image:type', 'image/png');
 
-    // Twitter / X card meta tags intentionally omitted — sharing priority
-    // is WhatsApp, Messenger, Facebook, and LinkedIn (per product
-    // decision). Twitter's summary_large_image card was removed to avoid
-    // maintaining a parallel meta-tag namespace that is no longer a
-    // distribution channel. Twitter still falls back to og:image via
-    // Open Graph compatibility, so the preview card continues to render
-    // there too.
+    // Twitter / X card meta tags. Although Twitter/X is no longer a share
+    // priority (the share button was replaced with LinkedIn in PR #33),
+    // opengraph.xyz and similar preview validators flag the absence of
+    // twitter:card as a defect — and without it, Twitter/X falls back to
+    // a tiny summary card instead of the large-image preview. Adding
+    // these tags costs nothing and keeps the preview card rendering
+    // correctly on every platform that respects Twitter's card spec.
+    setNamedMeta('name', 'twitter:card', 'summary_large_image');
+    setNamedMeta('name', 'twitter:title', copy.title);
+    setNamedMeta('name', 'twitter:description', copy.description);
+    setNamedMeta('name', 'twitter:image', ogImageAbs);
+    setNamedMeta('name', 'twitter:image:alt', ogImageAlt);
 
     // Schema.org WebApplication JSON-LD
     let scriptEl = document.head.querySelector('script[type="application/ld+json"]');
