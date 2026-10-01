@@ -1751,13 +1751,26 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                 </div>
               </div>
             ) : viewMode === 'grouped' ? (
-              
-              // View Mode 2: Compact, Grouped by Active Ingredient,
-              // organized under Category Section Headers (Insecticide / Fungicide /
-              // Herbicide / Miticide / Bio Pesticide / etc.) so users can scan the
-              // catalogue by what kind of pest they're fighting.
+
+              // View Mode 2: Dashboard + Grouped by Active Ingredient.
+              //
+              // Layout (top → bottom):
+              //   1. CATEGORY DASHBOARD STRIP — fixed-grid row of clickable
+              //      category snapshot cards. Click → smooth-scrolls to
+              //      that category section below. Makes category-wise
+              //      browsing + search easier.
+              //   2. CATEGORY SECTIONS — each category gets a colored
+              //      section header (red/golden/green per IRAC/FRAC/HRAC
+              //      scheme tone) + its ingredient groups underneath.
+              //   3. INGREDIENT HEADERS — stable-width grid (1fr auto)
+              //      so the right-side brand-count column is always the
+              //      same width.
+              //   4. BRAND ROWS — CSS Grid with fixed column tracks
+              //      (240px 130px 180px 150px) so every brand row aligns
+              //      identically. Long text truncates instead of pushing
+              //      columns around. Width never fluctuates per row.
               <div className="space-y-6">
-                
+
                 {/* Expand / Collapse All control triggers */}
                 <div className="flex justify-end gap-3 text-[11px] font-bold text-emerald-800">
                   <button onClick={expandAll} className="hover:underline cursor-pointer">{language === 'bn' ? 'সবগুলো গ্রুপ খুলুন' : 'Expand All Groups'}</button>
@@ -1805,283 +1818,274 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                   });
 
                   // Visual identity per category — top-border color + emoji +
-                  // short bilingual description. Matches the editorial design
-                  // language: IRAC red, FRAC golden, HRAC green, neutral muted.
-                  const catTheme = (cat: string): { border: string; emoji: string; descBn: string; descEn: string } => {
-                    if (cat === 'Insecticide')   return { border: 'var(--red, #f42a41)', emoji: '🐛', descBn: 'কীটনাশক — পোকা ও মাকড় দমন', descEn: 'Insecticide — controls insect pests' };
-                    if (cat === 'Fungicide')     return { border: 'var(--golden, #e3b341)', emoji: '🍄', descBn: 'ছত্রাকনাশক — রোগ ও পাতার দাগ দমন', descEn: 'Fungicide — controls fungal diseases' };
-                    if (cat === 'Herbicide')     return { border: 'var(--green, #006a4e)', emoji: '🌿', descBn: 'আগাছানাশক — অনাকাঙ্ক্ষিত আগাছা দমন', descEn: 'Herbicide — controls unwanted weeds' };
-                    if (cat === 'Miticide')      return { border: '#8b5cf6', emoji: '🕷️', descBn: 'মাইটনাশক — মাকড় ও সুতোর মাইট দমন', descEn: 'Miticide — controls mites & spider mites' };
-                    if (cat === 'Bio Pesticide') return { border: '#10b981', emoji: '🦠', descBn: 'জৈব বালাইনাশক — পরিবেশবান্ধব জীববিজ্ঞান', descEn: 'Bio-pesticide — eco-friendly biological control' };
-                    if (cat === 'Rodenticide')   return { border: '#92400e', emoji: '🐀', descBn: 'ইঁদুরনাশক — ইঁদুর ও কৃন্তক দমন', descEn: 'Rodenticide — controls rodents' };
+                  // short bilingual description + dashboard card tone class.
+                  // Matches the editorial design language: IRAC red,
+                  // FRAC golden, HRAC green, neutral muted.
+                  const catTheme = (cat: string): {
+                    border: string; emoji: string; descBn: string; descEn: string; tone: string;
+                  } => {
+                    if (cat === 'Insecticide')   return { border: 'var(--red, #f42a41)', emoji: '🐛', descBn: 'কীটনাশক — পোকা ও মাকড় দমন', descEn: 'Insecticide — controls insect pests', tone: 'acg-db-dash-card--red' };
+                    if (cat === 'Fungicide')     return { border: 'var(--golden, #e3b341)', emoji: '🍄', descBn: 'ছত্রাকনাশক — রোগ ও পাতার দাগ দমন', descEn: 'Fungicide — controls fungal diseases', tone: 'acg-db-dash-card--gold' };
+                    if (cat === 'Herbicide')     return { border: 'var(--green, #006a4e)', emoji: '🌿', descBn: 'আগাছানাশক — অনাকাঙ্ক্ষিত আগাছা দমন', descEn: 'Herbicide — controls unwanted weeds', tone: 'acg-db-dash-card--green' };
+                    if (cat === 'Miticide')      return { border: '#8b5cf6', emoji: '🕷️', descBn: 'মাইটনাশক — মাকড় ও সুতোর মাইট দমন', descEn: 'Miticide — controls mites & spider mites', tone: 'acg-db-dash-card--violet' };
+                    if (cat === 'Bio Pesticide') return { border: '#10b981', emoji: '🦠', descBn: 'জৈব বালাইনাশক — পরিবেশবান্ধব জীববিজ্ঞান', descEn: 'Bio-pesticide — eco-friendly biological control', tone: 'acg-db-dash-card--bio' };
+                    if (cat === 'Rodenticide')   return { border: '#92400e', emoji: '🐀', descBn: 'ইঁদুরনাশক — ইঁদুর ও কৃন্তক দমন', descEn: 'Rodenticide — controls rodents', tone: 'acg-db-dash-card--brown' };
                     if (cat === 'Stored Grain' || cat === 'Store Grain Insecticide')
-                                                 return { border: '#a16207', emoji: '🌾', descBn: 'গুদামজাত শস্য সুরক্ষা — মজুত শস্যের পোকা দমন', descEn: 'Stored grain protection — controls storage pests' };
-                    if (cat === 'Public Health') return { border: '#0ea5e9', emoji: '🩺', descBn: 'জনস্বাস্থ্য — মশা ও বাহিত রোগ দমন', descEn: 'Public health — vector & mosquito control' };
-                    return { border: '#5d6f64', emoji: '🧪', descBn: 'অন্যান্য বালাইনাশক', descEn: 'Other pesticides' };
+                                                 return { border: '#a16207', emoji: '🌾', descBn: 'গুদামজাত শস্য সুরক্ষা — মজুত শস্যের পোকা দমন', descEn: 'Stored grain protection — controls storage pests', tone: 'acg-db-dash-card--amber' };
+                    if (cat === 'Public Health') return { border: '#0ea5e9', emoji: '🩺', descBn: 'জনস্বাস্থ্য — মশা ও বাহিত রোগ দমন', descEn: 'Public health — vector & mosquito control', tone: 'acg-db-dash-card--sky' };
+                    return { border: '#5d6f64', emoji: '🧪', descBn: 'অন্যান্য বালাইনাশক', descEn: 'Other pesticides', tone: 'acg-db-dash-card--muted' };
                   };
 
-                  return sortedCats.map((cat) => {
+                  // Pre-compute per-category metrics for the dashboard strip
+                  const catMetrics = sortedCats.map((cat) => {
                     const groups = byCategory.get(cat)!;
                     const totalBrands = groups.reduce((sum, g) => sum + g.products.length, 0);
                     const uniqueMoAs = new Set<string>();
                     groups.forEach((g) => { if (g.moaCode) uniqueMoAs.add(g.moaCode); });
-                    const theme = catTheme(cat);
-
-                    return (
-                      <section key={cat} className="acg-db-cat-section" style={{
-                        border: '1px solid var(--line, #dfe5dd)',
-                        background: 'var(--card, #fff)',
-                        borderTop: `3px solid ${theme.border}`,
-                        overflow: 'hidden'
-                      }}>
-                        {/* Category section header */}
-                        <header style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          gap: 12,
-                          padding: '14px 18px',
-                          background: 'var(--paper-muted, #e7eee8)',
-                          borderBottom: '1px solid var(--line, #dfe5dd)',
-                          flexWrap: 'wrap'
-                        }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flex: 1, minWidth: 0 }}>
-                            <span style={{ fontSize: 24, lineHeight: 1 }} aria-hidden>{theme.emoji}</span>
-                            <div style={{ minWidth: 0 }}>
-                              <h3 style={{
-                                fontFamily: 'var(--display, "Hind Siliguri", system-ui, sans-serif)',
-                                fontWeight: 700,
-                                fontSize: 18,
-                                color: 'var(--green-900, #004d38)',
-                                lineHeight: 1.25,
-                                letterSpacing: '-0.01em'
-                              }}>{transCat(cat)}</h3>
-                              <p style={{
-                                fontSize: 11.5,
-                                color: 'var(--muted, #5d6f64)',
-                                marginTop: 2,
-                                lineHeight: 1.55
-                              }}>{bn ? theme.descBn : theme.descEn}</p>
-                            </div>
-                          </div>
-                          {/* Category live counts */}
-                          <div style={{
-                            display: 'flex',
-                            gap: 14,
-                            alignItems: 'center',
-                            fontFamily: 'var(--mono, "IBM Plex Mono", monospace)',
-                            fontSize: 10,
-                            letterSpacing: '0.08em',
-                            textTransform: 'uppercase',
-                            color: 'var(--muted, #5d6f64)'
-                          }}>
-                            <span title={bn ? 'সক্রিয় উপাদান' : 'Active ingredients'}>
-                              <b style={{ color: 'var(--green-900, #004d38)', fontFamily: 'var(--display, sans-serif)', fontSize: 14 }}>{formatNum(groups.length)}</b>{' '}
-                              {bn ? 'উপাদান' : 'ingredients'}
-                            </span>
-                            <span style={{ color: 'var(--line)' }}>·</span>
-                            <span title={bn ? 'নিবন্ধিত ব্র্যান্ড' : 'Registered brands'}>
-                              <b style={{ color: 'var(--green-900, #004d38)', fontFamily: 'var(--display, sans-serif)', fontSize: 14 }}>{formatNum(totalBrands)}</b>{' '}
-                              {bn ? 'ব্র্যান্ড' : 'brands'}
-                            </span>
-                            {uniqueMoAs.size > 0 && (
-                              <>
-                                <span style={{ color: 'var(--line)' }}>·</span>
-                                <span title={bn ? 'MoA গ্রুপ' : 'MoA groups'}>
-                                  <b style={{ color: 'var(--green-900, #004d38)', fontFamily: 'var(--display, sans-serif)', fontSize: 14 }}>{formatNum(uniqueMoAs.size)}</b>{' '}
-                                  MoA
-                                </span>
-                              </>
-                            )}
-                          </div>
-                        </header>
-
-                        {/* Ingredient groups inside this category */}
-                        <div style={{ padding: '14px 14px', display: 'grid', gap: 12 }}>
-                {groups.map((group) => {
-                  const isExpanded = !!expandedIngredients[group.ingredient];
-                  const hasGreenOrBlueToxicity = group.whoColor === '#3b82f6' || group.whoColor === '#22c55e' || group.whoColor === '#10b981';
+                    return { cat, groups, totalBrands, uniqueMoAs: uniqueMoAs.size, theme: catTheme(cat) };
+                  });
 
                   return (
-                    <div 
-                      key={group.ingredient} 
-                      className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-3xs transition-all duration-200 hover:border-slate-300"
-                    >
-                      
-                      {/* Active Ingredient Summary Header Box */}
-                      <div 
-                        onClick={() => toggleExpand(group.ingredient)}
-                        className="p-4.5 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer bg-slate-50/50 hover:bg-slate-50 transition-colors"
-                      >
-                        <div className="space-y-1">
-                          
-                          {/* Row 1: Badges */}
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border ${getCategoryTheme(group.type)}`}>
-                              {getCategoryIcon(group.type, "w-3.5 h-3.5")}
-                              <span>{transCat(group.type)}</span>
-                            </span>
-                            {group.moaCode && (
-                              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-emerald-300 tracking-wide">
-                                MoA {group.moaCode}
-                              </span>
-                            )}
-                            {group.resistanceRisk && (
-                              <span className={`text-[9px] font-bold px-2 py-0.5 rounded border ${getRiskColor(group.resistanceRisk)}`}>
-                                {language === 'bn' ? transRisk(group.resistanceRisk) : `${transRisk(group.resistanceRisk)} Risk`}
-                              </span>
-                            )}
-                          </div>
-
-                          {/* Row 2: Ingredient Name */}
-                          <h3 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                            <Tag className="w-4 h-4 text-emerald-600" />
-                            <span>{group.ingredient}</span>
-                          </h3>
-
-                          {/* Row 3: MoA Group Label & Crops summary */}
-                          <div className="text-xs text-slate-500 space-y-1">
-                            {group.moaGroup && (
-                              <p className="font-medium text-slate-600">
-                                {language === 'bn' ? 'ক্রিয়া কৌশলের গ্রুপ:' : 'Mode of Action Group:'} <strong className="text-slate-800">{language === 'bn' ? (moaInfoMap[group.moaCode || '']?.nameBn || group.moaGroup) : group.moaGroup}</strong>
-                              </p>
-                            )}
-                            <div className="flex flex-wrap gap-1 items-center pt-1">
-                              <span className="text-[10px] font-bold uppercase text-slate-400 mr-1">{language === 'bn' ? 'অনুমোদিত ফসল:' : 'Crops:'}</span>
-                              {Array.from(group.crops).slice(0, 5).map((c: string) => (
-                                <span key={c} className="bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md text-[10px] font-semibold">
-                                  {transCrop(c)}
-                                </span>
-                              ))}
-                              {group.crops.size > 5 && (
-                                <span className="text-slate-400 text-[10px] font-semibold">+{group.crops.size - 5} {language === 'bn' ? 'টি ফসল' : 'more'}</span>
-                              )}
+                    <>
+                      {/* ─────────────────────────────────────────────────────
+                          CATEGORY DASHBOARD STRIP — fixed-grid row of
+                          clickable snapshot cards. Click → smooth-scroll.
+                          ───────────────────────────────────────────────────── */}
+                      <div className="acg-db-dashboard">
+                        {catMetrics.map(({ cat, groups, totalBrands, uniqueMoAs, theme }) => (
+                          <button
+                            key={cat}
+                            type="button"
+                            className={`acg-db-dash-card ${theme.tone}`}
+                            onClick={() => {
+                              const el = document.getElementById(`cat-section-${cat.replace(/\s+/g, '-')}`);
+                              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }}
+                          >
+                            <div className="acg-db-dash-card__head">
+                              <span className="acg-db-dash-card__emoji" aria-hidden>{theme.emoji}</span>
+                              <span className="acg-db-dash-card__name">{transCat(cat)}</span>
                             </div>
-                          </div>
-
-                        </div>
-
-                        {/* Expand Trigger Indicator */}
-                        <div className="flex items-center gap-3 shrink-0 self-end md:self-center border-t md:border-t-0 pt-2.5 md:pt-0">
-                          <div className="text-right">
-                            <span className="block text-[10px] text-slate-400 font-bold uppercase">{language === 'bn' ? 'অনুমোদিত ব্র্যান্ড' : 'Registered Brands'}</span>
-                            <span className="text-sm font-black text-emerald-800">{formatNum(group.products.length)} {language === 'bn' ? 'টি পণ্য' : 'brands'}</span>
-                          </div>
-                          <div className="p-1.5 bg-slate-100 border border-slate-200 text-slate-600 rounded-lg">
-                            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                          </div>
-                        </div>
-
+                            <div className="acg-db-dash-card__metrics">
+                              <span className="acg-db-dash-card__metric">
+                                <b>{formatNum(groups.length)}</b>
+                                {bn ? 'উপাদান' : 'ing'}
+                              </span>
+                              <span className="acg-db-dash-card__metric">
+                                <b>{formatNum(totalBrands)}</b>
+                                {bn ? 'ব্র্যান্ড' : 'brand'}
+                              </span>
+                              <span className="acg-db-dash-card__metric">
+                                <b>{formatNum(uniqueMoAs)}</b>
+                                MoA
+                              </span>
+                            </div>
+                          </button>
+                        ))}
                       </div>
 
-                      {/* Expanded Section containing list of Brand formulations under this Active Ingredient */}
-                      {isExpanded && (
-                        <div className="border-t border-slate-200/80 bg-white p-4 space-y-3.5">
-                          
-                          <div className="flex items-center justify-between text-xs font-bold text-slate-600 pb-1.5 border-b border-slate-100">
-                            <span>{language === 'bn' ? 'অনুমোদিত ব্রান্ড ফর্মুলেশনসমূহ' : 'Authorized Commercial Brands'}</span>
-                            <span className="text-[10px] text-slate-400 font-medium">({formatNum(group.products.length)} {language === 'bn' ? 'টি নিবন্ধিত ব্র্যান্ড' : 'brands registered'})</span>
-                          </div>
-
-                          {/* Render Brands inside as clean rows without nesting cards */}
-                          <div className="divide-y divide-slate-100">
-                            {group.products.map((brand) => (
-                              <div 
-                                key={brand.id} 
-                                className="py-3 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs first:pt-0 last:pb-0 hover:bg-slate-50/60 px-2 rounded-lg transition-colors"
-                              >
-                                {/* Column 1: Brand Name and Reg Details */}
-                                <div className="space-y-1 min-w-[220px]">
-                                  <div className="flex items-baseline gap-2">
-                                    <h4 className="font-bold text-sm text-slate-900">{brand.tradeName}</h4>
-                                    {brand.formulation && (
-                                      <span className="bg-slate-100 text-slate-700 px-1.5 py-0.2 rounded text-[10px] font-bold border border-slate-200">
-                                        {brand.formulation}
-                                      </span>
-                                    )}
-                                  </div>
-                                  <div className="text-[11px] text-slate-500 font-medium space-x-2 flex flex-wrap">
-                                    <span>{language === 'bn' ? 'নিবন্ধন নং:' : 'Reg No:'} <strong className="font-mono text-slate-700">{brand.registrationNo}</strong></span>
-                                    <span className="text-slate-300">|</span>
-                                    <span>{language === 'bn' ? 'আমদানিকারক:' : 'Holder:'} <strong className="text-slate-700">{brand.registrationHolder}</strong></span>
-                                  </div>
-                                </div>
-
-                                {/* Column 2: Dedicated MoA Number Column */}
-                                <div className="bg-slate-50 p-2 rounded-lg border border-slate-100 min-w-[130px] shrink-0">
-                                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">
-                                    {brand.moaCode?.startsWith('IRAC') ? 'IRAC MoA' : brand.moaCode?.startsWith('FRAC') ? 'FRAC MoA' : brand.moaCode?.startsWith('HRAC') ? 'HRAC MoA' : 'MoA নম্বর'}
-                                  </span>
-                                  <span className="inline-block mt-0.5 px-2 py-0.5 rounded text-[11px] font-mono font-black bg-slate-800 text-emerald-300">
-                                    {brand.moaCode || 'IRAC UN'}
-                                  </span>
-                                  <span className="text-[10px] text-slate-500 truncate block max-w-[140px] mt-0.5" title={brand.moaGroup}>
-                                    {language === 'bn' ? (moaInfoMap[brand.moaCode || '']?.nameBn || brand.moaGroup) : brand.moaGroup}
-                                  </span>
-                                </div>
-
-                                {/* Column 3: Dosage and PHI */}
-                                <div className="grid grid-cols-2 gap-4 text-[11px] md:max-w-xs w-full md:w-auto bg-slate-50 p-2 rounded-lg border border-slate-100">
-                                  <div>
-                                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{language === 'bn' ? 'প্রয়োগ মাত্রা' : 'Dosage'}</span>
-                                    <span className="font-bold text-slate-800 truncate block max-w-[110px]" title={brand.dosageRate}>{transDose(brand.dosageRate)}</span>
-                                  </div>
-                                  <div>
-                                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{language === 'bn' ? 'তোলার বিরতি' : 'PHI Days'}</span>
-                                    <span className="font-bold text-slate-800 block">
-                                      {brand.phiDays ? `${formatNum(brand.phiDays)} ${language === 'bn' ? 'দিন' : 'days'}` : '—'}
-                                    </span>
-                                  </div>
-                                </div>
-
-                                {/* Column 4: Actions Triggers */}
-                                <div className="flex items-center gap-1.5 shrink-0 self-end md:self-auto pt-2 md:pt-0">
-                                  
-                                  {/* Mixing Dosage Station Trigger */}
-                                  <button
-                                    onClick={() => onOpenCalculator(brand)}
-                                    className="p-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/70 text-emerald-700 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
-                                    title={language === 'bn' ? 'হিসাবকারী স্টেশন খুলুন' : 'Open Dosage Station'}
-                                  >
-                                    <Calculator className="w-4 h-4" />
-                                    <span className="text-[10px] font-bold">{language === 'bn' ? 'ডোজ হিসাব' : 'Dosage'}</span>
-                                  </button>
-
-                                  {/* Safety Assessment Checklist */}
-                                  <button
-                                    onClick={() => onOpenSafety(brand)}
-                                    className="p-2 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/70 text-indigo-700 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
-                                    title={language === 'bn' ? 'নিরাপত্তা চেকলিস্ট' : 'Safety Protocols'}
-                                  >
-                                    <ShieldCheck className="w-4 h-4" />
-                                    <span className="text-[10px] font-bold">{language === 'bn' ? 'নিরাপত্তা' : 'Safety'}</span>
-                                  </button>
-
-                                  {/* Detail Specs Panel */}
-                                  <button
-                                    onClick={() => onSelectProduct(brand)}
-                                    className="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer"
-                                    title={language === 'bn' ? 'বিস্তারিত তথ্য' : 'Product Technical Datasheet'}
-                                  >
-                                    <Info className="w-4 h-4" />
-                                  </button>
-
-                                </div>
-
+                      {/* ─────────────────────────────────────────────────────
+                          CATEGORY SECTIONS — each category gets a colored
+                          section header + its ingredient groups underneath.
+                          ───────────────────────────────────────────────────── */}
+                      {catMetrics.map(({ cat, groups, totalBrands, uniqueMoAs, theme }) => (
+                        <section
+                          key={cat}
+                          id={`cat-section-${cat.replace(/\s+/g, '-')}`}
+                          className="acg-db-cat-section"
+                          style={{ borderTop: `3px solid ${theme.border}` }}
+                        >
+                          {/* Category section header */}
+                          <header className="acg-db-cat-head">
+                            <div className="acg-db-cat-head__left">
+                              <span className="acg-db-cat-head__emoji" aria-hidden>{theme.emoji}</span>
+                              <div style={{ minWidth: 0 }}>
+                                <div className="acg-db-cat-head__name">{transCat(cat)}</div>
+                                <p className="acg-db-cat-head__desc">{bn ? theme.descBn : theme.descEn}</p>
                               </div>
-                            ))}
+                            </div>
+                            {/* Category live counts */}
+                            <div className="acg-db-cat-head__metrics">
+                              <span title={bn ? 'সক্রিয় উপাদান' : 'Active ingredients'}>
+                                <b>{formatNum(groups.length)}</b>{' '}
+                                {bn ? 'উপাদান' : 'ing'}
+                              </span>
+                              <span className="acg-db-cat-head__sep">·</span>
+                              <span title={bn ? 'নিবন্ধিত ব্র্যান্ড' : 'Registered brands'}>
+                                <b>{formatNum(totalBrands)}</b>{' '}
+                                {bn ? 'ব্র্যান্ড' : 'brand'}
+                              </span>
+                              {uniqueMoAs > 0 && (
+                                <>
+                                  <span className="acg-db-cat-head__sep">·</span>
+                                  <span title={bn ? 'MoA গ্রুপ' : 'MoA groups'}>
+                                    <b>{formatNum(uniqueMoAs)}</b> MoA
+                                  </span>
+                                </>
+                              )}
+                            </div>
+                          </header>
+
+                          {/* Ingredient groups inside this category */}
+                          <div style={{ padding: '12px 12px', display: 'grid', gap: 10 }}>
+                            {groups.map((group) => {
+                              const isExpanded = !!expandedIngredients[group.ingredient];
+
+                              return (
+                                <div
+                                  key={group.ingredient}
+                                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-3xs transition-all duration-200 hover:border-slate-300"
+                                >
+                                  {/* Ingredient header — STABLE-WIDTH grid */}
+                                  <div
+                                    className="acg-db-ingredient-head"
+                                    onClick={() => toggleExpand(group.ingredient)}
+                                  >
+                                    <div className="acg-db-ingredient-head__left">
+                                      {/* Badges row */}
+                                      <div className="acg-db-ingredient-head__badges">
+                                        <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border ${getCategoryTheme(group.type)}`}>
+                                          {getCategoryIcon(group.type, "w-3.5 h-3.5")}
+                                          <span>{transCat(group.type)}</span>
+                                        </span>
+                                        {group.moaCode && (
+                                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-emerald-300 tracking-wide">
+                                            MoA {group.moaCode}
+                                          </span>
+                                        )}
+                                        {group.resistanceRisk && (
+                                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded border ${getRiskColor(group.resistanceRisk)}`}>
+                                            {language === 'bn' ? transRisk(group.resistanceRisk) : `${transRisk(group.resistanceRisk)} Risk`}
+                                          </span>
+                                        )}
+                                      </div>
+                                      {/* Ingredient name */}
+                                      <h3 className="acg-db-ingredient-head__title">
+                                        <Tag className="w-4 h-4 text-emerald-600 shrink-0" />
+                                        <span>{group.ingredient}</span>
+                                      </h3>
+                                      {/* Crops summary */}
+                                      {group.crops.size > 0 && (
+                                        <div className="acg-db-ingredient-head__crops">
+                                          <span className="acg-db-ingredient-head__crops-label">
+                                            {bn ? 'অনুমোদিত ফসল:' : 'Crops:'}
+                                          </span>
+                                          {Array.from(group.crops).slice(0, 5).map((c: string) => (
+                                            <span key={c} className="acg-db-ingredient-head__crop-chip">
+                                              {transCrop(c)}
+                                            </span>
+                                          ))}
+                                          {group.crops.size > 5 && (
+                                            <span className="text-slate-400 text-[10px] font-semibold">
+                                              +{group.crops.size - 5} {bn ? 'টি ফসল' : 'more'}
+                                            </span>
+                                          )}
+                                        </div>
+                                      )}
+                                    </div>
+                                    {/* Brand count + chevron — fixed-width right column */}
+                                    <div className="acg-db-ingredient-head__right">
+                                      <div className="acg-db-ingredient-head__count">
+                                        <b>{formatNum(group.products.length)}</b>
+                                        {bn ? 'টি পণ্য' : 'brands'}
+                                      </div>
+                                      <span className="acg-db-ingredient-head__chevron">
+                                        {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  {/* Expanded brand list — STABLE-WIDTH grid rows */}
+                                  {isExpanded && (
+                                    <div className="acg-db-brand-list">
+                                      <div className="acg-db-brand-list__head">
+                                        <span>{bn ? 'অনুমোদিত ব্রান্ড ফর্মুলেশনসমূহ' : 'Authorized Commercial Brands'}</span>
+                                        <span>({formatNum(group.products.length)} {bn ? 'টি নিবন্ধিত ব্র্যান্ড' : 'brands registered'})</span>
+                                      </div>
+                                      {group.products.map((brand) => (
+                                        <div key={brand.id} className="acg-db-brand-row">
+                                          {/* Col 1: Brand name + reg details (flexible, truncated) */}
+                                          <div className="acg-db-brand-name">
+                                            <div className="acg-db-brand-name__title">
+                                              <h4 title={brand.tradeName}>{brand.tradeName}</h4>
+                                              {brand.formulation && (
+                                                <span className="acg-db-brand-name__formulation">{brand.formulation}</span>
+                                              )}
+                                            </div>
+                                            <div className="acg-db-brand-name__meta">
+                                              <span>{bn ? 'নিবন্ধন নং:' : 'Reg:'} <strong className="font-mono">{brand.registrationNo}</strong></span>
+                                              <span className="sep">|</span>
+                                              <span title={brand.registrationHolder}>{bn ? 'আমদানিকারক:' : 'Holder:'} <strong>{brand.registrationHolder}</strong></span>
+                                            </div>
+                                          </div>
+                                          {/* Col 2: MoA badge (fixed 130px) */}
+                                          <div className="acg-db-brand-moa">
+                                            <span className="acg-db-brand-moa__label">
+                                              {brand.moaCode?.startsWith('IRAC') ? 'IRAC MoA' : brand.moaCode?.startsWith('FRAC') ? 'FRAC MoA' : brand.moaCode?.startsWith('HRAC') ? 'HRAC MoA' : (bn ? 'MoA নম্বর' : 'MoA')}
+                                            </span>
+                                            <span className="acg-db-brand-moa__code" title={brand.moaCode}>
+                                              {brand.moaCode || 'IRAC UN'}
+                                            </span>
+                                            <span className="acg-db-brand-moa__group" title={brand.moaGroup}>
+                                              {bn ? (moaInfoMap[brand.moaCode || '']?.nameBn || brand.moaGroup) : brand.moaGroup}
+                                            </span>
+                                          </div>
+                                          {/* Col 3: Dosage + PHI (fixed 180px) */}
+                                          <div className="acg-db-brand-dose">
+                                            <div className="acg-db-brand-dose__cell">
+                                              <span className="acg-db-brand-dose__label">{bn ? 'মাত্রা' : 'Dose'}</span>
+                                              <span className="acg-db-brand-dose__value" title={brand.dosageRate}>
+                                                {transDose(brand.dosageRate) || '—'}
+                                              </span>
+                                            </div>
+                                            <div className="acg-db-brand-dose__cell">
+                                              <span className="acg-db-brand-dose__label">PHI</span>
+                                              <span className="acg-db-brand-dose__value">
+                                                {brand.phiDays ? `${formatNum(brand.phiDays)} ${bn ? 'দিন' : 'd'}` : '—'}
+                                              </span>
+                                            </div>
+                                          </div>
+                                          {/* Col 4: Action buttons (fixed 150px, never wraps) */}
+                                          <div className="acg-db-brand-actions">
+                                            <button
+                                              type="button"
+                                              className="acg-db-brand-btn acg-db-brand-btn--calc"
+                                              onClick={() => onOpenCalculator(brand)}
+                                              title={bn ? 'হিসাবকারী স্টেশন খুলুন' : 'Open Dosage Station'}
+                                            >
+                                              <Calculator className="w-3.5 h-3.5" />
+                                              <span>{bn ? 'ডোজ' : 'Dose'}</span>
+                                            </button>
+                                            <button
+                                              type="button"
+                                              className="acg-db-brand-btn acg-db-brand-btn--safe"
+                                              onClick={() => onOpenSafety(brand)}
+                                              title={bn ? 'নিরাপত্তা চেকলিস্ট' : 'Safety Protocols'}
+                                            >
+                                              <ShieldCheck className="w-3.5 h-3.5" />
+                                              <span>{bn ? 'নিরাপত্তা' : 'Safe'}</span>
+                                            </button>
+                                            <button
+                                              type="button"
+                                              className="acg-db-brand-btn acg-db-brand-btn--info"
+                                              onClick={() => onSelectProduct(brand)}
+                                              title={bn ? 'বিস্তারিত তথ্য' : 'Product Technical Datasheet'}
+                                            >
+                                              <Info className="w-4 h-4" />
+                                            </button>
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })}
                           </div>
-
-                        </div>
-                      )}
-
-                    </div>
+                        </section>
+                      ))}
+                    </>
                   );
-                })}
-                        </div>{/* close inner padding div */}
-                      </section>
-                    );
-                  })
                 })()}
 
               </div>
