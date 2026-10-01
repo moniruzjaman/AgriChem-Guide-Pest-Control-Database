@@ -5,7 +5,7 @@
 
 A bilingual (Bangla / English) Progressive Web App that helps farmers, dealers, and field officers in Bangladesh choose the right pesticide, dose it correctly, and rotate modes of action to prevent resistance.
 
-**🔗 Live:** [pesticide.krishiai.live](https://pesticide.krishiai.live/) · **Preview fallback:** [pesticidenext.vercel.app](https://pesticidenext.vercel.app/) (Vercel preview only — canonical OG / Twitter URLs always point to `pesticide.krishiai.live`)
+**🔗 Live:** [pesticide.krishiai.live](https://pesticide.krishiai.live/) · **Preview fallback:** [agrichem-guide.vercel.app](https://agrichem-guide.vercel.app/) (Vercel preview only — canonical OG / Twitter URLs always point to `pesticide.krishiai.live`)
 
 ---
 
@@ -134,7 +134,7 @@ bun run scripts/audit_data.ts                  # audits merged catalogue counts 
 | Role | Domain | Notes |
 |------|--------|-------|
 | **Primary (canonical)** | `pesticide.krishiai.live` | All OG / Twitter / canonical URLs in `index.html` point here. Social crawlers see this domain. |
-| **Preview fallback** | `pesticidenext.vercel.app` | Vercel preview deploy — used for testing only. The server.ts `OG_IMAGE_ORIGIN` placeholder rewriting means even this preview deploy will rewrite `pesticide.krishiai.live` → `pesticidenext.vercel.app` per request, so crawlers fetching the preview URL see preview URLs. |
+| **Preview fallback** | `agrichem-guide.vercel.app` | Vercel preview deploy — used for testing only. The server.ts `OG_IMAGE_ORIGIN` placeholder rewriting means even this preview deploy will rewrite `pesticide.krishiai.live` → `agrichem-guide.vercel.app` per request, so crawlers fetching the preview URL see preview URLs. |
 | **GitHub Pages** | `moniruzjaman.github.io/AgriChem-Guide-Pest-Control-Database` | Built by `.github/workflows/deploy.yml`. Same OG rewriting applies. |
 | **Local dev** | `localhost:3000` | `tsx server.ts` — Vite middleware mode. |
 
@@ -144,7 +144,7 @@ bun run scripts/audit_data.ts                  # audits merged catalogue counts 
 
 This means:
 - Crawlers fetching `pesticide.krishiai.live/...` see `pesticide.krishiai.live` URLs (correct).
-- Crawlers fetching `pesticidenext.vercel.app/...` see `pesticidenext.vercel.app` URLs (correct for that preview).
+- Crawlers fetching `agrichem-guide.vercel.app/...` see `agrichem-guide.vercel.app` URLs (correct for that preview).
 - Crawlers fetching `localhost:3000` see `http://localhost:3000` URLs (correct for local debugging).
 
 ### PWA cache invalidation
