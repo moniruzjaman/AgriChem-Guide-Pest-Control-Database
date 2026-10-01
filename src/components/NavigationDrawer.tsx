@@ -146,7 +146,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                   </div>
                   <div>
                     <h2 className="font-black text-sm tracking-wide uppercase">
-                      {language === 'bn' ? 'অ্যাগ্রিকেম গাইড স্টেশন' : 'AgriChem Navigation'}
+                      {language === 'bn' ? 'পেস্টিসাইডনেক্সট গাইড স্টেশন' : 'PesticideNext Navigation'}
                     </h2>
                     <p className="text-[10px] text-emerald-200 font-medium">
                       {language === 'bn' ? '১-ক্লিক ফিল্ড গাইড ও ড্যাশবোর্ড' : '1-Click Interactive Assistant'}
@@ -376,7 +376,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                   </div>
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-1.5">
-                      <span className="font-bold text-slate-800">AgriChem Pro Mobile</span>
+                      <span className="font-bold text-slate-800">PesticideNext Mobile</span>
                       <span className="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-1.5 py-0.2 rounded">
                         PWA
                       </span>

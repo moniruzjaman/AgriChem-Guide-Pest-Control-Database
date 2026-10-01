@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
 import { RegulatoryAlert } from '../types';
-import { 
-  Bell, 
-  BellRing, 
-  ShieldAlert, 
-  Calendar, 
-  AlertTriangle, 
-  Info, 
-  CheckCircle2, 
-  Send, 
-  Plus, 
-  Trash2, 
-  Clock, 
-  Sprout, 
-  Tag, 
-  Sparkles 
+import {
+  Bell,
+  BellRing,
+  ShieldAlert,
+  Send,
+  Plus,
+  Trash2,
+  Sprout,
+  ChevronDown,
+  Sparkles,
+  CheckCircle2,
+  Megaphone,
+  Flower2,
+  Calendar,
+  FileText,
 } from 'lucide-react';
-import { 
-  requestPushPermission, 
-  triggerAlertNotification, 
+import {
+  requestPushPermission,
+  triggerAlertNotification,
   sendPushNotification,
-  checkNotificationSupport 
 } from '../utils/notifications';
 import { useLanguage } from '../context/LanguageContext';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
+import './NotificationCenter.css';
+import './pn-tokens.css';
 
 interface NotificationCenterProps {
   alerts: RegulatoryAlert[];
@@ -39,14 +40,15 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   onDeleteAlert
 }) => {
   const { language, transCrop, formatNum } = useLanguage();
+  const bn = language === 'bn';
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'regulatory' | 'seasonal'>('all');
   const [permissionStatus, setPermissionStatus] = useState<string>(
     typeof window !== 'undefined' && 'Notification' in window ? Notification.permission : 'unsupported'
   );
   const [showAddForm, setShowAddForm] = useState(false);
+  const [headOpen, setHeadOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Form state for creating custom seasonal/compliance alert
   const [newTitle, setNewTitle] = useState('');
   const [newCategory, setNewCategory] = useState<'regulatory' | 'seasonal'>('seasonal');
   const [newSeverity, setNewSeverity] = useState<'high' | 'medium' | 'info'>('medium');
@@ -64,24 +66,22 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     setPermissionStatus(res);
     if (res === 'granted') {
       showToast(
-        language === 'bn' 
-          ? 'পুশ নোটিফিকেশন সফলভাবে চালু করা হয়েছে!' 
-          : 'Push notifications successfully enabled on your device!'
+        bn ? 'পুশ নোটিফিকেশন সফলভাবে চালু করা হয়েছে!' : 'Push notifications successfully enabled on your device!'
       );
       sendPushNotification(
-        language === 'bn' 
-          ? 'এগ্রিকেম প্রো: সরকারি নির্দেশিকা ও মৌসুমী সতর্কতা সক্রিয়' 
-          : 'AgriChem Compliance & Seasonal Alerts Activated', 
+        bn
+          ? 'পেস্টিসাইডনেক্সট: সরকারি নির্দেশিকা ও মৌসুমী সতর্কতা সক্রিয়'
+          : 'PesticideNext Compliance & Seasonal Alerts Activated',
         {
-          body: language === 'bn'
+          body: bn
             ? 'আপনি গুরুত্বপূর্ণ সরকারি প্রবিধান ও আঞ্চলিক বালাই আবির্ভাব সতর্কতা পাবেন।'
             : 'You will receive critical regulatory updates and regional pest emergence warnings.'
         }
       );
     } else {
       showToast(
-        language === 'bn' 
-          ? 'ব্রাউজারে নোটিফিকেশন অনুমতি বাতিল বা ব্লক করা হয়েছে।' 
+        bn
+          ? 'ব্রাউজারে নোটিফিকেশন অনুমতি বাতিল বা ব্লক করা হয়েছে।'
           : 'Notification permission was declined or blocked in browser settings.'
       );
     }
@@ -89,21 +89,21 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
   const handleTriggerTestPush = () => {
     const success = sendPushNotification(
-      language === 'bn' 
-        ? 'এগ্রিকেম নমুনা সতর্কতা: মৌসুমী বালাই পরামর্শ' 
-        : 'AgriChem Test Alert: Seasonal Pest Advisory', 
+      bn
+        ? 'পেস্টিসাইডনেক্সট নমুনা সতর্কতা: মৌসুমী বালাই পরামর্শ'
+        : 'PesticideNext Test Alert: Seasonal Pest Advisory',
       {
-        body: language === 'bn'
+        body: bn
           ? 'আপনার এলাকার ধানে বাদামি গাছফড়িং (BPH) দেখা গেছে। গোছা ফাঁক করে গাছের গোড়া পরীক্ষা করুন।'
           : 'Brown Plant Hopper (BPH) activity reported in your regional rice clusters. Inspect plant base.'
       }
     );
     if (success) {
-      showToast(language === 'bn' ? 'পুশ অ্যালার্ট আপনার ডিভাইসে পাঠানো হয়েছে!' : 'Push alert sent to your notification tray!');
+      showToast(bn ? 'পুশ অ্যালার্ট আপনার ডিভাইসে পাঠানো হয়েছে!' : 'Push alert sent to your notification tray!');
     } else {
       showToast(
-        language === 'bn' 
-          ? 'সতর্কতা: ডিভাইসে সরাসরি পুশ পেতে উপরের বাটন চেপে ব্রাউজার নোটিফিকেশন অনুমতি দিন।' 
+        bn
+          ? 'সতর্কতা: ডিভাইসে সরাসরি পুশ পেতে উপরের বাটন চেপে ব্রাউজার নোটিফিকেশন অনুমতি দিন।'
           : 'Notice: Displaying in-app alert. Enable browser push permission above for desktop/mobile tray push.'
       );
     }
@@ -113,9 +113,13 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     onMarkRead(alert.id);
     const pushed = triggerAlertNotification(alert);
     if (pushed) {
-      showToast(language === 'bn' ? `পুশ নোটিফিকেশন পাঠানো হয়েছে: "${alert.title}"` : `Push alert sent: "${alert.title}"`);
+      showToast(
+        bn ? `পুশ নোটিফিকেশন পাঠানো হয়েছে: "${alert.title}"` : `Push alert sent: "${alert.title}"`
+      );
     } else {
-      showToast(language === 'bn' ? `সতর্কবার্তা সক্রিয় করা হয়েছে: "${alert.title}"` : `Alert triggered: "${alert.title}"`);
+      showToast(
+        bn ? `সতর্কবার্তা সক্রিয় করা হয়েছে: "${alert.title}"` : `Alert triggered: "${alert.title}"`
+      );
     }
   };
 
@@ -132,13 +136,17 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
       targetCrops: newCrops.split(',').map((c) => c.trim()),
       summary: newSummary,
       details: newDetails || newSummary,
-      actionRequired: language === 'bn' ? 'এগ্রিকেম গাইডবুকের কৃষিবিদ পরামর্শ মেনে চলুন।' : 'Follow agronomic recommendations in the AgriChem Guidebook.',
+      actionRequired: bn
+        ? 'পেস্টিসাইডনেক্সট গাইডবুকের কৃষিবিদ পরামর্শ মেনে চলুন।'
+        : 'Follow agronomic recommendations in the PesticideNext Guidebook.',
       read: false
     };
 
     onAddCustomAlert(custom);
     triggerAlertNotification(custom);
-    showToast(language === 'bn' ? 'নতুন মৌসুমী সতর্কতা নির্ধারিত ও পাঠানো হয়েছে!' : 'New seasonal application alert scheduled and dispatched!');
+    showToast(
+      bn ? 'নতুন মৌসুমী সতর্কতা নির্ধারিত ও পাঠানো হয়েছে!' : 'New seasonal application alert scheduled and dispatched!'
+    );
     setNewTitle('');
     setNewSummary('');
     setNewDetails('');
@@ -150,383 +158,540 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     return a.category === selectedFilter;
   });
 
+  const unreadCount = alerts.filter((a) => !a.read).length;
+  const regCount = alerts.filter((a) => a.category === 'regulatory').length;
+  const seaCount = alerts.filter((a) => a.category === 'seasonal').length;
+  const highCount = alerts.filter((a) => a.severity === 'high').length;
+
+  // ---------------------------------------------------------------- bilingual
+  const copy = bn
+    ? {
+        eyebrow: 'সরকারি নজরদারি ও ফিল্ড টেলিমেট্রি পুশ অ্যালার্ট',
+        h1a: 'নিয়ন্ত্রণ আদেশ আসবে —',
+        h1b: 'আপনাকে অবাক করবে না।',
+        lede:
+          'প্রতিটি মৌসুমে নতুন নিষেধাজ্ঞা, নতুন পোকা আক্রমণ, নতুন আবহাওয়া সতর্কতা — কৃষকের কাছে এগুলো অপ্রত্যাশিত নয়, শুধু তাকে আগে জানানো দরকার। এই ফিড সেই জানানোর জায়গা।',
+        ctaEnable: 'পুশ নোটিফিকেশন চালু করুন',
+        ctaTest: 'নমুনা পুশ পাঠান',
+        ctaNew: 'নতুন কাস্টম সতর্কতা যুক্ত করুন',
+        ctaCancel: 'বাতিল করুন',
+        ctaPush: 'পুশ অ্যালার্ট পাঠান',
+        ctaSave: 'সংরক্ষণ ও পুশ সম্প্রচার',
+        ctaDelete: 'মুছে ফেলুন',
+        trust1: 'সকল নিয়ন্ত্রক আদেশ ও মৌসুমী সতর্কতা এখানেই সংরক্ষিত থাকে।',
+        trust2: 'ব্রাউজার পুশ চালু থাকলে অফলাইনেও আপনার ডিভাইসে সরাসরি আসবে।',
+        stickerKicker: 'এই মুহূর্তে ফিডে',
+        sticker1Foot: 'অপঠিত সতর্কবার্তা',
+        sticker2Foot: 'সরকারি প্রবিধান',
+        sticker3Foot: 'মৌসুমী পূর্বাভাস',
+        sticker4Foot: 'জরুরি অগ্রাধিকার',
+        stickerFoot: 'প্রতিটি আইটেম আপনার ফিল্ড ক্যালেন্ডারে যুক্ত হয়।',
+        stat1Value: `${formatNum(alerts.length)}`,
+        stat1Label: 'মোট সতর্কবার্তা',
+        stat1Detail: 'নিয়ন্ত্রক · মৌসুমী',
+        stat2Value: `${formatNum(unreadCount)}`,
+        stat2Label: 'অপঠিত',
+        stat2Detail: 'এখনো পড়া হয়নি',
+        stat3Value: `${formatNum(highCount)}`,
+        stat3Label: 'জরুরি অগ্রাধিকার',
+        stat3Detail: 'অবিলম্বে পদক্ষেপ',
+        stat4Value: bn ? 'PWA' : 'PWA',
+        stat4Label: 'অফলাইন পুশ',
+        stat4Detail: 'সার্ভিস ওয়ার্কার',
+        filterAll: `সকল বার্তা`,
+        filterReg: `সরকারি প্রবিধান`,
+        filterSea: `মৌসুমী পূর্বাভাস`,
+        permOk: 'ব্রাউজার পুশ নোটিফিকেশন সক্রিয় রয়েছে',
+        formKicker: 'কাস্টম সতর্কতা নির্ধারণ',
+        formTitle: 'নিজের মৌসুমী বা নিয়ন্ত্রক সতর্কবার্তা তৈরি করুন।',
+        formSub: 'প্রতিটি কাস্টম সতর্কতা স্থানীয় মাঠকর্মীদের কাছে পুশ হিসেবে সম্প্রচারিত হয়।',
+        formLabelTitle: 'সতর্কবার্তার শিরোনাম',
+        formLabelCat: 'ক্যাটাগরি',
+        formLabelCrops: 'প্রযোজ্য ফসল (কমা দিয়ে লিখুন)',
+        formLabelSev: 'গুরুত্বের মাত্রা',
+        formLabelSummary: 'সংক্ষিপ্ত সারসংক্ষেপ',
+        formLabelDetails: 'বিস্তারিত দিকনির্দেশনা ও করণীয়',
+        formSevHigh: 'উচ্চ গুরুত্ব (জরুরি পদক্ষেপ আবশ্যক)',
+        formSevMed: 'মাঝারি গুরুত্ব (পরামর্শ)',
+        formSevInfo: 'সাধারণ তথ্য',
+        formCatSea: 'মৌসুমী প্রয়োগ সতর্কতা',
+        formCatReg: 'সরকারি প্রবিধান ও কমপ্লায়েন্স',
+        formPhTitle: 'যেমন: কুমিল্লা অঞ্চলে ধানে প্রাথমিক ব্লাস্ট রোগের প্রাদুর্ভাব',
+        formPhCrops: 'ধান, আলু, পাট',
+        formPhSummary: '১ লাইনের সংক্ষিপ্ত নির্দেশনামূলক বিবরণ',
+        formPhDetails: 'প্রস্তাবিত বালাইনাশক, স্প্রে সময় ও সতর্কতা...',
+        sevHigh: 'জরুরি অগ্রাধিকার',
+        sevMed: 'পরামর্শমূলক',
+        sevInfo: 'সাধারণ তথ্য',
+        catReg: 'সরকারি প্রবিধান',
+        catSea: 'মৌসুমী সতর্কতা',
+        actionLabel: 'জরুরি পদক্ষেপ:',
+        emptyTitle: 'এই ফিল্টারে কোনো সতর্কবার্তা নেই।',
+        emptyDesc: 'অন্য ক্যাটাগরি বেছে নিন বা নতুন কাস্টম সতর্কবার্তা যোগ করুন।'
+      }
+    : {
+        eyebrow: 'Compliance Watch & Field Telemetry Push Alerts',
+        h1a: 'Regulations will land —',
+        h1b: "they won't surprise you.",
+        lede:
+          'Every season brings new bans, new pest outbreaks, new weather advisories — to a farmer these are never unexpected, they only need to be told ahead of time. This feed is where the telling happens.',
+        ctaEnable: 'Enable device push notifications',
+        ctaTest: 'Send sample field alert',
+        ctaNew: 'Schedule custom alert',
+        ctaCancel: 'Cancel new alert',
+        ctaPush: 'Send push alert',
+        ctaSave: 'Broadcast & save alert',
+        ctaDelete: 'Delete reminder',
+        trust1: 'Every regulatory mandate and seasonal warning is archived here.',
+        trust2: 'With browser push enabled, alerts land directly on your device, even offline.',
+        stickerKicker: 'Live in your feed',
+        sticker1Foot: 'unread alerts',
+        sticker2Foot: 'regulatory mandates',
+        sticker3Foot: 'seasonal early warnings',
+        sticker4Foot: 'high-priority items',
+        stickerFoot: 'Every item maps onto your field calendar.',
+        stat1Value: `${formatNum(alerts.length)}`,
+        stat1Label: 'total alerts',
+        stat1Detail: 'regulatory · seasonal',
+        stat2Value: `${formatNum(unreadCount)}`,
+        stat2Label: 'unread',
+        stat2Detail: 'still pending review',
+        stat3Value: `${formatNum(highCount)}`,
+        stat3Label: 'high priority',
+        stat3Detail: 'immediate action',
+        stat4Value: 'PWA',
+        stat4Label: 'offline push',
+        stat4Detail: 'service worker',
+        filterAll: 'All alerts',
+        filterReg: 'Regulatory compliance',
+        filterSea: 'Seasonal early warnings',
+        permOk: 'Browser push notifications are active',
+        formKicker: 'Schedule a custom alert',
+        formTitle: 'Compose your own seasonal or compliance notice.',
+        formSub: 'Each custom alert is dispatched as a push to the local agronomy team.',
+        formLabelTitle: 'Alert title',
+        formLabelCat: 'Category',
+        formLabelCrops: 'Target crops (comma separated)',
+        formLabelSev: 'Severity level',
+        formLabelSummary: 'Brief summary',
+        formLabelDetails: 'Detailed guidance & instructions',
+        formSevHigh: 'High Severity (Immediate Attention)',
+        formSevMed: 'Medium Severity (Advisory)',
+        formSevInfo: 'Informational Notification',
+        formCatSea: 'Seasonal Application Alert',
+        formCatReg: 'Regulatory Compliance Notice',
+        formPhTitle: 'e.g., Early Blast Sighting Warning in Comilla District',
+        formPhCrops: 'Rice, Potato, Jute',
+        formPhSummary: 'Short 1-sentence action summary',
+        formPhDetails: 'Recommended actions, chemicals, and timing...',
+        sevHigh: 'High priority',
+        sevMed: 'Medium advisory',
+        sevInfo: 'Information',
+        catReg: 'Regulatory',
+        catSea: 'Seasonal',
+        actionLabel: 'Action Required:',
+        emptyTitle: 'No alerts in this filter.',
+        emptyDesc: 'Pick another category or schedule a new custom alert.'
+      };
+
   return (
-    <div id="notifications-view" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Toast popup */}
+    <div className="acg-al pn-tokens" id="notifications-view">
+      {/* toast popup */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5 border border-slate-700">
-          <BellRing className="w-5 h-5 text-amber-400 shrink-0" />
-          <span className="text-xs font-medium">{toastMessage}</span>
-          <button 
+        <div className="acg-al-toast">
+          <BellRing size={18} color="#e3b341" />
+          <span style={{ fontSize: 12, lineHeight: 1.5 }}>{toastMessage}</span>
+          <button
+            type="button"
             onClick={() => setToastMessage(null)}
-            className="text-slate-400 hover:text-white text-xs ml-2 cursor-pointer"
+            className="acg-al-toast__close"
+            aria-label="close"
           >
             ✕
           </button>
         </div>
       )}
 
-      {/* Header Banner */}
-      <div className="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-md relative overflow-hidden">
-        <div className="max-w-3xl relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-800/80 border border-emerald-700 text-emerald-200 text-xs font-semibold mb-3">
-            <BellRing className="w-3.5 h-3.5 text-amber-400" />
-            {language === 'bn' ? 'সরকারি নজরদারি ও ফিল্ড টেলিমেট্রি পুশ অ্যালার্ট' : 'Compliance Watch & Field Telemetry Alerts'}
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
-            {language === 'bn' ? 'সরকারি নির্দেশিকা, কমপ্লায়েন্স ও মৌসুমী স্প্রে সতর্কতা' : 'Regulatory Compliance Updates & Seasonal Alerts'}
-          </h1>
-          <p className="text-sm text-slate-300 mt-2 leading-relaxed">
-            {language === 'bn'
-              ? 'বালাইনাশক নিয়ন্ত্রণ সংক্রান্ত সরকারি আদেশ, নিষিদ্ধ রাসায়নিকের তদারকি, পরাগায়নকারী মৌমাছি সুরক্ষা সময় এবং আবহাওয়ানির্ভর মৌসুমী বালাই আবির্ভাবের জরুরি পুশ নোটিফিকেশন।'
-              : 'Real-time regulatory mandates, restricted use enforcement, pollinator protective hours, and meteorological seasonal pest emergence alerts for field agronomists.'}
-          </p>
-
-          <div className="mt-5 flex flex-wrap items-center gap-3">
-            {permissionStatus === 'granted' ? (
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-semibold">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                {language === 'bn' ? 'ব্রাউজার পুশ নোটিফিকেশন সক্রিয় রয়েছে' : 'Browser Push Notifications Active'}
-              </div>
-            ) : (
-              <button
-                id="enable-push-permission-btn"
-                onClick={handleRequestPermission}
-                className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold shadow-xs transition cursor-pointer"
-              >
-                <Bell className="w-4 h-4" />
-                <span>{language === 'bn' ? 'ডিভাইসে পুশ নোটিফিকেশন চালু করুন' : 'Enable Device Push Notifications'}</span>
-              </button>
-            )}
-
-            <button
-              id="test-push-alert-btn"
-              onClick={handleTriggerTestPush}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 transition cursor-pointer"
-            >
-              <Send className="w-4 h-4 text-amber-400" />
-              <span>{language === 'bn' ? 'নমুনা পুশ অ্যালার্ট পাঠান' : 'Send Sample Field Alert'}</span>
-            </button>
-
-            <button
-              id="new-alert-btn"
-              onClick={() => setShowAddForm(!showAddForm)}
-              className="flex items-center gap-2 px-4 py-2 bg-white text-slate-900 hover:bg-slate-100 rounded-xl text-xs font-semibold shadow-xs transition cursor-pointer"
-            >
-              <Plus className="w-4 h-4 text-emerald-600" />
-              <span>
-                {showAddForm 
-                  ? (language === 'bn' ? 'বাতিল করুন' : 'Cancel New Alert') 
-                  : (language === 'bn' ? 'নতুন কাস্টম সতর্কতা যুক্ত করুন' : 'Schedule Custom Alert')}
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Collapsible User Guide */}
-      <CollapsibleUserGuide
-        pageKey="alerts"
-        titleEn="Compliance & Seasonal Alerting Manual"
-        titleBn="কমপ্লায়েন্স ও মৌসুমী সতর্কীকরণ নির্দেশিকা"
-        subtitleEn="Learn how browser push notifications and regulatory updates guard crop health."
-        subtitleBn="ব্রাউজার পুশ নোটিফিকেশন ও নতুন সরকারি প্রবিধান কীভাবে ফসলের সুরক্ষা নিশ্চিত করে তা জানুন।"
-        stepsEn={[
-          "Click 'Enable Device Push Notifications' to receive instant offline alerts on banned pesticides or sudden pest outbreaks.",
-          "Click 'Send Sample Field Alert' to trigger an immediate browser test notification on your screen.",
-          "Filter alerts using the category chips: All, Regulatory (compliance & bans), or Seasonal (pest warnings).",
-          "Select any active alert card to expand, marking it as read and noting the required field action.",
-          "Use 'Schedule Custom Alert' to create pest early warnings for Rice Blast, Late Blight, or sudden crop outbreaks."
-        ]}
-        stepsBn={[
-          "নিষিদ্ধ বালাইনাশক বা আকস্মিক পোকার আক্রমণ সম্পর্কিত অফলাইন পুশ নোটিফিকেশন পেতে 'পুশ নোটিফিকেশন চালু করুন' এ ক্লিক করুন।",
-          "তাত্ক্ষণিকভাবে আপনার স্ক্রিনে একটি ব্রাউজার টেস্ট নোটিফিকেশন পরীক্ষা করতে 'নমুনা পুশ অ্যালার্ট পাঠান' এ ক্লিক করুন।",
-          "অ্যালার্টগুলো ফিল্টার করতে অল, রেগুলেটরি (সরকারি নিষেধাজ্ঞা ও আইন) বা মৌসুমী (বালাই ও রোগ আক্রমণ সতর্কতা) ক্যাটাগরি বেছে নিন।",
-          "যেকোনো সক্রিয় অ্যালার্টে ক্লিক করে বিস্তারিত পড়ুন এবং মাঠে কী করণীয় তা জেনে নিন।",
-          "ধানের ব্লাস্ট, আলুর লেট ব্লাইট বা আবহাওয়াজনিত বালাই সতর্কতা তৈরি করতে 'কাস্টম সতর্কতা যুক্ত করুন' ফর্মটি ব্যবহার করুন।"
-        ]}
-        proTipsEn={[
-          "Regulatory compliance keeps farmers safe from exporting residue-heavy crops. Match alerts against your database selections.",
-          "Push notifications work 100% offline using standard browser Service Workers if installed as a PWA on your device."
-        ]}
-        proTipsBn={[
-          "কমপ্লায়েন্স মেনে চললে অতিরিক্ত বালাইনাশকের অবশিষ্টাংশ মুক্ত রফতানিযোগ্য ফসল উৎপাদন করা সম্ভব হয়।",
-          "আপনার ডিভাইসে পিডব্লিউএ (PWA) ইনস্টল করা থাকলে স্ট্যান্ডার্ড ব্রাউজার সার্ভিস ওয়ার্কারের মাধ্যমে অফলাইনেও পুশ অ্যালার্ট কাজ করবে।"
-        ]}
-      />
-
-      {/* Add Custom Alert Drawer / Form */}
-      {showAddForm && (
-        <form onSubmit={handleCreateAlert} className="bg-white border border-emerald-300 rounded-2xl p-6 shadow-sm space-y-4 animate-in fade-in">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-emerald-600" />
-              {language === 'bn' ? 'নতুন কাস্টম প্রবিধান বা মৌসুমী সতর্কতা নির্ধারণ' : 'Schedule Custom Regulatory or Seasonal Alert'}
-            </h3>
-            <span className="text-xs text-slate-400">
-              {language === 'bn' ? 'মাঠকর্মী ও স্প্রে টিমে প্রেরণযোগ্য' : 'Pushed to local agronomy team'}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="sm:col-span-2">
-              <label className="text-xs font-semibold text-slate-600 block mb-1">
-                {language === 'bn' ? 'সতর্কবার্তার শিরোনাম' : 'Alert Title'}
-              </label>
-              <input
-                type="text"
-                required
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                placeholder={language === 'bn' ? 'যেমন: কুমিল্লা অঞ্চলে ধানে প্রাথমিক ব্লাস্ট রোগের প্রাদুর্ভাব' : 'e.g., Early Blast Sighting Warning in Comilla District'}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              />
-            </div>
-            <div>
-              <label className="text-xs font-semibold text-slate-600 block mb-1">
-                {language === 'bn' ? 'ক্যাটাগরি' : 'Category'}
-              </label>
-              <select
-                value={newCategory}
-                onChange={(e) => setNewCategory(e.target.value as any)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              >
-                <option value="seasonal">{language === 'bn' ? 'মৌসুমী প্রয়োগ সতর্কতা' : 'Seasonal Application Alert'}</option>
-                <option value="regulatory">{language === 'bn' ? 'সরকারি প্রবিধান ও কমপ্লায়েন্স' : 'Regulatory Compliance Notice'}</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="text-xs font-semibold text-slate-600 block mb-1">
-                {language === 'bn' ? 'প্রযোজ্য ফসল (কমা দিয়ে লিখুন)' : 'Target Crops (comma separated)'}
-              </label>
-              <input
-                type="text"
-                value={newCrops}
-                onChange={(e) => setNewCrops(e.target.value)}
-                placeholder={language === 'bn' ? 'ধান, আলু, পাট' : 'Rice, Potato, Jute'}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              />
-            </div>
-            <div>
-              <label className="text-xs font-semibold text-slate-600 block mb-1">
-                {language === 'bn' ? 'গুরুত্বের মাত্রা (Severity)' : 'Severity Level'}
-              </label>
-              <select
-                value={newSeverity}
-                onChange={(e) => setNewSeverity(e.target.value as any)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              >
-                <option value="high">{language === 'bn' ? 'উচ্চ গুরুত্ব (জরুরি পদক্ষেপ আবশ্যক)' : 'High Severity (Immediate Attention)'}</option>
-                <option value="medium">{language === 'bn' ? 'মাঝারি গুরুত্ব (পরামর্শ)' : 'Medium Severity (Advisory)'}</option>
-                <option value="info">{language === 'bn' ? 'সাধারণ তথ্য' : 'Informational Notification'}</option>
-              </select>
-            </div>
-          </div>
-
+      {/* -------------------------- header (editorial hero) */}
+      <section className="pn-shell">
+        <div className={`pn-head ${headOpen ? 'pn-head--open' : ''}`}>
           <div>
-            <label className="text-xs font-semibold text-slate-600 block mb-1">
-              {language === 'bn' ? 'সংক্ষিপ্ত সারসংক্ষেপ' : 'Brief Summary'}
-            </label>
-            <input
-              type="text"
-              required
-              value={newSummary}
-              onChange={(e) => setNewSummary(e.target.value)}
-              placeholder={language === 'bn' ? '১ লাইনের সংক্ষিপ্ত নির্দেশনামূলক বিবরণ' : 'Short 1-sentence action summary'}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
-            />
-          </div>
-
-          <div>
-            <label className="text-xs font-semibold text-slate-600 block mb-1">
-              {language === 'bn' ? 'বিস্তারিত দিকনির্দেশনা ও করণীয়' : 'Detailed Guidance & Instructions'}
-            </label>
-            <textarea
-              rows={2}
-              value={newDetails}
-              onChange={(e) => setNewDetails(e.target.value)}
-              placeholder={language === 'bn' ? 'প্রস্তাবিত বালাইনাশক, স্প্রে সময় ও সতর্কতা...' : 'Recommended actions, chemicals, and timing...'}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
-            />
-          </div>
-
-          <div className="flex justify-end gap-2">
+            <p className="pn-eyebrow">
+              <span className="pn-dot" /> {copy.eyebrow}
+            </p>
+            <h1 className="pn-h1">
+              {copy.h1a}
+              <br />
+              <em>{copy.h1b}</em>
+            </h1>
+            <div className="pn-head__more">
+              <p className="pn-lede">{copy.lede}</p>
+              <ul className="pn-trust">
+                <li><ShieldAlert size={14} /> {copy.trust1}</li>
+                <li><BellRing size={14} /> {copy.trust2}</li>
+              </ul>
+            </div>
             <button
               type="button"
-              onClick={() => setShowAddForm(false)}
-              className="px-4 py-1.5 text-xs text-slate-600 hover:text-slate-800 rounded-lg border border-slate-200 cursor-pointer"
+              className="pn-head__toggle"
+              onClick={() => setHeadOpen((o) => !o)}
             >
-              {language === 'bn' ? 'বাতিল' : 'Cancel'}
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-1.5 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-xs cursor-pointer"
-            >
-              {language === 'bn' ? 'সংরক্ষণ ও পুশ সম্প্রচার' : 'Broadcast & Save Alert'}
+              <ChevronDown size={14} />
+              {bn ? 'বিস্তারিত' : 'Details'}
             </button>
           </div>
-        </form>
-      )}
 
-      {/* Filter Tabs */}
-      <div className="flex items-center justify-between gap-4 border-b border-slate-200 pb-3">
-        <div className="flex items-center gap-2">
+          {/* desktop sticker: live counts */}
+          <aside className="pn-sticker">
+            <p className="pn-sticker__kicker">{copy.stickerKicker}</p>
+            <div className="pn-sticker__row">
+              <span className="pn-sticker__num">{formatNum(unreadCount)}</span>
+              <Megaphone size={14} color="#f42a41" />
+              <span className="pn-sticker__label">{copy.sticker1Foot}</span>
+            </div>
+            <div className="pn-sticker__row">
+              <span className="pn-sticker__num">{formatNum(regCount)}</span>
+              <ShieldAlert size={14} color="#006a4e" />
+              <span className="pn-sticker__label">{copy.sticker2Foot}</span>
+            </div>
+            <div className="pn-sticker__row">
+              <span className="pn-sticker__num">{formatNum(seaCount)}</span>
+              <Sprout size={14} color="#006a4e" />
+              <span className="pn-sticker__label">{copy.sticker3Foot}</span>
+            </div>
+            <div className="pn-sticker__row">
+              <span className="pn-sticker__num">{formatNum(highCount)}</span>
+              <BellRing size={14} color="#e3b341" />
+              <span className="pn-sticker__label">{copy.sticker4Foot}</span>
+            </div>
+            <p className="pn-sticker__foot">
+              <Calendar size={14} /> {copy.stickerFoot}
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      {/* -------------------------- stats band */}
+      <section className="pn-shell">
+        <div className="pn-stats">
+          <div className="pn-stat">
+            <div className="pn-stat__value">{copy.stat1Value}</div>
+            <div className="pn-stat__label">{copy.stat1Label}</div>
+            <div className="pn-stat__detail">{copy.stat1Detail}</div>
+          </div>
+          <div className="pn-stat">
+            <div className="pn-stat__value">{copy.stat2Value}</div>
+            <div className="pn-stat__label">{copy.stat2Label}</div>
+            <div className="pn-stat__detail">{copy.stat2Detail}</div>
+          </div>
+          <div className="pn-stat">
+            <div className="pn-stat__value">{copy.stat3Value}</div>
+            <div className="pn-stat__label">{copy.stat3Label}</div>
+            <div className="pn-stat__detail">{copy.stat3Detail}</div>
+          </div>
+          <div className="pn-stat">
+            <div className="pn-stat__value">{copy.stat4Value}</div>
+            <div className="pn-stat__label">{copy.stat4Label}</div>
+            <div className="pn-stat__detail">{copy.stat4Detail}</div>
+          </div>
+        </div>
+      </section>
+
+      {/* -------------------------- main panels */}
+      <section className="pn-shell acg-al-panels">
+        {/* Collapsible User Guide */}
+        <div className="acg-guide-wrap">
+          <CollapsibleUserGuide
+            pageKey="alerts"
+            titleEn="Compliance & Seasonal Alerting Manual"
+            titleBn="কমপ্লায়েন্স ও মৌসুমী সতর্কীকরণ নির্দেশিকা"
+            subtitleEn="Learn how browser push notifications and regulatory updates guard crop health."
+            subtitleBn="ব্রাউজার পুশ নোটিফিকেশন ও নতুন সরকারি প্রবিধান কীভাবে ফসলের সুরক্ষা নিশ্চিত করে তা জানুন।"
+            stepsEn={[
+              "Click 'Enable Device Push Notifications' to receive instant offline alerts on banned pesticides or sudden pest outbreaks.",
+              "Click 'Send Sample Field Alert' to trigger an immediate browser test notification on your screen.",
+              "Filter alerts using the category chips: All, Regulatory (compliance & bans), or Seasonal (pest warnings).",
+              "Select any active alert card to expand, marking it as read and noting the required field action.",
+              "Use 'Schedule Custom Alert' to create pest early warnings for Rice Blast, Late Blight, or sudden crop outbreaks."
+            ]}
+            stepsBn={[
+              "নিষিদ্ধ বালাইনাশক বা আকস্মিক পোকার আক্রমণ সম্পর্কিত অফলাইন পুশ নোটিফিকেশন পেতে 'পুশ নোটিফিকেশন চালু করুন' এ ক্লিক করুন।",
+              "তাত্ক্ষণিকভাবে আপনার স্ক্রিনে একটি ব্রাউজার টেস্ট নোটিফিকেশন পরীক্ষা করতে 'নমুনা পুশ অ্যালার্ট পাঠান' এ ক্লিক করুন।",
+              "অ্যালার্টগুলো ফিল্টার করতে অল, রেগুলেটরি (সরকারি নিষেধাজ্ঞা ও আইন) বা মৌসুমী (বালাই ও রোগ আক্রমণ সতর্কতা) ক্যাটাগরি বেছে নিন।",
+              "যেকোনো সক্রিয় অ্যালার্টে ক্লিক করে বিস্তারিত পড়ুন এবং মাঠে কী করণীয় তা জেনে নিন।",
+              "ধানের ব্লাস্ট, আলুর লেট ব্লাইট বা আবহাওয়াজনিত বালাই সতর্কতা তৈরি করতে 'কাস্টম সতর্কতা যুক্ত করুন' ফর্মটি ব্যবহার করুন।"
+            ]}
+            proTipsEn={[
+              'Regulatory compliance keeps farmers safe from exporting residue-heavy crops. Match alerts against your database selections.',
+              'Push notifications work 100% offline using standard browser Service Workers if installed as a PWA on your device.'
+            ]}
+            proTipsBn={[
+              'কমপ্লায়েন্স মেনে চললে অতিরিক্ত বালাইনাশকের অবশিষ্টাংশ মুক্ত রফতানিযোগ্য ফসল উৎপাদন করা সম্ভব হয়।',
+              'আপনার ডিভাইসে পিডব্লিউএ (PWA) ইনস্টল করা থাকলে স্ট্যান্ডার্ড ব্রাউজার সার্ভিস ওয়ার্কারের মাধ্যমে অফলাইনেও পুশ অ্যালার্ট কাজ করবে।'
+            ]}
+          />
+        </div>
+
+        {/* Permission banner */}
+        <div className="acg-al-perm">
+          {permissionStatus === 'granted' ? (
+            <span className="acg-al-perm__ok">
+              <CheckCircle2 size={14} /> {copy.permOk}
+            </span>
+          ) : (
+            <div className="acg-al-perm__ok" style={{ color: 'var(--red-800)' }}>
+              <Bell size={14} color="#f42a41" /> {bn ? 'পুশ নোটিফিকেশন এখনো বন্ধ আছে' : 'Push notifications are off'}
+            </div>
+          )}
+          <div className="acg-al-perm__row">
+            {permissionStatus !== 'granted' && (
+              <button type="button" className="pn-btn" onClick={handleRequestPermission}>
+                <Bell size={14} /> {copy.ctaEnable}
+              </button>
+            )}
+            <button type="button" className="pn-btn pn-btn--outline" onClick={handleTriggerTestPush}>
+              <Send size={14} /> {copy.ctaTest}
+            </button>
+            <button
+              type="button"
+              className={`pn-btn ${showAddForm ? 'pn-btn--red' : 'pn-btn--gold'}`}
+              onClick={() => setShowAddForm((v) => !v)}
+            >
+              <Plus size={14} /> {showAddForm ? copy.ctaCancel : copy.ctaNew}
+            </button>
+          </div>
+        </div>
+
+        {/* Custom alert form */}
+        {showAddForm && (
+          <form className="acg-al-form" onSubmit={handleCreateAlert}>
+            <div className="pn-card__kicker">{copy.formKicker}</div>
+            <h2 className="pn-card__title">{copy.formTitle}</h2>
+            <p className="pn-card__sub">{copy.formSub}</p>
+
+            <div className="acg-al-form__grid">
+              <div className="acg-al-form__row--full">
+                <label className="acg-al-form__label">{copy.formLabelTitle}</label>
+                <input
+                  type="text"
+                  required
+                  value={newTitle}
+                  onChange={(e) => setNewTitle(e.target.value)}
+                  placeholder={copy.formPhTitle}
+                  className="acg-al-form__input"
+                />
+              </div>
+              <div>
+                <label className="acg-al-form__label">{copy.formLabelCat}</label>
+                <select
+                  value={newCategory}
+                  onChange={(e) => setNewCategory(e.target.value as any)}
+                  className="acg-al-form__select"
+                >
+                  <option value="seasonal">{copy.formCatSea}</option>
+                  <option value="regulatory">{copy.formCatReg}</option>
+                </select>
+              </div>
+              <div>
+                <label className="acg-al-form__label">{copy.formLabelSev}</label>
+                <select
+                  value={newSeverity}
+                  onChange={(e) => setNewSeverity(e.target.value as any)}
+                  className="acg-al-form__select"
+                >
+                  <option value="high">{copy.formSevHigh}</option>
+                  <option value="medium">{copy.formSevMed}</option>
+                  <option value="info">{copy.formSevInfo}</option>
+                </select>
+              </div>
+              <div className="acg-al-form__row--full">
+                <label className="acg-al-form__label">{copy.formLabelCrops}</label>
+                <input
+                  type="text"
+                  value={newCrops}
+                  onChange={(e) => setNewCrops(e.target.value)}
+                  placeholder={copy.formPhCrops}
+                  className="acg-al-form__input"
+                />
+              </div>
+              <div className="acg-al-form__row--full">
+                <label className="acg-al-form__label">{copy.formLabelSummary}</label>
+                <input
+                  type="text"
+                  required
+                  value={newSummary}
+                  onChange={(e) => setNewSummary(e.target.value)}
+                  placeholder={copy.formPhSummary}
+                  className="acg-al-form__input"
+                />
+              </div>
+              <div className="acg-al-form__row--full">
+                <label className="acg-al-form__label">{copy.formLabelDetails}</label>
+                <textarea
+                  rows={2}
+                  value={newDetails}
+                  onChange={(e) => setNewDetails(e.target.value)}
+                  placeholder={copy.formPhDetails}
+                  className="acg-al-form__textarea"
+                />
+              </div>
+            </div>
+
+            <div className="acg-al-form__foot">
+              <button
+                type="button"
+                className="pn-linkbtn pn-linkbtn--muted"
+                onClick={() => setShowAddForm(false)}
+              >
+                {copy.ctaCancel}
+              </button>
+              <button type="submit" className="pn-btn">
+                <Sparkles size={14} /> {copy.ctaSave}
+              </button>
+            </div>
+          </form>
+        )}
+
+        {/* Filter chips */}
+        <div className="acg-al-filters">
           <button
+            type="button"
+            className={`acg-al-filter ${selectedFilter === 'all' ? 'acg-al-filter--active' : ''}`}
             onClick={() => setSelectedFilter('all')}
-            className={`px-3 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
-              selectedFilter === 'all'
-                ? 'bg-slate-900 text-white'
-                : 'text-slate-600 hover:bg-slate-100'
-            }`}
           >
-            {language === 'bn' ? `সকল বার্তা (${formatNum(alerts.length)})` : `All Alerts (${alerts.length})`}
+            {copy.filterAll} <span className="acg-al-filter__count">{formatNum(alerts.length)}</span>
           </button>
           <button
+            type="button"
+            className={`acg-al-filter ${selectedFilter === 'regulatory' ? 'acg-al-filter--active' : ''}`}
             onClick={() => setSelectedFilter('regulatory')}
-            className={`px-3 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
-              selectedFilter === 'regulatory'
-                ? 'bg-slate-900 text-white'
-                : 'text-slate-600 hover:bg-slate-100'
-            }`}
           >
-            {language === 'bn' 
-              ? `সরকারি প্রবিধান (${formatNum(alerts.filter((a) => a.category === 'regulatory').length)})` 
-              : `Regulatory Compliance (${alerts.filter((a) => a.category === 'regulatory').length})`}
+            <ShieldAlert size={12} /> {copy.filterReg}{' '}
+            <span className="acg-al-filter__count">{formatNum(regCount)}</span>
           </button>
           <button
+            type="button"
+            className={`acg-al-filter ${selectedFilter === 'seasonal' ? 'acg-al-filter--active' : ''}`}
             onClick={() => setSelectedFilter('seasonal')}
-            className={`px-3 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
-              selectedFilter === 'seasonal'
-                ? 'bg-slate-900 text-white'
-                : 'text-slate-600 hover:bg-slate-100'
-            }`}
           >
-            {language === 'bn' 
-              ? `মৌসুমী পূর্বাভাস (${formatNum(alerts.filter((a) => a.category === 'seasonal').length)})` 
-              : `Seasonal Early Warnings (${alerts.filter((a) => a.category === 'seasonal').length})`}
+            <Sprout size={12} /> {copy.filterSea} <span className="acg-al-filter__count">{formatNum(seaCount)}</span>
           </button>
         </div>
-      </div>
 
-      {/* Alerts Feed */}
-      <div className="space-y-4">
-        {filteredAlerts.map((alert) => {
-          const isHigh = alert.severity === 'high';
-          return (
-            <div
-              key={alert.id}
-              className={`p-5 rounded-2xl border transition-all ${
-                isHigh 
-                  ? 'border-amber-300 bg-amber-50/40 shadow-xs' 
-                  : 'border-slate-200 bg-white hover:border-slate-300'
-              }`}
-            >
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div className="flex items-start gap-3">
-                  <div className={`p-2.5 rounded-xl shrink-0 mt-0.5 ${
-                    alert.category === 'regulatory' 
-                      ? 'bg-rose-100 text-rose-800' 
-                      : 'bg-emerald-100 text-emerald-800'
-                  }`}>
-                    {alert.category === 'regulatory' ? (
-                      <ShieldAlert className="w-5 h-5" />
-                    ) : (
-                      <Sprout className="w-5 h-5" />
-                    )}
-                  </div>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded ${
-                        isHigh ? 'bg-rose-600 text-white' : 'bg-slate-200 text-slate-800'
-                      }`}>
-                        {alert.severity === 'high' 
-                          ? (language === 'bn' ? 'জরুরি অগ্রাধিকার' : 'High Priority') 
-                          : alert.severity === 'medium'
-                          ? (language === 'bn' ? 'পরামর্শমূলক' : 'Medium Advisory')
-                          : (language === 'bn' ? 'সাধারণ তথ্য' : 'Information')}
-                      </span>
-                      <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
-                        {alert.category === 'regulatory' 
-                          ? (language === 'bn' ? 'সরকারি প্রবিধান' : 'Regulatory') 
-                          : (language === 'bn' ? 'মৌসুমী সতর্কতা' : 'Seasonal')}
-                      </span>
-                      <span className="text-xs text-slate-400 font-mono">
-                        • {formatNum(alert.date)}
-                      </span>
+        {/* Alert feed */}
+        <div className="acg-al-feed">
+          {filteredAlerts.length === 0 && (
+            <div className="pn-card pn-card--red">
+              <div className="pn-card__kicker">{copy.emptyTitle}</div>
+              <p className="pn-card__sub">{copy.emptyDesc}</p>
+            </div>
+          )}
+          {filteredAlerts.map((alert) => {
+            const isHigh = alert.severity === 'high';
+            const isReg = alert.category === 'regulatory';
+            const sevClass =
+              alert.severity === 'high'
+                ? ''
+                : alert.severity === 'medium'
+                ? 'acg-al-card__sev--med'
+                : 'acg-al-card__sev--info';
+            return (
+              <article
+                key={alert.id}
+                className={`acg-al-card ${isReg ? 'acg-al-card--reg' : 'acg-al-card--sea'} ${
+                  isHigh ? 'acg-al-card--high' : ''
+                }`}
+              >
+                <div className="acg-al-card__head">
+                  <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', flex: 1, minWidth: 0 }}>
+                    <span className="acg-al-card__icon">
+                      {isReg ? <ShieldAlert size={18} /> : <Sprout size={18} />}
+                    </span>
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <div className="acg-al-card__title-row">
+                        <span className={`acg-al-card__sev ${sevClass}`}>
+                          {alert.severity === 'high'
+                            ? copy.sevHigh
+                            : alert.severity === 'medium'
+                            ? copy.sevMed
+                            : copy.sevInfo}
+                        </span>
+                        <span className="acg-al-card__cat">{isReg ? copy.catReg : copy.catSea}</span>
+                        <span className="acg-al-card__date">· {formatNum(alert.date)}</span>
+                      </div>
+                      <h3 className="acg-al-card__title">{alert.title}</h3>
+                      <p className="acg-al-card__summary">{alert.summary}</p>
                     </div>
-
-                    <h3 className="text-base font-bold text-slate-900 leading-tight">
-                      {alert.title}
-                    </h3>
-                    <p className="text-xs font-semibold text-slate-700 mt-1 leading-relaxed">
-                      {alert.summary}
-                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0">
-                  <button
-                    onClick={() => handleSendSingleAlert(alert)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold shadow-2xs transition cursor-pointer"
-                    title={language === 'bn' ? 'পুশ অ্যালার্ট পাঠান' : 'Send push alert notification'}
-                  >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>{language === 'bn' ? 'পুশ অ্যালার্ট পাঠান' : 'Send Push Alert'}</span>
-                  </button>
+                {alert.details && (
+                  <div className="acg-al-card__body">
+                    <p>{alert.details}</p>
+                  </div>
+                )}
 
+                {alert.actionRequired && (
+                  <div className="acg-al-card__action">
+                    <b>{copy.actionLabel}</b>
+                    {alert.actionRequired}
+                  </div>
+                )}
+
+                {(alert.targetCrops?.length || alert.targetChemicals?.length) ? (
+                  <div className="acg-al-card__tags">
+                    {alert.targetCrops && alert.targetCrops.length > 0 && (
+                      <>
+                        <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                          {bn ? 'ফসল:' : 'Crops:'}
+                        </span>
+                        {alert.targetCrops.map((c, i) => (
+                          <span key={i} className="acg-al-card__tag acg-al-card__tag--green">
+                            {transCrop(c)}
+                          </span>
+                        ))}
+                      </>
+                    )}
+                    {alert.targetChemicals && alert.targetChemicals.length > 0 && (
+                      <>
+                        <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginLeft: 'auto' }}>
+                          {bn ? 'রাসায়নিক:' : 'Chemicals:'}
+                        </span>
+                        {alert.targetChemicals.map((chem, i) => (
+                          <span key={i} className="acg-al-card__tag acg-al-card__tag--gold">
+                            {chem}
+                          </span>
+                        ))}
+                      </>
+                    )}
+                  </div>
+                ) : null}
+
+                <div className="acg-al-card__actions">
+                  <button
+                    type="button"
+                    className="pn-btn"
+                    onClick={() => handleSendSingleAlert(alert)}
+                    title={copy.ctaPush}
+                  >
+                    <Send size={13} /> {copy.ctaPush}
+                  </button>
                   {onDeleteAlert && alert.id.startsWith('custom-') && (
                     <button
+                      type="button"
+                      className="pn-linkbtn pn-linkbtn--muted"
                       onClick={() => onDeleteAlert(alert.id)}
-                      className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition cursor-pointer"
-                      title={language === 'bn' ? 'মুছে ফেলুন' : 'Delete reminder'}
+                      title={copy.ctaDelete}
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 size={13} /> {copy.ctaDelete}
                     </button>
                   )}
                 </div>
-              </div>
-
-              {/* Detail Paragraph */}
-              <div className="mt-3.5 pt-3 border-t border-slate-200/70 text-xs text-slate-600 leading-relaxed bg-white/80 p-3 rounded-xl border border-slate-100 space-y-2">
-                <p>{alert.details}</p>
-                {alert.actionRequired && (
-                  <p className="font-medium text-emerald-950 bg-emerald-50/80 p-2 rounded-lg border border-emerald-200/60">
-                    <strong>{language === 'bn' ? 'জরুরি পদক্ষেপ:' : 'Action Required:'}</strong> {alert.actionRequired}
-                  </p>
-                )}
-              </div>
-
-              {/* Tag Chips */}
-              <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px]">
-                {alert.targetCrops && alert.targetCrops.length > 0 && (
-                  <div className="flex items-center gap-1 text-slate-500">
-                    <span className="font-semibold text-slate-400">{language === 'bn' ? 'ফসল:' : 'Crops:'}</span>
-                    {alert.targetCrops.map((c, i) => (
-                      <span key={i} className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded">
-                        {transCrop(c)}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                {alert.targetChemicals && alert.targetChemicals.length > 0 && (
-                  <div className="flex items-center gap-1 text-slate-500 ml-auto">
-                    <span className="font-semibold text-slate-400">{language === 'bn' ? 'রাসায়নিক:' : 'Chemicals:'}</span>
-                    {alert.targetChemicals.map((chem, i) => (
-                      <span key={i} className="bg-emerald-50 text-emerald-800 border border-emerald-200 px-1.5 py-0.5 rounded font-medium">
-                        {chem}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 };

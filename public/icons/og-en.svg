@@ -48,7 +48,7 @@
 
   <!-- Header Text — Plus Jakarta Sans / system-ui for English -->
   <text x="245" y="148" fill="#7dd3a8" font-size="16" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" letter-spacing="2">DAE OFFICIAL REFERENCE &amp; RESISTANCE SUITE</text>
-  <text x="245" y="200" fill="#ffffff" font-size="54" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900">AgriChem Pro</text>
+  <text x="245" y="200" fill="#ffffff" font-size="54" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900">PesticideNext</text>
   <text x="110" y="262" fill="#a7f3d0" font-size="22" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="500">Precision Crop Protection, Knapsack Dosage Math &amp; Resistance Rotation Guide</text>
 
   <!-- 6 Features Badges Grid (brand-aligned accents) -->

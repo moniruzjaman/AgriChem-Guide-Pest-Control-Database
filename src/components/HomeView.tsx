@@ -873,8 +873,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <section className="acg-shell acg-guide-wrap">
         <CollapsibleUserGuide
           pageKey="home"
-          titleEn="AgriChem Pro Field Suite Guide"
-          titleBn="অ্যাগ্রিকেম প্রো স্যুট গাইড ও ভূমিকা"
+          titleEn="PesticideNext Field Suite Guide"
+          titleBn="পেস্টিসাইডনেক্সট স্যুট গাইড ও ভূমিকা"
           subtitleEn="Learn how to navigate our integrated offline-first crop protection toolkit."
           subtitleBn="আমাদের সমন্বিত অফলাইন ফসল সুরক্ষা টুলের সঠিক ব্যবহার ও সঠিক নেভিগেশন জানুন।"
           stepsEn={[
@@ -1054,8 +1054,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </span>
             <h3 className="acg-share__title">
               {bn
-                ? 'এগ্রিকেম প্রো শেয়ার করে নিরাপদ ও বিষমুক্ত কৃষিতে অবদান রাখুন'
-                : 'Share AgriChem Pro & promote safe chemical stewardship'}
+                ? 'পেস্টিসাইডনেক্সট শেয়ার করে নিরাপদ ও বিষমুক্ত কৃষিতে অবদান রাখুন'
+                : 'Share PesticideNext & promote safe chemical stewardship'}
             </h3>
             <p className="acg-share__desc">
               {bn

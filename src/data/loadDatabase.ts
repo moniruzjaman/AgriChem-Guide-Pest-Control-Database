@@ -155,7 +155,7 @@ function buildCropList(products: ChemicalProduct[]): string[] {
 /** Read user-imported custom products persisted in localStorage. */
 function loadCustomProducts(baseline: ChemicalProduct[]): ChemicalProduct[] {
   if (typeof window === 'undefined') return [];
-  const saved = window.localStorage.getItem('agrichem_custom_products');
+  const saved = window.localStorage.getItem('pesticidenext_custom_products');
   if (!saved) return [];
   try {
     const parsed = JSON.parse(saved) as ChemicalProduct[];

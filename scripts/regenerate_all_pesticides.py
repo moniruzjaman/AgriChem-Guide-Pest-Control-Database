@@ -31,7 +31,7 @@ import json
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path("/home/z/my-project/repos/AgriChem-Guide-Pest-Control-Database")
+REPO_ROOT = Path("/home/z/my-project/repos/PesticideNext-Guide-Pest-Control-Database")
 CSV_PATH = REPO_ROOT / "data_raw" / "all_pesticides.csv"
 OUT_PATH = REPO_ROOT / "src" / "data" / "all_pesticides.ts"
 

@@ -42,7 +42,7 @@ export function triggerAlertNotification(alert: RegulatoryAlert): boolean {
   const icon = alert.category === 'regulatory' ? '⚠️' : '🌾';
   const title = `${icon} ${alert.title}`;
   return sendPushNotification(title, {
-    body: `${alert.summary}\nAction: ${alert.actionRequired || 'Check AgriChem Field Guide.'}`,
+    body: `${alert.summary}\nAction: ${alert.actionRequired || 'Check PesticideNext Field Guide.'}`,
     tag: alert.id
   });
 }

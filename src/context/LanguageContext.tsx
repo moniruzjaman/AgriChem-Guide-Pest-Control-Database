@@ -33,7 +33,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('agrichem_lang') as Language;
+      const saved = localStorage.getItem('pesticidenext_lang') as Language;
       if (saved === 'bn' || saved === 'en') {
         return saved;
       }
@@ -44,7 +44,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     if (typeof window !== 'undefined') {
-      localStorage.setItem('agrichem_lang', lang);
+      localStorage.setItem('pesticidenext_lang', lang);
     }
   };
 

@@ -1,0 +1,59 @@
+/* ============================================================================
+   DatabaseView.css — the Chemical Database tab in the Home tab's editorial
+   design language (Bangladesh official palette: bottle green, flag red,
+   white, golden). Self-contained: the token block + paper grain come from
+   pn-tokens.css (.acg-db is just .pn-tokens + a class hook).
+
+   The Database tab keeps its existing Tailwind-class filter controls and
+   product cards. This CSS only styles the editorial hero, stats band, and
+   sticker card on top — the existing utility-class chrome is intentionally
+   left in place so the complex importer / filter / brand-table logic stays
+   unchanged.
+   ========================================================================== */
+
+.acg-db {
+  /* Inherits .pn-tokens: --green / --red / --golden / --bg / --ink etc. */
+}
+
+/* The existing filter/importer chrome from DatabaseView.tsx continues to
+   use Tailwind utilities. Those utilities were authored against the white
+   page background — under .acg-db's paper grain, they sometimes need a
+   subtle bg fill so they don't sit directly on the textured surface. */
+.acg-db .acg-db-panels { margin-top: 36px; display: grid; gap: 24px; }
+.acg-db .acg-db-panels > * { position: relative; z-index: 2; }
+
+/* Tone-shift some existing inline chips to the official palette via class
+   overrides (kept minimal so existing filter logic isn't broken). */
+.acg-db .acg-db-cropbar {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--green);
+  padding: 16px 18px;
+}
+
+/* advisory summary card when a crop is selected */
+.acg-db .acg-db-advisory {
+  background: var(--golden-tint);
+  border: 1px solid var(--golden-tint-line);
+  border-left: 3px solid var(--golden);
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.acg-db .acg-db-advisory svg { color: var(--golden-ink); flex: none; margin-top: 2px; }
+.acg-db .acg-db-advisory__title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--golden-ink);
+}
+.acg-db .acg-db-advisory__p {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #6b5a26;
+}
+
+/* Collapsible user guide spacing override */
+.acg-db .acg-guide-wrap { margin-top: 24px; }

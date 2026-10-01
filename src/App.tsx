@@ -119,14 +119,14 @@ export default function App() {
     );
 
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem('agrichem_custom_products', JSON.stringify(customOnly));
+      window.localStorage.setItem('pesticidenext_custom_products', JSON.stringify(customOnly));
     }
     setProducts(newProducts);
   };
 
   const handleResetProducts = () => {
     if (typeof window !== 'undefined') {
-      window.localStorage.removeItem('agrichem_custom_products');
+      window.localStorage.removeItem('pesticidenext_custom_products');
     }
     if (!products) return;
     // Drop every non-baseline (custom) product: baseline entries are the
@@ -145,8 +145,8 @@ export default function App() {
   useEffect(() => {
     let isNewSession = false;
     if (typeof window !== 'undefined') {
-      if (!sessionStorage.getItem('agrichem_session_started')) {
-        sessionStorage.setItem('agrichem_session_started', 'true');
+      if (!sessionStorage.getItem('pesticidenext_session_started')) {
+        sessionStorage.setItem('pesticidenext_session_started', 'true');
         isNewSession = true;
       }
     }
@@ -196,7 +196,7 @@ export default function App() {
   // Alerts & Notifications state with localStorage persistence
   const [alerts, setAlerts] = useState<RegulatoryAlert[]>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('agrichem_alerts');
+      const saved = localStorage.getItem('pesticidenext_alerts');
       if (saved) {
         try {
           return JSON.parse(saved);
@@ -210,7 +210,7 @@ export default function App() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('agrichem_alerts', JSON.stringify(alerts));
+      localStorage.setItem('pesticidenext_alerts', JSON.stringify(alerts));
     }
   }, [alerts]);
 
@@ -449,13 +449,13 @@ export default function App() {
           <div className="flex items-center gap-3">
             <img
               src="/favicon.svg"
-              alt={language === 'bn' ? 'এগ্রিকেম প্রো লোগো' : 'AgriChem Pro Logo'}
+              alt={language === 'bn' ? 'পেস্টিসাইডনেক্সট লোগো' : 'PesticideNext Logo'}
               className="w-8 h-8 rounded-lg object-contain shadow-xs"
               referrerPolicy="no-referrer"
             />
             <div>
               <p className="font-bold text-slate-900">
-                {language === 'bn' ? 'অ্যাগ্রিকেম প্রো — ফিল্ড কন্ট্রোলস ও ডাটাবেস গাইডবুক' : 'AgriChem Pro — Field Controls & Database Guidebook'}
+                {language === 'bn' ? 'পেস্টিসাইডনেক্সট — ফিল্ড কন্ট্রোলস ও ডাটাবেস গাইডবুক' : 'PesticideNext — Field Controls & Database Guidebook'}
               </p>
               <p className="text-[11px] text-slate-400">
                 {language === 'bn' ? 'কৃষি সম্প্রসারণ অধিদপ্তর (DAE) অনুমোদিত অফিসিয়াল রেফারেন্স ডাটাবেস' : 'Department of Agricultural Extension (DAE) Official Reference Data'}
