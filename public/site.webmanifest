@@ -1,7 +1,7 @@
 {
-  "name": "PesticideNext",
+  "name": "PesticideNext — পরের স্প্রে, আর ভুল হবে না।",
   "short_name": "পেস্টিসাইডনেক্সট",
-  "description": "Agricultural chemical controls guide, MoA rotation planner, field dosage calculator, safety checklists, and offline pocket book.",
+  "description": "Bangladesh field-crop reference: 5,711+ DAE-registered pesticides, knapsack tank-mix calculator, IRAC/FRAC/HRAC MoA rotation planner, safety checklists, and an offline pocket-book guide.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#00281b",
