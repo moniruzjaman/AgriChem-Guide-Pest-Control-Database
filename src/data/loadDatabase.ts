@@ -3,12 +3,12 @@ import { ChemicalProduct } from '../types';
 /**
  * loadDatabase.ts — the SINGLE source of truth for the product catalogue.
  *
- * The merged catalogue (1,256 curated + 4,455 DAE register entries = 5,711
- * products) is intentionally loaded through dynamic ``import()`` so BOTH the
+ * The merged catalogue (1,256 curated + ~3,790 DAE register entries =
+ * ~5,046 products) is intentionally loaded through dynamic ``import()`` so BOTH the
  * heavy curated databases (~1.3 MB) and the DAE register mapping (~2.7 MB
  * source) are code-split into async chunks instead of being inlined into the
  * main bundle. This keeps the application shell light (first paint with a
- * few hundred KB of JS) while the full 5,711-product database streams in
+ * few hundred KB of JS) while the full ~5,046-product database streams in
  * right after — and the Workbox service worker precaches the chunks, so
  * offline field use still works.
  *

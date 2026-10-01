@@ -350,11 +350,28 @@ function mergeProducts(a: ChemicalProduct, b: ChemicalProduct): ChemicalProduct 
  * enriched with MoA + toxicity metadata. Rows are deduplicated by
  * ``registrationNo + tradeName`` so that the same commercial product with
  * multiple recommendation lines appears only once in the database.
+ *
+ * "Public Health" products (mosquito coils, vector-control sprays, etc.)
+ * are intentionally EXCLUDED. They are PTAC-approved by the Plant
+ * Protection Wing, but they are for public-health use — NOT for
+ * agricultural crop protection. They have 0% MoA code coverage because
+ * IRAC/FRAC/HRAC classification only applies to agricultural pesticides.
+ * Including them:
+ *   - inflates the catalogue by 665 products (11.6%) with no agricultural
+ *     value to the farmer using this app,
+ *   - drags down the MoA mapping percentage (665 zero-MoA products in
+ *     the denominator create a visible mismatch between the Home tab
+ *     stat and the OG image stat),
+ *   - creates "Public Health" section headers in the Database tab that
+ *     are irrelevant to crop-protection decisions.
  */
 export const ALL_PESTICIDES_DATABASE: ChemicalProduct[] = (() => {
   const map = new Map<string, ChemicalProduct>();
 
   pesticides.forEach((p, idx) => {
+    // Skip Public Health products — they are not agricultural pesticides.
+    if (p.pesticideType === 'Public Health') return;
+
     const product = toChemicalProduct(p, idx);
     const key = `${product.registrationNo}|${product.tradeName}`.toLowerCase().trim();
     const existing = map.get(key);

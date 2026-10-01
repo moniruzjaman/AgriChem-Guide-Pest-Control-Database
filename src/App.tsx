@@ -63,7 +63,7 @@ function DatabaseSplash({ language }: { language: 'bn' | 'en' }) {
         {language === 'bn' ? 'সম্পূর্ণ বালাইনাশক ডাটাবেস লোড হচ্ছে…' : 'Loading the full pesticide database…'}
       </p>
       <p className="mt-1 text-xs text-slate-500">
-        {language === 'bn' ? '৫,৭১১+ নিবন্ধিত বালাইনাশক প্রস্তুত করা হচ্ছে' : 'Preparing 5,711+ registered products'}
+        {language === 'bn' ? '৫,০৫২+ নিবন্ধিত বালাইনাশক প্রস্তুত করা হচ্ছে' : 'Preparing 5,052+ registered products'}
       </p>
     </div>
   );
@@ -76,7 +76,7 @@ export default function App() {
   // Product catalogue — hydrated asynchronously from the merged database
   // chunk (curated + full DAE register + any user-imported customs).
   // Views only render once the full dataset is ready, so every counter,
-  // filter, and card grid reflects the complete 5,711-product catalogue.
+  // filter, and card grid reflects the complete 5,052-product catalogue.
   // ---------------------------------------------------------------------------
   const [products, setProducts] = useState<ChemicalProduct[] | null>(null);
   const [baselineCount, setBaselineCount] = useState(0);
