@@ -142,10 +142,11 @@ async function startServer() {
     // the raw HTML the server returns. If that HTML points at the wrong
     // domain (or worse, a relative path), the crawler either fetches a 404
     // for the OG image or drops the preview entirely. This middleware makes
-    // the same built bundle work on pesticidenext.live, preview deploys,
+    // the same built bundle work on pesticide.krishiai.live (the canonical
+    // production domain), agrichem-guide.vercel.app (Vercel preview fallback),
     // localhost, and any custom domain — crawlers always see fully-qualified
     // absolute URLs that match the host they actually fetched the page from.
-    const PROD_PLACEHOLDER = "https://pesticidenext.live";
+    const PROD_PLACEHOLDER = "https://pesticide.krishiai.live";
     let cachedIndexHtml: string | null = null;
     const getIndexHtml = (): string => {
       if (cachedIndexHtml === null) {

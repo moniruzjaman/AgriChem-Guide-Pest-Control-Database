@@ -118,6 +118,15 @@ export default defineConfig(() => {
           ]
         },
         workbox: {
+          // Cache id prefixes every Workbox cache name. Bumping it from the
+          // default `workbox-precache-v2` to `pn-v2-precache-v2` forces
+          // every returning user to download a fresh precache — the old
+          // `workbox-precache-v2` cache becomes orphaned and is purged by
+          // the cleanup hook in src/main.tsx (deleteOldCachesIfAny).
+          // Bump this string on every breaking release so users never get
+          // stuck on a stale cached bundle (old OG image, old tagline,
+          // pre-rename branding, etc.).
+          cacheId: 'pn-v2',
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2,json,webmanifest}'],
           // Take over from any previous service worker IMMEDIATELY and purge
           // old precaches. Without this, returning visitors keep getting the

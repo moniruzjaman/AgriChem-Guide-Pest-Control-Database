@@ -1,4 +1,4 @@
-name: Deploy Pesticide Guide to GitHub Pages
+name: Deploy PesticideNext to GitHub Pages
 
 on:
   push:
