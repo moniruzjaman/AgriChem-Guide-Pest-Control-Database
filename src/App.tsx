@@ -455,7 +455,7 @@ export default function App() {
             />
             <div>
               <p className="font-bold text-slate-900">
-                {language === 'bn' ? 'পেস্টিসাইডনেক্সট — ফিল্ড কন্ট্রোলস ও ডাটাবেস গাইডবুক' : 'PesticideNext — Field Controls & Database Guidebook'}
+                {language === 'bn' ? 'পেস্টিসাইডনেক্সট — পরের স্প্রে, আর ভুল হবে না।' : 'PesticideNext — The next spray, without the mistake.'}
               </p>
               <p className="text-[11px] text-slate-400">
                 {language === 'bn' ? 'কৃষি সম্প্রসারণ অধিদপ্তর (DAE) অনুমোদিত অফিসিয়াল রেফারেন্স ডাটাবেস' : 'Department of Agricultural Extension (DAE) Official Reference Data'}

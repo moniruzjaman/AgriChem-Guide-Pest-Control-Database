@@ -691,6 +691,40 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
             );
           })}
         </div>
+
+        {/* Official compliance disclaimer */}
+        <div className="acg-al-disclaim" style={{
+          marginTop: 24,
+          background: 'var(--golden-tint)',
+          border: '1px solid var(--golden-tint-line)',
+          padding: '16px 18px',
+          display: 'flex',
+          gap: 12,
+          alignItems: 'flex-start'
+        }}>
+          <ShieldAlert size={18} color="#8a6d1d" style={{ flex: 'none', marginTop: 2 }} />
+          <div>
+            <strong style={{
+              display: 'block',
+              fontFamily: 'var(--display)',
+              fontSize: 13,
+              fontWeight: 700,
+              color: 'var(--golden-ink)'
+            }}>
+              {bn ? 'সরকারি নিয়ন্ত্রণমূলক তথ্যসূত্র ও কমপ্লায়েন্স ডিসক্লেইমার' : 'Official Regulatory Reference & Compliance Disclaimer'}
+            </strong>
+            <p style={{
+              marginTop: 4,
+              fontSize: 11.5,
+              lineHeight: 1.7,
+              color: '#6b5a26'
+            }}>
+              {bn
+                ? 'এই ফিডে প্রদর্শিত সরকারি আদেশ ও মৌসুমী সতর্কতাগুলো কৃষি সম্প্রসারণ অধিদপ্তর (DAE), উদ্ভিদ সংরক্ষণ উইং এবং আন্তর্জাতিক বালাইনাশক নিয়ন্ত্রণ সংস্থার প্রকাশিত নির্দেশিকা থেকে সংকলিত। এই অ্যালার্টগুলো শুধুমাত্র সাধারণ সতর্কীকরণের উদ্দেশ্যে — কোনো আইনি বা কৃষিবিদ পরামর্শের বিকল্প নয়। প্রতিটি মাঠ-স্তরের সিদ্ধান্তের আগে অবশ্যই নিকটস্থ উপ-সহকারী কৃষি কর্মকর্তা বা DAE ফিল্ড অফিসারের সাথে যোগাযোগ করুন এবং পণ্যের বর্তমান লেবেল যাচাই করুন।'
+                : 'The regulatory mandates and seasonal advisories shown in this feed are compiled from official publications by the Department of Agricultural Extension (DAE), the Plant Protection Wing, and international pesticide stewardship organizations. These alerts are for general awareness only — they do not constitute legal or agronomic advice. Always consult with your local Sub-Assistant Agriculture Officer or DAE field officer before any field-level decision, and verify the current product label.'}
+            </p>
+          </div>
+        </div>
       </section>
     </div>
   );

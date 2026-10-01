@@ -113,7 +113,10 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   const [sortBy, setSortBy] = useState<'name' | 'type' | 'phi' | 'reg'>('name');
   
   // View mode & UX controls
-  const [viewMode, setViewMode] = useState<'table' | 'grouped' | 'grid'>('table');
+  // Default to 'grouped' so users see products organized by active ingredient
+  // under category section headers (Insecticide / Fungicide / Herbicide / etc.)
+  // — visually appealing and easy to scan, instead of a flat alphabetical list.
+  const [viewMode, setViewMode] = useState<'table' | 'grouped' | 'grid'>('grouped');
   const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
   const [expandedIngredients, setExpandedIngredients] = useState<Record<string, boolean>>({});
   const [visibleLimit, setVisibleLimit] = useState<number>(50);
@@ -1749,8 +1752,11 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
               </div>
             ) : viewMode === 'grouped' ? (
               
-              // View Mode 2: Compact, Grouped by Active Ingredient
-              <div className="space-y-4">
+              // View Mode 2: Compact, Grouped by Active Ingredient,
+              // organized under Category Section Headers (Insecticide / Fungicide /
+              // Herbicide / Miticide / Bio Pesticide / etc.) so users can scan the
+              // catalogue by what kind of pest they're fighting.
+              <div className="space-y-6">
                 
                 {/* Expand / Collapse All control triggers */}
                 <div className="flex justify-end gap-3 text-[11px] font-bold text-emerald-800">
@@ -1759,7 +1765,140 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                   <button onClick={collapseAll} className="hover:underline cursor-pointer">{language === 'bn' ? 'সবগুলো গ্রুপ বন্ধ করুন' : 'Collapse All Groups'}</button>
                 </div>
 
-                {groupedByIngredient.map((group) => {
+                {/* Group by category — each category gets a colored section
+                    header (red for IRAC-leaning insecticides, green for
+                    HRAC-leaning herbicides, golden for FRAC-leaning fungicides,
+                    neutral for the rest), then its ingredient groups render
+                    underneath. Categories with zero matches are skipped. */}
+                {(() => {
+                  // Bucket the grouped ingredients by their parent category.
+                  // groupedByIngredient is already sorted alphabetically by
+                  // ingredient name; we preserve that order inside each bucket.
+                  const byCategory = new Map<string, typeof groupedByIngredient>();
+                  for (const g of groupedByIngredient) {
+                    const cat = (g.type || 'Other').trim();
+                    if (!byCategory.has(cat)) byCategory.set(cat, []);
+                    byCategory.get(cat)!.push(g);
+                  }
+
+                  // Canonical category order — pest-type first, then disease,
+                  // then weed, then the smaller categories. Anything not in
+                  // this list lands at the end alphabetically.
+                  const order = [
+                    'Insecticide',
+                    'Fungicide',
+                    'Herbicide',
+                    'Miticide',
+                    'Bio Pesticide',
+                    'Rodenticide',
+                    'Stored Grain',
+                    'Store Grain Insecticide',
+                    'Public Health'
+                  ];
+                  const sortedCats = Array.from(byCategory.keys()).sort((a, b) => {
+                    const ai = order.indexOf(a);
+                    const bi = order.indexOf(b);
+                    if (ai !== -1 && bi !== -1) return ai - bi;
+                    if (ai !== -1) return -1;
+                    if (bi !== -1) return 1;
+                    return a.localeCompare(b);
+                  });
+
+                  // Visual identity per category — top-border color + emoji +
+                  // short bilingual description. Matches the editorial design
+                  // language: IRAC red, FRAC golden, HRAC green, neutral muted.
+                  const catTheme = (cat: string): { border: string; emoji: string; descBn: string; descEn: string } => {
+                    if (cat === 'Insecticide')   return { border: 'var(--red, #f42a41)', emoji: '🐛', descBn: 'কীটনাশক — পোকা ও মাকড় দমন', descEn: 'Insecticide — controls insect pests' };
+                    if (cat === 'Fungicide')     return { border: 'var(--golden, #e3b341)', emoji: '🍄', descBn: 'ছত্রাকনাশক — রোগ ও পাতার দাগ দমন', descEn: 'Fungicide — controls fungal diseases' };
+                    if (cat === 'Herbicide')     return { border: 'var(--green, #006a4e)', emoji: '🌿', descBn: 'আগাছানাশক — অনাকাঙ্ক্ষিত আগাছা দমন', descEn: 'Herbicide — controls unwanted weeds' };
+                    if (cat === 'Miticide')      return { border: '#8b5cf6', emoji: '🕷️', descBn: 'মাইটনাশক — মাকড় ও সুতোর মাইট দমন', descEn: 'Miticide — controls mites & spider mites' };
+                    if (cat === 'Bio Pesticide') return { border: '#10b981', emoji: '🦠', descBn: 'জৈব বালাইনাশক — পরিবেশবান্ধব জীববিজ্ঞান', descEn: 'Bio-pesticide — eco-friendly biological control' };
+                    if (cat === 'Rodenticide')   return { border: '#92400e', emoji: '🐀', descBn: 'ইঁদুরনাশক — ইঁদুর ও কৃন্তক দমন', descEn: 'Rodenticide — controls rodents' };
+                    if (cat === 'Stored Grain' || cat === 'Store Grain Insecticide')
+                                                 return { border: '#a16207', emoji: '🌾', descBn: 'গুদামজাত শস্য সুরক্ষা — মজুত শস্যের পোকা দমন', descEn: 'Stored grain protection — controls storage pests' };
+                    if (cat === 'Public Health') return { border: '#0ea5e9', emoji: '🩺', descBn: 'জনস্বাস্থ্য — মশা ও বাহিত রোগ দমন', descEn: 'Public health — vector & mosquito control' };
+                    return { border: '#5d6f64', emoji: '🧪', descBn: 'অন্যান্য বালাইনাশক', descEn: 'Other pesticides' };
+                  };
+
+                  return sortedCats.map((cat) => {
+                    const groups = byCategory.get(cat)!;
+                    const totalBrands = groups.reduce((sum, g) => sum + g.products.length, 0);
+                    const uniqueMoAs = new Set<string>();
+                    groups.forEach((g) => { if (g.moaCode) uniqueMoAs.add(g.moaCode); });
+                    const theme = catTheme(cat);
+
+                    return (
+                      <section key={cat} className="acg-db-cat-section" style={{
+                        border: '1px solid var(--line, #dfe5dd)',
+                        background: 'var(--card, #fff)',
+                        borderTop: `3px solid ${theme.border}`,
+                        overflow: 'hidden'
+                      }}>
+                        {/* Category section header */}
+                        <header style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: 12,
+                          padding: '14px 18px',
+                          background: 'var(--paper-muted, #e7eee8)',
+                          borderBottom: '1px solid var(--line, #dfe5dd)',
+                          flexWrap: 'wrap'
+                        }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flex: 1, minWidth: 0 }}>
+                            <span style={{ fontSize: 24, lineHeight: 1 }} aria-hidden>{theme.emoji}</span>
+                            <div style={{ minWidth: 0 }}>
+                              <h3 style={{
+                                fontFamily: 'var(--display, "Hind Siliguri", system-ui, sans-serif)',
+                                fontWeight: 700,
+                                fontSize: 18,
+                                color: 'var(--green-900, #004d38)',
+                                lineHeight: 1.25,
+                                letterSpacing: '-0.01em'
+                              }}>{transCat(cat)}</h3>
+                              <p style={{
+                                fontSize: 11.5,
+                                color: 'var(--muted, #5d6f64)',
+                                marginTop: 2,
+                                lineHeight: 1.55
+                              }}>{bn ? theme.descBn : theme.descEn}</p>
+                            </div>
+                          </div>
+                          {/* Category live counts */}
+                          <div style={{
+                            display: 'flex',
+                            gap: 14,
+                            alignItems: 'center',
+                            fontFamily: 'var(--mono, "IBM Plex Mono", monospace)',
+                            fontSize: 10,
+                            letterSpacing: '0.08em',
+                            textTransform: 'uppercase',
+                            color: 'var(--muted, #5d6f64)'
+                          }}>
+                            <span title={bn ? 'সক্রিয় উপাদান' : 'Active ingredients'}>
+                              <b style={{ color: 'var(--green-900, #004d38)', fontFamily: 'var(--display, sans-serif)', fontSize: 14 }}>{formatNum(groups.length)}</b>{' '}
+                              {bn ? 'উপাদান' : 'ingredients'}
+                            </span>
+                            <span style={{ color: 'var(--line)' }}>·</span>
+                            <span title={bn ? 'নিবন্ধিত ব্র্যান্ড' : 'Registered brands'}>
+                              <b style={{ color: 'var(--green-900, #004d38)', fontFamily: 'var(--display, sans-serif)', fontSize: 14 }}>{formatNum(totalBrands)}</b>{' '}
+                              {bn ? 'ব্র্যান্ড' : 'brands'}
+                            </span>
+                            {uniqueMoAs.size > 0 && (
+                              <>
+                                <span style={{ color: 'var(--line)' }}>·</span>
+                                <span title={bn ? 'MoA গ্রুপ' : 'MoA groups'}>
+                                  <b style={{ color: 'var(--green-900, #004d38)', fontFamily: 'var(--display, sans-serif)', fontSize: 14 }}>{formatNum(uniqueMoAs.size)}</b>{' '}
+                                  MoA
+                                </span>
+                              </>
+                            )}
+                          </div>
+                        </header>
+
+                        {/* Ingredient groups inside this category */}
+                        <div style={{ padding: '14px 14px', display: 'grid', gap: 12 }}>
+                {groups.map((group) => {
                   const isExpanded = !!expandedIngredients[group.ingredient];
                   const hasGreenOrBlueToxicity = group.whoColor === '#3b82f6' || group.whoColor === '#22c55e' || group.whoColor === '#10b981';
 
@@ -1939,6 +2078,11 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                     </div>
                   );
                 })}
+                        </div>{/* close inner padding div */}
+                      </section>
+                    );
+                  })
+                })()}
 
               </div>
             ) : (
