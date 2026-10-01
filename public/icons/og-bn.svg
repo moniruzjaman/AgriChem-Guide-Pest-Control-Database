@@ -48,7 +48,7 @@
 
   <!-- Header Text — Noto Serif Bengali for proper Unicode Bangla rendering -->
   <text x="245" y="150" fill="#7dd3a8" font-size="18" font-family="'Noto Serif Bengali', 'Hind Siliguri', serif" font-weight="700" letter-spacing="1">ডিএই অফিসিয়াল রেফারেন্স ভিত্তিক ডিজিটাল প্ল্যাটফর্ম</text>
-  <text x="245" y="200" fill="#ffffff" font-size="54" font-family="'Noto Serif Bengali', 'Hind Siliguri', serif" font-weight="900">এগ্রিকেম প্রো</text>
+  <text x="245" y="200" fill="#ffffff" font-size="54" font-family="'Noto Serif Bengali', 'Hind Siliguri', serif" font-weight="900">পেস্টিসাইডনেক্সট</text>
   <text x="110" y="262" fill="#a7f3d0" font-size="22" font-family="'Noto Serif Bengali', 'Hind Siliguri', serif" font-weight="500">আধুনিক ফসলের বালাই ব্যবস্থাপনা, সঠিক রাসায়নিক প্রয়োগ ও মাঠ মাত্রা ক্যালকুলেটর</text>
 
   <!-- 6 Features Badges Grid (brand-aligned accents) -->

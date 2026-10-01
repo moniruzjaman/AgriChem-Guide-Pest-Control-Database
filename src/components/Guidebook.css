@@ -1,0 +1,450 @@
+/* ============================================================================
+   Guidebook.css — the Field Guidebook tab in the Home tab's editorial design
+   language (Bangladesh official palette: bottle green, flag red, white,
+   golden). Self-contained: the token block + paper grain come from
+   pn-tokens.css (.acg-gb is just .pn-tokens + a class hook).
+   ========================================================================== */
+
+.acg-gb {
+  /* Inherits .pn-tokens: --green / --red / --golden / --bg / --ink etc. */
+}
+
+.acg-gb .acg-gb-panels { margin-top: 44px; display: grid; gap: 44px; }
+
+/* chapter selector tabs */
+.acg-gb-chapters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+}
+.acg-gb-chapter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  background: var(--card);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.acg-gb-chapter:hover { color: var(--green-900); border-color: var(--green); }
+.acg-gb-chapter--active {
+  background: var(--green-900);
+  color: #fff;
+  border-color: var(--green-900);
+}
+.acg-gb-chapter svg { color: inherit; }
+
+/* chapter header (kicker + title + sub) reused inside each chapter */
+.acg-gb-chapter-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+}
+.acg-gb-chapter-head__kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 500;
+}
+.acg-gb-chapter-head__title {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.25;
+  color: var(--green-900);
+  letter-spacing: -0.01em;
+}
+.acg-gb-chapter-head__sub {
+  margin-top: 8px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+/* crop schedule cards */
+.acg-gb-crops {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 640px) { .acg-gb-crops { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .acg-gb-crops { grid-template-columns: repeat(3, 1fr); } }
+.acg-gb-crop {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--green);
+  padding: 18px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.acg-gb-crop:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 77, 56, 0.1);
+}
+.acg-gb-crop__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.acg-gb-crop__count {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: #dcece4;
+  color: var(--green);
+  padding: 3px 7px;
+}
+.acg-gb-crop__title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.acg-gb-crop__label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.acg-gb-crop__pests {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  background: var(--paper-muted);
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+}
+.acg-gb-crop__breakdown {
+  font-size: 11.5px;
+  display: grid;
+  gap: 4px;
+}
+.acg-gb-crop__breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 4px;
+}
+.acg-gb-crop__breakdown-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.acg-gb-crop__breakdown-label { color: var(--muted); }
+.acg-gb-crop__breakdown-value {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--green-900);
+  font-weight: 600;
+}
+.acg-gb-crop__foot {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+/* calibration 3-step formula cards */
+.acg-gb-cal {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 768px) { .acg-gb-cal { grid-template-columns: repeat(3, 1fr); } }
+.acg-gb-cal-step {
+  background: #fbfcfb;
+  border: 1px solid var(--line);
+  padding: 18px 18px 16px;
+}
+.acg-gb-cal-step__num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green-900);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.acg-gb-cal-step__title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.acg-gb-cal-step__p {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* nozzle selection cards */
+.acg-gb-nozzles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+@media (min-width: 768px) { .acg-gb-nozzles { grid-template-columns: repeat(3, 1fr); } }
+.acg-gb-nozzle {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+}
+.acg-gb-nozzle b {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--green-900);
+}
+.acg-gb-nozzle p {
+  margin-top: 6px;
+  font-size: 11.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* resistance chapters */
+.acg-gb-res {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+@media (min-width: 768px) { .acg-gb-res { grid-template-columns: repeat(2, 1fr); } }
+.acg-gb-res-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--red);
+  padding: 16px 18px 14px;
+}
+.acg-gb-res-card--ok { border-top-color: var(--green); }
+.acg-gb-res-card__title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.acg-gb-res-card p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.acg-gb-res-card strong { color: var(--ink); }
+
+/* MoA table inside resistance chapter */
+.acg-gb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+  margin-top: 12px;
+}
+.acg-gb-table th,
+.acg-gb-table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.acg-gb-table th {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--paper-muted);
+}
+.acg-gb-table td {
+  color: var(--muted);
+}
+.acg-gb-table td b { color: var(--ink); }
+
+/* W.A.L.E.S. simulator */
+.acg-gb-wales-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .acg-gb-wales-grid { grid-template-columns: 1fr 1.4fr; }
+}
+.acg-gb-wales-form {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 18px 18px 16px;
+}
+.acg-gb-wales-form h4 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.acg-gb-wales-form__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.acg-gb-wales-form__row:last-child { border-bottom: 0; }
+.acg-gb-wales-form__row label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.acg-gb-wales-form__row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green);
+}
+.acg-gb-wales-stage {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--golden);
+  padding: 22px 22px 20px;
+}
+.acg-gb-wales-step {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--line);
+  align-items: center;
+  opacity: 0.5;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.acg-gb-wales-step--active {
+  opacity: 1;
+  transform: translateX(4px);
+}
+.acg-gb-wales-step--done {
+  opacity: 0.85;
+}
+.acg-gb-wales-step__num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--paper-muted);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.acg-gb-wales-step--active .acg-gb-wales-step__num {
+  background: var(--red);
+  color: #fff;
+}
+.acg-gb-wales-step--done .acg-gb-wales-step__num {
+  background: var(--green);
+  color: #fff;
+}
+.acg-gb-wales-step__label {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink);
+}
+.acg-gb-wales-step__desc {
+  margin-top: 4px;
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* PHI chapter */
+.acg-gb-phi-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+@media (min-width: 768px) { .acg-gb-phi-grid { grid-template-columns: repeat(2, 1fr); } }
+.acg-gb-phi-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--golden);
+  padding: 14px 16px;
+}
+.acg-gb-phi-card__title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.acg-gb-phi-card__p {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* generic reference / advisory boxes */
+.acg-gb-advisory {
+  background: var(--golden-tint);
+  border: 1px solid var(--golden-tint-line);
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 16px;
+}
+.acg-gb-advisory svg { color: var(--golden-ink); flex: none; margin-top: 2px; }
+.acg-gb-advisory strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--golden-ink);
+}
+.acg-gb-advisory p {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #6b5a26;
+}
+
+/* verdict / info box */
+.acg-gb-info {
+  background: #eef5ef;
+  border: 1px solid #c5ddd0;
+  padding: 14px 16px;
+  margin-top: 14px;
+}
+.acg-gb-info h4 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--green-900);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.acg-gb-info h4 svg { color: var(--green); }
+
+.acg-gb .acg-guide-wrap { margin-top: 24px; }

@@ -1,9 +1,9 @@
-# এগ্রিকেম প্রো — AgriChem Pro
+# পেস্টিসাইডনেক্সট — PesticideNext
 
 **আধুনিক বালাই ব্যবস্থাপনা ও সঠিক রাসায়নিক মাত্রা সহায়িকা**
 *(Modern Pest Management & Correct Chemical Dosage Guide for Bangladesh)*
 
-AgriChem Pro is a bilingual (Bangla / English) Progressive Web App that helps farmers, dealers, and advisors in Bangladesh choose the right pesticide, dose it correctly, and rotate modes of action to prevent resistance.
+PesticideNext is a bilingual (Bangla / English) Progressive Web App that helps farmers, dealers, and advisors in Bangladesh choose the right pesticide, dose it correctly, and rotate modes of action to prevent resistance.
 
 ## ✨ Key Features
 
@@ -117,4 +117,4 @@ Data curated with reference to the Plant Protection Act (PTAC) registers and the
 
 ## ⚠️ Disclaimer
 
-AgriChem Pro is an informational aid. Always follow the product label and Department of Agricultural Extension (DAE) regulations; consult a licensed agronomist before applying any chemical.
+PesticideNext is an informational aid. Always follow the product label and Department of Agricultural Extension (DAE) regulations; consult a licensed agronomist before applying any chemical.

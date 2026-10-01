@@ -34,6 +34,9 @@ import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
 import { MOA_DATABASE } from '../data/moaData';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
+import './DatabaseView.css';
+import './pn-tokens.css';
+import { Database as DatabaseIcon } from 'lucide-react';
 
 interface DatabaseViewProps {
   products: ChemicalProduct[];
@@ -95,6 +98,9 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   const [parsedPreview, setParsedPreview] = useState<ChemicalProduct[]>([]);
   const [importError, setImportError] = useState<string>('');
   const [importSuccess, setImportSuccess] = useState<string>('');
+
+  // Editorial hero collapse (matches HomeView / RotationPlanner pattern)
+  const [headOpen, setHeadOpen] = useState<boolean>(false);
 
   // Primary navigation states
   const [selectedType, setSelectedType] = useState<string>('all');
@@ -590,7 +596,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(headers + exampleRow);
     const link = document.createElement("a");
     link.setAttribute("href", csvContent);
-    link.setAttribute("download", "agrichem_approved_pesticides_template.csv");
+    link.setAttribute("download", "pesticidenext_approved_pesticides_template.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -622,7 +628,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(headers + rows.join('\n'));
     const link = document.createElement("a");
     link.setAttribute("href", csvContent);
-    link.setAttribute("download", `agrichem_full_database_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute("download", `pesticidenext_full_database_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -701,11 +707,165 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     }
   };
 
+  const bn = language === 'bn';
+
+  // ----------------------------------------------- editorial copy deck --
+  const copy = bn
+    ? {
+        eyebrow: '৫,৭১১+ নিবন্ধিত পণ্যের সম্পূর্ণ ডাটাবেস',
+        h1a: 'সঠিক ওষুধ খুঁজুন,',
+        h1b: 'ভুল ওষুধ নয়।',
+        lede:
+          'প্রতিটি কৃষক কখনো "সব থেকে ভালো ওষুধ" খোঁজে না — সে খোঁজে তার ফসলের পোকার জন্য নিবন্ধিত সঠিক ওষুধ। এই ডাটাবেস সেই সঠিক ওষুধ খুঁজে দেয় — ফসল, পোকা, MoA গ্রুপ ও WHO বিপদ ব্যান্ড দিয়ে।',
+        trust1: 'সকল পণ্য DAE-নিবন্ধিত, রেজি. নম্বর সহ যাচাইযোগ্য।',
+        trust2: 'নিজের এক্সেল শিট থেকে কাস্টম পণ্য ইম্পোর্ট করে তালিকা সম্প্রসারণ করুন।',
+        stickerKicker: 'এই মুহূর্তে ফিল্টারে',
+        sticker1Foot: 'নিবন্ধিত ব্র্যান্ড',
+        sticker2Foot: 'স্বতন্ত্র উপাদান',
+        sticker3Foot: 'MoA গ্রুপ',
+        sticker4Foot: 'নিরাপদ (নীল/সবুজ)',
+        stickerFoot: 'প্রতিটি সংখ্যা বর্তমান ফিল্টারের সাথে আপডেট হয়।',
+        stat1Label: 'নিবন্ধিত ব্র্যান্ড',
+        stat1Detail: 'বর্তমান ফিল্টারে',
+        stat2Label: 'স্বতন্ত্র উপাদান',
+        stat2Detail: 'সক্রিয় রাসায়নিক',
+        stat3Label: 'MoA গ্রুপ',
+        stat3Detail: 'IRAC · FRAC · HRAC',
+        stat4Label: 'নিরাপদ পছন্দ',
+        stat4Detail: 'WHO নীল + সবুদ',
+        ctaDetails: 'বিস্তারিত'
+      }
+    : {
+        eyebrow: '5,711+ registered products, full catalogue',
+        h1a: 'Find the right chemical,',
+        h1b: 'not just any chemical.',
+        lede:
+          'No farmer asks for "the best pesticide" — they ask for the right registered chemical for their crop and pest. This database finds that right chemical, filtered by crop, pest, MoA group, and WHO hazard band.',
+        trust1: 'Every product is DAE-registered, with verifiable registration numbers.',
+        trust2: 'Import your own Excel sheet to extend the catalogue with custom products.',
+        stickerKicker: 'Live in this filter',
+        sticker1Foot: 'registered brands',
+        sticker2Foot: 'unique ingredients',
+        sticker3Foot: 'MoA groups',
+        sticker4Foot: 'safe picks (blue/green)',
+        stickerFoot: 'Every number updates with the current filter.',
+        stat1Label: 'registered brands',
+        stat1Detail: 'in current filter',
+        stat2Label: 'unique ingredients',
+        stat2Detail: 'active chemicals',
+        stat3Label: 'MoA groups',
+        stat3Detail: 'IRAC · FRAC · HRAC',
+        stat4Label: 'safe picks',
+        stat4Detail: 'WHO blue + green',
+        ctaDetails: 'Details'
+      };
+
+  // Real stats derived from the current filter
+  const safePickCount = useMemo(
+    () =>
+      filteredProducts.filter(
+        (p) => p.whoColor === '#3b82f6' || p.whoColor === '#22c55e' || p.whoColor === '#10b981'
+      ).length,
+    [filteredProducts]
+  );
+  const uniqueMoACodesInFilter = useMemo(() => {
+    const set = new Set<string>();
+    filteredProducts.forEach((p) => {
+      if (p.moaCode) set.add(p.moaCode);
+    });
+    return set.size;
+  }, [filteredProducts]);
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <div className="acg-db pn-tokens">
+      {/* -------------------------------------------- editorial hero */}
+      <section className="pn-shell">
+        <div className={`pn-head ${headOpen ? 'pn-head--open' : ''}`}>
+          <div>
+            <p className="pn-eyebrow">
+              <span className="pn-dot" /> {copy.eyebrow}
+            </p>
+            <h1 className="pn-h1">
+              {copy.h1a}
+              <br />
+              <em>{copy.h1b}</em>
+            </h1>
+            <div className="pn-head__more">
+              <p className="pn-lede">{copy.lede}</p>
+              <ul className="pn-trust">
+                <li><ShieldCheck size={14} /> {copy.trust1}</li>
+                <li><FileDown size={14} /> {copy.trust2}</li>
+              </ul>
+            </div>
+            <button
+              type="button"
+              className="pn-head__toggle"
+              onClick={() => setHeadOpen((o) => !o)}
+            >
+              <ChevronDown size={14} /> {copy.ctaDetails}
+            </button>
+          </div>
+
+          <aside className="pn-sticker">
+            <p className="pn-sticker__kicker">{copy.stickerKicker}</p>
+            <div className="pn-sticker__row">
+              <span className="pn-sticker__num">{formatNum(totalBrandsCount.toLocaleString('en-US'))}</span>
+              <DatabaseIcon size={14} color="#006a4e" />
+              <span className="pn-sticker__label">{copy.sticker1Foot}</span>
+            </div>
+            <div className="pn-sticker__row">
+              <span className="pn-sticker__num">{formatNum(uniqueIngredientsCount.toLocaleString('en-US'))}</span>
+              <Layers size={14} color="#006a4e" />
+              <span className="pn-sticker__label">{copy.sticker2Foot}</span>
+            </div>
+            <div className="pn-sticker__row">
+              <span className="pn-sticker__num">{formatNum(uniqueMoACodesInFilter)}</span>
+              <Activity size={14} color="#006a4e" />
+              <span className="pn-sticker__label">{copy.sticker3Foot}</span>
+            </div>
+            <div className="pn-sticker__row">
+              <span className="pn-sticker__num">{formatNum(safePickCount.toLocaleString('en-US'))}</span>
+              <HeartPulse size={14} color="#006a4e" />
+              <span className="pn-sticker__label">{copy.sticker4Foot}</span>
+            </div>
+            <p className="pn-sticker__foot">
+              <Sparkles size={14} /> {copy.stickerFoot}
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      {/* ----------------------------------------------- stats band */}
+      <section className="pn-shell">
+        <div className="pn-stats">
+          <div className="pn-stat">
+            <div className="pn-stat__value">{formatNum(totalBrandsCount.toLocaleString('en-US'))}</div>
+            <div className="pn-stat__label">{copy.stat1Label}</div>
+            <div className="pn-stat__detail">{copy.stat1Detail}</div>
+          </div>
+          <div className="pn-stat">
+            <div className="pn-stat__value">{formatNum(uniqueIngredientsCount.toLocaleString('en-US'))}</div>
+            <div className="pn-stat__label">{copy.stat2Label}</div>
+            <div className="pn-stat__detail">{copy.stat2Detail}</div>
+          </div>
+          <div className="pn-stat">
+            <div className="pn-stat__value">{formatNum(uniqueMoACodesInFilter)}</div>
+            <div className="pn-stat__label">{copy.stat3Label}</div>
+            <div className="pn-stat__detail">{copy.stat3Detail}</div>
+          </div>
+          <div className="pn-stat">
+            <div className="pn-stat__value">{formatNum(safePickCount.toLocaleString('en-US'))}</div>
+            <div className="pn-stat__label">{copy.stat4Label}</div>
+            <div className="pn-stat__detail">{copy.stat4Detail}</div>
+          </div>
+        </div>
+      </section>
+
+      {/* -------------------------------------------- existing controls */}
+      <section className="pn-shell acg-db-panels">
 
       {/* 🚀 1. Visual Crop Focus Bar (Horizontal scrolling Carousel) */}
-      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-3xs space-y-2.5">
+      <div className="acg-db-cropbar space-y-2.5">
         <div className="flex items-center justify-between text-xs px-1">
           <span className="font-bold text-slate-700 flex items-center gap-1.5 uppercase tracking-wider">
             <Sprout className="w-4 h-4 text-emerald-600" />
@@ -779,15 +939,13 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
 
       {/* 🌾 2. Smart Crop Advisory Summary Alert */}
       {selectedCrop !== 'all' && (
-        <div className="bg-emerald-50/80 border border-emerald-200/70 rounded-xl p-4 flex items-start gap-3.5 shadow-2xs">
-          <div className="p-2 bg-emerald-600 text-white rounded-lg shrink-0">
-            <Sparkles className="w-4 h-4" />
-          </div>
+        <div className="acg-db-advisory">
+          <Sparkles className="w-4 h-4" />
           <div className="space-y-1 text-xs">
-            <h4 className="font-bold text-emerald-950">
+            <h4 className="acg-db-advisory__title">
               {language === 'bn' ? `${transCrop(selectedCrop)} ফসল সুরক্ষা ও বালাই দমন পরামর্শ` : `${transCrop(selectedCrop)} Protection & Health Dossier`}
             </h4>
-            <p className="text-emerald-800 leading-relaxed font-medium">
+            <p className="acg-db-advisory__p">
               {language === 'bn' 
                 ? `বর্তমানে এই ডাটাবেজে ${transCrop(selectedCrop)}-এর জন্য মোট ${formatNum(filteredProducts.length)}টি অনুমোদিত ব্রান্ড এবং ${formatNum(uniqueIngredientsCount)}টি স্বতন্ত্র সক্রিয় বালাইনাশক উপাদান নিবন্ধিত রয়েছে। নিচে এদের সঠিক বালাই দমনের মাত্রা ও তোলার নিয়মাবলী দেওয়া হলো।`
                 : `Currently, there are ${formatNum(filteredProducts.length)} authorized brand formulations containing ${formatNum(uniqueIngredientsCount)} unique active chemical ingredients registered for ${transCrop(selectedCrop)} pest management in Bangladesh.`}
@@ -1861,6 +2019,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
         </div>
       </div>
 
+      </section>
     </div>
   );
 };

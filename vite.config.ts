@@ -82,8 +82,8 @@ export default defineConfig(() => {
         ],
         manifest: {
           id: '/',
-          name: 'AgriChem Pro',
-          short_name: 'এগ্রিকেম প্রো',
+          name: 'PesticideNext',
+          short_name: 'পেস্টিসাইডনেক্সট',
           description: 'Agricultural chemical controls guide, MoA rotation planner, field dosage calculator, safety checklists, and offline pocket book.',
           theme_color: '#006a4e',
           background_color: '#00281b',

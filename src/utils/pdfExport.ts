@@ -91,7 +91,7 @@ export async function exportSingleProductPDF(product: ChemicalProduct) {
   const pageHeight = doc.internal.pageSize.height;
   doc.setFontSize(8);
   doc.setTextColor(130, 130, 130);
-  doc.text('AgriChem Guidebook - Department of Agricultural Extension / Agricultural Field Reference.', 14, pageHeight - 8);
+  doc.text('PesticideNext Guidebook - Department of Agricultural Extension / Agricultural Field Reference.', 14, pageHeight - 8);
 
   doc.save(`${product.tradeName.replace(/[^a-zA-Z0-9]/g, '_')}_Field_Guide.pdf`);
 }
@@ -147,7 +147,7 @@ export async function exportCropGuidePDF(cropName: string, products: ChemicalPro
     doc.setPage(i);
     doc.setFontSize(8);
     doc.setTextColor(120, 120, 120);
-    doc.text(`Page ${i} of ${pageCount} | AgriChem Guidebook Database`, 14, doc.internal.pageSize.height - 6);
+    doc.text(`Page ${i} of ${pageCount} | PesticideNext Guidebook Database`, 14, doc.internal.pageSize.height - 6);
   }
 
   doc.save(`${cropName.replace(/\s+/g, '_')}_Pest_Control_Guide.pdf`);
