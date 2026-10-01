@@ -132,7 +132,7 @@ export default defineConfig(() => {
           // Take over from any previous service worker IMMEDIATELY and purge
           // old precaches. Without this, returning visitors keep getting the
           // stale cached bundle (e.g. the old 1,256-product dataset) instead
-          // of the merged 5,711-product catalogue.
+          // of the merged 5,052-product catalogue.
           skipWaiting: true,
           clientsClaim: true,
           cleanupOutdatedCaches: true,

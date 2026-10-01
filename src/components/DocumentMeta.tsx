@@ -19,11 +19,11 @@ const TAB_META: Record<AppTab, {
   home: {
     en: {
       title: 'PesticideNext — Smart Crop Chemical & Pest Management Suite',
-      description: 'The next spray, without the mistake — 5,711+ DAE pesticides, MoA rotation, tank calculator, and pocket book for Bangladesh.'
+      description: 'The next spray, without the mistake — 5,052+ DAE pesticides, MoA rotation, tank calculator, and pocket book for Bangladesh.'
     },
     bn: {
       title: 'পেস্টিসাইডনেক্সট — আধুনিক বালাই ব্যবস্থাপনা ও সঠিক রাসায়নিক মাত্রা সহায়িকা',
-      description: 'পরের স্প্রে, আর ভুল হবে না — বাংলাদেশের মাঠ ফসলের জন্য ৫,৭১১+ DAE বালাইনাশক, MoA রোটেশন, ট্যাংক ক্যালকুলেটর ও পকেট বুক।'
+      description: 'পরের স্প্রে, আর ভুল হবে না — বাংলাদেশের মাঠ ফসলের জন্য ৫,০৫২+ DAE বালাইনাশক, MoA রোটেশন, ট্যাংক ক্যালকুলেটর ও পকেট বুক।'
     }
   },
   database: {
