@@ -65,9 +65,9 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     icon: React.ComponentType<{ className?: string }>;
   }> = {
     home: {
-      titleEn: 'PesticideNext — Smart Crop Chemical & Pest Management Suite',
-      titleBn: 'পেস্টিসাইডনেক্সট — আধুনিক বালাইনাশক ও বালাই ব্যবস্থাপনা প্ল্যাটফর্ম',
-      descEn: 'DAE-registered 5,052+ pesticides, knapsack sprayer tank calculator, MoA rotation planner, WHO safety protocols & offline field manual.',
+      titleEn: 'PesticideNext — পরের স্প্রে, আর ভুল হবে না।',
+      titleBn: 'পেস্টিসাইডনেক্সট — পরের স্প্রে, আর ভুল হবে না।',
+      descEn: '5,052+ DAE pesticides, MoA rotation planner, tank calculator, WHO safety protocols & offline field manual.',
       descBn: 'বাংলাদেশে মাঠ ফসলের জন্য ডিএই নিবন্ধিত ৫,০৫২+ বালাইনাশক ডাটাবেস, স্প্রেয়ার ট্যাংক ক্যালকুলেটর, প্রতিরোধ রোধে MoA রোটেশন ও পকেট বুক।',
       tag: '#PesticideNext #BangladeshFarming #CropProtection',
       icon: Sparkles
