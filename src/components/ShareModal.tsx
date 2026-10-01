@@ -53,7 +53,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
 
   if (!isOpen) return null;
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://pesticidenext.live';
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://pesticide.krishiai.live';
   
   // Build target-specific link & text
   const shareTargetInfo: Record<AppTab, {

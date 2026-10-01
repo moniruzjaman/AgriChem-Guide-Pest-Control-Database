@@ -5,7 +5,7 @@
 
 A bilingual (Bangla / English) Progressive Web App that helps farmers, dealers, and field officers in Bangladesh choose the right pesticide, dose it correctly, and rotate modes of action to prevent resistance.
 
-**🔗 Live:** [pesticidenext.live](https://pesticidenext.live/) · **Preview fallback:** [pesticidenext.vercel.app](https://pesticidenext.vercel.app/) (Vercel preview only — canonical OG / Twitter URLs always point to `pesticidenext.live`)
+**🔗 Live:** [pesticide.krishiai.live](https://pesticide.krishiai.live/) · **Preview fallback:** [pesticidenext.vercel.app](https://pesticidenext.vercel.app/) (Vercel preview only — canonical OG / Twitter URLs always point to `pesticide.krishiai.live`)
 
 ---
 
@@ -48,7 +48,7 @@ The app uses a "pain-point editorial" design language across all tabs:
 
 ```
 ├── server.ts               # Express server: visitor API, Vite dev middleware, prod static + OG rewriting
-├── index.html              # App shell with SEO/OG/Twitter meta tags (canonical = pesticidenext.live)
+├── index.html              # App shell with SEO/OG/Twitter meta tags (canonical = pesticide.krishiai.live)
 ├── vite.config.ts          # Vite + PWA config (cacheId: 'pn-v2', skipWaiting, cleanupOutdatedCaches)
 ├── metadata.json           # AI Studio app metadata (name = tagline)
 ├── data_raw/               # Source CSVs (DAE pesticide registers, product lists)
@@ -133,17 +133,17 @@ bun run scripts/audit_data.ts                  # audits merged catalogue counts 
 
 | Role | Domain | Notes |
 |------|--------|-------|
-| **Primary (canonical)** | `pesticidenext.live` | All OG / Twitter / canonical URLs in `index.html` point here. Social crawlers see this domain. |
-| **Preview fallback** | `pesticidenext.vercel.app` | Vercel preview deploy — used for testing only. The server.ts `OG_IMAGE_ORIGIN` placeholder rewriting means even this preview deploy will rewrite `pesticidenext.live` → `pesticidenext.vercel.app` per request, so crawlers fetching the preview URL see preview URLs. |
+| **Primary (canonical)** | `pesticide.krishiai.live` | All OG / Twitter / canonical URLs in `index.html` point here. Social crawlers see this domain. |
+| **Preview fallback** | `pesticidenext.vercel.app` | Vercel preview deploy — used for testing only. The server.ts `OG_IMAGE_ORIGIN` placeholder rewriting means even this preview deploy will rewrite `pesticide.krishiai.live` → `pesticidenext.vercel.app` per request, so crawlers fetching the preview URL see preview URLs. |
 | **GitHub Pages** | `moniruzjaman.github.io/AgriChem-Guide-Pest-Control-Database` | Built by `.github/workflows/deploy.yml`. Same OG rewriting applies. |
 | **Local dev** | `localhost:3000` | `tsx server.ts` — Vite middleware mode. |
 
 ### How OG URL rewriting works
 
-`index.html` is built with `https://pesticidenext.live` as the placeholder origin in every OG / Twitter / canonical tag. At runtime in production mode, `server.ts` reads `X-Forwarded-Proto` and `X-Forwarded-Host` (or falls back to `req.protocol` + `req.headers.host`) to compute the actual origin the request was served from, then string-replaces `https://pesticidenext.live` with that origin before responding.
+`index.html` is built with `https://pesticide.krishiai.live` as the placeholder origin in every OG / Twitter / canonical tag. At runtime in production mode, `server.ts` reads `X-Forwarded-Proto` and `X-Forwarded-Host` (or falls back to `req.protocol` + `req.headers.host`) to compute the actual origin the request was served from, then string-replaces `https://pesticide.krishiai.live` with that origin before responding.
 
 This means:
-- Crawlers fetching `pesticidenext.live/...` see `pesticidenext.live` URLs (correct).
+- Crawlers fetching `pesticide.krishiai.live/...` see `pesticide.krishiai.live` URLs (correct).
 - Crawlers fetching `pesticidenext.vercel.app/...` see `pesticidenext.vercel.app` URLs (correct for that preview).
 - Crawlers fetching `localhost:3000` see `http://localhost:3000` URLs (correct for local debugging).
 
