@@ -4,11 +4,12 @@
    white, golden). Self-contained: the token block + paper grain come from
    pn-tokens.css (.acg-db is just .pn-tokens + a class hook).
 
-   The Database tab keeps its existing Tailwind-class filter controls and
-   product cards. This CSS only styles the editorial hero, stats band, and
-   sticker card on top — the existing utility-class chrome is intentionally
-   left in place so the complex importer / filter / brand-table logic stays
-   unchanged.
+   PR: Dashboard redesign + stable-width brand grid.
+   The previous flex-based brand rows fluctuated in width per row because
+   every column had a variable min-width. The new layout uses CSS Grid
+   with fixed column tracks so every brand row aligns identically
+   regardless of text length. A new category-dashboard strip at the top
+   makes category-wise browsing + search easier.
    ========================================================================== */
 
 .acg-db {
@@ -19,8 +20,28 @@
    use Tailwind utilities. Those utilities were authored against the white
    page background — under .acg-db's paper grain, they sometimes need a
    subtle bg fill so they don't sit directly on the textured surface. */
-.acg-db .acg-db-panels { margin-top: 36px; display: grid; gap: 24px; }
-.acg-db .acg-db-panels > * { position: relative; z-index: 2; }
+.acg-db .acg-db-panels {
+  margin-top: 36px;
+  display: grid;
+  gap: 24px;
+  /* CRITICAL: overflow hidden + min-width 0 on the grid container prevents
+     grid items from blowing out the 1240px pn-shell when their content
+     (e.g. long trade names in brand rows) is wider than the track.
+     Without this, the grid expands to fit the widest child → 13000+px
+     page width → horizontal scrollbar. */
+  overflow: hidden;
+  min-width: 0;
+}
+.acg-db .acg-db-panels > * {
+  position: relative;
+  z-index: 2;
+  /* min-width: 0 is the CSS Grid equivalent of "allow this item to shrink
+     below its content size". Default is `auto` which means "at least as
+     wide as the content" → blows out the grid. */
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
 
 /* Tone-shift some existing inline chips to the official palette via class
    overrides (kept minimal so existing filter logic isn't broken). */
@@ -57,3 +78,494 @@
 
 /* Collapsible user guide spacing override */
 .acg-db .acg-guide-wrap { margin-top: 24px; }
+
+/* ============================================================================
+   CATEGORY DASHBOARD STRIP — fixed-grid row of clickable category snapshot
+   cards at the top of the grouped view. Replaces the "Expand/Collapse All"
+   toolbar with a scannable dashboard that makes category-wise browsing +
+   search easier. Each card: emoji + category name + 3 metrics (ingredients,
+   brands, MoA groups). Click → smooth-scrolls to that category section.
+   ========================================================================== */
+.acg-db-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+.acg-db-dash-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--green);
+  padding: 12px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  min-width: 0; /* prevent grid blowout from long category names */
+}
+.acg-db-dash-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 77, 56, 0.08);
+  border-color: var(--green);
+}
+.acg-db-dash-card--red    { border-top-color: var(--red); }
+.acg-db-dash-card--gold   { border-top-color: var(--golden); }
+.acg-db-dash-card--green  { border-top-color: var(--green); }
+.acg-db-dash-card--violet { border-top-color: #8b5cf6; }
+.acg-db-dash-card--bio    { border-top-color: #10b981; }
+.acg-db-dash-card--brown  { border-top-color: #92400e; }
+.acg-db-dash-card--amber  { border-top-color: #a16207; }
+.acg-db-dash-card--sky    { border-top-color: #0ea5e9; }
+.acg-db-dash-card--muted  { border-top-color: #5d6f64; }
+
+.acg-db-dash-card__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.acg-db-dash-card__emoji {
+  font-size: 18px;
+  line-height: 1;
+  flex: none;
+}
+.acg-db-dash-card__name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--green-900);
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.acg-db-dash-card__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.3;
+}
+.acg-db-dash-card__metric b {
+  display: block;
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green-900);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin-bottom: 1px;
+}
+
+/* ============================================================================
+   STABLE-WIDTH BRAND ROW — CSS Grid with fixed column tracks.
+   Every brand row aligns identically regardless of text length because
+   each column has a fixed track size. Long text truncates with ellipsis
+   instead of pushing the next column around.
+
+   CRITICAL: the row + its parent containers must have `min-width: 0` and
+   `overflow: hidden` so the grid never expands beyond the viewport. Without
+   this, the `minmax(260px, 1.6fr)` first track can blow out to 13000+ px
+   when the parent has no explicit max-width (the grid expands to fit the
+   longest non-truncated content).
+
+   Grid tracks (desktop ≥1024px):
+     1. Brand name + reg details — flexible but min 240px, truncated
+     2. MoA badge — fixed 130px
+     3. Dosage + PHI — fixed 180px
+     4. Action buttons — fixed 150px
+
+   On tablet/mobile the grid collapses to a 1-column stack with
+   consistent padding so width never fluctuates.
+   ========================================================================== */
+.acg-db-brand-list {
+  background: var(--card);
+  padding: 4px 0 8px;
+  overflow: hidden; /* prevent grid blowout beyond container */
+}
+.acg-db-brand-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.15s ease;
+  align-items: start;
+  min-width: 0; /* CRITICAL: allow grid children to shrink below content size */
+  overflow: hidden;
+}
+.acg-db-brand-row:hover { background: var(--paper-muted); }
+.acg-db-brand-row:last-child { border-bottom: 0; }
+
+@media (min-width: 768px) {
+  .acg-db-brand-row {
+    grid-template-columns: minmax(0, 1.5fr) 130px 180px 150px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 14px;
+  }
+}
+@media (min-width: 1280px) {
+  .acg-db-brand-row {
+    grid-template-columns: minmax(0, 1.6fr) 140px 200px 160px;
+    gap: 14px;
+  }
+}
+
+/* Brand-name cell — truncate long trade names so the column never blows out */
+.acg-db-brand-name {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.acg-db-brand-name__title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.acg-db-brand-name__title h4 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--ink);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.acg-db-brand-name__formulation {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 2px 6px;
+  background: var(--paper-muted);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.acg-db-brand-name__meta {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  line-height: 1.5;
+}
+.acg-db-brand-name__meta strong { color: var(--ink); font-weight: 600; }
+.acg-db-brand-name__meta .sep { color: var(--line); }
+
+/* MoA badge cell — fixed width, never fluctuates */
+.acg-db-brand-moa {
+  background: var(--paper-muted);
+  border: 1px solid var(--line);
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  overflow: hidden;
+}
+.acg-db-brand-moa__label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.acg-db-brand-moa__code {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  background: var(--green-900);
+  color: #6ee7b7;
+  align-self: flex-start;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.acg-db-brand-moa__group {
+  font-size: 10px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Dosage + PHI cell — fixed width, two sub-columns */
+.acg-db-brand-dose {
+  background: var(--paper-muted);
+  border: 1px solid var(--line);
+  padding: 6px 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  min-width: 0;
+}
+.acg-db-brand-dose__cell { min-width: 0; }
+.acg-db-brand-dose__label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+}
+.acg-db-brand-dose__value {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Action buttons cell — fixed width, never wraps */
+.acg-db-brand-actions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+.acg-db-brand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  transition: background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.acg-db-brand-btn:hover { background: var(--paper-muted); border-color: var(--green); }
+.acg-db-brand-btn--calc { color: var(--green); border-color: var(--green); }
+.acg-db-brand-btn--calc:hover { background: var(--green); color: #fff; }
+.acg-db-brand-btn--safe { color: #b31d31; border-color: #f5bfc8; }
+.acg-db-brand-btn--safe:hover { background: var(--red-tint); border-color: var(--red); }
+.acg-db-brand-btn--info { padding: 6px; }
+.acg-db-brand-btn--info svg { display: block; }
+
+/* ============================================================================
+   STABLE-WIDTH INGREDIENT HEADER — grid: 1fr auto so the right-side
+   brand-count column is always the same width regardless of how long
+   the ingredient name or crop list is.
+   ========================================================================== */
+.acg-db-ingredient-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--paper-muted);
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.acg-db-ingredient-head:hover { background: #dcecdf; }
+.acg-db-ingredient-head__left { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.acg-db-ingredient-head__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.acg-db-ingredient-head__title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.acg-db-ingredient-head__title span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.acg-db-ingredient-head__crops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--muted);
+}
+.acg-db-ingredient-head__crops-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-right: 4px;
+}
+.acg-db-ingredient-head__crop-chip {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  font-weight: 600;
+}
+.acg-db-ingredient-head__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+}
+.acg-db-ingredient-head__count {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.acg-db-ingredient-head__count b {
+  display: block;
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green-900);
+  letter-spacing: -0.01em;
+}
+.acg-db-ingredient-head__chevron {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  flex: none;
+}
+
+/* The expanded brand-list container */
+.acg-db-brand-list {
+  background: var(--card);
+  padding: 4px 0 8px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* The ingredient group card (Tailwind bg-white border rounded-2xl) needs
+   min-width: 0 + max-width: 100% so it never expands beyond its grid
+   parent. Without this, the card grows to fit the longest non-truncated
+   child (e.g. a long trade name), which blows out the page width. */
+.acg-db-cat-section .bg-white.border.border-slate-200.rounded-2xl {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+.acg-db-brand-list__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ============================================================================
+   CATEGORY SECTION — the outer wrapper for each category (Insecticide,
+   Fungicide, etc.) in the grouped view. Header is now more compact +
+   dashboard-like.
+   ========================================================================== */
+.acg-db-cat-section {
+  border: 1px solid var(--line);
+  background: var(--card);
+  overflow: hidden; /* prevent inner grid from blowing out */
+  scroll-margin-top: 80px; /* for smooth-scroll from dashboard card click */
+  min-width: 0;
+}
+.acg-db-cat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--paper-muted);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.acg-db-cat-head__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+.acg-db-cat-head__emoji {
+  font-size: 22px;
+  line-height: 1;
+  flex: none;
+}
+.acg-db-cat-head__name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--green-900);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.acg-db-cat-head__desc {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+  line-height: 1.5;
+}
+.acg-db-cat-head__metrics {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex: none;
+}
+.acg-db-cat-head__metrics b {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green-900);
+}
+.acg-db-cat-head__sep { color: var(--line); }
