@@ -156,13 +156,15 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     });
   };
 
-  // Social Share links
+  // Social Share links — priority order: WhatsApp, Facebook, Messenger,
+  // LinkedIn, Telegram. Twitter/X intentionally omitted (sharing priority
+  // decision); Twitter still falls back to og:image via Open Graph
+  // compatibility so the preview card renders there too.
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(fullShareText)}`;
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
   const messengerUrl = `https://www.facebook.com/dialog/send?app_id=291494419162&link=${encodeURIComponent(shareUrl)}&redirect_uri=${encodeURIComponent(shareUrl)}`;
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(currentTitle + ' — ' + currentDesc)}&url=${encodeURIComponent(shareUrl)}&hashtags=${encodeURIComponent('PesticideNext,SmartFarming,DAE')}`;
-  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(currentTitle + '\n' + currentDesc)}`;
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(currentTitle + '\n' + currentDesc)}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 overflow-y-auto">
@@ -246,21 +248,10 @@ export const ShareModal: React.FC<ShareModalProps> = ({
             <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-2xs space-y-0">
               <div className="w-full aspect-[1.91/1] bg-slate-100 relative border-b border-slate-100 overflow-hidden">
                 <img
-                  src={language === 'bn' ? '/icons/og-bn.png' : '/icons/og-en.png'}
+                  src="/og-image.png"
                   alt="PesticideNext OG Preview"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
-                  // Falls back to the SVG only if the PNG is somehow missing —
-                  // the PNG is the canonical format for OG previews because
-                  // WhatsApp / Facebook / Twitter-X reject SVG.
-                  onError={(e) => {
-                    const img = e.currentTarget;
-                    const fallback = language === 'bn' ? '/icons/og-bn.svg' : '/icons/og-en.svg';
-                    if (img.src !== fallback && !img.dataset.fallbackUsed) {
-                      img.dataset.fallbackUsed = '1';
-                      img.src = fallback;
-                    }
-                  }}
                 />
               </div>
               <div className="p-3 space-y-1.5">
@@ -336,15 +327,17 @@ export const ShareModal: React.FC<ShareModalProps> = ({
                 <span>Messenger</span>
               </button>
 
-              {/* Twitter / X */}
+              {/* LinkedIn — priority #4 (was previously defined but never rendered) */}
               <a
-                href={twitterUrl}
+                href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col sm:flex-row items-center justify-center gap-1.5 py-2 px-1 rounded-xl bg-slate-900/10 hover:bg-slate-900/20 border border-slate-300 text-slate-900 font-semibold text-[11px] sm:text-xs transition shadow-2xs text-center"
+                className="flex flex-col sm:flex-row items-center justify-center gap-1.5 py-2 px-1 rounded-xl bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 border border-[#0A66C2]/30 text-[#0A66C2] font-semibold text-[11px] sm:text-xs transition shadow-2xs text-center"
               >
-                <span className="font-bold text-xs leading-none">𝕏</span>
-                <span>Twitter / X</span>
+                <svg className="w-4 h-4 shrink-0 text-[#0A66C2]" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
+                </svg>
+                <span>LinkedIn</span>
               </a>
 
               {/* Telegram */}

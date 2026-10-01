@@ -77,8 +77,9 @@ export default defineConfig(() => {
         includeAssets: [
           'favicon.svg',
           'favicon-32.png',
+          'og-image.png',
           'icons/*.png',
-          'apple-touch-*.svg'
+          'icons/apple-touch-default.svg'
         ],
         manifest: {
           id: '/',

@@ -55,7 +55,8 @@ The app uses a "pain-point editorial" design language across all tabs:
 ├── scripts/
 │   ├── regenerate_all_pesticides.py  # data_raw/all_pesticides.csv → src/data/all_pesticides.ts
 │   └── audit_data.ts                 # Verifies merged catalogue counts (run with bun)
-├── public/                 # Icons, manifests, OG images (bn/en — 1200×630 Retina PNGs), partner logos
+├── public/                 # Single OG image (og-image.png — 1200×630 PNG), favicon set, PWA manifest, partner logos
+│   └── icons/              # PWA icons (192/512), apple-touch-default — only files referenced by vite.config.ts
 └── src/
     ├── App.tsx             # Root component, hash routing, visitor pings, footer with tagline
     ├── main.tsx            # Boot: storage migration + PWA cache cleanup, then React mount
