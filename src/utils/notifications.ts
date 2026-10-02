@@ -25,8 +25,8 @@ export function sendPushNotification(title: string, options?: NotificationOption
   if (Notification.permission === 'granted') {
     try {
       new Notification(title, {
-        icon: '/favicon.ico',
-        badge: '/favicon.ico',
+        icon: '/icons/icon-192.png',
+        badge: '/favicon-32.png',
         ...options
       });
       return true;

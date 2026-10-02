@@ -75,47 +75,32 @@ export default defineConfig(() => {
         registerType: 'autoUpdate',
         injectRegister: 'auto',
         includeAssets: [
-          'favicon.svg',
+          'favicon.ico',
           'favicon-32.png',
+          'apple-touch-icon.png',
           'og-image.png',
-          'icons/*.png',
-          'icons/apple-touch-default.svg'
+          'icons/*.png'
         ],
+        // Single source of truth for the PWA manifest (served at
+        // /manifest.webmanifest and linked automatically by vite-plugin-pwa).
         manifest: {
           id: '/',
-          name: 'PesticideNext',
-          short_name: 'পেস্টিসাইডনেক্সট',
-          description: 'Agricultural chemical controls guide, MoA rotation planner, field dosage calculator, safety checklists, and offline pocket book.',
+          name: 'PesticideNext — Smart Pesticide Reference & Resistance Management',
+          short_name: 'PesticideNext',
+          description: 'Bangladesh field-crop reference: DAE-registered pesticides, tank-mix calculator, IRAC/FRAC/HRAC MoA rotation planner, safety checklists, and an offline pocket-book guide. বালাইনাশক তথ্য ও বালাই প্রতিরোধ ব্যবস্থাপনা।',
+          lang: 'bn',
+          dir: 'ltr',
+          categories: ['agriculture', 'reference', 'productivity'],
           theme_color: '#006a4e',
-          background_color: '#00281b',
+          background_color: '#000000',
           display: 'standalone',
-          start_url: '/',
+          orientation: 'portrait',
+          start_url: '/?source=pwa',
           scope: '/',
           icons: [
-            {
-              src: '/favicon.svg',
-              sizes: 'any',
-              type: 'image/svg+xml',
-              purpose: 'any'
-            },
-            {
-              src: '/icons/icon-192.png',
-              sizes: '192x192',
-              type: 'image/png',
-              purpose: 'any'
-            },
-            {
-              src: '/icons/icon-512.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'any maskable'
-            },
-            {
-              src: '/icons/apple-touch-default.png',
-              sizes: '180x180',
-              type: 'image/png',
-              purpose: 'any'
-            }
+            { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+            { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+            { src: '/icons/icon-512-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
           ]
         },
         workbox: {

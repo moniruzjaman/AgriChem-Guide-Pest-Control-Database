@@ -482,7 +482,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <img
-              src="/favicon.svg"
+              src="/icons/icon-192.png"
               alt={language === 'bn' ? 'পেস্টিসাইডনেক্সট লোগো' : 'PesticideNext Logo'}
               className="w-8 h-8 rounded-lg object-contain shadow-xs"
               referrerPolicy="no-referrer"

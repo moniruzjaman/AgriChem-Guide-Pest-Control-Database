@@ -109,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveTab('home')}
             >
               <img 
-                src="/favicon.svg" 
+                src="/icons/icon-192.png" 
                 alt="PesticideNext Logo" 
                 className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl object-contain shadow-sm shrink-0"
                 referrerPolicy="no-referrer"
