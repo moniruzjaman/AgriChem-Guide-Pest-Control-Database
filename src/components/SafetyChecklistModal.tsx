@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ChemicalProduct } from '../types';
 import { 
   ShieldAlert, 
@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { exportSingleProductPDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 interface SafetyChecklistModalProps {
   product: ChemicalProduct | null;
@@ -27,6 +28,8 @@ export const SafetyChecklistModal: React.FC<SafetyChecklistModalProps> = ({
   product,
   onClose
 }) => {
+  const overlayRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(overlayRef, !!product);
   const { language, transTox, formatNum } = useLanguage();
   if (!product) return null;
 
@@ -68,7 +71,7 @@ export const SafetyChecklistModal: React.FC<SafetyChecklistModalProps> = ({
   const band = getToxicityBand(product.toxicityClass);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+    <div ref={overlayRef} className="acg-modal-scope fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
       <div 
         id="safety-checklist-modal"
         className="bg-white rounded-2xl max-w-2xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"

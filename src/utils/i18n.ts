@@ -140,8 +140,8 @@ export const UI_TRANSLATIONS: Record<Language, Record<string, string>> = {
     spray_water_volume: 'Recommended Water Volume',
     resistance_guideline: 'Resistance Management Guideline',
     safety_cautions: 'Safety Precautions',
-    dae_recommendations_title: 'Official DAE Use Recommendations',
-    dae_recommendations_desc: 'Crop | Pest | Dosage prescriptions authorised by the Department of Agricultural Extension (DAE) for this registration.',
+    dae_recommendations_title: 'DAE-Registered Use Recommendations',
+    dae_recommendations_desc: 'Crop | Pest | Dosage prescriptions from the DAE registration record for this product.',
     dae_recommendations_empty: 'No structured recommendations on file. Refer to the product label or contact your nearest DAE office.',
     dae_crop_col: 'Crop',
     dae_pest_col: 'Target Pest / Disease',
@@ -268,8 +268,8 @@ export const UI_TRANSLATIONS: Record<Language, Record<string, string>> = {
     spray_water_volume: 'প্রস্তাবিত পানির পরিমাণ',
     resistance_guideline: 'প্রতিরোধ ক্ষমতা রোধের নির্দেশিকা',
     safety_cautions: 'ব্যবহারিক সতর্কতা',
-    dae_recommendations_title: 'DAE অনুমোদিত প্রয়োগ নির্দেশিকা',
-    dae_recommendations_desc: 'এই নিবন্ধনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) অনুমোদিত ফসল | বালাই | মাত্রা তালিকা।',
+    dae_recommendations_title: 'DAE নিবন্ধিত প্রয়োগ নির্দেশিকা',
+    dae_recommendations_desc: 'এই পণ্যের নিবন্ধন তালিকা থেকে নেওয়া ফসল | বালাই | মাত্রা তালিকা।',
     dae_recommendations_empty: 'কোনো কাঠামোগত সুপারিশ নেই। পণ্যের লেবেল দেখুন বা নিকটস্থ DAE অফিসে যোগাযোগ করুন।',
     dae_crop_col: 'ফসল',
     dae_pest_col: 'লক্ষ্য বালাই / রোগ',
@@ -277,7 +277,7 @@ export const UI_TRANSLATIONS: Record<Language, Record<string, string>> = {
     dae_rec_count_suffix: 'টি অনুমোদিত সুপারিশ রেকর্ডে আছে',
 
     // Dosage Calculator
-    calc_header_title: 'ন্যাSplit-Knapsack স্প্রেয়ার মাত্রা ও ট্যাংক মিশ্রণ স্টেশন',
+    calc_header_title: 'ন্যাপস্যাক স্প্রেয়ার মাত্রা ও ট্যাংক মিশ্রণ স্টেশন',
     calc_header_desc: 'যেকোনো নিবন্ধিত রাসায়নিক নির্বাচন করে আপনার জমির পরিমাণ অনুযায়ী পানির পরিমাণ, ট্যাংকের সংখ্যা ও প্রয়োজনীয় ওষুধের সঠিক হিসাব জানুন।',
     calc_field_area: 'জমির পরিমাণ',
     calc_area_unit: 'জমির একক',
@@ -319,7 +319,7 @@ export const UI_TRANSLATIONS: Record<Language, Record<string, string>> = {
 
     // Guidebook
     guide_title: 'মাঠ পর্যায়ের কৃষি নির্দেশিকা ও স্প্রেয়ার ক্যালিব্রেশন',
-    guide_desc: 'ন্যাSplit স্প্রেয়ার সঠিক ক্যালিব্রেশন পদ্ধতি, বিশ্বজনীন ট্যাংক মিক্সিং নিয়ম (W.A.L.E.S.), প্রতিরোধ বায়োলজি এবং প্রধান ফসলের স্প্রে ক্যালেন্ডার।',
+    guide_desc: 'ন্যাপস্যাক স্প্রেয়ার সঠিক ক্যালিব্রেশন পদ্ধতি, বিশ্বজনীন ট্যাংক মিক্সিং নিয়ম (W.A.L.E.S.), প্রতিরোধ বায়োলজি এবং প্রধান ফসলের স্প্রে ক্যালেন্ডার।',
     guide_step1: 'ধাপ ১: ১০০ বর্গমিটার টেস্ট এরিয়া চিহ্নিত করুন',
     guide_step2: 'ধাপ ২: স্বাভাবিক গতিতে বিশুদ্ধ পানি স্প্রে করুন',
     guide_step3: 'ধাপ ৩: প্রতি হেক্টরে পানির প্রয়োজনীয়তা বের করুন',

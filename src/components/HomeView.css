@@ -667,6 +667,8 @@
 /* extra button variants */
 .acg-btn--red { background: var(--red); color: #ffffff; }
 .acg-btn--red:hover { background: var(--red-800); }
+.acg-btn--gold { background: var(--golden); color: var(--green-900); }
+.acg-btn--gold:hover { background: #d4a02e; }
 .acg-btn--white { background: #ffffff; color: var(--green-900); }
 .acg-btn--white:hover { background: var(--paper-muted); }
 .acg-btn--onbright { color: #ffffff; border-color: rgba(255, 255, 255, 0.55); }

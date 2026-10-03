@@ -70,7 +70,7 @@ export const CollapsibleUserGuide: React.FC<CollapsibleUserGuideProps> = ({
               <h4 className="font-bold text-sm text-emerald-950 tracking-tight leading-tight">
                 {title}
               </h4>
-              <span className="bg-emerald-200/60 text-emerald-800 text-[9px] font-black px-1.5 py-0.2 rounded uppercase tracking-wider shrink-0">
+              <span className="bg-emerald-200/60 text-emerald-800 text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider shrink-0">
                 {language === 'bn' ? 'ব্যবহার নির্দেশিকা' : 'Field Manual'}
               </span>
             </div>
@@ -110,7 +110,7 @@ export const CollapsibleUserGuide: React.FC<CollapsibleUserGuideProps> = ({
                   <ul className="space-y-2">
                     {steps.map((step, idx) => (
                       <li key={idx} className="flex gap-2.5 items-start text-[11px] text-slate-700 leading-relaxed">
-                        <span className="w-4.5 h-4.5 bg-emerald-600/10 border border-emerald-300 text-emerald-800 font-bold text-[10px] rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="w-4 h-4 bg-emerald-600/10 border border-emerald-300 text-emerald-800 font-bold text-[10px] rounded-full flex items-center justify-center shrink-0 mt-0.5">
                           {idx + 1}
                         </span>
                         <span>{step}</span>

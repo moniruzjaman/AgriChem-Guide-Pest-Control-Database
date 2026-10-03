@@ -18,16 +18,15 @@ import type { AppTab } from '../types';
 
 // ── Cross-app partner branding ───────────────────────────────────────────────
 // The partner apps (উদ্ভিদ গোয়েন্দা / Plant Detective and the Pesticide Act
-// 2018 explorer) render their own live logo so the artwork always matches the
-// partner app's latest deploy; the local PNG is only a cache/network fallback.
+// 2018 explorer). Logos are served from the LOCAL bundle so we never ping
+// third-party domains on Home load (privacy + offline PWA). The remote URL is
+// kept only as a metadata reference for the partner app's canonical deploy.
 export const CABI_APP_URL = 'https://cabi.krishiai.live/';
-export const CABI_APP_LOGO = 'https://cabi.krishiai.live/cabi-logo.png';
+export const CABI_APP_LOGO = '/partner-plant-detective-logo.png';
 export const CABI_APP_LOGO_FALLBACK = '/partner-plant-detective-logo.png';
 export const PESTICIDE_ACT_APP_URL = 'https://pesticideact2018.vercel.app/';
-export const PESTICIDE_ACT_APP_LOGO =
-  'https://pesticideact2018.vercel.app/apple-touch-icon.png';
-export const PESTICIDE_ACT_APP_LOGO_FALLBACK =
-  '/partner-pesticide-act-logo.png';
+export const PESTICIDE_ACT_APP_LOGO = '/partner-pesticide-act-logo.png';
+export const PESTICIDE_ACT_APP_LOGO_FALLBACK = '/partner-pesticide-act-logo.png';
 
 // ── Popular crops for quick database navigation ─────────────────────────────
 export interface PopularCrop {
@@ -78,20 +77,20 @@ export const FEATURES: FeatureDossier[] = [
     descEn: 'Instant search across Bangladesh DAE-registered insecticides, fungicides, herbicides, and miticides. Includes verified trade names, target pests, label application rates, PHI (Pre-Harvest Interval) and REI safety windows.',
     descBn: 'কৃষি সম্প্রসারণ অধিদপ্তর (DAE) নিবন্ধিত কীটনাশক, ছত্রাকনাশক, আগাছানাশক ও মাকড়নাশকের পূর্ণাঙ্গ তালিকা। অনুমোদিত বাণিজ্য নাম, লক্ষ্য বালাই, প্রতি হেক্টরে সঠিক প্রয়োগ মাত্রা, ফসল তোলার নিরাপদ বিরতি (PHI) ও রি-এন্ট্রি সময়কাল দেখুন।',
     icon: Database,
-    badgeEn: 'Official register',
-    badgeBn: 'অফিসিয়াল রেজিস্টার',
+    badgeEn: 'From DAE register',
+    badgeBn: 'DAE তালিকা থেকে',
     tone: 'green',
     statLabelEn: 'Active Ingredients',
     statLabelBn: 'সক্রিয় উপাদান',
     statValue: '5,052+',
     highlightsEn: [
-      'Official DAE Registration',
+      'Verifiable DAE registration numbers',
       'PHI & REI Safety Windows',
       'Target Pest Index',
       'Trade Names Dossier',
     ],
     highlightsBn: [
-      'ডিএই অফিসিয়াল নিবন্ধন',
+      'যাচাইযোগ্য DAE নিবন্ধন নম্বর',
       'PHI ও REI নিরাপদ সময়',
       'বালাই ও রোগের পূর্ণাঙ্গ তালিকা',
       'ব্র্যান্ড ও বাণিজ্য নাম',

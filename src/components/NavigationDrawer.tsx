@@ -7,18 +7,19 @@ import {
   Database, 
   Calculator, 
   RotateCw, 
-  ShieldCheck, 
-  BookOpen, 
-  Bell, 
-  Share2, 
-  Languages, 
-  Info, 
+  ShieldCheck,
+  BookOpen,
+  Bell,
+  Share2,
+  Languages,
+  Info,
   ArrowRight,
   Sparkles,
   Zap,
   Smartphone,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  NotebookPen
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
@@ -133,7 +134,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-            className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col h-full border-l border-slate-200"
+            className="acg-drawer-scope fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col h-full border-l border-slate-200"
           >
             {/* Drawer Header Box */}
             <div className="p-5 border-b border-slate-100 bg-emerald-900 text-white relative overflow-hidden">
@@ -306,6 +307,21 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                       {getStepStatus('alerts')}
                     </div>
                   </button>
+
+                  <button
+                    onClick={() => handleTabClick('myfield')}
+                    className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${
+                      activeTab === 'myfield'
+                        ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
+                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <NotebookPen className={`w-4 h-4 ${activeTab === 'myfield' ? 'text-emerald-700' : 'text-slate-500'}`} />
+                      <span>{language === 'bn' ? 'আমার জমি ও স্প্রে ইতিহাস' : 'My Field & Spray History'}</span>
+                    </div>
+                    {getStepStatus('myfield' as AppTab)}
+                  </button>
                 </div>
               </div>
 
@@ -318,7 +334,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                   </h3>
                 </div>
 
-                <div className="relative border-l-2 border-slate-150 pl-3 ml-2 space-y-4">
+                <div className="relative border-l-2 border-slate-200 pl-3 ml-2 space-y-4">
                   {roadmapSteps.map((step) => {
                     const StepIcon = step.icon;
                     const isActive = activeTab === step.id;
@@ -377,7 +393,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-1.5">
                       <span className="font-bold text-slate-800">PesticideNext Mobile</span>
-                      <span className="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-1.5 py-0.2 rounded">
+                      <span className="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-1.5 py-0.5 rounded">
                         PWA
                       </span>
                     </div>

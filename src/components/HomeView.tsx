@@ -17,6 +17,7 @@ import {
   Share2,
   ShieldCheck,
   Sparkles,
+  NotebookPen,
 } from 'lucide-react';
 import { ChemicalProduct, AppTab, MoAClassification } from '../types';
 import { MOA_DATABASE } from '../data/moaData';
@@ -267,6 +268,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         ctaCalc: 'ট্যাংক ক্যালকুলেটর',
         ctaShare: 'শেয়ার করুন',
         ctaGuide: 'গাইড মেনু',
+        ctaLogSpray: 'স্প্রে লগ করুন',
         trust:
           'সুপারিশের আগে লেবেল, নিবন্ধন, PHI, REI ও PPE যাচাই করুন।',
         dialogKicker: 'মাঠের কথা',
@@ -276,7 +278,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         guideQuote: '“পণ্য নয় — গ্রুপ বদলান।”',
         dialogFoot: 'একই গ্রুপ বারবার দিলে পোকা প্রতিরোধী হয়ে ওঠে।',
         stat1Label: 'DAE নিবন্ধিত পণ্য',
-        stat1Detail: 'ডিএই অনুমোদিত মাস্টার তালিকা',
+        stat1Detail: 'DAE প্রকাশ্য তালিকা থেকে',
         stat2Label: 'MoA-তে ম্যাপ করা',
         stat2Detail: 'IRAC · FRAC · HRAC জুড়ে ম্যাপ করা',
         stat3Label: 'MoA গ্রুপ',
@@ -323,6 +325,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         ctaCalc: 'Tank calculator',
         ctaShare: 'Share the app',
         ctaGuide: 'Guide menu',
+        ctaLogSpray: 'Log a spray',
         trust:
           'Always verify the current label, registration status, PHI, REI, and PPE before recommending.',
         dialogKicker: 'FROM THE FIELD',
@@ -332,7 +335,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         guideQuote: '“It’s not the product — change the group.”',
         dialogFoot: 'Repeating the same group breeds resistance.',
         stat1Label: 'DAE registered products',
-        stat1Detail: 'official DAE master register',
+        stat1Detail: 'sourced from DAE register',
         stat2Label: 'mapped to MoA',
         stat2Detail: 'across IRAC · FRAC · HRAC',
         stat3Label: 'MoA groups',
@@ -394,6 +397,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </button>
             <button className="acg-btn acg-btn--red" onClick={onOpenShareModal} title={copy.ctaShare}>
               <Share2 size={16} /> {copy.ctaShare}
+            </button>
+            <button className="acg-btn acg-btn--gold" onClick={() => go('myfield')} title={copy.ctaLogSpray}>
+              <NotebookPen size={16} /> {copy.ctaLogSpray}
             </button>
             <button className="acg-btn acg-btn--outline" onClick={onOpenDrawer} title={copy.ctaGuide}>
               <Compass size={16} /> {copy.ctaGuide}
@@ -960,9 +966,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <a href={PESTICIDE_ACT_APP_URL} target="_blank" rel="noopener noreferrer" className="acg-btn acg-btn--red">
                 <ExternalLink size={14} /> {bn ? 'ইন্টারেক্টিভ অ্যাপ' : 'Interactive app'}
               </a>
-              <a href="/pesticide-act-2018.pdf" target="_blank" rel="noopener noreferrer" className="acg-btn acg-btn--outline">
-                <FileDown size={14} /> {bn ? 'পিডিএফ' : 'Act PDF'}
-              </a>
+              <button type="button" onClick={() => onNavigateTab('alerts')} className="acg-btn acg-btn--outline">
+                <FileDown size={14} /> {bn ? 'বিধি সতর্কতা' : 'Regulatory alerts'}
+              </button>
             </div>
           </div>
 
@@ -1031,9 +1037,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <li>{bn ? 'জরুরি বিষক্রিয়া চিকিৎসা ও প্রাথমিক চিকিৎসা' : 'Emergency poisoning first aid & response'}</li>
             </ul>
             <div className="acg-res__actions">
-              <a href="/field-guide.pdf" target="_blank" rel="noopener noreferrer" className="acg-btn">
-                <FileDown size={14} /> {bn ? 'ফিল্ড গাইড পিডিএফ' : 'Field guide (PDF)'}
-              </a>
+              <button type="button" onClick={() => onNavigateTab('guidebook')} className="acg-btn">
+                <FileDown size={14} /> {bn ? 'ফিল্ড গাইড খুলুন' : 'Open field guide'}
+              </button>
             </div>
           </div>
         </div>

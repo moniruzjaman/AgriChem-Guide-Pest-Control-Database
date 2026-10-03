@@ -1,21 +1,7 @@
 {
-  "total": 4,
+  "total": 1,
   "uniqueIps": [
-    "114.130.156.107",
-    "127.0.0.1"
+    "12ca17b49af22894"
   ],
-  "downloads": [
-    {
-      "kind": "crop-guide",
-      "label": "Rice",
-      "ts": 1790855108021,
-      "viaShare": true
-    },
-    {
-      "kind": "rotation-schedule",
-      "label": "Rice-Borer",
-      "ts": 1790855114109,
-      "viaShare": true
-    }
-  ]
+  "downloads": []
 }

@@ -419,8 +419,8 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({
                 <div>
                   <strong>
                     {language === 'bn'
-                      ? 'অফিসিয়াল ডিএই পরামর্শ সতর্কতা ও নির্দেশিকা:'
-                      : 'Official DAE Rotation Advisory Disclaimer:'}
+                      ? 'ঘূর্ণন পরামর্শ ও ডিএই যাচাই সতর্কতা:'
+                      : 'Rotation Advisory & DAE Consultation Disclaimer:'}
                   </strong>
                   <p>
                     {language === 'bn'

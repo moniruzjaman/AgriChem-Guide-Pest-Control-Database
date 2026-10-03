@@ -9,8 +9,8 @@ import { DocumentMeta } from './components/DocumentMeta';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { useLanguage } from './context/LanguageContext';
 import { useReadAloud } from './hooks/useReadAloud';
+import { useOnlineStatus } from './hooks/useOnlineStatus';
 import { detectSharedVisit, flushPendingDownloads } from './utils/analytics';
-import { Analytics } from '@vercel/analytics/react';
 import {
   Leaf,
   Share2,
@@ -38,6 +38,9 @@ const SafetyView = lazy(() =>
 );
 const NotificationCenter = lazy(() =>
   import('./components/NotificationCenter').then((m) => ({ default: m.NotificationCenter }))
+);
+const SprayLogView = lazy(() =>
+  import('./components/SprayLogView').then((m) => ({ default: m.SprayLogView }))
 );
 const NavigationDrawer = lazy(() =>
   import('./components/NavigationDrawer').then((m) => ({ default: m.NavigationDrawer }))
@@ -173,7 +176,16 @@ export default function App() {
   // Real-time visitor counts state
   const [visitorStats, setVisitorStats] = useState<{ total: number; unique: number; active: number; downloads: number; shareDownloads: number } | null>(null);
 
+  // Offline-safe + static-host-safe visitor counter.
+  // - Skips ALL network calls when offline (useOnlineStatus hook).
+  // - Stops polling after 2 consecutive failures (e.g. static host with no
+  //   /api backend, or backend down) so the console stays quiet and the app
+  //   keeps working fully offline.
+  // - Polls every 60s (was 10s) to reduce background traffic.
+  const isOnline = useOnlineStatus();
   useEffect(() => {
+    if (!isOnline) return; // never poll while offline
+
     let isNewSession = false;
     if (typeof window !== 'undefined') {
       if (!sessionStorage.getItem('pesticidenext_session_started')) {
@@ -182,42 +194,44 @@ export default function App() {
       }
     }
 
+    let failures = 0;
+    let cancelled = false;
+
     const fetchHit = async () => {
       try {
         const response = await fetch('/api/visitors/hit', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ isNewSession }),
         });
         const contentType = response.headers.get('content-type');
         if (response.ok && contentType && contentType.includes('application/json')) {
           const data = await response.json();
-          setVisitorStats(data);
-        }
-      } catch (err) {
-        console.warn('Failed to log visitor hit:', err);
+          if (!cancelled) { setVisitorStats(data); failures = 0; }
+        } else { failures++; }
+      } catch {
+        failures++;
       }
     };
 
     const fetchStats = async () => {
+      if (failures >= 2) return; // backend unavailable — stop polling silently
       try {
         const response = await fetch('/api/visitors/stats');
         const contentType = response.headers.get('content-type');
         if (response.ok && contentType && contentType.includes('application/json')) {
           const data = await response.json();
-          setVisitorStats(data);
-        }
-      } catch (err) {
-        console.warn('Failed to fetch visitor stats:', err);
+          if (!cancelled) { setVisitorStats(data); failures = 0; }
+        } else { failures++; }
+      } catch {
+        failures++;
       }
     };
 
     fetchHit();
-    const interval = setInterval(fetchStats, 10000);
-    return () => clearInterval(interval);
-  }, []);
+    const interval = setInterval(fetchStats, 60000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, [isOnline]);
 
   // Modals state
   const [detailProduct, setDetailProduct] = useState<ChemicalProduct | null>(null);
@@ -413,6 +427,15 @@ export default function App() {
             />
           </Suspense>
         )}
+
+        {activeTab === 'myfield' && (
+          <Suspense fallback={<DatabaseSplash language={language} />}>
+            <SprayLogView
+              products={products}
+              onNavigateTab={(tab) => setActiveTab(tab)}
+            />
+          </Suspense>
+        )}
       </main>
 
       {/* Global Modals */}
@@ -474,9 +497,6 @@ export default function App() {
       {/* PWA Floating Offline Indicator */}
       <OfflineIndicator />
 
-      {/* Vercel Web Analytics */}
-      <Analytics />
-
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 mt-12 py-8 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -492,7 +512,7 @@ export default function App() {
                 {language === 'bn' ? 'পেস্টিসাইডনেক্সট — পরের স্প্রে, আর ভুল হবে না।' : 'PesticideNext — The next spray, without the mistake.'}
               </p>
               <p className="text-[11px] text-slate-400">
-                {language === 'bn' ? 'কৃষি সম্প্রসারণ অধিদপ্তর (DAE) অনুমোদিত অফিসিয়াল রেফারেন্স ডাটাবেস' : 'Department of Agricultural Extension (DAE) Official Reference Data'}
+                {language === 'bn' ? 'পণ্যের তথ্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE)-এর প্রকাশ্য নিবন্ধন তালিকা থেকে সংগ্রহ করা হয়েছে — এটি সরকারি অ্যাপ নয়।' : 'Product data sourced from the public DAE register — this is not a government app.'}
               </p>
             </div>
           </div>

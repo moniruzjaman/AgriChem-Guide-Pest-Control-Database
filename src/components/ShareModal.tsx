@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  X, 
-  Share2, 
-  Copy, 
-  Check, 
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  X,
+  Share2,
+  Copy,
+  Check,
   ExternalLink,
-  MessageCircle, 
-  Send, 
+  MessageCircle,
+  Send,
   Sparkles,
   Database,
   Calculator,
   RotateCw,
   ShieldCheck,
   BookOpen,
-  QrCode
+  QrCode,
+  NotebookPen
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import QRCode from 'qrcode';
 import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -38,6 +41,9 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   const [selectedTarget, setSelectedTarget] = useState<AppTab>(activeTab);
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const [qrDataUrl, setQrDataUrl] = useState<string>('');
+  const overlayRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(overlayRef, isOpen);
 
   // Sync the selected share target with the active tab whenever the modal is
   // (re)opened. Without this, useState's lazy initialiser only captures the
@@ -119,6 +125,14 @@ export const ShareModal: React.FC<ShareModalProps> = ({
       descBn: 'মৌসুমি বালাই আক্রমণ সতর্কতা ও সরকারি নিয়ন্ত্রক নোটিশ।',
       tag: '#PestAlerts #AgricultureNotices',
       icon: Sparkles
+    },
+    myfield: {
+      titleEn: 'PesticideNext — My Field & Spray History',
+      titleBn: 'পেস্টিসাইডনেক্সট — আমার জমি ও স্প্রে ইতিহাস',
+      descEn: 'Log every spray and let the app remember which MoA group was used — so the next spray rotates and resistance never builds.',
+      descBn: 'প্রতিটি স্প্রে লগ করুন। অ্যাপ মনে রাখবে কোন গ্রুপ ব্যবহার হয়েছে — যাতে পরবর্তী স্প্রে ঘূর্ণন করা যায়।',
+      tag: '#SprayLog #ResistanceManagement',
+      icon: NotebookPen
     }
   };
 
@@ -132,6 +146,23 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   // (and whether they downloaded anything).
   const shareBase = selectedTarget === 'home' ? origin : `${origin}/#${selectedTarget}`;
   const shareUrl = `${shareBase}${shareBase.includes('?') ? '&' : '?'}from=share`;
+
+  // Generate QR locally — no remote API call, works fully offline.
+  // qrDataUrl is recomputed whenever the share URL changes or the QR panel
+  // is toggled open.
+  useEffect(() => {
+    if (!showQR) return;
+    let cancelled = false;
+    QRCode.toDataURL(shareUrl, {
+      width: 200,
+      margin: 1,
+      color: { dark: '#004d38', light: '#ffffff' },
+      errorCorrectionLevel: 'M',
+    }).then((url) => {
+      if (!cancelled) setQrDataUrl(url);
+    }).catch(() => { /* QR generation failed — panel stays empty */ });
+    return () => { cancelled = true; };
+  }, [showQR, shareUrl]);
 
   const fullShareText = `${currentTitle}\n\n${currentDesc}\n\n🔗 ${shareUrl}\n\n${currentInfo.tag}`;
 
@@ -169,7 +200,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(currentTitle + '\n' + currentDesc)}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 overflow-y-auto">
+    <div ref={overlayRef} className="acg-modal-scope fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 overflow-y-auto">
       <motion.div 
         initial={{ opacity: 0, scale: 0.95, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -409,12 +440,15 @@ export const ShareModal: React.FC<ShareModalProps> = ({
                 >
                   <div className="bg-emerald-50/70 border border-emerald-200 rounded-xl p-4 flex flex-col items-center justify-center text-center space-y-2 mt-2">
                     <div className="w-32 h-32 bg-white p-2 rounded-lg shadow-xs border border-emerald-300 flex items-center justify-center">
-                      <img
-                        src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(shareUrl)}`}
-                        alt="PesticideNext QR Code"
-                        className="w-full h-full object-contain"
-                        loading="lazy"
-                      />
+                      {qrDataUrl ? (
+                        <img
+                          src={qrDataUrl}
+                          alt="PesticideNext QR Code"
+                          className="w-full h-full object-contain"
+                        />
+                      ) : (
+                        <QrCode className="w-8 h-8 text-emerald-400 animate-pulse" />
+                      )}
                     </div>
                     <p className="text-[11px] text-slate-600 max-w-xs">
                       {language === 'bn' 

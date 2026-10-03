@@ -974,7 +974,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
               <p className="text-xs text-slate-500 mt-0.5">
                 {language === 'bn' 
                   ? 'আপনার এক্সেল/গুগল শিট থেকে ডিএই অনুমোদিত বালাইনাশকের তালিকা সরাসরি এখানে পেস্ট বা আপলোড করুন।' 
-                  : 'Import, parse, and append DAE-approved pesticides directly from Microsoft Excel or CSV files.'}
+                  : 'Import, parse, and append DAE-registered pesticides directly from Microsoft Excel or CSV files.'}
               </p>
             </div>
           </div>
@@ -1611,7 +1611,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                   </span>
                                 )}
                               </div>
-                              <span className={`inline-flex items-center gap-1 text-[9px] font-semibold px-1.5 py-0.2 rounded-full border mt-0.5 ${getCategoryTheme(product.type)}`}>
+                              <span className={`inline-flex items-center gap-1 text-[9px] font-semibold px-1.5 py-0.5 rounded-full border mt-0.5 ${getCategoryTheme(product.type)}`}>
                                 {transCat(product.type)}
                               </span>
                             </td>
@@ -2156,7 +2156,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
           <ShieldAlert className="w-5 h-5 text-slate-500 shrink-0 mt-0.5" />
           <div className="text-xs space-y-1">
             <strong className="text-slate-900 block font-bold">
-              {language === 'bn' ? 'অফিসিয়াল ডিএই তথ্যসূত্র ও আইনি ডিসক্লেইমার:' : 'Official DAE Database Citation & Regulatory Disclaimer:'}
+              {language === 'bn' ? 'তথ্যসূত্র ও আইনি ডিসক্লেইমার (DAE গেজেট তালিকা থেকে সংগৃহীত):' : 'Data Source & Regulatory Disclaimer (compiled from DAE gazetted register):'}
             </strong>
             <p className="text-slate-600 leading-relaxed font-medium">
               {language === 'bn' 
