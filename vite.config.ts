@@ -66,10 +66,23 @@ function aistudioMediaPlugin(): Plugin {
 // LINT.ThenChange(//depot/google3/java/com/google/alkali/boq/makersuite/applet_dev_service/templates/initializers/react_theme/vite.config.ts:aistudio_media_plugin)
 
 export default defineConfig(() => {
+  // GitHub Pages with a custom CNAME (pesticide.krishiai.live) serves at the
+  // domain root, so `base` should be `/`. If the CNAME is ever removed, the
+  // app is served at https://<owner>.github.io/<repo>/ — in that case set
+  // `BASE_PATH=/<repo>/` in the CI env (or .env) and every asset path, the
+  // PWA manifest start_url/scope, and the SW registration will follow.
+  // Default: '/' (correct for the custom-domain deploy).
+  const BASE_PATH = process.env.BASE_PATH || '/';
+  // Vite requires `base` to be an absolute path that starts and ends with '/'.
+  const base = BASE_PATH.startsWith('/') && BASE_PATH.endsWith('/')
+    ? BASE_PATH
+    : '/';
+
   return {
+    base,
     plugins: [
-      react(), 
-      tailwindcss(), 
+      react(),
+      tailwindcss(),
       aistudioMediaPlugin(),
       VitePWA({
         registerType: 'autoUpdate',
@@ -88,11 +101,14 @@ export default defineConfig(() => {
           // Self-hosted fonts CSS + woff2 files (replaces Google Fonts CDN).
           'fonts/fonts.css',
           'fonts/*.woff2',
+          // Custom-domain record so GitHub Pages keeps pesticide.krishiai.live
+          // even if the Settings → Pages → Custom domain UI is ever reset.
+          'CNAME',
         ],
         // Single source of truth for the PWA manifest (served at
         // /manifest.webmanifest and linked automatically by vite-plugin-pwa).
         manifest: {
-          id: '/',
+          id: base,
           name: 'PesticideNext — Smart Pesticide Reference & Resistance Management',
           short_name: 'PesticideNext',
           description: 'Bangladesh field-crop reference: DAE-registered pesticides, tank-mix calculator, IRAC/FRAC/HRAC MoA rotation planner, safety checklists, and an offline pocket-book guide. বালাইনাশক তথ্য ও বালাই প্রতিরোধ ব্যবস্থাপনা।',
@@ -103,8 +119,10 @@ export default defineConfig(() => {
           background_color: '#000000',
           display: 'standalone',
           orientation: 'portrait',
-          start_url: '/?source=pwa',
-          scope: '/',
+          // start_url + scope track `base` so PWA install works on both the
+          // custom domain (base='/') and the raw github.io subpath.
+          start_url: `${base}?source=pwa`,
+          scope: base,
           icons: [
             { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
             { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },

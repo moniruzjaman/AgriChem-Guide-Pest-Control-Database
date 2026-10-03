@@ -122,7 +122,11 @@ function setNamedMeta(attr: 'name' | 'property', key: string, content: string) {
 function absUrl(path: string) {
   if (typeof window === 'undefined') return path;
   try {
-    return new URL(path, window.location.origin).href;
+    // Use window.location.href (not origin) as the base so that a subpath
+    // deploy (e.g. /AgriChem-Guide-Pest-Control-Database/ on the raw
+    // github.io URL) is preserved. Using `origin` alone would drop the
+    // subpath and produce 404s for /og-image.png etc.
+    return new URL(path, window.location.href).href;
   } catch {
     return path;
   }
@@ -167,6 +171,10 @@ export const DocumentMeta: React.FC<{ activeTab: AppTab }> = ({ activeTab }) => 
     setNamedMeta('property', 'og:site_name', appName);
     setNamedMeta('property', 'og:url', canonicalUrl);
     setNamedMeta('property', 'og:image', ogImageAbs);
+    // og:image:secure_url is defined statically in index.html pointing at
+    // the production domain — rewrite it here too so it matches the actual
+    // runtime origin (important if the app is viewed on a preview/staging URL).
+    setNamedMeta('property', 'og:image:secure_url', ogImageAbs);
     setNamedMeta('property', 'og:image:alt', ogImageAlt);
     setNamedMeta('property', 'og:image:width', '1200');
     setNamedMeta('property', 'og:image:height', '630');

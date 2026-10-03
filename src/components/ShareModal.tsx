@@ -144,8 +144,15 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   // recipient opens it, the app records the visit as share-originated — this
   // is what lets us tell whether a shared person actually opened the app
   // (and whether they downloaded anything).
-  const shareBase = selectedTarget === 'home' ? origin : `${origin}/#${selectedTarget}`;
-  const shareUrl = `${shareBase}${shareBase.includes('?') ? '&' : '?'}from=share`;
+  // Build the share URL. The `?from=share` query MUST come before any hash
+  // so that `new URLSearchParams(window.location.search)` can read it on
+  // landing — putting it after `#` makes it part of the hash fragment and
+  // share attribution is silently lost (analytics.ts:detectSharedVisit).
+  // Format:  https://host/?from=share#<tab>
+  const shareUrl =
+    selectedTarget === 'home'
+      ? `${origin}/?from=share`
+      : `${origin}/?from=share#${selectedTarget}`;
 
   // Generate QR locally — no remote API call, works fully offline.
   // qrDataUrl is recomputed whenever the share URL changes or the QR panel

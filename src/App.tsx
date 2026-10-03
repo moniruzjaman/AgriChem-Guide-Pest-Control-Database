@@ -146,6 +146,50 @@ export default function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   // ---------------------------------------------------------------------------
+  // Hash routing — lets shared deep links (e.g. `/?from=share#database`) land
+  // on the correct tab instead of always opening at Home. ShareModal builds
+  // URLs with the tab name in the hash; this effect reads it on mount and on
+  // every `hashchange`, validates it against the known AppTab set, and
+  // navigates. Invalid / empty hashes are ignored (stay on current tab).
+  // We also push the hash back into the URL when the user switches tabs
+  // in-app, so the browser back/forward buttons and copy-url keep working.
+  // ---------------------------------------------------------------------------
+  const VALID_TABS: AppTab[] = ['home', 'database', 'calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'myfield'];
+
+  useEffect(() => {
+    const tabFromHash = (hash: string): AppTab | null => {
+      const clean = hash.replace(/^#\/?/, '').split(/[?&]/)[0].toLowerCase();
+      if (!clean) return null;
+      return (VALID_TABS as string[]).includes(clean) ? (clean as AppTab) : null;
+    };
+
+    const applyHash = () => {
+      const tab = tabFromHash(window.location.hash);
+      if (tab) setActiveTab(tab);
+    };
+
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+    return () => window.removeEventListener('hashchange', applyHash);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // When the user navigates in-app (clicks a nav button), reflect it into the
+  // URL hash so the address bar, back button, and copy-link stay in sync.
+  // Skip pushing when the hash already matches (avoids extra history entries).
+  useEffect(() => {
+    const expected = `#${activeTab}`;
+    if (window.location.hash !== expected && activeTab !== 'home') {
+      // Use replaceState for the first sync so we don't pile up a back-entry
+      // on every initial navigation; pushState thereafter so back works.
+      window.history.pushState(null, '', expected);
+    } else if (activeTab === 'home' && window.location.hash) {
+      // On Home, clear the hash so the URL is clean.
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }, [activeTab]);
+
+  // ---------------------------------------------------------------------------
   // Read-aloud (TTS) — Web Speech API hook surfaced as a speaker icon in the
   // navbar right beside the Share button. The main content region is captured
   // via ref so the current tab's visible text can be spoken on demand.
