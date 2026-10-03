@@ -143,6 +143,34 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
           setActiveIndex((i) => Math.max(i - 1, 0));
         }
         break;
+      case 'Home':
+        // Jump to first option
+        if (open && filtered.length > 0) {
+          e.preventDefault();
+          setActiveIndex(0);
+        }
+        break;
+      case 'End':
+        // Jump to last option
+        if (open && filtered.length > 0) {
+          e.preventDefault();
+          setActiveIndex(filtered.length - 1);
+        }
+        break;
+      case 'PageUp':
+        // Jump up by ~8 rows
+        if (open && filtered.length > 0) {
+          e.preventDefault();
+          setActiveIndex((i) => Math.max(0, i - 8));
+        }
+        break;
+      case 'PageDown':
+        // Jump down by ~8 rows
+        if (open && filtered.length > 0) {
+          e.preventDefault();
+          setActiveIndex((i) => Math.min(filtered.length - 1, i + 8));
+        }
+        break;
       case 'Enter':
         if (open && filtered[activeIndex]) {
           e.preventDefault();
@@ -179,6 +207,12 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
           aria-expanded={open}
           aria-controls={id ? `${id}-listbox` : undefined}
           aria-label={ariaLabel}
+          aria-activedescendant={
+            open && filtered.length > 0 && id
+              ? `${id}-opt-${activeIndex}`
+              : undefined
+          }
+          aria-autocomplete="list"
           autoComplete="off"
           disabled={disabled}
           value={displayText}
@@ -241,6 +275,7 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
               return (
                 <li
                   key={opt.value}
+                  id={id ? `${id}-opt-${idx}` : undefined}
                   role="option"
                   aria-selected={isSelected}
                   onMouseEnter={() => setActiveIndex(idx)}

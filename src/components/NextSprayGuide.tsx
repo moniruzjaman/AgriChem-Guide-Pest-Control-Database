@@ -343,7 +343,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
             )}
             <h4 className="font-bold text-sm text-slate-900">{p.tradeName}</h4>
             {p.formulation && (
-              <span className="bg-slate-100 text-slate-700 px-1.5 py-0.2 rounded text-[10px] font-bold border border-slate-200">
+              <span className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-[10px] font-bold border border-slate-200">
                 {p.formulation}
               </span>
             )}
@@ -518,7 +518,7 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
                               <div className="flex items-center gap-1.5">
                                 <span className="font-bold text-sm text-slate-900 truncate">{p.tradeName}</span>
                                 {p.formulation && (
-                                  <span className="bg-slate-100 text-slate-600 px-1 py-0.2 rounded text-[9px] font-bold border border-slate-200">
+                                  <span className="bg-slate-100 text-slate-600 px-1 py-0.5 rounded text-[9px] font-bold border border-slate-200">
                                     {p.formulation}
                                   </span>
                                 )}
@@ -611,11 +611,11 @@ export const NextSprayGuide: React.FC<NextSprayGuideProps> = ({
                   <div className="flex items-baseline gap-2 flex-wrap">
                     <h4 className="font-black text-base text-slate-900">{recommendation.appliedProduct.tradeName}</h4>
                     {recommendation.appliedProduct.formulation && (
-                      <span className="bg-slate-100 text-slate-700 px-1.5 py-0.2 rounded text-[10px] font-bold border border-slate-200">
+                      <span className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-[10px] font-bold border border-slate-200">
                         {recommendation.appliedProduct.formulation}
                       </span>
                     )}
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.2 rounded-full border bg-amber-50 text-amber-800 border-amber-200">
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border bg-amber-50 text-amber-800 border-amber-200">
                       {getCategoryIcon(recommendation.appliedProduct.type, 'w-3 h-3')}
                       {transCat(recommendation.appliedProduct.type)}
                     </span>

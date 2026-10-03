@@ -43,17 +43,13 @@
 <!-- PWA manifest: link is injected at build time by vite-plugin-pwa (/manifest.webmanifest) -->
 
 <!--
-  App-wide fonts:
-  Hind Siliguri — Bangla + Latin
-  IBM Plex Mono — micro-labels, codes and monospace elements
+  App-wide fonts: SELF-HOSTED for full offline PWA support.
+  Hind Siliguri — Bangla + Latin (OFL)
+  IBM Plex Mono — micro-labels, codes and monospace elements (OFL)
+  Loaded via /fonts/fonts.css (precached by the service worker).
   display=swap prevents invisible Bengali text while fonts load.
 -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
-/>
+<link rel="stylesheet" href="/fonts/fonts.css" />
 
 <!-- Open Graph / Facebook / Messenger / WhatsApp -->
 <meta

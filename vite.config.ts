@@ -79,7 +79,15 @@ export default defineConfig(() => {
           'favicon-32.png',
           'apple-touch-icon.png',
           'og-image.png',
-          'icons/*.png'
+          'icons/*.png',
+          // Hero background photograph (HomeView.css) — was missing from precache,
+          // causing the Home hero to fall back to a flat gradient when offline.
+          'hero-field.jpg',
+          // Partner-app logos (local fallbacks used by HomeView).
+          'partner-*.png',
+          // Self-hosted fonts CSS + woff2 files (replaces Google Fonts CDN).
+          'fonts/fonts.css',
+          'fonts/*.woff2',
         ],
         // Single source of truth for the PWA manifest (served at
         // /manifest.webmanifest and linked automatically by vite-plugin-pwa).
@@ -113,7 +121,7 @@ export default defineConfig(() => {
           // stuck on a stale cached bundle (old OG image, old tagline,
           // pre-rename branding, etc.).
           cacheId: 'pn-v2',
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2,json,webmanifest}'],
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2,json,webmanifest}'],
           // Take over from any previous service worker IMMEDIATELY and purge
           // old precaches. Without this, returning visitors keep getting the
           // stale cached bundle (e.g. the old 1,256-product dataset) instead
@@ -138,6 +146,19 @@ export default defineConfig(() => {
                 cacheableResponse: {
                   statuses: [0, 200],
                 },
+              },
+            },
+            // Safety-net runtime cache for any remaining cross-origin image
+            // requests (e.g. partner-app logos if a future edit re-points to
+            // a remote host). CacheFirst with a long TTL so a single hit is
+            // enough to serve the asset offline thereafter.
+            {
+              urlPattern: /\.(?:png|jpg|jpeg|svg|webp|gif)$/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'image-cache',
+                expiration: { maxEntries: 60, maxAgeSeconds: 60 * 60 * 24 * 30 },
+                cacheableResponse: { statuses: [0, 200] },
               },
             },
           ],

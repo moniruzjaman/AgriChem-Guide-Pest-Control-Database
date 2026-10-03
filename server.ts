@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
+import crypto from "crypto";
 import { createServer as createViteServer } from "vite";
 
 async function startServer() {
@@ -24,8 +25,13 @@ async function startServer() {
 
   // Keep only the most recent download records so the JSON file stays small.
   const MAX_DOWNLOAD_RECORDS = 1000;
+  // Cap the unique-visitor list so the JSON file cannot grow unbounded.
+  // Old hashes are evicted FIFO once the cap is exceeded.
+  const MAX_UNIQUE_VISITORS = 50000;
 
-  // Initialize and load visitor data once on server startup
+  // Initialize and load visitor data once on server startup.
+  // NOTE: `uniqueIps` historically held raw IP addresses. For privacy it now
+  // holds SHA-256 hashes (first 16 hex chars) so no PII is ever persisted.
   let visitorData = {
     total: 0,
     uniqueIps: [] as string[],
@@ -57,16 +63,24 @@ async function startServer() {
     }
   };
 
-  // Active unique user tracker in-memory (map of IP to timestamp of last request)
+  // Active unique user tracker in-memory (map of visitor-hash to timestamp
+  // of last request). Keys are SHA-256 hashes, never raw IPs.
   const activeUsers = new Map<string, number>();
 
-  // Helper to get client IP
-  const getClientIp = (req: express.Request): string => {
+  // Helper to get client IP, then hash it for privacy. We never persist or
+  // log raw IP addresses — only the first 16 hex chars of the SHA-256 hash,
+  // which is sufficient for unique-visitor counting while being irreversible.
+  const getVisitorHash = (req: express.Request): string => {
+    let rawIp = "127.0.0.1";
     const forwarded = req.headers["x-forwarded-for"];
     if (typeof forwarded === "string") {
-      return forwarded.split(",")[0].trim();
+      rawIp = forwarded.split(",")[0].trim();
+    } else if (req.socket.remoteAddress) {
+      rawIp = req.socket.remoteAddress;
     }
-    return req.socket.remoteAddress || "127.0.0.1";
+    // Strip IPv6 prefix from IPv4-mapped addresses for consistency.
+    rawIp = rawIp.replace(/^::ffff:/, "");
+    return crypto.createHash("sha256").update(rawIp).digest("hex").slice(0, 16);
   };
 
   // Shared stats payload for all API responses. `downloads` is the total
@@ -151,13 +165,17 @@ async function startServer() {
   // Log a visitor hit and fetch updated stats
   app.post("/api/visitors/hit", (req, res) => {
     try {
-      const ip = getClientIp(req);
+      const visitorHash = getVisitorHash(req);
       const { isNewSession } = req.body;
 
-      // Check if it's a new unique IP
-      const isNewUnique = !visitorData.uniqueIps.includes(ip);
+      // Check if it's a new unique visitor (hash)
+      const isNewUnique = !visitorData.uniqueIps.includes(visitorHash);
       if (isNewUnique) {
-        visitorData.uniqueIps.push(ip);
+        visitorData.uniqueIps.push(visitorHash);
+        // Evict oldest hashes once we exceed the cap (FIFO).
+        if (visitorData.uniqueIps.length > MAX_UNIQUE_VISITORS) {
+          visitorData.uniqueIps = visitorData.uniqueIps.slice(-MAX_UNIQUE_VISITORS);
+        }
       }
 
       // If it's a new session, increment total visitors
@@ -170,12 +188,12 @@ async function startServer() {
 
       // Track active user activity
       const now = Date.now();
-      activeUsers.set(ip, now);
+      activeUsers.set(visitorHash, now);
 
       // Clean up users inactive for more than 3 minutes
-      for (const [activeIp, lastSeen] of activeUsers.entries()) {
+      for (const [activeHash, lastSeen] of activeUsers.entries()) {
         if (now - lastSeen > 180000) { // 3 minutes
-          activeUsers.delete(activeIp);
+          activeUsers.delete(activeHash);
         }
       }
 
@@ -189,16 +207,16 @@ async function startServer() {
   // Get active visitor stats in real-time
   app.get("/api/visitors/stats", (req, res) => {
     try {
-      const ip = getClientIp(req);
+      const visitorHash = getVisitorHash(req);
 
       // Ensure current user is tracked as active
       const now = Date.now();
-      activeUsers.set(ip, now);
+      activeUsers.set(visitorHash, now);
 
       // Clean up users inactive for more than 3 minutes
-      for (const [activeIp, lastSeen] of activeUsers.entries()) {
+      for (const [activeHash, lastSeen] of activeUsers.entries()) {
         if (now - lastSeen > 180000) {
-          activeUsers.delete(activeIp);
+          activeUsers.delete(activeHash);
         }
       }
 

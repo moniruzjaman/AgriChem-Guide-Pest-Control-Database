@@ -281,3 +281,15 @@
 .acg-al-toast__close:hover { color: #fff; }
 
 .acg-al .acg-guide-wrap { margin-top: 24px; }
+
+/* Official compliance disclaimer — golden-tinted callout (was undefined class) */
+.acg-al-disclaim {
+  margin-top: 24px;
+  background: var(--golden-tint);
+  border: 1px solid var(--golden-tint-line);
+  padding: 16px 18px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border-radius: 14px;
+}

@@ -112,12 +112,10 @@ npm run clean    # remove dist/ and server.js
 
 ## ⚙️ Environment Variables
 
-Copy [`.env.example`](.env.example) to `.env`:
-
-| Variable | Description |
-|----------|-------------|
-| `GEMINI_API_KEY` | API key for Gemini AI calls (auto-injected when deployed via Google AI Studio) |
-| `APP_URL` | Public URL where the app is hosted (used for self-referential links / callbacks) |
+**None required.** This is a fully offline PWA — no API keys, no server-side AI,
+no external secrets. The optional Express server (`server.ts`) only provides a
+lightweight visitor counter at `/api/visitors/*` and is not required for the
+app to function. On static hosts the counter simply stays at zero.
 
 ## 🧪 Data Pipeline
 

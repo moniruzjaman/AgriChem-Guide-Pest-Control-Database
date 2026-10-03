@@ -9,7 +9,8 @@ const THEME_COLOR: Record<AppTab, string> = {
   rotation: '#f42a41',
   safety: '#006a4e',
   guidebook: '#006a4e',
-  alerts: '#f42a41'
+  alerts: '#f42a41',
+  myfield: '#e3b341'
 };
 
 const TAB_META: Record<AppTab, {
@@ -84,6 +85,16 @@ const TAB_META: Record<AppTab, {
     bn: {
       title: 'পেস্টিসাইডনেক্সট — নিয়ন্ত্রক সতর্কতা',
       description: 'মৌসুমি বালাই সতর্কতা, নিষিদ্ধ তালিকা ও ফসল তোলার বিরতি।'
+    }
+  },
+  myfield: {
+    en: {
+      title: 'PesticideNext — My Field & Spray History',
+      description: 'Log every spray. The app remembers which MoA group was used so the next spray can rotate — preventing resistance.'
+    },
+    bn: {
+      title: 'পেস্টিসাইডনেক্সট — আমার জমি ও স্প্রে ইতিহাস',
+      description: 'প্রতিটি স্প্রে লগ করুন। অ্যাপ মনে রাখবে কোন গ্রুপ ব্যবহার হয়েছে — যাতে পরবর্তী স্প্রে ঘূর্ণন করা যায় ও প্রতিরোধ গড়ে না ওঠে।'
     }
   }
 };
@@ -200,7 +211,7 @@ export const DocumentMeta: React.FC<{ activeTab: AppTab }> = ({ activeTab }) => 
         'WHO বিষাক্ততা ব্যান্ড ও PPE চেকলিস্ট',
         'W.A.L.E.S. ট্যাংক মিক্সিং ক্রম ফিল্ড গাইড'
       ] : [
-        'DAE Approved Pesticide Database',
+        'DAE-Registered Pesticide Database',
         'Knapsack Sprayer Tank Dosage Calculator',
         'IRAC and FRAC Mode-of-Action Resistance Rotation',
         'WHO Toxicity Hazard Bands and PPE Checklist',

@@ -16,7 +16,8 @@ import {
   Compass,
   Menu,
   Volume2,
-  VolumeX
+  VolumeX,
+  NotebookPen
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
@@ -71,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, [activeTab]);
 
   return (
-    <header className="sticky top-0 z-30 bg-white border-b border-slate-200 shadow-xs">
+    <header className="acg-drawer-scope sticky top-0 z-30 bg-white border-b border-slate-200 shadow-xs">
       {/* Top Banner */}
       <div className="bg-[#006a4e] text-emerald-100 text-xs px-4 py-1.5 flex flex-wrap justify-between items-center gap-2 border-b-2 border-[#f42a41]">
         <div className="flex items-center gap-2">
@@ -210,7 +211,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Languages className="w-4 h-4 text-emerald-700 shrink-0" />
               <span className="hidden sm:inline font-bold tracking-tight">{language === 'en' ? 'বাংলা' : 'English'}</span>
-              <span className="text-[10px] px-1 py-0.2 rounded bg-emerald-200/80 text-emerald-800 uppercase font-semibold">
+              <span className="text-[10px] px-1 py-0.5 rounded bg-emerald-200/80 text-emerald-800 uppercase font-semibold">
                 {language === 'en' ? 'BN' : 'EN'}
               </span>
             </button>
@@ -329,12 +330,25 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Bell className="w-4 h-4" />
             <span>{t('tab_alerts')}</span>
             {unreadAlertCount > 0 && (
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+              <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${
                 activeTab === 'alerts' ? 'bg-[#f42a41] text-white' : 'bg-[#f42a41] text-white'
               }`}>
                 {formatNum(unreadAlertCount)}
               </span>
             )}
+          </button>
+
+          <button
+            id="tab-btn-myfield"
+            onClick={() => setActiveTab('myfield')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
+              activeTab === 'myfield'
+                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
+                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
+            }`}
+          >
+            <NotebookPen className="w-4 h-4" />
+            <span>{language === 'bn' ? 'আমার জমি' : 'My Field'}</span>
           </button>
 
           {/* Quick Tab-Bar Compass Drawer Trigger */}

@@ -43,7 +43,7 @@ export const PWAInstallButton: React.FC = () => {
         </button>
 
         {showIOSGuide && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4">
+          <div className="acg-modal-scope fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4">
             <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl border border-slate-200">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div className="flex items-center gap-2">

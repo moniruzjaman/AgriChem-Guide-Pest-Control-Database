@@ -5,6 +5,7 @@ import { LanguageProvider } from './context/LanguageContext';
 import { migrateAgrichemToPesticideNext } from './utils/migrateStorage';
 import { deleteOldCachesIfAny } from './utils/cleanupCaches';
 import './index.css';
+import './components/brand-remap.css';
 
 // One-time storage migration: copy any data still living under the legacy
 // `agrichem_*` keys into the new `pesticidenext_*` namespace before React

@@ -5,3 +5,6 @@ build/
 *.local
 .DS_Store
 npm-debug.log*
+# Visitor counter state — runtime-generated, should never be committed (contains visitor hashes)
+visitor_counts.json
+visitor_counts.json.tmp

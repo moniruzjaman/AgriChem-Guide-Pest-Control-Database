@@ -1,0 +1,441 @@
+/* ============================================================================
+   brand-remap.css — Scope-remaps raw Tailwind color utilities to the
+   Bangladesh official palette so every tab/modal shares one visual identity.
+
+   Brand palette:
+     --green   #006a4e  (bottle green, primary)
+     --green-900 #004d38 (deep green, headings/hover)
+     --green-50 #f0f7f3 (faint green breath)
+     --red     #f42a41  (flag red, accent/danger)
+     --red-800 #b31d31  (deep red)
+     --red-tint #fde4e7
+     --golden  #e3b341  (golden accent)
+     --golden-ink #8a6d1d
+     --golden-tint #f6eccf
+     --ink     #14261d  (primary text)
+     --muted   #5d6f64  (secondary text)
+     --line    #dfe5dd  (hairline border)
+     --card    #ffffff
+     --bg      #f5f8f5  (paper)
+
+   Scopes: .acg-db (Database), .acg-sf (Safety), .acg-gb (Guidebook),
+           .acg-al (Alerts), .acg-rp (Rotation), .acg-guide-wrap (shared guide),
+           .acg-modal-scope (full-screen modals), .acg-drawer-scope (drawer/navbar).
+   ========================================================================== */
+
+/* Build a single selector list of all brand-scoped roots. */
+.acg-db, .acg-sf, .acg-gb, .acg-al, .acg-rp, .acg-guide-wrap,
+.acg-modal-scope, .acg-drawer-scope {
+
+  /* ── Emerald → brand green ─────────────────────────────────────────── */
+  --tw-emerald-50:  #eef5ef;
+  --tw-emerald-100: #dcece4;
+  --tw-emerald-200: #c5ddd0;
+  --tw-emerald-300: #a3c9b4;
+  --tw-emerald-400: #6fae8c;
+  --tw-emerald-500: #006a4e;
+  --tw-emerald-600: #006a4e;
+  --tw-emerald-700: #005a40;
+  --tw-emerald-800: #004d38;
+  --tw-emerald-900: #003a2a;
+  --tw-emerald-950: #14261d;
+}
+
+/* Background colors — emerald */
+.acg-db .bg-emerald-50, .acg-sf .bg-emerald-50, .acg-gb .bg-emerald-50,
+.acg-al .bg-emerald-50, .acg-rp .bg-emerald-50, .acg-guide-wrap .bg-emerald-50,
+.acg-modal-scope .bg-emerald-50, .acg-drawer-scope .bg-emerald-50 { background-color: #eef5ef; }
+
+.acg-db .bg-emerald-100, .acg-sf .bg-emerald-100, .acg-gb .bg-emerald-100,
+.acg-al .bg-emerald-100, .acg-rp .bg-emerald-100, .acg-guide-wrap .bg-emerald-100,
+.acg-modal-scope .bg-emerald-100, .acg-drawer-scope .bg-emerald-100 { background-color: #dcece4; }
+
+.acg-db .bg-emerald-200, .acg-sf .bg-emerald-200, .acg-gb .bg-emerald-200,
+.acg-al .bg-emerald-200, .acg-rp .bg-emerald-200, .acg-guide-wrap .bg-emerald-200,
+.acg-modal-scope .bg-emerald-200, .acg-drawer-scope .bg-emerald-200 { background-color: #c5ddd0; }
+
+.acg-db .bg-emerald-500, .acg-sf .bg-emerald-500, .acg-gb .bg-emerald-500,
+.acg-al .bg-emerald-500, .acg-rp .bg-emerald-500, .acg-guide-wrap .bg-emerald-500,
+.acg-modal-scope .bg-emerald-500, .acg-drawer-scope .bg-emerald-500,
+.acg-db .bg-emerald-600, .acg-sf .bg-emerald-600, .acg-gb .bg-emerald-600,
+.acg-al .bg-emerald-600, .acg-rp .bg-emerald-600, .acg-guide-wrap .bg-emerald-600,
+.acg-modal-scope .bg-emerald-600, .acg-drawer-scope .bg-emerald-600 { background-color: #006a4e; }
+
+.acg-db .bg-emerald-700, .acg-sf .bg-emerald-700, .acg-gb .bg-emerald-700,
+.acg-al .bg-emerald-700, .acg-rp .bg-emerald-700, .acg-guide-wrap .bg-emerald-700,
+.acg-modal-scope .bg-emerald-700, .acg-drawer-scope .bg-emerald-700 { background-color: #005a40; }
+
+.acg-db .bg-emerald-800, .acg-sf .bg-emerald-800, .acg-gb .bg-emerald-800,
+.acg-al .bg-emerald-800, .acg-rp .bg-emerald-800, .acg-guide-wrap .bg-emerald-800,
+.acg-modal-scope .bg-emerald-800, .acg-drawer-scope .bg-emerald-800 { background-color: #004d38; }
+
+.acg-db .bg-emerald-900, .acg-sf .bg-emerald-900, .acg-gb .bg-emerald-900,
+.acg-al .bg-emerald-900, .acg-rp .bg-emerald-900, .acg-guide-wrap .bg-emerald-900,
+.acg-modal-scope .bg-emerald-900, .acg-drawer-scope .bg-emerald-900 { background-color: #003a2a; }
+
+.acg-db .bg-emerald-950, .acg-sf .bg-emerald-950, .acg-gb .bg-emerald-950,
+.acg-al .bg-emerald-950, .acg-rp .bg-emerald-950, .acg-guide-wrap .bg-emerald-950,
+.acg-modal-scope .bg-emerald-950, .acg-drawer-scope .bg-emerald-950,
+.acg-db .bg-emerald-950\/60, .acg-sf .bg-emerald-950\/60, .acg-gb .bg-emerald-950\/60,
+.acg-al .bg-emerald-950\/60, .acg-rp .bg-emerald-950\/60, .acg-guide-wrap .bg-emerald-950\/60,
+.acg-modal-scope .bg-emerald-950\/60, .acg-drawer-scope .bg-emerald-950\/60 { background-color: #14261d; }
+
+/* Hover backgrounds — emerald */
+.acg-db .hover\:bg-emerald-100:hover, .acg-sf .hover\:bg-emerald-100:hover,
+.acg-gb .hover\:bg-emerald-100:hover, .acg-al .hover\:bg-emerald-100:hover,
+.acg-rp .hover\:bg-emerald-100:hover, .acg-guide-wrap .hover\:bg-emerald-100:hover,
+.acg-modal-scope .hover\:bg-emerald-100:hover, .acg-drawer-scope .hover\:bg-emerald-100:hover,
+.acg-db .hover\:bg-emerald-700:hover, .acg-sf .hover\:bg-emerald-700:hover,
+.acg-gb .hover\:bg-emerald-700:hover, .acg-al .hover\:bg-emerald-700:hover,
+.acg-rp .hover\:bg-emerald-700:hover, .acg-guide-wrap .hover\:bg-emerald-700:hover,
+.acg-modal-scope .hover\:bg-emerald-700:hover, .acg-drawer-scope .hover\:bg-emerald-700:hover { background-color: #005a40; }
+
+/* Text colors — emerald */
+.acg-db .text-emerald-400, .acg-sf .text-emerald-400, .acg-gb .text-emerald-400,
+.acg-al .text-emerald-400, .acg-rp .text-emerald-400, .acg-guide-wrap .text-emerald-400,
+.acg-modal-scope .text-emerald-400, .acg-drawer-scope .text-emerald-400,
+.acg-db .text-emerald-300, .acg-sf .text-emerald-300, .acg-gb .text-emerald-300,
+.acg-al .text-emerald-300, .acg-rp .text-emerald-300, .acg-guide-wrap .text-emerald-300,
+.acg-modal-scope .text-emerald-300, .acg-drawer-scope .text-emerald-300 { color: #6fae8c; }
+
+.acg-db .text-emerald-500, .acg-sf .text-emerald-500, .acg-gb .text-emerald-500,
+.acg-al .text-emerald-500, .acg-rp .text-emerald-500, .acg-guide-wrap .text-emerald-500,
+.acg-modal-scope .text-emerald-500, .acg-drawer-scope .text-emerald-500,
+.acg-db .text-emerald-600, .acg-sf .text-emerald-600, .acg-gb .text-emerald-600,
+.acg-al .text-emerald-600, .acg-rp .text-emerald-600, .acg-guide-wrap .text-emerald-600,
+.acg-modal-scope .text-emerald-600, .acg-drawer-scope .text-emerald-600 { color: #006a4e; }
+
+.acg-db .text-emerald-700, .acg-sf .text-emerald-700, .acg-gb .text-emerald-700,
+.acg-al .text-emerald-700, .acg-rp .text-emerald-700, .acg-guide-wrap .text-emerald-700,
+.acg-modal-scope .text-emerald-700, .acg-drawer-scope .text-emerald-700 { color: #005a40; }
+
+.acg-db .text-emerald-800, .acg-sf .text-emerald-800, .acg-gb .text-emerald-800,
+.acg-al .text-emerald-800, .acg-rp .text-emerald-800, .acg-guide-wrap .text-emerald-800,
+.acg-modal-scope .text-emerald-800, .acg-drawer-scope .text-emerald-800 { color: #004d38; }
+
+.acg-db .text-emerald-900, .acg-sf .text-emerald-900, .acg-gb .text-emerald-900,
+.acg-al .text-emerald-900, .acg-rp .text-emerald-900, .acg-guide-wrap .text-emerald-900,
+.acg-modal-scope .text-emerald-900, .acg-drawer-scope .text-emerald-900 { color: #003a2a; }
+
+.acg-db .text-emerald-950, .acg-sf .text-emerald-950, .acg-gb .text-emerald-950,
+.acg-al .text-emerald-950, .acg-rp .text-emerald-950, .acg-guide-wrap .text-emerald-950,
+.acg-modal-scope .text-emerald-950, .acg-drawer-scope .text-emerald-950 { color: #14261d; }
+
+/* Borders — emerald */
+.acg-db .border-emerald-200, .acg-sf .border-emerald-200, .acg-gb .border-emerald-200,
+.acg-al .border-emerald-200, .acg-rp .border-emerald-200, .acg-guide-wrap .border-emerald-200,
+.acg-modal-scope .border-emerald-200, .acg-drawer-scope .border-emerald-200,
+.acg-db .border-emerald-300, .acg-sf .border-emerald-300, .acg-gb .border-emerald-300,
+.acg-al .border-emerald-300, .acg-rp .border-emerald-300, .acg-guide-wrap .border-emerald-300,
+.acg-modal-scope .border-emerald-300, .acg-drawer-scope .border-emerald-300 { border-color: #c5ddd0; }
+
+.acg-db .border-emerald-500, .acg-sf .border-emerald-500, .acg-gb .border-emerald-500,
+.acg-al .border-emerald-500, .acg-rp .border-emerald-500, .acg-guide-wrap .border-emerald-500,
+.acg-modal-scope .border-emerald-500, .acg-drawer-scope .border-emerald-500,
+.acg-db .border-emerald-600, .acg-sf .border-emerald-600, .acg-gb .border-emerald-600,
+.acg-al .border-emerald-600, .acg-rp .border-emerald-600, .acg-guide-wrap .border-emerald-600,
+.acg-modal-scope .border-emerald-600, .acg-drawer-scope .border-emerald-600 { border-color: #006a4e; }
+
+.acg-db .border-emerald-800, .acg-sf .border-emerald-800, .acg-gb .border-emerald-800,
+.acg-al .border-emerald-800, .acg-rp .border-emerald-800, .acg-guide-wrap .border-emerald-800,
+.acg-modal-scope .border-emerald-800, .acg-drawer-scope .border-emerald-800,
+.acg-db .border-emerald-700, .acg-sf .border-emerald-700, .acg-gb .border-emerald-700,
+.acg-al .border-emerald-700, .acg-rp .border-emerald-700, .acg-guide-wrap .border-emerald-700,
+.acg-modal-scope .border-emerald-700, .acg-drawer-scope .border-emerald-700 { border-color: #004d38; }
+
+/* Ring — emerald (focus rings) */
+.acg-db .focus\:ring-emerald-500:focus, .acg-sf .focus\:ring-emerald-500:focus,
+.acg-gb .focus\:ring-emerald-500:focus, .acg-al .focus\:ring-emerald-500:focus,
+.acg-rp .focus\:ring-emerald-500:focus, .acg-guide-wrap .focus\:ring-emerald-500:focus,
+.acg-modal-scope .focus\:ring-emerald-500:focus, .acg-drawer-scope .focus\:ring-emerald-500:focus,
+.acg-db .ring-emerald-500, .acg-sf .ring-emerald-500, .acg-gb .ring-emerald-500,
+.acg-al .ring-emerald-500, .acg-rp .ring-emerald-500, .acg-guide-wrap .ring-emerald-500,
+.acg-modal-scope .ring-emerald-500, .acg-drawer-scope .ring-emerald-500,
+.acg-db .ring-emerald-200, .acg-sf .ring-emerald-200, .acg-gb .ring-emerald-200,
+.acg-al .ring-emerald-200, .acg-rp .ring-emerald-200, .acg-guide-wrap .ring-emerald-200,
+.acg-modal-scope .ring-emerald-200, .acg-drawer-scope .ring-emerald-200 { --tw-ring-color: #006a4e; }
+
+/* ── Slate → brand neutrals ─────────────────────────────────────────── */
+.acg-db .bg-slate-50, .acg-sf .bg-slate-50, .acg-gb .bg-slate-50,
+.acg-al .bg-slate-50, .acg-rp .bg-slate-50, .acg-guide-wrap .bg-slate-50,
+.acg-modal-scope .bg-slate-50, .acg-drawer-scope .bg-slate-50 { background-color: #f5f8f5; }
+
+.acg-db .bg-slate-100, .acg-sf .bg-slate-100, .acg-gb .bg-slate-100,
+.acg-al .bg-slate-100, .acg-rp .bg-slate-100, .acg-guide-wrap .bg-slate-100,
+.acg-modal-scope .bg-slate-100, .acg-drawer-scope .bg-slate-100 { background-color: #e7eee8; }
+
+.acg-db .bg-slate-200, .acg-sf .bg-slate-200, .acg-gb .bg-slate-200,
+.acg-al .bg-slate-200, .acg-rp .bg-slate-200, .acg-guide-wrap .bg-slate-200,
+.acg-modal-scope .bg-slate-200, .acg-drawer-scope .bg-slate-200 { background-color: #dfe5dd; }
+
+.acg-db .bg-slate-300, .acg-sf .bg-slate-300, .acg-gb .bg-slate-300,
+.acg-al .bg-slate-300, .acg-rp .bg-slate-300, .acg-guide-wrap .bg-slate-300,
+.acg-modal-scope .bg-slate-300, .acg-drawer-scope .bg-slate-300 { background-color: #c8d1c5; }
+
+/* Slate-800/900 used for dark headers/buttons → brand deep green */
+.acg-db .bg-slate-800, .acg-sf .bg-slate-800, .acg-gb .bg-slate-800,
+.acg-al .bg-slate-800, .acg-rp .bg-slate-800, .acg-guide-wrap .bg-slate-800,
+.acg-modal-scope .bg-slate-800, .acg-drawer-scope .bg-slate-800,
+.acg-db .bg-slate-900, .acg-sf .bg-slate-900, .acg-gb .bg-slate-900,
+.acg-al .bg-slate-900, .acg-rp .bg-slate-900, .acg-guide-wrap .bg-slate-900,
+.acg-modal-scope .bg-slate-900, .acg-drawer-scope .bg-slate-900 { background-color: #004d38; }
+
+/* Slate-900 with opacity (modal backdrops) → brand deep green tinted */
+.acg-db .bg-slate-900\/60, .acg-sf .bg-slate-900\/60, .acg-gb .bg-slate-900\/60,
+.acg-al .bg-slate-900\/60, .acg-rp .bg-slate-900\/60, .acg-guide-wrap .bg-slate-900\/60,
+.acg-modal-scope .bg-slate-900\/60, .acg-drawer-scope .bg-slate-900\/60,
+.acg-modal-scope .bg-slate-900\/70, .acg-drawer-scope .bg-slate-900\/70 { background-color: rgba(0, 29, 21, 0.66); }
+
+.acg-db .hover\:bg-slate-100:hover, .acg-sf .hover\:bg-slate-100:hover,
+.acg-gb .hover\:bg-slate-100:hover, .acg-al .hover\:bg-slate-100:hover,
+.acg-rp .hover\:bg-slate-100:hover, .acg-guide-wrap .hover\:bg-slate-100:hover,
+.acg-modal-scope .hover\:bg-slate-100:hover, .acg-drawer-scope .hover\:bg-slate-100:hover,
+.acg-db .hover\:bg-slate-100\/60:hover, .acg-sf .hover\:bg-slate-100\/60:hover,
+.acg-gb .hover\:bg-slate-100\/60:hover, .acg-al .hover\:bg-slate-100\/60:hover,
+.acg-rp .hover\:bg-slate-100\/60:hover, .acg-guide-wrap .hover\:bg-slate-100\/60:hover,
+.acg-modal-scope .hover\:bg-slate-100\/60:hover, .acg-drawer-scope .hover\:bg-slate-100\/60:hover { background-color: #e7eee8; }
+
+.acg-db .hover\:bg-slate-800:hover, .acg-sf .hover\:bg-slate-800:hover,
+.acg-gb .hover\:bg-slate-800:hover, .acg-al .hover\:bg-slate-800:hover,
+.acg-rp .hover\:bg-slate-800:hover, .acg-guide-wrap .hover\:bg-slate-800:hover,
+.acg-modal-scope .hover\:bg-slate-800:hover, .acg-drawer-scope .hover\:bg-slate-800:hover,
+.acg-db .hover\:bg-slate-900:hover, .acg-sf .hover\:bg-slate-900:hover,
+.acg-gb .hover\:bg-slate-900:hover, .acg-al .hover\:bg-slate-900:hover,
+.acg-rp .hover\:bg-slate-900:hover, .acg-guide-wrap .hover\:bg-slate-900:hover,
+.acg-modal-scope .hover\:bg-slate-900:hover, .acg-drawer-scope .hover\:bg-slate-900:hover { background-color: #003a2a; }
+
+/* Text — slate */
+.acg-db .text-slate-400, .acg-sf .text-slate-400, .acg-gb .text-slate-400,
+.acg-al .text-slate-400, .acg-rp .text-slate-400, .acg-guide-wrap .text-slate-400,
+.acg-modal-scope .text-slate-400, .acg-drawer-scope .text-slate-400 { color: #8a9b8f; }
+
+.acg-db .text-slate-500, .acg-sf .text-slate-500, .acg-gb .text-slate-500,
+.acg-al .text-slate-500, .acg-rp .text-slate-500, .acg-guide-wrap .text-slate-500,
+.acg-modal-scope .text-slate-500, .acg-drawer-scope .text-slate-500 { color: #5d6f64; }
+
+.acg-db .text-slate-600, .acg-sf .text-slate-600, .acg-gb .text-slate-600,
+.acg-al .text-slate-600, .acg-rp .text-slate-600, .acg-guide-wrap .text-slate-600,
+.acg-modal-scope .text-slate-600, .acg-drawer-scope .text-slate-600 { color: #3d4a42; }
+
+.acg-db .text-slate-700, .acg-sf .text-slate-700, .acg-gb .text-slate-700,
+.acg-al .text-slate-700, .acg-rp .text-slate-700, .acg-guide-wrap .text-slate-700,
+.acg-modal-scope .text-slate-700, .acg-drawer-scope .text-slate-700,
+.acg-db .hover\:text-slate-700:hover, .acg-sf .hover\:text-slate-700:hover,
+.acg-gb .hover\:text-slate-700:hover, .acg-al .hover\:text-slate-700:hover,
+.acg-rp .hover\:text-slate-700:hover, .acg-guide-wrap .hover\:text-slate-700:hover,
+.acg-modal-scope .hover\:text-slate-700:hover, .acg-drawer-scope .hover\:text-slate-700:hover { color: #2a3a30; }
+
+.acg-db .text-slate-800, .acg-sf .text-slate-800, .acg-gb .text-slate-800,
+.acg-al .text-slate-800, .acg-rp .text-slate-800, .acg-guide-wrap .text-slate-800,
+.acg-modal-scope .text-slate-800, .acg-drawer-scope .text-slate-800 { color: #1a2820; }
+
+.acg-db .text-slate-900, .acg-sf .text-slate-900, .acg-gb .text-slate-900,
+.acg-al .text-slate-900, .acg-rp .text-slate-900, .acg-guide-wrap .text-slate-900,
+.acg-modal-scope .text-slate-900, .acg-drawer-scope .text-slate-900,
+.acg-db .text-slate-950, .acg-sf .text-slate-950, .acg-gb .text-slate-950,
+.acg-al .text-slate-950, .acg-rp .text-slate-950, .acg-guide-wrap .text-slate-950,
+.acg-modal-scope .text-slate-950, .acg-drawer-scope .text-slate-950 { color: #14261d; }
+
+/* Borders — slate */
+.acg-db .border-slate-100, .acg-sf .border-slate-100, .acg-gb .border-slate-100,
+.acg-al .border-slate-100, .acg-rp .border-slate-100, .acg-guide-wrap .border-slate-100,
+.acg-modal-scope .border-slate-100, .acg-drawer-scope .border-slate-100 { border-color: #e7eee8; }
+
+.acg-db .border-slate-200, .acg-sf .border-slate-200, .acg-gb .border-slate-200,
+.acg-al .border-slate-200, .acg-rp .border-slate-200, .acg-guide-wrap .border-slate-200,
+.acg-modal-scope .border-slate-200, .acg-drawer-scope .border-slate-200,
+.acg-db .hover\:border-slate-200:hover, .acg-sf .hover\:border-slate-200:hover,
+.acg-gb .hover\:border-slate-200:hover, .acg-al .hover\:border-slate-200:hover,
+.acg-rp .hover\:border-slate-200:hover, .acg-guide-wrap .hover\:border-slate-200:hover,
+.acg-modal-scope .hover\:border-slate-200:hover, .acg-drawer-scope .hover\:border-slate-200:hover { border-color: #dfe5dd; }
+
+.acg-db .border-slate-300, .acg-sf .border-slate-300, .acg-gb .border-slate-300,
+.acg-al .border-slate-300, .acg-rp .border-slate-300, .acg-guide-wrap .border-slate-300,
+.acg-modal-scope .border-slate-300, .acg-drawer-scope .border-slate-300 { border-color: #c8d1c5; }
+
+.acg-db .border-slate-700, .acg-sf .border-slate-700, .acg-gb .border-slate-700,
+.acg-al .border-slate-700, .acg-rp .border-slate-700, .acg-guide-wrap .border-slate-700,
+.acg-modal-scope .border-slate-700, .acg-drawer-scope .border-slate-700,
+.acg-db .border-slate-800, .acg-sf .border-slate-800, .acg-gb .border-slate-800,
+.acg-al .border-slate-800, .acg-rp .border-slate-800, .acg-guide-wrap .border-slate-800,
+.acg-modal-scope .border-slate-800, .acg-drawer-scope .border-slate-800 { border-color: #004d38; }
+
+/* ── Amber → brand golden ───────────────────────────────────────────── */
+.acg-db .bg-amber-50, .acg-sf .bg-amber-50, .acg-gb .bg-amber-50,
+.acg-al .bg-amber-50, .acg-rp .bg-amber-50, .acg-guide-wrap .bg-amber-50,
+.acg-modal-scope .bg-amber-50, .acg-drawer-scope .bg-amber-50 { background-color: #f6eccf; }
+
+.acg-db .bg-amber-100, .acg-sf .bg-amber-100, .acg-gb .bg-amber-100,
+.acg-al .bg-amber-100, .acg-rp .bg-amber-100, .acg-guide-wrap .bg-amber-100,
+.acg-modal-scope .bg-amber-100, .acg-drawer-scope .bg-amber-100 { background-color: #ead9a5; }
+
+.acg-db .bg-amber-400, .acg-sf .bg-amber-400, .acg-gb .bg-amber-400,
+.acg-al .bg-amber-400, .acg-rp .bg-amber-400, .acg-guide-wrap .bg-amber-400,
+.acg-modal-scope .bg-amber-400, .acg-drawer-scope .bg-amber-400 { background-color: #e3b341; }
+
+.acg-db .bg-amber-500, .acg-sf .bg-amber-500, .acg-gb .bg-amber-500,
+.acg-al .bg-amber-500, .acg-rp .bg-amber-500, .acg-guide-wrap .bg-amber-500,
+.acg-modal-scope .bg-amber-500, .acg-drawer-scope .bg-amber-500,
+.acg-db .bg-amber-600, .acg-sf .bg-amber-600, .acg-gb .bg-amber-600,
+.acg-al .bg-amber-600, .acg-rp .bg-amber-600, .acg-guide-wrap .bg-amber-600,
+.acg-modal-scope .bg-amber-600, .acg-drawer-scope .bg-amber-600 { background-color: #d4a02e; }
+
+.acg-db .bg-amber-700, .acg-sf .bg-amber-700, .acg-gb .bg-amber-700,
+.acg-al .bg-amber-700, .acg-rp .bg-amber-700, .acg-guide-wrap .bg-amber-700,
+.acg-modal-scope .bg-amber-700, .acg-drawer-scope .bg-amber-700 { background-color: #8a6d1d; }
+
+.acg-db .bg-amber-800, .acg-sf .bg-amber-800, .acg-gb .bg-amber-800,
+.acg-al .bg-amber-800, .acg-rp .bg-amber-800, .acg-guide-wrap .bg-amber-800,
+.acg-modal-scope .bg-amber-800, .acg-drawer-scope .bg-amber-800 { background-color: #6f5515; }
+
+/* Text — amber */
+.acg-db .text-amber-700, .acg-sf .text-amber-700, .acg-gb .text-amber-700,
+.acg-al .text-amber-700, .acg-rp .text-amber-700, .acg-guide-wrap .text-amber-700,
+.acg-modal-scope .text-amber-700, .acg-drawer-scope .text-amber-700 { color: #8a6d1d; }
+
+.acg-db .text-amber-800, .acg-sf .text-amber-800, .acg-gb .text-amber-800,
+.acg-al .text-amber-800, .acg-rp .text-amber-800, .acg-guide-wrap .text-amber-800,
+.acg-modal-scope .text-amber-800, .acg-drawer-scope .text-amber-800,
+.acg-db .text-amber-850, .acg-sf .text-amber-850, .acg-gb .text-amber-850,
+.acg-al .text-amber-850, .acg-rp .text-amber-850, .acg-guide-wrap .text-amber-850,
+.acg-modal-scope .text-amber-850, .acg-drawer-scope .text-amber-850 { color: #6f5515; }
+
+.acg-db .text-amber-900, .acg-sf .text-amber-900, .acg-gb .text-amber-900,
+.acg-al .text-amber-900, .acg-rp .text-amber-900, .acg-guide-wrap .text-amber-900,
+.acg-modal-scope .text-amber-900, .acg-drawer-scope .text-amber-900,
+.acg-db .text-amber-950, .acg-sf .text-amber-950, .acg-gb .text-amber-950,
+.acg-al .text-amber-950, .acg-rp .text-amber-950, .acg-guide-wrap .text-amber-950,
+.acg-modal-scope .text-amber-950, .acg-drawer-scope .text-amber-950 { color: #4a3a0f; }
+
+/* Borders — amber */
+.acg-db .border-amber-200, .acg-sf .border-amber-200, .acg-gb .border-amber-200,
+.acg-al .border-amber-200, .acg-rp .border-amber-200, .acg-guide-wrap .border-amber-200,
+.acg-modal-scope .border-amber-200, .acg-drawer-scope .border-amber-200 { border-color: #ead9a5; }
+
+.acg-db .border-amber-400, .acg-sf .border-amber-400, .acg-gb .border-amber-400,
+.acg-al .border-amber-400, .acg-rp .border-amber-400, .acg-guide-wrap .border-amber-400,
+.acg-modal-scope .border-amber-400, .acg-drawer-scope .border-amber-400 { border-color: #e3b341; }
+
+.acg-db .border-amber-700, .acg-sf .border-amber-700, .acg-gb .border-amber-700,
+.acg-al .border-amber-700, .acg-rp .border-amber-700, .acg-guide-wrap .border-amber-700,
+.acg-modal-scope .border-amber-700, .acg-drawer-scope .border-amber-700 { border-color: #8a6d1d; }
+
+/* ── Red → brand red ────────────────────────────────────────────────── */
+.acg-db .bg-red-50, .acg-sf .bg-red-50, .acg-gb .bg-red-50,
+.acg-al .bg-red-50, .acg-rp .bg-red-50, .acg-guide-wrap .bg-red-50,
+.acg-modal-scope .bg-red-50, .acg-drawer-scope .bg-red-50 { background-color: #fde4e7; }
+
+.acg-db .bg-red-500, .acg-sf .bg-red-500, .acg-gb .bg-red-500,
+.acg-al .bg-red-500, .acg-rp .bg-red-500, .acg-guide-wrap .bg-red-500,
+.acg-modal-scope .bg-red-500, .acg-drawer-scope .bg-red-500,
+.acg-db .bg-red-600, .acg-sf .bg-red-600, .acg-gb .bg-red-600,
+.acg-al .bg-red-600, .acg-rp .bg-red-600, .acg-guide-wrap .bg-red-600,
+.acg-modal-scope .bg-red-600, .acg-drawer-scope .bg-red-600 { background-color: #f42a41; }
+
+.acg-db .bg-red-800, .acg-sf .bg-red-800, .acg-gb .bg-red-800,
+.acg-al .bg-red-800, .acg-rp .bg-red-800, .acg-guide-wrap .bg-red-800,
+.acg-modal-scope .bg-red-800, .acg-drawer-scope .bg-red-800 { background-color: #b31d31; }
+
+.acg-db .text-red-700, .acg-sf .text-red-700, .acg-gb .text-red-700,
+.acg-al .text-red-700, .acg-rp .text-red-700, .acg-guide-wrap .text-red-700,
+.acg-modal-scope .text-red-700, .acg-drawer-scope .text-red-700 { color: #b31d31; }
+
+.acg-db .text-red-800, .acg-sf .text-red-800, .acg-gb .text-red-800,
+.acg-al .text-red-800, .acg-rp .text-red-800, .acg-guide-wrap .text-red-800,
+.acg-modal-scope .text-red-800, .acg-drawer-scope .text-red-800 { color: #8a141f; }
+
+.acg-db .border-red-200, .acg-sf .border-red-200, .acg-gb .border-red-200,
+.acg-al .border-red-200, .acg-rp .border-red-200, .acg-guide-wrap .border-red-200,
+.acg-modal-scope .border-red-200, .acg-drawer-scope .border-red-200 { border-color: #f5bfc8; }
+
+.acg-db .border-red-400, .acg-sf .border-red-400, .acg-gb .border-red-400,
+.acg-al .border-red-400, .acg-rp .border-red-400, .acg-guide-wrap .border-red-400,
+.acg-modal-scope .border-red-400, .acg-drawer-scope .border-red-400 { border-color: #f42a41; }
+
+/* ── Blue → brand green (resistance-risk sections reuse green) ──────── */
+.acg-db .bg-blue-50, .acg-sf .bg-blue-50, .acg-gb .bg-blue-50,
+.acg-al .bg-blue-50, .acg-rp .bg-blue-50, .acg-guide-wrap .bg-blue-50,
+.acg-modal-scope .bg-blue-50, .acg-drawer-scope .bg-blue-50 { background-color: #eef5ef; }
+
+.acg-db .bg-blue-500, .acg-sf .bg-blue-500, .acg-gb .bg-blue-500,
+.acg-al .bg-blue-500, .acg-rp .bg-blue-500, .acg-guide-wrap .bg-blue-500,
+.acg-modal-scope .bg-blue-500, .acg-drawer-scope .bg-blue-500 { background-color: #006a4e; }
+
+.acg-db .text-blue-700, .acg-sf .text-blue-700, .acg-gb .text-blue-700,
+.acg-al .text-blue-700, .acg-rp .text-blue-700, .acg-guide-wrap .text-blue-700,
+.acg-modal-scope .text-blue-700, .acg-drawer-scope .text-blue-700 { color: #006a4e; }
+
+.acg-db .text-blue-950, .acg-sf .text-blue-950, .acg-gb .text-blue-950,
+.acg-al .text-blue-950, .acg-rp .text-blue-950, .acg-guide-wrap .text-blue-950,
+.acg-modal-scope .text-blue-950, .acg-drawer-scope .text-blue-950 { color: #004d38; }
+
+.acg-db .border-blue-100, .acg-sf .border-blue-100, .acg-gb .border-blue-100,
+.acg-al .border-blue-100, .acg-rp .border-blue-100, .acg-guide-wrap .border-blue-100,
+.acg-modal-scope .border-blue-100, .acg-drawer-scope .border-blue-100,
+.acg-db .border-blue-200, .acg-sf .border-blue-200, .acg-gb .border-blue-200,
+.acg-al .border-blue-200, .acg-rp .border-blue-200, .acg-guide-wrap .border-blue-200,
+.acg-modal-scope .border-blue-200, .acg-drawer-scope .border-blue-200 { border-color: #c5ddd0; }
+
+.acg-db .focus\:ring-blue-500:focus, .acg-sf .focus\:ring-blue-500:focus,
+.acg-gb .focus\:ring-blue-500:focus, .acg-al .focus\:ring-blue-500:focus,
+.acg-rp .focus\:ring-blue-500:focus, .acg-guide-wrap .focus\:ring-blue-500:focus,
+.acg-modal-scope .focus\:ring-blue-500:focus, .acg-drawer-scope .focus\:ring-blue-500:focus,
+.acg-db .focus\:border-blue-500:focus, .acg-sf .focus\:border-blue-500:focus,
+.acg-gb .focus\:border-blue-500:focus, .acg-al .focus\:border-blue-500:focus,
+.acg-rp .focus\:border-blue-500:focus, .acg-guide-wrap .focus\:border-blue-500:focus,
+.acg-modal-scope .focus\:border-blue-500:focus, .acg-drawer-scope .focus\:border-blue-500:focus { --tw-ring-color: #006a4e; border-color: #006a4e; }
+
+/* ── Teal → brand green (DosageCalculatorModal gradient + rings) ───── */
+.acg-db .bg-teal-50, .acg-sf .bg-teal-50, .acg-gb .bg-teal-50,
+.acg-al .bg-teal-50, .acg-rp .bg-teal-50, .acg-guide-wrap .bg-teal-50,
+.acg-modal-scope .bg-teal-50, .acg-drawer-scope .bg-teal-50 { background-color: #eef5ef; }
+
+.acg-db .bg-teal-400, .acg-sf .bg-teal-400, .acg-gb .bg-teal-400,
+.acg-al .bg-teal-400, .acg-rp .bg-teal-400, .acg-guide-wrap .bg-teal-400,
+.acg-modal-scope .bg-teal-400, .acg-drawer-scope .bg-teal-400,
+.acg-db .bg-teal-500, .acg-sf .bg-teal-500, .acg-gb .bg-teal-500,
+.acg-al .bg-teal-500, .acg-rp .bg-teal-500, .acg-guide-wrap .bg-teal-500,
+.acg-modal-scope .bg-teal-500, .acg-drawer-scope .bg-teal-500 { background-color: #006a4e; }
+
+.acg-db .border-teal-200, .acg-sf .border-teal-200, .acg-gb .border-teal-200,
+.acg-al .border-teal-200, .acg-rp .border-teal-200, .acg-guide-wrap .border-teal-200,
+.acg-modal-scope .border-teal-200, .acg-drawer-scope .border-teal-200 { border-color: #c5ddd0; }
+
+.acg-db .focus\:ring-teal-500:focus, .acg-sf .focus\:ring-teal-500:focus,
+.acg-gb .focus\:ring-teal-500:focus, .acg-al .focus\:ring-teal-500:focus,
+.acg-rp .focus\:ring-teal-500:focus, .acg-guide-wrap .focus\:ring-teal-500:focus,
+.acg-modal-scope .focus\:ring-teal-500:focus, .acg-drawer-scope .focus\:ring-teal-500:focus { --tw-ring-color: #006a4e; }
+
+/* Gradient overrides — from-teal-*-to-emerald-* → brand green tints */
+.acg-db .from-teal-50, .acg-sf .from-teal-50, .acg-gb .from-teal-50,
+.acg-al .from-teal-50, .acg-rp .from-teal-50, .acg-guide-wrap .from-teal-50,
+.acg-modal-scope .from-teal-50, .acg-drawer-scope .from-teal-50,
+.acg-db .from-emerald-50, .acg-sf .from-emerald-50, .acg-gb .from-emerald-50,
+.acg-al .from-emerald-50, .acg-rp .from-emerald-50, .acg-guide-wrap .from-emerald-50,
+.acg-modal-scope .from-emerald-50, .acg-drawer-scope .from-emerald-50 { --tw-gradient-from: #eef5ef var(--tw-gradient-from-position); --tw-gradient-to: transparent var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+
+.acg-db .to-emerald-50, .acg-sf .to-emerald-50, .acg-gb .to-emerald-50,
+.acg-al .to-emerald-50, .acg-rp .to-emerald-50, .acg-guide-wrap .to-emerald-50,
+.acg-modal-scope .to-emerald-50, .acg-drawer-scope .to-emerald-50 { --tw-gradient-to: #eef5ef var(--tw-gradient-to-position); }
+
+/* ── Gray → brand neutrals (minor usage) ───────────────────────────── */
+.acg-db .bg-gray-50, .acg-sf .bg-gray-50, .acg-gb .bg-gray-50,
+.acg-al .bg-gray-50, .acg-rp .bg-gray-50, .acg-guide-wrap .bg-gray-50,
+.acg-modal-scope .bg-gray-50, .acg-drawer-scope .bg-gray-50 { background-color: #f5f8f5; }
+
+.acg-db .bg-gray-100, .acg-sf .bg-gray-100, .acg-gb .bg-gray-100,
+.acg-al .bg-gray-100, .acg-rp .bg-gray-100, .acg-guide-wrap .bg-gray-100,
+.acg-modal-scope .bg-gray-100, .acg-drawer-scope .bg-gray-100 { background-color: #e7eee8; }
+
+.acg-db .text-gray-500, .acg-sf .text-gray-500, .acg-gb .text-gray-500,
+.acg-al .text-gray-500, .acg-rp .text-gray-500, .acg-guide-wrap .text-gray-500,
+.acg-modal-scope .text-gray-500, .acg-drawer-scope .text-gray-500 { color: #5d6f64; }
+
+.acg-db .text-gray-700, .acg-sf .text-gray-700, .acg-gb .text-gray-700,
+.acg-al .text-gray-700, .acg-rp .text-gray-700, .acg-guide-wrap .text-gray-700,
+.acg-modal-scope .text-gray-700, .acg-drawer-scope .text-gray-700 { color: #2a3a30; }
+
+/* ── Rose → brand red (SearchableSelect clear button) ───────────────── */
+.acg-db .text-rose-600, .acg-sf .text-rose-600, .acg-gb .text-rose-600,
+.acg-al .text-rose-600, .acg-rp .text-rose-600, .acg-guide-wrap .text-rose-600,
+.acg-modal-scope .text-rose-600, .acg-drawer-scope .text-rose-600 { color: #b31d31; }

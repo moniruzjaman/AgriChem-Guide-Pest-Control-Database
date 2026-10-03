@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChemicalProduct, DosageInput } from '../types';
 import { calculateDosage } from '../utils/calculator';
 import { exportDosagePrescriptionPDF } from '../utils/pdfExport';
@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 interface DosageCalculatorModalProps {
   products: ChemicalProduct[];
@@ -30,6 +31,8 @@ export const DosageCalculatorModal: React.FC<DosageCalculatorModalProps> = ({
   onSelectProduct
 }) => {
   const { language, t, transCrop, transCat, transDose, formatNum } = useLanguage();
+  const overlayRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(overlayRef, true);
 
   const areaUnitBn = (u: DosageInput['areaUnit']): string =>
     ({ bigha: 'বিঘা', katha: 'কাঠা', acre: 'একর', hectare: 'হেক্টর', sqm: 'বর্গমিটার' } as Record<string, string>)[u] || u;
@@ -57,7 +60,7 @@ export const DosageCalculatorModal: React.FC<DosageCalculatorModalProps> = ({
   }, language);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+    <div ref={overlayRef} className="acg-modal-scope fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
       <div 
         id="dosage-calculator-modal"
         className="bg-white rounded-2xl max-w-2xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"

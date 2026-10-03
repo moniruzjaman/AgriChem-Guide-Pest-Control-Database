@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ChemicalProduct } from '../types';
 import { 
   X, 
@@ -21,6 +21,7 @@ import { calculateDosage } from '../utils/calculator';
 import { useLanguage } from '../context/LanguageContext';
 import { MOA_DATABASE } from '../data/moaData';
 import { lookupNoteBn } from '../utils/i18n';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 interface ProductDetailModalProps {
   product: ChemicalProduct | null;
@@ -33,6 +34,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   onClose,
   onOpenDosageCalculator
 }) => {
+  const overlayRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(overlayRef, !!product);
   const { language, t, transCrop, transCat, transRisk, transPest, transTox, transDose, transNote, formatNum } = useLanguage();
 
   if (!product) return null;
@@ -59,7 +62,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   }, language);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+    <div ref={overlayRef} className="acg-modal-scope fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
       <div 
         id="product-detail-modal"
         className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"
@@ -95,11 +98,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         {/* Scrollable Content */}
         <div className="p-6 overflow-y-auto space-y-6 text-sm text-slate-700">
           {/* Official DAE Advisory Disclaimer */}
-          <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2.5 text-amber-850">
+          <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2.5 text-amber-800">
             <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
             <div className="text-xs space-y-0.5 leading-relaxed">
               <strong className="text-amber-950 block font-bold">
-                {language === 'bn' ? 'গুরুত্বপূর্ণ ডিএই সরকারি নির্দেশিকা ও সতর্কবার্তা:' : 'Official DAE Advisory Disclaimer:'}
+                {language === 'bn' ? 'গুরুত্বপূর্ণ সতর্কবার্তা ও ডিএই পরামর্শ:' : 'Safety Advisory & DAE Consultation Reminder:'}
               </strong>
               <p className="text-slate-700 font-medium">
                 {language === 'bn' 

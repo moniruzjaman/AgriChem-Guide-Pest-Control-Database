@@ -106,4 +106,4 @@ export interface SprayRotationStep {
   conflictReason?: string;
 }
 
-export type AppTab = 'home' | 'database' | 'calculator' | 'rotation' | 'safety' | 'guidebook' | 'alerts';
+export type AppTab = 'home' | 'database' | 'calculator' | 'rotation' | 'safety' | 'guidebook' | 'alerts' | 'myfield';
