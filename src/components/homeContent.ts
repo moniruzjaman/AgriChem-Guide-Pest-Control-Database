@@ -69,6 +69,16 @@ export interface FeatureDossier {
 /* eslint-disable indent */
 export const FEATURES: FeatureDossier[] = [
   {
+    id: 'intelligence' as AppTab,
+    titleEn: 'Pesticide Intelligence Engine', titleBn: 'বালাইনাশক ইন্টেলিজেন্স ইঞ্জিন',
+    subtitleEn: 'Weather-aware next-spray decisions', subtitleBn: 'আবহাওয়া ও MoA-ভিত্তিক পরবর্তী স্প্রে',
+    descEn: 'Combine field location, weather, registered products and previous MoA into a ranked next-spray signal.',
+    descBn: 'লোকেশন, আবহাওয়া, নিবন্ধিত পণ্য ও আগের MoA একসাথে নিয়ে সম্ভাব্য পরবর্তী স্প্রে সিদ্ধান্ত সাজান।',
+    icon: ShieldCheck, badgeEn: 'Evidence-first', badgeBn: 'তথ্যভিত্তিক', tone: 'green', statLabelEn: 'Signals', statLabelBn: 'সিগন্যাল', statValue: 'Weather + MoA',
+    highlightsEn: ['Spray windows','Disease pressure','MoA rotation guard','Registered product ranking'],
+    highlightsBn: ['স্প্রে-উইন্ডো','রোগ অনুকূলতা','MoA ঘূর্ণন গার্ড','নিবন্ধিত পণ্য র‍্যাঙ্কিং']
+  },
+  {
     id: 'database' as AppTab,
     titleEn: 'DAE Registered Chemical Database',
     titleBn: 'ডিএই নিবন্ধিত রাসায়নিক ডাটাবেস',
