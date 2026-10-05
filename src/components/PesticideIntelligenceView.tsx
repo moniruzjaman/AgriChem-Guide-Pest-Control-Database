@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { CloudRain, Droplets, Gauge, LocateFixed, RefreshCw, ShieldAlert, Wind } from 'lucide-react';
 import type { ChemicalProduct } from '../types';
 import { useLanguage } from '../context/LanguageContext';
+import { useSprayHistory, lastMoaForCrop } from '../hooks/useSprayHistory';
 import { runPesticideIntelligence, type PesticideIntelligenceResult } from '../intelligence/pesticideIntelligence';
 
 export const PesticideIntelligenceView: React.FC<{products:ChemicalProduct[]}> = ({products}) => {
  const {language,formatNum}=useLanguage(); const bn=language==='bn';
+ const {entries:sprayHistory}=useSprayHistory();
  const [lat,setLat]=useState('23.8103'),[lon,setLon]=useState('90.4125'),[crop,setCrop]=useState('Rice'),[pest,setPest]=useState(''),[lastMoa,setLastMoa]=useState(''),[result,setResult]=useState<PesticideIntelligenceResult|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const crops=Array.from(new Set(products.flatMap(p=>p.crops))).filter(Boolean).sort().slice(0,80);
+ const lastLogged=lastMoaForCrop(sprayHistory,crop); const effectiveLastMoa=lastMoa||lastLogged?.moaCode||'';
  const locate=()=>navigator.geolocation?.getCurrentPosition(p=>{setLat(p.coords.latitude.toFixed(5));setLon(p.coords.longitude.toFixed(5))},()=>setError(bn?'লোকেশন অনুমতি পাওয়া যায়নি।':'Location permission was not granted.'));
- const analyze=async()=>{setBusy(true);setError('');try{setResult(await runPesticideIntelligence({location:{latitude:Number(lat),longitude:Number(lon),name:'field'},products,crop,pest,lastMoa}))}catch(e){setError(e instanceof Error?e.message:String(e))}finally{setBusy(false)}};
+ const analyze=async()=>{setBusy(true);setError('');try{setResult(await runPesticideIntelligence({location:{latitude:Number(lat),longitude:Number(lon),name:'field'},products,crop,pest,lastMoa:effectiveLastMoa}))}catch(e){setError(e instanceof Error?e.message:String(e))}finally{setBusy(false)}};
  return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
   <section className="rounded-3xl bg-[#063f31] text-white p-6 sm:p-8 shadow-lg"><div className="text-[10px] uppercase tracking-[.18em] text-emerald-300 font-bold">Pesticide Intelligence Engine</div><h1 className="mt-2 text-2xl sm:text-3xl font-black">{bn?'পরবর্তী স্প্রে—আবহাওয়া, বালাই, MoA ও DAE ডাটাবেস একসাথে।':'Next-spray intelligence—weather, pest, MoA and the DAE catalogue together.'}</h1><p className="mt-3 text-sm text-emerald-100">{bn?'KWI weather signal + নিবন্ধিত পণ্য + MoA rotation guard দিয়ে সম্ভাব্য স্প্রে সিদ্ধান্ত সাজানো হয়।':'Combines the uploaded weather-intelligence concepts with registered products and MoA rotation guardrails.'}</p></section>
   <section className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm"><div className="grid md:grid-cols-5 gap-3">
@@ -18,7 +21,7 @@ export const PesticideIntelligenceView: React.FC<{products:ChemicalProduct[]}> =
    <label className="text-xs font-bold text-slate-600">Latitude<input value={lat} onChange={e=>setLat(e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 p-2.5 text-sm"/></label>
    <label className="text-xs font-bold text-slate-600">Longitude<input value={lon} onChange={e=>setLon(e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 p-2.5 text-sm"/></label>
    <div className="flex items-end gap-2"><button onClick={locate} className="p-2.5 rounded-xl border border-slate-200"><LocateFixed className="w-4 h-4"/></button><button onClick={analyze} disabled={busy} className="flex-1 p-2.5 rounded-xl bg-emerald-700 text-white font-bold disabled:opacity-50">{busy?<RefreshCw className="w-4 h-4 animate-spin mx-auto"/>:(bn?'বিশ্লেষণ':'Analyze')}</button></div></div>
-   <label className="block mt-3 text-xs font-bold text-slate-600">{bn?'শেষ ব্যবহৃত MoA code':'Last-used MoA code'}<input value={lastMoa} onChange={e=>setLastMoa(e.target.value)} placeholder="e.g. IRAC 28" className="mt-1 w-full md:w-80 rounded-xl border border-slate-200 p-2.5 text-sm"/></label>
+   <label className="block mt-3 text-xs font-bold text-slate-600">{bn?'শেষ ব্যবহৃত MoA code (লগ থেকে স্বয়ংক্রিয়)':'Last-used MoA code (auto from spray log)'}<input value={lastMoa} onChange={e=>setLastMoa(e.target.value)} placeholder="e.g. IRAC 28" className="mt-1 w-full md:w-80 rounded-xl border border-slate-200 p-2.5 text-sm"/></label>
    {error&&<div className="mt-3 rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-800">{error}</div>}
   </section>
   {result&&<><section className="grid grid-cols-2 lg:grid-cols-5 gap-3">{[[<Gauge/>, 'Temp', result.weather.temperature.toFixed(1)+'°C'],[<Droplets/>,'Humidity',formatNum(result.weather.humidity)+'%'],[<Wind/>,'Wind',result.weather.windSpeed.toFixed(1)+' km/h'],[<CloudRain/>,bn?'বৃষ্টি সম্ভাবনা':'Rain chance',formatNum(result.weather.rainProbability)+'%'],[<ShieldAlert/>,bn?'রোগ অনুকূলতা':'Disease pressure',formatNum(result.diseasePressure)+'/100']].map(([icon,label,value],i)=><div key={i} className="bg-white border border-slate-200 rounded-2xl p-4"><div className="flex items-center gap-2 text-slate-400">{React.cloneElement(icon as React.ReactElement,{className:'w-4 h-4'})}<span className="text-[11px] font-bold">{label as string}</span></div><div className="mt-2 text-xl font-black">{value as string}</div></div>)}</section>
