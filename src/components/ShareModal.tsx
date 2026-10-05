@@ -22,6 +22,46 @@ import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
+/**
+ * Facebook Messenger "Send" dialog (`/dialog/send`) requires a Meta app id
+ * whose registered website domain matches the deployment host — otherwise the
+ * dialog opens with "Invalid app_id" / link-domain errors. The hard-coded
+ * default below is the id previously baked into this modal; deployments on a
+ * different domain (or after app review) should override it at build time:
+ *
+ *   # .env.local
+ *   VITE_FB_MESSENGER_APP_ID=123456789012345
+ *
+ * If the dialog still rejects the share, register/verify the app at
+ * https://developers.facebook.com → App Settings → Basic → Website.
+ */
+const MESSENGER_APP_ID: string =
+  (import.meta.env?.VITE_FB_MESSENGER_APP_ID as string | undefined) || '291494419162';
+
+/**
+ * Legacy clipboard copy for non-secure contexts (plain-HTTP field / LAN
+ * deployments) where the async Clipboard API is not exposed by the browser.
+ * Returns true when the copy actually succeeded.
+ */
+function legacyCopyText(text: string): boolean {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  } catch {
+    return false;
+  }
+}
+
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -43,6 +83,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   const [showQR, setShowQR] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const overlayRef = useRef<HTMLDivElement>(null);
+  const urlInputRef = useRef<HTMLInputElement>(null);
   useFocusTrap(overlayRef, isOpen);
 
   // Sync the selected share target with the active tab whenever the modal is
@@ -57,10 +98,61 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     }
   }, [isOpen, activeTab]);
 
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://pesticide.krishiai.live';
+
+  // Build the share URL. `?from=share` tags the link so the recipient's visit
+  // is recorded as share-originated (analytics.ts:detectSharedVisit). The
+  // query MUST come before any hash — putting it after `#` makes it part of
+  // the fragment and share attribution is silently lost.
+  // Format:  https://host/?from=share#<tab>
+  // (Hoisted ABOVE the early return: the QR-generation effect below depends
+  // on it, and hooks must never sit behind a conditional return.)
+  const shareUrl =
+    selectedTarget === 'home'
+      ? `${origin}/?from=share`
+      : `${origin}/?from=share#${selectedTarget}`;
+
+  // Generate QR locally — no remote API call, works fully offline.
+  // ⚠ Rules of Hooks fix: this effect previously lived AFTER the
+  // `if (!isOpen) return null` early return, so opening the modal introduced
+  // a NEW hook mid-lifetime of the component. React crashed the entire app
+  // with "Rendered more hooks than during the previous render" — meaning
+  // every share button in the app white-screened on click. All hooks now run
+  // unconditionally; the body is a no-op while the modal is closed.
+  useEffect(() => {
+    if (!isOpen || !showQR) return;
+    let cancelled = false;
+    QRCode.toDataURL(shareUrl, {
+      width: 200,
+      margin: 1,
+      color: { dark: '#004d38', light: '#ffffff' },
+      errorCorrectionLevel: 'M',
+    }).then((url) => {
+      if (!cancelled) setQrDataUrl(url);
+    }).catch(() => { /* QR generation failed — panel stays empty */ });
+    return () => { cancelled = true; };
+  }, [isOpen, showQR, shareUrl]);
+
+  // Escape-to-close + background scroll lock while the modal is open.
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://pesticide.krishiai.live';
-  
   // Build target-specific link & text
   const shareTargetInfo: Record<AppTab, {
     titleEn: string;
@@ -140,37 +232,6 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   const currentTitle = language === 'bn' ? currentInfo.titleBn : currentInfo.titleEn;
   const currentDesc = language === 'bn' ? currentInfo.descBn : currentInfo.descEn;
   
-  // URL with hash or param. `?from=share` tags the link so that when the
-  // recipient opens it, the app records the visit as share-originated — this
-  // is what lets us tell whether a shared person actually opened the app
-  // (and whether they downloaded anything).
-  // Build the share URL. The `?from=share` query MUST come before any hash
-  // so that `new URLSearchParams(window.location.search)` can read it on
-  // landing — putting it after `#` makes it part of the hash fragment and
-  // share attribution is silently lost (analytics.ts:detectSharedVisit).
-  // Format:  https://host/?from=share#<tab>
-  const shareUrl =
-    selectedTarget === 'home'
-      ? `${origin}/?from=share`
-      : `${origin}/?from=share#${selectedTarget}`;
-
-  // Generate QR locally — no remote API call, works fully offline.
-  // qrDataUrl is recomputed whenever the share URL changes or the QR panel
-  // is toggled open.
-  useEffect(() => {
-    if (!showQR) return;
-    let cancelled = false;
-    QRCode.toDataURL(shareUrl, {
-      width: 200,
-      margin: 1,
-      color: { dark: '#004d38', light: '#ffffff' },
-      errorCorrectionLevel: 'M',
-    }).then((url) => {
-      if (!cancelled) setQrDataUrl(url);
-    }).catch(() => { /* QR generation failed — panel stays empty */ });
-    return () => { cancelled = true; };
-  }, [showQR, shareUrl]);
-
   const fullShareText = `${currentTitle}\n\n${currentDesc}\n\n🔗 ${shareUrl}\n\n${currentInfo.tag}`;
 
   // Native share handler
@@ -188,12 +249,35 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     }
   };
 
-  // Copy link handler
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(shareUrl).then(() => {
+  // Copy link handler — uses the async Clipboard API on secure contexts and
+  // falls back to the legacy execCommand strategy on plain-HTTP deployments
+  // (common for field/LAN use), where `navigator.clipboard` is undefined and
+  // the previous implementation silently failed / threw. If every strategy
+  // fails, the read-only URL input is selected so the user can copy manually.
+  const handleCopyLink = async () => {
+    const succeed = () => {
       setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    });
+      window.setTimeout(() => setCopied(false), 2500);
+    };
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareUrl);
+        succeed();
+        return;
+      }
+      throw new Error('clipboard-api-unavailable');
+    } catch {
+      if (legacyCopyText(shareUrl)) {
+        succeed();
+      } else {
+        // Last resort: highlight the URL so Ctrl+C / long-press still works.
+        const el = urlInputRef.current;
+        if (el) {
+          el.focus();
+          el.select();
+        }
+      }
+    }
   };
 
   // Social Share links — priority order: WhatsApp, Facebook, Messenger,
@@ -202,13 +286,23 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   // compatibility so the preview card renders there too.
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(fullShareText)}`;
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-  const messengerUrl = `https://www.facebook.com/dialog/send?app_id=291494419162&link=${encodeURIComponent(shareUrl)}&redirect_uri=${encodeURIComponent(shareUrl)}`;
+  const messengerUrl = `https://www.facebook.com/dialog/send?app_id=${encodeURIComponent(MESSENGER_APP_ID)}&link=${encodeURIComponent(shareUrl)}&redirect_uri=${encodeURIComponent(shareUrl)}`;
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
   const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(currentTitle + '\n' + currentDesc)}`;
 
   return (
-    <div ref={overlayRef} className="acg-modal-scope fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 overflow-y-auto">
-      <motion.div 
+    <div
+      ref={overlayRef}
+      onClick={(e) => {
+        // Click on the dimmed backdrop (not on the dialog panel) closes the modal.
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className="acg-modal-scope fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 overflow-y-auto"
+    >
+      <motion.div
+        role="dialog"
+        aria-modal="true"
+        aria-label={language === 'bn' ? 'পেস্টিসাইডনেক্সট শেয়ার করুন' : 'Share PesticideNext'}
         initial={{ opacity: 0, scale: 0.95, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -350,10 +444,20 @@ export const ShareModal: React.FC<ShareModalProps> = ({
                   const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
                   if (isMobile) {
                     // Direct deep-link trigger to open the native Messenger mobile app sharing sheet
-                    window.location.href = `fb-messenger://share/?link=${encodeURIComponent(shareUrl)}`;
-                    // Quick web fallback if the app is not installed on the user device
-                    setTimeout(() => {
-                      window.open(messengerUrl, '_blank', 'noopener,noreferrer');
+                    try {
+                      window.location.href = `fb-messenger://share/?link=${encodeURIComponent(shareUrl)}`;
+                    } catch { /* deep link unsupported — web fallback below */ }
+                    // Web fallback ONLY when the native app did not take over:
+                    // if the deep link succeeded the browser is backgrounded
+                    // (visibilityState 'hidden'), so we skip the popup instead
+                    // of opening a duplicate share dialog when the user
+                    // returns / when the app is installed.
+                    window.setTimeout(() => {
+                      try {
+                        if (document.visibilityState === 'visible') {
+                          window.open(messengerUrl, '_blank', 'noopener,noreferrer');
+                        }
+                      } catch { /* popup blocked — nothing else to do */ }
                     }, 1200);
                   } else {
                     window.open(messengerUrl, '_blank', 'noopener,noreferrer');
@@ -397,9 +501,12 @@ export const ShareModal: React.FC<ShareModalProps> = ({
           <div className="space-y-2 pt-1 border-t border-slate-100">
             <div className="flex gap-2">
               <input
+                ref={urlInputRef}
+                id="acg-share-url"
                 type="text"
                 readOnly
                 value={shareUrl}
+                aria-label={language === 'bn' ? 'শেয়ার লিংক' : 'Share link'}
                 className="flex-1 px-3 py-2 text-xs font-mono bg-slate-50 border border-slate-200 rounded-xl text-slate-700 select-all focus:outline-none"
               />
               <button

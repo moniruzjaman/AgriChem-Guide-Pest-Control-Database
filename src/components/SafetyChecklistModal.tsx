@@ -31,10 +31,16 @@ export const SafetyChecklistModal: React.FC<SafetyChecklistModalProps> = ({
   const overlayRef = useRef<HTMLDivElement>(null);
   useFocusTrap(overlayRef, !!product);
   const { language, transTox, formatNum } = useLanguage();
-  if (!product) return null;
 
-  // Interactive Checklist states
+  // Interactive checklist state.
+  // ⚠ Rules of Hooks: this useState MUST be called before the
+  // `if (!product) return null` early return below — it previously lived
+  // after it, which only worked while App.tsx mounted this component
+  // conditionally. Always-mounted rendering would crash React with
+  // "Rendered more hooks than during the previous render".
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({});
+
+  if (!product) return null;
 
   const toggleCheck = (key: string) => {
     setCheckedItems((prev) => ({ ...prev, [key]: !prev[key] }));
