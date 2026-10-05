@@ -117,6 +117,13 @@ no external secrets. The optional Express server (`server.ts`) only provides a
 lightweight visitor counter at `/api/visitors/*` and is not required for the
 app to function. On static hosts the counter simply stays at zero.
 
+One **optional** build-time variable is supported:
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `VITE_FB_MESSENGER_APP_ID` | `291494419162` | Meta app id used by the Share modal's Messenger button. The `/dialog/send` endpoint only accepts app ids whose registered website domain matches the deployment host — set this in `.env.local` when deploying to a new domain. |
+
+
 ## 🧪 Data Pipeline
 
 The pesticide catalogue is generated from raw CSV registers in [`data_raw/`](data_raw):

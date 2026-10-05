@@ -38,6 +38,17 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   useFocusTrap(overlayRef, !!product);
   const { language, t, transCrop, transCat, transRisk, transPest, transTox, transDose, transNote, formatNum } = useLanguage();
 
+  // Mini quick calculator state inside modal.
+  // ⚠ Rules of Hooks: every hook MUST be called before the
+  // `if (!product) return null` early return below. These useState calls
+  // previously lived AFTER it — only safe while App.tsx happened to mount
+  // this component conditionally; rendering it always-mounted (e.g. inside
+  // <AnimatePresence> for exit animations) would crash with
+  // "Rendered more hooks than during the previous render".
+  const [areaVal, setAreaVal] = useState<number>(1);
+  const [areaUnit, setAreaUnit] = useState<'bigha' | 'acre' | 'hectare'>('bigha');
+  const [tankSize, setTankSize] = useState<number>(16);
+
   if (!product) return null;
 
   // MoA info lookup — prefer Bangla metadata in bn mode
@@ -48,11 +59,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   const rotationDisplay = language === 'bn'
     ? (lookupNoteBn(product.rotationNotes || '') || moaInfo?.rotationStrategyBn || 'প্রতিরোধ রোধে পরপর ২ বারের বেশি একই গ্রুপের ওষুধ প্রয়োগ করবেন না। ভিন্ন MoA গ্রুপের ওষুধ দিয়ে ঘূর্ণন করুন।')
     : (product.rotationNotes || 'Do not make more than 2 consecutive applications. Rotate with a chemical from an alternate MoA family to prevent target-site resistance.');
-
-  // Mini quick calculator state inside modal
-  const [areaVal, setAreaVal] = useState<number>(1);
-  const [areaUnit, setAreaUnit] = useState<'bigha' | 'acre' | 'hectare'>('bigha');
-  const [tankSize, setTankSize] = useState<number>(16);
 
   const quickDosage = calculateDosage(product, {
     areaValue: areaVal,
