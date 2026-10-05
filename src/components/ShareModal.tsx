@@ -163,7 +163,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     icon: React.ComponentType<{ className?: string }>;
   }> = {
     home: {
-      titleEn: 'PesticideNext — পরের স্প্রে, আর ভুল হবে না।',
+      titleEn: "PesticideNext — The next spray won't be a mistake.",
       titleBn: 'পেস্টিসাইডনেক্সট — পরের স্প্রে, আর ভুল হবে না।',
       descEn: '5,052+ DAE pesticides, MoA rotation planner, tank calculator, WHO safety protocols & offline field manual.',
       descBn: 'বাংলাদেশে মাঠ ফসলের জন্য ডিএই নিবন্ধিত ৫,০৫২+ বালাইনাশক ডাটাবেস, স্প্রেয়ার ট্যাংক ক্যালকুলেটর, প্রতিরোধ রোধে MoA রোটেশন ও পকেট বুক।',
@@ -376,7 +376,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
             <div className="flex items-center justify-between text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
               <span>{language === 'bn' ? 'সোশ্যাল মিডিয়া প্রিভিউ কেমন দেখাবে:' : 'Social Link Preview Card:'}</span>
               <span className="text-emerald-700 font-bold bg-emerald-100/60 px-2 py-0.5 rounded">
-                সোশ্যাল প্রিভিউ কার্ড (1200×630)
+                {language === 'bn' ? 'সোশ্যাল প্রিভিউ কার্ড (1200×630)' : 'Social Preview Card (1200×630)'}
               </span>
             </div>
             <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-2xs space-y-0">
