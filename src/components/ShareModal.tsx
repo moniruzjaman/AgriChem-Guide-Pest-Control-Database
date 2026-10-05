@@ -14,7 +14,8 @@ import {
   ShieldCheck,
   BookOpen,
   QrCode,
-  NotebookPen
+  NotebookPen,
+  BrainCircuit
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import QRCode from 'qrcode';
@@ -217,6 +218,11 @@ export const ShareModal: React.FC<ShareModalProps> = ({
       descBn: 'মৌসুমি বালাই আক্রমণ সতর্কতা ও সরকারি নিয়ন্ত্রক নোটিশ।',
       tag: '#PestAlerts #AgricultureNotices',
       icon: Sparkles
+    },
+    intelligence: {
+      titleEn: 'PesticideNext — Pesticide Intelligence Engine', titleBn: 'পেস্টিসাইডনেক্সট — বালাইনাশক ইন্টেলিজেন্স ইঞ্জিন',
+      descEn: 'Weather-aware spray windows, disease pressure, registered-product ranking and MoA rotation guard.', descBn: 'আবহাওয়া, স্প্রে-উইন্ডো, রোগ অনুকূলতা, নিবন্ধিত পণ্য ও MoA ঘূর্ণন গার্ড।',
+      tag: '#PesticideIntelligence #SmartSpray #MoARotation', icon: BrainCircuit
     },
     myfield: {
       titleEn: 'PesticideNext — My Field & Spray History',
