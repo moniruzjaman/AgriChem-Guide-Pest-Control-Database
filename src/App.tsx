@@ -10,6 +10,7 @@ import { OfflineIndicator } from './components/OfflineIndicator';
 import { useLanguage } from './context/LanguageContext';
 import { useReadAloud } from './hooks/useReadAloud';
 import { useOnlineStatus } from './hooks/useOnlineStatus';
+import { PesticideIntelligenceView } from './components/PesticideIntelligenceView';
 import { detectSharedVisit, flushPendingDownloads } from './utils/analytics';
 import {
   Leaf,
@@ -154,7 +155,7 @@ export default function App() {
   // We also push the hash back into the URL when the user switches tabs
   // in-app, so the browser back/forward buttons and copy-url keep working.
   // ---------------------------------------------------------------------------
-  const VALID_TABS: AppTab[] = ['home', 'database', 'calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'myfield'];
+  const VALID_TABS: AppTab[] = ['home', 'database', 'calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'myfield', 'intelligence'];
 
   useEffect(() => {
     const tabFromHash = (hash: string): AppTab | null => {
@@ -471,6 +472,8 @@ export default function App() {
             />
           </Suspense>
         )}
+
+        {activeTab === 'intelligence' && (<Suspense fallback={<DatabaseSplash language={language} />}><PesticideIntelligenceView products={products} /></Suspense>)}
 
         {activeTab === 'myfield' && (
           <Suspense fallback={<DatabaseSplash language={language} />}>

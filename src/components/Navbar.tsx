@@ -17,7 +17,8 @@ import {
   Menu,
   Volume2,
   VolumeX,
-  NotebookPen
+  NotebookPen,
+  BrainCircuit
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
@@ -350,6 +351,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             <NotebookPen className="w-4 h-4" />
             <span>{language === 'bn' ? 'আমার জমি' : 'My Field'}</span>
           </button>
+
+          <button id="tab-btn-intelligence" onClick={() => setActiveTab('intelligence')} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer ${activeTab === 'intelligence' ? 'bg-[#006a4e] text-white shadow-xs font-bold' : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'}`}><BrainCircuit className="w-4 h-4" /><span>{language === 'bn' ? 'ইন্টেলিজেন্স' : 'Intelligence'}</span></button>
 
           {/* Quick Tab-Bar Compass Drawer Trigger */}
           <button

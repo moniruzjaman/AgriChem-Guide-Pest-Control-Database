@@ -10,7 +10,8 @@ const THEME_COLOR: Record<AppTab, string> = {
   safety: '#006a4e',
   guidebook: '#006a4e',
   alerts: '#f42a41',
-  myfield: '#e3b341'
+  myfield: '#e3b341',
+  intelligence: '#006a4e'
 };
 
 const TAB_META: Record<AppTab, {
@@ -86,6 +87,10 @@ const TAB_META: Record<AppTab, {
       title: 'পেস্টিসাইডনেক্সট — নিয়ন্ত্রক সতর্কতা',
       description: 'মৌসুমি বালাই সতর্কতা, নিষিদ্ধ তালিকা ও ফসল তোলার বিরতি।'
     }
+  },
+  intelligence: {
+    en: { title: 'PesticideNext — Pesticide Intelligence Engine', description: 'Weather-aware pesticide ranking, spray windows, disease pressure and MoA rotation guard using the registered product catalogue.' },
+    bn: { title: 'পেস্টিসাইডনেক্সট — বালাইনাশক ইন্টেলিজেন্স ইঞ্জিন', description: 'আবহাওয়া, স্প্রে-উইন্ডো, রোগ অনুকূলতা ও MoA ঘূর্ণন একসাথে বিশ্লেষণ করুন।' }
   },
   myfield: {
     en: {
