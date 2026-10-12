@@ -56,6 +56,36 @@ export interface ChemicalProduct {
   recommendations?: string[];
   /** Source dataset tag — used for diagnostics and dedupe priority. */
   source?: 'curated' | 'dae-register';
+
+  // ---------------------------------------------------------------------------
+  //  Policy / HHP / MoA enrichment (from policyEnrichmentData.ts sidecar)
+  //
+  //  These fields are populated from the AgriChem/MoA PTAC master database
+  //  (5,485 rows × 31 cols) keyed by Registration No. Products whose reg no
+  //  is not in the sidecar will have all of these as `undefined`.
+  // ---------------------------------------------------------------------------
+  /** IRAC / FRAC / HRAC scheme tag. */
+  scheme?: string;
+  /** MoA group number within the scheme (e.g. "1B", "11"). */
+  groupNo?: string;
+  /** Human-readable MoA description. */
+  moaDescription?: string;
+  /** WHO/FAO Highly Hazardous Pesticide status (e.g. "YES — HHP", "No"). */
+  hhpStatus?: string;
+  /** Active ingredient(s) that triggered HHP classification, if any. */
+  hazardousActivesMatched?: string;
+  /** EU / global regulatory status (banned, restricted, approved, etc.). */
+  euGlobalRegulatoryStatus?: string;
+  /** Bangladesh-specific policy action (phase-out, restrict, monitor, etc.). */
+  bangladeshPolicyAction?: string;
+  /** Policy risk tier: GREEN | AMBER | RED. */
+  policyRiskTier?: 'GREEN' | 'AMBER' | 'RED' | string;
+  /** Short formulation code from the enriched database (EC, WP, SC, etc.). */
+  formulationCode?: string;
+  /** Physicality of the formulation (liquid, solid, etc.). */
+  formulationTypePhysicality?: string;
+  /** Co-formulant / inert concern flags. */
+  coFormulantInertConcern?: string;
 }
 
 export interface MoAClassification {
@@ -118,4 +148,4 @@ export interface SprayRotationStep {
   conflictReason?: string;
 }
 
-export type AppTab = 'home' | 'database' | 'calculator' | 'rotation' | 'safety' | 'guidebook' | 'alerts' | 'myfield' | 'intelligence';
+export type AppTab = 'home' | 'database' | 'calculator' | 'rotation' | 'safety' | 'guidebook' | 'alerts' | 'myfield' | 'intelligence' | 'specialist';

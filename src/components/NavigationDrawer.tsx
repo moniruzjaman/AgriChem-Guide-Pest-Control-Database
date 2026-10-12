@@ -198,6 +198,8 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                 
                 <div className="grid grid-cols-1 gap-2">\n                <button onClick={() => handleTabClick('intelligence')} className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${activeTab === 'intelligence' ? 'bg-emerald-50 text-emerald-900 border-emerald-200' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}`}><div className="flex items-center gap-3"><BrainCircuit className={`w-4 h-4 ${activeTab === 'intelligence' ? 'text-emerald-700' : 'text-slate-500'}`} /><span>{language === 'bn' ? 'স্প্রে ইন্টেলিজেন্স' : 'Spray Intelligence'}</span></div>{getStepStatus('intelligence')}</button>
 
+                <button onClick={() => handleTabClick('specialist')} className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${activeTab === 'specialist' ? 'bg-emerald-50 text-emerald-900 border-emerald-200' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}`}><div className="flex items-center gap-3"><ShieldCheck className={`w-4 h-4 ${activeTab === 'specialist' ? 'text-emerald-700' : 'text-slate-500'}`} /><span>{language === 'bn' ? 'স্পেশালিস্ট সার্চ' : 'Specialist Search'}</span></div>{getStepStatus('specialist')}</button>
+
 
                   <button
                     onClick={() => handleTabClick('home')}

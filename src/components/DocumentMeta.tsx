@@ -11,7 +11,8 @@ const THEME_COLOR: Record<AppTab, string> = {
   guidebook: '#006a4e',
   alerts: '#f42a41',
   myfield: '#e3b341',
-  intelligence: '#006a4e'
+  intelligence: '#006a4e',
+  specialist: '#006a4e'
 };
 
 const TAB_META: Record<AppTab, {
@@ -100,6 +101,16 @@ const TAB_META: Record<AppTab, {
     bn: {
       title: 'পেস্টিসাইডনেক্সট — আমার জমি ও স্প্রে ইতিহাস',
       description: 'প্রতিটি স্প্রে লগ করুন। অ্যাপ মনে রাখবে কোন গ্রুপ ব্যবহার হয়েছে — যাতে পরবর্তী স্প্রে ঘূর্ণন করা যায় ও প্রতিরোধ গড়ে না ওঠে।'
+    }
+  },
+  specialist: {
+    en: {
+      title: 'PesticideNext — Specialist Search (Policy / HHP / MoA)',
+      description: 'Specialist query tool: filter the 5,485-row enriched pesticide database by Policy Risk Tier, WHO/FAO HHP status, EU regulatory status, Bangladesh policy action, MoA scheme, and formulation code.'
+    },
+    bn: {
+      title: 'পেস্টিসাইডনেক্সট — স্পেশালিস্ট সার্চ (নীতি / HHP / MoA)',
+      description: 'নীতি ঝুঁকি স্তর, WHO/FAO HHP স্ট্যাটাস, EU নিয়ন্ত্রক স্ট্যাটাস, বাংলাদেশ নীতি কর্ম, MoA স্কিম এবং ফর্মুলেশন কোড অনুযায়ী ৫,৪৮৫-সারির সমৃদ্ধ ডাটাবেস ফিল্টার করুন।'
     }
   }
 };

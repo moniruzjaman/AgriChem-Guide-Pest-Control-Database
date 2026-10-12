@@ -148,9 +148,11 @@ export default defineConfig(() => {
           clientsClaim: true,
           cleanupOutdatedCaches: true,
           // The heavy product data now lives in dedicated async chunks
-          // (code-split via loadDatabase.ts), so no single precache entry
-          // exceeds the default-ish range. Keep a 4 MiB ceiling for safety.
-          maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+          // (code-split via loadDatabase.ts). The policy enrichment sidecar
+          // adds ~3 MB of inline data to the allPesticidesData chunk, so we
+          // raise the precache ceiling to 8 MiB to keep the SW precache
+          // manifest complete for offline field use.
+          maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
           runtimeCaching: [
             {
               urlPattern: /^\/api\/.*/i,

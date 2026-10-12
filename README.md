@@ -22,6 +22,7 @@ A bilingual (Bangla / English) Progressive Web App that helps farmers, dealers, 
 - 🌐 **Bangla / English i18n** — full language switching via context; Bengali numerals, crop/pest/dosage translations, and a Hind Siliguri + IBM Plex Mono typography stack ([`src/context/LanguageContext.tsx`](src/context/LanguageContext.tsx), [`src/utils/i18n.ts`](src/utils/i18n.ts)).
 - 👥 **Live Visitor Counter** — total / unique / active-user tracking backed by the Express server.
 - 🔗 **Social Sharing with correct OG previews** — the server rewrites an `OG_IMAGE_ORIGIN` placeholder per request so WhatsApp / Facebook / Telegram / X / LinkedIn crawlers always see absolute image URLs matching the deployed domain.
+- 🛡️ **Specialist Search** — regulator/agronomist query tool over the 5,485-row enriched AgriChem/MoA PTAC master database. Filter by Policy Risk Tier (GREEN/AMBER/RED), WHO/FAO HHP status, EU regulatory status, Bangladesh policy action, MoA scheme, formulation code, and full-text search across common name / trade name / registration no / active ingredient. One-click CSV export of the filtered result set ([`SpecialistSearchView.tsx`](src/components/SpecialistSearchView.tsx), [`policyEnrichmentData.ts`](src/data/policyEnrichmentData.ts)).
 
 ## 🎨 Design language
 
@@ -51,10 +52,13 @@ The app uses a "pain-point editorial" design language across all tabs:
 ├── index.html              # App shell with SEO/OG/Twitter meta tags (canonical = pesticide.krishiai.live)
 ├── vite.config.ts          # Vite + PWA config (cacheId: 'pn-v2', skipWaiting, cleanupOutdatedCaches)
 ├── metadata.json           # AI Studio app metadata (name = tagline)
-├── data_raw/               # Source CSVs (DAE pesticide registers, product lists)
+├── data_raw/               # Source CSVs (DAE pesticide registers, product lists, policy enrichment sidecar)
+│   ├── all_pesticides.csv                       # 5,452-row DAE register (13 cols)
+│   └── pesticide_policy_enrichment.csv          # 5,485-row policy/HHP/MoA sidecar (16 cols)
 ├── scripts/
-│   ├── regenerate_all_pesticides.py  # data_raw/all_pesticides.csv → src/data/all_pesticides.ts
-│   └── audit_data.ts                 # Verifies merged catalogue counts (run with bun)
+│   ├── regenerate_all_pesticides.py             # data_raw/all_pesticides.csv → src/data/all_pesticides.ts
+│   ├── generate_policy_enrichment.py            # data_raw/pesticide_policy_enrichment.csv → src/data/policyEnrichmentData.ts
+│   └── audit_data.ts                            # Verifies merged catalogue counts (run with bun)
 ├── public/                 # Single OG image (og-image.png — 1200×630 PNG), favicon set, PWA manifest, partner logos
 │   └── icons/              # PWA icons (192/512), apple-touch-default — only files referenced by vite.config.ts
 └── src/
@@ -130,6 +134,7 @@ The pesticide catalogue is generated from raw CSV registers in [`data_raw/`](dat
 
 ```bash
 python3 scripts/regenerate_all_pesticides.py   # regenerates src/data/all_pesticides.ts
+python3 scripts/generate_policy_enrichment.py  # regenerates src/data/policyEnrichmentData.ts (5,485-row policy/HHP sidecar)
 bun run scripts/audit_data.ts                  # audits merged catalogue counts by type/source
 ```
 

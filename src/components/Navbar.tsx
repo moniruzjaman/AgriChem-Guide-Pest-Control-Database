@@ -354,6 +354,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button id="tab-btn-intelligence" onClick={() => setActiveTab('intelligence')} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer ${activeTab === 'intelligence' ? 'bg-[#006a4e] text-white shadow-xs font-bold' : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'}`}><BrainCircuit className="w-4 h-4" /><span>{language === 'bn' ? 'ইন্টেলিজেন্স' : 'Intelligence'}</span></button>
 
+          <button id="tab-btn-specialist" onClick={() => setActiveTab('specialist')} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer ${activeTab === 'specialist' ? 'bg-[#006a4e] text-white shadow-xs font-bold' : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'}`}><ShieldCheck className="w-4 h-4" /><span>{language === 'bn' ? 'স্পেশালিস্ট সার্চ' : 'Specialist'}</span></button>
+
           {/* Quick Tab-Bar Compass Drawer Trigger */}
           <button
             onClick={onOpenDrawer}

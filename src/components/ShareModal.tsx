@@ -231,6 +231,14 @@ export const ShareModal: React.FC<ShareModalProps> = ({
       descBn: 'প্রতিটি স্প্রে লগ করুন। অ্যাপ মনে রাখবে কোন গ্রুপ ব্যবহার হয়েছে — যাতে পরবর্তী স্প্রে ঘূর্ণন করা যায়।',
       tag: '#SprayLog #ResistanceManagement',
       icon: NotebookPen
+    },
+    specialist: {
+      titleEn: 'PesticideNext — Specialist Search (Policy / HHP / MoA)',
+      titleBn: 'পেস্টিসাইডনেক্সট — স্পেশালিস্ট সার্চ (নীতি / HHP / MoA)',
+      descEn: 'Specialist query tool over the 5,485-row enriched database — filter by Policy Risk Tier, WHO/FAO HHP, EU regulatory status, Bangladesh policy action, MoA scheme, and formulation code.',
+      descBn: 'নীতি ঝুঁকি স্তর, WHO/FAO HHP স্ট্যাটাস, EU নিয়ন্ত্রক স্ট্যাটাস, বাংলাদেশ নীতি কর্ম, MoA স্কিম এবং ফর্মুলেশন কোড অনুযায়ী ৫,৪৮৫-সারির সমৃদ্ধ ডাটাবেস ফিল্টার করুন।',
+      tag: '#SpecialistSearch #HHP #PolicyRiskTier',
+      icon: ShieldCheck
     }
   };
 

@@ -19,6 +19,7 @@
 import { ChemicalProduct, ChemicalType, MoAClassification } from '../types';
 import { pesticides, PesticideType } from './all_pesticides';
 import { MOA_DATABASE } from './moaData';
+import { getPolicyEnrichment } from './policyEnrichmentData';
 
 // ---------------------------------------------------------------------------
 //  MoA lookup helpers
@@ -307,6 +308,32 @@ function toChemicalProduct(
     rotationNotes: moa?.rotationStrategy ?? '',
     recommendations: recommendationLines,
     source: 'dae-register',
+    // --- Policy / HHP / MoA enrichment from sidecar (5,485-row AgriChem/MoA PTAC master) ---
+    ...attachPolicyEnrichment(p.registrationNo),
+  };
+}
+
+/**
+ * Look up the 14-column policy/HHP/MoA enrichment for a given registration
+ * number and project it onto a partial ChemicalProduct shape. Returns an
+ * empty object when the reg no is not in the sidecar (legacy entries that
+ * pre-date the AgriChem/MoA PTAC master database).
+ */
+function attachPolicyEnrichment(registrationNo: string): Partial<ChemicalProduct> {
+  const enr = getPolicyEnrichment(registrationNo);
+  if (!enr) return {};
+  return {
+    scheme: enr.scheme ?? undefined,
+    groupNo: enr.groupNo ?? undefined,
+    moaDescription: enr.moaDescription ?? undefined,
+    hhpStatus: enr.hhpStatus ?? undefined,
+    hazardousActivesMatched: enr.hazardousActivesMatched ?? undefined,
+    euGlobalRegulatoryStatus: enr.euGlobalRegulatoryStatus ?? undefined,
+    bangladeshPolicyAction: enr.bangladeshPolicyAction ?? undefined,
+    policyRiskTier: enr.policyRiskTier ?? undefined,
+    formulationCode: enr.formulationCode ?? undefined,
+    formulationTypePhysicality: enr.formulationTypePhysicality ?? undefined,
+    coFormulantInertConcern: enr.coFormulantInertConcern ?? undefined,
   };
 }
 
