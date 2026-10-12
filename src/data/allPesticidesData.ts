@@ -260,6 +260,18 @@ function toChemicalProduct(
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
 
+  // Parse the primary active ingredient(s) out of the CSV ``Common Name``
+  // field. Compound products are separated by ``+`` (e.g.
+  // "Ethion (5%) + Thiamethoxam (20%)"). Concentration annotations in
+  // parentheses are stripped so the resulting list is plain AI names, which
+  // the scan matcher uses for active-ingredient lookups.
+  const activeIngredients: string[] = cleanLabels(
+    p.commonName
+      .split(/\s*\+\s*/)
+      .map((part) => part.replace(/\s*\([^)]*\)/, '').trim())
+      .filter((part) => part.length > 0)
+  );
+
   // Stable ID: <type-prefix>-<registrationNo>-<seq>
   // The registration number is already unique per product in the DAE
   // register, but we append a sequence digit to defend against the rare
@@ -273,6 +285,7 @@ function toChemicalProduct(
     id,
     type: PESTICIDE_TYPE_TO_CHEMICAL[p.pesticideType],
     commonName: p.commonName,
+    activeIngredients,
     tradeName: p.brandName,
     registrationNo: p.registrationNo,
     registrationHolder: p.registrationHolder,

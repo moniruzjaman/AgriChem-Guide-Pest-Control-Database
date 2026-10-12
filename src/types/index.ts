@@ -13,6 +13,18 @@ export interface ChemicalProduct {
   id: string;
   type: ChemicalType;
   commonName: string;
+  /**
+   * Parsed active ingredient(s) derived from the CSV ``Common Name`` field
+   * (e.g. ``"Ethion (5%) + Thiamethoxam (20%)"`` -> ``["Ethion", "Thiamethoxam"]``).
+   * Used as the primary scan/match target for active-ingredient lookups.
+   */
+  activeIngredients?: string[];
+  /**
+   * Alternate spellings / transliterations of the brand or active ingredient
+   * (e.g. Bengali-script variants) used to bridge scanned Bangla text onto the
+   * English catalogue. Populated where the source data provides them.
+   */
+  aiAliases?: string[];
   tradeName: string;
   registrationNo: string;
   registrationHolder: string;
