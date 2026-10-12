@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ChemicalProduct } from '../types';
+import { ChemicalProduct } from '../../types';
 import {
   convertIndicDigits,
   detectScript,
@@ -165,7 +165,8 @@ describe('matchScanResult — active ingredient', () => {
   });
 
   it('scores an AI substring query as broad', () => {
-    const m = matchScanResult('metox', fixtures);
+    // "methox" appears inside the AI but is not a leading token.
+    const m = matchScanResult('methox', fixtures);
     const hit = m.find((x) => x.field === 'activeIngredient');
     expect(hit).toBeDefined();
     expect(hit!.confidence).toBe('broad');

@@ -81,35 +81,34 @@ export function convertIndicDigits(text: string): string {
 // ---------------------------------------------------------------------------
 
 const BENGALI_INDEPENDENT: Record<string, string> = {
-  অ: 'o', আ: 'a', ই: 'i', ঈ: 'i', উ: 'u', ঊ: 'u',
-  ঋ: 'ri', এ: 'e', ঐ: 'ai', ও: 'o', ঔ: 'ou',
+  'অ': 'o', 'আ': 'a', 'ই': 'i', 'ঈ': 'i', 'উ': 'u', 'ঊ': 'u',
+  'ঋ': 'ri', 'এ': 'e', 'ঐ': 'ai', 'ও': 'o', 'ঔ': 'ou',
 };
 
 const BENGALI_SIGNS: Record<string, string> = {
-  া: 'a', ি: 'i', ী: 'i', ু: 'u', ূ: 'u',
-  ে: 'e', ৈ: 'ai', ো: 'o', ৌ: 'ou', ৗ: 'o',
+  'া': 'a', 'ি': 'i', 'ী': 'i', 'ু': 'u', 'ূ': 'u',
+  'ে': 'e', 'ৈ': 'ai', 'ো': 'o', 'ৌ': 'ou', 'ৗ': 'o',
 };
-// nishkha (sign without independent form) — handled inline above.
 
 const BENGALI_CONSONANTS: Record<string, string> = {
-  ক: 'k', খ: 'kh', গ: 'g', ঘ: 'gh', ঙ: 'ng',
-  চ: 'c', ছ: 'ch', জ: 'j', ঝ: 'jh', ঞ: 'ny',
-  ট: 't', ঠ: 'th', ড: 'd', ঢ: 'dh', ণ: 'n',
-  ত: 't', থ: 'th', দ: 'd', ধ: 'dh', ন: 'n',
-  প: 'p', ফ: 'ph', ব: 'b', ভ: 'b', ম: 'm',
-  য: 'j', র: 'r', ল: 'l',
-  শ: 'sh', ষ: 'sh', স: 's', হ: 'h',
-  ড়: 'r', ঢ়: 'dh', য়: 'y',
+  'ক': 'k', 'খ': 'kh', 'গ': 'g', 'ঘ': 'gh', 'ঙ': 'ng',
+  'চ': 'c', 'ছ': 'ch', 'জ': 'j', 'ঝ': 'jh', 'ঞ': 'ny',
+  'ট': 't', 'ঠ': 'th', 'ড': 'd', 'ঢ': 'dh', 'ণ': 'n',
+  'ত': 't', 'থ': 'th', 'দ': 'd', 'ধ': 'dh', 'ন': 'n',
+  'প': 'p', 'ফ': 'ph', 'ব': 'b', 'ভ': 'b', 'ম': 'm',
+  'য': 'j', 'র': 'r', 'ল': 'l',
+  'শ': 'sh', 'ষ': 'sh', 'স': 's', 'হ': 'h',
+  'ড়': 'r', 'ঢ়': 'dh', 'য়': 'y',
   // retroflex flap / nukta consonants kept as plain mappings.
-  ড়: 'd', ঢ়: 'dh',
+  'ড়': 'd', 'ঢ়': 'dh',
 };
 
 const BENGALI_DIACRITICS: Record<string, string> = {
-  ঁ: '',  // candrabindu — dropped
-  ং: 'ng', // anusvara
-  ঃ: 'h', // visarga
-  ‌: '',  // zero-width non-joiner — dropped
-  ‍: '',  // zero-width joiner — dropped
+  'ঁ': '',   // candrabindu — dropped
+  'ং': 'ng', // anusvara
+  'ঃ': 'h',  // visarga
+  '\u200c': '', // zero-width non-joiner — dropped
+  '\u200d': '', // zero-width joiner — dropped
 };
 
 // Virama (hasanta) — suppresses the inherent vowel of a consonant; used to
