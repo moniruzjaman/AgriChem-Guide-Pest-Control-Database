@@ -35,7 +35,7 @@ console.log(JSON.stringify(byType, null, 2));
 // Hard assertions — fail loudly if the merged data regresses.
 //   136 crops = the original 137 minus the malformed `"` artifact row.
 //   5,439 recs = 4,454 DAE rows + 985 curated entries enriched from their DAE twin.
-const expected = { baselineMin: 5500, recsMin: 5200, cropsMin: 136 };
+const expected = { baselineMin: 6100, recsMin: 5200, cropsMin: 136 };
 const problems: string[] = [];
 if (baselineCount < expected.baselineMin)
   problems.push(`baselineCount ${baselineCount} < ${expected.baselineMin}`);
