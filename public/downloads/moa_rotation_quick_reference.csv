@@ -1,0 +1,73 @@
+﻿MoA Group,Mechanism / Target,Resistance Risk,Rotation Partners,Active Ingredients in Database,Count
+BIO,Entomopathogenic fungus — biological control,Low,Chemical rotation,beauveria bassiana; metarhizium anisopliae; verticillium lecanii; helicoverpa armigera npv,4
+FRAC 1,MBC — β-tubulin polymerization,High,"FRAC 3, 11, M03",carbendazim; thiophanate-methyl; benomyl,3
+FRAC 11,QoI — cytochrome bc1 Complex III (Strobilurin),High,"FRAC 3, M03, M05, 1",azoxystrobin; pyraclostrobin; picoxystrobin; trifloxystrobin; kresoxim-methyl; fluoxastrobin; fenamidone,7
+FRAC 16.1,MBI-R — melanin biosynthesis (rice blast),Low,"FRAC 3, 11, M03",tricyclazole,1
+FRAC 17,Glucopyranosyl antibiotic — trehalose,Low,"FRAC 3, M03, 11",validamycin; validamicine,2
+FRAC 2,Dicarboximide — OS-1 histidine kinase,Medium,"FRAC 1, 3, M03",iprodione; procymidone,2
+FRAC 22,Microtubule assembly inhibitor,Low,"FRAC 1, 3",oryzatin,1
+FRAC 24,Hexopyranosyl antibiotic — protein synthesis,Low,"FRAC M01, 3, 11",kasugamycin; kasungamycin,2
+FRAC 25,Antibiotic — protein synthesis,Low,"FRAC M01, 3",stretomycin; streptomycin,2
+FRAC 27,Cyanoacetamide-oxime,Medium,"FRAC M03, 4, 11",cymoxanil,1
+FRAC 28,Carbamate — membrane/permeability,Medium,"FRAC M03, 4, 11",propamocarb,1
+FRAC 3,DMI — C14-demethylase (Triazole),Medium,"FRAC 11, M03, M05, 7",difenoconazole; cyproconazole; hexaconazole; propiconazole; tebuconazole; epoxiconazole; epoxiconazol; diniconazole; tetraconazole; flutriafol; triadimefon; triadimenol,12
+FRAC 33,Phosphonate — host defence,Low,"FRAC M03, 3, 4",fosetyl-aluminium; fosetyl-al; phosphorous acid,3
+FRAC 4,Phenylamide — RNA polymerase I,High,"FRAC M03, 3, 11",metalaxyl; benalaxyl; mefenoxam,3
+FRAC 40,CAA — cellulose synthase,Medium,"FRAC M03, 4, 11",dimethomorph; mandipropamid; iprovalicarb,3
+FRAC 43,Benzamide — delocalisation of spectral proteins,Medium,"FRAC 33, M03, 4",fluopicolide,1
+FRAC 5,Amine — Δ14-reductase / Δ8→Δ7-isomerase,Medium,"FRAC 3, 11, M03",tridemorph,1
+FRAC 6,Phospholipid biosynthesis / methyltransferase,Low,"FRAC 3, M03",edifenphos; isoprothiolane,2
+FRAC 7,SDHI — succinate dehydrogenase Complex II,Medium,"FRAC 3, 11, M03",carboxin; boscalid; fluopyram,3
+FRAC M01,Multi-site — inorganic copper,Low,"FRAC 3, 11, M03",copper oxychloride; copper hydroxide; copper; cuprous oxide; copper sulfate,5
+FRAC M02 / IRAC UN,Multi-site — sulphur (fungicide/acaricide),Low,"FRAC 3, 11, M03",sulphur; sulfur,2
+FRAC M03,Multi-site — dithiocarbamate,Low,"FRAC 3, 11, 4",mancozeb; propineb; zineb; thiram; metiram; metiram complex,6
+FRAC M04,Multi-site — phthalimide,Low,"FRAC 3, 11, M03",captan,1
+FRAC M05,Multi-site — chloronitrile,Low,"FRAC 3, 11, M03",chlorothalonil,1
+FRAC P1,Host plant defence inducer,Low,"FRAC 3, 11, M03",chitosan,1
+FRAC U8,Aromatic hydrocarbon — unknown precise target,Low,"FRAC 3, M03, 11",dichloran,1
+FRAC UN,Thiazole — bacterial blight agent,Low,"FRAC 3, M03",bismarthazole; bismerthiazole; thiadiazole copper,3
+HRAC 1,ACCase inhibitor (aryloxyphenoxypropionate),High,"HRAC 2, 9, 15",clodinafop-propargyl; cyhalofop-butyl; fenoxaprop-p-ethyl; quizalofop-p-ethyl; metamifop; fluazifop-p-butyl; clethodim; sethoxydim,8
+HRAC 14,PPO inhibitor (phenylpyrazole),Low,"HRAC 2, 9, 15",carfentrazone ethyl; oxadiazon; oxadiargyl; fomesafen; oxyfluorfen,5
+HRAC 15,VLCFA elongase inhibitor (chloroacetamide),Low,"HRAC 2, 9, 4",pretilachlor; acetochlor; butachlor; alachlor; mefenacet; anilofos,6
+HRAC 2,ALS inhibitor (pyrimidinyl-oxybenzoate),High,"HRAC 9, 15, 4",bispyribac sodium; bispyribac-sodium; bensulfuron methyl; bensulfuron-methyl; pyrazosulfuron ethyl; pyrazosulfuron-ethyl; ethoxysulfuron; nicosulfuron; halosulfuron-methyl; metsulfuron-methyl; orthosulfamuron; triasulfuron; penoxsulam; azimsulfuron; chlorimuron-ethyl; sulfosulfuron,16
+HRAC 22,PSI electron divertor (bipyridylium),Low,"HRAC 9, 2, 4",paraquat; paraquat dichloride; diquat,3
+HRAC 3,Microtubule assembly inhibitor (dinitroaniline),Low,"HRAC 2, 9, 14",pendimethalin; trifluralin,2
+HRAC 4,Synthetic auxin (phenoxy-carboxylate),Low,"HRAC 2, 9, 14, 15",24d; 24d amine; 24d amine salt; mcpa; mcpa-500; quinclorac,6
+HRAC 5,PSII inhibitor (triazine / C1),Medium,"HRAC 2, 9, 15",atrazine; metribuzin,2
+HRAC 7,PSII inhibitor (anilide / C2),Low,"HRAC 2, 15, 9",propanil; isoproturon; diuron,3
+HRAC 9,EPSPS inhibitor (glycine),Medium,"HRAC 2, 4, 14, 15",glyphosate,1
+IPM,Pheromone — mating disruption / trapping (Bactrocera),,—,cuelure; spodolure,2
+IRAC 10A,Mite growth inhibitor (Thiazolidinone),Medium,"IRAC 12C, 21A, 23",hexythiazox; clofentezine,2
+IRAC 10B,Mite growth inhibitor (Oxazoline),Medium,"IRAC 10A, 12C, 21A",etoxazole,1
+IRAC 11A,Microbial — Bt crystal toxin,Low,"IRAC 1B, 3A, 4A, 5, 28",bacillus thuringiensis; bacillus thuringiensis kurstaki,2
+IRAC 12A,Mitochondrial ATP synthase inhibitor (Thiourea),Medium,"IRAC 1B, 3A, 4A",diafenthiuron; cyhexatin; azocyclotin,3
+IRAC 12B,Mitochondrial ATP synthase inhibitor (Organotin),Medium,"IRAC 10A, 21A, 23",fenbutatin oxide,1
+IRAC 12C,Mitochondrial ATP synthase inhibitor (Sulfite),Medium,"IRAC 10A, 21A, 23",propargite; propergite,2
+IRAC 13,Uncoupler of oxidative phosphorylation (Pyrrole),Medium,"IRAC 1B, 3A, 4A, 6",chlorfenapyr,1
+IRAC 14,nAChR channel blocker (Nereistoxin analogue),Medium,"IRAC 1B, 3A, 4A",cartap; cartap hydrochloride; thiocyclam; bensultap; monomehypo,5
+IRAC 15,Chitin biosynthesis inhibitor (Benzoylurea),Low,"IRAC 1B, 3A, 4A, 5",lufenuron; lofenoron; hexaflumuron; flufenoxuron,4
+IRAC 16,Chitin biosynthesis inhibitor (Thiadiazine),Low,"IRAC 1A, 3A, 4A",buprofezin,1
+IRAC 18,Ecdysone receptor agonist,Low,"IRAC 1B, 3A, 4A, 28",tebufenozide,1
+IRAC 19,Octopamine receptor agonist (Amidine),Medium,"IRAC 1B, 3A, 10A",amitraz,1
+IRAC 1A,AChE inhibitor (Carbamate),High,"IRAC 3A, 4A, 5, 28",carbaryl; isoprocarb; bpmc; fenobucarb; methomyl; thiodicarb; carbofuran; carbosulfan; bendiocarb; propoxur; osfencarb,11
+IRAC 1B,AChE inhibitor (Organophosphate),High,"IRAC 3A, 4A, 5, 28",chlorpyrifos; dimethoate; malathion; profenofos; triazophos; quinalphos; diazinon; fenitrothion; fenthion; phenthoate; pirimiphos methyl; pirimiphos-methyl; ethion; cadusafos; acephate; dichlorvos; temephos; phoxim,18
+IRAC 20,Mitochondrial Complex III inhibitor (Hydrazonone),Medium,"IRAC 1B, 3A, 4A",hydramethylnon,1
+IRAC 21A,METI acaricide — Complex I inhibitor (Quinazoline),Medium,"IRAC 10A, 12C, 23",fenazaquin; fenpyroximate; pyridaben; tebufenpyrad,4
+IRAC 22A,Na⁺ channel blocker (Oxadiazine),Medium,"IRAC 1B, 3A, 4A, 28",indoxacarb,1
+IRAC 23,Acetyl-CoA carboxylase inhibitor (Tetronic acid),Medium,"IRAC 10A, 12C, 21A",spiromesifen; spirotetramat,2
+IRAC 24A,Phosphine — Complex IV inhibitor (Fumigant),,Alternate fumigant,aluminium phosphide; aluminum phosphide; magnesium phosphide,3
+IRAC 28,Ryanodine receptor modulator (Diamide),Medium,"IRAC 1B, 3A, 4A, 5, 6",chlorantraniliprole; chloraniliprole; flubendiamide; cyantraniliprole,4
+IRAC 2A,GABA-gated Cl⁻ channel blocker (Cyclodiene),High,"IRAC 3A, 4A, 5",endosulfan,1
+IRAC 2B,GABA-gated Cl⁻ channel blocker (Phenylpyrazole),High,"IRAC 3A, 4A, 28",fipronil,1
+IRAC 3A,Na⁺ channel modulator (Pyrethroid),High,"IRAC 1B, 4A, 5, 28",cypermethrin; beta cypermethrin; alpha cypermethrin; alphacypermethrin; zeta cypermethrin; deltamethrin; lambda cyhalothrin; lambda-cyhalothrin; lamda cyhalothrin; gamma cyhalothrin; fenvalerate; esfenvalerate; bifenthrin; fenpropathrin; permethrin; cyfluthrin; beta cyfluthrin; allethrin; d-allethrin; s-bio-allethrin; bioallethrin; d-trans allethrin; tetramethrin; d-tetramethrin; prallethrin; transfluthrin; dimefluthrin; cyphenothrin; esbiothrin; resmethrin; d-phenothrin,31
+IRAC 4A,nAChR competitive modulator (Neonicotinoid),High,"IRAC 1B, 3A, 5, 28",imidacloprid; acetamiprid; thiamethoxam; clothianidin; dinotefuran; thiacloprid; nitenpyram,7
+IRAC 5,nAChR allosteric modulator (Spinosyn),Medium,"IRAC 1B, 3A, 4A, 28",spinosad; spinetoram,2
+IRAC 6,GluCl allosteric modulator (Avermectin),High,"IRAC 1B, 3A, 4A, 28",abamectin; emamectin benzoate; emamectin; milbemectin,4
+IRAC 7A,Juvenile hormone mimetic,Low,"IRAC 1B, 3A, 4A",methoprene; hydroprene,2
+IRAC 7B,Juvenile hormone mimetic,Low,"IRAC 1B, 3A, 4A",fenoxycarb,1
+IRAC 7C,Juvenile hormone mimetic,Low,"IRAC 1B, 3A, 4A",pyriproxyfen,1
+IRAC 8A,Alkyl halide — multi-site fumigant,,Alternate fumigant,methyl bromide,1
+IRAC 9B,Chordotonal organ TRPV modulator,Medium,"IRAC 1B, 3A, 4A",pymetrozine; pyrifluquinazon,2
+IRAC UN,Acaricide (Benzilate ester),Medium,"IRAC 10A, 12C, 21A",bromopropylate; azadirachtin; matrine,3
+Rodenticide,2nd-gen anticoagulant — VKOR inhibitor,,Alternate bait type,bromadiolone; flocoumafen; brodifacoum; zinc phosphide; warfarin,5
+SYN,Piperonyl butoxide — P450 synergist,,—,pbo; mgk264; pynamine,3
