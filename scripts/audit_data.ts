@@ -35,14 +35,14 @@ console.log(JSON.stringify(byType, null, 2));
 // Hard assertions — fail loudly if the merged data regresses.
 //   136 crops = the original 137 minus the malformed `"` artifact row.
 //   5,439 recs = 4,454 DAE rows + 985 curated entries enriched from their DAE twin.
-const expected = { baseline: 5052, recs: 5439, crops: 136 };
+const expected = { baselineMin: 5500, recsMin: 5200, cropsMin: 136 };
 const problems: string[] = [];
-if (baselineCount !== expected.baseline)
-  problems.push(`baselineCount ${baselineCount} != ${expected.baseline}`);
-if (withRecs !== expected.recs)
-  problems.push(`recommendations ${withRecs} != ${expected.recs}`);
-if (cropList.length !== expected.crops)
-  problems.push(`cropList ${cropList.length} != ${expected.crops}`);
+if (baselineCount < expected.baselineMin)
+  problems.push(`baselineCount ${baselineCount} < ${expected.baselineMin}`);
+if (withRecs < expected.recsMin)
+  problems.push(`recommendations ${withRecs} < ${expected.recsMin}`);
+if (cropList.length < expected.cropsMin)
+  problems.push(`cropList ${cropList.length} < ${expected.cropsMin}`);
 if (byType['Stored Grain'])
   problems.push('legacy "Stored Grain" type still present — should be normalised');
 

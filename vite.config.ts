@@ -66,12 +66,9 @@ function aistudioMediaPlugin(): Plugin {
 // LINT.ThenChange(//depot/google3/java/com/google/alkali/boq/makersuite/applet_dev_service/templates/initializers/react_theme/vite.config.ts:aistudio_media_plugin)
 
 export default defineConfig(() => {
-  // GitHub Pages with a custom CNAME (pesticide.krishiai.live) serves at the
-  // domain root, so `base` should be `/`. If the CNAME is ever removed, the
-  // app is served at https://<owner>.github.io/<repo>/ — in that case set
-  // `BASE_PATH=/<repo>/` in the CI env (or .env) and every asset path, the
-  // PWA manifest start_url/scope, and the SW registration will follow.
-  // Default: '/' (correct for the custom-domain deploy).
+  // pesticide.krishiai.live is served by Vercel at the domain root, so
+  // `base` is `/`. GitHub Pages remains a github.io fallback — set
+  // `BASE_PATH=/<repo>/` in CI if that path deploy is needed.
   const BASE_PATH = process.env.BASE_PATH || '/';
   // Vite requires `base` to be an absolute path that starts and ends with '/'.
   const base = BASE_PATH.startsWith('/') && BASE_PATH.endsWith('/')
@@ -101,9 +98,7 @@ export default defineConfig(() => {
           // Self-hosted fonts CSS + woff2 files (replaces Google Fonts CDN).
           'fonts/fonts.css',
           'fonts/*.woff2',
-          // Custom-domain record so GitHub Pages keeps pesticide.krishiai.live
-          // even if the Settings → Pages → Custom domain UI is ever reset.
-          'CNAME',
+          // pesticide.krishiai.live is served by Vercel, not GitHub Pages.
         ],
         // Single source of truth for the PWA manifest (served at
         // /manifest.webmanifest and linked automatically by vite-plugin-pwa).
@@ -131,19 +126,19 @@ export default defineConfig(() => {
         },
         workbox: {
           // Cache id prefixes every Workbox cache name. Bumping it from the
-          // default `workbox-precache-v2` to `pn-v2-precache-v2` forces
+          // default `workbox-precache-v2` to `pn-v3-precache-v2` forces
           // every returning user to download a fresh precache — the old
           // `workbox-precache-v2` cache becomes orphaned and is purged by
           // the cleanup hook in src/main.tsx (deleteOldCachesIfAny).
           // Bump this string on every breaking release so users never get
           // stuck on a stale cached bundle (old OG image, old tagline,
           // pre-rename branding, etc.).
-          cacheId: 'pn-v2',
+          cacheId: 'pn-v3',
           globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2,json,webmanifest}'],
           // Take over from any previous service worker IMMEDIATELY and purge
           // old precaches. Without this, returning visitors keep getting the
           // stale cached bundle (e.g. the old 1,256-product dataset) instead
-          // of the merged 5,052-product catalogue.
+          // of a stale cached catalogue.
           skipWaiting: true,
           clientsClaim: true,
           cleanupOutdatedCaches: true,
@@ -201,6 +196,7 @@ export default defineConfig(() => {
       hmr: false,
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      allowedHosts: ['.monkeycode-ai.live'],
     },
   };
 });

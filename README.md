@@ -5,13 +5,13 @@
 
 A bilingual (Bangla / English) Progressive Web App that helps farmers, dealers, and field officers in Bangladesh choose the right pesticide, dose it correctly, and rotate modes of action to prevent resistance.
 
-**🔗 Live:** [pesticide.krishiai.live](https://pesticide.krishiai.live/) · **Preview fallback:** [agrichem-guide.vercel.app](https://agrichem-guide.vercel.app/) (Vercel preview only — canonical OG / Twitter URLs always point to `pesticide.krishiai.live`)
+**Live:** [pesticide.krishiai.live](https://pesticide.krishiai.live/) (Vercel) · **Preview:** [agrichem-guide.vercel.app](https://agrichem-guide.vercel.app/)
 
 ---
 
 ## ✨ Key Features
 
-- 🗂️ **Pesticide Database** — 5,052+ DAE-registered products (insecticides, fungicides, herbicides, miticides, bio-pesticides, rodenticides, stored-grain protectants). Grouped by category section headers (color-coded by IRAC red / FRAC golden / HRAC green) with live counts of ingredients, brands, and MoA groups per category ([`src/components/DatabaseView.tsx`](src/components/DatabaseView.tsx)).
+- **Pesticide Database** — latest DAE-registered products (insecticides, fungicides, herbicides, miticides, bio-pesticides, rodenticides, stored-grain protectants), merged with the 5,485-row AgriChem/MoA PTAC master. Grouped by category section headers (color-coded by IRAC red / FRAC golden / HRAC green) with live counts of ingredients, brands, and MoA groups per category (`src/components/DatabaseView.tsx`).
 - 🧮 **Knapsack Sprayer Tank Calculator** — computes the correct amount of product and water per tank from label doses (g/ha, g/L, ml/L etc.) ([`src/utils/calculator.ts`](src/utils/calculator.ts), [`DosageCalculatorModal.tsx`](src/components/DosageCalculatorModal.tsx)).
 - 🔄 **MoA Rotation Planner** — IRAC / FRAC / HRAC mode-of-action classification with a multi-step rotation sequence builder that flags back-to-back same-group applications as conflicts ([`src/data/moaData.ts`](src/data/moaData.ts), [`RotationPlanner.tsx`](src/components/RotationPlanner.tsx), [`NextSprayGuide.tsx`](src/components/NextSprayGuide.tsx)).
 - 🛡️ **Safety & PPE Checklists** — interactive 10-point pre-spray / during-spray / post-spray checklist with progress bar, WHO toxicity band cards (red / yellow / blue / green), and emergency first-aid protocols including specific antidotes ([`SafetyView.tsx`](src/components/SafetyView.tsx)).
@@ -144,9 +144,9 @@ bun run scripts/audit_data.ts                  # audits merged catalogue counts 
 
 | Role | Domain | Notes |
 |------|--------|-------|
-| **Primary (canonical)** | `pesticide.krishiai.live` | All OG / Twitter / canonical URLs in `index.html` point here. Social crawlers see this domain. |
-| **Preview fallback** | `agrichem-guide.vercel.app` | Vercel preview deploy — used for testing only. The server.ts `OG_IMAGE_ORIGIN` placeholder rewriting means even this preview deploy will rewrite `pesticide.krishiai.live` → `agrichem-guide.vercel.app` per request, so crawlers fetching the preview URL see preview URLs. |
-| **GitHub Pages** | `moniruzjaman.github.io/AgriChem-Guide-Pest-Control-Database` | Built by `.github/workflows/deploy.yml`. Same OG rewriting applies. |
+| **Primary (canonical)** | `pesticide.krishiai.live` | Served by Vercel (`vercel.json` alias). Point DNS CNAME to `cname.vercel-dns.com`. |
+| **Preview fallback** | `agrichem-guide.vercel.app` | Vercel preview deploy. |
+| **GitHub Pages** | `moniruzjaman.github.io/AgriChem-Guide-Pest-Control-Database` | Built by `.github/workflows/deploy.yml`. Custom-domain CNAME is stripped so Pages does not claim `pesticide.krishiai.live`. |
 | **Local dev** | `localhost:3000` | `tsx server.ts` — Vite middleware mode. |
 
 ### How OG URL rewriting works
@@ -162,11 +162,11 @@ This means:
 
 Returning users get the new build automatically because:
 1. The service worker is registered with `registerType: 'autoUpdate'` + `skipWaiting: true` + `clientsClaim: true` — the new SW takes over immediately on the next navigation.
-2. The Workbox `cacheId` is `'pn-v2'`. When bumped on a breaking release, the new SW populates a fresh `pn-v2-precache-v2` cache while the old `workbox-precache-v2` cache becomes orphaned.
-3. `src/utils/cleanupCaches.ts` runs on every boot and deletes any cache whose name doesn't start with `pn-v2`, reclaiming disk space.
+2. The Workbox `cacheId` is `'pn-v3'`. When bumped on a breaking release, the new SW populates a fresh `pn-v3-precache-v2` cache while the old cache becomes orphaned.
+3. `src/utils/cleanupCaches.ts` runs on every boot and deletes any cache whose name doesn't start with `pn-v3`, reclaiming disk space.
 4. `cleanupOutdatedCaches: true` in the Workbox config also cleans up caches with the Workbox-recognized outdated format.
 
-To force a fresh cache on the next breaking release, bump the `cacheId` string in `vite.config.ts` (e.g. `pn-v2` → `pn-v3`).
+To force a fresh cache on the next breaking release, bump the `cacheId` string in `vite.config.ts` (e.g. `pn-v3` → `pn-v4`).
 
 ## 🤝 Partners
 

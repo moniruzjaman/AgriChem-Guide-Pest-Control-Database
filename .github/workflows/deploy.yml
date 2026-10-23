@@ -35,6 +35,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Keep custom domain on Vercel
+        run: |
+          if [ -f dist/CNAME ]; then
+            mv dist/CNAME dist/CNAME.gh-disabled
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

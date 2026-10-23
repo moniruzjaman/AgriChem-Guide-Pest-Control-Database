@@ -7,18 +7,18 @@
  * `cleanupOutdatedCaches: true` in vite.config.ts only purges caches with
  * the Workbox-recognized outdated format — it does NOT purge arbitrary
  * old cache IDs. This helper deletes any cache whose name doesn't start
- * with the current `pn-v2` prefix, reclaiming disk space and ensuring
+ * with the current `pn-v3` prefix, reclaiming disk space and ensuring
  * returning users can never accidentally fall back to a stale precache.
  *
  * Safe to call on every boot — it only deletes caches that don't match
  * the current prefix. If a user has multiple tabs open and another tab
  * is mid-flight populating a cache, that cache will already start with
- * the `pn-v2` prefix so it survives.
+ * the `pn-v3` prefix so it survives.
  *
  * Run this BEFORE the service worker registers so the old cache is gone
  * by the time the new SW tries to populate its own cache.
  */
-const CURRENT_CACHE_PREFIX = 'pn-v2';
+const CURRENT_CACHE_PREFIX = 'pn-v3';
 
 export async function deleteOldCachesIfAny(): Promise<string[]> {
   if (typeof window === 'undefined' || !('caches' in window)) {
@@ -30,7 +30,7 @@ export async function deleteOldCachesIfAny(): Promise<string[]> {
     const keys = await window.caches.keys();
     for (const key of keys) {
       // Keep the current precache + any runtime caches that also use the
-      // pn-v2 prefix. Drop everything else (old `workbox-precache-v2`,
+      // pn-v3 prefix. Drop everything else (old `workbox-precache-v2`,
       // old `workbox-runtime-*`, etc.).
       if (!key.startsWith(CURRENT_CACHE_PREFIX)) {
         const ok = await window.caches.delete(key);
