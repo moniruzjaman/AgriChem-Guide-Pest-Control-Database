@@ -22,11 +22,11 @@ const TAB_META: Record<AppTab, {
   home: {
     en: {
       title: 'PesticideNext — পরের স্প্রে, আর ভুল হবে না।',
-      description: '5,052+ DAE pesticides, MoA rotation, tank calculator, and pocket book for Bangladesh.'
+      description: 'Latest DAE pesticides, MoA rotation, tank calculator, and pocket book for Bangladesh.'
     },
     bn: {
       title: 'পেস্টিসাইডনেক্সট — পরের স্প্রে, আর ভুল হবে না।',
-      description: 'বাংলাদেশের মাঠ ফসলের জন্য ৫,০৫২+ DAE বালাইনাশক, MoA রোটেশন, ট্যাংক ক্যালকুলেটর ও পকেট বুক।'
+      description: 'বাংলাদেশের মাঠ ফসলের জন্য সর্বশেষ DAE বালাইনাশক, MoA রোটেশন, ট্যাংক ক্যালকুলেটর ও পকেট বুক।'
     }
   },
   database: {

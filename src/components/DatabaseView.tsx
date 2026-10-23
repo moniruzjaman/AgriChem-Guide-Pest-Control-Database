@@ -711,11 +711,12 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   };
 
   const bn = language === 'bn';
+  const catalogueCountLabel = formatNum(products.length.toLocaleString('en-US'));
 
   // ----------------------------------------------- editorial copy deck --
   const copy = bn
     ? {
-        eyebrow: '৫,০৫২+ নিবন্ধিত পণ্যের সম্পূর্ণ ডাটাবেস',
+        eyebrow: `${catalogueCountLabel}+ নিবন্ধিত পণ্যের সম্পূর্ণ ডাটাবেস`,
         h1a: 'সঠিক ওষুধ খুঁজুন,',
         h1b: 'ভুল ওষুধ নয়।',
         lede:
@@ -739,7 +740,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
         ctaDetails: 'বিস্তারিত'
       }
     : {
-        eyebrow: '5,052+ registered products, full catalogue',
+        eyebrow: `${catalogueCountLabel}+ registered products, full catalogue`,
         h1a: 'Find the right chemical,',
         h1b: 'not just any chemical.',
         lede:

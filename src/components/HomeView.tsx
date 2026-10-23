@@ -689,7 +689,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <div className="acg-feat__foot">
                   <span className="acg-feat__stat">
                     {bn ? feature.statLabelBn : feature.statLabelEn}
-                    <b>{feature.statValue}</b>
+                    <b>{feature.id === 'database' ? totalLabel : feature.statValue}</b>
                   </span>
                   <span className="acg-feat__go">
                     {bn ? 'খুলুন' : 'Open'} <ArrowRight size={13} />
@@ -756,7 +756,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     {bn ? 'এই টুল খুলুন' : 'Open this tool'} <ArrowUpRight size={15} />
                   </button>
                   <span className="acg-preview__stat">
-                    {bn ? f.statLabelBn : f.statLabelEn}: <b>{f.statValue}</b>
+                    {bn ? f.statLabelBn : f.statLabelEn}: <b>{f.id === 'database' ? totalLabel : f.statValue}</b>
                   </span>
                 </div>
               </div>

@@ -24,8 +24,8 @@ export const OfflineIndicator: React.FC = () => {
         </div>
         <p className="text-white/90 font-medium mt-0.5 leading-relaxed">
           {language === 'bn' 
-            ? '৫,০৫২টি বালাইনাশক ও নির্দেশিকা অফলাইনে ব্যবহারের জন্য সম্পূর্ণ নিরাপদ রাখা হয়েছে।'
-            : '5,052+ pesticides, formulas & guides are fully cached for field-work.'}
+            ? 'সর্বশেষ বালাইনাশক ডাটাবেস ও নির্দেশিকা অফলাইনে ব্যবহারের জন্য সম্পূর্ণ নিরাপদ রাখা হয়েছে।'
+            : 'The latest pesticide database, formulas & guides are fully cached for field-work.'}
         </p>
       </div>
     </div>

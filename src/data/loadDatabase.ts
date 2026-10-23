@@ -3,20 +3,11 @@ import { ChemicalProduct } from '../types';
 /**
  * loadDatabase.ts — the SINGLE source of truth for the product catalogue.
  *
- * The merged catalogue (1,256 curated + ~3,790 DAE register entries =
- * ~5,046 products) is intentionally loaded through dynamic ``import()`` so BOTH the
- * heavy curated databases (~1.3 MB) and the DAE register mapping (~2.7 MB
- * source) are code-split into async chunks instead of being inlined into the
- * main bundle. This keeps the application shell light (first paint with a
- * few hundred KB of JS) while the full ~5,046-product database streams in
- * right after — and the Workbox service worker precaches the chunks, so
- * offline field use still works.
- *
- * Consumers:
- *   - App.tsx  → hydrates the global ``products`` state before rendering
- *     any view, so every screen (Home, Database, Calculator, Rotation,
- *     Safety, Guidebook, Alerts) shows the full merged dataset — never a
- *     stale partial count.
+ * Merges curated products + the DAE register dump + extras from the
+ * 5,485-row AgriChem/MoA PTAC master (bangladesh_pesticide_database.csv),
+ * then overlays measured toxicity / PHI / formulation fields onto matching
+ * registration numbers. Loaded through dynamic ``import()`` so heavy data
+ * stays out of the application shell.
  */
 
 export interface LoadedDatabase {
@@ -40,6 +31,44 @@ let loadPromise: Promise<LoadedDatabase> | null = null;
  */
 function normalizeType(type: ChemicalProduct['type']): ChemicalProduct['type'] {
   return type === 'Stored Grain' ? 'Store Grain Insecticide' : type;
+}
+
+const WHO_COLOR_BY_TOX: Record<string, string> = {
+  'Ia - Extremely Hazardous': '#dc2626',
+  'Ib - Highly Hazardous': '#dc2626',
+  'II - Moderately Hazardous': '#eab308',
+  'III - Slightly Hazardous': '#3b82f6',
+  'U - Unlikely to Present Hazard': '#10b981',
+};
+
+function applyBdOverlay(
+  products: ChemicalProduct[],
+  overlayByReg: Record<string, {
+    toxicityClass?: ChemicalProduct['toxicityClass'];
+    formulation?: string;
+    phiDays?: number;
+    reiHours?: number;
+    resistanceRisk?: ChemicalProduct['resistanceRisk'];
+    moaCode?: string;
+  }>
+): ChemicalProduct[] {
+  return products.map((product) => {
+    const overlay = overlayByReg[(product.registrationNo ?? '').trim().toUpperCase()];
+    if (!overlay) return product;
+    const next: ChemicalProduct = { ...product };
+    if (overlay.toxicityClass) {
+      next.toxicityClass = overlay.toxicityClass;
+      next.whoColor = WHO_COLOR_BY_TOX[overlay.toxicityClass] ?? next.whoColor;
+    }
+    if (overlay.formulation && (!next.formulation || next.formulation === 'Unknown')) {
+      next.formulation = overlay.formulation;
+    }
+    if (overlay.phiDays != null) next.phiDays = overlay.phiDays;
+    if (overlay.reiHours != null) next.reiHours = overlay.reiHours;
+    if (overlay.resistanceRisk) next.resistanceRisk = overlay.resistanceRisk;
+    if (overlay.moaCode && !next.moaCode) next.moaCode = overlay.moaCode;
+    return next;
+  });
 }
 
 /**
@@ -186,18 +215,34 @@ export function loadDatabase(): Promise<LoadedDatabase> {
     // import: curatedData pulls the five curated databases and
     // allPesticidesData pulls the 2.7 MB all_pesticides register dump —
     // Rollup extracts both subtrees from the main bundle entirely.
-    const [{ CURATED_DATABASE }, { ALL_PESTICIDES_DATABASE }] = await Promise.all([
-      import('./curatedData'),
-      import('./allPesticidesData'),
-    ]);
+    const [{ CURATED_DATABASE }, { ALL_PESTICIDES_DATABASE }, { BD_OVERLAY_BY_REG, BD_REGISTER_EXTRAS }] =
+      await Promise.all([
+        import('./curatedData'),
+        import('./allPesticidesData'),
+        import('./bdRegisterLatest'),
+      ]);
 
-    const merged = mergeWithCurated(CURATED_DATABASE, ALL_PESTICIDES_DATABASE);
+    const merged = applyBdOverlay(
+      mergeWithCurated(CURATED_DATABASE, ALL_PESTICIDES_DATABASE),
+      BD_OVERLAY_BY_REG
+    );
+
+    const seenRegNos = new Set(
+      merged.map((p) => (p.registrationNo ?? '').toLowerCase().trim()).filter(Boolean)
+    );
+    for (const extra of BD_REGISTER_EXTRAS) {
+      const regNo = (extra.registrationNo ?? '').toLowerCase().trim();
+      if (regNo && seenRegNos.has(regNo)) continue;
+      if (regNo) seenRegNos.add(regNo);
+      merged.push({ ...extra, type: normalizeType(extra.type) });
+    }
+
     const custom = loadCustomProducts(merged);
 
     if (typeof console !== 'undefined' && console.debug) {
       console.debug(
         `[loadDatabase] curated=${CURATED_DATABASE.length} ` +
-          `daeTotal=${ALL_PESTICIDES_DATABASE.length} ` +
+          `daeTotal=${ALL_PESTICIDES_DATABASE.length} extras=${BD_REGISTER_EXTRAS.length} ` +
           `merged=${merged.length} custom=${custom.length}`
       );
     }

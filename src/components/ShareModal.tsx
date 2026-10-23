@@ -166,16 +166,16 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     home: {
       titleEn: "PesticideNext — The next spray won't be a mistake.",
       titleBn: 'পেস্টিসাইডনেক্সট — পরের স্প্রে, আর ভুল হবে না।',
-      descEn: '5,052+ DAE pesticides, MoA rotation planner, tank calculator, WHO safety protocols & offline field manual.',
-      descBn: 'বাংলাদেশে মাঠ ফসলের জন্য ডিএই নিবন্ধিত ৫,০৫২+ বালাইনাশক ডাটাবেস, স্প্রেয়ার ট্যাংক ক্যালকুলেটর, প্রতিরোধ রোধে MoA রোটেশন ও পকেট বুক।',
+      descEn: 'Latest DAE pesticides, MoA rotation planner, tank calculator, WHO safety protocols & offline field manual.',
+      descBn: 'বাংলাদেশে মাঠ ফসলের জন্য ডিএই নিবন্ধিত সর্বশেষ বালাইনাশক ডাটাবেস, স্প্রেয়ার ট্যাংক ক্যালকুলেটর, প্রতিরোধ রোধে MoA রোটেশন ও পকেট বুক।',
       tag: '#PesticideNext #BangladeshFarming #CropProtection',
       icon: Sparkles
     },
     database: {
       titleEn: 'PesticideNext — DAE Chemical & Pesticide Catalog',
       titleBn: 'পেস্টিসাইডনেক্সট — অনুমোদিত বালাইনাশক ডাটাবেস',
-      descEn: 'Search 5,052+ approved active ingredients, trade names, approved crops, and mode-of-action codes.',
-      descBn: 'ফসল, বালাই, ট্রেড নাম ও MoA কোড দিয়ে ডিএই নিবন্ধিত ৫,০৫২+ বালাইনাশকের অনুমোদন তালিকা দেখুন।',
+      descEn: 'Search the latest approved active ingredients, trade names, approved crops, and mode-of-action codes.',
+      descBn: 'ফসল, বালাই, ট্রেড নাম ও MoA কোড দিয়ে ডিএই নিবন্ধিত সর্বশেষ বালাইনাশকের অনুমোদন তালিকা দেখুন।',
       tag: '#PesticideDatabase #DAE #AgriTech',
       icon: Database
     },
