@@ -1253,6 +1253,20 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 440 KB
               </span>
             </a>
+            {/* MoA Rotation Guide */}
+            <a
+              href="/downloads/MoA_Rotation_Guide_IRAC.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#15803d', color: 'white', borderColor: '#15803d' }}
+            >
+              <FileText size={15} />
+              {bn ? 'MoA রোটেশন গাইড' : 'MoA Rotation Guide'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                126 KB
+              </span>
+            </a>
           </div>
         </div>
       </section>
