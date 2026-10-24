@@ -133,8 +133,8 @@ export default defineConfig(() => {
           // Bump this string on every breaking release so users never get
           // stuck on a stale cached bundle (old OG image, old tagline,
           // pre-rename branding, etc.).
-          cacheId: 'pn-v3',
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2,json,webmanifest}'],
+          cacheId: 'pn-v4',
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2,json,webmanifest,csv,pdf,xlsx}'],
           // Take over from any previous service worker IMMEDIATELY and purge
           // old precaches. Without this, returning visitors keep getting the
           // stale cached bundle (e.g. the old 1,256-product dataset) instead
@@ -145,9 +145,10 @@ export default defineConfig(() => {
           // The heavy product data now lives in dedicated async chunks
           // (code-split via loadDatabase.ts). The policy enrichment sidecar
           // adds ~3 MB of inline data to the allPesticidesData chunk, so we
-          // raise the precache ceiling to 8 MiB to keep the SW precache
-          // manifest complete for offline field use.
-          maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
+          // raise the precache ceiling to 16 MiB (was 8 MiB) to keep the SW
+          // precache manifest complete for offline field use after the
+          // 86th/87th PTAC update pushed the chunk to ~7.2 MB.
+          maximumFileSizeToCacheInBytes: 16 * 1024 * 1024,
           runtimeCaching: [
             {
               urlPattern: /^\/api\/.*/i,

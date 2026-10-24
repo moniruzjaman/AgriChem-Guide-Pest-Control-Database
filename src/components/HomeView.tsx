@@ -1051,6 +1051,103 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </p>
       </section>
 
+      {/* ------------------------- LATEST DATABASE DOWNLOADS ---------- */}
+      <section className="acg-shell">
+        <div className="acg-card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #006a4e 0%, #004d39 100%)',
+            color: 'white',
+            padding: '24px 28px',
+          }}>
+            <span className="acg-res__eyebrow acg-res__eyebrow--gold" style={{ color: '#e3b341' }}>
+              {bn ? 'সর্বশেষ ডাটাবেস' : 'Latest database'}
+            </span>
+            <h3 style={{ margin: '6px 0 4px 0', fontSize: 22, fontWeight: 800, color: 'white' }}>
+              {bn
+                ? 'নিবন্ধিত বালাইনাশক ডাটাবেস — ডাউনলোড'
+                : 'Registered Pesticide Database — Download'}
+            </h3>
+            <p style={{ margin: 0, fontSize: 13, color: '#d4ede0', maxWidth: 720 }}>
+              {bn
+                ? 'লাইভ API (ppw.krishi.gov.bd), ৮৬ ও ৮৭তম পিটিএসি গেজেট এবং MoA ম্যাপিং অডিট থেকে একত্রিত — সম্পূর্ণ ডাটাবেস, MoA রেফারেন্স ও প্রিন্টযোগ্য পিডিএফ।'
+                : 'Unified snapshot built from the live API (ppw.krishi.gov.bd), the 86th & 87th PTAC gazettes, and the MoA mapping audit — full database, MoA rotation reference, and a printable PDF.'}
+            </p>
+          </div>
+          <div style={{ padding: '20px 28px', display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            {/* XLSX */}
+            <a
+              href="/downloads/pesticide_database_latest.xlsx"
+              download
+              className="acg-btn"
+              style={{ background: '#0369a1', color: 'white', borderColor: '#0369a1' }}
+            >
+              <FileDown size={15} />
+              {bn ? 'এক্সেল (XLSX)' : 'Excel (XLSX)'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                {bn ? '~ ৮,৯৩৫ রেকর্ড' : '~ 8,935 records'}
+              </span>
+            </a>
+            {/* PDF */}
+            <a
+              href="/downloads/pesticide_database_latest.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#b91c1c', color: 'white', borderColor: '#b91c1c' }}
+            >
+              <FileText size={15} />
+              {bn ? 'পিডিএফ (PDF)' : 'PDF reference'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                {bn ? 'প্রিন্টযোগ্য' : 'Printable'}
+              </span>
+            </a>
+            {/* CSV */}
+            <a
+              href="/downloads/pesticide_database_latest.csv"
+              download
+              className="acg-btn"
+              style={{ background: '#15803d', color: 'white', borderColor: '#15803d' }}
+            >
+              <FileDown size={15} />
+              {bn ? 'সিএসভি (CSV)' : 'Flat CSV'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                {bn ? '২.৮ এমবি' : '2.8 MB'}
+              </span>
+            </a>
+            {/* MoA rotation reference */}
+            <a
+              href="/downloads/moa_rotation_quick_reference.csv"
+              download
+              className="acg-btn"
+              style={{ background: '#a16207', color: 'white', borderColor: '#a16207' }}
+            >
+              <FileDown size={15} />
+              {bn ? 'MoA রেফারেন্স' : 'MoA rotation ref'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                {bn ? '৭২ গ্রুপ' : '72 groups'}
+              </span>
+            </a>
+          </div>
+          <div style={{ padding: '12px 28px 20px 28px', fontSize: 12, color: '#475569', borderTop: '1px solid #e2e8f0' }}>
+            <strong style={{ color: '#006a4e' }}>
+              {bn ? 'তথ্যসূত্র: ' : 'Source: '}
+            </strong>
+            {bn
+              ? 'ppw.krishi.gov.bd লাইভ API + ৮৬/৮৭ তম পিটিএসি গেজেট + MoA ম্যাপিং অডিট। সর্বশেষ আপডেট করা হয়েছে প্রতিটি বিল্ডে।'
+              : 'Live ppw.krishi.gov.bd API + 86th/87th PTAC gazettes + MoA mapping audit. Refreshed on every build.'}
+            {' '}
+            <a
+              href="https://ppw.krishi.gov.bd/pesticide-list"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#0369a1', fontWeight: 600, textDecoration: 'underline' }}
+            >
+              {bn ? 'সরকারি সাইটে লাইভ সার্চ করুন →' : 'Search the official site live →'}
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* -------------------------------- SHARE BANNER (restored) ------- */}
       <section className="acg-shell">
         <div className="acg-share">

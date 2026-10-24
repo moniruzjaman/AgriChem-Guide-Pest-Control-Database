@@ -28,7 +28,10 @@ import {
   Upload,
   Table,
   Warehouse,
-  HeartPulse
+  HeartPulse,
+  ExternalLink,
+  FileText,
+  Download
 } from 'lucide-react';
 import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
@@ -78,6 +81,310 @@ const CROP_EMOJIS: Record<string, string> = {
   'Citrus': '🍊'
 };
 
+// ===========================================================================
+// PpwLiveSearchPanel
+// ------------------
+// In-app search interface that proxies the official ppw.krishi.gov.bd
+// pesticide-search JSON API through our backend at /api/ppw/search.
+// The official site sends `X-Frame-Options: SAMEORIGIN`, so it can't be
+// iframed directly. Instead we proxy the underlying JSON API and render
+// the results natively in the app, so users can verify any product
+// against the live government database without leaving PesticideNext.
+// ===========================================================================
+interface PpwRecord {
+  id: number;
+  app_php_no: string;
+  brand_name: string;
+  company_id: number;
+  chemical_id: number | null;
+  company?: {
+    id: number;
+    company_name: string;
+    company_name_en: string;
+    company_email?: string;
+    company_phone?: string;
+    company_mobile?: string;
+    address1?: string;
+  } | null;
+  chemical?: { name?: string } | null;
+}
+
+interface PpwApiResponse {
+  current_page: number;
+  data: PpwRecord[];
+  total: number;
+  per_page: number;
+  last_page: number;
+  from: number | null;
+  to: number | null;
+}
+
+const PpwLiveSearchPanel: React.FC<{
+  language: 'bn' | 'en';
+  resetKey: number;
+}> = ({ language, resetKey }) => {
+  const [query, setQuery] = useState('');
+  const [apNo, setApNo] = useState('');
+  const [filterExpired, setFilterExpired] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<PpwApiResponse | null>(null);
+  const [page, setPage] = useState(1);
+  const [lastQuery, setLastQuery] = useState({ keyword: '', apNo: '', filter: '' });
+
+  // Reset when the panel is reopened (resetKey changes)
+  React.useEffect(() => {
+    setQuery('');
+    setApNo('');
+    setFilterExpired(false);
+    setError(null);
+    setData(null);
+    setPage(1);
+  }, [resetKey]);
+
+  const doSearch = React.useCallback(async (pageNum: number) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const params = new URLSearchParams();
+      params.set('page', String(pageNum));
+      const keyword = query.trim();
+      if (keyword) params.set('keyword', keyword);
+      const ap = apNo.trim();
+      if (ap) params.set('ap_no', ap);
+      if (filterExpired) params.set('filter', 'expired');
+      const url = `/api/ppw/search?${params.toString()}`;
+      const res = await fetch(url);
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        throw new Error(errBody?.error || `HTTP ${res.status}`);
+      }
+      const json = (await res.json()) as PpwApiResponse;
+      setData(json);
+      setLastQuery({ keyword, apNo: ap, filter: filterExpired ? 'expired' : '' });
+      setPage(pageNum);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+      setData(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [query, apNo, filterExpired]);
+
+  // Auto-search on first open (load page 1)
+  React.useEffect(() => {
+    doSearch(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetKey]);
+
+  const bn = language === 'bn';
+
+  return (
+    <div className="border-t border-emerald-200 bg-white">
+      {/* Search input row */}
+      <div className="px-5 py-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="relative">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') doSearch(1); }}
+            placeholder={bn ? 'ব্র্যান্ড/কীওয়ার্ড দিয়ে খুঁজুন...' : 'Search by brand or keyword...'}
+            className="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30 font-medium"
+          />
+        </div>
+        <div className="relative">
+          <Info className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <input
+            type="text"
+            value={apNo}
+            onChange={(e) => setApNo(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') doSearch(1); }}
+            placeholder={bn ? 'রেজি. নম্বর (AP-XXXX)' : 'Reg. no (AP-XXXX)'}
+            className="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30 font-medium"
+          />
+        </div>
+        <label className="flex items-center gap-2 text-xs font-semibold text-slate-700 select-none cursor-pointer">
+          <input
+            type="checkbox"
+            checked={filterExpired}
+            onChange={(e) => setFilterExpired(e.target.checked)}
+            className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+          />
+          {bn ? 'বাতিলকৃত সহ' : 'Include expired'}
+        </label>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => doSearch(1)}
+            disabled={loading}
+            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Search className="w-3.5 h-3.5" />
+            {loading
+              ? (bn ? 'খুঁজছি...' : 'Searching...')
+              : (bn ? 'সার্চ করুন' : 'Search')}
+          </button>
+          <button
+            type="button"
+            onClick={() => { setQuery(''); setApNo(''); setFilterExpired(false); }}
+            disabled={loading}
+            className="px-3 py-2 text-xs font-bold bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition disabled:opacity-50"
+            title={bn ? 'পরিষ্কার করুন' : 'Clear'}
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Status row */}
+      <div className="px-5 pb-2 text-xs text-slate-600 flex items-center justify-between flex-wrap gap-2">
+        <div className="flex items-center gap-2">
+          <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span>
+            {data
+              ? (bn
+                ? `লাইভ ডাটাবেস: ${data.total.toLocaleString()} টি রেকর্ড ম্যাচ`
+                : `Live DB: ${data.total.toLocaleString()} matching records`)
+              : (bn ? 'লাইভ ডাটাবেসের সাথে সংযুক্ত হচ্ছে...' : 'Connecting to live DB...')}
+          </span>
+        </div>
+        {lastQuery.keyword || lastQuery.apNo || lastQuery.filter ? (
+          <span className="text-slate-500">
+            {bn ? 'ফিল্টার: ' : 'Filter: '}
+            <code className="text-emerald-700 font-mono">
+              {[
+                lastQuery.keyword && `kw="${lastQuery.keyword}"`,
+                lastQuery.apNo && `reg=${lastQuery.apNo}`,
+                lastQuery.filter && `filter=${lastQuery.filter}`,
+              ].filter(Boolean).join(' · ') || (bn ? 'কোনো ফিল্টার নেই' : 'no filter')}
+            </code>
+          </span>
+        ) : null}
+      </div>
+
+      {/* Error */}
+      {error && (
+        <div className="mx-5 mb-3 p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 flex items-start gap-2">
+          <ShieldAlert className="w-4 h-4 mt-0.5 shrink-0" />
+          <div>
+            <strong className="block">{bn ? 'সার্চ ব্যর্থ' : 'Search failed'}</strong>
+            <span className="font-mono text-[10px]">{error}</span>
+            <div className="mt-1.5">
+              <a
+                href="https://ppw.krishi.gov.bd/pesticide-list"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-red-700 font-bold underline"
+              >
+                <ExternalLink className="w-3 h-3" />
+                {bn ? 'সরকারি সাইটে খুলুন' : 'Open official site'}
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Results table */}
+      {data && data.data.length > 0 && (
+        <div className="border-t border-slate-200 overflow-x-auto">
+          <table className="w-full text-xs">
+            <thead className="bg-slate-50 text-slate-600">
+              <tr>
+                <th className="px-3 py-2 text-left font-bold">{bn ? 'রেজি. নম্বর' : 'Reg No'}</th>
+                <th className="px-3 py-2 text-left font-bold">{bn ? 'ব্র্যান্ড নাম' : 'Brand Name'}</th>
+                <th className="px-3 py-2 text-left font-bold hidden sm:table-cell">{bn ? 'কোম্পানি' : 'Company'}</th>
+                <th className="px-3 py-2 text-left font-bold hidden md:table-cell">{bn ? 'ফোন' : 'Phone'}</th>
+                <th className="px-3 py-2 text-left font-bold hidden lg:table-cell">{bn ? 'ইমেইল' : 'Email'}</th>
+                <th className="px-3 py-2 text-right font-bold">{bn ? 'আইডি' : 'ID'}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.data.map((r) => (
+                <tr key={r.id} className="border-t border-slate-100 hover:bg-emerald-50/40 transition">
+                  <td className="px-3 py-2 font-mono font-bold text-emerald-700 whitespace-nowrap">
+                    {r.app_php_no || '—'}
+                  </td>
+                  <td className="px-3 py-2 font-semibold text-slate-800">{r.brand_name || '—'}</td>
+                  <td className="px-3 py-2 text-slate-600 hidden sm:table-cell">
+                    {r.company?.company_name || '—'}
+                  </td>
+                  <td className="px-3 py-2 text-slate-600 hidden md:table-cell">
+                    {r.company?.company_phone || r.company?.company_mobile || '—'}
+                  </td>
+                  <td className="px-3 py-2 text-slate-600 hidden lg:table-cell">
+                    {r.company?.company_email ? (
+                      <a href={`mailto:${r.company.company_email}`} className="text-emerald-700 hover:underline">
+                        {r.company.company_email}
+                      </a>
+                    ) : '—'}
+                  </td>
+                  <td className="px-3 py-2 text-right text-slate-400 font-mono text-[10px]">{r.id}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Empty state */}
+      {data && data.data.length === 0 && !loading && (
+        <div className="px-5 py-8 text-center text-sm text-slate-500">
+          {bn ? 'কোনো রেকর্ড পাওয়া যায়নি।' : 'No records found.'}
+        </div>
+      )}
+
+      {/* Pagination */}
+      {data && data.last_page > 1 && (
+        <div className="px-5 py-3 border-t border-slate-200 flex items-center justify-between gap-3 text-xs">
+          <button
+            type="button"
+            onClick={() => doSearch(Math.max(1, page - 1))}
+            disabled={page <= 1 || loading}
+            className="px-3 py-1.5 bg-slate-100 rounded-lg font-bold hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed transition"
+          >
+            ← {bn ? 'আগের' : 'Prev'}
+          </button>
+          <span className="text-slate-600 font-semibold">
+            {bn
+              ? `পৃষ্ঠা ${page} / ${data.last_page}`
+              : `Page ${page} of ${data.last_page}`}
+          </span>
+          <button
+            type="button"
+            onClick={() => doSearch(Math.min(data.last_page, page + 1))}
+            disabled={page >= data.last_page || loading}
+            className="px-3 py-1.5 bg-slate-100 rounded-lg font-bold hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed transition"
+          >
+            {bn ? 'পরের' : 'Next'} →
+          </button>
+        </div>
+      )}
+
+      {/* Footer note */}
+      <div className="px-5 py-2 bg-emerald-50 border-t border-emerald-200 text-[11px] text-emerald-700 flex items-center gap-2">
+        <Info className="w-3.5 h-3.5 shrink-0" />
+        <span>
+          {bn
+            ? 'এই ফলাফলগুলো সরাসরি সরকারের ppw.krishi.gov.bd লাইভ ডাটাবেস থেকে আনা হয়েছে (আমাদের ব্যাকএন্ড প্রক্সির মাধ্যমে)।'
+            : 'These results are fetched live from the official ppw.krishi.gov.bd database via our backend proxy.'}
+          {' '}
+          <a
+            href="https://ppw.krishi.gov.bd/pesticide-list"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold underline inline-flex items-center gap-1"
+          >
+            <ExternalLink className="w-3 h-3" />
+            {bn ? 'সরকারি সাইটে খুলুন' : 'Open official site'}
+          </a>
+        </span>
+      </div>
+    </div>
+  );
+};
+
 export const DatabaseView: React.FC<DatabaseViewProps> = ({
   products,
   baselineCount,
@@ -101,6 +408,12 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
 
   // Editorial hero collapse (matches HomeView / RotationPlanner pattern)
   const [headOpen, setHeadOpen] = useState<boolean>(false);
+
+  // Official PPW (Plant Protection Wing) iframe search toggle — embeds
+  // https://ppw.krishi.gov.bd/pesticide-list as an in-app live search
+  // surface so users can verify products against the official source.
+  const [showPpwFrame, setShowPpwFrame] = useState<boolean>(false);
+  const [ppwFrameKey, setPpwFrameKey] = useState<number>(0);
 
   // Primary navigation states
   const [selectedType, setSelectedType] = useState<string>('all');
@@ -2149,6 +2462,60 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
 
         </div>
 
+      </div>
+
+      {/* Official PPW Live Search — in-app proxy to ppw.krishi.gov.bd
+          (The official site sends X-Frame-Options: SAMEORIGIN, so we can't
+          iframe it directly. Instead we proxy the upstream JSON API through
+          our own /api/ppw/search route and render results in-app, so users
+          can verify any product against the live government database without
+          leaving PesticideNext.) */}
+      <div className="mt-6 bg-gradient-to-br from-emerald-50 to-slate-50 border border-emerald-200 rounded-2xl overflow-hidden">
+        <button
+          type="button"
+          onClick={() => { setShowPpwFrame(v => !v); setPpwFrameKey(k => k + 1); }}
+          className="w-full flex items-center justify-between gap-3 px-5 py-4 text-left hover:bg-emerald-100/50 transition"
+          aria-expanded={showPpwFrame}
+        >
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-700 text-white shadow-2xs">
+              <Search className="w-4 h-4" />
+            </div>
+            <div>
+              <strong className="block text-sm font-bold text-emerald-900">
+                {language === 'bn'
+                  ? 'সরকারি প্ল্যান্ট প্রটেকশন উইং লাইভ সার্চ (ppw.krishi.gov.bd)'
+                  : 'Official Plant Protection Wing Live Search (ppw.krishi.gov.bd)'}
+              </strong>
+              <span className="text-xs text-emerald-700 font-medium">
+                {language === 'bn'
+                  ? 'রেজিস্ট্রেশন নম্বর দিয়ে সরাসরি সরকারি ডাটাবেসে যাচাই করুন'
+                  : 'Verify any registration number directly against the live government database'}
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-emerald-700">
+            <a
+              href="https://ppw.krishi.gov.bd/pesticide-list"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="hidden sm:inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-lg bg-white border border-emerald-300 hover:bg-emerald-50 transition"
+              title={language === 'bn' ? 'নতুন ট্যাবে খুলুন' : 'Open in new tab'}
+            >
+              <ExternalLink className="w-3 h-3" />
+              {language === 'bn' ? 'নতুন ট্যাব' : 'New Tab'}
+            </a>
+            <span className="text-xs font-bold px-2 py-0.5 rounded-md bg-emerald-700 text-white">
+              {showPpwFrame
+                ? (language === 'bn' ? 'বন্ধ করুন' : 'Close')
+                : (language === 'bn' ? 'খুলুন' : 'Open')}
+            </span>
+          </div>
+        </button>
+        {showPpwFrame && (
+          <PpwLiveSearchPanel language={language} resetKey={ppwFrameKey} />
+        )}
       </div>
 
       {/* Official DAE Registry Disclaimer & Source Verification Footnote */}

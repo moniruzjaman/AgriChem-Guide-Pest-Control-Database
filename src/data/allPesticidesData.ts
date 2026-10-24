@@ -66,7 +66,7 @@ const MOA_BY_ACTIVE: Record<string, MoAClassification> = (() => {
  */
 function resolveMoa(
   csvMoaCode: string | null,
-  commonName: string
+  commonName: string | null | undefined
 ): MoAClassification | null {
   if (csvMoaCode && csvMoaCode.trim()) {
     const code = csvMoaCode.trim();
@@ -81,7 +81,12 @@ function resolveMoa(
     }
   }
 
+  // NOTE: ``commonName`` may be null/empty for live-only records imported
+  // from the ppw.krishi.gov.bd API snapshot. Skip the active-ingredient
+  // lookup in that case and fall through to the conservative default.
+  if (!commonName) return null;
   const lc = commonName.toLowerCase().trim();
+  if (!lc) return null;
   if (MOA_BY_ACTIVE[lc]) {
     return MOA_BY_ACTIVE[lc];
   }
@@ -247,16 +252,19 @@ function toChemicalProduct(
 
   // Water volume: tea requires higher spray volumes; default to 500 L/ha
   // for field crops (rice, jute, vegetables) and 1000 L/ha for tea.
-  const hasTea = p.recommendedCrops.some((c) => c.toLowerCase() === 'tea');
+  const hasTea = (p.recommendedCrops ?? []).some((c) => c.toLowerCase() === 'tea');
   const waterVolumeLPerHa = hasTea ? 1000 : 500;
 
   // Sanitised crop / pest labels (drops stray-quote artifacts and dedupes).
-  const crops = cleanLabels(p.recommendedCrops);
-  const pests = cleanLabels(p.recommendedPests);
+  const crops = cleanLabels(p.recommendedCrops ?? []);
+  const pests = cleanLabels(p.recommendedPests ?? []);
 
   // Split recommendations string on newline into a structured array.
   // Empty / whitespace-only entries are filtered out.
-  const recommendationLines = p.recommendations
+  // NOTE: ``recommendations`` may be null for live-only records imported
+  // from the ppw.krishi.gov.bd API snapshot (they have no DAE
+  // crop/pest/dosage recommendations). Treat null/empty as "no lines".
+  const recommendationLines = (p.recommendations ?? '')
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
@@ -266,8 +274,11 @@ function toChemicalProduct(
   // "Ethion (5%) + Thiamethoxam (20%)"). Concentration annotations in
   // parentheses are stripped so the resulting list is plain AI names, which
   // the scan matcher uses for active-ingredient lookups.
+  // NOTE: ``commonName`` may be empty for live-only records imported from
+  // the ppw.krishi.gov.bd API snapshot that were not in the 86th/87th
+  // PTAC gazette. Treat empty/null as "no active ingredients parsed".
   const activeIngredients: string[] = cleanLabels(
-    p.commonName
+    (p.commonName ?? '')
       .split(/\s*\+\s*/)
       .map((part) => part.replace(/\s*\([^)]*\)/, '').trim())
       .filter((part) => part.length > 0)
