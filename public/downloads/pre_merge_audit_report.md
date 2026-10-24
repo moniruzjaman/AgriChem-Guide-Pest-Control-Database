@@ -1,20 +1,20 @@
 # Pre-Merge Audit Report — Latest Pesticide Database
 
-**Generated:** 2026-10-24 06:02 UTC  
-**Total records:** 8,931 unique Registration No / 8,935 total rows  
+**Generated:** 2026-10-24 06:19 UTC  
+**Total records:** 9,040 unique Registration No / 9,040 total rows  
 
 ---
 
 ## 1. Duplicate Registration No Detection
 
-- **Total unique Registration No:** 8,931
-- **Duplicate reg#s (count > 1):** 4
-- **Total rows in duplicate groups:** 8
-- **Same Trade Name duplicates** (likely parser/data-entry variants): 1
-- **Different Trade Name duplicates** (genuine source-gazette reuse of reg#): 3
+- **Total unique Registration No:** 9,040
+- **Duplicate reg#s (count > 1):** 0
+- **Total rows in duplicate groups:** 0
+- **Same Trade Name duplicates** (likely parser/data-entry variants): 0
+- **Different Trade Name duplicates** (genuine source-gazette reuse of reg#): 0
 
 ### Verdict
-⚠️ **4 duplicate reg#s found.** 1 have the same trade name (parser/data-entry variant) and 3 have different trade names (genuine source reuse).
+✅ **No duplicates found.** The database is clean.
 
 Full duplicate list: [`pre_merge_audit_duplicates.csv`](./pre_merge_audit_duplicates.csv)
 
@@ -22,37 +22,37 @@ Full duplicate list: [`pre_merge_audit_duplicates.csv`](./pre_merge_audit_duplic
 
 ## 2. MoA Classification Coverage
 
-- **Total records:** 8,935
-- **Records with MoA Code:** 4,061 (45.5%)
-- **Records with Scheme:** 5,031 (56.3%)
-- **Records with Group No.:** 5,031 (56.3%)
-- **Records with MoA Description:** 5,031 (56.3%)
-- **Records with Target Site:** 5,031 (56.3%)
-- **Records with Policy Action:** 5,031 (56.3%)
-- **Records with Policy Risk Tier:** 5,031 (56.3%)
+- **Total records:** 9,040
+- **Records with MoA Code:** 4,074 (45.1%)
+- **Records with Scheme:** 5,038 (55.7%)
+- **Records with Group No.:** 4,967 (54.9%)
+- **Records with MoA Description:** 5,038 (55.7%)
+- **Records with Target Site:** 4,967 (54.9%)
+- **Records with Policy Action:** 4,967 (54.9%)
+- **Records with Policy Risk Tier:** 5,017 (55.5%)
 
 ### Policy Risk Tier distribution
 
 | Tier | Count |
 |---|---|
-| STANDARD | 3,944 |
-| (empty) | 3,904 |
-| AMBER | 657 |
-| RED | 408 |
-| GREEN | 21 |
+| (empty) | 4,023 |
+| STANDARD | 3,894 |
+| AMBER | 666 |
+| RED | 416 |
+| GREEN | 40 |
 | RED (multiple HHPs) | 1 |
 
-- **Records WITHOUT MoA Code:** 4,874 (54.5%)
+- **Records WITHOUT MoA Code:** 4,966 (54.9%)
 
 ### Audit cross-check
 
 - Audited reg#s (in moa_mapping_audit.csv): 5,437
-- Live DB unique reg#s: 8,931
+- Live DB unique reg#s: 9,040
 - Audited but NOT in live DB (likely obsolete): 407
-- In live DB but NOT audited (newest records, expected to lack MoA): 3,901
+- In live DB but NOT audited (newest records, expected to lack MoA): 4,010
 
 ### Verdict
-⚠️ **Only 45.5% MoA coverage.** Consider delaying merge until more records are classified, OR accept that newer records will show "Unknown" MoA.
+⚠️ **Only 45.1% MoA coverage.** Consider delaying merge until more records are classified, OR accept that newer records will show "Unknown" MoA.
 
 Full list of records missing MoA: [`pre_merge_audit_no_moa.csv`](./pre_merge_audit_no_moa.csv)
 
@@ -60,7 +60,7 @@ Full list of records missing MoA: [`pre_merge_audit_no_moa.csv`](./pre_merge_aud
 
 ## 3. Gazette vs. Live DB Cross-Check
 
-- Live DB unique reg#s: 8,931
+- Live DB unique reg#s: 9,040
 - 86th PTAC unique reg#s: 1,296
 - 87th PTAC unique reg#s: 507
 - Gazette union: 1,803
@@ -68,20 +68,18 @@ Full list of records missing MoA: [`pre_merge_audit_no_moa.csv`](./pre_merge_aud
 - 86th only (not in 87th): 1,296
 - 87th only (not in 86th): 507
 
-- **Orphans** (in gazettes but NOT in live DB): 109
+- **Orphans** (in gazettes but NOT in live DB): 0
 - **Live-only** (in live DB but NOT in any gazette): 7,237
 
 ### Verdict
-⚠️ **109 orphan reg#s found** — these appear in the 86th/87th gazettes but are missing from the live DB. This could indicate (a) the live API has filtered them out, (b) they were truly obsolete and removed, or (c) a parsing issue. Review the orphans CSV to decide.
-
-Full orphan list: [`pre_merge_audit_orphans.csv`](./pre_merge_audit_orphans.csv)
+✅ **No orphans.** Every reg# in the 86th/87th gazettes is also present in the live DB, confirming the live DB is a strict superset.
 
 ---
 
 ## 4. Policy Sidecar Coverage vs. all_pesticides.csv
 
-- all_pesticides.csv unique reg#s: 9,339
-- policy_enrichment.csv unique reg#s: 9,453
+- all_pesticides.csv unique reg#s: 9,448
+- policy_enrichment.csv unique reg#s: 9,562
 - In all_pesticides but NOT in policy sidecar: 66
 - In policy sidecar but NOT in all_pesticides: 180
 
@@ -89,10 +87,10 @@ Full orphan list: [`pre_merge_audit_orphans.csv`](./pre_merge_audit_orphans.csv)
 
 | Field | Coverage |
 |---|---|
-| HHP Status (WHO/FAO) | 51.1% |
-| EU / Global Regulatory Status | 51.1% |
-| Bangladesh Policy Action | 57.3% |
-| Formulation Code | 51.1% |
+| HHP Status (WHO/FAO) | 50.5% |
+| EU / Global Regulatory Status | 50.5% |
+| Bangladesh Policy Action | 56.7% |
+| Formulation Code | 50.5% |
 
 ---
 
@@ -102,9 +100,9 @@ Full orphan list: [`pre_merge_audit_orphans.csv`](./pre_merge_audit_orphans.csv)
 
 | Section | Count |
 |---|---|
-| Pesticides | 7,352 |
-| Public Health | 1,462 |
-| Biopesticides | 117 |
+| Pesticides | 7,379 |
+| Public Health | 1,535 |
+| Biopesticides | 122 |
 | Pesticides (Legacy) | 4 |
 
 ### By Status
@@ -112,24 +110,28 @@ Full orphan list: [`pre_merge_audit_orphans.csv`](./pre_merge_audit_orphans.csv)
 | Status | Count |
 |---|---|
 | Active | 6,759 |
-| Expired | 2,173 |
-| Active (Duplicate) | 3 |
+| Expired | 2,172 |
+| Active (Gazette only) | 109 |
 
 ### By Pesticide Type
 
 | Type | Count |
 |---|---|
-| Insecticide | 7,352 |
-| Public Health | 1,462 |
-| Bio Pesticide | 121 |
+| Insecticide | 7,344 |
+| Public Health | 1,535 |
+| Bio Pesticide | 126 |
+| Fungicide | 23 |
+| Herbicide | 12 |
 
 ### By Source Edition
 
 | Source | Count |
 |---|---|
-| Live only | 7,240 |
-| 86th | 1,269 |
+| Live only | 7,237 |
+| 86th | 1,268 |
 | 87th | 426 |
+| 87th orphan | 81 |
+| 86th orphan | 28 |
 
 ---
 
@@ -137,10 +139,10 @@ Full orphan list: [`pre_merge_audit_orphans.csv`](./pre_merge_audit_orphans.csv)
 
 | Check | Status | Notes |
 |---|---|---|
-| 1. Duplicates | ⚠️ Review | 4 dup reg#s, 1 with same trade name (parser) |
-| 2. MoA coverage | ⚠️ Review | Only 45.5% coverage |
-| 3. Gazette vs. live | ⚠️ Review | 109 orphans (in gazettes but not in live) |
-| 4. Policy sidecar | ℹ️ Info | HHP 51%, EU 51%, BD action 57%, Formulation 51% |
-| 5. Distribution | ✅ Pass | 8,935 total across 4 sections |
+| 1. Duplicates | ✅ Pass | No duplicate reg#s |
+| 2. MoA coverage | ⚠️ Review | Only 45.1% coverage |
+| 3. Gazette vs. live | ✅ Pass | Live DB is a strict superset of gazettes |
+| 4. Policy sidecar | ℹ️ Info | HHP 50%, EU 50%, BD action 57%, Formulation 50% |
+| 5. Distribution | ✅ Pass | 9,040 total across 4 sections |
 
 **Recommendation:** Merge the database once you've reviewed any ⚠️ items above. The ✅ items are safe to ship as-is.
