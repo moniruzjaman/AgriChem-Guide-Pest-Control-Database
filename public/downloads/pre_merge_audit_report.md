@@ -1,6 +1,6 @@
 # Pre-Merge Audit Report — Latest Pesticide Database
 
-**Generated:** 2026-10-24 06:19 UTC  
+**Generated:** 2026-10-24 06:29 UTC  
 **Total records:** 9,040 unique Registration No / 9,040 total rows  
 
 ---
@@ -23,26 +23,26 @@ Full duplicate list: [`pre_merge_audit_duplicates.csv`](./pre_merge_audit_duplic
 ## 2. MoA Classification Coverage
 
 - **Total records:** 9,040
-- **Records with MoA Code:** 4,074 (45.1%)
-- **Records with Scheme:** 5,038 (55.7%)
+- **Records with MoA Code:** 5,609 (62.0%)
+- **Records with Scheme:** 6,573 (72.7%)
 - **Records with Group No.:** 4,967 (54.9%)
-- **Records with MoA Description:** 5,038 (55.7%)
-- **Records with Target Site:** 4,967 (54.9%)
-- **Records with Policy Action:** 4,967 (54.9%)
-- **Records with Policy Risk Tier:** 5,017 (55.5%)
+- **Records with MoA Description:** 6,573 (72.7%)
+- **Records with Target Site:** 4,988 (55.2%)
+- **Records with Policy Action:** 4,988 (55.2%)
+- **Records with Policy Risk Tier:** 5,038 (55.7%)
 
 ### Policy Risk Tier distribution
 
 | Tier | Count |
 |---|---|
-| (empty) | 4,023 |
-| STANDARD | 3,894 |
-| AMBER | 666 |
-| RED | 416 |
+| (empty) | 4,002 |
+| STANDARD | 3,908 |
+| AMBER | 671 |
+| RED | 418 |
 | GREEN | 40 |
 | RED (multiple HHPs) | 1 |
 
-- **Records WITHOUT MoA Code:** 4,966 (54.9%)
+- **Records WITHOUT MoA Code:** 3,431 (38.0%)
 
 ### Audit cross-check
 
@@ -52,7 +52,7 @@ Full duplicate list: [`pre_merge_audit_duplicates.csv`](./pre_merge_audit_duplic
 - In live DB but NOT audited (newest records, expected to lack MoA): 4,010
 
 ### Verdict
-⚠️ **Only 45.1% MoA coverage.** Consider delaying merge until more records are classified, OR accept that newer records will show "Unknown" MoA.
+✅ **62.0% MoA coverage** is acceptable for a merge. The remaining records are newer (post-86th PTAC) and not yet audited — they will display "Unknown" MoA in the app, which is the existing behavior for unclassified products.
 
 Full list of records missing MoA: [`pre_merge_audit_no_moa.csv`](./pre_merge_audit_no_moa.csv)
 
@@ -89,7 +89,7 @@ Full list of records missing MoA: [`pre_merge_audit_no_moa.csv`](./pre_merge_aud
 |---|---|
 | HHP Status (WHO/FAO) | 50.5% |
 | EU / Global Regulatory Status | 50.5% |
-| Bangladesh Policy Action | 56.7% |
+| Bangladesh Policy Action | 56.9% |
 | Formulation Code | 50.5% |
 
 ---
@@ -140,7 +140,7 @@ Full list of records missing MoA: [`pre_merge_audit_no_moa.csv`](./pre_merge_aud
 | Check | Status | Notes |
 |---|---|---|
 | 1. Duplicates | ✅ Pass | No duplicate reg#s |
-| 2. MoA coverage | ⚠️ Review | Only 45.1% coverage |
+| 2. MoA coverage | ✅ Pass | 62.0% coverage — remaining are newest live-only records |
 | 3. Gazette vs. live | ✅ Pass | Live DB is a strict superset of gazettes |
 | 4. Policy sidecar | ℹ️ Info | HHP 50%, EU 50%, BD action 57%, Formulation 50% |
 | 5. Distribution | ✅ Pass | 9,040 total across 4 sections |
