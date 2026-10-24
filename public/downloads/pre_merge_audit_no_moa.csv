@@ -4,7 +4,6 @@ AP-271,Pesticides,Active,,Bromapoint,Bromapoint,Shetu Pesticides Ltd,Live only
 AP-430,Pesticides,Active,,Ratox,Ratox,Auto Crop Care Limited,Live only
 AP-497,Pesticides,Active,,Regent 3GR,Regent 3GR,BASF Bangladesh Limited,Live only
 AP-764,Pesticides,Active,,Sunfos-20%EC,Sunfos-20%EC,Sunseed Pesticides,Live only
-AP-996,Pesticides,Active,,Rexivit 80 WP,Rexivit 80 WP,Soft Agro Service,Live only
 AP-998,Pesticides,Active,,TENUP 4G,TENUP 4G,Auto Crop Care Limited,Live only
 AP-1037,Pesticides,Active,,Mancothane 80WP,Mancothane 80WP,Haychem (Bangladesh) Limited,Live only
 AP-1082,Pesticides,Active,,THIOLUX 80% WG,THIOLUX 80% WG,M/S Agro Business Support Limited,Live only
@@ -27,14 +26,11 @@ AP-2183,Pesticides,Active,,Grant 50SC,Grant 50SC,Advanced Life Care Bangladesh L
 AP-2230,Pesticides,Active,,Ricovet 80 WG,Ricovet 80 WG,M/S. Rico Agrovet,Live only
 AP-2277,Pesticides,Active,,AP- Tab,AP- Tab,Sadik Agrochemicals Co. Limited,Live only
 AP-2322,Pesticides,Active,,Adzoate 5WDG,Adzoate 5WDG,Advanced Agricultural Solution Ltd,Live only
-AP-2352,Pesticides,Active,,Rexifos 55 EC,Rexifos 55 EC,Soft Agro Service,Live only
-AP-2391,Pesticides,Active,,Mascothrin 10 EC,Mascothrin 10 EC,Masco Agro Chemicals,Live only
 AP-2436,Pesticides,Active,,Sulfomart 80 WDG,Sulfomart 80 WDG,The Limit Agroproducts Ltd,Live only
 AP-2529,Pesticides,Active,,CM 75 WP,CM 75 WP,Mcdonald crop care limited,Live only
 AP-2631,Pesticides,Active,,Itaphos 48EC,Itaphos 48EC,Italy Agro Marketing Company,Live only
 AP-2706,Pesticides,Active,,Itathirin 10 EC,Itathirin 10 EC,Italy Agro Marketing Company,Live only
 AP-2773,Pesticides,Active,,Tarazole 75 WP,Tarazole 75 WP,Sunseed Pesticides,Live only
-AP-2843,Pesticides,Active,,Lintap 200 SL,Lintap 200 SL,Seed link Enterprise,Live only
 AP-2845,Pesticides,Active,,Emachin 5 SG,Emachin 5 SG,Green Link International,Live only
 AP-2948,Pesticides,Active,,Filnon 10 G,Filnon 10 G,AM Traders,Live only
 AP-2956,Pesticides,Active,,Dhamaka 48 EC,Dhamaka 48 EC,S T Trading Corporation,Live only
@@ -44,7 +40,6 @@ AP-3370,Pesticides,Active,,Hayromazine 75WP,Hayromazine 75WP,Haychem (Bangladesh
 AP-3379,Pesticides,Active,,Gentco 3GR,Gentco 3GR,Marshal Agrovet Chemical Industries Ltd,Live only
 AP-3446,Pesticides,Active,,Unique 5 SG,Unique 5 SG,Sonali Krishi Sheba Industries,Live only
 AP-3498,Pesticides,Active,,Bigben 6WDG,Bigben 6WDG,Green Link International,Live only
-AP-3511,Pesticides,Active,,Justin 40WG,Justin 40WG,M/S Mimpex Agro Chemicals Ltd,Live only
 AP-3519,Pesticides,Active,,Thuosal 80 WDG,Thuosal 80 WDG,Absolve Crop Care,Live only
 AP-3522,Pesticides,Active,,Supersul 80WDG,Supersul 80WDG,Utsa Crop Care.,Live only
 AP-3523,Pesticides,Active,,Cobravet 80 DF,Cobravet 80 DF,Marygold Agro Science Limited,Live only
@@ -108,7 +103,6 @@ AP-4181,Pesticides,Active,,Kapvit 80 WDG,Kapvit 80 WDG,M/S. Khan Agricultural Pr
 AP-4182,Pesticides,Active,,Anamvit 80WDG,Anamvit 80WDG,Agrisel Bangladesh Co. Ltd,Live only
 AP-4183,Pesticides,Active,,Nalvit 80 WDG,Nalvit 80 WDG,National Green Care,Live only
 AP-4184,Pesticides,Active,,Monofull 80 WDG,Monofull 80 WDG,Mosco Marketing Limited,Live only
-AP-4186,Pesticides,Active,,Supervit Plus 80 WDG,Supervit Plus 80 WDG,Larsen chemical industries (pvt.) ltd.,Live only
 AP-4187,Pesticides,Active,,LCI Super 80 WDG,LCI Super 80 WDG,Larsen chemical industries (pvt.) ltd.,Live only
 AP-4218,Pesticides,Active,,Bactroban 20 WP,Bactroban 20 WP,Haychem (Bangladesh) Limited,Live only
 AP-4252,Pesticides,Active,,Fortazeb 72WP,Fortazeb 72WP,Forward International (BD) Ltd,Live only
@@ -133,9 +127,7 @@ AP-4579,Pesticides,Active,,Gitoczole 11SC,Gitoczole 11SC,Gurpukur Corporation,Li
 AP-4580,Pesticides,Active,,Amatozole 11SC,Amatozole 11SC,Amana Agro Science,Live only
 AP-4581,Pesticides,Active,,Forfeat 10.5WDG,Forfeat 10.5WDG,Forward International (BD) Ltd,Live only
 AP-4622,Pesticides,Active,,Boom 72WP,Boom 72WP,M/S  Lark International,Live only
-AP-4625,Pesticides,Active,,SB-Zeb 72WP,SB-Zeb 72WP,SB Crop Care Industries Ltd,Live only
 AP-4761,Pesticides,Active,,Osivit 80 WDG,Osivit 80 WDG,Osiris Agro,Live only
-AP-4794,Pesticides,Active,,Rondo 72 WDG,Rondo 72 WDG,RiceCo International Bangladesh Ltd.,Live only
 AP-4795,Pesticides,Active,,Filwell 48SL,Filwell 48SL,Agrinet Crop Care Bangladesh,Live only
 AP-4889,Pesticides,Active,,Anth 55 EC,Anth 55 EC,A R Agrochem BD Ltd,Live only
 AP-4894,Pesticides,Active,,Thuja 40EC,Thuja 40EC,Crop Life Agro Chemicals Limited,Live only
@@ -182,7 +174,6 @@ AP-5185,Pesticides,Active,,Bendar 18WP,Bendar 18WP,Super Agro Services Co. Ltd,L
 AP-5186,Pesticides,Active,,Georjerice Gold 18WP,Georjerice Gold 18WP,Kohinoor Agro  Chemicals,Live only
 AP-5187,Pesticides,Active,,Boomer 18WP,Boomer 18WP,M/S Agro Business Support Limited,Live only
 AP-5188,Pesticides,Active,,Adora Plus 18WP,Adora Plus 18WP,Agrinet Crop Care Bangladesh,Live only
-AP-5189,Pesticides,Active,,Lalteer 18WP,Lalteer 18WP,Chens Crop Science Bangladesh Ltd,Live only
 AP-5190,Pesticides,Active,,Naingla 18WP,Naingla 18WP,Evergreen Crop Care Limited,Live only
 AP-5191,Pesticides,Active,,Palam 18WP,Palam 18WP,PAFS Agro International co.,Live only
 AP-5194,Pesticides,Active,,Dibar 18WP,Dibar 18WP,SAM Agro Chemical,Live only
@@ -202,7 +193,6 @@ AP-5233,Pesticides,Active,,Force Cyper 4.5EC,Force Cyper 4.5EC,Forward Internati
 AP-5234,Pesticides,Active,,Naturethrin 3WDG,Naturethrin 3WDG,Nature Care Manufacturing Industry Ltd.,Live only
 AP-5244,Pesticides,Active,,Nilama 70WDG,Nilama 70WDG,Padma Agro Sprayers Co,Live only
 AP-5245,Pesticides,Active,,Fame 70WDG,Fame 70WDG,Haychem (Bangladesh) Limited,Live only
-AP-5262,Pesticides,Active,,Senate 55EC,Senate 55EC,M/S Onechem,Live only
 AP-5270,Pesticides,Active,,Unistar 50SC,Unistar 50SC,Unifarma Bangladesh Industries Ltd.,Live only
 AP-5275,Pesticides,Active,,Haymanil 55WDG,Haymanil 55WDG,Haychem (Bangladesh) Limited,Live only
 AP-5276,Pesticides,Active,,Fultime 50WDG,Fultime 50WDG,ACI Formulations PLC,Live only
@@ -239,7 +229,6 @@ AP-5439,Pesticides,Active,,Bactaf 50 SP,Bactaf 50 SP,Auto Crop Care Limited,Live
 AP-5440,Pesticides,Active,,Hurricane 30 WP,Hurricane 30 WP,M/S Sea trade Fertilizer Ltd,Live only
 AP-5441,Pesticides,Active,,Agrichlor 18 WP,Agrichlor 18 WP,Agrivision Bangladesh,Live only
 AP-5442,Pesticides,Active,,Nesaf 18 WP,Nesaf 18 WP,Bengal Crop Care Limited,Live only
-AP-5443,Pesticides,Active,,G-Chlor 18 WP,G-Chlor 18 WP,Bengal Crop Care Limited,Live only
 AP-5444,Pesticides,Active,,A-Chlor 18 WP,A-Chlor 18 WP,Agrisel Bangladesh Co. Ltd,Live only
 AP-5445,Pesticides,Active,,Aceben 18 WP,Aceben 18 WP,Corbel International Limited,Live only
 AP-5446,Pesticides,Active,,Fair Clean 18WP,Fair Clean 18WP,Fair Agro Chemicals Services Ltd,Live only
@@ -252,7 +241,6 @@ AP-5476,Pesticides,Active,,Samolin 33EC,Samolin 33EC,SAM Agro Chemical,Live only
 AP-5477,Pesticides,Active,,Torunil 33EC,Torunil 33EC,Square Pharmaceuticals PLC.,Live only
 AP-5478,Pesticides,Active,,Herbilin 33EC,Herbilin 33EC,M/S Aranya Crop Care Ltd,Live only
 AP-5484,Pesticides,Active,,Lifeline 28SL,Lifeline 28SL,RiceCo International Bangladesh Ltd.,Live only
-AP-5521,Pesticides,Active,,Aloron 50WG,Aloron 50WG,Sweet Agrovet Limited,Live only
 AP-5522,Pesticides,Active,,Lutham 40WDG,Lutham 40WDG,Mcdonald Bangladesh Pvt Ltd,Live only
 AP-5523,Pesticides,Active,,Lufzan 40WDG,Lufzan 40WDG,Agro Link BD,Live only
 AP-5524,Pesticides,Active,,Jamir 20EC,Jamir 20EC,M/S Intefa,Live only
@@ -275,7 +263,6 @@ AP-5593,Pesticides,Active,,Midanil 50WDG,Midanil 50WDG,Fasal Agro Industries Ltd
 AP-5594,Pesticides,Active,,Tomahulk 5G,Tomahulk 5G,M/S Eminence Chemical Industries Ltd,Live only
 AP-5595,Pesticides,Active,,Jumka 70WDG,Jumka 70WDG,Gurpukur Corporation,Live only
 AP-5596,Pesticides,Active,,Muntaha 70WDG,Muntaha 70WDG,SQ Nafis Crop Care Limited,Live only
-AP-5603,Pesticides,Active,,Jubas Plus 2.5EC,Jubas Plus 2.5EC,M/S Intefa,Live only
 AP-5605,Pesticides,Active,,Ratoma 0.005% RB,Ratoma 0.005% RB,Square Pharmaceuticals PLC.,Live only
 AP-5609,Pesticides,Active,,Mancolaxyl 72WP,Mancolaxyl 72WP,RiceCo International Bangladesh Ltd.,Live only
 AP-5630,Pesticides,Active,,Bismazol 20WP,Bismazol 20WP,Square Pharmaceuticals PLC.,Live only
@@ -286,7 +273,6 @@ AP-5637,Pesticides,Active,,Extra Klin 33EC,Extra Klin 33EC,Green Bangla Agrovet 
 AP-5653,Pesticides,Active,,Evaclean 18WP,Evaclean 18WP,EH & AgroVet Ltd,Live only
 AP-5654,Pesticides,Active,,Ble Raj 32WP,Ble Raj 32WP,Blessing Agrovet Industries Ltd,Live only
 AP-5656,Pesticides,Active,,Extrafen 55SC,Extrafen 55SC,Kohinoor Agro  Chemicals,Live only
-AP-5657,Pesticides,Active,,Atraforce Plus 55SC,Atraforce Plus 55SC,Sixon Chem BD Ltd.,Live only
 AP-5665,Pesticides,Active,,Deenathrin 10EC,Deenathrin 10EC,SARKER TRADING INTERNATIONAL,Live only
 AP-5669,Pesticides,Active,,Pannel 50SC,Pannel 50SC,M/S Mimpex Agro Chemicals Ltd,Live only
 AP-5670,Pesticides,Active,,Poluck 50SC,Poluck 50SC,Pace Import & Export Ltd.,Live only
@@ -306,7 +292,6 @@ AP-5713,Pesticides,Active,,Aim-Tez 3WDG,Aim-Tez 3WDG,M/S Agricultural Input Mark
 AP-5714,Pesticides,Active,,One Short 3WDG,One Short 3WDG,Smart Agrovet,Live only
 AP-5715,Pesticides,Active,,Carbotin 4EC,Carbotin 4EC,ICI Agri Care,Live only
 AP-5716,Pesticides,Active,,Sanstar 10EC,Sanstar 10EC,Mcdonald Bangladesh Pvt Ltd,Live only
-AP-5740,Pesticides,Active,,Plato 7.89EC,Plato 7.89EC,Haychem (Bangladesh) Limited,Live only
 AP-5760,Pesticides,Active,,Tear Plus 50 WDG,Tear Plus 50 WDG,Blessing Agrovet Industries Ltd,Live only
 AP-5761,Pesticides,Active,,E-Tap Plus 50WDG,E-Tap Plus 50WDG,East West Chemicals Ltd.,Live only
 AP-5762,Pesticides,Active,,Lumia 50WDG,Lumia 50WDG,Pace Import & Export Ltd.,Live only
@@ -341,14 +326,12 @@ AP-5863,Pesticides,Active,,Copter 55SC,Copter 55SC,M/S Mimpex Agro Chemicals Ltd
 AP-5864,Pesticides,Active,,Triozine 55 SC,Triozine 55 SC,Haychem (Bangladesh) Limited,Live only
 AP-5866,Pesticides,Active,,Prism 27.5 SC,Prism 27.5 SC,ACI Formulations PLC,Live only
 AP-5867,Pesticides,Active,,Bajna 55 SC,Bajna 55 SC,General Agro Chemicals Ltd.,Live only
-AP-5893,Pesticides,Active,,Chi-Cord 10 EC,Chi-Cord 10 EC,Hossain Traders,Live only
 AP-5901,Pesticides,Active,,Faand 4EC,Faand 4EC,Agroiris (BD) Ltd,Live only
 AP-5903,Pesticides,Active,,KG Shurma 3 WDG,KG Shurma 3 WDG,Glorious Crop Care Limited,Live only
 AP-5904,Pesticides,Active,,Abba Star 3WDG,Abba Star 3WDG,Vision Agro,Live only
 AP-5905,Pesticides,Active,,Surjo 3 WG,Surjo 3 WG,ICI Agri Care,Live only
 AP-5906,Pesticides,Active,,Tab. Thrim 3 WDG,Tab. Thrim 3 WDG,TAB Brand Agro,Live only
 AP-5907,Pesticides,Active,,Abacyper 3 WDG,Abacyper 3 WDG,M/S Take Care,Live only
-AP-5913,Pesticides,Active,,Aplus 50 SC,Aplus 50 SC,EH & AgroVet Ltd,Live only
 AP-5914,Pesticides,Active,,Filanto 80 WDG,Filanto 80 WDG,ACI Formulations PLC,Live only
 AP-5915,Pesticides,Active,,Apon 40 WDG,Apon 40 WDG,Crop Protection & Care Center,Live only
 AP-5916,Pesticides,Active,,Vanguard 40 WG,Vanguard 40 WG,M/S Asia Trade International,Live only
@@ -366,7 +349,6 @@ AP-5967,Pesticides,Active,,Pahar 80 WDG,Pahar 80 WDG,Smart Agrovet,Live only
 AP-5968,Pesticides,Active,,Currency 80 WDG,Currency 80 WDG,Tata Crop Care Company,Live only
 AP-5973,Pesticides,Active,,Phobia 10 SC,Phobia 10 SC,Xplore Business Limited,Live only
 AP-5980,Pesticides,Active,,Tomcat 80 WDG,Tomcat 80 WDG,Canary Limited,Live only
-AP-5981,Pesticides,Active,,Positron Plus 80 WDG,Positron Plus 80 WDG,BAI AGRICULTURAL INDUSTRIES LIMITED,Live only
 AP-5983,Pesticides,Active,,Rimixam 70 WDG,Rimixam 70 WDG,Rajib Agro Chemicals Limited,Live only
 AP-6000,Pesticides,Active,,Farmarb 15 SC,Farmarb 15 SC,Goldenkey Agribusiness Company Limited,Live only
 AP-6003,Pesticides,Active,,Ziczole 20 EC,Ziczole 20 EC,Gurpukur Corporation,Live only
@@ -380,7 +362,6 @@ AP-6011,Pesticides,Active,,Ricofen Plus 20 EC,Ricofen Plus 20 EC,M/S. Rico Agrov
 AP-6030,Pesticides,Active,,Rat Finish,Rat Finish,ACI Formulations PLC,Live only
 AP-6032,Pesticides,Active,,Rat killer,Rat killer,US Agro Limited,Live only
 AP-6034,Pesticides,Active,,Koradex 50SP,Koradex 50SP,Marshal Agrovet Chemical Industries Ltd,Live only
-AP-6036,Pesticides,Active,,Red Card 20 WDG,Red Card 20 WDG,M/S Eminence Chemical Industries Ltd,Live only
 AP-6050,Pesticides,Active,,Nasok 72 WP,Nasok 72 WP,BACI Limited,Live only
 AP-6051,Pesticides,Active,,Midsil 72WP,Midsil 72WP,Midland Agro Industries,Live only
 AP-6079,Pesticides,Active,,Osbenclor 18 WP,Osbenclor 18 WP,RADICO AGRO LIMITED,Live only
@@ -400,7 +381,6 @@ AP-6094,Pesticides,Active,,Livina 18 WP,Livina 18 WP,Auto Crop Care Limited,Live
 AP-6095,Pesticides,Active,,Nishes 18 WP,Nishes 18 WP,Agroiris (BD) Ltd,Live only
 AP-6096,Pesticides,Active,,Bibarna 18 WP,Bibarna 18 WP,TAB Brand Agro,Live only
 AP-6097,Pesticides,Active,,Pixar 18 WP,Pixar 18 WP,Basic Agrovet,Live only
-AP-6098,Pesticides,Active,,Agacha clear 18 WP,Agacha clear 18 WP,M/S. Chashi Agro Care,Live only
 AP-6099,Pesticides,Active,,Tata Clear 40 WP,Tata Clear 40 WP,Tata Crop Care Company,Live only
 AP-6100,Pesticides,Active,,Mapclorak 40 WP,Mapclorak 40 WP,Map Agro Industries Ltd,Live only
 AP-6101,Pesticides,Active,,Ronorac 40 WP,Ronorac 40 WP,Agrivision Bangladesh,Live only
@@ -450,8 +430,6 @@ AP-6186,Pesticides,Active,,Veto 20 SL,Veto 20 SL,Crop Protection & Care Center,L
 AP-6187,Pesticides,Active,,Midacrop 70 WDG,Midacrop 70 WDG,Chens Crop Science Bangladesh Ltd,Live only
 AP-6188,Pesticides,Active,,Imicare 70 WDG,Imicare 70 WDG,GME Agro Limited,Live only
 AP-6189,Pesticides,Active,,Green Feedor 70 WG,Green Feedor 70 WG,Evergreen Crop Care Limited,Live only
-AP-6190,Pesticides,Active,,Imida Gold 70WG,Imida Gold 70WG,Hazi Abdul Hakim Sowdagar,Live only
-AP-6191,Pesticides,Active,,Kreshok Bondhu Plus 70 WDG,Kreshok Bondhu Plus 70 WDG,Genetica Industries Limited,Live only
 AP-6192,Pesticides,Active,,Narita 10 EC,Narita 10 EC,M/S Mimpex Agro Chemicals Ltd,Live only
 AP-6193,Pesticides,Active,,Aroma Plus 80 WDG,Aroma Plus 80 WDG,M/S. Atherton Imbros Co. Ltd.,Live only
 AP-6194,Pesticides,Active,,Ibosin 80 WG,Ibosin 80 WG,Square Pharmaceuticals PLC.,Live only
@@ -478,7 +456,6 @@ AP-6216,Pesticides,Active,,L-Acedaprid 70WDG,L-Acedaprid 70WDG,The Limit Agropro
 AP-6217,Pesticides,Active,,Moto 25 WDG,Moto 25 WDG,Surovi Agro Industries Ltd.,Live only
 AP-6218,Pesticides,Active,,Anova 75 SP,Anova 75 SP,Mark Trading,Live only
 AP-6219,Pesticides,Active,,Ansect 75SP,Ansect 75SP,"Eastchem  Bangladesh Co., Ltd.",Live only
-AP-6220,Pesticides,Active,,Bahadur 95SG,Bahadur 95SG,Clean Agro,Live only
 AP-6221,Pesticides,Active,,Galab 20 EC,Galab 20 EC,Ad. Agro,Live only
 AP-6222,Pesticides,Active,,Strong 95 SP,Strong 95 SP,Mohananda Agro Products Ltd.,Live only
 AP-6223,Pesticides,Active,,Ocean 95SP,Ocean 95SP,Desh Agro Services Company Ltd,Live only
@@ -538,7 +515,6 @@ AP-6278,Pesticides,Active,,Astrum 60 WDG,Astrum 60 WDG,RiceCo International Bang
 AP-6279,Pesticides,Active,,Daroon 80 WDG,Daroon 80 WDG,Padma Agro Sprayers Co,Live only
 AP-6280,Pesticides,Active,,Ryzin 80 WDG,Ryzin 80 WDG,Corbel International Limited,Live only
 AP-6281,Pesticides,Active,,Olig 75 WDG,Olig 75 WDG,Byter Crop Protection Bangladesh Co. Ltd.,Live only
-AP-6282,Pesticides,Active,,Chitra 70 WDG,Chitra 70 WDG,Green Bangla Agrovet Limited,Live only
 AP-6283,Pesticides,Active,,Karen-Kill 68 WDG,Karen-Kill 68 WDG,Radical Crop Science Limited,Live only
 AP-6284,Pesticides,Active,,G-Play 68 WG,G-Play 68 WG,GME Agro Limited,Live only
 AP-6285,Pesticides,Active,,Pypride 68 WDG,Pypride 68 WDG,Sadik Agrochemicals Co. Limited,Live only
@@ -553,7 +529,6 @@ AP-6294,Pesticides,Active,,Agromectin 5 SG,Agromectin 5 SG,Agromine Pvt. Limited
 AP-6295,Pesticides,Active,,Rodela 30WP,Rodela 30WP,Global Agrovet Ltd.,Live only
 AP-6296,Pesticides,Active,,Precise 24 SC,Precise 24 SC,Silica Agro (BD) Co.,Live only
 AP-6297,Pesticides,Active,,N-Flor 24 SC,N-Flor 24 SC,NCL,Live only
-AP-6298,Pesticides,Active,,Alpha Chlorpyriphos 20EC,Alpha Chlorpyriphos 20EC,M/S Alpha Agro Limited,Live only
 AP-6299,Pesticides,Active,,Eyeren 50 WP,Eyeren 50 WP,Marygold Agro Science Limited,Live only
 AP-6301,Pesticides,Active,,Enfuse 4 G,Enfuse 4 G,Auto Crop Care Limited,Live only
 AP-6302,Pesticides,Active,,Minecto Xtra 40 SC,Minecto Xtra 40 SC,Syngenta Bangladesh Limited,Live only
@@ -581,7 +556,6 @@ AP-6326,Pesticides,Active,,Anamix 55 EC,Anamix 55 EC,Agrisel Bangladesh Co. Ltd,
 AP-6327,Pesticides,Active,,Proxy 20 EC,Proxy 20 EC,Progress Agro Industries,Live only
 AP-6328,Pesticides,Active,,Rock 20 EC,Rock 20 EC,The Shine Agro Industries,Live only
 AP-6329,Pesticides,Active,,Axio 20 EC,Axio 20 EC,Crop Life Agro Chemicals Limited,Live only
-AP-6330,Pesticides,Active,,Duranto 20 EC,Duranto 20 EC,Blessing Agrovet Industries Ltd,Live only
 AP-6331,Pesticides,Active,,KB Superb 20 EC,KB Superb 20 EC,M/S Krishok Bondhu Agro Ltd.,Live only
 AP-6332,Pesticides,Active,,E-Fan Plus 20 EC,E-Fan Plus 20 EC,East West Chemicals Ltd.,Live only
 AP-6333,Pesticides,Active,,Rimly 20 EC,Rimly 20 EC,Century Agro Limited,Live only
@@ -613,14 +587,12 @@ AP-6360,Pesticides,Active,,Flash Hit 70 WDG,Flash Hit 70 WDG,Dhaka Hangzhou Biot
 AP-6361,Pesticides,Active,,IBU 70 WDG,IBU 70 WDG,Genetica Industries Limited,Live only
 AP-6362,Pesticides,Active,,Warrior 70 WDG,Warrior 70 WDG,M/S Eminence Chemical Industries Ltd,Live only
 AP-6363,Pesticides,Active,,Dicarzol 20SP,Dicarzol 20SP,Petrochem (Bangladesh) Limited,Live only
-AP-6364,Pesticides,Active,,Prohori 30 WDG,Prohori 30 WDG,Xplore Business Limited,Live only
 AP-6365,Pesticides,Active,,Knock Super 80 WDG,Knock Super 80 WDG,Xplore Business Limited,Live only
 AP-6366,Pesticides,Active,,Holi 50 WP,Holi 50 WP,Sunseed Pesticides,Live only
 AP-6367,Pesticides,Active,,Eti 25 SC,Eti 25 SC,Symbiosis Technology,Live only
 AP-6368,Pesticides,Active,,Oxydal 24 SC,Oxydal 24 SC,Zhengbang Agricultural (Bangladesh) Co. Ltd.,Live only
 AP-6369,Pesticides,Active,,Emiron 20 WDG,Emiron 20 WDG,M/S Eminence Chemical Industries Ltd,Live only
 AP-6370,Pesticides,Active,,One stop 65 WDG,One stop 65 WDG,Ingenious Crop Science Ltd,Live only
-AP-6371,Pesticides,Active,,Green Phos 56% Tablet,Green Phos 56% Tablet,Evergreen Crop Care Limited,Live only
 AP-6372,Pesticides,Active,,Tamima 56% Tablet,Tamima 56% Tablet,Alif Agro,Live only
 AP-6373,Pesticides,Active,,Jass-Phos 57%,Jass-Phos 57%,Smart Agrovet,Live only
 AP-6374,Pesticides,Active,,KB Phos 56% TB,KB Phos 56% TB,M/S Krishok Bondhu Agro Ltd.,Live only
@@ -657,7 +629,6 @@ AP-6406,Pesticides,Active,,Gunnery 75 WP,Gunnery 75 WP,M/S Mondol Traders,Live o
 AP-6407,Pesticides,Active,,MND 69 WP,MND 69 WP,SAM Agro Chemical,Live only
 AP-6408,Pesticides,Active,,Pyrafroce Plus 18.70WG,Pyrafroce Plus 18.70WG,Sixon Chem BD Ltd.,Live only
 AP-6409,Pesticides,Active,,afna 50 WP,afna 50 WP,M/S Intefa,Live only
-AP-6410,Pesticides,Active,,Cactus 70 WDG,Cactus 70 WDG,M/S Sea trade Fertilizer Ltd,Live only
 AP-6411,Pesticides,Active,,McCol 70 WP,McCol 70 WP,Mcdonald Bangladesh Pvt Ltd,Live only
 AP-6412,Pesticides,Active,,Hattrik 78 WP,Hattrik 78 WP,GME Agro Limited,Live only
 AP-6413,Pesticides,Active,,Tricofol 75 WP,Tricofol 75 WP,BAI AGRICULTURAL INDUSTRIES LIMITED,Live only
@@ -672,8 +643,6 @@ AP-6422,Pesticides,Active,,Forever 75 WG,Forever 75 WG,M/S Basic Crop Care,Live 
 AP-6423,Pesticides,Active,,Antiver 75 WDG,Antiver 75 WDG,Progress Agro Industries,Live only
 AP-6425,Pesticides,Active,,Counter 75 WG,Counter 75 WG,ICI Agri Care,Live only
 AP-6426,Pesticides,Active,,KG T2 CARE 75WDG,KG T2 CARE 75WDG,Glorious Crop Care Limited,Live only
-AP-6428,Pesticides,Active,,Super Hi 10WP,Super Hi 10WP,Quality Pest Control Ltd,Live only
-AP-6429,Pesticides,Active,,Solo Plus 40 SC,Solo Plus 40 SC,National Agricare Import and Export Limited,Live only
 AP-6430,Pesticides,Active,,Ifsen 75 WP,Ifsen 75 WP,Sunseed Pesticides,Live only
 AP-6431,Pesticides,Active,,Carbofix 50 WDG,Carbofix 50 WDG,GME Agro Limited,Live only
 AP-6432,Pesticides,Active,,N-Zim 50 WP,N-Zim 50 WP,Nahar Agro International,Live only
@@ -707,7 +676,6 @@ AP-6463,Pesticides,Active,,Adorex 35 SC,Adorex 35 SC,Progress Agro Industries,Li
 AP-6464,Pesticides,Active,,Unique 20 SC,Unique 20 SC,Haychem (Bangladesh) Limited,Live only
 AP-6465,Pesticides,Active,,Paladin 40 SC,Paladin 40 SC,Byter Crop Protection Bangladesh Co. Ltd.,Live only
 AP-6466,Pesticides,Active,,Nilazol 70WP,Nilazol 70WP,M/S Asia Trade International,Live only
-AP-6467,Pesticides,Active,,Coppermet 55 WP,Coppermet 55 WP,Sunseed Pesticides,Live only
 AP-6468,Pesticides,Active,,Detox 72 SL,Detox 72 SL,Mark Trading,Live only
 AP-6469,Pesticides,Active,,Razor 80 WP,Razor 80 WP,Clean Agro,Live only
 AP-6470,Pesticides,Active,,Delight 24 SC,Delight 24 SC,ACI Formulations PLC,Live only
@@ -738,7 +706,6 @@ AP-6499,Pesticides,Active,,Fusinet 20SL,Fusinet 20SL,Square Pharmaceuticals PLC.
 AP-6500,Pesticides,Active,,Crash Down 200 SL,Crash Down 200 SL,Haychem (Bangladesh) Limited,Live only
 AP-6501,Pesticides,Active,,Fosin 20 SL,Fosin 20 SL,Agroiris (BD) Ltd,Live only
 AP-6502,Pesticides,Active,,Glutamine Super 50 SL,Glutamine Super 50 SL,Integrated Crop Solution Bangladesh,Live only
-AP-6503,Pesticides,Active,,Bullet 70 WP,Bullet 70 WP,Mosco Marketing Limited,Live only
 AP-6504,Pesticides,Active,,Magzin 70 WG,Magzin 70 WG,ACI Formulations PLC,Live only
 AP-6505,Pesticides,Active,,Herbinger 10SL,Herbinger 10SL,Fasal Agro Industries Ltd,Live only
 AP-6506,Pesticides,Active,,Banju 18WP,Banju 18WP,Dreamland Agro Products,Live only
@@ -939,7 +906,6 @@ AP-6718,Pesticides,Active,,Jago Super 68WP,Jago Super 68WP,General Agro Chemical
 AP-6719,Pesticides,Active,,NeedOn 82WP,NeedOn 82WP,Need Agro Industries,Live only
 AP-6721,Pesticides,Active,,Sonozim 50 WP,Sonozim 50 WP,S.S Agro Chemicals,Live only
 AP-6723,Pesticides,Active,,Mohazim 50WP,Mohazim 50WP,Purbita Agro Limited,Live only
-AP-6724,Pesticides,Active,,shake 50WDG,shake 50WDG,Aras Agro Ltd.,Live only
 AP-6725,Pesticides,Active,,Newtec 300SC,Newtec 300SC,Syngenta Bangladesh Limited,Live only
 AP-6726,Pesticides,Active,,Chaity 75WP,Chaity 75WP,Marygold Agro Science Limited,Live only
 AP-6727,Pesticides,Active,,Trend 75WP,Trend 75WP,M/S. Atherton Imbros Co. Ltd.,Live only
@@ -955,7 +921,6 @@ AP-6737,Pesticides,Active,,Tobla 50 SC,Tobla 50 SC,Marygold Agro Science Limited
 AP-6738,Pesticides,Active,,Cardion Super 50 WP,Cardion Super 50 WP,Mcdonald crop care limited,Live only
 AP-6740,Pesticides,Active,,Farmbin 32.5SC,Farmbin 32.5SC,Goldenkey Agribusiness Company Limited,Live only
 AP-6741,Pesticides,Active,,Cizophen 32.5SC,Cizophen 32.5SC,Century Agro Limited,Live only
-AP-6742,Pesticides,Active,,Bagha 30EC,Bagha 30EC,Sonali Agro Crop Care,Live only
 AP-6743,Pesticides,Active,,CyproGold 28SC,CyproGold 28SC,Sonali Agro Crop Care,Live only
 AP-6744,Pesticides,Active,,Karina 28 SC,Karina 28 SC,Ingenious Crop Science Ltd,Live only
 AP-6745,Pesticides,Active,,Need Three 55 SC,Need Three 55 SC,Need Agro Industries,Live only
@@ -988,7 +953,6 @@ AP-6773,Pesticides,Active,,Glufosin 15 SL,Glufosin 15 SL,Petrochem Agro Industri
 AP-6774,Pesticides,Active,,Bight 28SL,Bight 28SL,Sara Chemicals Ltd.,Live only
 AP-6775,Pesticides,Active,,Siconet 30 SL,Siconet 30 SL,SAMP LIMITED,Live only
 AP-6776,Pesticides,Active,,Sinam 20SL,Sinam 20SL,Chens Crop Science Bangladesh Ltd,Live only
-AP-6778,Pesticides,Active,,Babysate Star 20 SL,Babysate Star 20 SL,M/S Babylon Agro and Dairy Ltd.,Live only
 AP-6779,Pesticides,Active,,Pora 20SL,Pora 20SL,Digital Crop Solution,Live only
 AP-6780,Pesticides,Active,,Burn 28SL,Burn 28SL,ICI Agri Care,Live only
 AP-6781,Pesticides,Active,,Deadline 28SL,Deadline 28SL,Agrisel Bangladesh Co. Ltd,Live only
@@ -1008,7 +972,6 @@ AP-6797,Pesticides,Active,,Weed Star 18WP,Weed Star 18WP,Desh Agro Services Comp
 AP-6798,Pesticides,Active,,Rafal 18Wp,Rafal 18Wp,Shahjalal Agro Industries,Live only
 AP-6799,Pesticides,Active,,Chitaclor 18WP,Chitaclor 18WP,Chitrah Enterprise,Live only
 AP-6800,Pesticides,Active,,Ethoking 15WG,Ethoking 15WG,F.I.K Agro Products,Live only
-AP-6801,Pesticides,Active,,Redstar 25EC,Redstar 25EC,Nature & Care Agro Products Ltd.,Live only
 AP-6802,Pesticides,Active,,Nishchinto 20 SC,Nishchinto 20 SC,Agriplus Limited,Live only
 AP-6803,Pesticides,Active,,Best 40WP,Best 40WP,Partex Agro Ltd,Live only
 AP-6804,Pesticides,Active,,Traster 36WP,Traster 36WP,Valent Tech Limited,Live only
@@ -1016,7 +979,6 @@ AP-6805,Pesticides,Active,,Rymix 20WP,Rymix 20WP,Canary Limited,Live only
 AP-6806,Pesticides,Active,,Sea Rise Plus 20WDG,Sea Rise Plus 20WDG,Marygold Agro Science Limited,Live only
 AP-6807,Pesticides,Active,,Kattor 20WDG,Kattor 20WDG,Seed Link Limited,Live only
 AP-6808,Pesticides,Active,,Quick Wash 20WDG,Quick Wash 20WDG,Win Agro Limited,Live only
-AP-6809,Pesticides,Active,,Neutral 20WDG,Neutral 20WDG,Need Agro Industries,Live only
 AP-6810,Pesticides,Active,,Aim Create 20WDG,Aim Create 20WDG,M/S Agricultural Input Marketing,Live only
 AP-6811,Pesticides,Active,,Glyter-D-48SL,Glyter-D-48SL,Gurpukur Corporation,Live only
 AP-6812,Pesticides,Active,,Lada 24 OD,Lada 24 OD,Raven Formulations Limited,Live only
@@ -1029,7 +991,6 @@ AP-6818,Pesticides,Active,,Bashory 1.8ME,Bashory 1.8ME,Marygold Agro Science Lim
 AP-6819,Pesticides,Active,,Asma 1.8ME,Asma 1.8ME,Aras Agro Ltd.,Live only
 AP-6820,Pesticides,Active,,Thakaw 1.8ME,Thakaw 1.8ME,Royal Crop Care Limited,Live only
 AP-6821,Pesticides,Active,,S-Aba 1.8 EC,S-Aba 1.8 EC,Sarker Agro Process,Live only
-AP-6822,Pesticides,Active,,Lintec 1.8ME,Lintec 1.8ME,Seed Link Limited,Live only
 AP-6824,Pesticides,Active,,Dugdugi 8ME,Dugdugi 8ME,Marygold Agro Science Limited,Live only
 AP-6826,Pesticides,Active,,Need Biomix 8ME,Need Biomix 8ME,Need Agro Industries,Live only
 AP-6827,Pesticides,Active,,Win Biomix 8ME,Win Biomix 8ME,Win Agro Limited,Live only
@@ -1043,94 +1004,16 @@ AP-6835,Pesticides,Active,,Aim Green 8ME,Aim Green 8ME,M/S Agricultural Input Ma
 AP-6836,Pesticides,Active,,Crop Aba 1.8ME,Crop Aba 1.8ME,Ag Crop Solutions Ltd.,Live only
 AP-6837,Pesticides,Active,,World Super 1.8ME,World Super 1.8ME,M/S World Trade Link,Live only
 AP-6839,Pesticides,Active,,Tatatap 46 WP,Tatatap 46 WP,Tata Crop Care Company,Live only
-AP-6840,Pesticides,Active,,Summit 46WP,Summit 46WP,Agromine Pvt. Limited,Live only
 AP-6841,Pesticides,Active,,Abamax 5ME,Abamax 5ME,Agromine Pvt. Limited,Live only
 AP-6842,Pesticides,Active,,Easi-Aba 1.8ME,Easi-Aba 1.8ME,Easy Agro Care Limited,Live only
 AP-6843,Pesticides,Active,,M-Tin 1.2ME,M-Tin 1.2ME,Mamun Agro Products Ltd,Live only
 AP-6844,Pesticides,Active,,Landtin 1.8EC,Landtin 1.8EC,Motherland Crop Care,Live only
-AP-6940,Pesticides,Active,Isocycloseram 20%,Incipio 20SC,Incipio 20SC,Syngenta Bangladesh Limited,86th
-AP-6978,Pesticides,Active,S. Metolachlor 40% + Mesotrione 4%,Coyote 44SE,Coyote 44SE,RiceCo International Bangladesh Ltd.,86th
-AP-6990,Pesticides,Active,Glufosinate ammonium 30,% Glonium 300SL,Glonium 300 SL,Prestige Agro Dragoan Ltd,86th
-AP-6991,Pesticides,Active,Glufosinate ammonium 30,% Fagun 30SL,Fagun 30 SL,M/S  Lark International,86th
-AP-6992,Pesticides,Active,Glufosinate ammonium 30,% Backlock 30SL,Backlock 30SL,Agro Link BD,86th
-AP-6993,Pesticides,Active,Glufosinate ammonium 30,% Deface 30SL,Deface 30 SL,Versatile Agrochem,86th
-AP-6994,Pesticides,Active,Glufosinate ammonium 30,% Parosh 30SL,Parosh 30SL,Green Care Bangladesh,86th
-AP-6995,Pesticides,Active,Glufosinate ammonium 30,% Amosol 30SL,Amosol 30SL,Fair Agro Chemicals Services Ltd,86th
-AP-6996,Pesticides,Active,Glufosinate ammonium 30,% Roller 30SL,Roller 30SL,Ariyan Crop Science Co. Ltd.,86th
-AP-6997,Pesticides,Active,Glufosinate ammonium 30,% MATUL 30SL,MATUL 30 SL,Agro Land,86th
-AP-6998,Pesticides,Active,Glufosinate ammonium 20,% Tatavolt 20SL,Tatavolt 20SL,Tata Crop Care Company,86th
-AP-6999,Pesticides,Active,Glufosinate ammonium 20,% Symfo 20SL,Symfo 20SL,Symbiosis Technology,86th
-AP-7028,Pesticides,Active,3% + Spirodiclofen Abamectin 27%,Masir 30 SC,Masir 30SC,Alif Agro,86th
-AP-7053,Pesticides,Active,Diflubenzuron 25%,Truly Max 25 WP,Truly Max 25WP,Petrochem (Bangladesh) Limited,86th
 AP-7273,Pesticides,Active,,Samzo 5SG,Samzo 5SG,Safa Agro Products,Live only
-AP-7282,Pesticides,Active,Flonicamid 50%,Flotaf 50 WG,FLOTAF 50WG,Auto Crop Care Limited,86th
-AP-7283,Pesticides,Active,Bifenazate Flonicamid,Galpoo 60 WP,Galpoo 60WP,Seed Link Limited,86th
-AP-7370,Pesticides,Active,Lambada cyhalothrin 9.4% Thiamethoxam 12.6%,+ La-Thia 22SC,La-Thia 22 SC,Jadesheen Agriscience BD Ltd.,86th
-AP-7371,Pesticides,Active,Lambada cyhalothrin 9.5% Thiamethoxam 12.6%,+ Tabu Gold 22.1SC,Tabu Gold 22.1 ZC,Blessing Agrovet Industries Ltd,86th
-AP-7372,Pesticides,Active,Flometoquin 10.50%,Gladius 10SC,GLADIUS 10SC,Auto Crop Care Limited,86th
-AP-7496,Pesticides,Active,Penconazole 10% + Mendipropamid 30%,Koriza 40 EC,Koriza 40EC,M/S Eminence Chemical Industries Ltd,86th
 AP-7527,Pesticides,Active,,Niret plus 43SC,Niret plus 43SC,Bengal Crop Care Limited,Live only
-AP-7541,Pesticides,Active,N-Alkyl Dimethy benzyl ammonium Chloride 40%,Insane 40 WP,Insane 40 WP,Integrated Crop Solution Bangladesh,86th
 AP-7580,Pesticides,Active,,Eagle Mectin 1.8 EC,Eagle Mectin 1.8 EC,Eagle  Crop Care Ltd,Live only
-AP-7659,Pesticides,Active,Glufosinate ammonium 30%,Nuraz 30 SL,Nuruz 30SL,Swazis International Limited,86th
-AP-7660,Pesticides,Active,Glufosinate ammonium 20%,Gamahit 200 SL,Gamahit 200 SL,D.M Crop Care Ltd,86th
-AP-7661,Pesticides,Active,Glufosinate ammonium 20%,Imulin 20 SL,Imulin 20 SL,Dhaka Hangzhou Biotechnology Ltd,86th
-AP-7662,Pesticides,Active,Glufosinate ammonium 20%,Brush 200 SL,Brush 200SL,Clean Agro,86th
-AP-7663,Pesticides,Active,Glufosinate ammonium 20%,Subrina 20 SL,Sabrina 20SL,Raindrop Crop Care,86th
-AP-7665,Pesticides,Active,Glufosinate ammonium 20%,Golden Fire 200 SL,Golden Fire 200SL,Goldenkey Agribusiness Company Limited,86th
-AP-7666,Pesticides,Active,Glufosinate ammonium 20%,Raisonate 20 SL,Raisonate 20 SL,Rajib Agro Chemicals Limited,86th
-AP-7667,Pesticides,Active,Glufosinate ammonium 20%,Glyfos 20 SL,Glyfos 20 SL,Agrivision Crop Care and Public Health,86th
-AP-7668,Pesticides,Active,Glufosinate ammonium 30%,Glunate 30 SL,Glunate 30SL,Bengal Crop Care Limited,86th
-AP-7669,Pesticides,Active,Glufosinate ammonium 30%,Help line 30 SL,Help line 30SL,Marygold Agro Science Limited,86th
-AP-7670,Pesticides,Active,Glufosinate ammonium 30%,Thor 30 SL,THOR 30SL,Fasal Agro Industries Ltd,86th
-AP-7671,Pesticides,Active,Glufosinate ammonium 88%,Siante 88 WDG,Sinate 88 WDG,Surovi Agro Industries Ltd.,86th
-AP-7672,Pesticides,Active,Glufosinate ammonium 20%,Radinate 20 SL,Radinate 20 SL,Radical Crop Science Limited,86th
-AP-7673,Pesticides,Active,Glufosinate ammonium 20%,Lufosin 20 SL,Lufosin 20 SL,ACI Formulations PLC,86th
-AP-7674,Pesticides,Active,Glufosinate ammonium 20%,Duty 20 SL,Duty 20 SL,Islami Agro Chemicals,86th
-AP-7675,Pesticides,Active,Glufosinate ammonium 20%,Rapid 20 SL,Rapid 20 SL,Zhengbang Agricultural (Bangladesh) Co. Ltd.,86th
-AP-7676,Pesticides,Active,Glufosinate ammonium 28%,Cervino 28 SL,CERVINO 28SL,ABEDIN ENTERPRISES,86th
-AP-7677,Pesticides,Active,Glufosinate ammonium 20%,Clavengo 20 SL,Clavengo 20SL,Syngenta Bangladesh Limited,86th
-AP-7678,Pesticides,Active,Glufosinate ammonium 30%,Has Over 30 SL,Has Over 30SL,HAS AGRO LTD,86th
-AP-7679,Pesticides,Active,Glufosinate ammonium 20%,Shikor Porcha 20 SL,Shikor Pocha 20 SL,Union Agro Industries,86th
-AP-7680,Pesticides,Active,Glufosinate ammonium 20%,Sasnate 20 SL,Sasnate 20 SL,Quazi Crop Solution Ltd.,86th
-AP-7681,Pesticides,Active,Glufosinate ammonium 30%,Seeno 30 SL,Seeno 30 SL,Blessing Agro Seed & Fisheries,86th
-AP-7682,Pesticides,Active,Glufosinate ammonium 20%,Cal-Net 20 SL,Cal-Net 200 G/L,Classic Agrovet Ltd.,86th
-AP-7683,Pesticides,Active,Glufosinate ammonium 20%,Sikeran 20 SL,Sikeran 20SL,S.I. Agro International,86th
-AP-7684,Pesticides,Active,Glufosinate ammonium 50%,Kopat 50 SL,Kopat 50 SL,Native Crop Care,86th
-AP-7685,Pesticides,Active,Glufosinate ammonium 20%,Oroclean 20 SL,Oroclean 20SL,Oroni International Ltd,86th
-AP-7686,Pesticides,Active,Glufosinate ammonium 30%,Stock Out 30 SL,Stock Out 20SL,US Agro Limited,86th
-AP-7687,Pesticides,Active,Glufosinate ammonium 36% Oxyfluorfen 3%,+ Neeruchsed 39 SC,Neerushsed 39 SC,Need Agro Industries,86th
-AP-7688,Pesticides,Active,Glufosinate ammonium 36% Oxyfluorfen 3%,+ Root Off 39 SC,Root Off 39 SC,Gourab Industries Limited,86th
 AP-7767,Pesticides,Active,,Jumada 1.8 EC,Jumada 1.8 EC,Quazi Crop Solution Ltd.,Live only
 AP-7768,Pesticides,Active,,Run Tin 1.8 EC,Run Tin 1.8 EC,Runway Crop Care,Live only
-AP-7773,Pesticides,Active,Bifenazate 50%+ Fluonicamid 10%,Fluzate 60 WP,Fluzate 60 WP,Tens Agro Limited,87th
-AP-7821,Pesticides,Active,Flonicamid 25%,Waldo 25 SC,Waldo 25 SC,Canary Limited,87th
-AP-7865,Pesticides,Active,Fluxametamide 10%,Gracia 10 EC,Gracia 10 EC,ACI Formulations PLC,87th
-AP-7866,Pesticides,Active,Isocycloseram 10%,Atresia 10 DC,ATRESIA 10DC,Syngenta Bangladesh Limited,87th
 AP-7936,Pesticides,Active,,Vekar 1.8 EC,Vekar 1.8 EC,Viron Agro Limited,Live only
-AP-7963,Pesticides,Active,Ningnanmycin 10%,Nycin 10 WP,Nycin 10 WP,Swazis International Limited,87th
-AP-8014,Pesticides,Active,Flumioxazin 50%,Joker 50 WP,Joker 50 WP,Krishi Crop Care Limited,87th
-AP-8018,Pesticides,Active,Glufosinate Ammonium 30%,Fluout 30 SL,Fluout 30 SL,Fortune Crop Science,87th
-AP-8019,Pesticides,Active,Glufosinate Ammonium 30%,Glugold 30 SL,Glugold 30 SL,Orient International Chemical Co.,87th
-AP-8020,Pesticides,Active,Glufosinate Ammonium 30%,Uniglorious 30 SL,Uniglorious 30 SL,United Seed Store,87th
-AP-8021,Pesticides,Active,Glufosinate Ammonium 30%,Corofos 30 SL,Corofos 30 SL,Corbel International Limited,87th
-AP-8022,Pesticides,Active,Glufosinate Ammonium 30%,Jinis 30 SL,Jinis 30 SL,M/S Islam Traders,87th
-AP-8023,Pesticides,Active,Glufosinate Ammonium 20%,Bifex 20 SL,Bifex 20SL,Nature & Care Agro Products Ltd.,87th
-AP-8024,Pesticides,Active,Glufosinate Ammonium 20%,Ramsate 20 SL,Ramsate 20 SL,M/S Shahid Enterprise,87th
-AP-8025,Pesticides,Active,Glufosinate Ammonium 20%,Ping Pong 20 SL,Ping Pong 20 SL,M/S Sea trade Fertilizer Ltd,87th
-AP-8026,Pesticides,Active,Glufosinate Ammonium 20%,Kapao 20 SL,Kapao 20 SL,M/S Agro private company,87th
-AP-8027,Pesticides,Active,Glufosinate Ammonium 20%,Gloset 20 SL,Gloset 20SL,Advanta Crop Care Ltd.,87th
-AP-8028,Pesticides,Active,Glufosinate Ammonium 20%,D-Nate 20 SL,D-Nate 20 SL,ADR Crop Care Ltd.,87th
-AP-8030,Pesticides,Active,Glufosinate Ammonium 20%,Dornet 20 SL,Dornet 20 SL,SAMARA AGRO INDUSTRIES,87th
-AP-8031,Pesticides,Active,Glufosinate Ammonium 20%,Bounce 20 SL,Bounce 20 SL,Jadesheen Agriscience BD Ltd.,87th
-AP-8032,Pesticides,Active,Glufosinate Ammonium 28%,Ridweed Plus 28 SL,Ridweed Plus 28 SL,Mcdonald Bangladesh Pvt Ltd,87th
-AP-8033,Pesticides,Active,Glufosinate Ammonium 20%,M-Phosate Plus 20 SL,M-Phosate Plus 20 SL,Sixon Chem BD Ltd.,87th
-AP-8034,Pesticides,Active,Glufosinate Ammonium 20%,Pillarstar 20 SL,Pilarstar 20SL,Shetu Pesticides Ltd,87th
-AP-8035,Pesticides,Active,Glufosinate Ammonium 20%,Vodvodi 20 SL,Vodvodi 20 SL,Annodatta Limited,87th
-AP-8036,Pesticides,Active,Glufosinate Ammonium 20%,Umbrella Plus 20 SL,Umbrella Plus 20 SL,Aama Green Care,87th
-AP-8037,Pesticides,Active,Glufosinate Ammonium 20%,Faysonate 20 SL,Faysonate 20 SL,Farming Agro Chemicals Ltd,87th
-AP-8038,Pesticides,Active,Glufosinate Ammonium 20%,Sucarol 20 SL,Sucarol 20 SL,Agri Source Ltd.,87th
-AP-8052,Pesticides,Active,Tembotrione 20 %,Laudis 20 WG,Laudis 20WG,Bayer CropScience Limited,87th
 AP-8061,Pesticides,Active,,Amostrapid 95 SP,Amostrapid 95 SP,M S AGRO AND FISH CARE,Live only
 AP-8062,Pesticides,Active,,Jnprid 95SP,Jnprid 95SP,JN Agro care,Live only
 AP-8063,Pesticides,Active,,Candid 95SP,Candid 95SP,M/S Islam Traders,Live only
@@ -1163,7 +1046,6 @@ AP-8090,Pesticides,Active,,Fenthin 20 EC,Fenthin 20 EC,MZ Enterprise,Live only
 AP-8091,Pesticides,Active,,Ghatak 20 EC,Ghatak 20 EC,Eco Aid Limited,Live only
 AP-8092,Pesticides,Active,,Cinafen 20EC,Cinafen 20EC,china crop care ltd,Live only
 AP-8093,Pesticides,Active,,Pyfam 20 EC,Pyfam 20 EC,M/S. Popular Agro Industries,Live only
-AP-8095,Pesticides,Active,,Force 70 WG,Force 70 WG,Active Crop Care Ltd.,Live only
 AP-8096,Pesticides,Active,,Fentom 30 SC,Fentom 30 SC,Agro Lead,Live only
 AP-8097,Pesticides,Active,,Black Burn 29.5 SC,Black Burn 29.5 SC,Ingenious Crop Science Ltd,Live only
 AP-8098,Pesticides,Active,,Stranger 30SC,Stranger 30SC,East West Chemicals Ltd.,Live only
@@ -1175,7 +1057,6 @@ AP-8106,Pesticides,Active,,Green Biofume 56 TB,Green Biofume 56 TB,Green Biotech
 AP-8107,Pesticides,Active,,PEXALON 10SC,PEXALON 10SC,Corteva Agriscience Bangladesh Limited,Live only
 AP-8108,Pesticides,Active,,AB 50 WDG,AB 50 WDG,Annodatta Limited,Live only
 AP-8109,Pesticides,Active,,Unigold 32.5 SC,Unigold 32.5 SC,United Seed Agro Limited,Live only
-AP-8110,Pesticides,Active,,Agrigold 32.5 SC,Agrigold 32.5 SC,Agri Gate Bangladesh Limited,Live only
 AP-8111,Pesticides,Active,,FZester 32.5SC,FZester 32.5SC,F Z Agro Science,Live only
 AP-8112,Pesticides,Active,,Extrazone 32.5 SC,Extrazone 32.5 SC,Biotech Agrovet,Live only
 AP-8113,Pesticides,Active,,Tomistar 32.5SC,Tomistar 32.5SC,Soil Agro Chemicals Limited,Live only
@@ -1206,8 +1087,6 @@ AP-8138,Pesticides,Active,,CIP 52.5 WDG,CIP 52.5 WDG,M/S Agro Business Support L
 AP-8139,Pesticides,Active,,Tatazim 52.5 WP,Tatazim 52.5 WP,China Agro Care System,Live only
 AP-8140,Pesticides,Active,,K-2 75 WP,K-2 75 WP,Union Agro Industries,Live only
 AP-8141,Pesticides,Active,,Kanzo 75 WP,Kanzo 75 WP,Annodatta Limited,Live only
-AP-8142,Pesticides,Active,,Oxy Copper 50 WP,Oxy Copper 50 WP,Shahjalal Agro Industries,Live only
-AP-8143,Pesticides,Active,,Amo Copper 50 WP,Amo Copper 50 WP,M/S MAZEDA ENTERPRISE,Live only
 AP-8144,Pesticides,Active,,Talaxyl 55 WP,Talaxyl 55 WP,Talent Agrovet,Live only
 AP-8145,Pesticides,Active,,Ippy 45 WP,Ippy 45 WP,Genetica Industries Limited,Live only
 AP-8146,Pesticides,Active,,Ibdazate 72 WP,Ibdazate 72 WP,IBDA Agro,Live only
@@ -1233,7 +1112,6 @@ AP-8168,Pesticides,Active,,Purbiconazole 40SC,Purbiconazole 40SC,Purbita Agro Li
 AP-8169,Pesticides,Active,,Properti 40 SC,Properti 40 SC,PAFS Agro International co.,Live only
 AP-8170,Pesticides,Active,,Urenus 55SC,Urenus 55SC,Vision Agro,Live only
 AP-8171,Pesticides,Active,,Attractive 50 SC,Attractive 50 SC,M/S Naafco (Pvt) Ltd,Live only
-AP-8172,Pesticides,Active,,Metrozin 55SC,Metrozin 55SC,Bengal Crop Care Limited,Live only
 AP-8173,Pesticides,Active,,Alpona 27.5 SC,Alpona 27.5 SC,Avail Agro Limited,Live only
 AP-8174,Pesticides,Active,,Fun-up 20 SL,Fun-up 20 SL,Biosafe Agritech,Live only
 AP-8175,Pesticides,Active,,Nistej 24 SL,Nistej 24 SL,Advanced Agricultural Solution Ltd,Live only
@@ -1283,7 +1161,6 @@ AP-26,Pesticides,Expired,,Nogos 100 Ec,Nogos 100 Ec,M/S Novartis (Bangladesh) Lt
 AP-43,Pesticides,Expired,,Aerovin 85 WP,Aerovin 85 WP,Riza Enterprises Ltd,Live only
 AP-46,Pesticides,Expired,,DDVP(phosvit)100 EC,DDVP(phosvit)100 EC,M/S Data Enterprises Ltd,Live only
 AP-47,Pesticides,Expired,,Elsan 50Ec,Elsan 50Ec,M/S Data Enterprises Ltd,Live only
-AP-50,Pesticides,Expired,,Diazinon 90 ULVC,Diazinon 90 ULVC,M/S Data Enterprises Ltd,Live only
 AP-51,Pesticides,Expired,,padan 50 SP,padan 50 SP,M/S Data Enterprises Ltd,Live only
 AP-59,Pesticides,Expired,,Actellic 50 ec,Actellic 50 ec,Symggenta  Bangladesh Ltd,Live only
 AP-60,Pesticides,Expired,,Cymbush 10 Ec,Cymbush 10 Ec,Symggenta  Bangladesh Ltd,Live only
@@ -1293,14 +1170,11 @@ AP-64,Pesticides,Expired,,Anthion,Anthion,Bangladesh Pharmaceutical Company Ltd,
 AP-67,Pesticides,Expired,,Zolone 35 Ec,Zolone 35 Ec,Rural Agro Science,Live only
 AP-73,Pesticides,Expired,,Dieldrin 20Ec,Dieldrin 20Ec,The Shell Compnay of Bangladesh,Live only
 AP-74,Pesticides,Expired,,Bidrin 24 WSC,Bidrin 24 WSC,The Shell Compnay of Bangladesh,Live only
-AP-77,Pesticides,Expired,,Mipcin 75 WP,Mipcin 75 WP,Padma Oil Company Ltd,Live only
-AP-78,Pesticides,Expired,,Malathion 57 EC,Malathion 57 EC,Buruak Sastech Ltd,Live only
 AP-79,Pesticides,Expired,,Vapona 100ec,Vapona 100ec,Buruak Sastech Ltd,Live only
 AP-80,Pesticides,Expired,,Bidria 85 WSC,Bidria 85 WSC,The Shell Compnay of Bangladesh,Live only
 AP-81,Pesticides,Expired,,Azodrin 40 WSC,Azodrin 40 WSC,The International Services,Live only
 AP-82,Pesticides,Expired,,Dieldrin 50Wp,Dieldrin 50Wp,The Shell Compnay of Bangladesh,Live only
 AP-83,Pesticides,Expired,,Dieldrin 40 WP,Dieldrin 40 WP,The Shell Compnay of Bangladesh,Live only
-AP-84,Pesticides,Expired,,Ethion 46.5%,Ethion 46.5%,FMC International S. A,Live only
 AP-100,Pesticides,Expired,,Pirimor 50 DP,Pirimor 50 DP,Advance Chemical Industries LTD,Live only
 AP-107,Pesticides,Expired,,FERNIMINE,FERNIMINE,M/S ICT Bangladesh Manufacturer LTD.,Live only
 AP-108,Pesticides,Expired,,Agrothion 50 EC,Agrothion 50 EC,M/S ICT Bangladesh Manufacturer LTD.,Live only
@@ -1309,7 +1183,6 @@ AP-111,Pesticides,Expired,,U 46D Powder,U 46D Powder,BASF Bangladesh Limited,Liv
 AP-112,Pesticides,Expired,,Basfapon,Basfapon,BASF Bangladesh Limited,Live only
 AP-114,Pesticides,Expired,,Thiodan 35 EC,Thiodan 35 EC,M/S Hoechst pharmaceuticals Co Ltd,Live only
 AP-116,Pesticides,Expired,,Torque 50 W/O,Torque 50 W/O,The Shell Compnay of Bangladesh,Live only
-AP-120,Pesticides,Expired,,Thiovit 80 WG,Thiovit 80 WG,Bangladesh Pharmaceutical Company Ltd,Live only
 AP-121,Pesticides,Expired,,Rentokil CCATYPE-C 72%,Rentokil CCATYPE-C 72%,M/S Greenland Engineer & Tractors Company Ltd,Live only
 AP-122,Pesticides,Expired,,Phostoxin,Phostoxin,Broadways Chapmen Limited,Live only
 AP-123,Pesticides,Expired,,Cupravit WP 50,Cupravit WP 50,M/S Bayer Bangladesh Limited,Live only
@@ -1318,16 +1191,13 @@ AP-125,Pesticides,Expired,,Celphos,Celphos,M/S Excel Trading Company Ltd,Live on
 AP-126,Pesticides,Expired,,2ithiol57Ec,2ithiol57Ec,Bangladesh Pharmaceutical Company Ltd,Live only
 AP-129,Pesticides,Expired,,Sevin 10% D,Sevin 10% D,Bangladesh Pharmaceutical Company Ltd,Live only
 AP-136,Pesticides,Expired,,Miral 3GR,Miral 3GR,M/S Novartis (Bangladesh) Ltd,Live only
-AP-138,Pesticides,Expired,,Maladen 57EC (Malathion 57EC),Maladen 57EC (Malathion 57EC),Padma Oil Company Ltd,Live only
 AP-140,Pesticides,Expired,,Arrivo 10EC,Arrivo 10EC,FMC Chemical International AG,Live only
 AP-141,Pesticides,Expired,,Rogor L-40,Rogor L-40,M/S Rupali Sangstha Ltd,Live only
 AP-142,Pesticides,Expired,,Bassa 50% EC,Bassa 50% EC,M/S Data Enterprises Ltd,Live only
 AP-144,Pesticides,Expired,,Tanalith CCA Oxide Type C Paste,Tanalith CCA Oxide Type C Paste,M/S Sisco International Ltd,Live only
 AP-148,Pesticides,Expired,,Pillarcron 100SL,Pillarcron 100SL,,Live only
-AP-150,Pesticides,Expired,,Carbaryl 85 WP,Carbaryl 85 WP,Mcdonald Bangladesh Pvt Ltd,Live only
 AP-151,Pesticides,Expired,,DDVP 100 EC,DDVP 100 EC,Mcdonald Bangladesh Pvt Ltd,Live only
 AP-153,Pesticides,Expired,,Malaton 57EC,Malaton 57EC,M/S Business Point Ltd,Live only
-AP-156,Pesticides,Expired,,Sumithion 3% Dust,Sumithion 3% Dust,Shetu Corporation Ltd,Live only
 AP-158,Pesticides,Expired,,Osmose K-33 C (72%),Osmose K-33 C (72%),M/S Tristan International,Live only
 AP-159,Pesticides,Expired,,Sabion 10G,Sabion 10G,Mcdonald Bangladesh Pvt Ltd,Live only
 AP-161,Pesticides,Expired,,Trebon 10EC,Trebon 10EC,M/S Data Enterprises Ltd,Live only
@@ -1351,7 +1221,6 @@ AP-216,Pesticides,Expired,,KAP 50EC,KAP 50EC,,Live only
 AP-224,Pesticides,Expired,,CHEMOCARB 50EC,CHEMOCARB 50EC,M/S Chemsfil Bangladesh Ltd,Live only
 AP-231,Pesticides,Expired,,Malamar 57EC,Malamar 57EC,M/S United Chemicals Industries,Live only
 AP-240,Pesticides,Expired,,Sovathion 50EC,Sovathion 50EC,,Live only
-AP-252,Pesticides,Expired,,Microthiol Special 80WP,Microthiol Special 80WP,,Live only
 AP-255,Pesticides,Expired,,Sumilias 75EC,Sumilias 75EC,Shetu Corporation Ltd,Live only
 AP-256,Pesticides,Expired,,DIPTEREX SL 50,DIPTEREX SL 50,M/S Beximco Agrochemicals,Live only
 AP-257,Pesticides,Expired,,CEWFON 80SP,CEWFON 80SP,,Live only
@@ -1366,14 +1235,12 @@ AP-283,Pesticides,Expired,,DIAZONYL T60,DIAZONYL T60,M/S S. Amda and Company Lim
 AP-284,Pesticides,Expired,,KADETT 40% Wsc,KADETT 40% Wsc,M/S Bisco Pesticides and Chemicals Limited,Live only
 AP-286,Pesticides,Expired,,MALATOX 57EC,MALATOX 57EC,M/S Bisco Pesticides and Chemicals Limited,Live only
 AP-288,Pesticides,Expired,,RAZTHION 57EC,RAZTHION 57EC,M/S Brother Enterprise Ltd,Live only
-AP-295,Pesticides,Expired,,SETHION 46.5EC,SETHION 46.5EC,,Live only
 AP-296,Pesticides,Expired,,COMSATE,COMSATE,Omnichem Limited,Live only
 AP-299,Pesticides,Expired,,STORMWAYBLOCK Bait 0.005%,STORMWAYBLOCK Bait 0.005%,The International Services,Live only
 AP-300,Pesticides,Expired,,PERMAWOOD CCA Type C 72% Oxide,PERMAWOOD CCA Type C 72% Oxide,M/S BD Associates & Co,Live only
 AP-305,Pesticides,Expired,,RAZFURAN 5G,RAZFURAN 5G,M/S Brother Enterprise Ltd,Live only
 AP-306,Pesticides,Expired,,Paaddy 50 EC,Paaddy 50 EC,M/S Krishi Rashayan (Pvt) Ltd,Live only
 AP-307,Pesticides,Expired,,Edthoate 50 EC,Edthoate 50 EC,M/S Edgro (Pvt) Ltd,Live only
-AP-310,Pesticides,Expired,,Cythrin 10 EC,Cythrin 10 EC,ACI Formulations PLC,Live only
 AP-311,Pesticides,Expired,,Somady 57 EC,Somady 57 EC,Mcdonald Bangladesh Pvt Ltd,Live only
 AP-312,Pesticides,Expired,,Palash 57 EC,Palash 57 EC,Petrochem (Bangladesh) Limited,Live only
 AP-313,Pesticides,Expired,,Malason 57 EC,Malason 57 EC,Map Agro Industries Ltd,Live only
@@ -1385,7 +1252,6 @@ AP-326,Pesticides,Expired,,Nugor 40 EC,Nugor 40 EC,United Phosphorus (Bangladesh
 AP-328,Pesticides,Expired,,Monophos 40 SC,Monophos 40 SC,M/S Alpha Agro Limited,Live only
 AP-330,Pesticides,Expired,,MAlaphos 57 EC,MAlaphos 57 EC,United Phosphorus (Bangladesh) Ltd.,Live only
 AP-336,Pesticides,Expired,,Azodrin 40 WSC.,Azodrin 40 WSC.,BASF Bangladesh Limited,Live only
-AP-337,Pesticides,Expired,,Round Up,Round Up,Monsanto Bangladesh Limited,Live only
 AP-339,Pesticides,Expired,,Phoskill 40 SL,Phoskill 40 SL,United Phosphorus (Bangladesh) Ltd.,Live only
 AP-340,Pesticides,Expired,,Amcodin 40% SL,Amcodin 40% SL,M/S. Atherton Imbros Co. Ltd.,Live only
 AP-341,Pesticides,Expired,,Vitacron 40 SC,Vitacron 40 SC,M/S Shetu Marketing Company,Live only
@@ -1399,26 +1265,16 @@ AP-359,Pesticides,Expired,,Dicofal 18.5 EC,Dicofal 18.5 EC,Mcdonald Bangladesh P
 AP-361,Pesticides,Expired,,Sefoff 20 WG,Sefoff 20 WG,Syngenta Bangladesh Limited,Live only
 AP-363,Pesticides,Expired,,Golter 5G,Golter 5G,Auto Crop Care Limited,Live only
 AP-364,Pesticides,Expired,,Asset 41%,Asset 41%,Agrodev Limited,Live only
-AP-365,Pesticides,Expired,,Chess 25 WP,Chess 25 WP,Syngenta Bangladesh Limited,Live only
-AP-367,Pesticides,Expired,,Mc Sulphur 80% WP,Mc Sulphur 80% WP,Mcdonald Bangladesh Pvt Ltd,Live only
-AP-368,Pesticides,Expired,,Laphos 40 SL,Laphos 40 SL,ACI Limited,Live only
 AP-369,Pesticides,Expired,,Marshal 6G,Marshal 6G,FMC Switzerland II Gmbit,Live only
-AP-370,Pesticides,Expired,,Zinc Phosophide,Zinc Phosophide,M/S Agrani Traders,Live only
 AP-371,Pesticides,Expired,,Lorsban 15G,Lorsban 15G,Auto Crop Care Limited,Live only
 AP-372,Pesticides,Expired,,Padan 4G,Padan 4G,Krishi Kallyan,Live only
-AP-376,Pesticides,Expired,,Chlorpyrifos 20 EC,Chlorpyrifos 20 EC,Safeway Pest Control,Live only
-AP-377,Pesticides,Expired,,Ridomil Gold Mz,Ridomil Gold Mz,Syngenta Bangladesh Limited,Live only
 AP-379,Pesticides,Expired,,Lethal 20 EC,Lethal 20 EC,Shetu Pesticides Ltd,Live only
-AP-381,Pesticides,Expired,,Pyriban 20% EC,Pyriban 20% EC,M/S Agro Development Services Co. Pvt. Ltd.,Live only
-AP-385,Pesticides,Expired,,Diazinone 10GR,Diazinone 10GR,Krishi Kallyan,Live only
 AP-386,Pesticides,Expired,,Vitashield 20 EC,Vitashield 20 EC,SEMCO Corporation Ltd.,Live only
 AP-387,Pesticides,Expired,,Killer 50 EC,Killer 50 EC,Reximco Insecticides Limited,Live only
 AP-390,Pesticides,Expired,,Dimevest 40 EC,Dimevest 40 EC,Harvest International,Live only
 AP-393,Pesticides,Expired,,Fentro 50EC,Fentro 50EC,Map Agro Industries Ltd,Live only
 AP-395,Pesticides,Expired,,Crackdown,Crackdown,Hesbestsons Bangladesh Ltd,Live only
 AP-423,Pesticides,Expired,,Razex 4G,Razex 4G,McDonald Crop Care Ltd,Live only
-AP-425,Pesticides,Expired,,Forwatap 4G,Forwatap 4G,Shetu Pesticides Ltd,Live only
-AP-427,Pesticides,Expired,,Talstar 2 WG,Talstar 2 WG,FMC Chemical International AG,Live only
 AP-433,Pesticides,Expired,,Shanon 10G,Shanon 10G,McDonald Crop Care Ltd,Live only
 AP-434,Pesticides,Expired,,Ambofos 20EC,Ambofos 20EC,M/S. Atherton Imbros Co. Ltd.,Live only
 AP-450,Pesticides,Expired,,Cemitap 50 SP,Cemitap 50 SP,S.S. vision Limited,Live only
@@ -1444,20 +1300,15 @@ AP-532,Pesticides,Expired,,Basudin 10SR,Basudin 10SR,Syngenta Bangladesh Limited
 AP-533,Pesticides,Expired,,Ricon 60EC,Ricon 60EC,Syngenta Bangladesh Limited,Live only
 AP-537,Pesticides,Expired,,Sinocarb 20EC,Sinocarb 20EC,Global Agrovet Ltd.,Live only
 AP-538,Pesticides,Expired,,SRACE 50EC,SRACE 50EC,M/S Agro Care Limited,Live only
-AP-542,Pesticides,Expired,,Ethion 46.5%EC,Ethion 46.5%EC,FMC Chemical International AG,Live only
 AP-549,Pesticides,Expired,,Perfekthion 40EC,Perfekthion 40EC,BASF Bangladesh Limited,Live only
 AP-551,Pesticides,Expired,,Neoron 500 EC,Neoron 500 EC,Syngenta Bangladesh Limited,Live only
 AP-553,Pesticides,Expired,,Silosan-50EC,Silosan-50EC,Syngenta Bangladesh Limited,Live only
-AP-554,Pesticides,Expired,,Diazinon 14 G,Diazinon 14 G,M/S Data Enterprises Ltd,Live only
 AP-555,Pesticides,Expired,,Padan 50SP,Padan 50SP,M/S Data Enterprises Ltd,Live only
 AP-556,Pesticides,Expired,,Elsan 50 EC,Elsan 50 EC,M/S Data Enterprises Ltd,Live only
-AP-557,Pesticides,Expired,,Diazinone 60EC,Diazinone 60EC,M/S Data Enterprises Ltd,Live only
 AP-558,Pesticides,Expired,,Elsan 92ULVC,Elsan 92ULVC,M/S Data Enterprises Ltd,Live only
 AP-559,Pesticides,Expired,,Vitavax 200B,Vitavax 200B,Pioneer Equipment and Chemical CO.,Live only
-AP-560,Pesticides,Expired,,Diazinon 90ULVC,Diazinon 90ULVC,M/S Data Enterprises Ltd,Live only
 AP-581,Pesticides,Expired,,Alphide,Alphide,M/S New Look,Live only
 AP-586,Pesticides,Expired,,Bilshot-N-2/6EC,Bilshot-N-2/6EC,Pharma and Firm,Live only
-AP-589,Pesticides,Expired,,AMCOZIN 60EC,AMCOZIN 60EC,M/S. Atherton Imbros Co. Ltd.,Live only
 AP-593,Pesticides,Expired,,Care 4G,Care 4G,ACI Formulations PLC,Live only
 AP-596,Pesticides,Expired,,Fortune 50SP,Fortune 50SP,M/S Agro Care Limited,Live only
 AP-602,Pesticides,Expired,,Filt 250,Filt 250,M/S Agro Care Limited,Live only
@@ -1466,11 +1317,8 @@ AP-624,Pesticides,Expired,,Sicofen 20% EC,Sicofen 20% EC,Genetica Industries Lim
 AP-625,Pesticides,Expired,,Easy 250EC,Easy 250EC,M/S Alpha Agro Limited,Live only
 AP-629,Pesticides,Expired,,Agrizinon 60EC,Agrizinon 60EC,M/S Agribusiness International,Live only
 AP-631,Pesticides,Expired,,Mighty 20EC,Mighty 20EC,Agro Continent Bangaldesh,Live only
-AP-632,Pesticides,Expired,,Cyren-15S,Cyren-15S,Shetu Corporation Ltd,Live only
 AP-633,Pesticides,Expired,,Lintur 70WS,Lintur 70WS,Syngenta Bangladesh Limited,Live only
 AP-637,Pesticides,Expired,,Sinofen 20EC,Sinofen 20EC,Global Agrovet Ltd.,Live only
-AP-645,Pesticides,Expired,,Suncot 10 EC,Suncot 10 EC,Padma Agro Sprayers Co,Live only
-AP-648,Pesticides,Expired,,Alert 50 EC,Alert 50 EC,Auto Crop Care Limited,Live only
 AP-649,Pesticides,Expired,,Superdan 50% SP,Superdan 50% SP,Omnichem Limited,Live only
 AP-655,Pesticides,Expired,,Chemicide 20 EC,Chemicide 20 EC,M/S Agribusiness International,Live only
 AP-672,Pesticides,Expired,,Q-furan 5S,Q-furan 5S,Qadside Bangladesh LTD.,Live only
@@ -1485,7 +1333,6 @@ AP-728,Pesticides,Expired,,Agridazim-50wp,Agridazim-50wp,M/S Agribusiness Intern
 AP-740,Pesticides,Expired,,Derifen-20EC,Derifen-20EC,ACI Formulations PLC,Live only
 AP-767,Pesticides,Expired,,Durin-10%EC,Durin-10%EC,M/S. M.Hossain Enterprise,Live only
 AP-772,Pesticides,Expired,,Medituf-50SP,Medituf-50SP,M.N Huda & Co.,Live only
-AP-773,Pesticides,Expired,,Touch-20EC,Touch-20EC,Gourab Industries Limited,Live only
 AP-776,Pesticides,Expired,,Limidelta-2.5EC,Limidelta-2.5EC,ACI Formulations PLC,Live only
 AP-777,Pesticides,Expired,,Ethiosul-46.5%EC,Ethiosul-46.5%EC,Hossain Enterprise C.C. Limited,Live only
 AP-784,Pesticides,Expired,,Pharzeb-80wp,Pharzeb-80wp,Pharma and Firm,Live only
@@ -1500,10 +1347,8 @@ AP-822,Pesticides,Expired,,BIJOY-4S,BIJOY-4S,East West Chemicals Ltd.,Live only
 AP-823,Pesticides,Expired,,MBChloro-20EC,MBChloro-20EC,M.B. Agro products Ltd.,Live only
 AP-825,Pesticides,Expired,,LiHae-20%EC,LiHae-20%EC,M/S. M.Hossain Enterprise,Live only
 AP-828,Pesticides,Expired,,FOCUS-50SC,FOCUS-50SC,Auto Crop Care Limited,Live only
-AP-829,Pesticides,Expired,,SHELTER-60EC,SHELTER-60EC,LINUX PESTICIDE PVT LTD,Live only
 AP-836,Pesticides,Expired,,IMPACT-75SP,IMPACT-75SP,M/S Agribusiness International,Live only
 AP-842,Pesticides,Expired,,Edchlor-500EC,Edchlor-500EC,Nokon Limited,Live only
-AP-843,Pesticides,Expired,,HUNTER-500EC,HUNTER-500EC,M/S Agro Care Limited,Live only
 AP-845,Pesticides,Expired,,FASTMIX EW,FASTMIX EW,Auto Crop Care Limited,Live only
 AP-849,Pesticides,Expired,,omnichlor-5%S,omnichlor-5%S,Omnichem Limited,Live only
 AP-865,Pesticides,Expired,,E-fan-20EC,E-fan-20EC,East West Chemicals Ltd.,Live only
@@ -1528,22 +1373,18 @@ AP-940,Pesticides,Expired,,Machete 5S,Machete 5S,Auto Crop Care Limited,Live onl
 AP-945,Pesticides,Expired,,Kirifos 20 EC,Kirifos 20 EC,McDonald Crop Care Ltd,Live only
 AP-946,Pesticides,Expired,,SItap 10EC,SItap 10EC,Green Care Bangladesh,Live only
 AP-953,Pesticides,Expired,,Diazol 60 EC,Diazol 60 EC,Corbel International Limited,Live only
-AP-954,Pesticides,Expired,,MB Malathion 57 EC,MB Malathion 57 EC,M.B. Agro products Ltd.,Live only
 AP-957,Pesticides,Expired,,Femplus 20 EC,Femplus 20 EC,East West Chemicals Ltd.,Live only
 AP-961,Pesticides,Expired,,Agrodan 5S,Agrodan 5S,M/S Agro Care Limited,Live only
 AP-967,Pesticides,Expired,,Farjim 50 WP,Farjim 50 WP,Pharma and Firm,Live only
 AP-968,Pesticides,Expired,,Seem Land 68% WP,Seem Land 68% WP,Shetu Pesticides Ltd,Live only
 AP-973,Pesticides,Expired,,Kinmazeb 80% WP,Kinmazeb 80% WP,Omnichem Limited,Live only
 AP-974,Pesticides,Expired,,Topgun 50 DF,Topgun 50 DF,Global Agrochemicals Ltd,Live only
-AP-976,Pesticides,Expired,,Monarch 72 WP,Monarch 72 WP,M.B. Agro products Ltd.,Live only
 AP-990,Pesticides,Expired,,Sunal 25% EC,Sunal 25% EC,Agrimax Bangladesh Ltd.,Live only
-AP-997,Pesticides,Expired,,BAIFOS-20EC,BAIFOS-20EC,BAI AGRICULTURAL INDUSTRIES LIMITED,Live only
 AP-999,Pesticides,Expired,,Linothrin 10 EC,Linothrin 10 EC,LINUX PESTICIDE PVT LTD,Live only
 AP-1002,Pesticides,Expired,,MBCyper,MBCyper,M.B. Agro products Ltd.,Live only
 AP-1019,Pesticides,Expired,,Hoppergone 50EC,Hoppergone 50EC,M/S Agribusiness International,Live only
 AP-1024,Pesticides,Expired,,Winner 25% EC,Winner 25% EC,Global Agrochemicals Ltd,Live only
 AP-1027,Pesticides,Expired,,AntiRat,AntiRat,Global Agrovet Ltd.,Live only
-AP-1031,Pesticides,Expired,,BAIZINON-60EC,BAIZINON-60EC,BAI AGRICULTURAL INDUSTRIES LIMITED,Live only
 AP-1033,Pesticides,Expired,,AlphadelDF 10WS,AlphadelDF 10WS,M/S Alpha Agro Limited,Live only
 AP-1035,Pesticides,Expired,,FENDI-25EC,FENDI-25EC,Nokon Limited,Live only
 AP-1039,Pesticides,Expired,,HYGRO 40 EC,HYGRO 40 EC,M/S Agribusiness International,Live only
@@ -1554,11 +1395,9 @@ AP-1049,Pesticides,Expired,,SAJID 72 WP,SAJID 72 WP,Reximco Insecticides Limited
 AP-1066,Pesticides,Expired,,Sulmathion 57 EC,Sulmathion 57 EC,Agrimax Bangladesh Ltd.,Live only
 AP-1084,Pesticides,Expired,,Hitfen 20 EC,Hitfen 20 EC,M/S Sea trade Fertilizer Ltd,Live only
 AP-1086,Pesticides,Expired,,DREM-20EC,DREM-20EC,Kingtech Corporation (BD),Live only
-AP-1092,Pesticides,Expired,,Rapid 72 WP,Rapid 72 WP,M/S. SAMP Limited,Live only
 AP-1103,Pesticides,Expired,,Newsnil 72WP,Newsnil 72WP,M/S News Chemicals Industries,Live only
 AP-1106,Pesticides,Expired,,QUINSUARD 25EC,QUINSUARD 25EC,Auto Crop Care Limited,Live only
 AP-1107,Pesticides,Expired,,Luciban 20 EC,Luciban 20 EC,M/S. Lucid Life Science,Live only
-AP-1109,Pesticides,Expired,,CROWN 20 SC,CROWN 20 SC,Auto Crop Care Limited,Live only
 AP-1111,Pesticides,Expired,,DUAL SOLD 960 EC,DUAL SOLD 960 EC,Syngenta Bangladesh Limited,Live only
 AP-1114,Pesticides,Expired,,Vitanon 60 EC,Vitanon 60 EC,SEMCO Corporation Ltd.,Live only
 AP-1118,Pesticides,Expired,,G-Gurd 25 EC,G-Gurd 25 EC,Global Agrovet Ltd.,Live only
@@ -1569,13 +1408,10 @@ AP-1137,Pesticides,Expired,,Newsdin 3G,Newsdin 3G,M/S News Chemicals Industries,
 AP-1140,Pesticides,Expired,,Navigator 48 EC,Navigator 48 EC,Auto Crop Care Limited,Live only
 AP-1142,Pesticides,Expired,,Nac-Fen-20 EC,Nac-Fen-20 EC,National Agricare Import and Export Limited,Live only
 AP-1147,Pesticides,Expired,,AutoGuard 25EC,AutoGuard 25EC,Auto Crop Care Limited,Live only
-AP-1154,Pesticides,Expired,,Queen-25 EC,Queen-25 EC,East West Chemicals Ltd.,Live only
-AP-1156,Pesticides,Expired,,Rambo 10EC,Rambo 10EC,TH Pesticide Ltd.,Live only
 AP-1157,Pesticides,Expired,,Abthrin 10EC,Abthrin 10EC,ABS Agro Products,Live only
 AP-1160,Pesticides,Expired,,Charity 5% SR,Charity 5% SR,Map Agro Industries Ltd,Live only
 AP-1171,Pesticides,Expired,,Polyfit 500EC,Polyfit 500EC,McDonald Crop Care Ltd,Live only
 AP-1172,Pesticides,Expired,,Nacstar 48% EC,Nacstar 48% EC,National Agricare Import and Export Limited,Live only
-AP-1179,Pesticides,Expired,,Fyfanon 44EW,Fyfanon 44EW,Oroni International Ltd,Live only
 AP-1188,Pesticides,Expired,,200M 25WG,200M 25WG,Larsen chemical industries (pvt.) ltd.,Live only
 AP-1200,Pesticides,Expired,,Knilt 250 EC,Knilt 250 EC,Nokon Limited,Live only
 AP-1201,Pesticides,Expired,,Guardian 50 SP,Guardian 50 SP,Larsen chemical industries (pvt.) ltd.,Live only
@@ -1601,15 +1437,11 @@ AP-1331,Pesticides,Expired,,Greenthoate 5EC,Greenthoate 5EC,Green Care Banglades
 AP-1334,Pesticides,Expired,,Neocidin 600EC,Neocidin 600EC,,Live only
 AP-1344,Pesticides,Expired,,DIZITOL-105,DIZITOL-105,M/S Mokow Limited,Live only
 AP-1373,Pesticides,Expired,,Kencozeb M-45,Kencozeb M-45,S.I. Agro International,Live only
-AP-1375,Pesticides,Expired,,Sundomil Plus68WP,Sundomil Plus68WP,Oroni International Ltd,Live only
 AP-1377,Pesticides,Expired,,Sicazim 50WP,Sicazim 50WP,S.I. Agro International,Live only
 AP-1378,Pesticides,Expired,,Hivit 80WDG,Hivit 80WDG,S.I. Agro International,Live only
 AP-1382,Pesticides,Expired,,PUREZOLE25EC,PUREZOLE25EC,M/S Pure Home,Live only
 AP-1386,Pesticides,Expired,,AGRITHANE80WP,AGRITHANE80WP,M/S Agribusiness International,Live only
 AP-1395,Pesticides,Expired,,Chemozim 50WP,Chemozim 50WP,Byco Agro Chemicals,Live only
-AP-1398,Pesticides,Expired,,Rifos- 20 EC,Rifos- 20 EC,M/S. Rico Agrovet,Live only
-AP-1400,Pesticides,Expired,,Mc. Sulphur Gold-80WG,Mc. Sulphur Gold-80WG,Mcdonald Bangladesh Pvt Ltd,Live only
-AP-1419,Pesticides,Expired,,Power 80 WP,Power 80 WP,M/S. Standard Yes Co. Ltd.,Live only
 AP-1427,Pesticides,Expired,,Smart Phos 20 EC,Smart Phos 20 EC,Smart Agrovet,Live only
 AP-1433,Pesticides,Expired,,Cyperstand 10 EC,Cyperstand 10 EC,M/S. Standard Yes Co. Ltd.,Live only
 AP-1441,Pesticides,Expired,,Krishchlor 50 EC,Krishchlor 50 EC,"M/S, MARP Bangladesh",Live only
@@ -1617,13 +1449,10 @@ AP-1443,Pesticides,Expired,,Limozin 50 EC,Limozin 50 EC,Larsen chemical industri
 AP-1446,Pesticides,Expired,,Torpedo 48 EC,Torpedo 48 EC,Global Agrovet Ltd.,Live only
 AP-1449,Pesticides,Expired,,Super Sonic 50 EW,Super Sonic 50 EW,ACI Formulations PLC,Live only
 AP-1452,Pesticides,Expired,,Raid 50 EC,Raid 50 EC,M/S Pure Home,Live only
-AP-1453,Pesticides,Expired,,Select 500 EC,Select 500 EC,ACI Formulations PLC,Live only
 AP-1455,Pesticides,Expired,,Agrifit 500 EC,Agrifit 500 EC,M/S Agribusiness International,Live only
-AP-1460,Pesticides,Expired,,Manage 10 WP,Manage 10 WP,Grow More Agro Science.,Live only
 AP-1469,Pesticides,Expired,,Lily Quine 25 EC,Lily Quine 25 EC,Unifarma Bangladesh Industries Ltd.,Live only
 AP-1471,Pesticides,Expired,,Benofit 6 G,Benofit 6 G,Mcdonald Bangladesh Pvt Ltd,Live only
 AP-1473,Pesticides,Expired,,C=Cyd 50 EC,C=Cyd 50 EC,Maitri Agro Industries,Live only
-AP-1474,Pesticides,Expired,,Shakti 50 SP,Shakti 50 SP,Desh Pesticides,Live only
 AP-1482,Pesticides,Expired,,Sefron 5 G,Sefron 5 G,M/S. Safe Crop Limited,Live only
 AP-1488,Pesticides,Expired,,Sonnet 50 SP,Sonnet 50 SP,Syngenta Bangladesh Limited,Live only
 AP-1491,Pesticides,Expired,,Vital 25 EC,Vital 25 EC,Mcdonald Bangladesh Pvt Ltd,Live only
@@ -1642,13 +1471,11 @@ AP-1577,Pesticides,Expired,,Dice 2.5 EC,Dice 2.5 EC,Blessing Agrovet Industries 
 AP-1582,Pesticides,Expired,,Quinal Green 25 EC,Quinal Green 25 EC,Green Care Bangladesh,Live only
 AP-1587,Pesticides,Expired,,Orgathion 50 EC,Orgathion 50 EC,Green Care Bangladesh,Live only
 AP-1590,Pesticides,Expired,,Term,Term,Alpha Zeta Crop,Live only
-AP-1617,Pesticides,Expired,,Virtako 0.6 GR,Virtako 0.6 GR,Syngenta Bangladesh Limited,Live only
 AP-1639,Pesticides,Expired,,Sinlux 25 EC,Sinlux 25 EC,Global Agrovet Ltd.,Live only
 AP-1676,Pesticides,Expired,,Hexa 5EC,Hexa 5EC,ACI Formulations PLC,Live only
 AP-1701,Pesticides,Expired,,Sinobral 50WP,Sinobral 50WP,Omnichem Limited,Live only
 AP-1705,Pesticides,Expired,,Mixol 72WP,Mixol 72WP,Medicon Agrovet,Live only
 AP-1707,Pesticides,Expired,,Sulphin 80WG,Sulphin 80WG,Medicon Agrovet,Live only
-AP-1718,Pesticides,Expired,,Ecozinon 60EC,Ecozinon 60EC,AMCO AGRICULTURAL INDUSTRIES LIMITED,Live only
 AP-1728,Pesticides,Expired,,M-Fos 48EC,M-Fos 48EC,M/S M.H Gop Care Ltd.,Live only
 AP-1737,Pesticides,Expired,,A Plus 5G,A Plus 5G,ACI Formulations PLC,Live only
 AP-1739,Pesticides,Expired,,Famous 53WP,Famous 53WP,ACI Formulations PLC,Live only
@@ -1657,12 +1484,10 @@ AP-1750,Pesticides,Expired,,Selathrin 2.5EC,Selathrin 2.5EC,M/S. Sealand Agro In
 AP-1751,Pesticides,Expired,,ACME Chlorpuriphos 48EC,ACME Chlorpuriphos 48EC,ACME Pesticides Ltd.,Live only
 AP-1755,Pesticides,Expired,,Mig-5,Mig-5,M/S Alpha Agro Limited,Live only
 AP-1757,Pesticides,Expired,,Diffender 25EC,Diffender 25EC,National Agricare Import and Export Limited,Live only
-AP-1765,Pesticides,Expired,,Cobra 60EC,Cobra 60EC,Map Agro Industries Ltd,Live only
 AP-1769,Pesticides,Expired,,M-thrin 10EC,M-thrin 10EC,M/S M.H Gop Care Ltd.,Live only
 AP-1782,Pesticides,Expired,,Megha Thrin 10EC,Megha Thrin 10EC,meghna fertilizer & agro chemical industries,Live only
 AP-1791,Pesticides,Expired,,S-Cyper 10Ec,S-Cyper 10Ec,S.H. Agro Science,Live only
 AP-1796,Pesticides,Expired,,lam 2.5 Ec,lam 2.5 Ec,ACI Formulations PLC,Live only
-AP-1799,Pesticides,Expired,,Sinbad 1.8 EC,Sinbad 1.8 EC,S.I. Agro International,Live only
 AP-1800,Pesticides,Expired,,Bofen 20Ec,Bofen 20Ec,Agro Arena Associates Ltd,Live only
 AP-1806,Pesticides,Expired,,Danafuran 5G,Danafuran 5G,Byco Agro Chemicals,Live only
 AP-1808,Pesticides,Expired,,I-furan 5G,I-furan 5G,Integrated Crop Solution Bangladesh,Live only
@@ -1695,13 +1520,10 @@ AP-2149,Pesticides,Expired,,Ancozeb 80 WF,Ancozeb 80 WF,A.N corporation,Live onl
 AP-2155,Pesticides,Expired,,Mouzeb 80 WP,Mouzeb 80 WP,Mou International,Live only
 AP-2160,Pesticides,Expired,,Orzeb 80 WP,Orzeb 80 WP,M/S Orbit Agro Industry,Live only
 AP-2162,Pesticides,Expired,,Fetter 80 WP,Fetter 80 WP,Joary Agro,Live only
-AP-2164,Pesticides,Expired,,Phyto 80 WP,Phyto 80 WP,S.S. vision Limited,Live only
 AP-2166,Pesticides,Expired,,Mancarb 75 WP,Mancarb 75 WP,East West Chemicals Ltd.,Live only
 AP-2173,Pesticides,Expired,,Rexigent 50 Sc,Rexigent 50 Sc,Reximco Insecticides Limited,Live only
 AP-2175,Pesticides,Expired,,Fiprako 50 Sc,Fiprako 50 Sc,Mcdonald Bangladesh Pvt Ltd,Live only
-AP-2179,Pesticides,Expired,,Prince 50 Sc,Prince 50 Sc,BASF Bangladesh Limited,Live only
 AP-2182,Pesticides,Expired,,Nil-gent 3GR,Nil-gent 3GR,East West Chemicals Ltd.,Live only
-AP-2185,Pesticides,Expired,,Nicothrin 10 EC,Nicothrin 10 EC,punam international,Live only
 AP-2188,Pesticides,Expired,,Cipfrin 3 GR,Cipfrin 3 GR,Hossain Enterprise C.C. Limited,Live only
 AP-2189,Pesticides,Expired,,Higent 48 EC,Higent 48 EC,Hi Care Agrovet,Live only
 AP-2194,Pesticides,Expired,,Pedephos 48 Ec,Pedephos 48 Ec,Panchi Corporation,Live only
@@ -1721,12 +1543,9 @@ AP-2234,Pesticides,Expired,,Bycovit 80 WDG,Bycovit 80 WDG,Byco Agro Chemicals,Li
 AP-2242,Pesticides,Expired,,Carb 50 WP,Carb 50 WP,Agrinet Crop Care Bangladesh,Live only
 AP-2255,Pesticides,Expired,,Tazamethrin 10 Q,Tazamethrin 10 Q,RK Agro Products Ltd.,Live only
 AP-2260,Pesticides,Expired,,Ambda 2.5 Ec,Ambda 2.5 Ec,AN Corporation,Live only
-AP-2261,Pesticides,Expired,,Rugby 2.5 Ec,Rugby 2.5 Ec,Norther Crop Care Ltd,Live only
 AP-2267,Pesticides,Expired,,Rindel 2.5 Ec,Rindel 2.5 Ec,Agro Arena Associates Ltd,Live only
 AP-2270,Pesticides,Expired,,Verve 41 SL,Verve 41 SL,Larsen chemical industries (pvt.) ltd.,Live only
 AP-2280,Pesticides,Expired,,Hi Fume 56%,Hi Fume 56%,Hi Care Agrovet,Live only
-AP-2287,Pesticides,Expired,,Rajteer 5 G,Rajteer 5 G,M/S Modern Agro Chemicals,Live only
-AP-2299,Pesticides,Expired,,Propiconazole 250 EC,Propiconazole 250 EC,PaIker Imports & Exports,Live only
 AP-2301,Pesticides,Expired,,Azole 250 EC,Azole 250 EC,A.N corporation,Live only
 AP-2305,Pesticides,Expired,,Run 250 EC,Run 250 EC,East West Chemicals Ltd.,Live only
 AP-2307,Pesticides,Expired,,Goldstar 75 SP,Goldstar 75 SP,Nokon Limited,Live only
@@ -1763,22 +1582,17 @@ AP-2432,Pesticides,Expired,,Quevit 80 WDG,Quevit 80 WDG,Unique Agro Technology L
 AP-2441,Pesticides,Expired,,Dekosulf 80 WG,Dekosulf 80 WG,Agrinet Crop Care Bangladesh,Live only
 AP-2442,Pesticides,Expired,,Thiospecial 80 DF,Thiospecial 80 DF,Norther Crop Care Ltd,Live only
 AP-2451,Pesticides,Expired,,Mabendazim 50 WP,Mabendazim 50 WP,Mabco Bangladesh,Live only
-AP-2453,Pesticides,Expired,,Starzim 50 WP,Starzim 50 WP,Astron Agree Care Bangladesh,Live only
 AP-2456,Pesticides,Expired,,Megadazim 50 WP,Megadazim 50 WP,Mars Trade In Culture(Pvt.) Ltd.,Live only
 AP-2463,Pesticides,Expired,,Kishzeb 80 WP,Kishzeb 80 WP,kishan Agro Chemicals,Live only
-AP-2471,Pesticides,Expired,,Mancozim 80 WP,Mancozim 80 WP,Agrinet Crop Care Bangladesh,Live only
 AP-2474,Pesticides,Expired,,Clorofil M- 45,Clorofil M- 45,S.M Agricutural Division,Live only
-AP-2475,Pesticides,Expired,,Mancozeb MZ 80 WP,Mancozeb MZ 80 WP,Gulf Fertilizer & Chemicals Ltd,Live only
 AP-2476,Pesticides,Expired,,Rafizeb 80 WP,Rafizeb 80 WP,Ashrafi Agro science,Live only
 AP-2480,Pesticides,Expired,,Mcozeb 80 WP,Mcozeb 80 WP,MH Crop Care,Live only
 AP-2481,Pesticides,Expired,,Rozeb 80 WP,Rozeb 80 WP,Roza Agro,Live only
 AP-2482,Pesticides,Expired,,Aqizeb 80 WP,Aqizeb 80 WP,Agri-Business And Advisory Service,Live only
 AP-2493,Pesticides,Expired,,Tencozeb,Tencozeb,Marshal Agrovet Chemical Industries Ltd,Live only
-AP-2501,Pesticides,Expired,,Adhezole 28 SC,Adhezole 28 SC,Advanced Agricultural Solution Ltd,Live only
 AP-2513,Pesticides,Expired,,Recometa 72 WP,Recometa 72 WP,Raina Associates,Live only
 AP-2517,Pesticides,Expired,,Roxyl 72 WP,Roxyl 72 WP,Roza Agro,Live only
 AP-2518,Pesticides,Expired,,Sanil 72 WP,Sanil 72 WP,Sreejoni Agrochemical,Live only
-AP-2524,Pesticides,Expired,,Mancodazim Plus 75 WP,Mancodazim Plus 75 WP,Unique Agro Technology Ltd,Live only
 AP-2527,Pesticides,Expired,,Hunchat 75 WP,Hunchat 75 WP,Symbiosis Technology,Live only
 AP-2537,Pesticides,Expired,,Eurothrin 10 Ec,Eurothrin 10 Ec,Euro Bangla Agriculture Ltd,Live only
 AP-2546,Pesticides,Expired,,RanaQuat 20 Ec,RanaQuat 20 Ec,Runner Agro Products Limited,Live only
@@ -1786,10 +1600,8 @@ AP-2550,Pesticides,Expired,,Norphosat 480 SL,Norphosat 480 SL,Norther Crop Care 
 AP-2557,Pesticides,Expired,,Chlotar 5 G,Chlotar 5 G,Adroit Agro Chemical,Live only
 AP-2559,Pesticides,Expired,,Mega Clean 53 WP,Mega Clean 53 WP,East West Chemicals Ltd.,Live only
 AP-2560,Pesticides,Expired,,Tough 30 Ec,Tough 30 Ec,Map Agro Industries Ltd,Live only
-AP-2570,Pesticides,Expired,,Ultima 40 WP,Ultima 40 WP,M/S Mimpex Agro Chemicals Ltd,Live only
 AP-2579,Pesticides,Expired,,Beema 53 WP,Beema 53 WP,Partex Agro Ltd,Live only
 AP-2582,Pesticides,Expired,,M-Fil 10 WP,M-Fil 10 WP,MH Crop Care,Live only
-AP-2584,Pesticides,Expired,,Rajfit 500 EC,Rajfit 500 EC,Siraj Agro International Limited,Live only
 AP-2625,Pesticides,Expired,,Hilton 50 Ec,Hilton 50 Ec,Nidus Agro,Live only
 AP-2626,Pesticides,Expired,,Dyfos 48 Ec,Dyfos 48 Ec,Diya Agrocare,Live only
 AP-2630,Pesticides,Expired,,C-Top 48 Ec,C-Top 48 Ec,Energy Agro Chemicals,Live only
@@ -1809,7 +1621,6 @@ AP-2658,Pesticides,Expired,,Sreejoni 5G,Sreejoni 5G,Sreejoni Agrochemical,Live o
 AP-2659,Pesticides,Expired,,Itafuran 5G,Itafuran 5G,Italy Agro Marketing Company,Live only
 AP-2660,Pesticides,Expired,,Saipro 3 GR,Saipro 3 GR,Siraj Agro International Limited,Live only
 AP-2663,Pesticides,Expired,,Reback 50 Sc,Reback 50 Sc,Anandha Agnovet,Live only
-AP-2664,Pesticides,Expired,,Regiment 50 Sc,Regiment 50 Sc,ACI Chemicals Limited,Live only
 AP-2667,Pesticides,Expired,,Largent 3GR,Largent 3GR,Larsen chemical industries (pvt.) ltd.,Live only
 AP-2668,Pesticides,Expired,,Aqinil 50 Sc,Aqinil 50 Sc,Agro Business & Advisory Service,Live only
 AP-2670,Pesticides,Expired,,Saynik 50 Sc,Saynik 50 Sc,Anandha Agnovet,Live only
@@ -1827,7 +1638,6 @@ AP-2741,Pesticides,Expired,,Mabula 2.5 EC,Mabula 2.5 EC,Mabco Bangladesh,Live on
 AP-2749,Pesticides,Expired,,Etop 20 EC,Etop 20 EC,Energy Agro Chemicals,Live only
 AP-2750,Pesticides,Expired,,Zee-Fen 20 EC,Zee-Fen 20 EC,Three Star Agrochemical Company,Live only
 AP-2753,Pesticides,Expired,,Ricothion 54 EC,Ricothion 54 EC,Raina Associates,Live only
-AP-2758,Pesticides,Expired,,Sarazon 60 EC,Sarazon 60 EC,Sara Chemicals Ltd.,Live only
 AP-2759,Pesticides,Expired,,Thisal 20WP,Thisal 20WP,Invent Trading,Live only
 AP-2768,Pesticides,Expired,,Geviquin 25 EC,Geviquin 25 EC,Gourab Industries Limited,Live only
 AP-2771,Pesticides,Expired,,Mituvit 80 WDG,Mituvit 80 WDG,Sabir Fertilizer & Chemical Coplex Ltd.,Live only
@@ -1871,7 +1681,6 @@ AP-2991,Pesticides,Expired,,T-Mectin 1.8 EC,T-Mectin 1.8 EC,Tajanal Agro Industr
 AP-3012,Pesticides,Expired,,Larkphos Plus 55 EC,Larkphos Plus 55 EC,Balark Enterprise,Live only
 AP-3031,Pesticides,Expired,,Trushoot 2.5 EC,Trushoot 2.5 EC,Six Seasons Bangladesh,Live only
 AP-3032,Pesticides,Expired,,T-lamcyhalo 2.5 EC,T-lamcyhalo 2.5 EC,Tajanal Agro Industries Ltd.,Live only
-AP-3034,Pesticides,Expired,,Lampard2.5EC,Lampard2.5EC,Green Bangla Formulations,Live only
 AP-3036,Pesticides,Expired,,Deamla 2.5 EC,Deamla 2.5 EC,S.M Agricutural Division,Live only
 AP-3040,Pesticides,Expired,,Pinacord 10 EC,Pinacord 10 EC,Paragon Agro Limited,Live only
 AP-3043,Pesticides,Expired,,G-Methrin 10 EC,G-Methrin 10 EC,Gulf Fertilizer & Chemicals Ltd,Live only
@@ -1882,7 +1691,6 @@ AP-3058,Pesticides,Expired,,Shep 20 EC,Shep 20 EC,Shalleen Agro Chemicals Ltd,Li
 AP-3059,Pesticides,Expired,,Iback 20 EC,Iback 20 EC,MS Agro Chemicals Co. Ltd.,Live only
 AP-3060,Pesticides,Expired,,Anithion 57 EC,Anithion 57 EC,M/S Nafis Crop Care,Live only
 AP-3064,Pesticides,Expired,,G-Tax 57% Tab,G-Tax 57% Tab,Taj Agro Enterprise,Live only
-AP-3072,Pesticides,Expired,,T-sulphur 80 WDG,T-sulphur 80 WDG,Tajanal Agro Industries Ltd.,Live only
 AP-3075,Pesticides,Expired,,Dhaksulf 80,Dhaksulf 80,Dhaka Crop Care,Live only
 AP-3079,Pesticides,Expired,,Towzole 30 EC,Towzole 30 EC,East West Chemicals Ltd.,Live only
 AP-3089,Pesticides,Expired,,Astreate 5 EC,Astreate 5 EC,Astron Agree Care Bangladesh,Live only
@@ -1902,8 +1710,6 @@ AP-3145,Pesticides,Expired,,Ruvi One 50WP,Ruvi One 50WP,Astron Agree Care Bangla
 AP-3154,Pesticides,Expired,,Noamectin 1.8 EC,Noamectin 1.8 EC,Sisnova Agro international,Live only
 AP-3156,Pesticides,Expired,,Bulbul 5G,Bulbul 5G,Nokon Limited,Live only
 AP-3158,Pesticides,Expired,,Butagin 5G,Butagin 5G,Shabuj Bangla Agro,Live only
-AP-3170,Pesticides,Expired,,Tiptop 35WP,Tiptop 35WP,East West Chemicals Ltd.,Live only
-AP-3178,Pesticides,Expired,,Cross 500EC,Cross 500EC,Byco Crop Care,Live only
 AP-3183,Pesticides,Expired,,Ananda Clean 10WP,Ananda Clean 10WP,Anandha Agnovet,Live only
 AP-3209,Pesticides,Expired,,Alphavet 80WPG,Alphavet 80WPG,Alfa Agro Limited,Live only
 AP-3222,Pesticides,Expired,,Monivit 80WDG,Monivit 80WDG,Agro Monitor,Live only
@@ -1951,7 +1757,6 @@ AP-3466,Pesticides,Expired,,Phosthrin 50.5 EC,Phosthrin 50.5 EC,Runner Agro Prod
 AP-3472,Pesticides,Expired,,Unito Plus 55EC,Unito Plus 55EC,Unique Agro Technology Ltd,Live only
 AP-3485,Pesticides,Expired,,Droop 45SC,Droop 45SC,Bangla Agri Business,Live only
 AP-3491,Pesticides,Expired,,Krimerin Super 44 EC,Krimerin Super 44 EC,Mcdonald Bangladesh Pvt Ltd,Live only
-AP-3493,Pesticides,Expired,,Fento 20EC,Fento 20EC,The Chemicals,Live only
 AP-3494,Pesticides,Expired,,Tatafen 20EC,Tatafen 20EC,R.B. Trading,Live only
 AP-3499,Pesticides,Expired,,Pasafic 2.5 EC,Pasafic 2.5 EC,MS Agro Chemicals Co. Ltd.,Live only
 AP-3516,Pesticides,Expired,,Fasalfume 57%,Fasalfume 57%,Green Bangla Formulations,Live only
@@ -1996,7 +1801,6 @@ AP-3788,Pesticides,Expired,,Pafip 3GR,Pafip 3GR,PAFS Agro International co.,Live
 AP-3806,Pesticides,Expired,,Lamvent 2.5 EC,Lamvent 2.5 EC,Agri Invent Limited,Live only
 AP-3808,Pesticides,Expired,,Nazillam 2.5 EC,Nazillam 2.5 EC,Nazir Agro Products,Live only
 AP-3822,Pesticides,Expired,,Cymovent 10EC,Cymovent 10EC,Agri Invent Limited,Live only
-AP-3827,Pesticides,Expired,,Holomethrin 10 EC,Holomethrin 10 EC,Global Agrovet Ltd.,Live only
 AP-3880,Pesticides,Expired,,Albarin 3WDG,Albarin 3WDG,Agro Link BD,Live only
 AP-3884,Pesticides,Expired,,Safed 6 WG,Safed 6 WG,MH Crop Care,Live only
 AP-3891,Pesticides,Expired,,Haziryl 85 WP,Haziryl 85 WP,Hazi Abdul Hakim Sowdagar,Live only
@@ -2010,7 +1814,6 @@ AP-3969,Pesticides,Expired,,Trigger 365 EH,Trigger 365 EH,FMC Switzerland II Gmb
 AP-3973,Pesticides,Expired,,Ornate 20 WDG,Ornate 20 WDG,SAM Agro Chemical,Live only
 AP-3977,Pesticides,Expired,,Promix 55 EC,Promix 55 EC,M.N Vision International,Live only
 AP-3978,Pesticides,Expired,,Rabprid 20SL,Rabprid 20SL,M/S Rapid Agro Science,Live only
-AP-3989,Pesticides,Expired,,Imiget 70 WG,Imiget 70 WG,Getco Agri Technologies Ltd.,Live only
 AP-4052,Pesticides,Expired,,Nagama 85 WDG,Nagama 85 WDG,Classic Agrovet Ltd.,Live only
 AP-4055,Pesticides,Expired,,Skyren 2.5 EC,Skyren 2.5 EC,S.K Agro Chemicals,Live only
 AP-4103,Pesticides,Expired,,Boycot 6 WS,Boycot 6 WS,Eithical Agro Vision,Live only
@@ -2029,7 +1832,6 @@ AP-4415,Pesticides,Expired,,Pampas 15 EC,Pampas 15 EC,M/S Sea trade Fertilizer L
 AP-4481,Pesticides,Expired,,Pinkchlor 48 EC,Pinkchlor 48 EC,Pinky Agro Care,Live only
 AP-4490,Pesticides,Expired,,Gilthrin 55EC,Gilthrin 55EC,Need Agro Industries,Live only
 AP-4496,Pesticides,Expired,,Beltap 4 GL,Beltap 4 GL,Corbel International Limited,Live only
-AP-4516,Pesticides,Expired,,E-thrin 2.5 EC,E-thrin 2.5 EC,Easy Agro Service,Live only
 AP-4542,Pesticides,Expired,,Orginon 5.3GR,Orginon 5.3GR,Orbet Agro Industry,Live only
 AP-4543,Pesticides,Expired,,Dalas 104,Dalas 104,Fast mutual corporation,Live only
 AP-4546,Pesticides,Expired,,Mujidan 104,Mujidan 104,M/S Mujib Enterprize,Live only
@@ -2044,7 +1846,6 @@ AP-4614,Pesticides,Expired,,Benison 30EC,Benison 30EC,M/S Original Agro,Live onl
 AP-4706,Pesticides,Expired,,Acmezcb 80WP,Acmezcb 80WP,ACME Pesticides Ltd.,Live only
 AP-4753,Pesticides,Expired,,Imazapyr 21.45L,Imazapyr 21.45L,Nokon Limited,Live only
 AP-4781,Pesticides,Expired,,Zinious 20 SL,Zinious 20 SL,M/S News Chemicals Industries,Live only
-AP-4845,Pesticides,Expired,,Agacha Clean 35WP,Agacha Clean 35WP,Agro Square,Live only
 AP-4860,Pesticides,Expired,,Dyazole 3EC,Dyazole 3EC,Green Bangla Agrovate Limited.,Live only
 AP-4863,Pesticides,Expired,,Saba 1.8EC,Saba 1.8EC,M/S Finela Agro Ltd.,Live only
 AP-4867,Pesticides,Expired,,Red Bangla 1.8E,Red Bangla 1.8E,Green & Red Bangla Agro,Live only
@@ -2062,7 +1863,6 @@ AP-4971,Pesticides,Expired,,Nabid40WDG,Nabid40WDG,M/S Nabid Agro Industries.,Liv
 AP-4990,Pesticides,Expired,,Finecus 10SG,Finecus 10SG,M/S Finela Agro Ltd.,Live only
 AP-4992,Pesticides,Expired,,Ropose5SG,Ropose5SG,M/S News Chemicals Industries,Live only
 AP-4993,Pesticides,Expired,,Alizate 5WDG,Alizate 5WDG,M/S Ali Chemical,Live only
-AP-4999,Pesticides,Expired,,Benzo5SG,Benzo5SG,M/S Authentic Crop Care,Live only
 AP-5021,Pesticides,Expired,,Softzim 50WP,Softzim 50WP,Soft Agro Service,Live only
 AP-5040,Pesticides,Expired,,Luxol 25SC,Luxol 25SC,M/S Luxury Corporation,Live only
 AP-5042,Pesticides,Expired,,Astron 25EC,Astron 25EC,Astron Agree Care Bangladesh,Live only
@@ -2088,13 +1888,10 @@ AP-5213,Pesticides,Expired,,Antarclean 20WP,Antarclean 20WP,Antar Business Inter
 AP-5248,Pesticides,Expired,,Rexidan 4G,Rexidan 4G,M/S Reximco Chemical Industries,Live only
 AP-5260,Pesticides,Expired,,Trifthrin 10EC,Trifthrin 10EC,T.F. Agro,Live only
 AP-5273,Pesticides,Expired,,Redcon 5SG,Redcon 5SG,Green & Red Bangla Agro,Live only
-AP-5274,Pesticides,Expired,,Bindu 80WDG,Bindu 80WDG,M/S. New Life Agrochemicals,Live only
 AP-5280,Pesticides,Expired,,Genin 40WDG,Genin 40WDG,Gurpukur Corporation,Live only
 AP-5281,Pesticides,Expired,,Cinozi 10 G,Cinozi 10 G,china crop care ltd,Live only
 AP-5284,Pesticides,Expired,,Right Way 50WG,Right Way 50WG,Agrinet Crop Care Bangladesh,Live only
 AP-5306,Pesticides,Expired,,Nepathrin Plus 20EC,Nepathrin Plus 20EC,Need Agro Industries,Live only
-AP-5330,Pesticides,Expired,,KB- Lam 2.5 Ec,KB- Lam 2.5 Ec,M/S Krishibid Bangladesh ltd.,Live only
-AP-5356,Pesticides,Expired,,Dizim 50 WP,Dizim 50 WP,General Agro Chemicals Ltd.,Live only
 AP-5377,Pesticides,Expired,,Nokla 50 WP,Nokla 50 WP,RR Consortium,Live only
 AP-5402,Pesticides,Expired,,Titazeb 80 WP,Titazeb 80 WP,Titas Trade Inernational,Live only
 AP-5403,Pesticides,Expired,,Norexzeb 80 WP,Norexzeb 80 WP,Scots Agro Chemicals,Live only
@@ -2104,7 +1901,6 @@ AP-5466,Pesticides,Expired,,Rexitup Plus 95SP,Rexitup Plus 95SP,Reximco Insectic
 AP-5471,Pesticides,Expired,,R-killer 16.5 WP,R-killer 16.5 WP,Reximco Insecticides Limited,Live only
 AP-5481,Pesticides,Expired,,Fenil 525 WDG,Fenil 525 WDG,Classic Agrovet Ltd.,Live only
 AP-5483,Pesticides,Expired,,Desiquat 36WP,Desiquat 36WP,National Agricare Import and Export Limited,Live only
-AP-5520,Pesticides,Expired,,Supermectin 50WDG,Supermectin 50WDG,Super Crop Care Ltd.,Live only
 AP-5526,Pesticides,Expired,,U-Doxacarb 14.5SC,U-Doxacarb 14.5SC,Unicrop Protection Ltd.,Live only
 AP-5531,Pesticides,Expired,,Sajid Plus 10EC,Sajid Plus 10EC,Reximco Insecticides Limited,Live only
 AP-5556,Pesticides,Expired,,Ganida Plus 2.5 EC,Ganida Plus 2.5 EC,General Agro Chemicals Ltd.,Live only
@@ -2153,13 +1949,9 @@ AP-6758,Pesticides,Expired,,Xelora 50FS,Xelora 50FS,BASF Bangladesh Limited,Live
 AP-6777,Pesticides,Expired,,Glufolink 30SL,Glufolink 30SL,Shynee Agro Industries,Live only
 AP-6786,Pesticides,Expired,,Stomp Xtra CS,Stomp Xtra CS,BASF Bangladesh Limited,Live only
 AP-6793,Pesticides,Expired,,Arenaclor 18WP,Arenaclor 18WP,Agro Arena Associates Ltd,Live only
-AP-6975,Pesticides,Expired,Sulfentrazone 48%,Cholon 48SC,Cholon 48SC,Sonali Agro Crop Care,86th
-AP-7664,Pesticides,Expired,Glufosinate ammonium 20%,Jongla 20 SL,Jongla 20SL,Genetica Industries Limited,86th
-AP-8215,Pesticides,Expired,,Zonatrac,Zonatrac,Russell IPM Bangladesh Limited,Live only
 AP-20234,Pesticides,Expired,,new ss,new ss,Test Compnay,Live only
 AP-20245,Pesticides,Expired,,tes df,tes df,Test Compnay,Live only
 AP-40001,Pesticides,Expired,,test-108,test-108,Test Compnay,Live only
-3852,Pesticides (Legacy),Expired,,Xu-Long 40 WG,Xu-Long 40 WG,M/S Eminence Chemical Industries Ltd,Live only
 6183,Pesticides (Legacy),Expired,,Digtal 70WDG,Digtal 70WDG,Agro Systems Ltd.,Live only
 6474,Pesticides (Legacy),Expired,,MetKlo Mix 20WP,MetKlo Mix 20WP,A R Agrochem BD Ltd,Live only
 AP(Bio)-02,Biopesticides,Active,,Q- Phero,Q- Phero,Ispahani Agro Limited,Live only
@@ -2173,11 +1965,9 @@ AP(Bio)-24,Biopesticides,Active,,Tricost 1% WP,Tricost 1% WP,Haychem (Bangladesh
 AP(Bio)-29,Biopesticides,Active,,Tabiz Pheromone Trap,Tabiz Pheromone Trap,Pheromone Industries Ltd,Live only
 AP(Bio)-31,Biopesticides,Active,,Fall Army - Lure,Fall Army - Lure,Ispahani Agro Limited,Live only
 AP(Bio)-32,Biopesticides,Active,,Hay Lure Army Worm,Hay Lure Army Worm,Haychem (Bangladesh) Limited,Live only
-AP(Bio)-33,Biopesticides,Active,,Bio-Cure 1 EC,Bio-Cure 1 EC,Integrated Crop Solution Bangladesh,Live only
 AP(Bio)-34,Biopesticides,Active,,Biotrin,Biotrin,Ispahani Agro Limited,Live only
 AP(Bio)-35,Biopesticides,Active,,K-Mite,K-Mite,Ispahani Agro Limited,Live only
 AP(Bio)-36,Biopesticides,Active,,Ratan Pheromone,Ratan Pheromone,Pheromone Industries Ltd,Live only
-AP(Bio)-37,Biopesticides,Active,,Apache,Apache,ACI Formulations PLC,Live only
 AP(Bio)-38,Biopesticides,Active,,Orolure,Orolure,Oroni International Ltd,Live only
 AP(Bio)-41,Biopesticides,Active,,Haylure Brinjal,Haylure Brinjal,Haychem (Bangladesh) Limited,Live only
 AP(Bio)-42,Biopesticides,Active,,Bio-Lure,Bio-Lure,Integrated Crop Solution Bangladesh,Live only
@@ -2202,17 +1992,8 @@ AP(Bio)-78,Biopesticides,Active,,Biochem 16000WP,Biochem 16000WP,Chemist Crop Ca
 AP(Bio)-79,Biopesticides,Active,,Bio-Viride 1WP,Bio-Viride 1WP,Protistha Agro Industries Ltd,Live only
 AP(Bio)-80,Biopesticides,Active,,Bio-Action,Bio-Action,Ispahani Agro Limited,Live only
 AP(Bio)-81,Biopesticides,Active,,Neemazal 1.2 EC,Neemazal 1.2 EC,M/S Alpha Agro Limited,Live only
-AP(Bio)-82,Biopesticides,Active,Bacilus Amyloliquefaciens,Dynamic WP,Dynamic WP,Russell IPM Bangladesh Limited,86th
-AP(Bio)-83,Biopesticides,Active,Oligosaccharins 3%,Bio Shield,Bio Shield,Ispahani Agro Limited,86th
 AP(Bio)-100,Biopesticides,Active,Baciillus thuringiensus var kurstaki,Bio Fighter,Bio-Fighter,Protistha Agro Industries Ltd,86th
-AP(Bio)-101,Biopesticides,Active,D-limonene,Bio Clean 5 SL,Bio-Clean 5% SL,Ispahani Agro Limited,86th
-AP(Bio)-102,Biopesticides,Active,Sodium Laury Ether sulphate,Fizimite 20EC,Fizimite 20 EC,Russell IPM Bangladesh Limited,86th
-AP(Bio)-104,Biopesticides,Active,E-II-Hexadecenyl Acctate +E-11- Hexadecanol,Bio-Bullet,Bio-Bullet,ACI Formulations PLC,86th
-AP(Bio)-107,Biopesticides,Active,Trichoderma viride,Faicoderma 2 x 108 CFU/G WP,Faicoderma 2 x 10^8 CFU/G WP,Fasal Agro Industries Ltd,87th
 AP(Bio)-108,Biopesticides,Active,9.11-tetradecasienyl acetate & tetradecasienyl acetate,9.12- Haylure spur,Haylure spur,Haychem (Bangladesh) Limited,86th
-AP(Bio)-110,Biopesticides,Active,E-11-Hexadecenyl Acetate+E-11- Hexadecanol,Bicolure Rrinjal,BICOLURE BRINJAL,Bismillah Corporation Limited,86th
-AP(Bio)-129,Biopesticides,Active,Paecilomyces lilacinus 2%,Bio-Nemacis,Bio-Nemacis,Ispahani Agro Limited,87th
-AP(Bio)-133,Biopesticides,Active,Physcion 0.1 % SL,Bio-Viron,Bio-Viron,Ispahani Agro Limited,87th
 AP(Bio)-137,Biopesticides,Active,Curcumin 130 ppm,No Virus,No Virus,Fasal Agro Industries Ltd,87th
 AP(Bio)-138,Biopesticides,Active,z-9-Tetradecenyl Acetate 1%,Tera,Tera,M/S Aranya Crop Care Ltd,87th
 AP(Bio)-139,Biopesticides,Active,Potassium salt of fatty acid 40%,Fytoclean,Fytoclean,Russell IPM Bangladesh Limited,87th
@@ -2221,13 +2002,11 @@ AP(Bio)-141,Biopesticides,Active,,Ricoderma 1.5 WP,Ricoderma 1.5 WP,Rajib Agro C
 AP(Bio)-04,Biopesticides,Expired,,Vegard 5 EC,Vegard 5 EC,SNS Agro Tec,Live only
 AP(Bio)-07,Biopesticides,Expired,,Leomax,Leomax,Russell IPM Bangladesh Limited,Live only
 AP(Bio)-08,Biopesticides,Expired,,Bioneem Plus 1 EC,Bioneem Plus 1 EC,Ispahani Agro Limited,Live only
-AP(Bio)-09,Biopesticides,Expired,,Fytomax 3 EC,Fytomax 3 EC,Russell IPM Bangladesh Limited,Live only
 AP(Bio)-22,Biopesticides,Expired,,Spodo-NPV,Spodo-NPV,Ispahani Agro Limited,Live only
 AP(Bio)-23,Biopesticides,Expired,,Decoprima,Decoprima,Mohsin Enterprise,Live only
 AP(Bio)-25,Biopesticides,Expired,,Monex 0.5 WP,Monex 0.5 WP,Haychem (Bangladesh) Limited,Live only
 AP(Bio)-26,Biopesticides,Expired,,AT Fruit's Lure'69,AT Fruit's Lure'69,Agritech,Live only
 AP(Bio)-27,Biopesticides,Expired,,BSFB Lure'69,BSFB Lure'69,Agritech,Live only
-AP(Bio)-28,Biopesticides,Expired,,AT Cuelure'69,AT Cuelure'69,Agritech,Live only
 AP(Bio)-39,Biopesticides,Expired,,Supernet,Supernet,M/S Naafco (Pvt) Ltd,Live only
 AP(Bio)-40,Biopesticides,Expired,,Fruit Magneto,Fruit Magneto,TBS Agro Ltd.,Live only
 AP(Bio)-43,Biopesticides,Expired,,Cue Magneto,Cue Magneto,TBS Agro Ltd.,Live only
@@ -2237,10 +2016,8 @@ AP(Bio)-58,Biopesticides,Expired,,ABADA 1.8ME,ABADA 1.8ME,M/s Antezar Agro Chemi
 AP(Bio)-59,Biopesticides,Expired,,Aim Green 8.0 ME,Aim Green 8.0 ME,M/S Agricultural Input Marketing,Live only
 AP(Bio)-62,Biopesticides,Expired,,texture Plus 5 ME,texture Plus 5 ME,Cobra Agro Care Limited,Live only
 AP(Bio)-66,Biopesticides,Expired,,Tata Tap 46 WP,Tata Tap 46 WP,Tata Crop Care Company,Live only
-AP(Bio)-105,Biopesticides,Expired,Trichoderma Harzianum,Bio-Derma,Bio-Derma,Ispahani Agro Limited,86th
 AP(Bio)-109,Biopesticides,Expired,9.11-tetradecasienyl acetate & tetradecasienyl acetate,9.12- Sodo King SL Lure,Sodo King SL Lure,TBS Agro Ltd.,86th
 AP(Bio)-118,Biopesticides,Expired,L.delbrueckii var bulgaricus+ S.cerevisiae +B.subtilis,Clybio Gold,Clybio Gold,Conpass Corporation,86th
-AP(Bio)-120,Biopesticides,Expired,Oxymatrine 1%,Matrxine 1EC,Matrixine 1EC,Russell IPM Bangladesh Limited,86th
 AP(Bio)-121,Biopesticides,Expired,"Z9, E11-Tetradecanieyl Acetate",Xlure SPL,Xlure SPL,Russell IPM Bangladesh Limited,86th
 AP(Bio)-122,Biopesticides,Expired,"EZZ,3,8,11-Tetradecanieyl Acetate",Tuta-Lure,Tuta-Lure,Ispahani Agro Limited,86th
 AP(Bio)-123,Biopesticides,Expired,9z-Tetradecanieyl Acetate:Z7-Dodecyl acetate:Z11-Hexadecenyl Acetate96%,Frugi-Lure,Frugi-Lure,Ispahani Agro Limited,86th
@@ -2260,10 +2037,8 @@ PHP-149,Public Health,Active,,Fighter King Brand Mosquito Coil,Fighter King Bran
 PHP-162,Public Health,Active,,Delete 2.5 EC,Delete 2.5 EC,ACI Formulations PLC,Live only
 PHP-163,Public Health,Active,,Limbate 50 EC,Limbate 50 EC,The Limit Agroproducts Ltd,Live only
 PHP-165,Public Health,Active,,Aroma Mosquito Coil,Aroma Mosquito Coil,M/s. Ruma Chemicals Co.,Live only
-PHP-166,Public Health,Active,,Family Super Mosquito Coil,Family Super Mosquito Coil,Joy Chemical Co.,Live only
 PHP-168,Public Health,Active,,Keeper 10 EC,Keeper 10 EC,ACI Formulations PLC,Live only
 PHP-175,Public Health,Active,,Cleaner 50 EC,Cleaner 50 EC,ACI Formulations PLC,Live only
-PHP-184,Public Health,Active,,Missile 50 EC,Missile 50 EC,ACI Formulations PLC,Live only
 PHP-185,Public Health,Active,,Devicyper 10 EC,Devicyper 10 EC,The Limit Agroproducts Ltd,Live only
 PHP-186,Public Health,Active,,ACI Mosquito Insecticide,ACI Mosquito Insecticide,ACI Formulations PLC,Live only
 PHP-203,Public Health,Active,,Suprem Mosquito Coil,Suprem Mosquito Coil,M/S M.K. International,Live only
@@ -2280,12 +2055,9 @@ PHP-238,Public Health,Active,,Lakshaya 2.5Flow,Lakshaya 2.5Flow,Larsen chemical 
 PHP-244,Public Health,Active,,Shastra 0.5% DP,Shastra 0.5% DP,The Limit Agroproducts Ltd,Live only
 PHP-250,Public Health,Active,,Eagle Insect Powder,Eagle Insect Powder,Quazi Enterprises Limited,Live only
 PHP-254,Public Health,Active,,No-Kroach-1%SB,No-Kroach-1%SB,Green Bangla Agrovet Limited,Live only
-PHP-257,Public Health,Active,,Phonix Brand Insecticides Powder,Phonix Brand Insecticides Powder,Khaja Chemical Industries,Live only
 PHP-259,Public Health,Active,,"""Nice"" Brand Mosquito Coil","""Nice"" Brand Mosquito Coil",Salim Enterprise.,Live only
-PHP-260,Public Health,Active,,Super Fighter Mosquito Coil,Super Fighter Mosquito Coil,Supti Chemical Co.,Live only
 PHP-262,Public Health,Active,,RM Brand Mosquito Coil,RM Brand Mosquito Coil,RM Chemical Industries,Live only
 PHP-264,Public Health,Active,,Gear-10EC,Gear-10EC,Green Bangla Agrovet Limited,Live only
-PHP-265,Public Health,Active,,Night Rose Brand Mosquito Coil,Night Rose Brand Mosquito Coil,Inteshar Enterprise,Live only
 PHP-273,Public Health,Active,,Phoenix Brand Mosquito Coil,Phoenix Brand Mosquito Coil,Khaja Chemical Industries,Live only
 PHP-276,Public Health,Active,,Polar King Brand Mosquito Coil,Polar King Brand Mosquito Coil,Shanta Chemical Company,Live only
 PHP-284,Public Health,Active,,Prohari Active Brand Mosquito Coil,Prohari Active Brand Mosquito Coil,Prime Manufacturing and Allied Ind. Ltd.,Live only
@@ -2315,7 +2087,6 @@ PHP-359,Public Health,Active,,Abedin Power King Brand Mosquito Coil,Abedin Power
 PHP-360,Public Health,Active,,Ibich Brand Insecticide Powder,Ibich Brand Insecticide Powder,Three Star Enterprise,Live only
 PHP-362,Public Health,Active,,Vecon,Vecon,Gourab Industries Limited,Live only
 PHP-368,Public Health,Active,,RAK Super Mosfly Mosquito Coil,RAK Super Mosfly Mosquito Coil,SAK Consumer Products Ltd,Live only
-PHP-369,Public Health,Active,,Mosquito Killer,Mosquito Killer,M R Enterprise,Live only
 PHP-372,Public Health,Active,,Night Gun Booster Brand Mosquito Coil,Night Gun Booster Brand Mosquito Coil,S.K. Corporation,Live only
 PHP-375,Public Health,Active,,USA Brand Mosquito Coil,USA Brand Mosquito Coil,USA Corporation,Live only
 PHP-376,Public Health,Active,,Finis Liquid Spray,Finis Liquid Spray,Standard Finis Oil Co.,Live only
@@ -2345,8 +2116,6 @@ PHP-475,Public Health,Active,,Jonaki Brand Mosquito Coil,Jonaki Brand Mosquito C
 PHP-481,Public Health,Active,,Dragon Brand Mosquito Coil,Dragon Brand Mosquito Coil,Sunon International,Live only
 PHP-482,Public Health,Active,,FINIS BLACK BOOSTER MOSQUITO COIL,FINIS BLACK BOOSTER MOSQUITO COIL,Standard Finis Oil Co.,Live only
 PHP-485,Public Health,Active,,Uniper 100 EC,Uniper 100 EC,Mamun Agro Products Ltd,Live only
-PHP-486,Public Health,Active,,Unida 2.5 EC,Unida 2.5 EC,Mamun Agro Products Ltd,Live only
-PHP-487,Public Health,Active,,Unikill 2.8 EC,Unikill 2.8 EC,Mamun Agro Products Ltd,Live only
 PHP-500,Public Health,Active,,IBICH Brand Insect Chalk,IBICH Brand Insect Chalk,Three Star Enterprise,Live only
 PHP-501,Public Health,Active,,Hit Aerosol Crawling Insect Killer,Hit Aerosol Crawling Insect Killer,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-504,Public Health,Active,,S.S. Active Super Brand mosquito Coil,S.S. Active Super Brand mosquito Coil,Sonali Chemical Company,Live only
@@ -2378,7 +2147,6 @@ PHP-604,Public Health,Active,,Boshra jumboo Coil,Boshra jumboo Coil,Sinthiya Che
 PHP-606,Public Health,Active,,Max Fighter Jumboo Mosquito Coil,Max Fighter Jumboo Mosquito Coil,Jahan Chemical,Live only
 PHP-609,Public Health,Active,,Hit Super Brand Insecticide Powder,Hit Super Brand Insecticide Powder,North Bengal Chemical Co.,Live only
 PHP-610,Public Health,Active,,Hit Jumbo Fast Card,Hit Jumbo Fast Card,Godrej Household Products (BD) Pvt. Ltd.,Live only
-PHP-611,Public Health,Active,,Good Knight Jumbo Fast Card,Good Knight Jumbo Fast Card,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-612,Public Health,Active,,Vanish Liquid Insecticide,Vanish Liquid Insecticide,Basic Agrovet,Live only
 PHP-613,Public Health,Active,,Diamond Insect Power,Diamond Insect Power,Green Care Bangladesh,Live only
 PHP-616,Public Health,Active,,M.Rose Plant Fiber Mosquito coil,M.Rose Plant Fiber Mosquito coil,Green Leaves International,Live only
@@ -2391,9 +2159,7 @@ PHP-631,Public Health,Active,,Proton 10WP,Proton 10WP,Digital Agricultural Indus
 PHP-634,Public Health,Active,,Eagle Liquid Sprey,Eagle Liquid Sprey,Quazi Enterprises Limited,Live only
 PHP-0635,Public Health,Active,,Bangla Hi Power Jumbo Mosquito Coil,Bangla Hi Power Jumbo Mosquito Coil,M/s Bangla Food And Chemical Industries,Live only
 PHP-639,Public Health,Active,,Beema Brand Mosquito Coil,Beema Brand Mosquito Coil,Heaven International,Live only
-PHP-645,Public Health,Active,,Super Sun Mosquito Coil,Super Sun Mosquito Coil,R.K. Chemicals Co.,Live only
 PHP-646,Public Health,Active,,Hot Link Mosquito Coil,Hot Link Mosquito Coil,Seed Link Limited,Live only
-PHP-648,Public Health,Active,,Masranga Mosquito Coil,Masranga Mosquito Coil,Shova Consumer Care,Live only
 PHP-656,Public Health,Active,,Maxu Mosquito Coil,Maxu Mosquito Coil,Tasmia Chemical Works,Live only
 PHP-658,Public Health,Active,,Kite Mosquito Coil,Kite Mosquito Coil,Moni Enterprise,Live only
 PHP-660,Public Health,Active,,Boss Mosquito Coil,Boss Mosquito Coil,Arafat Chemical Works,Live only
@@ -2421,19 +2187,13 @@ PHP-716,Public Health,Active,,Eagle Super Powr Mosquito Coil,Eagle Super Powr Mo
 PHP-717,Public Health,Active,,Eagle Max Hit Jumboo Mosq Coil,Eagle Max Hit Jumboo Mosq Coil,Quazi Enterprises Limited,Live only
 PHP-720,Public Health,Active,,Hi Power Insect Powder,Hi Power Insect Powder,MS SM Enterprise,Live only
 PHP-722,Public Health,Active,,K.N. Effective Mosquito Coil,K.N. Effective Mosquito Coil,P.T. Consumer Products Industries.,Live only
-PHP-732,Public Health,Active,,Topas 57EC,Topas 57EC,Sun Corporation,Live only
 PHP-736,Public Health,Active,,TRM-7 Mosquito Coil,TRM-7 Mosquito Coil,Tanisha Corporation,Live only
-PHP-737,Public Health,Active,,Discovery Mosquito Coil,Discovery Mosquito Coil,M/S M.K. International,Live only
 PHP-738,Public Health,Active,,786 Booster Mosquito Coil,786 Booster Mosquito Coil,Masud Consumer Products,Live only
 PHP-739,Public Health,Active,,Super Discovery Mosquito Coil,Super Discovery Mosquito Coil,M/S M.K. International,Live only
-PHP-745,Public Health,Active,,Night Guard Tofan Mosquito Coil,Night Guard Tofan Mosquito Coil,Takwa Marketing Network,Live only
 PHP-0747,Public Health,Active,,Bangla High-Power Mega Mosquito Coil,Bangla High-Power Mega Mosquito Coil,M/s Bangla Food And Chemical Industries,Live only
-PHP-755,Public Health,Active,,Confidence Mosquito Coil,Confidence Mosquito Coil,Confidence Creators,Live only
 PHP-756,Public Health,Active,,Lulu Plant Fiber Brand Mosquito coil,Lulu Plant Fiber Brand Mosquito coil,Evana Crop Life,Live only
 PHP-764,Public Health,Active,,Osithrin Mosquito Coil,Osithrin Mosquito Coil,Osiris Agro,Live only
 PHP-765,Public Health,Active,,Ali Always Time King Mosquito Coil,Ali Always Time King Mosquito Coil,M/S Ali Chemical,Live only
-PHP-767,Public Health,Active,,Good Knight Advanced Xpress Liquid Vaporiser,Good Knight Advanced Xpress Liquid Vaporiser,Godrej Household Products (BD) Pvt. Ltd.,Live only
-PHP-772,Public Health,Active,,Token 10 WP,Token 10 WP,M/S Asia Trade International,Live only
 PHP-774,Public Health,Active,,Dubar 2.5 SC,Dubar 2.5 SC,Babylon Agriscience Ltd,Live only
 PHP-775,Public Health,Active,,Sherat Plus 10 WP,Sherat Plus 10 WP,Babylon Agriscience Ltd,Live only
 PHP-776,Public Health,Active,,Fighter Brand Aerosol,Fighter Brand Aerosol,Supti Chemical Co.,Live only
@@ -2444,7 +2204,6 @@ PHP-781,Public Health,Active,,Ahad 10 WP,Ahad 10 WP,Alif Agro,Live only
 PHP-782,Public Health,Active,,Mix 50 EC,Mix 50 EC,Agrisel Bangladesh Co. Ltd,Live only
 PHP-783,Public Health,Active,,Merisol,Merisol,Marshal Agrovet Chemical Industries Ltd,Live only
 PHP-785,Public Health,Active,,DK Booster Mosquito Coil,DK Booster Mosquito Coil,D.K. Marketing and Trading Co.,Live only
-PHP-789,Public Health,Active,,Patabahar Extra Jumbo Mosquito Coil,Patabahar Extra Jumbo Mosquito Coil,Gree Star Chemical Company,Live only
 PHP-793,Public Health,Active,,Safe Black Brand Mosquito Coil,Safe Black Brand Mosquito Coil,Orpa Trade International,Live only
 PHP-798,Public Health,Active,,RGI Super Power Mosquito Coil,RGI Super Power Mosquito Coil,Rupa Chemical Works,Live only
 PHP-800,Public Health,Active,,Special Power Mosquito Coil,Special Power Mosquito Coil,Jogonnath Chemical Works,Live only
@@ -2457,7 +2216,6 @@ PHP-809,Public Health,Active,,Queen Mega Mosquito Coil,Queen Mega Mosquito Coil,
 PHP-810,Public Health,Active,,Civil Magik Mosquito Coil,Civil Magik Mosquito Coil,Seba Corporation,Live only
 PHP-813,Public Health,Active,,Megnet Mosquito Coil,Megnet Mosquito Coil,M/s Shah Chemical Industries,Live only
 PHP-814,Public Health,Active,,Rocket Plant Fiber Mosquito Coil,Rocket Plant Fiber Mosquito Coil,Nuruzzaman Biswas Industries Ltd.,Live only
-PHP-815,Public Health,Active,,Golden Lion mosquito Coil,Golden Lion mosquito Coil,Goldenkey Agribusiness Company Limited,Live only
 PHP-818,Public Health,Active,,Nice Gold Mosquito Coil,Nice Gold Mosquito Coil,Jannat Industriues BD,Live only
 PHP-819,Public Health,Active,,Nishan Jumboo Mosquito Coil,Nishan Jumboo Mosquito Coil,Khan Chemical,Live only
 PHP-820,Public Health,Active,,Mass Mosquito Coil,Mass Mosquito Coil,Shahela Trading,Live only
@@ -2529,7 +2287,6 @@ PHP-935,Public Health,Active,,Joom Power Mosquito Coil,Joom Power Mosquito Coil,
 PHP-936,Public Health,Active,,VIP Mosquito Coil,VIP Mosquito Coil,Habib Chemicals,Live only
 PHP-937,Public Health,Active,,Joom Mosquito Coil,Joom Mosquito Coil,Advance Personal Care Limited,Live only
 PHP-939,Public Health,Active,,M Fos 20 EC,M Fos 20 EC,M R Enterprise,Live only
-PHP-940,Public Health,Active,,Terminator 13 G,Terminator 13 G,Babylon Agriscience Ltd,Live only
 PHP-941,Public Health,Active,,Octopus Liquid Insecticide,Octopus Liquid Insecticide,R.K. International,Live only
 PHP-942,Public Health,Active,,Alcykon 5 WP,Alcykon 5 WP,Nokon Limited,Live only
 PHP-943,Public Health,Active,,Moharaj Insect powder,Moharaj Insect powder,Bongshe Moharaj & Agro Technology,Live only
@@ -2552,7 +2309,6 @@ PHP-968,Public Health,Active,,Ispat Neem Brand Mosquito Coil,Ispat Neem Brand Mo
 PHP-969,Public Health,Active,,Talent Brand Mosquito Coil,Talent Brand Mosquito Coil,Talent Trading Corporation,Live only
 PHP-970,Public Health,Active,,Gorjon Super Mosquito Coil,Gorjon Super Mosquito Coil,Islam agro industries,Live only
 PHP-971,Public Health,Active,,Murag Mosquito Coil,Murag Mosquito Coil,Sajib consumer products,Live only
-PHP-973,Public Health,Active,,Night Guard Mosquito Coil,Night Guard Mosquito Coil,Takwa Marketing Network,Live only
 PHP-975,Public Health,Active,,Robi Fighter Mosquito Coil,Robi Fighter Mosquito Coil,M/S Alamgir Chemical,Live only
 PHP-976,Public Health,Active,,Star Jambo Brand Mosquito Coil,Star Jambo Brand Mosquito Coil,Star Chemical & Consumer Products,Live only
 PHP-977,Public Health,Active,,Bock Super Mosquito Coil,Bock Super Mosquito Coil,Bashir Chemical Works.,Live only
@@ -2589,7 +2345,6 @@ PHP-1029,Public Health,Active,,Mukim 10 WP,Mukim 10 WP,Genetica Industries Limit
 PHP-1031,Public Health,Active,,Quick Liquid Insecticide,Quick Liquid Insecticide,Green Care Bangladesh,Live only
 PHP-1032,Public Health,Active,,Moskil Liquid Spray,Moskil Liquid Spray,Gourab Industries Limited,Live only
 PHP-1034,Public Health,Active,,Hiltem 50EC,Hiltem 50EC,Gourab Industries Limited,Live only
-PHP-1035,Public Health,Active,,Good Knight Active +,Good Knight Active +,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-1036,Public Health,Active,,Hit Flying Insect Killer,Hit Flying Insect Killer,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-1046,Public Health,Active,,Night Sheba Mosquito Coil,Night Sheba Mosquito Coil,Hazi Chemical Works,Live only
 PHP-1051,Public Health,Active,,Gangway,Gangway,Nokon Limited,Live only
@@ -2601,8 +2356,6 @@ PHP-1059,Public Health,Active,,Al-amin Finish Insect Powder.,Al-amin Finish Inse
 PHP-1060,Public Health,Active,,Al-amin Finish Liquid Insecticide,Al-amin Finish Liquid Insecticide,Al-Amin Agro Kit Company,Live only
 PHP-1061,Public Health,Active,,Ring Guard Mosquito Coil,Ring Guard Mosquito Coil,M/S S.K. Solar Consumers,Live only
 PHP-1067,Public Health,Active,,Adiskill Liquid Spray (RFU),Adiskill Liquid Spray (RFU),Marshal Agrovet Chemical Industries Ltd,Live only
-PHP-1070,Public Health,Active,,Vitacare Aerosol,Vitacare Aerosol,Vitacan Industries Ltd.,Live only
-PHP-1073,Public Health,Active,,Good Knight,Good Knight,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-1075,Public Health,Active,,ravtellic 50% EC,ravtellic 50% EC,Raven Agro Chemicals Limited,Live only
 PHP-1076,Public Health,Active,,Natular Tm DT Tablet,Natular Tm DT Tablet,RiceCo International Bangladesh Ltd.,Live only
 PHP-1078,Public Health,Active,,Cosmo Marshal Aerosol (Insect Spray),Cosmo Marshal Aerosol (Insect Spray),M/S Cosmo Consumer Product Ltd.,Live only
@@ -2610,14 +2363,12 @@ PHP-1079,Public Health,Active,,Jonaki Aerosol (Insect Spray),Jonaki Aerosol (Ins
 PHP-1080,Public Health,Active,,Cosmo Insect Power,Cosmo Insect Power,M/S Cosmo Consumer Product Ltd.,Live only
 PHP-1082,Public Health,Active,,Kick Out Aerosol,Kick Out Aerosol,Advance Personal Care Limited,Live only
 PHP-1083,Public Health,Active,,Kick Out Aerosol.,Kick Out Aerosol.,Advance Personal Care Limited,Live only
-PHP-1084,Public Health,Active,,Lal Teer ZAP Aerosol,Lal Teer ZAP Aerosol,Chens Crop Science Bangladesh Ltd,Live only
 PHP-1085,Public Health,Active,,Green Magic Night Veporizer,Green Magic Night Veporizer,Green Care Bangladesh,Live only
 PHP-1086,Public Health,Active,,Rico Liquid Insecticide,Rico Liquid Insecticide,M/S. Rico Agrovet,Live only
 PHP-1099,Public Health,Active,,Fast Kill Liquid Spray,Fast Kill Liquid Spray,Marygold Agro Science Limited,Live only
 PHP-1100,Public Health,Active,,Biothin Liquid Insecticide,Biothin Liquid Insecticide,Dhaka Hangzhou Biotechnology Ltd,Live only
 PHP-1101,Public Health,Active,,Biobos 2.5 EC,Biobos 2.5 EC,Dhaka Hangzhou Biotechnology Ltd,Live only
 PHP-1102,Public Health,Active,,Vanish Plus,Vanish Plus,Biosafe Agrovet,Live only
-PHP-1103,Public Health,Active,,Bio Killer 2.5 EC,Bio Killer 2.5 EC,Biosafe Agrovet,Live only
 PHP-1104,Public Health,Active,,Nasla 10 WP,Nasla 10 WP,M/S Ris Agro,Live only
 PHP-1105,Public Health,Active,,Gene Liquid Spray,Gene Liquid Spray,Genetica Industries Limited,Live only
 PHP-1106,Public Health,Active,,Rasler 10 WP,Rasler 10 WP,Radical Crop Science Limited,Live only
@@ -2635,13 +2386,10 @@ PHP-1123,Public Health,Active,,Killer Mosquito Insectide,Killer Mosquito Insecti
 PHP-1126,Public Health,Active,,Dengue Clean 1,Dengue Clean 1,Clean Agro,Live only
 PHP-1127,Public Health,Active,,Larvicure 50 EC,Larvicure 50 EC,Integrated Techno Services Limited,Live only
 PHP-1128,Public Health,Active,,Bazooka 10WP,Bazooka 10WP,Clean Agro,Live only
-PHP-1129,Public Health,Active,,Mosquito Killer Insecticide,Mosquito Killer Insecticide,Agrivision Crop Care and Public Health,Live only
 PHP-1130,Public Health,Active,,Melbeez Liquid Insecticides,Melbeez Liquid Insecticides,Integrated Techno Services Limited,Live only
 PHP-1131,Public Health,Active,,G-Tech 10 WP,G-Tech 10 WP,Growtech Agro.,Live only
 PHP-1132,Public Health,Active,,Safeguard 10 WP,Safeguard 10 WP,Integrated Techno Services Limited,Live only
-PHP-1133,Public Health,Active,,Quick Out Aerosol,Quick Out Aerosol,Agromine Pvt. Limited,Live only
 PHP-1134,Public Health,Active,,Kafon Liquid Insecticide,Kafon Liquid Insecticide,Bk Diamond International Crop Solution Limited,Live only
-PHP-1135,Public Health,Active,,Clean 2.5% EC,Clean 2.5% EC,Growtech Agro.,Live only
 PHP-1136,Public Health,Active,,Nokkhotra Liquid Insecticide,Nokkhotra Liquid Insecticide,Tata Crop Care Company,Live only
 PHP-1137,Public Health,Active,,Biddut 10 WP,Biddut 10 WP,Tata Crop Care Company,Live only
 PHP-1138,Public Health,Active,,Royal Super 10 WP,Royal Super 10 WP,Royal Crop Care Limited,Live only
@@ -2658,12 +2406,10 @@ PHP-1152,Public Health,Active,,Agivet 50 EC,Agivet 50 EC,Tareq Traders,Live only
 PHP-1153,Public Health,Active,,Avron 1 SG,Avron 1 SG,Marshal Agrovet Chemical Industries Ltd,Live only
 PHP-1154,Public Health,Active,,Acicon 2.5EC,Acicon 2.5EC,Agrivision Crop Care and Public Health,Live only
 PHP-1155,Public Health,Active,,Smart Killer 2.5 EC,Smart Killer 2.5 EC,Harvest Agrovet Limited,Live only
-PHP-1156,Public Health,Active,,Mosquito Slayer 5% RFU,Mosquito Slayer 5% RFU,M R Enterprise,Live only
 PHP-1157,Public Health,Active,,Delet Gel,Delet Gel,B.P. International,Live only
 PHP-1158,Public Health,Active,,Ecoroach Bait,Ecoroach Bait,B.P. International,Live only
 PHP-1159,Public Health,Active,,Vaseline Mosquito Defence Lotion,Vaseline Mosquito Defence Lotion,UNILEVER BANGLADESH LIMITED,Live only
 PHP-1163,Public Health,Active,,Solid Insect Powder,Solid Insect Powder,Harvest Agrovet Limited,Live only
-PHP-1164,Public Health,Active,,Max Power Aerosol Insect Spray,Max Power Aerosol Insect Spray,Harvest Agrovet Limited,Live only
 PHP-1167,Public Health,Active,,Bio-Bti,Bio-Bti,Ispahani Agro Limited,Live only
 PHP-1168,Public Health,Active,,PUNISH,PUNISH,M/S. Popular Agro Industries,Live only
 PHP-1169,Public Health,Active,,Karnish 0.3 RFU,Karnish 0.3 RFU,M/S. Popular Agro Industries,Live only
@@ -2671,142 +2417,21 @@ PHP-1170,Public Health,Active,,Tatathion 57EC,Tatathion 57EC,Tata Crop Care Comp
 PHP-1171,Public Health,Active,,Zaconil Oil Spray,Zaconil Oil Spray,Zaco Animal Health,Live only
 PHP-1172,Public Health,Active,,Rakkha 2EW,Rakkha 2EW,M/S. Popular Agro Industries,Live only
 PHP-1175,Public Health,Active,,Finix Brand Mosquito Chalk,Finix Brand Mosquito Chalk,Khaja Chemical Industries,Live only
-PHP-1176,Public Health,Active,,Current Action Liquid Spray,Current Action Liquid Spray,Ionus Corporation,Live only
-PHP-1177,Public Health,Active,,Mosquito Out Liquid Spray,Mosquito Out Liquid Spray,M/S  NADIA ENTERPRISE,Live only
 PHP-1178,Public Health,Active,,Hit Brand Insecticide Liquid,Hit Brand Insecticide Liquid,North Bengal Chemical Co.,Live only
 PHP-1179,Public Health,Active,,Sikari 5% RFU,Sikari 5% RFU,Tareq Traders,Live only
 PHP-1180,Public Health,Active,,Hunter 007 Liquid Spray,Hunter 007 Liquid Spray,Ashu Enterprise,Live only
 PHP-1181,Public Health,Active,,Mosfly Aerosol,Mosfly Aerosol,SAK Consumer Products Ltd,Live only
 PHP-1182,Public Health,Active,,SAK Insect Powder,SAK Insect Powder,SAK Consumer Products Ltd,Live only
 PHP-1183,Public Health,Active,,Mosfly Liquid Vaporizer,Mosfly Liquid Vaporizer,SAK Consumer Products Ltd,Live only
-PHP-1184,Public Health,Active,,Good Knight Advanced Power Shots,Good Knight Advanced Power Shots,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-1186,Public Health,Active,,Ulbon 1.25 ULV,Ulbon 1.25 ULV,Marshal Agrovet Chemical Industries Ltd,Live only
 PHP-1189,Public Health,Active,,Jadu Mosquito Coil,Jadu Mosquito Coil,Alif Chemical Company,Live only
 PHP-1190,Public Health,Active,,Easy Mosquito Coil,Easy Mosquito Coil,Easy Agro Service,Live only
 PHP-1191,Public Health,Active,,Red Cow Mosquito Bambo Stick,Red Cow Mosquito Bambo Stick,Alif Chemical Company,Live only
-PHP-1197,Public Health,Active,Diflubenzuron 2%,Dimilin 2G,Dimilin 2G,RiceCo International Bangladesh Ltd.,86th
-PHP-1198,Public Health,Active,Diflubenzuron 25%,Adept 25WP,Adept 25 WP,RiceCo International Bangladesh Ltd.,86th
 PHP-1202,Public Health,Active,Azamethiphos 1%,Tatajom,Tatajom,Padma Agro Sprayers Co,86th
-PHP-1236,Public Health,Active,Meperfluthrin 0.05%,Bongo Fighter Mosquito Coil,Bongo Fighter Mosquito Coil,BS Enterprise,86th
 PHP--1251,Public Health,Active,,Red  Leaf  Mosquito Coil,Red  Leaf  Mosquito Coil,Tareq Traders,Live only
-PHP--1252,Public Health,Active,,Hunter Brand Mosquito Coil,Hunter Brand Mosquito Coil,Tareq Traders,Live only
-PHP-1254,Public Health,Active,Meperfluthrin 0.02%,Horse Brand Mosquito coil,Horse Brand Mosquito Coil,Agrovet Crop and Health Care,86th
-PHP-1257,Public Health,Active,Meperfluthrin 0.05%,Rulex Jambo Brand Mosquito Coil,Rulex Jumbo Brand Mosquito Coil,Jasim Chemicals Works,86th
-PHP-1258,Public Health,Active,(Prallethrin 0.2%+D- Phenothrin 0.15% HN),Xtreme Aerosol,Xtreme Aerosol,Bashundhara Paper Mills Ltd.,86th
-PHP-1261,Public Health,Active,Meperfluthrin 0.03%,Leader Brand Mosquito Coil,Leader Brand Mosquito Coil,Abid Chemical Works,86th
-PHP-1267,Public Health,Active,Meperfluthrin 0.03%,Uni Mosquito Coil,Uni Mosquito Coil,Perfect Care Limited,86th
-PHP-1268,Public Health,Active,Meperfluthrin 0.03%,Moyna Mosquito Coil,Moyna Mosquito Coil,Rumana Soap Factory,86th
-PHP-1295,Public Health,Active,Meperfluthrin 0.03%,Arrow Mosquito Coil,Arrow Mosquito Coil,M/S  NADIA ENTERPRISE,86th
-PHP-1297,Public Health,Active,Meperfluthrin 0.03%,Dengue Killer Mosquito Coil,Dengue Killer Mosquito Coil,SA Formulations Ltd.,86th
-PHP-1298,Public Health,Active,Meperfluthrin 0.03%,Rose Mosquito Coil,Rose Mosquito Coil,Imex Trade International,86th
-PHP-1299,Public Health,Active,Meperfluthrin 0.03%,Pocha Mosquito Coil,Pocha Mosquito Coil,Alam Soap Factory Ltd,86th
-PHP-1300,Public Health,Active,Meperfluthrin 0.03%,Alishan Mosquito Coil,Alishan  Mosquito Coil,Badal Chemical Company,86th
-PHP-1301,Public Health,Active,Meperfluthrin 0.03%,Super Star Mosquito Coil,Supar Star Mosquito Coil,Chishtia Marketing And Distribution,86th
-PHP-1303,Public Health,Active,Meperfluthrin 0.02%,Faster Fox Mosquito Coil,Faster FOX Mosquito Coil,Good Deal,86th
-PHP-1304,Public Health,Active,Meperfluthrin 0.02%,Parrot Brand Mosquito Coil,Parrot Brand Mosquito Coil,Ruby Mart,86th
-PHP-1306,Public Health,Active,Meperfluthrin 0.03%,570 Jumbo Mosquito Coil,570 Jumbo Mosquito coil,Jasim Chemicals Works,86th
-PHP-1309,Public Health,Active,Meperfluthrin 0.03%,Aruha Aloron Mosquito Coil,Aruha Aloron Mosquito Coil,M/S World Trade Link,86th
-PHP-1310,Public Health,Active,Meperfluthrin 0.03%,Saftey Mosquito Coil,Safety Mosquito Coil,M/S Alam Trading,86th
-PHP-1318,Public Health,Active,Meperfluthrin 0.03%,BM Plus Mosquito Coil,BM Plus mosquito coil,B M International,86th
-PHP-1321,Public Health,Active,Meperfluthrin 0.05%,Mala Mosquito Coil,Mala Mosquito Coil,M.H. Chemicals Works,86th
-PHP-1323,Public Health,Active,Meperfluthrin 0.05%,Dhor Brand Mosquito Coil,Dhor Brand Mosquito Coil,Moynul Haque Chemicals Works,86th
-PHP-1328,Public Health,Active,Meperfluthrin 0.03%,Rajdhani Mosquito Coil,Rajdhani Mosquito Coil,Sinthiya Chemical Works and Food,86th
-PHP-1334,Public Health,Active,Meperfluthrin 0.05%,Max Power Mosquito Coil,Max Power Mosquito Coil,Harvest Agrovet Limited,86th
-PHP-1336,Public Health,Active,Meperfluthrin 0.03%,Rozen Power Mosquito Coil,Rozen Power Mosquito coil,Ruhan & Ratul Chemical Works,86th
-PHP-1337,Public Health,Active,Meperfluthrin 0.03%,Sara Mosquito Coil,Sara Mosquito Coil,Translamo Industries,86th
-PHP-1341,Public Health,Active,Meperfluthrin 0.05%,Ninja Fiber Mosquito Coil,Ninja Plant Fiber Mosquito Coil,AYESHA TRADE INTERNATIONAL,86th
-PHP-1342,Public Health,Active,Meperfluthrin 0.05%,Alarm Mosquito Coil,Alarm Mosquito Coil,Barakah Trade International,86th
-PHP-1343,Public Health,Active,Meperfluthrin 0.05%,Lalteer Zap Ninja Mosquito Coil,Lalteer Zap Ninja Mosquito Coil,Chens Crop Science Bangladesh Ltd,86th
-PHP-1345,Public Health,Active,Meperfluthrin 0.03%,City Full Care Mosquito Coil,City Full Care Mosquito Coil,Babul Chemical Works,86th
-PHP-1346,Public Health,Active,Meperfluthrin 0.03%,Dhup Magic Mosquito Coil,Dhup Magic Mosquito Coil,A K International,86th
-PHP-1348,Public Health,Active,Meperfluthrin 0.03%,Abedin Boom Brand Mosquito Coil,Abedin Boom Brand Mosquito Coil,Abedin Chemical Works,86th
-PHP-1352,Public Health,Active,Meperfluthrin 0.05%,Family Safe Brand Mosquito Coil,Family Safe Mosquito Coil,Joy Chemical Co.,86th
-PHP-1362,Public Health,Active,Meperfluthrin 0.03%,Rangdhunu Plant Fiber Mosquito Coil,Rangdhunu Plant Fiber Mosquito Coil,Dhaka Trade Corporation,86th
-PHP-1363,Public Health,Active,Meperfluthrin 0.03%,Rangdhunu China Brand Mosquito Coil,Rangdhunu China Brand Mosquito Coil,Dhaka Trade Corporation,86th
-PHP-1370,Public Health,Active,Meperfluthrin 0.03%,One Star Power King Mosquito Coil,One Star Power King Mosquito Coil,M/S Bithe Enterprise,86th
-PHP-1371,Public Health,Active,Meperfluthrin 0.03%,One Touch Mosquito Coil,One Touch Mosquito Coil,Khan Enterprise,86th
-PHP-1374,Public Health,Active,Meperfluthrin 0.03%,Zebra King Mosquito Coil,Zebra King Mosquito Coil,Riad Enterprise,86th
-PHP-1382,Public Health,Active,Meperfluthrin 0.03%,Fine Max Gold Mosquito Coil,Fine Max Gold Mosquito Coil,L.M. Chemical & Co.,86th
-PHP-1384,Public Health,Active,Meperfluthrin 0.05%,No Tension Mosquito Coil,No Tension Mosquito Coil,Sifat Consumer Product,86th
-PHP-1394,Public Health,Active,Meperfluthrin 0.08%,Night Cover Mosquito Coil,Night Cover Mosquito Coil,SSS Corporation.,86th
-PHP-1395,Public Health,Active,Meperfluthrin 0.03%,Progoti Mosquito Coil,Progoti Mosquito Coil,Progoti Enterprise,86th
-PHP-1396,Public Health,Active,Meperfluthrin 0.05%,Nidra Mosquito Coil,Nidra Mosquito Coil,Safe Care,86th
-PHP-1399,Public Health,Active,Meperfluthrin 0.03%,Jhinuk Mosquito Coil,Jhinuk Mosquito Coil,Grocer Consumer Products,86th
-PHP-1404,Public Health,Active,Meperfluthrin 0.03%,Cute Mosquito Coil,Cute Mosquito Coil,Seba Corporation,86th
-PHP-1405,Public Health,Active,Meperfluthrin 0.03%,Kashful Mosquito Coil,Kashful Mosquito Coil,Noorjahan Enterprise,86th
-PHP-1411,Public Health,Active,Meperfluthrin 0.03%,Lion Brand Mosquito Coil,Lion Brand Mosquito Coil,Dia Agro Chem,86th
-PHP-1415,Public Health,Active,Meperfluthrin 0.03%,Vivel Brand Mosquito Coil,Vivel Brand Mosquito Coil,Khandaker Products,86th
-PHP-1416,Public Health,Active,Meperfluthrin 0.03%,Cyelone Mosquito Coil,Cyclone Mosquito Coil,Daniel Agrochemicals,86th
-PHP-1422,Public Health,Active,Meperfluthrin 0.03%,Cheetah No-1 Mosquito Coil,Cheetah No-1 Mosquito Coil,S. A Chemical Works,86th
-PHP-1423,Public Health,Active,Meperfluthrin 0.03%,Cherry Mosquito Coil,Cherry Mosquito Coil,Sikdar Enterprise,86th
-PHP-1425,Public Health,Active,Meperfluthrin 0.03%,Nabab Mosquito Coil,Nabab Mosquito Coil,Asif Mouli Enterprise,86th
-PHP-1433,Public Health,Active,Meperfluthrin 0.03%,H.R Super Jumbo Mosquito Coil,H.R Super Jumbo Mosquito Coil,Miazi Enterprise,86th
-PHP-1434,Public Health,Active,Meperfluthrin 0.03%,A.N.S Brand Mosquito Coil,A.N.S Brand Mosquito Coil,S M Chemical Ltd,86th
-PHP-1438,Public Health,Active,Meperfluthrin 0.03%,Ababil Mosquito Coil,Ababil Mosquito Coil,Nannu Consumer,86th
-PHP-1439,Public Health,Active,Meperfluthrin 0.03%,Desh Lily Mosquito Coil,Desh Lily Mosquito Coil,Desh Consumer Products,86th
-PHP-1452,Public Health,Active,Meperfluthrin 0.03%,Mortein Mosquito Coil,Mortein Mosquito Coil,Family Consumer Care,86th
-PHP-1460,Public Health,Active,Meperfluthrin 0.02%,Harmony Booster Mosquito Coil,Harmony Booster Mosquito Coil,MAH Corporation,86th
-PHP-1463,Public Health,Active,Meperfluthrin 0.03%,Attack Brand Mosquito Coil,Attack Brand Mosquito Coil,Riyaz Consumer Products,86th
-PHP-1469,Public Health,Active,Meperfluthrin 0.03%,Bijoy-52 Mosquito Coil,Bijoy-52 Mosquito Coil,Alavi Corporation,86th
-PHP-1471,Public Health,Active,Meperfluthrin 0.03%,Hangor Mosquito Coil,Hangor Mosquito coil,ACP Consumer Products,86th
-PHP-1472,Public Health,Active,Meperfluthrin 0.03%,Atontro Prohori Mosquito Coil,Atontro Prohori Mosquito Coil,Niha International.,86th
-PHP-1474,Public Health,Active,Meperfluthrin 0.05%,Raz Bahar Mosquito Coil,Raz Bahar Mosquito Coil,Dina Enterprise,86th
-PHP-1488,Public Health,Active,Meperfluthrin 0.03%,Easy Guard Mosquito Coil,Easy Guard Mosquito Coil,M/S Mazada Enterprise,86th
-PHP-1490,Public Health,Active,Meperfluthrin 0.03%,Mira Mosquito Coil,Mira Mosquito Coil,H.T. Corporation,86th
-PHP-1492,Public Health,Active,Meperfluthrin 0.03%,Anuradha plus Mosquito Coil,Anuradha plus Mosquito Coil,Jogonnath Chemical Works,86th
-PHP-1512,Public Health,Active,Meperfluthrin 0.025%,Xtreme Mosquito Coil,Xtreme Mosquito Coil,Bashundhara Multipaper Ind. Ltd .,86th
-PHP-1514,Public Health,Active,sphaericus 2362 Bacillus thuringiensis subsp. Israelensis (3000(ITU),VectoBac WG,VectoBac WG,Primo Health Ltd,86th
-PHP-1519,Public Health,Active,Meperfluthrin 0.05%,Hamid Super Mosquito Coil,Hamid Super Mosquito Coil,Hamid Traders,86th
-PHP-1522,Public Health,Active,Meperfluthrin 0.05%,Aisha Mosquito Coil,Aisha Mosquito Coil,Abdullah Chemical Works,86th
-PHP-1536,Public Health,Active,Meperfluthrin 0.05%,Rongin MP Mosquito Coil,Rongin MP Mosquito Coil,MAWLA ENTERPRISE,86th
-PHP-1540,Public Health,Active,Meperfluthrin 0.05%,Banani King Mosquito Coil,Banani King Mosquito Coil,Aryan Trading,86th
-PHP-1541,Public Health,Active,Meperfluthrin 0.05%,Prince Mosquito Coil,Prince Mosquito Coil,M.M.S Enterprise,86th
-PHP-1543,Public Health,Active,Meperfluthrin 0.05%,One Plus Mosquito Coil,One Plus Mosquito Coil,M A corporation,86th
-PHP-1546,Public Health,Active,Meperfluthrin 0.05%,Jedda Mosquito Coil,Jedda Mosquito Coil,Tat Hira Consumer,86th
-PHP-1547,Public Health,Active,Meperfluthrin 0.05%,Kalo Hit Mosquito Coil,Kalo Hit Mosquito Coil,HANNAN CHEMICAL WORKS,86th
-PHP-1586,Public Health,Active,Meperfluthrin 0.03% w/w,Ujala Mosquito Coil,Ujala Mosquito Coil,BASK Bangladesh.,87th
-PHP-1604,Public Health,Active,Es-Biothrin 0.2% w/w,Toru Lota Extra Mosquito Coil,Toru Lota Extra Mosquito Ciol,M/s Nannu Consumers,87th
-PHP-1605,Public Health,Active,Es-Biothrin 0.2% w/w,A K Heat Power Max Mosquito Coil,A K Heat Power Max Mosquito Coil,AK Corporation,87th
-PHP-1606,Public Health,Active,Es-Biothrin 0.25% w/w,Green Leaves Mosquito Coil,Green Leaves Mosquito Coil,LUCK MART INDUSTRIES LTD,87th
-PHP-1607,Public Health,Active,Es-Biothrin 0.25% w/w,Noyon Mocca Mosquito Coil,Noyon Mocca Mosquito Coil,Noyon Consumer Products,87th
-PHP-1608,Public Health,Active,Es-Biothrin 0.25% w/w,Panda Super Mosquito Coil,Panda Super Mosquito Coil,Chandpur Chemical Works,87th
-PHP-1612,Public Health,Active,Es-Biothrin 0.25% w/w,Dinosaur Mosquito Coil,Dinosaur Mosquito Coil,Shanta Traders,87th
-PHP-1613,Public Health,Active,Es-Biothrin 0.3% w/w,Joddha Hi Power Mosquito Coil,Joddha Hi Power Mosquito Coil,S M Enterprise,87th
-PHP-1615,Public Health,Active,Meperfluthrin 0.02% w/w,Plant Fiber Discovery Gold Mosquito Coil,Plant Fiber Discovery Gold Mosquito Coil,M/S M.K. International,87th
-PHP-1618,Public Health,Active,Meperfluthrin 0.03% w/w,RMP Super Mosquito Coil,RMP Super Mosquito Coil,Rico Multi Products,87th
-PHP-1621,Public Health,Active,Meperfluthrin 0.03% w/w,Fancy Mega Mosquito Coil,Fancy Mega Mosquito Coil,Top Solution Corporation,87th
-PHP-1623,Public Health,Active,Meperfluthrin 0.03% w/w,Fire Fighter Mosquito Coil,Super Strong Mosquito Coil,Sharif chemical Works,87th
-PHP-1624,Public Health,Active,Meperfluthrin 0.05% w/w,Shainik King Mosquito Coil,Shainik King Mosquito coil,Sakal & Co.,87th
-PHP-1627,Public Health,Active,Meperfluthrin 0.03% w/w,B-2 Mosquito Coil,B-2 Mosquito Coil,M. R. Khan Associates Company,87th
-PHP-1629,Public Health,Active,Meperfluthrin 0.05% w/w,Shahin Super Mosquito Coil,Shahin Super Mosquito Coil,Saleem Consumer Products,87th
-PHP-1630,Public Health,Active,Meperfluthrin 0.05% w/w,Net Night Mosquito Coil,Net Night Mosquito Coil,M/s Salam Enterprise,87th
-PHP-1632,Public Health,Active,Meperfluthrin 0.05% w/w Pankhiraj,Jumbo Mosquito Coil,Pankhiraj  Jumbo Mosquito Coil,HANNAN CHEMICAL WORKS,87th
-PHP-1634,Public Health,Active,Meperfluthrin 0.05% w/w,BP Rest Night Mosquito Coil,BP Rest Night Mosquito Coil,BP Marketing & Trading,87th
-PHP-1635,Public Health,Active,Meperfluthrin 0.05% w/w,Viper Mosquito Coil,Viper Mosquito Coil,BP Marketing & Trading,87th
-PHP-1637,Public Health,Active,Meperfluthrin 0.05% w/w,Rhino Mosquito Coil,Rhino Mosquito Coil,SR Basic Enterprise,87th
-PHP-1638,Public Health,Active,Meperfluthrin 0.05% w/w,ATM Mosquito Coil,ATM Mosquito Coil,Miran Enterprise,87th
-PHP-1639,Public Health,Active,Meperfluthrin 0.05% w/w,Fulkoli Mosquito Coil,Fulkoli Mosquito Coil,Rafi Chemical Works,87th
-PHP-1641,Public Health,Active,Meperfluthrin 0.05% w/w,Neta Mosquito Coil,Neta Mosquito Coil,Mim Chemical Works,87th
-PHP-1642,Public Health,Active,Meperfluthrin 0.05% w/w,Kung Fu King Mosquito Coil,Kung Fu King Mosquito Coil,M/S Kader & Co.,87th
-PHP-1645,Public Health,Active,Meperfluthrin 0.05% w/w,Battle Brand Mosquito Coil,Battle Brand Mosquito Coil,Hasan Enterprise,87th
-PHP-1648,Public Health,Active,Meperfluthrin 0.05% w/w,Shuvo King Power Mosquito Coil,Shuvo King Power Mosquito Coil,Shahanaz Enterprise,87th
-PHP-1651,Public Health,Active,Meperfluthrin 0.05% w/w,Leopard Mosquito Coil,Leopard Mosquito Coil,Brothers Chemical,87th
-PHP-1652,Public Health,Active,Meperfluthrin 0.05% w/w,Rosemary Mosquito Coil,Rosemary Mosquito Coil,AB Manufacturers Industry,87th
-PHP-1654,Public Health,Active,Meperfluthrin 0.05% w/w,5G Super Mosquito Coil,5G Super Mosquito Coil,Tasmia Chemical Works,87th
-PHP-1655,Public Health,Active,Meperfluthrin 0.05% w/w,Jomidar Mosquito Coil,Jomidar Mosquito Coil,Sneha Chemical Works,87th
-PHP-1656,Public Health,Active,Meperfluthrin 0.05% w/w,Final Mosquito Coil,Final Mosquito Coil,Nayan International,87th
-PHP-1657,Public Health,Active,Meperfluthrin 0.03% w/w,SP Mosquito Coil,SP Mosquito  Coil,SP Agro Care Limited,87th
-PHP-1658,Public Health,Active,Meperfluthrin 0.08% w/w,XND Mosquito Coil,XND Mosquito Coil,3 STAR,87th
-PHP-1660,Public Health,Active,Meperfluthrin 0.08% w/w,RAK Mosfly Magic Mosquito Coil,RAK Mosfly Magic Mosquito Coil,SAK Consumer Products Ltd,87th
-PHP-1664,Public Health,Active,Meperfluthrin 0.05% w/w,Kazi Mosquito Coil,Kazi Mosquito Coil,HT Private Corporation,87th
-PHP-1669,Public Health,Active,Renofluthrin 1.5%,Good Knight Power Activ+ Liquid Vaporiser,Good Knight Power Activ+ Liquid Vaporizer,Godrej Household Products (BD) Pvt. Ltd.,87th
 PHP-1671,Public Health,Active,Propetamphos 22.5%,Safrotin MC,Safrotin MC,Mcdonald Bangladesh Pvt Ltd,87th
 PHP-1710,Public Health,Active,Nur 0.05% w/w,Lebu Mosquito Coil,Lebu Mosquito Coil,Mahabub Enterprise,87th
 PHP-1731,Public Health,Active,,Mission Booster Mosquito Coil,Mission Booster Mosquito Coil,Bhai Bon Consumer,Live only
-PHP-1735,Public Health,Active,,Mosquiton+ 0.8 P,Mosquiton+ 0.8 P,Genetica Industries Limited,Live only
-PHP-1736,Public Health,Active,,Mosquito XT Control,Mosquito XT Control,Genetica Industries Limited,Live only
-PHP-1737,Public Health,Active,,Mosquito Bits 200 G,Mosquito Bits 200 G,Genetica Industries Limited,Live only
-PHP-1738,Public Health,Active,,Mosquito Dunks,Mosquito Dunks,Genetica Industries Limited,Live only
 PHP-1742,Public Health,Active,,One Booster Mosquito Coil,One Booster Mosquito Coil,One Coil Factory,Live only
 PHP-1743,Public Health,Active,,Star Light Power Mosquito Coil,Star Light Power Mosquito Coil,A S N Trading,Live only
 PHP-1744,Public Health,Active,,Saad Extra Power Mosquito Coil,Saad Extra Power Mosquito Coil,Sufola Chemical Works,Live only
@@ -2817,11 +2442,9 @@ PHP-1749,Public Health,Active,,Insuf Mosquito Coil,Insuf Mosquito Coil,Mahabub E
 PHP-,Public Health,Expired,,Afizinon 10G,Afizinon 10G,Sundarbon Agro Products,Live only
 PHP-7,Public Health,Expired,,Sunflower Mosquito Coil,Sunflower Mosquito Coil,Oram LTD.,Live only
 PHP-10,Public Health,Expired,,Actellic 50EC,Actellic 50EC,Syngenta Bangladesh Limited,Live only
-PHP-15,Public Health,Expired,,"""Flyban"" Mosquito Coil","""Flyban"" Mosquito Coil",Flyba Insecticides Ltd,Live only
 PHP-16,Public Health,Expired,,ARS Brand Mosquito Coil,ARS Brand Mosquito Coil,Globe Insecticides Ltd.,Live only
 PHP-18,Public Health,Expired,,SICO Flying Insecticide,SICO Flying Insecticide,Sajeeb Industrial Corporation,Live only
 PHP-20,Public Health,Expired,,Globe Brand MAT (Insecticidal MAT),Globe Brand MAT (Insecticidal MAT),Globe Insecticides Ltd.,Live only
-PHP-21,Public Health,Expired,,Fenitrothion 40 WP,Fenitrothion 40 WP,Shetu Corporation Ltd,Live only
 PHP-22,Public Health,Expired,,Noback 50 L,Noback 50 L,ACI Formulations PLC,Live only
 PHP-25,Public Health,Expired,,Sumiguard-50 EC,Sumiguard-50 EC,Shetu Corporation Ltd,Live only
 PHP-26,Public Health,Expired,,Cislin-2.5% EC,Cislin-2.5% EC,M/S Hoechst pharmaceuticals Co Ltd,Live only
@@ -2835,7 +2458,6 @@ PHP-54,Public Health,Expired,,"""Mortein"" Mosquito Coil","""Mortein"" Mosquito 
 PHP-56,Public Health,Expired,,Finis Mosquito Coil,Finis Mosquito Coil,Standard Finis Oil Co.,Live only
 PHP-62,Public Health,Expired,,Arrow 57EC,Arrow 57EC,Shetu Corporation Ltd,Live only
 PHP-63,Public Health,Expired,,Limisashtha 57EC,Limisashtha 57EC,The Limit Agroproducts Ltd,Live only
-PHP-64,Public Health,Expired,,Solution 57EC,Solution 57EC,,Live only
 PHP-65,Public Health,Expired,,Acekro 20EC,Acekro 20EC,Mcdonald Bangladesh Pvt Ltd,Live only
 PHP-67,Public Health,Expired,,Mcfos-20EC,Mcfos-20EC,Mcdonald Bangladesh Pvt Ltd,Live only
 PHP-69,Public Health,Expired,,Semcor-50EC,Semcor-50EC,,Live only
@@ -2868,7 +2490,6 @@ PHP-119,Public Health,Expired,,Quick Kill Mosquitocide,Quick Kill Mosquitocide,S
 PHP-120,Public Health,Expired,,Globe Aerosol Insecticide,Globe Aerosol Insecticide,Globe Insecticides Ltd.,Live only
 PHP-121,Public Health,Expired,,Nuvasol,Nuvasol,M/S Novartis (Bangladesh) Ltd,Live only
 PHP-123,Public Health,Expired,,Aciphos 20 EC,Aciphos 20 EC,ACI Formulations PLC,Live only
-PHP-124,Public Health,Expired,,Good Knight Fighter Mosquito Coil,Good Knight Fighter Mosquito Coil,Godrej Sara Lee(Bangladesh) Pvt. Ltd,Live only
 PHP-125,Public Health,Expired,,Shield Mosquito Coil,Shield Mosquito Coil,Oroni International Ltd,Live only
 PHP-126,Public Health,Expired,,Shield Aerosol,Shield Aerosol,Oroni International Ltd,Live only
 PHP-127,Public Health,Expired,,Finish Mat,Finish Mat,Standard Finis Oil Co.,Live only
@@ -2878,12 +2499,9 @@ PHP-131,Public Health,Expired,,Magic Mosquito Coil,Magic Mosquito Coil,Olympic I
 PHP-132,Public Health,Expired,,Mortin Liquid Vaporizer,Mortin Liquid Vaporizer,Reckitt Benckiser (Bangladesh) Ltd,Live only
 PHP-133,Public Health,Expired,,ACI Mosquito Vaporizer,ACI Mosquito Vaporizer,ACI Formulations PLC,Live only
 PHP-134,Public Health,Expired,,Loader Mosquito Coil,Loader Mosquito Coil,Oram LTD.,Live only
-PHP-136,Public Health,Expired,,Relax Mosquito Coil,Relax Mosquito Coil,ACI Formulations PLC,Live only
 PHP-137,Public Health,Expired,,Anvil 10+10 ULV,Anvil 10+10 ULV,Clarity Ecotech Canada,Live only
 PHP-138,Public Health,Expired,,Stop Brand  Mosquito Coil,Stop Brand  Mosquito Coil,Globe Janakantha Shilpa Paribar Ltd.,Live only
 PHP-139,Public Health,Expired,,Stop Brand Mosquito Coil,Stop Brand Mosquito Coil,Globe Insecticides Ltd.,Live only
-PHP-141,Public Health,Expired,,Good Knight Super Mat,Good Knight Super Mat,Godrej Household Products (BD) Pvt. Ltd.,Live only
-PHP-142,Public Health,Expired,,Good Knight Jumboo Mosquito Repellent Coil,Good Knight Jumboo Mosquito Repellent Coil,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-143,Public Health,Expired,,Sood Knight Expert Liquid Vaporiser,Sood Knight Expert Liquid Vaporiser,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-146,Public Health,Expired,,Xpel Aerosol.,Xpel Aerosol.,Square Pharmaceuticals PLC.,Live only
 PHP-147,Public Health,Expired,,Xpel Mosquito Coil,Xpel Mosquito Coil,Square Pharmaceuticals PLC.,Live only
@@ -2909,7 +2527,6 @@ PHP-178,Public Health,Expired,,Parrot Mosquito coil,Parrot Mosquito coil,CHEMOLI
 PHP-179,Public Health,Expired,,Ninja Mosquito Coil,Ninja Mosquito Coil,Lauchet Cheme Complex,Live only
 PHP-180,Public Health,Expired,,Hygine Mosquito Coil,Hygine Mosquito Coil,Sanowara I.P. Limited,Live only
 PHP-181,Public Health,Expired,,Nokon Mosquito Coil,Nokon Mosquito Coil,Nokon Limited,Live only
-PHP-182,Public Health,Expired,,Punch 10 EC,Punch 10 EC,M/S Bony enterprise,Live only
 PHP-183,Public Health,Expired,,ACI Mosquito Coil Super Plus,ACI Mosquito Coil Super Plus,ACI Formulations PLC,Live only
 PHP-187,Public Health,Expired,,ACI King Mosquito coil,ACI King Mosquito coil,ACI Formulations PLC,Live only
 PHP-188,Public Health,Expired,,Limcis 2.8 EC,Limcis 2.8 EC,The Limit Agroproducts Ltd,Live only
@@ -2920,7 +2537,6 @@ PHP-199,Public Health,Expired,,Fenitrokill,Fenitrokill,Alpha Zeta Crop,Live only
 PHP-200,Public Health,Expired,,Permakillrfu,Permakillrfu,Safeway Pest Control,Live only
 PHP-201,Public Health,Expired,,Permakill Concentrate,Permakill Concentrate,Safeway Pest Control,Live only
 PHP-202,Public Health,Expired,,Eagle Super Mosquito Coil,Eagle Super Mosquito Coil,Quazi Enterprises Limited,Live only
-PHP-204,Public Health,Expired,,Good Knight Mosquito Coil,Good Knight Mosquito Coil,Godrej Sara Lee(Bangladesh) Pvt. Ltd,Live only
 PHP-206,Public Health,Expired,,ACI Queen Mosquito Coil,ACI Queen Mosquito Coil,ACI Formulations PLC,Live only
 PHP-207,Public Health,Expired,,Clean Bait Powder,Clean Bait Powder,Nazrul Enterprise,Live only
 PHP-208,Public Health,Expired,,Romana Brand Mosquito Coil,Romana Brand Mosquito Coil,Nipa Chemical Co.,Live only
@@ -2943,7 +2559,6 @@ PHP-239,Public Health,Expired,,Eagle Powder Mosquito Coil,Eagle Powder Mosquito 
 PHP-240,Public Health,Expired,,Mozzi-Mort,Mozzi-Mort,Bio-Tech International Bangladesh,Live only
 PHP-241,Public Health,Expired,,ACI Mosquito Coil Super,ACI Mosquito Coil Super,ACI Formulations PLC,Live only
 PHP-242,Public Health,Expired,,Leader Mosquito Coil,Leader Mosquito Coil,Kohinoor Chemical Co. (BD) LTD.,Live only
-PHP-243,Public Health,Expired,,Great 57EC,Great 57EC,Green Bangla Agrovet Limited,Live only
 PHP-245,Public Health,Expired,,Supreme Insect Powder,Supreme Insect Powder,Shahid Chemical Company,Live only
 PHP-246,Public Health,Expired,,Tiger King Ace Coil,Tiger King Ace Coil,Technopia Bangladesh Pvt. Ltd.,Live only
 PHP-247,Public Health,Expired,,"""Eagle"" Mosquito Coil","""Eagle"" Mosquito Coil",Quazi Enterprises Limited,Live only
@@ -2960,9 +2575,7 @@ PHP-269,Public Health,Expired,,Tiger King Super Coil,Tiger King Super Coil,Techn
 PHP-270,Public Health,Expired,,Moyur Mosquito Coil,Moyur Mosquito Coil,Hanto Chemical Industries,Live only
 PHP-271,Public Health,Expired,,Eagle Vaporizer,Eagle Vaporizer,Quazi Enterprises Limited,Live only
 PHP-274,Public Health,Expired,,Tiger King Power Coil,Tiger King Power Coil,Technopia Bangladesh Pvt. Ltd.,Live only
-PHP-275,Public Health,Expired,,"""Night Guard"" Brand Mosquito Coil","""Night Guard"" Brand Mosquito Coil",Takwa Marketing Network,Live only
 PHP-279,Public Health,Expired,,J.C.I. Brand Mosquito Coil.,J.C.I. Brand Mosquito Coil.,Jamil Chemicals & Food Products,Live only
-PHP-280,Public Health,Expired,,Five Star Brand Mosquito Coil,Five Star Brand Mosquito Coil,Rahala Chemical Works,Live only
 PHP-281,Public Health,Expired,,Aftab Mosquito Coil,Aftab Mosquito Coil,M/S Sea trade Fertilizer Ltd,Live only
 PHP-282,Public Health,Expired,,Aswat Mosquito Coil,Aswat Mosquito Coil,Aswat Consumer Product Limited.,Live only
 PHP-283,Public Health,Expired,,Aswat Super Coil,Aswat Super Coil,Aswat Consumer Product Limited.,Live only
@@ -2981,8 +2594,6 @@ PHP-298,Public Health,Expired,,Maxo- Power Plus,Maxo- Power Plus,Kallal Enterpri
 PHP-299,Public Health,Expired,,Globe Brand High Power Fragrant Red Colour Mosquito Coil.,Globe Brand High Power Fragrant Red Colour Mosquito Coil.,Globe Insecticides Ltd.,Live only
 PHP-300,Public Health,Expired,,Raja Mosquito Coil.,Raja Mosquito Coil.,Cedar Complex,Live only
 PHP-301,Public Health,Expired,,Maxo-Red XL,Maxo-Red XL,Kallal Enterprise Limited,Live only
-PHP-304,Public Health,Expired,,Dominate Brand Mosquito Coil.,Dominate Brand Mosquito Coil.,Dominate Consumer Products Ltd.,Live only
-PHP-308,Public Health,Expired,,Panda King Brand Mosquito Coil.,Panda King Brand Mosquito Coil.,Chandpur Chemical Works,Live only
 PHP-309,Public Health,Expired,,Elephant King Booster Mosquito Coil.,Elephant King Booster Mosquito Coil.,Maladesh Internation (Pvt) Ltd.,Live only
 PHP-310,Public Health,Expired,,Prohari Active Brand Mosquito Coil.,Prohari Active Brand Mosquito Coil.,S.R Chemicals Works,Live only
 PHP-311,Public Health,Expired,,Night Angle Brand Mosquito Coil.,Night Angle Brand Mosquito Coil.,M/s. Bhuiyan Corporation,Live only
@@ -3001,14 +2612,12 @@ PHP-332,Public Health,Expired,,ACME Super Booster Mosquito Coil,ACME Super Boost
 PHP-333,Public Health,Expired,,ACME Premium Brand Mosquito Coil,ACME Premium Brand Mosquito Coil,ACME Pesticides Ltd.,Live only
 PHP-334,Public Health,Expired,,Knock Down Mosquito Coil,Knock Down Mosquito Coil,Haychem (Bangladesh) Limited,Live only
 PHP-335,Public Health,Expired,,Challange Brand Insecticide Powder,Challange Brand Insecticide Powder,Santana Chemical Company,Live only
-PHP-337,Public Health,Expired,,DeltaKill 25,DeltaKill 25,Safeway Pest Control,Live only
 PHP-338,Public Health,Expired,,K-Othrin WG250,K-Othrin WG250,Bayer CropScience Limited,Live only
 PHP-340,Public Health,Expired,,Vactor 1G,Vactor 1G,,Live only
 PHP-342,Public Health,Expired,,ABA Brand Mosquito Coil,ABA Brand Mosquito Coil,Ahsan Business Asociates,Live only
 PHP-345,Public Health,Expired,,Standard Insect Powder,Standard Insect Powder,M/S. Standard Yes Co. Ltd.,Live only
 PHP-346,Public Health,Expired,,Spar 1SG,Spar 1SG,Progressive Pest Management,Live only
 PHP-347,Public Health,Expired,,Tiger King All Insect Control Aerosol,Tiger King All Insect Control Aerosol,Technopia Bangladesh Pvt. Ltd.,Live only
-PHP-349,Public Health,Expired,,Good Knight Octagon Coil,Good Knight Octagon Coil,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-351,Public Health,Expired,,Shapla Brand Mosquito Coil,Shapla Brand Mosquito Coil,Habib Chemicals,Live only
 PHP-355,Public Health,Expired,,Vanish Brand Mosquito Coil,Vanish Brand Mosquito Coil,Shashi Chemical Company,Live only
 PHP-357,Public Health,Expired,,Jomm Brand Mosquito Coil,Jomm Brand Mosquito Coil,Mizan Consumer Products and Beverage Ltd.,Live only
@@ -3016,7 +2625,6 @@ PHP-361,Public Health,Expired,,Vistar 8 SC,Vistar 8 SC,Progressive Pest Manageme
 PHP-363,Public Health,Expired,,Adultithrin 10EC,Adultithrin 10EC,Agri Invent Limited,Live only
 PHP-364,Public Health,Expired,,Larvifos 20EC,Larvifos 20EC,Agri Invent Limited,Live only
 PHP-366,Public Health,Expired,,Asia Super Brand Mosquito Coil,Asia Super Brand Mosquito Coil,H.A.M. Chemical Industries,Live only
-PHP-367,Public Health,Expired,,RAK Mosfly Mosquito Coil,RAK Mosfly Mosquito Coil,SAK Consumer Products Ltd,Live only
 PHP-370,Public Health,Expired,,Tiger King Ultra M. Coil,Tiger King Ultra M. Coil,Technopia Bangladesh Pvt. Ltd.,Live only
 PHP-371,Public Health,Expired,,Cannon Power Brand Mosquito Coil,Cannon Power Brand Mosquito Coil,Chemico Laboratories Ltd.,Live only
 PHP-373,Public Health,Expired,,Cannon Brand Mosquito Coil,Cannon Brand Mosquito Coil,Chemico Laboratories Ltd.,Live only
@@ -3033,7 +2641,6 @@ PHP-387,Public Health,Expired,,Trishal 5WP,Trishal 5WP,Nokon Limited,Live only
 PHP-388,Public Health,Expired,,Cock Brand Mosquito Coil,Cock Brand Mosquito Coil,Liberty Trading Corporation,Live only
 PHP-389,Public Health,Expired,,Zeriko Hi Booster M. Coil,Zeriko Hi Booster M. Coil,Cobra Agro Chemicals Industries,Live only
 PHP-392,Public Health,Expired,,Top Star Brand Mosquito Coil,Top Star Brand Mosquito Coil,W.H. International,Live only
-PHP-393,Public Health,Expired,,RAK Mosfly Red Mosquito Coil,RAK Mosfly Red Mosquito Coil,Rak Mosfly (Bangladesh) Pvt. Limited,Live only
 PHP-394,Public Health,Expired,,Polar Super Brand Mosquito Coil,Polar Super Brand Mosquito Coil,Shanta Chemical Company,Live only
 PHP-395,Public Health,Expired,,Green Guard Gel,Green Guard Gel,Green,Live only
 PHP-396,Public Health,Expired,,Anti-Cockroach,Anti-Cockroach,National Agricare Import and Export Limited,Live only
@@ -3057,7 +2664,6 @@ PHP-424,Public Health,Expired,,Mortein Nature Guard Mosquito Coil,Mortein Nature
 PHP-426,Public Health,Expired,,Mortein Nature Gard Liquid Vaporiser,Mortein Nature Gard Liquid Vaporiser,Reckitt Benckiser (Bangladesh) Ltd,Live only
 PHP-427,Public Health,Expired,,Canon Brand Mosquito Coil,Canon Brand Mosquito Coil,Erra Industrial Corporation,Live only
 PHP-429,Public Health,Expired,,Shainik Power Booster Mosquito Coil,Shainik Power Booster Mosquito Coil,Sakal & Co.,Live only
-PHP-430,Public Health,Expired,,Commando Super Killer Mega Booster Mosquito Coil,Commando Super Killer Mega Booster Mosquito Coil,J&J Essential products Ltd,Live only
 PHP-431,Public Health,Expired,,Super Six Brand Mosquito Coil,Super Six Brand Mosquito Coil,Turag Chemicals,Live only
 PHP-432,Public Health,Expired,,Pheonix Power Booster Brand Mosquito Coil,Pheonix Power Booster Brand Mosquito Coil,Khaja Chemical Industries,Live only
 PHP-437,Public Health,Expired,,Abedin advanture Black Mosquito Coil,Abedin advanture Black Mosquito Coil,Abedin Chemical Works,Live only
@@ -3065,13 +2671,11 @@ PHP-439,Public Health,Expired,,shanghai Super Jumboo Mosquito Coil,shanghai Supe
 PHP-441,Public Health,Expired,,Clean Night Brand Mosquito Coil,Clean Night Brand Mosquito Coil,Bangladesh Trade Corporation,Live only
 PHP-446,Public Health,Expired,,Smart Power Booster Mosquito Coil,Smart Power Booster Mosquito Coil,Tasmia Herbal & Chemicals,Live only
 PHP-447,Public Health,Expired,,Bangla Power Booster Brand Mosquito Coil,Bangla Power Booster Brand Mosquito Coil,Bangla Food and Chemical Industries,Live only
-PHP-450,Public Health,Expired,,Super Star Mosquito Coil,Super Star Mosquito Coil,Tasnin Corporation,Live only
 PHP-451,Public Health,Expired,,Royal Plus Mosquito Coil,Royal Plus Mosquito Coil,Bright Bangla International,Live only
 PHP-454,Public Health,Expired,,Ama Mosquito Coil,Ama Mosquito Coil,Aama Green Care,Live only
 PHP-455,Public Health,Expired,,SP Mosquito Coil,SP Mosquito Coil,Al-Textile Mills,Live only
 PHP-456,Public Health,Expired,,Astro Brand Mosquito Coil,Astro Brand Mosquito Coil,Ashad Enterprise,Live only
 PHP-457,Public Health,Expired,,Elephant Kind Booster Mosquito Coil,Elephant Kind Booster Mosquito Coil,Maladesh Internation (Pvt) Ltd.,Live only
-PHP-458,Public Health,Expired,,Good Knight Advanced Liquid Vaporizer,Good Knight Advanced Liquid Vaporizer,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-460,Public Health,Expired,,Night Lion killer Mosquito Coil,Night Lion killer Mosquito Coil,Luminous Trade and Manufacturing,Live only
 PHP-461,Public Health,Expired,,LIon Power Hi Booster Mosquito Coil,LIon Power Hi Booster Mosquito Coil,Universal Pvt. Ltd,Live only
 PHP-462,Public Health,Expired,,Read A Dream Mosquito Coil,Read A Dream Mosquito Coil,Math Corporation,Live only
@@ -3086,7 +2690,6 @@ PHP-470,Public Health,Expired,,Sound Sleep Mosquito Coil,Sound Sleep Mosquito Co
 PHP-471,Public Health,Expired,,Clear Brand Mosquito Coil,Clear Brand Mosquito Coil,BG Enterprise,Live only
 PHP-472,Public Health,Expired,,BD Lion Micro Smoke Black Mosquito Coil,BD Lion Micro Smoke Black Mosquito Coil,Universal Pvt. Ltd,Live only
 PHP-473,Public Health,Expired,,Swasti Roach Killer,Swasti Roach Killer,GME Agro Limited,Live only
-PHP-474,Public Health,Expired,,Super Star Insecticide Powder,Super Star Insecticide Powder,Selina Chemical Industries,Live only
 PHP-477,Public Health,Expired,,Rocky Brand Insect Chalk,Rocky Brand Insect Chalk,Rocky Chemical Co.,Live only
 PHP-478,Public Health,Expired,,Hilthrin 2.5 EC,Hilthrin 2.5 EC,Gourab Industries Limited,Live only
 PHP-479,Public Health,Expired,,Fuji Mosquito Repellent Incense Coil,Fuji Mosquito Repellent Incense Coil,Bogra Traders,Live only
@@ -3175,7 +2778,6 @@ PHP-666,Public Health,Expired,,Grand Lion Plant Fiber Mosquito Coil,Grand Lion P
 PHP-669,Public Health,Expired,,Dragon Boma Micro Smoke Mosquito Coil,Dragon Boma Micro Smoke Mosquito Coil,Tawakkal Store,Live only
 PHP-670,Public Health,Expired,,Dragon Boma Plant Fiber Mosquito Coil.,Dragon Boma Plant Fiber Mosquito Coil.,Tawakkal Store,Live only
 PHP-671,Public Health,Expired,,Dragon Boma No Smoke Mosquito Coil,Dragon Boma No Smoke Mosquito Coil,Tawakkal Store,Live only
-PHP-672,Public Health,Expired,,Night Guard Brand Mosquito Coil,Night Guard Brand Mosquito Coil,Kabir Enterprize,Live only
 PHP-674,Public Health,Expired,,Grand Lion Hrater Vaporizer,Grand Lion Hrater Vaporizer,Mannan Electronics,Live only
 PHP-675,Public Health,Expired,,Sumon Bao Ma Veporizer,Sumon Bao Ma Veporizer,Sumon International,Live only
 PHP-676,Public Health,Expired,,China Insect Chalk,China Insect Chalk,M/S China Chemical Company,Live only
@@ -3187,12 +2789,10 @@ PHP-689,Public Health,Expired,,KB Mosquito Coil,KB Mosquito Coil,M/S Krishibid B
 PHP-694,Public Health,Expired,,Mostel,Mostel,Shelly and Daughters,Live only
 PHP-696,Public Health,Expired,,Boarder Guard Jumboo Booster Mosquito Coil,Boarder Guard Jumboo Booster Mosquito Coil,N/S Roman Chemicals,Live only
 PHP-708,Public Health,Expired,,FTi Plant Fiber Mosquito Coil,FTi Plant Fiber Mosquito Coil,Shafik Enterprise,Live only
-PHP-709,Public Health,Expired,,Sunshine Mosquito Coil,Sunshine Mosquito Coil,Alpha Trade BD,Live only
 PHP-714,Public Health,Expired,,Seven Star Mosquito Coil,Seven Star Mosquito Coil,Mostafa & Sons,Live only
 PHP-715,Public Health,Expired,,Blue Star Mosquito Coil,Blue Star Mosquito Coil,Mostafa & Sons,Live only
 PHP-718,Public Health,Expired,,N-High Power Booster Mosquito Coil,N-High Power Booster Mosquito Coil,Boni Chemicals Co.,Live only
 PHP-719,Public Health,Expired,,Booma Aerosol,Booma Aerosol,Sumon International,Live only
-PHP-721,Public Health,Expired,,X-tra Power Booster Plant Fiber Mosquito Coil,X-tra Power Booster Plant Fiber Mosquito Coil,P.T. Consumer Products Industries.,Live only
 PHP-726,Public Health,Expired,,Combat Gel,Combat Gel,Hi-Tech Agro Products Limited,Live only
 PHP-735,Public Health,Expired,,Chiu Thai Mosquito Coil,Chiu Thai Mosquito Coil,Bongshe Moharaj & Agro Technology,Live only
 PHP-741,Public Health,Expired,,mortein Double Killer Coil,mortein Double Killer Coil,Reckitt Benckiser (Bangladesh) Ltd,Live only
@@ -3204,7 +2804,6 @@ PHP-751,Public Health,Expired,,Moon Star Deadlu Mosquito Coil,Moon Star Deadlu M
 PHP-759,Public Health,Expired,,Kasla 10 WP,Kasla 10 WP,K F K Bangladesh,Live only
 PHP-766,Public Health,Expired,,Energy Mosquito Insecticide,Energy Mosquito Insecticide,Agrisun International Ltd,Live only
 PHP-769,Public Health,Expired,,Canon Brand Aerosol,Canon Brand Aerosol,Erra Industrial Corporation,Live only
-PHP-770,Public Health,Expired,,All Out Aci Super 16% Transfluthrin LV,All Out Aci Super 16% Transfluthrin LV,SC Johnson Private Ltd.,Live only
 PHP-771,Public Health,Expired,,Hit Gel Bait,Hit Gel Bait,Imperial Trade International,Live only
 PHP-773,Public Health,Expired,,Get Out Cockroach Kill Gell,Get Out Cockroach Kill Gell,M/S Clean Heart,Live only
 PHP-777,Public Health,Expired,,All Out Flush Hard Paper,All Out Flush Hard Paper,SC Johnson Private Ltd.,Live only
@@ -3217,13 +2816,10 @@ PHP-791,Public Health,Expired,,Z-Fire Mosquito Coil,Z-Fire Mosquito Coil,Z-Tradi
 PHP-792,Public Health,Expired,,DF Artillery Plant Fiber Mosquito Coil,DF Artillery Plant Fiber Mosquito Coil,Dewan Trading,Live only
 PHP-794,Public Health,Expired,,DF Artillery 1 Mosquito Coil,DF Artillery 1 Mosquito Coil,Dewan Trading,Live only
 PHP-795,Public Health,Expired,,New Sony Super Mosquito Coil,New Sony Super Mosquito Coil,Tahasin Consumer Products,Live only
-PHP-796,Public Health,Expired,,Super Shot Brand Mosquito Coil,Super Shot Brand Mosquito Coil,Rudronil Enterprise,Live only
-PHP-797,Public Health,Expired,,Boxer Brand Plant Fiber Mosquito Coil,Boxer Brand Plant Fiber Mosquito Coil,Confo Tech (BD) Ltd.,Live only
 PHP-799,Public Health,Expired,,Topking Brand Mosquito Coil,Topking Brand Mosquito Coil,Mitali Enterprise,Live only
 PHP-803,Public Health,Expired,,NMR Magic Jumbo Mosquito Coil,NMR Magic Jumbo Mosquito Coil,N.M.R. Enterprise,Live only
 PHP-804,Public Health,Expired,,Black Morter Super Mosquito Coil,Black Morter Super Mosquito Coil,Tanisha Corporation,Live only
 PHP-805,Public Health,Expired,,New Cobra Super Mosquito Coil,New Cobra Super Mosquito Coil,M/s. Triangle Consumer,Live only
-PHP-811,Public Health,Expired,,Banglar Raja Mosquito Coil,Banglar Raja Mosquito Coil,M/s Arif Enterprise,Live only
 PHP-812,Public Health,Expired,,Mong SL Hi Mega Mosquito Coil,Mong SL Hi Mega Mosquito Coil,Santa Chemical Company,Live only
 PHP-816,Public Health,Expired,,Extra Shokti Mosquito Coil,Extra Shokti Mosquito Coil,Zarin Enterprise,Live only
 PHP-817,Public Health,Expired,,A.C. 3 In 1 Mosquito Coil,A.C. 3 In 1 Mosquito Coil,Alif Chemical Company,Live only
@@ -3233,10 +2829,6 @@ PHP-825,Public Health,Expired,,Odomos Mosquito Repellent Lotion,Odomos Mosquito 
 PHP-827,Public Health,Expired,,Night Dream Brand Mosquito Coil,Night Dream Brand Mosquito Coil,Bashir Chemical Works.,Live only
 PHP-828,Public Health,Expired,,Dragon Gold Mosquito Coil,Dragon Gold Mosquito Coil,Unison Trading Company,Live only
 PHP-829,Public Health,Expired,,Ninja Style Mosquito Coil,Ninja Style Mosquito Coil,Rafiq & Co. (Pvt) Ltd.,Live only
-PHP-830,Public Health,Expired,,Good Knight Advance 5 Minutes Express Coil,Good Knight Advance 5 Minutes Express Coil,Godrej Household Products (BD) Pvt. Ltd.,Live only
-PHP-831,Public Health,Expired,,Good Knight Advanced Mosquito Coil,Good Knight Advanced Mosquito Coil,Godrej Household Products (BD) Pvt. Ltd.,Live only
-PHP-832,Public Health,Expired,,Good Knight Advance Mosquito Coil,Good Knight Advance Mosquito Coil,Godrej Household Products (BD) Pvt. Ltd.,Live only
-PHP-833,Public Health,Expired,,Super Night Killer Mosquito Coil,Super Night Killer Mosquito Coil,Haque Daily chemicals Industry,Live only
 PHP-835,Public Health,Expired,,SMC Brand Mosquito Coil,SMC Brand Mosquito Coil,Shanta International,Live only
 PHP-836,Public Health,Expired,,ACI Xtra Power Black Fighter Brand Mosquito Coil,ACI Xtra Power Black Fighter Brand Mosquito Coil,ACI Formulations PLC,Live only
 PHP-837,Public Health,Expired,,Sentry Mosquito Coil,Sentry Mosquito Coil,Agro 3 Mosquito Coil Manufacturer,Live only
@@ -3256,15 +2848,11 @@ PHP-867,Public Health,Expired,,Touch Out Cockroach Killer,Touch Out Cockroach Ki
 PHP-875,Public Health,Expired,,New Chokh Mosquito Coil,New Chokh Mosquito Coil,Shakib Chemical & Industry,Live only
 PHP-876,Public Health,Expired,,Eyassa Super Mosquito Coil,Eyassa Super Mosquito Coil,M/S Al Eyassa Trading.,Live only
 PHP-877,Public Health,Expired,,Moushumi Extra Power Mosquito Coil,Moushumi Extra Power Mosquito Coil,Moushumi Chemical Works,Live only
-PHP-881,Public Health,Expired,,Santi 10 WP,Santi 10 WP,Padma Agro Sprayers Co,Live only
 PHP-883,Public Health,Expired,,Jaguar Super Mosquito Coil,Jaguar Super Mosquito Coil,Shefa Chemicals & Food Industries Pvt. Ltd,Live only
 PHP-886,Public Health,Expired,,Ananda Mega King Mosquito Coil,Ananda Mega King Mosquito Coil,M/S Super Coil Co.,Live only
-PHP-890,Public Health,Expired,,Good Knight Jumboo Mosquito Coil,Good Knight Jumboo Mosquito Coil,Godrej Household Products (BD) Pvt. Ltd.,Live only
-PHP-891,Public Health,Expired,,Good Knight advance Xpress Mosquito Coil,Good Knight advance Xpress Mosquito Coil,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-897,Public Health,Expired,,Black Fighter Mosquito Coil,Black Fighter Mosquito Coil,ACI Formulations PLC,Live only
 PHP-906,Public Health,Expired,,Saba Mosquito Coil,Saba Mosquito Coil,Saba Trade & Associates,Live only
 PHP-909,Public Health,Expired,,Lizard Mega Mosquito Coil,Lizard Mega Mosquito Coil,Seuly Chemical Works,Live only
-PHP-912,Public Health,Expired,,Zom Zom Mosquito Coil,Zom Zom Mosquito Coil,Joy Trading International,Live only
 PHP-914,Public Health,Expired,,Rupali Fine Insect Powder,Rupali Fine Insect Powder,Sonar Bangla Chemical Co.,Live only
 PHP-917,Public Health,Expired,,National King Mosquito Coil,National King Mosquito Coil,Bhuiyan Chemicals and Food,Live only
 PHP-918,Public Health,Expired,,Prospur 50 WP,Prospur 50 WP,ACI Formulations PLC,Live only
@@ -3272,7 +2860,6 @@ PHP-924,Public Health,Expired,,Manhaa Bangladesh Mosquito Coil,Manhaa Bangladesh
 PHP-926,Public Health,Expired,,SS Power Mosquito Coil,SS Power Mosquito Coil,S.S. Power,Live only
 PHP-927,Public Health,Expired,,Teer Mosquito Coil,Teer Mosquito Coil,Harun Chemical Works,Live only
 PHP-932,Public Health,Expired,,Techno Mosquito Coil,Techno Mosquito Coil,Techno Enterprise,Live only
-PHP-938,Public Health,Expired,,Good Knight Octa Guard Mosquito Coil,Good Knight Octa Guard Mosquito Coil,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-945,Public Health,Expired,,ACI Anti Bite Gel,ACI Anti Bite Gel,ACI Formulations PLC,Live only
 PHP-947,Public Health,Expired,,Yash Mosquito Coil,Yash Mosquito Coil,Pak Panjaton Chemical Works,Live only
 PHP-948,Public Health,Expired,,ACI Black Fighter Neem Advance Mosquito Coil,ACI Black Fighter Neem Advance Mosquito Coil,ACI Formulations PLC,Live only
@@ -3289,7 +2876,6 @@ PHP-982,Public Health,Expired,,4G Mosquito Coil,4G Mosquito Coil,Fair United Che
 PHP-995,Public Health,Expired,,RM Mega Brand Mosquito Coil,RM Mega Brand Mosquito Coil,RM Chemical Industries,Live only
 PHP-996,Public Health,Expired,,N.P. 100 Mosquito Coil,N.P. 100 Mosquito Coil,S.R Chemicals Works,Live only
 PHP-997,Public Health,Expired,,Shera Mosquito Coil,Shera Mosquito Coil,M/S Islam Chemical Industries,Live only
-PHP-1000,Public Health,Expired,,Champion Super Mosquito Coil,Champion Super Mosquito Coil,M/S Khan Enterprise,Live only
 PHP-1001,Public Health,Expired,,Maoa Mosquito Coil,Maoa Mosquito Coil,M/S Azad Chemical Works,Live only
 PHP-1004,Public Health,Expired,,Red Star Mosquito Coil.,Red Star Mosquito Coil.,Nuha International,Live only
 PHP-1005,Public Health,Expired,,Gopal Mosquito Coil,Gopal Mosquito Coil,Rudra Chemical Works,Live only
@@ -3306,14 +2892,12 @@ PHP-1022,Public Health,Expired,,Temopest 50 EC,Temopest 50 EC,Agrivision Crop Ca
 PHP-1026,Public Health,Expired,,Famis Brand Insecticide Powder,Famis Brand Insecticide Powder,M/S Jihad Chemical Company,Live only
 PHP-1030,Public Health,Expired,,I Gold 10 WP,I Gold 10 WP,D.M Crop Care Ltd,Live only
 PHP-1033,Public Health,Expired,,hit Gel Stick,hit Gel Stick,Godrej Household Products (BD) Pvt. Ltd.,Live only
-PHP-1037,Public Health,Expired,,Good Knight Power Chip,Good Knight Power Chip,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-1047,Public Health,Expired,,Guru Mosquito Coil,Guru Mosquito Coil,Alif Chemical Company,Live only
 PHP-1048,Public Health,Expired,,Ecotraps,Ecotraps,Square Pharmaceuticals PLC.,Live only
 PHP-1049,Public Health,Expired,,Top Bait Cockroach Gel,Top Bait Cockroach Gel,Zero Pest,Live only
 PHP-1050,Public Health,Expired,,Ficam 80 WP,Ficam 80 WP,Bayer CropScience Limited,Live only
 PHP-1054,Public Health,Expired,,Star Liquid Insecticide,Star Liquid Insecticide,M/S Alam Trading,Live only
 PHP-1056,Public Health,Expired,,Fenon 40 WP,Fenon 40 WP,A&E International,Live only
-PHP-1058,Public Health,Expired,,Night Queen Mosquito Coil,Night Queen Mosquito Coil,M/S Tarif Products,Live only
 PHP-1062,Public Health,Expired,,ACI All Night Aerosol,ACI All Night Aerosol,ACI Formulations PLC,Live only
 PHP-1063,Public Health,Expired,,ACI all Out Insect Repellant Lotion,ACI all Out Insect Repellant Lotion,ACI Formulations PLC,Live only
 PHP-1064,Public Health,Expired,,ACI Super Liquid Vaporizer,ACI Super Liquid Vaporizer,ACI Formulations PLC,Live only
@@ -3321,16 +2905,12 @@ PHP-1065,Public Health,Expired,,All Out Liquid Vaporizer.,All Out Liquid Vaporiz
 PHP-1066,Public Health,Expired,,All Out Flash Guard Paper,All Out Flash Guard Paper,SC Johnson Private Ltd.,Live only
 PHP-1068,Public Health,Expired,,Moskill Spray,Moskill Spray,Standard Finis Oil Co.,Live only
 PHP-1069,Public Health,Expired,,Goldeer Aerosol,Goldeer Aerosol,S.N Trade International,Live only
-PHP-1071,Public Health,Expired,,Mosquiton 0.12 P,Mosquiton 0.12 P,Russell IPM Bangladesh Limited,Live only
-PHP-1072,Public Health,Expired,,Good Knight Gold Liquid Vaporizer,Good Knight Gold Liquid Vaporizer,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-1074,Public Health,Expired,,Odomos Naturals Non Sticky Mosquito Repellent Cream,Odomos Naturals Non Sticky Mosquito Repellent Cream,Asian Consumer Care Pvt. Ltd,Live only
 PHP-1077,Public Health,Expired,,Save Liquid Spray,Save Liquid Spray,Tareq Traders,Live only
 PHP-1081,Public Health,Expired,,Kick Out Brand Liquid Vaporizer,Kick Out Brand Liquid Vaporizer,Sun Basic Chemicals Ltd invaliid,Live only
 PHP-1087,Public Health,Expired,,City Clean G2 EW,City Clean G2 EW,Gazipur City Corporation,Live only
 PHP-1088,Public Health,Expired,,City Delta G 1.25 Ull,City Delta G 1.25 Ull,Gazipur City Corporation,Live only
 PHP-1089,Public Health,Expired,,Bentacide 250 EC Special,Bentacide 250 EC Special,Gazipur City Corporation,Live only
-PHP-1090,Public Health,Expired,,Gethion 5 RFU,Gethion 5 RFU,Gazipur City Corporation,Live only
-PHP-1091,Public Health,Expired,,Cityphos -G 50 EC,Cityphos -G 50 EC,Gazipur City Corporation,Live only
 PHP-1092,Public Health,Expired,,Nomos Cream,Nomos Cream,Beximco Pharmaceuticals Ltd.,Live only
 PHP-1093,Public Health,Expired,,Cityhion I-5 RFU,Cityhion I-5 RFU,Dhaka South City Corporation,Live only
 PHP-1094,Public Health,Expired,,Tephra 50 EC,Tephra 50 EC,Dhaka South City Corporation,Live only
@@ -3352,81 +2932,10 @@ PHP-1149,Public Health,Expired,,Soffell Mosquito Repellent spray,Soffell Mosquit
 PHP-1150,Public Health,Expired,,Soffella Mosquito Lotion,Soffella Mosquito Lotion,Smart Distribution Pvt. Ltd,Live only
 PHP-1161,Public Health,Expired,,Chaklader Insecticides Powder,Chaklader Insecticides Powder,M/s Chaklader Agro Chemical Co,Live only
 PHP-1162,Public Health,Expired,,Agun Insecticides Power,Agun Insecticides Power,Tarjan Chemical Co,Live only
-PHP-1166,Public Health,Expired,,FastM 80WP,FastM 80WP,A &E International,Live only
-PHP-1185,Public Health,Expired,,Good Knight Agarbatti,Good Knight Agarbatti,Godrej Household Products (BD) Pvt. Ltd.,Live only
 PHP-1187,Public Health,Expired,,AC-7 Aerosol,AC-7 Aerosol,Alif Chemical Company,Live only
 PHP-1188,Public Health,Expired,,Guru Aerosol,Guru Aerosol,Alif Chemical Company,Live only
-PHP-1196,Public Health,Expired,Ionic Nano Copper 5.2%,Blue Water Guard,Blue water guard,Stalwart Associates,86th
 PHP-1207,Public Health,Expired,Deltramethrin 0.5%,Hit 3 in 1 Chalk,HIT 3 in 1 Chalk,Godrej Household Products (BD) Pvt. Ltd.,86th
-PHP-1241,Public Health,Expired,0.1%+Meperfluthrin 0.2% Bacillus Thuringiensis Var. Israelenis 1200 Itu/Mg Wp,Biomos 1200ITU/MG WP,Biomos 1200ITU/MG WP,A & I Limited,86th
-PHP-1245,Public Health,Expired,Meperfluthrin 0.3%,Thunder Classic Mosquito coil,Thunder Classic Mosquito Coil,Abaid Monsur Consumer Ltd,86th
-PHP-1247,Public Health,Expired,Meperfluthrin 0.08%,Pan Pata Mosquito coil,Pan Pata Mosquito Coil,DM Crop Care Ltd,86th
-PHP-1251,Public Health,Expired,Meperfluthrin 0.02%,Red Leaf Mosquito Coil,Red Leaf Mosquito Coil,Tareque Traders,86th
-PHP-1259,Public Health,Expired,(Prallethrin 0.2%+D- Phenothrin 0.15%),Blaster Aerosol,Blaster Aerosol,Faymas Enterprise,86th
-PHP-1260,Public Health,Expired,(Prallethrin 0.2%+D- Phenothrin 0.15%),Super Power Aerosol,Super Power Aerosol,Akij Healthcare and Hygiene Ltd,86th
-PHP-1266,Public Health,Expired,Meperfluthrin 0.03%,Blaster Mosquito Coil,Blaster Mosquito Coil,Faymas Enterprise,86th
-PHP-1282,Public Health,Expired,Meperfluthrin 0.05%,Monpura Mosquito Coil,Monpura Mosquito Coil,GREEN STAR CHEMICALS & CONSUMER PRODUCTS,86th
-PHP-1302,Public Health,Expired,Meperfluthrin 0.03%,Bright Star Mosquito Coil,Bright Star Mosquito Coil,BRIGHT  STAR ENGINEERING,86th
-PHP-1307,Public Health,Expired,Meperfluthrin 0.03%,Banglader Special Mosquito Coil,Banglar Special Mosquito Coil,Yeaqub & Mahabub Chemical Works,86th
-PHP-1316,Public Health,Expired,Meperfluthrin 0.03%,Surja Power Mosquito Coil,Surjo Power Mosquito Coil,Haziabdul Karim Miah Chemical Works Ltd,86th
-PHP-1324,Public Health,Expired,Meperfluthrin 0.03% W/W,Formula Mosquito Coil,Formula Mosquito coil,Dana Corporation,86th
-PHP-1325,Public Health,Expired,Meperfluthrin 0.03%,Sathi Mosquito Coil,Sathi Mosquito coil,M/S Arju Enterprise,86th
-PHP-1338,Public Health,Expired,Meperfluthrin 0.03%,Hunter Ninja Mosquito Coil,Hunter Ninja Mosquito Coil,Ashu Enterprise,86th
-PHP-1344,Public Health,Expired,Meperfluthrin 0.03%,Monset Hunker Mosquito Coil,Monset Hunker Mosquito Coil,God Gift Enterprise,86th
-PHP-1349,Public Health,Expired,Meperfluthrin 0.03%,Fast Knock Down Mosquito Coil,Fast Knock Down Mosquito Coil,Bismillah Consumer,86th
-PHP-1375,Public Health,Expired,Meperfluthrin 0.03%,Mr. Action Mosquito Coil,Mr. Action Mosquito Coil,Master Corporation,86th
-PHP-1377,Public Health,Expired,Meperfluthrin 0.03%,Kobutor Marka Mosquito Coil,Kobutor Marka Mosquito Coil,GACL,86th
-PHP-1379,Public Health,Expired,Meperfluthrin 0.03%,Zarine Super Mosquito Coil,Zarine Super Mosquito Coil,Zarine Enterprise,86th
-PHP-1380,Public Health,Expired,Meperfluthrin 0.03%,CKT Nockout Mini 4 Hours Mosquito Coil,CKT Nockout Mini 4 Hours Mosquito Coil,C. K. Trading,86th
-PHP-1391,Public Health,Expired,Meperfluthrin 0.05%,Panda Mosquito Coil,Panda Mosquito Coil,A and A Chemical,86th
-PHP-1400,Public Health,Expired,Meperfluthrin 0.03%,Pubali Mosquito Coil,Pubali Mosquito Coil,MUSTAKIM CONSUMER PRODUCT,86th
-PHP-1401,Public Health,Expired,Meperfluthrin 0.03%,Sultan King Mosquito Coil,Sultan King Mosquito Coil,M S Company OPC Bnagladesh,86th
-PHP-1420,Public Health,Expired,Meperfluthrin 0.03%,Nibaron Brand Mosquito Coil,Nibaron Brand Mosquito Coil,Khandaker Trading Intertnational,86th
-PHP-1424,Public Health,Expired,Meperfluthrin 0.03%,Banalota Mosquito Coil,Banalota Mosquito Coil,M/S JS Traders,86th
-PHP-1436,Public Health,Expired,Meperfluthrin 0.03%,Rupa Mosquito Coil,Rupa Mosquito Coil,Tawshique & Brothers,86th
-PHP-1440,Public Health,Expired,Meperfluthrin 0.03%,Spider Jambo Mosquito Coil,Spider Jambo Mosquito Coil,RAMIN COSUMER PRODUCTS,86th
-PHP-1441,Public Health,Expired,Meperfluthrin 0.05%,ABL Hunter Brand Mosquito Coil,ABL Hunter Brand Mosquito Coil,Alima Bangladesh Limited,86th
-PHP-1442,Public Health,Expired,Meperfluthrin 0.05%,Super Kill Brand Fiber Mosquito Coil,Superkill Brand Fiber Mosquito Coil,Oohlala International BD Limited,86th
-PHP-1443,Public Health,Expired,Meperfluthrin 0.05%,Boxer Brand Carbon Mosquito Coil,Boxer Brand Carbon Mosquito Coil,Confo Tech BD Limited,86th
-PHP-1444,Public Health,Expired,Meperfluthrin 0.05%,Boxer Brand Fiber Mosquito Coil,Boxer Brand Fiber Mosquito Coil,Confo Tech BD Limited,86th
-PHP-1447,Public Health,Expired,Es-biothrin 0.12%,Fatema Black Power Booster,Fatema Black Powder Booster Mosquito,Nafija Fatema Chemical,86th
-PHP-1450,Public Health,Expired,Meperfluthrin 0.03%,Power Dragon Mosquito Coil,Power Dragon Mosquito Coil,Jannat Consumer Product,86th
-PHP-1456,Public Health,Expired,Meperfluthrin 0.03%,New Dream Night Mosquito Coil,New Dream Night Mosquito Coil,Shawon Enterprise,86th
-PHP-1485,Public Health,Expired,Meperfluthrin 0.03%,Everyday Mosquito Coil,Everyday Mosquito Coil,Momenarahim Consumer Product,86th
-PHP-1487,Public Health,Expired,Meperfluthrin 0.03%,Elegant Mosquito Coil,Elegant Mosquito Coil,Elegant Enterprise,86th
-PHP-1500,Public Health,Expired,Meperfluthrin 0.03%,Holy Power Mosquito Coil,Holy Power Mosquito Coil,Holy Agro Chemical,86th
-PHP-1511,Public Health,Expired,Meperfluthrin 0.03%,Winner Mosquito Coil,Winner Mosquito Coil,M M Traders,86th
-PHP-1518,Public Health,Expired,Meperfluthrin 0.05%,GL Tufan Mosquito Coil,GL Tufan Mosquito Coil,Gaffer Enterprise,86th
-PHP-1520,Public Health,Expired,Meperfluthrin 0.05%,Moskiller Super Mosquito Coil,Moskiller Super Mosquito Coil,Bhuiyan Associate,86th
-PHP-1550,Public Health,Expired,Meperfluthrin 0.05%,Anik Mosquito Coil,Anik Mosquito Coil,Alif Consumer Products,86th
 PHP-20233,Public Health,Expired,,new test,new test,Test Compnay,Live only
 PHP-20244,Public Health,Expired,,ana,ana,Test Compnay,Live only
-PHP-1626,Public Health,Active (Gazette only),Meperfluthrin 0.03% w/w,Talash Mosquito Coil,Talash Mosquito Coil,H H Enterprise,87th orphan
-PHP-1640,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,Nijum Mosquito Coil,Nijum Mosquito Coil,Nihal Chemicals,87th orphan
-PHP-1431,Public Health,Active (Gazette only),Meperfluthrin 0.03%,Icon Mosquito Coil,Icon Mosquito Coil,Nandita Chemical,86th orphan
-PHP-1628,Public Health,Active (Gazette only),Meperfluthrin 0.03% w/w,Hot Jumbo Brand Mosquito Coil,Hot Jumbo Brand Mosquito Coil,RBM Chemical,87th orphan
-PHP-1611,Public Health,Active (Gazette only),Es-Biothrin 0.25% w/w,888 Mosquito Coil,888 Mosquito Coil,Metro Super Shop,87th orphan
-PHP-1610,Public Health,Active (Gazette only),Es-Biothrin 0.25% w/w,Mortein Super King Mosquito Coil,Mortein Super King Mosquito Coil,Family Consumer Care,87th orphan
-PHP-1636,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,Doom Mosquito Coil,Doom Mosquito Coil,Mona Enterprise,87th orphan
-PHP-1616,Public Health,Active (Gazette only),Meperfluthrin 0.03% w/w,Night Save Mosquito Coil,Night Save Mosquito Coil,Mili Chemicals,87th orphan
-PHP-1609,Public Health,Active (Gazette only),Es-Biothrin 0.25% w/w,Nagorik Mosquito Coil,Nagorik Mosquito Coil,Roja Consumer,87th orphan
-PHP-1647,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,Choice Mosquito Coil,Choice Mosquito Coil,Choice Cosmetics Care & Toiletries,87th orphan
-AP-8029,Pesticides,Active (Gazette only),Glufosinate Ammonium 20%,Ruinous 20 SL,Ruinous 20 SL,Mondol Traders,87th orphan
-PHP-1653,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,Coil Badsha Mosquito Coil,Coil Badsha Mosquito Coil,AB Manufacturers Industry,87th orphan
-PHP-1659,Public Health,Active (Gazette only),Meperfluthrin 0.08% w/w,D H Han Mosquito Coil,D H Han Mosquito Coil,Dhaka Hangzhou Biotechnology Ltd.,87th orphan
-PHP-1643,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,Soket Mosquito Coil,Soket Mosquito Coil,MK Momin Enterprise,87th orphan
 AP-7031,Pesticides,Active (Gazette only),Afidopyropen 5%,Sefina 5 DC,Sefina 5 DC,BASF Bangladesh Limited,86th orphan
-PHP-1625,Public Health,Active (Gazette only),Meperfluthrin 0.03% w/w,Arjan Super King Mosquito Coil,Arjan Super King Mosquito Coil,Shova Consumer Care,87th orphan
-PHP-1631,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,Care Mosquito Coil,Care Mosquito Coil,Care (Pvt.) Bangladesh,87th orphan
-PHP-1633,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,ACME King Mosquito Coil,ACME King Mosquito Coil,ACME Pesticides Limited,87th orphan
-PHP-1644,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,Somaj King Mosquito Coil,Somaj King Mosquito Coil,M.A Corporation,87th orphan
-PHP-1614,Public Health,Active (Gazette only),Es-Biothrin 0.3% w/w,Titash Mosquito Coil,Titash Mosquito Coil,T.P. Enterprise,87th orphan
-PHP-1646,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,JS Dadagiri Unlimited Mosquito Coil,JS Dadagiri Unlimited Mosquito Coil,Samira & Co.,87th orphan
-PHP-1649,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,Ananna Super Mosquito coil,Ananna Super Mosquito coil,Prime Chemical Technologies,87th orphan
-PHP-1602,Public Health,Active (Gazette only),Es-Biothrin 0.12% w/w,Pahari Mosquito Coil,Pahari Mosquito Coil,Malek & Company,87th orphan
-PHP-1619,Public Health,Active (Gazette only),Meperfluthrin 0.03% w/w,SR Mosquito Coil,SR Mosquito Coil,Sajim Chemical Works,87th orphan
-PHP-1603,Public Health,Active (Gazette only),Es-Biothrin 0.12% w/w,King Khan Brand Mosquito Coil,King Khan Brand Mosquito Coil,Razzak Chemical Industries,87th orphan
 AP(Bio)-113,Biopesticides,Active (Gazette only),Meterhizium anisopliae & Beauveria bassiana,Metarizep,Metarizep,Indo-Bangla Agro Tech Ltd.,86th orphan
-PHP-1650,Public Health,Active (Gazette only),Meperfluthrin 0.05% w/w,Luncher Mosquito Coil,Luncher Mosquito Coil,Haydar Corporation and Chemical,87th orphan
-PHP-1620,Public Health,Active (Gazette only),Meperfluthrin 0.03% w/w,Zenith Low Smoke Mosquito Coil,Zenith Low Smoke Mosquito Coil,Zenith Toiletries,87th orphan
-AP(Bio)-134,Biopesticides,Active (Gazette only),Physcion 0.1%,Bio-Libas,Bio-Libas,Integrated Crop Solution Bangladesh,87th orphan
