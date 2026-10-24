@@ -18,7 +18,7 @@
  * Run this BEFORE the service worker registers so the old cache is gone
  * by the time the new SW tries to populate its own cache.
  */
-const CURRENT_CACHE_PREFIX = 'pn-v4';
+const CURRENT_CACHE_PREFIX = 'pn-v5';
 
 export async function deleteOldCachesIfAny(): Promise<string[]> {
   if (typeof window === 'undefined' || !('caches' in window)) {

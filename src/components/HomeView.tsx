@@ -1148,6 +1148,115 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
+      {/* ----------------- OFFICIAL SOURCES & REFERENCE DOWNLOADS ------- */}
+      <section className="acg-shell">
+        <div className="acg-card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)',
+            color: 'white',
+            padding: '20px 28px',
+          }}>
+            <span className="acg-res__eyebrow" style={{ color: '#93c5fd' }}>
+              {bn ? 'অফিসিয়াল সূত্র ও রেফারেন্স' : 'Official sources & reference'}
+            </span>
+            <h3 style={{ margin: '6px 0 4px 0', fontSize: 20, fontWeight: 800, color: 'white' }}>
+              {bn ? 'সরকারি ডাটাবেস ও IRAC MoA ক্লাসিফিকেশন' : 'Government database & IRAC MoA classification'}
+            </h3>
+            <p style={{ margin: 0, fontSize: 12, color: '#bfdbfe', maxWidth: 720 }}>
+              {bn
+                ? 'বাংলাদেশ সরকারের উদ্ভিদ সংরক্ষণ উইং এবং IRAC-এর অফিসিয়াল সূত্র থেকে সরাসরি তথ্য যাচাই করুন।'
+                : 'Verify directly against the Government of Bangladesh Plant Protection Wing and the IRAC MoA Classification Scheme v11.5.'}
+            </p>
+          </div>
+          <div style={{ padding: '20px 28px', display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            {/* PPW Official */}
+            <a
+              href="https://ppw.krishi.gov.bd/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#006a4e', color: 'white', borderColor: '#006a4e' }}
+            >
+              <ExternalLink size={15} />
+              {bn ? 'সরকারি পিপিডাব্লিউ সাইট' : 'PPW Official Site'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                ppw.krishi.gov.bd
+              </span>
+            </a>
+            {/* IRAC Training */}
+            <a
+              href="https://irac-online.org/training/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#7c3aed', color: 'white', borderColor: '#7c3aed' }}
+            >
+              <ExternalLink size={15} />
+              {bn ? 'IRAC ট্রেনিং' : 'IRAC Training'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                irac-online.org
+              </span>
+            </a>
+            {/* IRAC MoA Classification v11.5 PDF */}
+            <a
+              href="/downloads/IRAC_MoA_Classification_v11.5.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#b91c1c', color: 'white', borderColor: '#b91c1c' }}
+            >
+              <FileText size={15} />
+              {bn ? 'IRAC MoA v11.5 PDF' : 'IRAC MoA v11.5 PDF'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                1.5 MB
+              </span>
+            </a>
+            {/* IRAC MoA Brochure v11.5 PDF */}
+            <a
+              href="/downloads/IRAC_MoA_Brochure_v11.5.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#be123c', color: 'white', borderColor: '#be123c' }}
+            >
+              <FileText size={15} />
+              {bn ? 'IRAC ব্রোশিউর' : 'IRAC Brochure'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                1.2 MB
+              </span>
+            </a>
+            {/* IRAC Resistance Monitoring Guide PDF */}
+            <a
+              href="/downloads/IRAC_Resistance_Monitoring_Guide.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#9333ea', color: 'white', borderColor: '#9333ea' }}
+            >
+              <FileText size={15} />
+              {bn ? 'প্রতিরোধ মনিটরিং' : 'Resistance Guide'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                473 KB
+              </span>
+            </a>
+            {/* PTAC 86th Gazette PDF */}
+            <a
+              href="/downloads/PTAC_86th_Gazette.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#0369a1', color: 'white', borderColor: '#0369a1' }}
+            >
+              <FileText size={15} />
+              {bn ? '৮৬তম গেজেট PDF' : '86th PTAC Gazette'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                440 KB
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* -------------------------------- SHARE BANNER (restored) ------- */}
       <section className="acg-shell">
         <div className="acg-share">

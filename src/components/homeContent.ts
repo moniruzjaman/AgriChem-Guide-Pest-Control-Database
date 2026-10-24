@@ -28,6 +28,17 @@ export const PESTICIDE_ACT_APP_URL = 'https://pesticideact2018.vercel.app/';
 export const PESTICIDE_ACT_APP_LOGO = '/partner-pesticide-act-logo.png';
 export const PESTICIDE_ACT_APP_LOGO_FALLBACK = '/partner-pesticide-act-logo.png';
 
+// ── Official authoritative sources ──────────────────────────────────────────
+// Plant Protection Wing (PPW) — official Bangladesh government pesticide
+// database. The live API at ppw.krishi.gov.bd/pesticide-search is proxied
+// through our backend at /api/ppw/search for in-app live search (DatabaseView).
+export const PPW_OFFICIAL_URL = 'https://ppw.krishi.gov.bd/';
+// IRAC — Insecticide Resistance Action Committee. The authoritative MoA
+// classification scheme (v11.5, Feb 2026) is bundled in /public/downloads/
+// for offline reference.
+export const IRAC_URL = 'https://irac-online.org/';
+export const IRAC_TRAINING_URL = 'https://irac-online.org/training/';
+
 // ── Popular crops for quick database navigation ─────────────────────────────
 export interface PopularCrop {
   en: string;
