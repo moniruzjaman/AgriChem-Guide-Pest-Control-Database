@@ -1,0 +1,434 @@
+/* ─────────────────────────────────────────────────────────────────────
+ * MoA Rotation Compliance Warning Modal — Guide §4.3 styling.
+ *
+ * Visual Badging Standards: sub-group letter must be rendered in the
+ * SAME font size as the main number, all caps. The group badge uses a
+ * monospace font stack so the sub-group letter is not visually smaller
+ * than the numeric main group — per IRAC label standards.
+ * ───────────────────────────────────────────────────────────────────── */
+
+.acg-moa-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+  font-family: -apple-system, "Hind Siliguri", "Inter", system-ui, sans-serif;
+}
+
+.acg-moa-modal {
+  background: #fff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 600px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+}
+
+.acg-moa-modal--block {
+  border-top: 4px solid #b91c1c;
+}
+.acg-moa-modal--flag {
+  border-top: 4px solid #c2410c;
+}
+.acg-moa-modal--pass {
+  border-top: 4px solid #15803d;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────── */
+
+.acg-moa-modal__header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.acg-moa-modal__eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.acg-moa-modal__verdict-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.acg-moa-modal--block .acg-moa-modal__verdict-icon { color: #b91c1c; }
+.acg-moa-modal--flag .acg-moa-modal__verdict-icon { color: #c2410c; }
+.acg-moa-modal--pass .acg-moa-modal__verdict-icon { color: #15803d; }
+
+.acg-moa-modal__eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #475569;
+  flex: 1;
+  margin: 0;
+}
+
+.acg-moa-modal__close {
+  background: transparent;
+  border: 0;
+  padding: 4px;
+  cursor: pointer;
+  color: #64748b;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.acg-moa-modal__close:hover { background: #f1f5f9; color: #0f172a; }
+
+.acg-moa-modal__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.acg-moa-modal__sub {
+  font-size: 14px;
+  color: #475569;
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+
+/* ── Proposed application badge (visual badging standards §4.3) ──────── */
+
+.acg-moa-modal__proposal {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 4px;
+}
+
+.acg-moa-modal__proposal-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.acg-moa-modal__proposal-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.acg-moa-modal__group-badge {
+  display: inline-block;
+  background: #b31d31;
+  color: #fff;
+  font-family: "JetBrains Mono", "Source Code Pro", "Courier New", monospace;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  /* IRAC label standard: sub-group letter in the SAME size as main number */
+  line-height: 1;
+}
+
+.acg-moa-modal__proposal-product {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.acg-moa-modal__proposal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.acg-moa-modal__proposal-meta strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* ── Findings list ────────────────────────────────────────────────────── */
+
+.acg-moa-modal__findings {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.acg-moa-modal__findings-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #475569;
+  margin: 0 0 10px;
+}
+
+.acg-moa-modal__findings-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.acg-moa-modal__finding {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fef9c3;
+  border-left: 3px solid #ca8a04;
+}
+
+.acg-moa-modal__finding--block {
+  background: #fee2e2;
+  border-left-color: #b91c1c;
+}
+
+.acg-moa-modal__finding-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #ca8a04;
+}
+
+.acg-moa-modal__finding--block .acg-moa-modal__finding-icon {
+  color: #b91c1c;
+}
+
+.acg-moa-modal__finding-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.acg-moa-modal__finding-code {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #475569;
+  margin: 0 0 4px;
+}
+
+.acg-moa-modal__finding-severity {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 9px;
+}
+
+.acg-moa-modal__finding--block .acg-moa-modal__finding-severity {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+.acg-moa-modal__finding-message {
+  font-size: 13px;
+  color: #1f2937;
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ── Alternative main groups ──────────────────────────────────────────── */
+
+.acg-moa-modal__alternatives {
+  padding: 14px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #f0fdf4;
+}
+
+.acg-moa-modal__alternatives-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #15803d;
+  margin: 0 0 8px;
+}
+
+.acg-moa-modal__alternatives-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.acg-moa-modal__alt-chip {
+  display: inline-block;
+  background: #15803d;
+  color: #fff;
+  font-family: "JetBrains Mono", "Source Code Pro", "Courier New", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.acg-moa-modal__alternatives-note {
+  font-size: 12px;
+  color: #166534;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Footer / actions ────────────────────────────────────────────────── */
+
+.acg-moa-modal__footer {
+  padding: 16px 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.acg-moa-modal__block-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #991b1b;
+  margin-right: auto;
+  font-weight: 500;
+}
+
+.acg-moa-modal__block-note svg { color: #b91c1c; }
+
+.acg-moa-modal__btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.15s;
+}
+
+.acg-moa-modal__btn--primary {
+  background: #006a4e;
+  color: #fff;
+}
+.acg-moa-modal__btn--primary:hover { background: #005a42; }
+.acg-moa-modal__btn--primary:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.acg-moa-modal__btn--secondary {
+  background: #f1f5f9;
+  color: #475569;
+}
+.acg-moa-modal__btn--secondary:hover { background: #e2e8f0; color: #0f172a; }
+
+/* Override justification box for FLAG severity */
+.acg-moa-modal__override {
+  width: 100%;
+  background: #fefce8;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.acg-moa-modal__override-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #92400e;
+  margin-bottom: 8px;
+}
+
+.acg-moa-modal__override-input {
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  resize: vertical;
+  background: #fff;
+  color: #0f172a;
+}
+
+.acg-moa-modal__override-input:focus {
+  outline: 2px solid #c2410c;
+  outline-offset: -1px;
+}
+
+.acg-moa-modal__override-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Reference footer */
+.acg-moa-modal__reference {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 24px 14px;
+  font-size: 11px;
+  color: #94a3b8;
+  margin: 0;
+  border-top: 1px solid #f1f5f9;
+}
+
+/* ── Mobile responsive ────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .acg-moa-modal__header { padding: 16px 18px 14px; }
+  .acg-moa-modal__findings,
+  .acg-moa-modal__alternatives,
+  .acg-moa-modal__footer { padding: 14px 18px; }
+  .acg-moa-modal__reference { padding: 10px 18px 12px; }
+  .acg-moa-modal__title { font-size: 18px; }
+  .acg-moa-modal__proposal-meta { gap: 10px; }
+  .acg-moa-modal__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .acg-moa-modal__btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .acg-moa-modal__block-note {
+    justify-content: center;
+    margin-right: 0;
+    text-align: center;
+  }
+}

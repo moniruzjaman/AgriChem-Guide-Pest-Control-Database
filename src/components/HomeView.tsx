@@ -268,7 +268,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         ctaCalc: 'ট্যাংক ক্যালকুলেটর',
         ctaShare: 'শেয়ার করুন',
         ctaGuide: 'গাইড মেনু',
-        ctaLogSpray: 'স্প্রে লগ করুন',
+        ctaLogSpray: 'স্প্রে লগ ও MoA কমপ্লায়েন্স যাচাই',
         trust:
           'সুপারিশের আগে লেবেল, নিবন্ধন, PHI, REI ও PPE যাচাই করুন।',
         dialogKicker: 'মাঠের কথা',
@@ -325,7 +325,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         ctaCalc: 'Tank calculator',
         ctaShare: 'Share the app',
         ctaGuide: 'Guide menu',
-        ctaLogSpray: 'Log a spray',
+        ctaLogSpray: 'Log spray + MoA compliance check',
         trust:
           'Always verify the current label, registration status, PHI, REI, and PPE before recommending.',
         dialogKicker: 'FROM THE FIELD',
@@ -1267,6 +1267,19 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 126 KB
               </span>
             </a>
+            {/* Live engine CTA — opens the My Field tab where the engine runs */}
+            <button
+              type="button"
+              className="acg-btn"
+              style={{ background: '#0f766e', color: 'white', borderColor: '#0f766e', cursor: 'pointer' }}
+              onClick={() => go('myfield')}
+            >
+              <ShieldCheck size={15} />
+              {bn ? 'MoA কমপ্লায়েন্স ইঞ্জিন (লাইভ)' : 'MoA Compliance Engine (live)'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                {bn ? 'ইন-অ্যাপ' : 'In-app'}
+              </span>
+            </button>
           </div>
         </div>
       </section>
