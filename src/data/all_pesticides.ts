@@ -21725,7 +21725,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: "1.25 Kg/ha",
     recommendations: "Tea | Mosquito bug | 1.25 Kg/ha",
     noOfRecommendations: 1,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Insecticide" as PesticideType,
@@ -43640,7 +43640,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: "16.66 kg/ha",
     recommendations: "Sugarcane | Termite | 16.66 kg/ha",
     noOfRecommendations: 1,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Insecticide" as PesticideType,
@@ -51245,7 +51245,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: "220 g/ha",
     recommendations: "Rice | BPH | 220 g/ha",
     noOfRecommendations: 1,
-    moaCode: null,
+    moaCode: "IRAC 1B",
   },
   {
     pesticideType: "Insecticide" as PesticideType,
@@ -51275,7 +51275,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: "60 g/ha",
     recommendations: "Rice | BPH | 60 g/ha",
     noOfRecommendations: 1,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Insecticide" as PesticideType,
@@ -72470,7 +72470,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: "6 ml/100m2",
     recommendations: "Mosquito | 6 ml/100m2",
     noOfRecommendations: 1,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -75590,7 +75590,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: "63x63x73 cm3",
     recommendations: "Mosquito | 63x63x73 cm3",
     noOfRecommendations: 1,
-    moaCode: null,
+    moaCode: "IRAC 1B",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -80525,7 +80525,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: "63x63x73 cm2",
     recommendations: "Mosquito | 63x63x73 cm2",
     noOfRecommendations: 1,
-    moaCode: null,
+    moaCode: "IRAC 1B",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -81140,7 +81140,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: "63x63x73 cm2",
     recommendations: "Mosquito | 63x63x73 cm2",
     noOfRecommendations: 1,
-    moaCode: null,
+    moaCode: "IRAC 1B",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -81395,7 +81395,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: "2.5 gm/33m3; 3 gm (15 x 15 cm)",
     recommendations: "Mosquito | 2.5 gm/33m3\nCockroach | 3 gm (15 x 15 cm)",
     noOfRecommendations: 2,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -110105,7 +110105,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Insecticide" as PesticideType,
@@ -113495,7 +113495,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Insecticide" as PesticideType,
@@ -114170,7 +114170,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Insecticide" as PesticideType,
@@ -116720,7 +116720,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Insecticide" as PesticideType,
@@ -126785,7 +126785,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 24B",
   },
   {
     pesticideType: "Bio Pesticide" as PesticideType,
@@ -128585,7 +128585,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 1B",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -128900,7 +128900,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -132815,7 +132815,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 1B",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -133745,7 +133745,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -133775,7 +133775,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -134330,7 +134330,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -134345,7 +134345,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -136520,7 +136520,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -136790,7 +136790,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 3A",
   },
   {
     pesticideType: "Public Health" as PesticideType,
@@ -141335,7 +141335,7 @@ export const pesticides: ReadonlyArray<PesticideProduct> = [
     dosageRate: null,
     recommendations: null,
     noOfRecommendations: 0,
-    moaCode: null,
+    moaCode: "IRAC 9D",
   },
   {
     pesticideType: "Public Health" as PesticideType,

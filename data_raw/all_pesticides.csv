@@ -2101,7 +2101,7 @@ Insecticide,, (0.6% + 1.55%),46,One Short 3WDG,AP-5714,Smart Agrovet,Jute,Hairy 
 Insecticide,, (0.6% + 1.55%),47,Almathrin 3WDG,AP-5902,Croptech Bangladesh Ltd.,Mango,Hopper,1 g/L of water,Mango | Hopper | 1 g/L of water,1,
 Insecticide,, (0.6% + 1.55%),48,KG Shurma 3WDG,AP-5903,Glorious Crop Care Ltd.,Mango,Hopper,1 g/L of water,Mango | Hopper | 1 g/L of water,1,
 Insecticide,, (0.6% + 1.55%),49,Abba Star 3WDG,AP-5904,Vision Agro,Cotton,Ball worm,2 g/L of water,Cotton | Ball worm | 2 g/L of water,1,
-Insecticide,, (0.6% + 1.55%),50,Surjo 3WG,AP-5905,ICI Agri Care,Tea,Mosquito bug,1.25 Kg/ha,Tea | Mosquito bug | 1.25 Kg/ha,1,
+Insecticide,, (0.6% + 1.55%),50,Surjo 3WG,AP-5905,ICI Agri Care,Tea,Mosquito bug,1.25 Kg/ha,Tea | Mosquito bug | 1.25 Kg/ha,1,IRAC 3A
 Insecticide,, (0.6% + 1.55%),51,Tab Thrin 3WDG,AP-5906,TAB Brands Ltd.,Tea,Mosquito bug,1.25 Kg/ha,Tea | Mosquito bug | 1.25 Kg/ha,1,
 Insecticide,, (0.6% + 1.55%),52,Abacyper 3WDG,AP-5907,Take Care,Tea,Mosquito bug,1.25 Kg/ha,Tea | Mosquito bug | 1.25 Kg/ha,1,
 Insecticide,4,Abamectin (2%) + Matrine (1%),1,Nitex 3WG,AP-2612,Mimpex Agrochemicals Limited,Cotton,"Aphid, Bollworm",600 ml/ha,"Cotton | Aphid, Bollworm | 600 ml/ha",1,IRAC 6
@@ -4254,7 +4254,7 @@ Insecticide,80,Fipronil,70,Shebanil 3GR,AP-3783,Sonali Krishi Sheba Industries,R
 Insecticide,80,Fipronil,71,Aashirbad 50SC,AP-3784,Hazi Abdul Hakim Sowdagar,Rice,BPH,0.5 L/ha,Rice | BPH | 0.5 L/ha,1,
 Insecticide,80,Fipronil,72,Bestnil 5SC,AP-3785,Best Harvest Agro Chemicals,Rice,BPH,0.5 L/ha,Rice | BPH | 0.5 L/ha,1,
 Insecticide,80,Fipronil,73,Pafip 3GR,AP-3788,Pafs Agro International Co.,Rice,YSB,10.00 kg/ha,Rice | YSB | 10.00 kg/ha,1,
-Insecticide,80,Fipronil,74,Viper 3GR,AP-4041,Eon Agro Industries Limited,Sugarcane,Termite,16.66 kg/ha,Sugarcane | Termite | 16.66 kg/ha,1,
+Insecticide,80,Fipronil,74,Viper 3GR,AP-4041,Eon Agro Industries Limited,Sugarcane,Termite,16.66 kg/ha,Sugarcane | Termite | 16.66 kg/ha,1,IRAC 3A
 Insecticide,80,Fipronil,75,Calibar 3GR,AP-4297,Haychem (Bangladesh) Limited,"Sugarcane, Tea","Termite, Top Shoot borer & Whit grub, Nematode",16.66 kg/ha; 33.33 kg/; 165 g/m3,"Sugarcane | Termite | 16.66 kg/ha
 Sugarcane | Top Shoot borer & Whit grub | 33.33 kg/
 Tea | Nematode | 165 g/m3",3,
@@ -4963,9 +4963,9 @@ Insecticide,,(20%) + (50%) (20%) + (50%),26,Hakkar 80WDG,AP-5962,Growtech Agro,R
 Insecticide,,(20%) + (50%) (20%) + (50%),27,Pyniram 80WDG,AP-5963,Advanced Lifecare Bangladesh Ltd.,Jute,Semilooper,125 g/ha,Jute | Semilooper | 125 g/ha,1,
 Insecticide,,(20%) + (50%) (20%) + (50%),28,Ramo 80WDG,AP-5964,Agro Link BD,"Kenaf & Mesta, Rice","Mealy bug, BPH",125 g/ha; 160 g/ha,"Kenaf & Mesta | Mealy bug | 125 g/ha
 Rice | BPH | 160 g/ha",2,
-Insecticide,,(20%) + (50%) (20%) + (50%),29,Phorate 70WDG,AP-5965,Basic Crop Care,Rice,BPH,220 g/ha,Rice | BPH | 220 g/ha,1,
+Insecticide,,(20%) + (50%) (20%) + (50%),29,Phorate 70WDG,AP-5965,Basic Crop Care,Rice,BPH,220 g/ha,Rice | BPH | 220 g/ha,1,IRAC 1B
 Insecticide,,(20%) + (50%) (20%) + (50%),30,Tabasum 70WDG,AP-5966,Viron Agro Ltd.,Rice,BPH,220 g/ha,Rice | BPH | 220 g/ha,1,
-Insecticide,,(20%) + (50%) (20%) + (50%),31,Pahar 80WDG,AP-5967,Jass Agro Ltd.,Rice,BPH,60 g/ha,Rice | BPH | 60 g/ha,1,
+Insecticide,,(20%) + (50%) (20%) + (50%),31,Pahar 80WDG,AP-5967,Jass Agro Ltd.,Rice,BPH,60 g/ha,Rice | BPH | 60 g/ha,1,IRAC 3A
 Insecticide,,(20%) + (50%) (20%) + (50%),32,Currency 80WDG,AP-5968,Tata Crop Care Company,Rice,BPH,60 g/ha,Rice | BPH | 60 g/ha,1,
 Insecticide,107,Nitenpyram (20%) + Diafenthiuron (30%),1,Dorex 50WDG,AP-5720,Sun Seed Pesticides,Cotton,"Aphid, Jassid",198 g/ha,"Cotton | Aphid, Jassid | 198 g/ha",1,IRAC 4A
 Insecticide,108,Osfencarb (BPMC),1,Mis-Kill 50EC,AP-681,Sun Seed Pesticides,Rice,"BPH, Hispa",1.00 L/ha,"Rice | BPH, Hispa | 1.00 L/ha",1,IRAC 1A
@@ -6618,7 +6618,7 @@ Public Health,,2%,32,Biobos 2.5EC,PHP-1101,Dhaka Hangzhou Biotechnology Ltd.,,Ad
 Public Health,,2%,33,Bio Killer 2.5EC,PHP-1103,Biosave Agrovet,,Adult Mosquito,0.40 ml/m2,Adult Mosquito | 0.40 ml/m2,1,IRAC UN
 Public Health,,2%,34,Chemmothrin 2.5EC,PHP-1114,Chemist Crop Care Ltd.,,Adult Mosquito,0.40 ml/m2,Adult Mosquito | 0.40 ml/m2,1,
 Public Health,,2%,35,Hiter 2.5EC,PHP-1115,Tens International,,Adult Mosquito,0.40 ml/m2,Adult Mosquito | 0.40 ml/m2,1,
-Public Health,,2%,36,Super Killer 1.25 ULV,PHP-1121,Siraj Agro International Ltd.,,Mosquito,6 ml/100m2,Mosquito | 6 ml/100m2,1,
+Public Health,,2%,36,Super Killer 1.25 ULV,PHP-1121,Siraj Agro International Ltd.,,Mosquito,6 ml/100m2,Mosquito | 6 ml/100m2,1,IRAC 3A
 Public Health,7,Permethrin (5%),1,Finis Insect Powder,PHP-59,Standard Finis Oil Company,,Cockroach,10 gm/m2,Cockroach | 10 gm/m2,1,
 Public Health,7,Permethrin (5%),2,Supreme Insect Powder,PHP-245,Shahid Chemical Co.,,Cockroach,10 gm/m2,Cockroach | 10 gm/m2,1,
 Public Health,7,Permethrin (5%),3,Eagle Insect Powder,PHP-250,Quazi Enterprises Limited,,Ant/Bed bug/Cockroach,10 gm/m2,Ant/Bed bug/Cockroach | 10 gm/m2,1,
@@ -6830,7 +6830,7 @@ Public Health,20,d-trans allethrin (0.30%),72,Eyassa Super Mosquito Coil,PHP-876
 Public Health,20,d-trans allethrin (0.30%),73,Tip Top Mosquito Coil,PHP-900,Rafa Enterprise,,Mosquito,63x63x73 cm3,Mosquito | 63x63x73 cm3,1,
 Public Health,20,d-trans allethrin (0.30%),74,Tata Mosquito Coil,PHP-902,Sanjida Chemical Works,,Mosquito,63x63x73 cm3,Mosquito | 63x63x73 cm3,1,
 Public Health,20,d-trans allethrin (0.30%),75,Bonolota Mega Mosquito,PHP-903,Medul International,,Mosquito,63x63x73 cm3,Mosquito | 63x63x73 cm3,1,
-Public Health,20,d-trans allethrin (0.30%),76,Black Panther Mega Mosquito Coil,PHP-905,Hussain Trading Company,,Mosquito,63x63x73 cm3,Mosquito | 63x63x73 cm3,1,
+Public Health,20,d-trans allethrin (0.30%),76,Black Panther Mega Mosquito Coil,PHP-905,Hussain Trading Company,,Mosquito,63x63x73 cm3,Mosquito | 63x63x73 cm3,1,IRAC 1B
 Public Health,20,d-trans allethrin (0.30%),77,Dhanes Pakhi Mosquito Coil,PHP-907,Kadir & Co.,,Mosquito,63x63x73 cm3,Mosquito | 63x63x73 cm3,1,
 Public Health,20,d-trans allethrin (0.30%),78,Capital Mosquito Coil,PHP-910,Capital Coil Industries,,Mosquito,63x63x73 cm3,Mosquito | 63x63x73 cm3,1,
 Public Health,20,d-trans allethrin (0.30%),79,Safe Guard Ki9ng Mosquito Coil,PHP-922,Riyaz Consumer Products,,Mosquito,63x63x73 cm3,Mosquito | 63x63x73 cm3,1,
@@ -7161,7 +7161,7 @@ Public Health,52,Dimefluthrin 0.25%,2,Jonaki Brand Mosquito Coil,PHP-475,Cosmo C
 Public Health,52,Dimefluthrin 0.25%,3,Finis Black Booster Mosquito Coil,PHP-482,Standard Finis Oil Company,,Mosquito,0.5 gm in (63 x 63 x 73 cm2),Mosquito | 0.5 gm in (63 x 63 x 73 cm2),1,
 Public Health,52,Dimefluthrin 0.25%,4,Anlu Plant Fibre Mosquito Coil,PHP-483,Quality Craft (BD) Limited,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
 Public Health,52,Dimefluthrin 0.25%,5,ACI Tornedo Mosquito Coil,PHP-496,ACI Formulations Limited,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
-Public Health,52,Dimefluthrin 0.25%,6,Black Panther Mosquito Coil,PHP-532,Hussain Trading Company,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
+Public Health,52,Dimefluthrin 0.25%,6,Black Panther Mosquito Coil,PHP-532,Hussain Trading Company,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,IRAC 1B
 Public Health,52,Dimefluthrin 0.25%,7,Rocket Brand Mosquito Coil,PHP-565,Nuruzzaman Biswas Industries Ltd,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
 Public Health,52,Dimefluthrin 0.25%,8,RAK Magic Jumboo Mosquito Coil,PHP-647,RAK Mosfly (Bangladesh) Pvt. Ltd.,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
 Public Health,52,Dimefluthrin 0.25%,9,Maxu Mosquito Coil,PHP-656,Tasmiya Chemical Works,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
@@ -7202,7 +7202,7 @@ Public Health,52,Dimefluthrin 0.25%,43,Rangdhunu Mosquito Coil,PHP-892,Dhaka Tra
 Public Health,52,Dimefluthrin 0.25%,44,Black Fighter Mosquito Coil,PHP-897,ACI Formulations Limited,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
 Public Health,52,Dimefluthrin 0.25%,45,Unique Super Mosquito Coil,PHP-901,M M Consumers,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
 Public Health,52,Dimefluthrin 0.25%,46,Saba Mosquito Coil,PHP-906,Saba Trade & Associates,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
-Public Health,,(0.02%) -0.03 (0.05%),47,Black Panther Super Mosquito Coil,PHP-908,Hussain Trading Company Ltd.,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
+Public Health,,(0.02%) -0.03 (0.05%),47,Black Panther Super Mosquito Coil,PHP-908,Hussain Trading Company Ltd.,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,IRAC 1B
 Public Health,,(0.02%) -0.03 (0.05%),48,Lizard Mega Mosquito Coil,PHP-909,Sheuly Chemical Works,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
 Public Health,,(0.02%) -0.03 (0.05%),49,B P Super Power Mosquito Coil,PHP-920,B P Internationa,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
 Public Health,,(0.02%) -0.03 (0.05%),50,Hisense Mosquito Coil,PHP-928,S Nahar Consumer Products,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
@@ -7220,7 +7220,7 @@ Public Health,,(0.02%) -0.03 (0.05%),61,Life Guard Mosquito Coil,PHP-986,Bhuyan 
 Public Health,,(0.02%) -0.03 (0.05%),62,N P 100 Mosquito Coil,PHP-996,S R Chemicals Works,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
 Public Health,,(0.02%) -0.03 (0.05%),63,Good Night Power Active+Liquid Vaporizer,PHP-1073,Godrej Household Products (BD) Pvt. Ltd,,Adult Mosquito,63x63x73 cm2 (20 minutes),Adult Mosquito | 63x63x73 cm2 (20 minutes),1,IRAC 3A
 Public Health,53,Imiprothrin 0.05%+Cypermethrin 0.10% Prallethrin 0.09%,1,Good Night Multi Insect Killer,PHP-494,Godrej Household Products (BD) Pvt. Ltd,,"Mosquito, Cockroach",2.5 gm/33m3; 3 gm (15 x 15 cm),"Mosquito | 2.5 gm/33m3
-Cockroach | 3 gm (15 x 15 cm)",2,
+Cockroach | 3 gm (15 x 15 cm)",2,IRAC 3A
 Public Health,54,Imiprothrin 0.07%+Cypermethrin 0.20%,1,Hit Aerosol Crawling Insect Killer Aerosol,PHP-501,Godrej Household Products (BD) Pvt. Ltd,,Cockroach,3 gm (15 x 15 cm),Cockroach | 3 gm (15 x 15 cm),1,
 Public Health,55,D-trans allethrin + flumenthrin,1,Suning Black Mosquito Coil,PHP-533,Abnoroni Enterprise,,Mosquito,63x63x73 cm2,Mosquito | 63x63x73 cm2,1,
 Public Health,56,Trans-tetamethrin+Cyfluthrin,1,Benga Tiger Aerosol,PHP-579,Asia Winner Bangladesh,,Mosquito,10 Sec/1000 m3,Mosquito | 10 Sec/1000 m3,1,
@@ -9134,7 +9134,7 @@ Insecticide,0,,0,Pyrol 80 WDG,AP-8208,Fortune Crop Science,,,,,0,
 Insecticide,0,,0,Skyton 5 EC,AP-8209,Crop Life Agro Chemicals Limited,,,,,0,
 Insecticide,0,,0,Zamdooth 55 EC,AP-8210,Best Agro Solution,,,,,0,
 Insecticide,0,,0,Promix 55EC,AP-8211,Provati Agro Care,,,,,0,
-Insecticide,0,,0,Bijoy 55 EC,AP-8212,Mousumi Crop Care,,,,,0,
+Insecticide,0,,0,Bijoy 55 EC,AP-8212,Mousumi Crop Care,,,,,0,IRAC 3A
 Insecticide,0,,0,Chlorper 55 EC,AP-8213,Sarker Agro Process,,,,,0,
 Insecticide,0,,0,Safenoc 29EC,AP-8214,Safe Agro Chemical Industries,,,,,0,
 Insecticide,0,,0,Basudin Io GR,AP-21,M/S Novartis (Bangladesh) Ltd,,,,,0,
@@ -9360,7 +9360,7 @@ Insecticide,0,,0,PRAHAR-50EC,AP-810,Map Agro Industries Ltd,,,,,0,
 Insecticide,0,,0,Furamin-3SR,AP-813,Medicon Agrovet,,,,,0,
 Insecticide,0,,0,Carbine-5S,AP-816,M.B. Agro products Ltd.,,,,,0,
 Insecticide,0,,0,Rakbel-4s,AP-817,Map Agro Industries Ltd,,,,,0,
-Insecticide,0,,0,BIJOY-4S,AP-822,East West Chemicals Ltd.,,,,,0,
+Insecticide,0,,0,BIJOY-4S,AP-822,East West Chemicals Ltd.,,,,,0,IRAC 3A
 Insecticide,0,,0,MBChloro-20EC,AP-823,M.B. Agro products Ltd.,,,,,0,
 Insecticide,0,,0,LiHae-20%EC,AP-825,M/S. M.Hossain Enterprise,,,,,0,
 Insecticide,0,,0,FOCUS-50SC,AP-828,Auto Crop Care Limited,,,,,0,
@@ -9405,7 +9405,7 @@ Insecticide,0,,0,BAIFOS-20EC,AP-997,BAI AGRICULTURAL INDUSTRIES LIMITED,,,,,0,IR
 Insecticide,0,,0,Linothrin 10 EC,AP-999,LINUX PESTICIDE PVT LTD,,,,,0,
 Insecticide,0,,0,MBCyper,AP-1002,M.B. Agro products Ltd.,,,,,0,
 Insecticide,0,,0,Hoppergone 50EC,AP-1019,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,Winner 25% EC,AP-1024,Global Agrochemicals Ltd,,,,,0,
+Insecticide,0,,0,Winner 25% EC,AP-1024,Global Agrochemicals Ltd,,,,,0,IRAC 3A
 Insecticide,0,,0,AntiRat,AP-1027,Global Agrovet Ltd.,,,,,0,
 Insecticide,0,,0,BAIZINON-60EC,AP-1031,BAI AGRICULTURAL INDUSTRIES LIMITED,,,,,0,IRAC 1B
 Insecticide,0,,0,AlphadelDF 10WS,AP-1033,M/S Alpha Agro Limited,,,,,0,
@@ -9575,7 +9575,7 @@ Insecticide,0,,0,Nicothrin 10 EC,AP-2185,punam international,,,,,0,IRAC 3A
 Insecticide,0,,0,Cipfrin 3 GR,AP-2188,Hossain Enterprise C.C. Limited,,,,,0,
 Insecticide,0,,0,Higent 48 EC,AP-2189,Hi Care Agrovet,,,,,0,
 Insecticide,0,,0,Pedephos 48 Ec,AP-2194,Panchi Corporation,,,,,0,
-Insecticide,0,,0,Nabab 48 EC,AP-2195,New Sun Rise Bangladesh Private Limited,,,,,0,
+Insecticide,0,,0,Nabab 48 EC,AP-2195,New Sun Rise Bangladesh Private Limited,,,,,0,IRAC 3A
 Insecticide,0,,0,Harpoon 30 EC,AP-2206,M/S Sea trade Fertilizer Ltd,,,,,0,
 Insecticide,0,,0,Abtap 50 SP,AP-2207,ABS Agro Products,,,,,0,14
 Insecticide,0,,0,Ortap 50 SP,AP-2209,M/S Orbit Agro Industry,,,,,0,
@@ -10246,7 +10246,7 @@ Bio Pesticide,0,Bacillus thuringiensis 64%,0,BT-Gold 32000 IU/mg WP,AP(Bio)-135,
 Bio Pesticide,0,Bacillus subtilis,0,Sting,AP(Bio)-136,ACI Formulations PLC,,,,,0,IRAC 11A
 Bio Pesticide,0,Curcumin 130 ppm,0,No Virus,AP(Bio)-137,Fasal Agro Industries Ltd,,,,,0,
 Bio Pesticide,0,z-9-Tetradecenyl Acetate 1%,0,Tera,AP(Bio)-138,M/S Aranya Crop Care Ltd,,,,,0,
-Bio Pesticide,0,Potassium salt of fatty acid 40%,0,Fytoclean,AP(Bio)-139,Russell IPM Bangladesh Limited,,,,,0,
+Bio Pesticide,0,Potassium salt of fatty acid 40%,0,Fytoclean,AP(Bio)-139,Russell IPM Bangladesh Limited,,,,,0,IRAC 24B
 Bio Pesticide,0,,0,Biolead,AP(Bio)-140,Pheromone Industries Ltd,,,,,0,
 Bio Pesticide,0,,0,Ricoderma 1.5 WP,AP(Bio)-141,Rajib Agro Chemicals Limited,,,,,0,
 Bio Pesticide,0,,0,Vegard 5 EC,AP(Bio)-04,SNS Agro Tec,,,,,0,
@@ -10366,7 +10366,7 @@ Public Health,0,Diflubenzuron 25%,0,Adept 25 WP,PHP-1198,RiceCo International Ba
 Public Health,0,Diflubenzuron 22.56% + Deltamethrin 2.14% SC,0,Dimilin 22 SC,PHP-1199,RiceCo International Bangladesh Ltd.,,,,,0,IRAC 3A
 Public Health,0,Bifenthrin 10%,0,Disect 10WP,PHP-1200,RiceCo International Bangladesh Ltd.,,,,,0,IRAC 3A
 Public Health,0,Permethrin 0.3%,0,Max Power Liquid Spray,PHP-1201,Harvest Agrovet Limited,,,,,0,IRAC 3A
-Public Health,0,Azamethiphos 1%,0,Tatajom,PHP-1202,Padma Agro Sprayers Co,,,,,0,
+Public Health,0,Azamethiphos 1%,0,Tatajom,PHP-1202,Padma Agro Sprayers Co,,,,,0,IRAC 1B
 Public Health,0,Lambda Cyhalothrin 10%,0,Max Clean Power 10 WP,PHP-1204,SENA AGRO CARE,,,,,0,IRAC 3A
 Public Health,0,Permethrin 0.3%,0,Phenarix Liquid Insecticides,PHP-1205,SENA AGRO CARE,,,,,0,IRAC 3A
 Public Health,0,Cypermethrin 10%,0,Biocin 10 EC,PHP-1206,Biosafe Agrovet,,,,,0,IRAC 3A
@@ -10387,7 +10387,7 @@ Public Health,0,Permethrin 0.03%,0,Bionil Oil Spray,PHP-1238,Mattri Chaya Trade 
 Public Health,0,Dimefluthrin 0.03%,0,City Black Mosquito Coil,PHP-1244,Babul Chemical Works,,,,,0,IRAC 3A
 Public Health,0,D-Transallethrin 0.15%,0,Dang Brand Msquito Coil,PHP-1249,Anowar Consumer Products,,,,,0,IRAC 3A
 Public Health,0,Dimefluthrin 0.05%,0,K.R.S Brand,PHP-1250,Anowar Consumer Products,,,,,0,IRAC 3A
-Public Health,0,,0,Red  Leaf  Mosquito Coil,PHP--1251,Tareq Traders,,,,,0,
+Public Health,0,,0,Red  Leaf  Mosquito Coil,PHP--1251,Tareq Traders,,,,,0,IRAC 3A
 Public Health,0,,0,Hunter Brand Mosquito Coil,PHP--1252,Tareq Traders,,,,,0,IRAC 3A
 Public Health,0,Dimefluthrin 0.02%,0,Liniex Brand Mosquito Coil,PHP-1253,Agrovet Crop and Health Care,,,,,0,IRAC 3A
 Public Health,0,Meperfluthrin 0.02%,0,Horse Brand Mosquito Coil,PHP-1254,Agrovet Crop and Health Care,,,,,0,IRAC 3A
@@ -10648,7 +10648,7 @@ Public Health,0,D-allethrin 0.3% w/w,0,Kalo Hit Strong  Mosquito Coil.,PHP-1666,
 Public Health,0,D-allethrin 0.3% w/w,0,Agni King Mosquito Coil,PHP-1667,M/s A L Trading,,,,,0,IRAC 3A
 Public Health,0,Renofluthrin 1.5%,0,Good Knight Power Activ+ Liquid Vaporizer,PHP-1669,Godrej Household Products (BD) Pvt. Ltd.,,,,,0,IRAC 3A
 Public Health,0,D-allethrin 0.3% w/w,0,Fire King Mosquito Coil,PHP-1670,Bhai Bhai Consumer,,,,,0,IRAC 3A
-Public Health,0,Propetamphos 22.5%,0,Safrotin MC,PHP-1671,Mcdonald Bangladesh Pvt Ltd,,,,,0,
+Public Health,0,Propetamphos 22.5%,0,Safrotin MC,PHP-1671,Mcdonald Bangladesh Pvt Ltd,,,,,0,IRAC 1B
 Public Health,0,D-allethrin 0.3% w/w,0,Banglar Shera Mosquito Coil,PHP-1672,Brothers Consumer Products,,,,,0,IRAC 3A
 Public Health,0,D-allethrin 0.3% w/w,0,Airforce Mosquito Coil,PHP-1674,Dell Inn Shine,,,,,0,IRAC 3A
 Public Health,0,D-allethrin 0.3% w/w,0,Panda King Mosquito Coil,PHP-1675,Chandpur Chemical Works,,,,,0,IRAC 3A
@@ -10710,9 +10710,9 @@ Public Health,0,,0,Bok Mosquito Coil,PHP-34,Lalmai Chemical Works Ltd.,,,,,0,
 Public Health,0,,0,Duracide-15,PHP-35,The Limit Agroproducts Ltd,,,,,0,
 Public Health,0,,0,Spider Brand Mosquito COil,PHP-44,Rina Chemical Works,,,,,0,
 Public Health,0,,0,Black Cat-P Aerosol Insecticide,PHP-51,Agromark,,,,,0,
-Public Health,0,,0,"""Mortein"" Mosquito Coil",PHP-54,Reckitt & Colman Bangladesh LTD.,,,,,0,
+Public Health,0,,0,"""Mortein"" Mosquito Coil",PHP-54,Reckitt & Colman Bangladesh LTD.,,,,,0,IRAC 3A
 Public Health,0,,0,Finis Mosquito Coil,PHP-56,Standard Finis Oil Co.,,,,,0,
-Public Health,0,,0,Arrow 57EC,PHP-62,Shetu Corporation Ltd,,,,,0,
+Public Health,0,,0,Arrow 57EC,PHP-62,Shetu Corporation Ltd,,,,,0,IRAC 3A
 Public Health,0,,0,Limisashtha 57EC,PHP-63,The Limit Agroproducts Ltd,,,,,0,
 Public Health,0,,0,Solution 57EC,PHP-64,,,,,,0,IRAC 3A
 Public Health,0,,0,Acekro 20EC,PHP-65,Mcdonald Bangladesh Pvt Ltd,,,,,0,
@@ -10749,8 +10749,8 @@ Public Health,0,,0,Aciphos 20 EC,PHP-123,ACI Formulations PLC,,,,,0,
 Public Health,0,,0,Good Knight Fighter Mosquito Coil,PHP-124,Godrej Sara Lee(Bangladesh) Pvt. Ltd,,,,,0,IRAC 3A
 Public Health,0,,0,Shield Mosquito Coil,PHP-125,Oroni International Ltd,,,,,0,
 Public Health,0,,0,Finish Mat,PHP-127,Standard Finis Oil Co.,,,,,0,
-Public Health,0,,0,Mortein Seek And Kill,PHP-129,Reckitt Benckiser (Bangladesh) Ltd,,,,,0,
-Public Health,0,,0,Good Night Chalk,PHP-130,Godrej Sara Lee(Bangladesh) Pvt. Ltd,,,,,0,
+Public Health,0,,0,Mortein Seek And Kill,PHP-129,Reckitt Benckiser (Bangladesh) Ltd,,,,,0,IRAC 3A
+Public Health,0,,0,Good Night Chalk,PHP-130,Godrej Sara Lee(Bangladesh) Pvt. Ltd,,,,,0,IRAC 3A
 Public Health,0,,0,Magic Mosquito Coil,PHP-131,Olympic Industries Ltd,,,,,0,
 Public Health,0,,0,Mortin Liquid Vaporizer,PHP-132,Reckitt Benckiser (Bangladesh) Ltd,,,,,0,
 Public Health,0,,0,ACI Mosquito Vaporizer,PHP-133,ACI Formulations PLC,,,,,0,
@@ -10895,7 +10895,7 @@ Public Health,0,,0,Clean Night Brand Mosquito Coil,PHP-441,Bangladesh Trade Corp
 Public Health,0,,0,Smart Power Booster Mosquito Coil,PHP-446,Tasmia Herbal & Chemicals,,,,,0,
 Public Health,0,,0,Royal Plus Mosquito Coil,PHP-451,Bright Bangla International,,,,,0,
 Public Health,0,,0,Ama Mosquito Coil,PHP-454,Aama Green Care,,,,,0,
-Public Health,0,,0,SP Mosquito Coil,PHP-455,Al-Textile Mills,,,,,0,
+Public Health,0,,0,SP Mosquito Coil,PHP-455,Al-Textile Mills,,,,,0,IRAC 3A
 Public Health,0,,0,Night Lion killer Mosquito Coil,PHP-460,Luminous Trade and Manufacturing,,,,,0,
 Public Health,0,,0,LIon Power Hi Booster Mosquito Coil,PHP-461,Universal Pvt. Ltd,,,,,0,
 Public Health,0,,0,Read A Dream Mosquito Coil,PHP-462,Math Corporation,,,,,0,
@@ -10913,7 +10913,7 @@ Public Health,0,,0,Swasti M Aerosol,PHP-493,GME Agro Limited,,,,,0,
 Public Health,0,,0,Power Boss Brand Mosquito Coil,PHP-495,Fardeen Trading,,,,,0,
 Public Health,0,,0,Benma High Quality Mosquito Coil,PHP-503,Satata Enterprise Ltd.,,,,,0,
 Public Health,0,,0,China Fox Mosquito Coil,PHP-509,Avecia Bangladesh,,,,,0,
-Public Health,0,,0,Good Night Advanced Low Smoke Coil,PHP-514,Godrej Household Products (BD) Pvt. Ltd.,,,,,0,
+Public Health,0,,0,Good Night Advanced Low Smoke Coil,PHP-514,Godrej Household Products (BD) Pvt. Ltd.,,,,,0,IRAC 3A
 Public Health,0,,0,Hilphos 20 EC,PHP-516,Gaurab Industries Ltd.,,,,,0,
 Public Health,0,,0,Dream Angel Mosquito Coil,PHP-517,Hasib Enterprise,,,,,0,
 Public Health,0,,0,Kingbo Mini Smoke Mosquito Coil,PHP-518,Mohammad Hossain & Sons,,,,,0,
@@ -11216,7 +11216,7 @@ Public Health,0,D-allethrin 0.3% w/w,0,Hoque Mosquito Coil,PHP-1676,Hoque Enterp
 Public Health,0,Permethrin 0.30%,0,No Fly Liquid Spray,PHP-1726,J.S.N Enterprise,,,,,0,IRAC 3A
 Public Health,0,Dimefluthrin 0.03% w/w,0,Subodh Mosquito Coil,PHP-1568,Onika Enterprise,,,,,0,IRAC 3A
 Public Health,0,Meperfluthrin 0.05% w/w,0,Soket Mosquito Coil,PHP-1643,MK Momin Enterprise,,,,,0,IRAC 3A
-Insecticide,0,Afidopyropen 5%,0,Sefina 5 DC,AP-7031,BASF Bangladesh Limited,,,,,0,
+Insecticide,0,Afidopyropen 5%,0,Sefina 5 DC,AP-7031,BASF Bangladesh Limited,,,,,0,IRAC 9D
 Public Health,0,Dimefluthrin 0.05%,0,Niha Brand Mosquito Coil,PHP-1552,Saeem Consumer,,,,,0,IRAC 3A
 Insecticide,0,Azoxystrobin 20% + Difenoconazole 12.50%,0,Powerbin 32.5 SC,AP-7873,Krishok Agri Care,,,,,0,FRAC 11
 Insecticide,0,Chlorpyrifos 50% + Beta Cypermethrin 10%,0,Minaar 60 EC,AP-7035,Ris Agro,,,,,0,IRAC 1B
