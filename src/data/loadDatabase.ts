@@ -1,13 +1,31 @@
 import { ChemicalProduct } from '../types';
+import { loadDatabaseFromJSON } from './loadDatabaseFromJSON';
 
 /**
  * loadDatabase.ts — the SINGLE source of truth for the product catalogue.
  *
- * Merges curated products + the DAE register dump + extras from the
- * 5,485-row AgriChem/MoA PTAC master (bangladesh_pesticide_database.csv),
- * then overlays measured toxicity / PHI / formulation fields onto matching
- * registration numbers. Loaded through dynamic ``import()`` so heavy data
- * stays out of the application shell.
+ * Merges curated products (inline, ~1 MB) + the DAE register database
+ * (fetched at runtime as JSON, ~2.4 MB gzipped) + extras from the
+ * bdRegisterLatest overlay, then overlays measured toxicity / PHI /
+ * formulation fields onto matching registration numbers.
+ *
+ * Architecture change (PR #46):
+ *   Previously, the DAE register (9,462 products) + policy enrichment
+ *   (9,562 reg# lookups) were bundled as inline TypeScript modules
+ *   (all_pesticides.ts + policyEnrichmentData.ts = 9 MB of TS → 7.1 MB
+ *   JS chunk). This made the initial bundle 22 MB and the first paint
+ *   slow on mobile.
+ *
+ *   Now, the DAE register + policy enrichment are pre-computed into a
+ *   single JSON file (pesticide_database.json, ~7.5 MB uncompressed,
+ *   ~2.4 MB gzipped) that is fetched at runtime. This reduces the JS
+ *   bundle by 7 MB and lets the app shell paint immediately while the
+ *   database loads in the background.
+ *
+ *   The curated dataset (~1 MB, 1,256 products with hand-curated
+ *   toxicity/PHI/REI/safety notes) and the bdRegisterLatest overlay
+ *   (~1 MB, toxicity/formulation overlays) remain inline because they're
+ *   small and needed for the app's safety features.
  */
 
 export interface LoadedDatabase {
@@ -116,6 +134,11 @@ function mergeWithCurated(
       if (daeTwin.formulation && (!enriched.formulation || enriched.formulation === 'Unknown')) {
         enriched.formulation = daeTwin.formulation;
       }
+      // Also adopt policy enrichment fields from the DAE twin
+      if (!enriched.scheme && daeTwin.scheme) enriched.scheme = daeTwin.scheme;
+      if (!enriched.groupNo && daeTwin.groupNo) enriched.groupNo = daeTwin.groupNo;
+      if (!enriched.moaDescription && daeTwin.moaDescription) enriched.moaDescription = daeTwin.moaDescription;
+      if (!enriched.policyRiskTier && daeTwin.policyRiskTier) enriched.policyRiskTier = daeTwin.policyRiskTier;
     }
     merged.push(enriched);
   }
@@ -202,28 +225,28 @@ function loadCustomProducts(baseline: ChemicalProduct[]): ChemicalProduct[] {
 }
 
 /**
- * Dynamically import the heavy data modules (curated databases + the full
- * DAE register mapping), merge and deduplicate them, and attach any
+ * Dynamically load the curated data (inline, ~1 MB) + the bdRegisterLatest
+ * overlay (inline, ~1 MB), then fetch the DAE register database JSON at
+ * runtime (~2.4 MB gzipped). Merge and deduplicate them, and attach any
  * user-imported custom products. The result is memoised so repeated calls
- * (e.g. StrictMode double-mount) share a single network fetch.
+ * (e.g. StrictMode double-mount) share a single fetch.
  */
 export function loadDatabase(): Promise<LoadedDatabase> {
   if (loadPromise) return loadPromise;
 
   loadPromise = (async () => {
-    // Both heavy modules live in separate async chunks thanks to dynamic
-    // import: curatedData pulls the five curated databases and
-    // allPesticidesData pulls the 2.7 MB all_pesticides register dump —
-    // Rollup extracts both subtrees from the main bundle entirely.
-    const [{ CURATED_DATABASE }, { ALL_PESTICIDES_DATABASE }, { BD_OVERLAY_BY_REG, BD_REGISTER_EXTRAS }] =
+    // Curated data + BD overlay are small (~1 MB each) — kept inline.
+    // The DAE register (9,462 products + policy enrichment) is fetched
+    // as JSON at runtime instead of bundled as a 7.1 MB JS chunk.
+    const [{ CURATED_DATABASE }, { BD_OVERLAY_BY_REG, BD_REGISTER_EXTRAS }, daeProducts] =
       await Promise.all([
         import('./curatedData'),
-        import('./allPesticidesData'),
         import('./bdRegisterLatest'),
+        loadDatabaseFromJSON(),
       ]);
 
     const merged = applyBdOverlay(
-      mergeWithCurated(CURATED_DATABASE, ALL_PESTICIDES_DATABASE),
+      mergeWithCurated(CURATED_DATABASE, daeProducts),
       BD_OVERLAY_BY_REG
     );
 
@@ -242,7 +265,7 @@ export function loadDatabase(): Promise<LoadedDatabase> {
     if (typeof console !== 'undefined' && console.debug) {
       console.debug(
         `[loadDatabase] curated=${CURATED_DATABASE.length} ` +
-          `daeTotal=${ALL_PESTICIDES_DATABASE.length} extras=${BD_REGISTER_EXTRAS.length} ` +
+          `daeJSON=${daeProducts.length} extras=${BD_REGISTER_EXTRAS.length} ` +
           `merged=${merged.length} custom=${custom.length}`
       );
     }
@@ -254,8 +277,8 @@ export function loadDatabase(): Promise<LoadedDatabase> {
     };
   })();
 
-  // If an async chunk fails to load (e.g. offline before first precache),
-  // reset the memo so a retry can start fresh.
+  // If the JSON fetch fails (e.g. offline before first cache), reset the
+  // memo so a retry can start fresh.
   loadPromise.catch(() => {
     loadPromise = null;
   });
