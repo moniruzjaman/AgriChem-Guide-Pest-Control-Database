@@ -4,7 +4,7 @@ AP-373,(trade name not recorded),IRAC,99,Compounds of unknown or uncertain MoA,U
 AP-1860,Bio-Bit / Delfin WG / Halt WP,FRAC,3,"DMI (Azoles) — Sterol C14-demethylase inhibitors (Propiconazole, Hexaconazole)",Sterol Biosynthesis,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-2210,Bio-Guard WP / Daman WP,IRAC,14,"Cartap, Nereistoxins — nAChR channel blockers",Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SP,Water-Soluble Powder,Solid,LOW-MEDIUM — soluble powder
 AP-806,(trade name not recorded),FRAC,90,Not classified by FRAC,Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
-AP-2230,Bio-Catch WP / Verticil,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-2230,Bio-Catch WP / Verticil,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3153,Sitro 25 SC,FRAC,11,"QoI — Complex III (cyt bc1) inhibitors (Azoxystrobin, Pyraclostrobin)",Respiration (Complex III),No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-2431,(trade name not recorded),FRAC,11,"QoI — Complex III (cyt bc1) inhibitors (Azoxystrobin, Pyraclostrobin)",Respiration (Complex III),No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-3111,(trade name not recorded),FRAC,11,"QoI — Complex III (cyt bc1) inhibitors (Azoxystrobin, Pyraclostrobin)",Respiration (Complex III),No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
@@ -2131,7 +2131,7 @@ AP-1892,(trade name not recorded),Unknown,—,No MoA Code assigned (pending clas
 AP-1559,(trade name not recorded),Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP-182,Lanirat / Retox / Roma / Ratonil,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP-1240,Rat-Kill Wax Block / Lanirat Block,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-1610,Storm 0.005% Block,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
+AP-1610,Storm 0.005% Block,IRAC,14,"nAChR channel blockers (Cartap, Bensultap)",Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-739,(trade name not recorded),IRAC,24,"Acequinocyl, Fluacrypyrim — Complex III inhibitors",Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP-916,(trade name not recorded),IRAC,24,"Acequinocyl, Fluacrypyrim — Complex III inhibitors",Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP-1891,(trade name not recorded),IRAC,24,"Acequinocyl, Fluacrypyrim — Complex III inhibitors",Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
@@ -2217,9 +2217,9 @@ AP (Bio)-33,Bio-cure Plus 1EC,IRAC,99,Compounds of unknown or uncertain MoA,Unkn
 AP (Bio)-34,Biotrin,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP (Bio)-35,K-Mite,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP (Bio)-36,Ratan Pheromone,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
-AP (Bio)-37,Apache,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
+AP (Bio)-37,Apache,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP (Bio)-38,Orolure,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
-AP (Bio)-39,Supernet,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
+AP (Bio)-39,Supernet,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP (Bio)-40,Fruit Magneto,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP (Bio)-41,Haylure Brinjal,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP (Bio)-42,Bio-lure,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
@@ -2345,7 +2345,7 @@ AP-3364,Ampera 20SL,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve
 AP-3365,Rexiprid 70WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3366,Imicart 70SP,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SP,Water-Soluble Powder,Solid,LOW-MEDIUM — soluble powder
 AP-3369,Pai-thoate 40EC,IRAC,1,Organophosphates — Acetylcholinesterase inhibitors,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
-AP-3370,Hayromazine 75WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
+AP-3370,Hayromazine 75WP,IRAC,15,Benzoylureas — chitin biosynthesis inhibitors,Growth & Development,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-3371,Faver 30SC,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-3372,Padmaryl 85WP,IRAC,1,Carbamates — Acetylcholinesterase inhibitors,Nerve & Muscle,YES — HHP,Carbaryl,"2, 8",Restricted; US tolerances established,Phase-out,AMBER,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-3374,Pai-Ryl 85WP,IRAC,1,Carbamates — Acetylcholinesterase inhibitors,Nerve & Muscle,YES — HHP,Carbaryl,"2, 8",Restricted; US tolerances established,Phase-out,AMBER,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
@@ -2454,23 +2454,23 @@ AP-3507,Abaryl 3WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modula
 AP-3508,Aabata 3WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,YES — HHP,Cypermethrin,8,"EU restricted, not approved; high residue HQ",Phase-out synthetic pyrethroids,AMBER,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3509,Ritol 10EC,IRAC,3,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-3510,Mitisol 5EC,IRAC,21,METI acaricides — Complex I electron transport inhibitors,Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
-AP-3511,Jastin 40WG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-3511,Jastin 40WG,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3512,Tattoo 18AS,IRAC,14,"Cartap, Nereistoxins — nAChR channel blockers",Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,AS,Aqueous Solution,Liquid,LOW — water-based
 AP-3513,Juti 30SL,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,YES — HHP,Cypermethrin,8,"EU restricted, not approved; high residue HQ",Phase-out synthetic pyrethroids,AMBER,SL,Soluble Concentrate,Liquid,LOW-MEDIUM — water-based solution
 AP-3514,Agricon 50WG,IRAC,9,Pymetrozine — Chordotonal organ modulator,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3517,Rexifos 56% Tab,IRAC,24,"Acequinocyl, Fluacrypyrim — Complex III inhibitors",Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
-AP-3518,Sulfostar DF,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
+AP-3518,Sulfostar DF,FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP-3519,Thuosal 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3522,Supersul 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-3523,Cobravet 80DF,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
+AP-3523,Cobravet 80DF,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP-3524,Shaitovit 80WG,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3526,Carsulf 80DF,FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP-3527,SB-Sul 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3528,Ablevet 80WG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3529,Ture-Vit 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3530,Univit 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-3531,Sulpho Search 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-3532,Megaton 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-3531,Sulpho Search 80WDG,FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-3532,Megaton 80WDG,IRAC,14,"nAChR channel blockers (Cartap, Bensultap)",Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3533,Winsul 80 WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3534,Limovit 80WG,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-3535,Polovit 80WDG,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -2976,13 +2976,13 @@ AP-4171,Donvit 80WDG,Unknown,—,No MoA Code assigned (pending classification),U
 AP-4175,Extravit 80WDG,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4176,Best Sulf 80WDG,FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4177,Agrovit Gold 80WDG,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-4179,Profesul 80WG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-4180,Statevit 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-4179,Profesul 80WG,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-4180,Statevit 80WDG,FRAC,11,QoI — Strobilurins (mitochondrial complex III),Respiration,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4181,Kapvit 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4182,Anamvit 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4183,Nalvit 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4184,Monofull 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-4186,Supervit Plus 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-4186,Supervit Plus 80WDG,FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4187,LCI Super 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4188,Headline Team,FRAC,11,"QoI — Complex III (cyt bc1) inhibitors (Azoxystrobin, Pyraclostrobin)",Respiration (Complex III),No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP-4189,Zampro DM,FRAC,40,"CAA — Cellulose synthase inhibitors (Dimethomorph, Mandipropamid)",Cell Wall Synthesis,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
@@ -3013,7 +3013,7 @@ AP-4214,Sweet Star 32.5SC,FRAC,11,"QoI — Complex III (cyt bc1) inhibitors (Azo
 AP-4215,Hama 52.5WP,FRAC,1,"MBC — β-tubulin synthesis inhibitors (Carbendazim, Thiophanate-methyl)",Cytoskeleton,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-4216,Two in One 25SC,FRAC,91,"Plant defence inducers (Acibenzolar-S-methyl, Probenazole)",Host Defence (SAR),No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-4217,Syconazole 25SC,FRAC,91,"Plant defence inducers (Acibenzolar-S-methyl, Probenazole)",Host Defence (SAR),No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
-AP-4218,Bactroban 20WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
+AP-4218,Bactroban 20WP,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-4219,Propel 75WG,FRAC,3,"DMI (Azoles) — Sterol C14-demethylase inhibitors (Propiconazole, Hexaconazole)",Sterol Biosynthesis,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4220,Dimension 75WP,FRAC,3,"DMI (Azoles) — Sterol C14-demethylase inhibitors (Propiconazole, Hexaconazole)",Sterol Biosynthesis,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-4221,Tynova 75WG,FRAC,3,"DMI (Azoles) — Sterol C14-demethylase inhibitors (Propiconazole, Hexaconazole)",Sterol Biosynthesis,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -3078,7 +3078,7 @@ AP-4293,M-Para 20SL,HRAC,22,"PS I electron diverters (Paraquat, Diquat)",Photosy
 AP-4294,SBraxon 20SL,HRAC,22,"PS I electron diverters (Paraquat, Diquat)",Photosynthesis (PS I),YES — HHP,Paraquat,"1, 8","Banned in 72 countries incl. Brazil, China",Immediate Ban,RED,SL,Soluble Concentrate,Liquid,LOW-MEDIUM — water-based solution
 AP-4295,Paraxone Plus 20SL,HRAC,22,"PS I electron diverters (Paraquat, Diquat)",Photosynthesis (PS I),YES — HHP,Paraquat,"1, 8","Banned in 72 countries incl. Brazil, China",Immediate Ban,RED,SL,Soluble Concentrate,Liquid,LOW-MEDIUM — water-based solution
 AP-4296,Fai-Quat 20SL,HRAC,22,"PS I electron diverters (Paraquat, Diquat)",Photosynthesis (PS I),YES — HHP,Paraquat,"1, 8","Banned in 72 countries incl. Brazil, China",Immediate Ban,RED,SL,Soluble Concentrate,Liquid,LOW-MEDIUM — water-based solution
-AP-4297,Calibar 3GR,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,GR,Granule,Solid,LOW — low-dust granular carrier
+AP-4297,Calibar 3GR,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,No,—,—,—,Standard registration controls,STANDARD,GR,Granule,Solid,LOW — low-dust granular carrier
 AP-4298,Delquat 20SL,HRAC,22,"PS I electron diverters (Paraquat, Diquat)",Photosynthesis (PS I),YES — HHP,Paraquat,"1, 8","Banned in 72 countries incl. Brazil, China",Immediate Ban,RED,SL,Soluble Concentrate,Liquid,LOW-MEDIUM — water-based solution
 AP-4299,Autoquat 20SL,HRAC,22,"PS I electron diverters (Paraquat, Diquat)",Photosynthesis (PS I),YES — HHP,Paraquat,"1, 8","Banned in 72 countries incl. Brazil, China",Immediate Ban,RED,SL,Soluble Concentrate,Liquid,LOW-MEDIUM — water-based solution
 AP-4300,Serfquat 20SL,HRAC,22,"PS I electron diverters (Paraquat, Diquat)",Photosynthesis (PS I),YES — HHP,Paraquat,"1, 8","Banned in 72 countries incl. Brazil, China",Immediate Ban,RED,SL,Soluble Concentrate,Liquid,LOW-MEDIUM — water-based solution
@@ -3535,7 +3535,7 @@ AP-4841,Opinion Plus 30WP,HRAC,2,"ALS inhibitors — Amino acid synthesis (Bispy
 AP-4842,Almix 20WP,HRAC,2,"ALS inhibitors — Amino acid synthesis (Bispyribac, Pyrazosulfuron)",Amino Acid Synthesis (BCAA),No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-4843,Destroy 20GR,HRAC,15,"VLCFA inhibitors — Very Long Chain Fatty Acid synthesis (Pretilachlor, Acetochlor)",Lipid Biosynthesis (VLCFA),No,—,—,—,Standard registration controls,STANDARD,GR,Granule,Solid,LOW — low-dust granular carrier
 AP-4844,Escape 35WP,HRAC,2,"ALS inhibitors — Amino acid synthesis (Bispyribac, Pyrazosulfuron)",Amino Acid Synthesis (BCAA),No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
-AP-4845,Agacha Clean 35WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
+AP-4845,Agacha Clean 35WP,HRAC,K3,VLCFA synthesis inhibitors (Chloroacetamides),Cell division,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-4846,Halaka 10WDG,HRAC,2,"ALS inhibitors — Amino acid synthesis (Bispyribac, Pyrazosulfuron)",Amino Acid Synthesis (BCAA),No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4847,Delsuf 10WP,HRAC,2,"ALS inhibitors — Amino acid synthesis (Bispyribac, Pyrazosulfuron)",Amino Acid Synthesis (BCAA),No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-4848,Pyrocare 10WP,HRAC,2,"ALS inhibitors — Amino acid synthesis (Bispyribac, Pyrazosulfuron)",Amino Acid Synthesis (BCAA),No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
@@ -3605,8 +3605,8 @@ AP-4924,Direx 80SP,IRAC,1,Organophosphates — Acetylcholinesterase inhibitors,N
 AP-4925,Demiter 10EC,IRAC,10,Mitochondrial ATP synthase inhibitors (Diafenthiuron),Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-4926,Nezox 10EC,IRAC,10,Mitochondrial ATP synthase inhibitors (Diafenthiuron),Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-4930,SB Marvel 3WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-4931,Operation 3WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-4933,Acamite Plus 3WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-4931,Operation 3WDG,HRAC,A,ACCase inhibitors (Aryloxyphenoxy propionates / Cyclohexanediones),Lipid synthesis,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-4933,Acamite Plus 3WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4934,Ricothrin 3WG,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-4935,Binta 2EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-4938,Canopy Plus 70WG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -3807,9 +3807,9 @@ AP-5156,Abad 32WP,Unknown,—,No MoA Code assigned (pending classification),Unkn
 AP-5157,Latai 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5158,Dafa 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5160,Gurgur 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
-AP-5161,Bondhulin 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
+AP-5161,Bondhulin 33EC,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5162,Onida 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
-AP-5163,Amada 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
+AP-5163,Amada 33EC,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5164,Niskriti 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5165,Pendakill 33EC,HRAC,K1,Microtubule assembly inhibitors (Dinitroanilines),Cell division,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5166,Double Star 25EC,HRAC,14,"PPO inhibitors — Protoporphyrinogen oxidase (Oxyfluorfen, Carfentrazone)",Porphyrin Biosynthesis,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
@@ -3828,7 +3828,7 @@ AP-5181,Serfclean 18WP,Unknown,—,No MoA Code assigned (pending classification)
 AP-5182,Superfine 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5183,Dix 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5184,Sky Blue 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
-AP-5185,Bendar 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
+AP-5185,Bendar 18WP,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5186,Georjerice Gold 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5187,Boomer 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5189,Lalteer 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
@@ -3870,7 +3870,7 @@ AP-5229,Saitin 1.8EC,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modul
 AP-5230,Sunabaprid 4EC,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5231,Lupin Plus 3WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5232,Cyba Plus 3WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-5233,Force Cyper 4.5EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
+AP-5233,Force Cyper 4.5EC,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5234,Naturethrin 3WDG,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5235,Keyadin 6WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,YES — HHP,Cypermethrin,8,"EU restricted, not approved; high residue HQ",Phase-out synthetic pyrethroids,AMBER,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5236,Sigmazel 6WG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,YES — HHP,Cypermethrin,8,"EU restricted, not approved; high residue HQ",Phase-out synthetic pyrethroids,AMBER,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -3928,7 +3928,7 @@ AP-5296,Thiocide 75WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Ne
 AP-5297,Mushy 73WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5298,Niamot 70WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5299,Luvan 70WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-5300,Tatamid Plus 73WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
+AP-5300,Tatamid Plus 73WP,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5301,Methoprid 73WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5302,Natureprid 73WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5303,Samitol 10EC,IRAC,3,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
@@ -3964,7 +3964,7 @@ AP-5336,Lamdex Extra 2.5EC,IRAC,3,Pyrethroids & Pyrethrins — Sodium channel mo
 AP-5337,Fighter Max 5EC,IRAC,3,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5338,M-Halathrin 2.5EC,IRAC,3,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5339,Shoilam 2.5EC,IRAC,3,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
-AP-5340,Phonix 30WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-5340,Phonix 30WDG,IRAC,24A,Mitochondrial complex II electron transport inhibitors,Respiration,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5341,Lufenin 40WG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5342,Vimstar 40WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5343,Luthium 40WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -4093,7 +4093,7 @@ AP-5474,Penthalin 33EC,Unknown,—,No MoA Code assigned (pending classification)
 AP-5475,Luyen 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5476,Samolin 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5477,Torunil 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
-AP-5478,Herbilin 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
+AP-5478,Herbilin 33EC,HRAC,B,"ALS inhibitors (Sulfonylureas, Imidazolinones)",Amino acid synthesis,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5479,Apiro Fort 55.08SC,HRAC,2,"ALS inhibitors — Amino acid synthesis (Bispyribac, Pyrazosulfuron)",Amino Acid Synthesis (BCAA),No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5480,Quifos 5EC,HRAC,1,"ACCase inhibitors — Lipid synthesis (Fenoxaprop, Fluazifop)",Lipid Biosynthesis,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5482,Limon Super 5EC,HRAC,1,"ACCase inhibitors — Lipid synthesis (Fenoxaprop, Fluazifop)",Lipid Biosynthesis,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
@@ -4167,7 +4167,7 @@ AP-5553,G-Mectin 1.8EC,IRAC,6,Avermectins & Milbemycins — GluCl allosteric mod
 AP-5554,Allion 1.8EC,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5555,Medithrin 3WDG,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5556,Luxathrin 3WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-5557,Achamka Plus 3WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-5557,Achamka Plus 3WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5558,Dine Plus 6WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5559,Seed Lambda 2.5EC,IRAC,3,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5560,Jassgold 12.5WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -4193,7 +4193,7 @@ AP-5579,Multiguard 42WS,IRAC,4,Neonicotinoids — nAChR competitive modulators,N
 AP-5580,Transform 24SC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5581,Orogold 85WP,IRAC,1,Carbamates — Acetylcholinesterase inhibitors,Nerve & Muscle,YES — HHP,Carbaryl,"2, 8",Restricted; US tolerances established,Phase-out,AMBER,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5582,Diaron 50WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
-AP-5583,Damdama Gold 44EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
+AP-5583,Damdama Gold 44EC,IRAC,1B / IRAC 3A,IRAC Group 1B / IRAC 3A — see IRAC/FRAC/HRAC table,Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5584,Bondhudor 70WP,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5585,G-Pride 20SL,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SL,Soluble Concentrate,Liquid,LOW-MEDIUM — water-based solution
 AP-5586,Fend 70WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -4202,7 +4202,7 @@ AP-5588,Helper 30WP,Unknown,—,No MoA Code assigned (pending classification),Un
 AP-5589,Flare 38WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5590,Yellow Flexi 18SC,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5591,Ray 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-5592,Procure Plus 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-5592,Procure Plus 80WDG,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5593,Midanil 50WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5594,Tomahulk 5G,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,G,Granule,Solid,LOW — low-dust granular carrier
 AP-5595,Jumka 70WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -4237,7 +4237,7 @@ AP-5626,Nac-Pro 40EC,FRAC,6,Phenylpyrroles (Fludioxonil) — MAP kinase inhibito
 AP-5627,Luxcarb 72WP,FRAC,28,DHODH — Dihydroorotate dehydrogenase inhibitors,Pyrimidine Biosynthesis,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5628,Pridizole 30EC,FRAC,11,"QoI — Complex III (cyt bc1) inhibitors (Azoxystrobin, Pyraclostrobin)",Respiration (Complex III),No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5629,Veer 70WP,FRAC,91,"Plant defence inducers (Acibenzolar-S-methyl, Probenazole)",Host Defence (SAR),No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
-AP-5630,Bismazol 20WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
+AP-5630,Bismazol 20WP,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5631,Sazoli 22.5SC,FRAC,91,"Plant defence inducers (Acibenzolar-S-methyl, Probenazole)",Host Defence (SAR),No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5632,Jolson 50SC,FRAC,91,"Plant defence inducers (Acibenzolar-S-methyl, Probenazole)",Host Defence (SAR),No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5633,Coma 45WP,FRAC,92,M1 — Multi-site contact (Inorganic copper),Multi-site,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
@@ -4263,7 +4263,7 @@ AP-5653,Evaclean 18WP,Unknown,—,No MoA Code assigned (pending classification),
 AP-5654,Ble Raj 32WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5655,Atraforce 80WP,HRAC,5,PS II inhibitors — Ureas / Amides (Isoproturon),Photosynthesis (PS II),No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5656,Extrafen 55SC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
-AP-5657,Atraforce Plus 55SC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
+AP-5657,Atraforce Plus 55SC,HRAC,C1,Triazine PSII inhibitors,Photosynthesis,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5658,Foray 10EC,HRAC,1,"ACCase inhibitors — Lipid synthesis (Fenoxaprop, Fluazifop)",Lipid Biosynthesis,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5659,Alixon 20SL,HRAC,22,"PS I electron diverters (Paraquat, Diquat)",Photosynthesis (PS I),YES — HHP,Paraquat,"1, 8","Banned in 72 countries incl. Brazil, China",Immediate Ban,RED,SL,Soluble Concentrate,Liquid,LOW-MEDIUM — water-based solution
 AP-5660,Bicosaf 70WP,HRAC,4,"Synthetic auxins — Phenoxy / Pyridine / Benzoic (2,4-D, MCPA)",Growth Regulation (Auxin),No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
@@ -4291,7 +4291,7 @@ AP-5682,Forhit 10EC,Unknown,—,No MoA Code assigned (pending classification),Un
 AP-5683,Ronomax 40WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5684,Abamid 38WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5685,Aba Imi Baba 55WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-5686,Daban Ultra 60WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-5686,Daban Ultra 60WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5687,Marhaba 30SC,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5688,Movecash 75WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5689,Topgate 57.5WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -4307,7 +4307,7 @@ AP-5698,Indoxiprid 22.2SC,IRAC,22,Indoxacarb — Voltage-dependent sodium channe
 AP-5699,Restrin 15WP,IRAC,12,Mitochondrial ATP synthase inhibitors (Diafenthiuron group),Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5700,Seapall 15WP,IRAC,12,Mitochondrial ATP synthase inhibitors (Diafenthiuron group),Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5701,Doxacarb 30WDG,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-5702,Polaris 14.5SC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
+AP-5702,Polaris 14.5SC,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5703,Ogni 14.5SC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5704,Unifight 35WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5705,Toraj 35WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -4320,7 +4320,7 @@ AP-5711,Cenben 5SG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulat
 AP-5712,Astin 5SG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SG,Water-Soluble Granule,Solid,LOW — low-dust granule
 AP-5713,Aim-Tez 3WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5714,One Short 3WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-5715,Carbotin 4EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
+AP-5715,Carbotin 4EC,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5717,Spidex 10EC,IRAC,10,Mitochondrial ATP synthase inhibitors (Diafenthiuron),Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5718,Peda Ting Ting 80WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5719,Rimson 80WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -4344,7 +4344,7 @@ AP-5736,Oshin 20SG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve 
 AP-5737,Knight Guard 40EC,IRAC,1,Organophosphates — Acetylcholinesterase inhibitors,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5738,Serf-Furan 5G,IRAC,1,Carbamates — Acetylcholinesterase inhibitors,Nerve & Muscle,YES — HHP,Carbofuran,"1, 8",Banned EU/US,Immediate Ban,RED,G,Granule,Solid,LOW — low-dust granular carrier
 AP-5739,Sunshine 50WP,IRAC,1,Organophosphates — Acetylcholinesterase inhibitors,Nerve & Muscle,YES — HHP,Chlorpyrifos,"5, 8",Banned EU; Annex A Stockholm POP,Immediate Ban & Phase-out,RED,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
-AP-5740,Plato 7.89EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
+AP-5740,Plato 7.89EC,FRAC,25,Antibiotic — protein synthesis,Nucleic acid / Protein,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5741,Constant Super 24EC,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-5742,Evil 85WP,IRAC,1,Carbamates — Acetylcholinesterase inhibitors,Nerve & Muscle,YES — HHP,Carbaryl,"2, 8",Restricted; US tolerances established,Phase-out,AMBER,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5743,Newril 85WP,IRAC,1,Carbamates — Acetylcholinesterase inhibitors,Nerve & Muscle,YES — HHP,Carbaryl,"2, 8",Restricted; US tolerances established,Phase-out,AMBER,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
@@ -4449,7 +4449,7 @@ AP-5842,Fadeox 25EC,HRAC,14,"PPO inhibitors — Protoporphyrinogen oxidase (Oxyf
 AP-5843,Paton 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5844,Avizan 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5845,Wideour 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
-AP-5846,Genesaf 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
+AP-5846,Genesaf 18WP,HRAC,B,"ALS inhibitors (Sulfonylureas, Imidazolinones)",Amino acid synthesis,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5847,Hisaf 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5848,Pashun 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5849,Red Clean 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
@@ -4469,7 +4469,7 @@ AP-5861,Somadhan 20WP,HRAC,2,"ALS inhibitors — Amino acid synthesis (Bispyriba
 AP-5862,Farmclean 20WP,HRAC,2,"ALS inhibitors — Amino acid synthesis (Bispyribac, Pyrazosulfuron)",Amino Acid Synthesis (BCAA),No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-5863,Copter 55SC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5864,Triozine 55SC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
-AP-5865,Moontex 55SC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
+AP-5865,Moontex 55SC,IRAC,14,"nAChR channel blockers (Cartap, Bensultap)",Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5866,Prism 27.5SC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5867,Bajna 55SC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-5868,Clio 33.60SC,HRAC,10,GS inhibitors — Glutamine synthetase (Glufosinate),Nitrogen Metabolism,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
@@ -4565,7 +4565,7 @@ AP-5956,Bijeta 80WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerv
 AP-5957,Pymet 80WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5958,Alzin 80WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5959,Bazraghat 80WDG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-5960,Hoppercare 70WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-5960,Hoppercare 70WDG,IRAC,9B,Pymetrozine — selective feeding blocker,Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5961,Quickdown 70WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5962,Hakkar 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5963,Pyniram 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -4573,7 +4573,7 @@ AP-5964,Ramo 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unk
 AP-5965,Phorate 70WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5966,Tabasum 70WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5967,Pahar 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-5968,Currency 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-5968,Currency 80WDG,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5969,Chicozin 50WDG,IRAC,9,Pymetrozine — Chordotonal organ modulator,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5970,Painer 50WDG,IRAC,9,Pymetrozine — Chordotonal organ modulator,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5971,V-Tara 68WG,IRAC,9,Pymetrozine — Chordotonal organ modulator,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
@@ -4586,7 +4586,7 @@ AP-5977,Midzoate 5SG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modul
 AP-5978,Sinatake 10SG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SG,Water-Soluble Granule,Solid,LOW — low-dust granule
 AP-5979,Redema 5SG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SG,Water-Soluble Granule,Solid,LOW — low-dust granule
 AP-5980,Tomcat 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
-AP-5981,Positron Plus 80WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-5981,Positron Plus 80WDG,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5982,Huntking 75WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5983,Rimixam 70WDG,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WDG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-5984,Copa 10SE,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SE,Suspo-emulsion,Liquid,MEDIUM — aqueous + solvent blend
@@ -4614,7 +4614,7 @@ AP-6005,Daoya 20EC,Unknown,—,No MoA Code assigned (pending classification),Unk
 AP-6006,Daze 20EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-6007,Rongon 20EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-6008,Sumoprempt 20EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
-AP-6009,Fenvet Plus 20EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
+AP-6009,Fenvet Plus 20EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-6010,Smash Plus 20EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-6011,Ricofen Plus 20EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-6012,Ematol 25SC,IRAC,21,METI acaricides — Complex I electron transport inhibitors,Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
@@ -4703,7 +4703,7 @@ AP-6094,Livina 18WP,Unknown,—,No MoA Code assigned (pending classification),Un
 AP-6095,Nishes 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-6096,Biborna 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-6097,Pixar 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
-AP-6098,Agacha Clear 18WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
+AP-6098,Agacha Clear 18WP,HRAC,K3,VLCFA synthesis inhibitors (Chloroacetamides),Cell division,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-6099,Tata Clear 40WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-6100,Mapclorak 40WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
 AP-6101,Ronorac 40WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WP,Wettable Powder,Solid,MEDIUM — dust inhalation; anti-caking agents
@@ -4713,7 +4713,7 @@ AP-6104,Lately 33EC,Unknown,—,No MoA Code assigned (pending classification),Un
 AP-6105,Pendima 33EC,HRAC,K1,Microtubule assembly inhibitors (Dinitroanilines),Cell division,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-6106,Piston 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-6107,Pendanil 33EC,HRAC,K1,Microtubule assembly inhibitors (Dinitroanilines),Cell division,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
-AP-6108,Nirani Plus 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
+AP-6108,Nirani Plus 33EC,HRAC,O,"Synthetic auxins (Phenoxy, Pyridine carboxylic)",Growth regulation,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-6109,Pentaline 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-6110,Nila 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-6111,Orosun 33EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
@@ -4812,7 +4812,7 @@ AP-974,(trade name not recorded),,,,,,,,,,,,,,
 AP-1877,(trade name not recorded),,,,,,,,,,,,,,
 AP-1675,(trade name not recorded),,,,,,,,,,,,,,
 AP-15,Cupravit 50 WP / Blue Copper 50 WP,,,,,,,,,,,,,,
-AP-1757,(trade name not recorded),,,,,,,,,,,,,,
+AP-1757,(trade name not recorded),FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
 AP-2305,(trade name not recorded),,,,,,,,,,,,,,
 AP-810,Score 250 EC,FRAC,3,"DMI (Azoles) — Sterol C14-demethylase inhibitors (Propiconazole, Hexaconazole)",Sterol Biosynthesis,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-2535,(trade name not recorded),,,,,,,,,,,,,,
@@ -4849,7 +4849,7 @@ AP-2476,(trade name not recorded),FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC t
 AP-2480,(trade name not recorded),FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
 AP-3097,(trade name not recorded),,,,,,,,,,,,,,
 AP-1037,(trade name not recorded),FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
-AP-2164,(trade name not recorded),,,,,,,,,,,,,,
+AP-2164,(trade name not recorded),FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-2154,(trade name not recorded),FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,GREEN,,,,
 AP-351,(trade name not recorded),,,,,,,,,,,,,,
 AP-2789,(trade name not recorded),FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
@@ -4885,21 +4885,21 @@ AP-968,(trade name not recorded),,,,,,,,,,,,,,
 AP-1699,(trade name not recorded),,,,,,,,,,,,,,
 AP-1913,(trade name not recorded),,,,,,,,,,,,,,
 AP-1049,(trade name not recorded),,,,,,,,,,,,,,
-AP-2513,(trade name not recorded),,,,,,,,,,,,,,
+AP-2513,(trade name not recorded),IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-2138,(trade name not recorded),,,,,,,,,,,,,,
 AP-3116,(trade name not recorded),,,,,,,,,,,,,,
 AP-3112,(trade name not recorded),,,,,,,,,,,,,,
 AP-2791,(trade name not recorded),,,,,,,,,,,,,,
 AP-2514,(trade name not recorded),,,,,,,,,,,,,,
-AP-1375,(trade name not recorded),,,,,,,,,,,,,,
+AP-1375,(trade name not recorded),FRAC,M03,Dithiocarbamates — multi-site contact,Multi-site contact,,,,,,,,,,
 (not recorded),(trade name not recorded),,,,,,,,,,,,,,
 AP-1092,(trade name not recorded),,,,,,,,,,,,,,
 (not recorded),(trade name not recorded),,,,,,,,,,,,,,
 (not recorded),(trade name not recorded),,,,,,,,,,,,,,
 AP-1705,(trade name not recorded),,,,,,,,,,,,,,
 AP-2517,(trade name not recorded),,,,,,,,,,,,,,
-AP-3113,(trade name not recorded),,,,,,,,,,,,,,
-AP-976,(trade name not recorded),,,,,,,,,,,,,,
+AP-3113,(trade name not recorded),IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
+AP-976,(trade name not recorded),FRAC,M03,Dithiocarbamates — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-206,(trade name not recorded),,,,,,,,,,,,,,
 AP-602,(trade name not recorded),,,,,,,,,,,,,,
 AP-1123,(trade name not recorded),,,,,,,,,,,,,,
@@ -4908,7 +4908,7 @@ AP-467,(trade name not recorded),FRAC,3,DMIs — Sterol biosynthesis (C14-demeth
 AP-709,(trade name not recorded),,,,,,,,,,,,,,
 AP-1879,(trade name not recorded),,,,,,,,,,,,,,
 AP-1382,(trade name not recorded),FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
-AP-2299,(trade name not recorded),FRAC,,DMI — Sterol C14-demethylase,Sterol Biosynthesis,,,,,,,,,,
+AP-2299,(trade name not recorded),FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
 AP-625,(trade name not recorded),,,,,,,,,,,,,,
 AP-1024,(trade name not recorded),,,,,,,,,,,,,,
 AP-1118,(trade name not recorded),,,,,,,,,,,,,,
@@ -4919,7 +4919,7 @@ AP-1898,(trade name not recorded),,,,,,,,,,,,,,
 AP-3204,(trade name not recorded),FRAC,,Glucopyranosyl antibiotic,,,,,,,,,,,
 AP-524,(trade name not recorded),,,,,,,,,,,,,,
 AP-2787,(trade name not recorded),FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
-AP-310,Topsin-M 70 WP / Roko 70 WP,,,,,,,,,,,,,,
+AP-310,Topsin-M 70 WP / Roko 70 WP,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-240,Thiraflo 75 WP / Vegaflo,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-2774,(trade name not recorded),,,,,,,,,,,,,,
 AP-2773,(trade name not recorded),FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
@@ -4932,11 +4932,11 @@ AP-2559,(trade name not recorded),,,,,,,,,,,,,,
 AP-1739,(trade name not recorded),,,,,,,,,,,,,,
 AP-1750,Nominee Gold 100 SC,HRAC,2,"ALS inhibitors — Amino acid synthesis (Bispyribac, Pyrazosulfuron)",Amino Acid Synthesis (BCAA),No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-3157,(trade name not recorded),,,,,,,,,,,,,,
-AP-2287,(trade name not recorded),,,,,,,,,,,,,,
+AP-2287,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-1449,(trade name not recorded),,,,,,,,,,,,,,
 AP-1168,(trade name not recorded),,,,,,,,,,,,,,
 AP-2557,(trade name not recorded),,,,,,,,,,,,,,
-AP-3158,(trade name not recorded),,,,,,,,,,,,,,
+AP-3158,(trade name not recorded),HRAC,K3,VLCFA synthesis inhibitors (Chloroacetamides),Cell division,,,,,,,,,,
 AP-363,(trade name not recorded),,,,,,,,,,,,,,
 AP-931,(trade name not recorded),,,,,,,,,,,,,,
 AP-1737,(trade name not recorded),,,,,,,,,,,,,,
@@ -4973,13 +4973,13 @@ AP-1452,(trade name not recorded),,,,,,,,,,,,,,
 AP-3173,(trade name not recorded),,,,,,,,,,,,,,
 AP-1441,(trade name not recorded),HRAC,K3,VLCFA synthesis inhibitors (Chloroacetamides),Cell division,,,,,,,,,,
 AP-842,(trade name not recorded),,,,,,,,,,,,,,
-AP-1453,(trade name not recorded),,,,,,,,,,,,,,
+AP-1453,(trade name not recorded),FRAC,11,QoI — Strobilurins (mitochondrial complex III),Respiration,,,,,,,,,,
 AP-3176,(trade name not recorded),,,,,,,,,,,,,,
-AP-1455,(trade name not recorded),,,,,,,,,,,,,,
+AP-1455,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-843,(trade name not recorded),,,,,,,,,,,,,,
-AP-3170,(trade name not recorded),,,,,,,,,,,,,,
-AP-3178,(trade name not recorded),,,,,,,,,,,,,,
-AP-2584,(trade name not recorded),,,,,,,,,,,,,,
+AP-3170,(trade name not recorded),FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
+AP-3178,(trade name not recorded),HRAC,B,"ALS inhibitors (Sulfonylureas, Imidazolinones)",Amino acid synthesis,,,,,,,,,,
+AP-2584,(trade name not recorded),HRAC,K3,VLCFA synthesis inhibitors (Chloroacetamides),Cell division,,,,,,,,,,
 AP-933,(trade name not recorded),,,,,,,,,,,,,,
 AP-1171,(trade name not recorded),,,,,,,,,,,,,,
 AP-1443,(trade name not recorded),,,,,,,,,,,,,,
@@ -4987,7 +4987,7 @@ AP-2171,(trade name not recorded),,,,,,,,,,,,,,
 AP-2562,(trade name not recorded),,,,,,,,,,,,,,
 AP-2582,(trade name not recorded),,,,,,,,,,,,,,
 AP-2318,(trade name not recorded),,,,,,,,,,,,,,
-AP-3183,(trade name not recorded),,,,,,,,,,,,,,
+AP-3183,(trade name not recorded),IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-2719,(trade name not recorded),,,,,,,,,,,,,,
 AP-2991,(trade name not recorded),IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP-1799,(trade name not recorded),,,,,,,,,,,,,,
@@ -4999,13 +4999,13 @@ AP-2307,(trade name not recorded),,,,,,,,,,,,,,
 AP-1224,(trade name not recorded),,,,,,,,,,,,,,
 AP-2871,(trade name not recorded),IRAC,,Neonicotinoids,,,,,,,,,,,
 AP-2697,(trade name not recorded),,,,,,,,,,,,,,
-AP-1566,(trade name not recorded),,,,,,,,,,,,,,
+AP-1566,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-1755,(trade name not recorded),,,,,,,,,,,,,,
 AP-192,Fastac 2 EC,IRAC,,"Pyrethroids, pyrethrins",,,,,,,,,,,
 AP-1323,(trade name not recorded),,,,,,,,,,,,,,
-AP-427,(trade name not recorded),,,,,,,,,,,,,,
+AP-427,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-2759,(trade name not recorded),,,,,,,,,,,,,,
-AP-1080,Award 25 SC / Applaud 25 SC,IRAC,,Organophosphates (AChE inhibitors),,,,,,,AMBER,,,,
+AP-1080,Award 25 SC / Applaud 25 SC,HRAC,G,EPSP synthase inhibitors (Glyphosate),Amino acid synthesis,,,,,,AMBER,,,,
 AP-3205,(trade name not recorded),IRAC,,CHS1 inhibitor + Carbamate,,,,,,,GREEN,,,,
 AP-2222,(trade name not recorded),,,,,,,,,,,,,,
 AP-305,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
@@ -5015,7 +5015,7 @@ AP-2878,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve &
 AP-2014,(trade name not recorded),,,,,,,,,,,,,,
 AP-1637,(trade name not recorded),,,,,,,,,,,,,,
 AP-2659,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
-AP-1515,(trade name not recorded),,,,,,,,,,,,,,
+AP-1515,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-2647,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-2890,(trade name not recorded),,,,,,,,,,,,,,
 AP-323,(trade name not recorded),,,,,,,,,,,,,,
@@ -5041,7 +5041,7 @@ AP-2226,(trade name not recorded),,,,,,,,,,,,,,
 AP-2641,(trade name not recorded),,,,,,,,,,,,,,
 AP-214,(trade name not recorded),,,,,,,,,,,,,,
 AP-1907,(trade name not recorded),,,,,,,,,,,,,,
-AP-280,(trade name not recorded),,,,,,,,,,,,,,
+AP-280,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-2651,(trade name not recorded),,,,,,,,,,,,,,
 AP-2645,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-2216,(trade name not recorded),,,,,,,,,,,,,,
@@ -5082,10 +5082,10 @@ AP-865,(trade name not recorded),,,,,,,,,,,,,,
 AP-939,(trade name not recorded),,,,,,,,,,,,,,
 AP-1732,(trade name not recorded),,,,,,,,,,,,,,
 AP-2681,(trade name not recorded),,,,,,,,,,,,,,
-AP-773,(trade name not recorded),,,,,,,,,,,,,,
+AP-773,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-1934,(trade name not recorded),,,,,,,,,,,,,,
-AP-2229,(trade name not recorded),,,,,,,,,,,,,,
-AP-369,(trade name not recorded),,,,,,,,,,,,,,
+AP-2229,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
+AP-369,(trade name not recorded),IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-416,(trade name not recorded),,,,,,,,,,,,,,
 AP-1109,(trade name not recorded),,,,,,,,,,,,,,
 AP-1471,(trade name not recorded),,,,,,,,,,,,,,
@@ -5107,24 +5107,24 @@ AP-423,(trade name not recorded),,,,,,,,,,,,,,
 AP-1535,(trade name not recorded),,,,,,,,,,,,,,
 AP-1201,(trade name not recorded),,,,,,,,,,,,,,
 AP-1251,(trade name not recorded),,,,,,,,,,,,,,
-AP-596,(trade name not recorded),,,,,,,,,,,,,,
+AP-596,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-1531,(trade name not recorded),,,,,,,,,,,,,,
 AP-649,(trade name not recorded),,,,,,,,,,,,,,
 AP-2000,(trade name not recorded),,,,,,,,,,,,,,
-AP-998,(trade name not recorded),,,,,,,,,,,,,,
+AP-998,(trade name not recorded),IRAC,14,"nAChR channel blockers (Cartap, Bensultap)",Nerve & Muscle,,,,,,,,,,
 AP-2207,(trade name not recorded),IRAC,,Nereistoxin analogues,,,,,,,,,,,
 AP-2670,(trade name not recorded),,,,,,,,,,,,,,
 AP-1212,(trade name not recorded),,,,,,,,,,,,,,
-AP-1474,(trade name not recorded),,,,,,,,,,,,,,
+AP-1474,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-2835,(trade name not recorded),,,,,,,,,,,,,,
-AP-2327,(trade name not recorded),,,,,,,,,,,,,,
+AP-2327,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-807,(trade name not recorded),,,,,,,,,,,,,,
 AP-2821,(trade name not recorded),,,,,,,,,,,,,,
 AP-1249,(trade name not recorded),,,,,,,,,,,,,,
 AP-2209,(trade name not recorded),,,,,,,,,,,,,,
 AP-946,(trade name not recorded),,,,,,,,,,,,,,
 AP-2838,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
-AP-2843,(trade name not recorded),,,,,,,,,,,,,,
+AP-2843,(trade name not recorded),IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-2333,(trade name not recorded),,,,,,,,,,,,,,
 AP-2672,(trade name not recorded),IRAC,14,"nAChR channel blockers (Cartap, Bensultap)",Nerve & Muscle,,,,,,,,,,
 AP-949,(trade name not recorded),,,,,,,,,,,,,,
@@ -5153,15 +5153,15 @@ AP-345,(trade name not recorded),,,,,,,,,,,,,,
 AP-2868,(trade name not recorded),,,,,,,,,,,,,,
 AP-506,(trade name not recorded),,,,,,,,,,,,,,
 AP-764,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
-AP-386,(trade name not recorded),,,,,,,,,,,,,,
+AP-386,(trade name not recorded),FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-1722,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-2625,(trade name not recorded),,,,,,,,,,,,,,
 AP-1107,(trade name not recorded),,,,,,,,,,,,,,
 AP-434,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-2628,(trade name not recorded),,,,,,,,,,,,,,
-AP-1398,(trade name not recorded),,,,,,,,,,,,,,
+AP-1398,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-1974,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
-AP-632,(trade name not recorded),,,,,,,,,,,,,,
+AP-632,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-1110,(trade name not recorded),,,,,,,,,,,,,,
 AP-1825,(trade name not recorded),,,,,,,,,,,,,,
 AP-2194,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
@@ -5172,7 +5172,7 @@ AP-1275,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,N
 AP-1214,(trade name not recorded),,,,,,,,,,,,,,
 AP-2848,(trade name not recorded),,,,,,,,,,,,,,
 AP-2352,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
-AP-1727,(trade name not recorded),IRAC,,Organophosphates — Acetylcholinesterase inhibitors,Nerve & Muscle,,,,,Immediate Ban & Phase-out,RED,,,,
+AP-1727,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,Immediate Ban & Phase-out,RED,,,,
 AP-2348,(trade name not recorded),,,,,,,,,,,,,,
 AP-2350,(trade name not recorded),,,,,,,,,,,,,,
 AP-2199,(trade name not recorded),,,,,,,,,,,,,,
@@ -5199,13 +5199,13 @@ AP-2865,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,N
 AP-1446,(trade name not recorded),,,,,,,,,,,,,,
 AP-2860,(trade name not recorded),,,,,,,,,,,,,,
 AP-1751,(trade name not recorded),,,,,,,,,,,,,,
-AP-2855,(trade name not recorded),,,,,,,,,,,,,,
+AP-2855,(trade name not recorded),HRAC,B,"ALS inhibitors (Sulfonylureas, Imidazolinones)",Amino acid synthesis,,,,,,,,,,
 AP-379,(trade name not recorded),,,,,,,,,,,,,,
 AP-2853,(trade name not recorded),,,,,,,,,,,,,,
 AP-1032,(trade name not recorded),,,,,,,,,,,,,,
 AP-312,Classic 20 EC / Pyrifos 20 EC,,,,,,,,,,,,,,
 AP-2170,(trade name not recorded),,,,,,,,,,,,,,
-AP-2366,(trade name not recorded),,,,,,,,,,,,,,
+AP-2366,(trade name not recorded),HRAC,A,ACCase inhibitors (Aryloxyphenoxy propionates / Cyclohexanediones),Lipid synthesis,,,,,,,,,,
 AP-2399,(trade name not recorded),,,,,,,,,,,,,,
 AP-3015,(trade name not recorded),,,,,,,,,,,,,,
 AP-2368,(trade name not recorded),,,,,,,,,,,,,,
@@ -5222,7 +5222,7 @@ AP-1838,(trade name not recorded),,,,,,,,,,,,,,
 AP-2391,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-3044,(trade name not recorded),,,,,,,,,,,,,,
 AP-1281,(trade name not recorded),,,,,,,,,,,,,,
-AP-645,(trade name not recorded),,,,,,,,,,,,,,
+AP-645,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-2395,(trade name not recorded),,,,,,,,,,,,,,
 AP-1955,(trade name not recorded),,,,,,,,,,,,,,
 AP-3040,(trade name not recorded),,,,,,,,,,,,,,
@@ -5253,7 +5253,7 @@ AP-3053,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium ch
 AP-2537,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-960,(trade name not recorded),,,,,,,,,,,,,,
 AP-2714,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
-AP-1433,(trade name not recorded),,,,,,,,,,,,,,
+AP-1433,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-1782,(trade name not recorded),,,,,,,,,,,,,,
 AP-2709,(trade name not recorded),,,,,,,,,,,,,,
 AP-1002,(trade name not recorded),,,,,,,,,,,,,,
@@ -5264,7 +5264,7 @@ AP-3045,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium ch
 AP-2716,(trade name not recorded),,,,,,,,,,,,,,
 AP-1131,(trade name not recorded),IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-2388,(trade name not recorded),,,,,,,,,,,,,,
-AP-2389,(trade name not recorded),,,,,,,,,,,,,,
+AP-2389,(trade name not recorded),IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-3255,(trade name not recorded),,,,,,,,,,,,,,
 AP-1769,(trade name not recorded),,,,,,,,,,,,,,
 AP-2255,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
@@ -5278,35 +5278,35 @@ AP-902,(trade name not recorded),,,,,,,,,,,,,,
 AP-727,(trade name not recorded),,,,,,,,,,,,,,
 AP-519,(trade name not recorded),,,,,,,,,,,,,,
 AP-2415,(trade name not recorded),,,,,,,,,,,,,,
-AP-1033,(trade name not recorded),,,,,,,,,,,,,,
+AP-1033,(trade name not recorded),FRAC,2,Dicarboximides — histidine kinase osmotic signal transduction,Nucleic acid / Protein,,,,,,,,,,
 AP-1577,(trade name not recorded),,,,,,,,,,,,,,
 AP-2267,(trade name not recorded),,,,,,,,,,,,,,
-AP-776,(trade name not recorded),,,,,,,,,,,,,,
+AP-776,(trade name not recorded),IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-204,Decis 2.5 EC / Sukanto 2.5 EC,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
-AP-629,(trade name not recorded),,,,,,,,,,,,,,
-AP-589,(trade name not recorded),,,,,,,,,,,,,,
-AP-159,(trade name not recorded),,,,,,,,,,,,,,
+AP-629,(trade name not recorded),FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
+AP-589,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
+AP-159,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-1114,(trade name not recorded),,,,,,,,,,,,,,
 AP-583,(trade name not recorded),,,,,,,,,,,,,,
 AP-1996,(trade name not recorded),,,,,,,,,,,,,,
-AP-1765,(trade name not recorded),,,,,,,,,,,,,,
+AP-1765,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-433,(trade name not recorded),,,,,,,,,,,,,,
-AP-2949,(trade name not recorded),,,,,,,,,,,,,,
+AP-2949,(trade name not recorded),HRAC,B,"ALS inhibitors (Sulfonylureas, Imidazolinones)",Amino acid synthesis,,,,,,,,,,
 AP-1993,(trade name not recorded),,,,,,,,,,,,,,
 AP-2344,(trade name not recorded),,,,,,,,,,,,,,
 AP-1344,(trade name not recorded),,,,,,,,,,,,,,
 AP-2346,(trade name not recorded),,,,,,,,,,,,,,
-AP-1718,(trade name not recorded),,,,,,,,,,,,,,
+AP-1718,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-2948,(trade name not recorded),,,,,,,,,,,,,,
-AP-829,(trade name not recorded),,,,,,,,,,,,,,
+AP-829,(trade name not recorded),FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
 AP-1334,(trade name not recorded),,,,,,,,,,,,,,
-AP-1031,(trade name not recorded),,,,,,,,,,,,,,
+AP-1031,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-2944,(trade name not recorded),,,,,,,,,,,,,,
 AP-2946,(trade name not recorded),,,,,,,,,,,,,,
 AP-953,(trade name not recorded),,,,,,,,,,,,,,
 AP-2947,(trade name not recorded),,,,,,,,,,,,,,
 AP-1924,(trade name not recorded),,,,,,,,,,,,,,
-AP-2758,(trade name not recorded),,,,,,,,,,,,,,
+AP-2758,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-84,Basudin 60 EC / Subash 60 EC,IRAC,,Organophosphate — AChE inhibitor,Nerve & Muscle,,,,,,,,,,
 AP-572,(trade name not recorded),,,,,,,,,,,,,,
 AP-514,(trade name not recorded),,,,,,,,,,,,,,
@@ -5320,7 +5320,7 @@ AP-141,Rogor 40 L,IRAC,1,Organophosphates — Acetylcholinesterase inhibitors,Ne
 AP-110,Rogor 40 EC / Tafgor 40 EC,IRAC,1,Organophosphates — Acetylcholinesterase inhibitors,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-2015,Oshin 20 SG / Venom 20 SG,IRAC,4,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,SG,Water-Soluble Granule,Solid,LOW — low-dust granule
 AP-1902,(trade name not recorded),,,,,,,,,,,,,,
-AP-2938,(trade name not recorded),,,,,,,,,,,,,,
+AP-2938,(trade name not recorded),IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP-2322,(trade name not recorded),,,,,,,,,,,,,,
 AP-2907,(trade name not recorded),,,,,,,,,,,,,,
 AP-2321,(trade name not recorded),,,,,,,,,,,,,,
@@ -5335,22 +5335,22 @@ AP-348,(trade name not recorded),,,,,,,,,,,,,,
 AP-04,(trade name not recorded),,,,,,,,,,,,,,
 AP-1046,(trade name not recorded),,,,,,,,,,,,,,
 AP-393,(trade name not recorded),,,,,,,,,,,,,,
-AP-1019,(trade name not recorded),,,,,,,,,,,,,,
+AP-1019,(trade name not recorded),IRAC,9B,Pymetrozine — selective feeding blocker,Unknown,,,,,,,,,,
 AP-387,(trade name not recorded),,,,,,,,,,,,,,
 AP-1473,(trade name not recorded),,,,,,,,,,,,,,
 AP-454,(trade name not recorded),,,,,,,,,,,,,,
 AP-1324,(trade name not recorded),,,,,,,,,,,,,,
-AP-314,(trade name not recorded),,,,,,,,,,,,,,
+AP-314,(trade name not recorded),HRAC,A,ACCase inhibitors (Aryloxyphenoxy propionates / Cyclohexanediones),Lipid synthesis,,,,,,,,,,
 AP-2795,(trade name not recorded),,,,,,,,,,,,,,
 AP-2188,(trade name not recorded),,,,,,,,,,,,,,
 AP-2034,(trade name not recorded),,,,,,,,,,,,,,
 AP-2406,(trade name not recorded),,,,,,,,,,,,,,
-AP-2664,(trade name not recorded),,,,,,,,,,,,,,
+AP-2664,(trade name not recorded),FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
 AP-2667,(trade name not recorded),,,,,,,,,,,,,,
 AP-2802,(trade name not recorded),,,,,,,,,,,,,,
 AP-41905,(trade name not recorded),,,,,,,,,,,,,,
 AP-2177,(trade name not recorded),,,,,,,,,,,,,,
-AP-2179,(trade name not recorded),,,,,,,,,,,,,,
+AP-2179,(trade name not recorded),IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-2663,(trade name not recorded),,,,,,,,,,,,,,
 AP-2182,(trade name not recorded),,,,,,,,,,,,,,
 AP-2173,(trade name not recorded),,,,,,,,,,,,,,
@@ -5369,7 +5369,7 @@ AP-2826,(trade name not recorded),,,,,,,,,,,,,,
 AP-2024,(trade name not recorded),,,,,,,,,,,,,,
 AP-2690,(trade name not recorded),,,,,,,,,,,,,,
 AP-2845,(trade name not recorded),,,,,,,,,,,,,,
-AP-2414,(trade name not recorded),,,,,,,,,,,,,,
+AP-2414,(trade name not recorded),IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-1958,(trade name not recorded),,,,,,,,,,,,,,
 AP-2342,(trade name not recorded),,,,,,,,,,,,,,
 AP-2741,(trade name not recorded),,,,,,,,,,,,,,
@@ -5384,7 +5384,7 @@ AP-1957,(trade name not recorded),,,,,,,,,,,,,,
 AP-3032,(trade name not recorded),,,,,,,,,,,,,,
 AP-3034,(trade name not recorded),,,,,,,,,,,,,,
 AP-1936,(trade name not recorded),,,,,,,,,,,,,,
-AP-2261,(trade name not recorded),,,,,,,,,,,,,,
+AP-2261,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-1796,(trade name not recorded),,,,,,,,,,,,,,
 AP-688,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-235,(trade name not recorded),,,,,,,,,,,,,,
@@ -5392,19 +5392,19 @@ AP-311,(trade name not recorded),,,,,,,,,,,,,,
 AP-153,(trade name not recorded),,,,,,,,,,,,,,
 AP-231,(trade name not recorded),,,,,,,,,,,,,,
 AP-2753,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
-AP-1179,(trade name not recorded),,,,,,,,,,,,,,
+AP-1179,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-330,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-288,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-954,(trade name not recorded),IRAC,,Organophosphate — AChE inhibitor,Nerve & Muscle,,,,,,,,,,
 AP-3060,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
-AP-313,(trade name not recorded),,,,,,,,,,,,,,
+AP-313,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-92,Fyfanon 57 EC / Malataf 57 EC,IRAC,1,Organophosphates — Acetylcholinesterase inhibitors,Nerve & Muscle,YES — HHP,Malathion,"1, 5, 8",Restricted; frequent residue detection,Phase-out & Substitute,AMBER,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-306,(trade name not recorded),,,,,,,,,,,,,,
 AP-538,(trade name not recorded),,,,,,,,,,,,,,
-AP-124,(trade name not recorded),,,,,,,,,,,,,,
+AP-124,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-415,(trade name not recorded),,,,,,,,,,,,,,
 AP-1533,(trade name not recorded),,,,,,,,,,,,,,
-AP-1154,(trade name not recorded),,,,,,,,,,,,,,
+AP-1154,(trade name not recorded),IRAC,24A,Mitochondrial complex II electron transport inhibitors,Respiration,,,,,,,,,,
 AP-1248,(trade name not recorded),,,,,,,,,,,,,,
 AP-1639,(trade name not recorded),,,,,,,,,,,,,,
 AP-1491,(trade name not recorded),,,,,,,,,,,,,,
@@ -5425,28 +5425,28 @@ AP-1188,(trade name not recorded),,,,,,,,,,,,,,
 AP-1526,(trade name not recorded),,,,,,,,,,,,,,
 AP-2412,(trade name not recorded),,,,,,,,,,,,,,
 AP-2411,(trade name not recorded),,,,,,,,,,,,,,
-AP-1617,(trade name not recorded),,,,,,,,,,,,,,
+AP-1617,(trade name not recorded),IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-398,Nerot 500 EC,,,,,,,,,,,,,,
 AP-1410,Myron 500 EC,IRAC,,Unknown or uncertain MoA,,,,,,,,,,,
 AP-777,(trade name not recorded),,,,,,,,,,,,,,
 AP-542,(trade name not recorded),IRAC,,Organophosphate — AChE inhibitor,Nerve & Muscle,,,,,,,,,,
 AP-295,Sethion 46.5 EC,IRAC,1,Organophosphates — Acetylcholinesterase inhibitors,Nerve & Muscle,No,—,—,—,Standard registration controls,STANDARD,EC,Emulsifiable Concentrate,Liquid,HIGH — organic solvent + emulsifier load (EU 2025 co-formulant ban relevance)
 AP-1520,Ortus 5 EC / Pyrox 5 EC,,,,,,,,,,,,,,
-AP-1388,Hexarite 5 EC,IRAC,,Mite growth inhibitors (chitin),,,,,,,,,,,
+AP-1388,Hexarite 5 EC,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
 AP-1189,(trade name not recorded),,,,,,,,,,,,,,
 AP-1980,Oberon 240 SC,IRAC,23,Tetronic & Tetramic acid derivatives — ACCase inhibitors,Lipid Synthesis,No,—,—,—,Standard registration controls,STANDARD,SC,Suspension Concentrate,Liquid,"MEDIUM — aqueous, surfactant-dependent"
 AP-367,(trade name not recorded),FRAC,,Multi-site — inorganic sulphur,Multi-site,,,,,,,,,,
 AP-2237,(trade name not recorded),,,,,,,,,,,,,,
 AP-2432,(trade name not recorded),,,,,,,,,,,,,,
-AP-357,(trade name not recorded),,,,,,,,,,,,,,
-AP-2442,(trade name not recorded),,,,,,,,,,,,,,
+AP-357,(trade name not recorded),FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,,,,,,,,,,
+AP-2442,(trade name not recorded),FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-996,(trade name not recorded),FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
 AP-1919,(trade name not recorded),,,,,,,,,,,,,,
 AP-1419,(trade name not recorded),,,,,,,,,,,,,,
 AP-1400,(trade name not recorded),FRAC,,Multi-site — inorganic sulphur,Multi-site,,,,,,,,,,
 AP-2069,(trade name not recorded),,,,,,,,,,,,,,
 AP-3221,(trade name not recorded),FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
-AP-2436,(trade name not recorded),,,,,,,,,,,,,,
+AP-2436,(trade name not recorded),FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-3222,(trade name not recorded),FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
 AP-2078,(trade name not recorded),,,,,,,,,,,,,,
 AP-1865,(trade name not recorded),,,,,,,,,,,,,,
@@ -5455,18 +5455,18 @@ AP-1862,(trade name not recorded),,,,,,,,,,,,,,
 AP-884,(trade name not recorded),,,,,,,,,,,,,,
 AP-2441,(trade name not recorded),FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-982,(trade name not recorded),,,,,,,,,,,,,,
-AP-1707,(trade name not recorded),,,,,,,,,,,,,,
+AP-1707,(trade name not recorded),FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-1378,(trade name not recorded),,,,,,,,,,,,,,
 AP-3072,(trade name not recorded),FRAC,,Multi-site — inorganic sulphur,Multi-site,,,,,,,,,,
 AP-358,(trade name not recorded),,,,,,,,,,,,,,
 (not recorded),(trade name not recorded),,,,,,,,,,,,,,
 AP-3075,(trade name not recorded),FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-2771,(trade name not recorded),,,,,,,,,,,,,,
-AP-252,Microthiol Special 80 WP,Unknown,—,No MoA Code assigned (pending classification),Unknown,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
+AP-252,Microthiol Special 80 WP,FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,No,—,—,—,Standard registration controls,STANDARD,WG,Water-Dispersible Granule,Solid,LOW — low-dust granule
 AP-356,Sulfex 80 WP,,,,,,,,,,,,,,
 AP-388,Ronovit 80 WG,,,,,,,,,,,,,,
 AP-1940,Pyranica 20 WP,,,,,,,,,,,,,,
-AP-1560,(trade name not recorded),,,,,,,,,,,,,,
+AP-1560,(trade name not recorded),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-458,(trade name not recorded),IRAC,24,"Acequinocyl, Fluacrypyrim — Complex III inhibitors",Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP-914,(trade name not recorded),IRAC,24,"Acequinocyl, Fluacrypyrim — Complex III inhibitors",Energy Metabolism,No,—,—,—,Standard registration controls,STANDARD,—,Not identifiable from brand name,Unknown,Unknown — request formulation dossier
 AP-406,(trade name not recorded),,,,,,,,,,,,,,
@@ -5483,19 +5483,19 @@ AP-28,Celphos / Quickphos 56% Tab,IRAC,24,"Acequinocyl, Fluacrypyrim — Complex
 AP-1160,K-Obiol 25 WP,,,,,,,,,,,,,,
 AP-907,(trade name not recorded),,,,,,,,,,,,,,
 AP-912,(trade name not recorded),,,,,,,,,,,,,,
-AP-906,(trade name not recorded),,,,,,,,,,,,,,
+AP-906,(trade name not recorded),FRAC,M03,Dithiocarbamates — multi-site contact,Multi-site contact,,,,,,,,,,
 AP--1320,Seamethrin 10EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,Phase-out synthetic pyrethroids,AMBER,,,,
 AP-1434,McZinex 60 EC,,,,,,,,,,,,,,
 AP-2277,AP- Tab,,,,,,,,,,,,,,
-AP-2505,Mighter 25EC,FRAC,,"DMI (Azoles) — Sterol C14-demethylase inhibitors (Propiconazole, Hexaconazole)",Sterol Biosynthesis,,,,,Standard registration controls,STANDARD,,,,
-AP-2956,Dhamaka 48 EC,,,,,,,,,,,,,,
-AP-3368,Umate 40EC,IRAC,,Organophosphates — Acetylcholinesterase inhibitors,Nerve & Muscle,,,,,Standard registration controls,STANDARD,,,,
+AP-2505,Mighter 25EC,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,Standard registration controls,STANDARD,,,,
+AP-2956,Dhamaka 48 EC,HRAC,B,"ALS inhibitors (Sulfonylureas, Imidazolinones)",Amino acid synthesis,,,,,,,,,,
+AP-3368,Umate 40EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,Standard registration controls,STANDARD,,,,
 AP-3375,Abin 85WP,IRAC,,Carbamates — Acetylcholinesterase inhibitors,Nerve & Muscle,,,,,Phase-out,AMBER,,,,
 AP-3446,Unique 5 SG,,,,,,,,,,,,,,
 AP-3498,Bigben 6WDG,,,,,,,,,,,,,,
 AP-3559,Linzim 50 WP,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
 AP-3590,Skyzeb 80 WP,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
-AP-3597,McZidan Super 80WP,,,,,,,,,,,,,,
+AP-3597,McZidan Super 80WP,FRAC,M03,Dithiocarbamates — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-3601,Rexithane M 45,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
 AP-3621,Rosa 72SL,,,,,,,,,,,,,,
 AP-3632,Cardion 50wp,,,,,,,,,,,,,,
@@ -5519,8 +5519,8 @@ AP-4795,Filwell 48SL,,,,,,,,,,,,,,
 AP-4833,Mita 33EC,HRAC,,Microtubule assembly inhibitors — Dinitroanilines (Pendimethalin),Cell Division,,,,,Standard registration controls,STANDARD,,,,
 AP-4889,Anth 55 EC,,,,,,,,,,,,,,
 AP-4894,Thuja 40EC,,,,,,,,,,,,,,
-AP-4936,Betacide 3WDG,,,,,,,,,,,,,,
-AP-4937,Sultap 80 WDG,,,,,,,,,,,,,,
+AP-4936,Betacide 3WDG,HRAC,D,Photosystem I electron diversion (Bipyridyliums),Photosynthesis,,,,,,,,,,
+AP-4937,Sultap 80 WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP-4978,Goldrise 15WG,,,,,,,,,,,,,,
 AP-4997,Emazoate 10WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP-5025,Osiclean 18 WP,,,,,,,,,,,,,,
@@ -5535,12 +5535,12 @@ AP-5335,Genekill Super 72 SL,,,,,,,,,,,,,,
 AP-5393,Hexure 10 EC,,,,,,,,,,,,,,
 AP-5419,Cove Up 25 EC,,,,,,,,,,,,,,
 AP-5426,Quna 50 EC,,,,,,,,,,,,,,
-AP-5487,Oxazon 25EC,HRAC,,"PPO inhibitors — Protoporphyrinogen oxidase (Oxyfluorfen, Carfentrazone)",Porphyrin Biosynthesis,,,,,Standard registration controls,STANDARD,,,,
+AP-5487,Oxazon 25EC,HRAC,E,"PPO inhibitors (Diphenylethers, Triazolinones)",Cell membrane,,,,,Standard registration controls,STANDARD,,,,
 AP-5535,Cyraj 10EC,,,,,,,,,,,,,,
-AP-5603,Jubas Plus 2.5EC,,,,,,,,,,,,,,
+AP-5603,Jubas Plus 2.5EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-5665,Deenathrin 10EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-5716,Sanstar 10EC,,,,,,,,,,,,,,
-AP-5776,Unigate 50WDG,Unknown,,No MoA Code assigned (pending classification),Unknown,,,,,Standard registration controls,STANDARD,,,,
+AP-5776,Unigate 50WDG,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,Standard registration controls,STANDARD,,,,
 AP-5893,Chi-Cord 10 EC,,,,,,,,,,,,,,
 AP-6159,Ginoba 1.8EC,,,,,,,,,,,,,,
 AP-6161,Lalmec 1.8 EC,,,,,,,,,,,,,,
@@ -5559,22 +5559,22 @@ AP-6174,Lalmia 2 EC,,,,,,,,,,,,,,
 AP-6175,Gunther 6.15 SC,,,,,,,,,,,,,,
 AP-6176,Indin 70 WDG,,,,,,,,,,,,,,
 AP-6177,Hifidor 70 WDG,,,,,,,,,,,,,,
-AP-6178,Empire Plus 70 WDG,,,,,,,,,,,,,,
+AP-6178,Empire Plus 70 WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6179,Liliprid 20 SL,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6180,Ford 70 WDG,,,,,,,,,,,,,,
 AP-6181,Tina 70 WDG,,,,,,,,,,,,,,
 AP-6182,Impose 70 WDG,,,,,,,,,,,,,,
-AP-6183,Digital 70WDG,,,,,,,,,,,,,,
-AP-6184,Topamac Plus 70 WDG,,,,,,,,,,,,,,
+AP-6183,Digital 70WDG,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
+AP-6184,Topamac Plus 70 WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6185,Mohaprid 20SL,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6186,Veto 20 SL,,,,,,,,,,,,,,
 AP-6187,Midacrop 70 WDG,,,,,,,,,,,,,,
-AP-6188,Imicare 70 WDG,,,,,,,,,,,,,,
+AP-6188,Imicare 70 WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6189,Green Feedor 70 WG,,,,,,,,,,,,,,
-AP-6190,Imida Gold 70WG,,,,,,,,,,,,,,
-AP-6191,Kreshok Bondhu Plus 70 WDG,,,,,,,,,,,,,,
+AP-6190,Imida Gold 70WG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
+AP-6191,Kreshok Bondhu Plus 70 WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6192,Narita 10 EC,,,,,,,,,,,,,,
-AP-6193,Aroma Plus 80 WDG,,,,,,,,,,,,,,
+AP-6193,Aroma Plus 80 WDG,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-6194,Ibosin 80 WG,,,,,,,,,,,,,,
 AP-6195,Burrette 80WDG,,,,,,,,,,,,,,
 AP-6196,Canton 80 WDG,,,,,,,,,,,,,,
@@ -5591,7 +5591,7 @@ AP-6207,Vettin 6 WDG,,,,,,,,,,,,,,
 AP-6208,Asset 4EC,,,,,,,,,,,,,,
 AP-6209,Zoonil 5 SC,,,,,,,,,,,,,,
 AP-6210,Daigent 3 GR,,,,,,,,,,,,,,
-AP-6212,Amatap Plus 20 SP,,,,,,,,,,,,,,
+AP-6212,Amatap Plus 20 SP,IRAC,14,"nAChR channel blockers (Cartap, Bensultap)",Nerve & Muscle,,,,,,,,,,
 AP-6213,Kito 20 SP,,,,,,,,,,,,,,
 AP-6214,Lyceta 20 SP,,,,,,,,,,,,,,
 AP-6215,Bleprid 5 WP,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
@@ -5610,7 +5610,7 @@ AP-6227,Chabuk 95 SP,,,,,,,,,,,,,,
 AP-6228,Motive 95 SP,,,,,,,,,,,,,,
 AP-6229,Ginotap 95 SP,,,,,,,,,,,,,,
 AP-6230,Deep Green 40 WG,,,,,,,,,,,,,,
-AP-6231,Ematox 40 WDG,,,,,,,,,,,,,,
+AP-6231,Ematox 40 WDG,IRAC,21A,Mitochondrial complex I electron transport inhibitors,Respiration,,,,,,,,,,
 AP-6232,Ready 40 WDG,,,,,,,,,,,,,,
 AP-6233,Revomax 40WDG,,,,,,,,,,,,,,
 AP-6234,Prosev 40 WDG,,,,,,,,,,,,,,
@@ -5619,13 +5619,13 @@ AP-6237,Megalan 30 SC,,,,,,,,,,,,,,
 AP-6238,Feral 40WDG,,,,,,,,,,,,,,
 AP-6239,Mahabeer 40 WDG,,,,,,,,,,,,,,
 AP-6240,Sahir 54 SG,,,,,,,,,,,,,,
-AP-6241,Imazin 73 WDG,,,,,,,,,,,,,,
+AP-6241,Imazin 73 WDG,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP-6242,Stemout 70 WDG,,,,,,,,,,,,,,
 AP-6243,Cyoxam 24.7 ZC,,,,,,,,,,,,,,
 AP-6244,Max Pro 40 WDG,,,,,,,,,,,,,,
 AP-6245,Typhoon 60 WDG,,,,,,,,,,,,,,
 AP-6246,Fix3 40 WDG,,,,,,,,,,,,,,
-AP-6247,Technic 37 WDG,,,,,,,,,,,,,,
+AP-6247,Technic 37 WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6248,Delvin 20 SG,,,,,,,,,,,,,,
 AP-6249,All Killer 20,,,,,,,,,,,,,,
 AP-6250,Jalut 20 SG,,,,,,,,,,,,,,
@@ -5642,8 +5642,8 @@ AP-6260,Pendora 80 WDG,HRAC,K1,Microtubule assembly inhibitors (Dinitroanilines)
 AP-6261,Falah 80 WDG,,,,,,,,,,,,,,
 AP-6262,Pyramid 80 WDG,,,,,,,,,,,,,,
 AP-6263,Amfan 80 WDG,,,,,,,,,,,,,,
-AP-6264,Powershot 70 WDG,,,,,,,,,,,,,,
-AP-6265,PYMETRICS 80WDG,,,,,,,,,,,,,,
+AP-6264,Powershot 70 WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
+AP-6265,PYMETRICS 80WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6267,Rozin 80 WDG,,,,,,,,,,,,,,
 AP-6268,Mohor 80 WDG,,,,,,,,,,,,,,
 AP-6269,Saba 80 WDG,,,,,,,,,,,,,,
@@ -5651,7 +5651,7 @@ AP-6270,Unizin 80 WDG,,,,,,,,,,,,,,
 AP-6271,Fang 80WDG,,,,,,,,,,,,,,
 AP-6272,Humza 70 WDG,,,,,,,,,,,,,,
 AP-6273,Dapot 80 WDG,,,,,,,,,,,,,,
-AP-6274,Pyrazin Plus 70 WDG,,,,,,,,,,,,,,
+AP-6274,Pyrazin Plus 70 WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6275,Lockdown 70 WDG,,,,,,,,,,,,,,
 AP-6276,Rhine gold 80WDG,,,,,,,,,,,,,,
 AP-6277,Run 80 WDG,,,,,,,,,,,,,,
@@ -5660,11 +5660,11 @@ AP-6279,Daroon 80 WDG,,,,,,,,,,,,,,
 AP-6280,Ryzin 80 WDG,,,,,,,,,,,,,,
 AP-6281,Olig 75 WDG,,,,,,,,,,,,,,
 AP-6282,Chitra 70 WDG,,,,,,,,,,,,,,
-AP-6283,Karen-Kill 68 WDG,,,,,,,,,,,,,,
+AP-6283,Karen-Kill 68 WDG,IRAC,9B,Pymetrozine — selective feeding blocker,Unknown,,,,,,,,,,
 AP-6284,G-Play 68 WG,,,,,,,,,,,,,,
 AP-6285,Pypride 68 WDG,,,,,,,,,,,,,,
 AP-6286,Shocked 68WDG,,,,,,,,,,,,,,
-AP-6287,Acetazine 70 WDG,,,,,,,,,,,,,,
+AP-6287,Acetazine 70 WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6288,Felix,,,,,,,,,,,,,,
 AP-6290,Gross 5WDG,,,,,,,,,,,,,,
 AP-6291,Nactin 5SG,,,,,,,,,,,,,,
@@ -5702,12 +5702,12 @@ AP-6326,Anamix 55 EC,,,,,,,,,,,,,,
 AP-6327,Proxy 20 EC,,,,,,,,,,,,,,
 AP-6328,Rock 20 EC,,,,,,,,,,,,,,
 AP-6329,Axio 20 EC,,,,,,,,,,,,,,
-AP-6330,Duranto 20 EC,,,,,,,,,,,,,,
+AP-6330,Duranto 20 EC,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6331,KB Superb 20 EC,,,,,,,,,,,,,,
 AP-6332,E-Fan Plus 20 EC,,,,,,,,,,,,,,
 AP-6333,Rimly 20 EC,,,,,,,,,,,,,,
 AP-6334,Khushi 20 EC,,,,,,,,,,,,,,
-AP-6335,Colour Plus 20 EC,,,,,,,,,,,,,,
+AP-6335,Colour Plus 20 EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6336,Super Roland 20 EC,,,,,,,,,,,,,,
 AP-6337,Byfen 20 EC,,,,,,,,,,,,,,
 AP-6338,Suhiproud 20 EC,,,,,,,,,,,,,,
@@ -5722,24 +5722,24 @@ AP-6347,Lamta 2.5 EC,,,,,,,,,,,,,,
 AP-6348,Soyad 2.5 EC,,,,,,,,,,,,,,
 AP-6349,Certain 2.5 EC,,,,,,,,,,,,,,
 AP-6350,Birol 2.5 EC,,,,,,,,,,,,,,
-AP-6351,Searat Power 2.5 EC,,,,,,,,,,,,,,
+AP-6351,Searat Power 2.5 EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-6352,Hossaguard 4.9 CS,,,,,,,,,,,,,,
 AP-6353,Quadris 2.5 EC,,,,,,,,,,,,,,
 AP-6354,Larin 2.5EC,,,,,,,,,,,,,,
 AP-6355,Zuzo 2.5EC,,,,,,,,,,,,,,
 AP-6356,Aralam 2.5 EC,,,,,,,,,,,,,,
 AP-6357,Has Kill 2.5 EC,,,,,,,,,,,,,,
-AP-6358,Volvoti 5 Ec,,,,,,,,,,,,,,
-AP-6360,Flash Hit 70 WDG,,,,,,,,,,,,,,
+AP-6358,Volvoti 5 Ec,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
+AP-6360,Flash Hit 70 WDG,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
 AP-6361,IBU 70 WDG,,,,,,,,,,,,,,
 AP-6362,Warrior 70 WDG,,,,,,,,,,,,,,
 AP-6363,Dicarzol 20SP,,,,,,,,,,,,,,
 AP-6364,Prohori 30 WDG,,,,,,,,,,,,,,
-AP-6365,Knock Super 80 WDG,,,,,,,,,,,,,,
+AP-6365,Knock Super 80 WDG,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6366,Holi 50 WP,,,,,,,,,,,,,,
 AP-6367,Eti 25 SC,,,,,,,,,,,,,,
 AP-6368,Oxydal 24 SC,,,,,,,,,,,,,,
-AP-6369,Emiron 20 WDG,,,,,,,,,,,,,,
+AP-6369,Emiron 20 WDG,HRAC,G,EPSP synthase inhibitors (Glyphosate),Amino acid synthesis,,,,,,,,,,
 AP-6370,One stop 65 WDG,,,,,,,,,,,,,,
 AP-6371,Green Phos 56% Tablet,,,,,,,,,,,,,,
 AP-6372,Tamima 56% Tablet,,,,,,,,,,,,,,
@@ -5747,14 +5747,14 @@ AP-6373,Jass-Phos 57%,,,,,,,,,,,,,,
 AP-6374,KB Phos 56% TB,,,,,,,,,,,,,,
 AP-6375,GT 56% TB,,,,,,,,,,,,,,
 AP-6376,Melphos Plus 56% Tab,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
-AP-6377,Limon Phos 56% TB,,,,,,,,,,,,,,
-AP-6378,Fumitab 56%,,,,,,,,,,,,,,
+AP-6377,Limon Phos 56% TB,HRAC,A,ACCase inhibitors (Aryloxyphenoxy propionates / Cyclohexanediones),Lipid synthesis,,,,,,,,,,
+AP-6378,Fumitab 56%,IRAC,24A,Mitochondrial complex II electron transport inhibitors,Respiration,,,,,,,,,,
 AP-6379,Quickphos 57% TB,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6380,Chinaphos 56% TB,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6381,Avilphos 57%,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6382,Growphos 56%,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6383,Store Protector 57% TB,,,,,,,,,,,,,,
-AP-6384,Arofume 57 TB,,,,,,,,,,,,,,
+AP-6384,Arofume 57 TB,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6385,Store Guard 50 EC,,,,,,,,,,,,,,
 AP-6386,Primibid 50 EC,,,,,,,,,,,,,,
 AP-6387,Krishitop 60 WDG,,,,,,,,,,,,,,
@@ -5772,16 +5772,16 @@ AP-6398,Thida 72 WP,,,,,,,,,,,,,,
 AP-6400,Nilgiri 72 WP,,,,,,,,,,,,,,
 AP-6401,Karvan 72 WP,,,,,,,,,,,,,,
 AP-6402,Al-Zeb 72 OP,,,,,,,,,,,,,,
-AP-6404,Mantacrop 72 WP,,,,,,,,,,,,,,
+AP-6404,Mantacrop 72 WP,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6405,Win Field 72 WP,,,,,,,,,,,,,,
 AP-6406,Gunnery 75 WP,,,,,,,,,,,,,,
 AP-6407,MND 69 WP,,,,,,,,,,,,,,
 AP-6408,Pyrafroce Plus 18.70WG,,,,,,,,,,,,,,
 AP-6409,afna 50 WP,,,,,,,,,,,,,,
-AP-6410,Cactus 70 WDG,,,,,,,,,,,,,,
+AP-6410,Cactus 70 WDG,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6411,McCol 70 WP,,,,,,,,,,,,,,
 AP-6412,Hattrik 78 WP,,,,,,,,,,,,,,
-AP-6413,Tricofol 75 WP,,,,,,,,,,,,,,
+AP-6413,Tricofol 75 WP,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
 AP-6414,Tranxit 75 WP,,,,,,,,,,,,,,
 AP-6415,Bleand 55 WG,,,,,,,,,,,,,,
 AP-6416,Lasi 70 WP,,,,,,,,,,,,,,
@@ -5796,7 +5796,7 @@ AP-6426,KG T2 CARE 75WDG,,,,,,,,,,,,,,
 AP-6428,Super Hi 10WP,,,,,,,,,,,,,,
 AP-6429,Solo Plus 40 SC,,,,,,,,,,,,,,
 AP-6430,Ifsen 75 WP,,,,,,,,,,,,,,
-AP-6431,Carbofix 50 WDG,,,,,,,,,,,,,,
+AP-6431,Carbofix 50 WDG,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6432,N-Zim 50 WP,,,,,,,,,,,,,,
 AP-6433,Perky 50 WP,,,,,,,,,,,,,,
 AP-6434,Sabat 50 WDG,,,,,,,,,,,,,,
@@ -5806,7 +5806,7 @@ AP-6438,Palron 20WP,,,,,,,,,,,,,,
 AP-6439,Carpidin 52.50 WP,,,,,,,,,,,,,,
 AP-6440,Cropstar 32.5 SC,,,,,,,,,,,,,,
 AP-6441,N-Drop 32.5 SC,,,,,,,,,,,,,,
-AP-6442,Basic Top 32.5 SC,,,,,,,,,,,,,,
+AP-6442,Basic Top 32.5 SC,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6443,Raystar 32.5 SC,,,,,,,,,,,,,,
 AP-6444,Hantivo 32.5 WDG,,,,,,,,,,,,,,
 AP-6445,Almera 32.5 SC,,,,,,,,,,,,,,
@@ -5820,7 +5820,7 @@ AP-6453,Benpozium 50 SC,,,,,,,,,,,,,,
 AP-6454,Taroka  28 SC,,,,,,,,,,,,,,
 AP-6455,Ace Gold 28 SC,,,,,,,,,,,,,,
 AP-6457,T-Zol 28 SC,,,,,,,,,,,,,,
-AP-6458,Freezone 32.5 WP,,,,,,,,,,,,,,
+AP-6458,Freezone 32.5 WP,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP-6460,Buffer 35SC,,,,,,,,,,,,,,
 AP-6461,VAI-Two 35 SC,,,,,,,,,,,,,,
 AP-6462,Ajax 35 SC,,,,,,,,,,,,,,
@@ -5828,7 +5828,7 @@ AP-6463,Adorex 35 SC,,,,,,,,,,,,,,
 AP-6464,Unique 20 SC,,,,,,,,,,,,,,
 AP-6465,Paladin 40 SC,,,,,,,,,,,,,,
 AP-6466,Nilazol 70WP,,,,,,,,,,,,,,
-AP-6467,Coppermet 55 WP,FRAC,,Multi-site — inorganic copper,Multi-site,,,,,,,,,,
+AP-6467,Coppermet 55 WP,FRAC,M01,Inorganic copper — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-6468,Detox 72 SL,,,,,,,,,,,,,,
 AP-6469,Razor 80 WP,,,,,,,,,,,,,,
 AP-6470,Delight 24 SC,,,,,,,,,,,,,,
@@ -5840,15 +5840,15 @@ AP-6477,KAP-Kill 5 EC,,,,,,,,,,,,,,
 AP-6478,Uproot 5 EC,,,,,,,,,,,,,,
 AP-6480,Upload 5 EC,,,,,,,,,,,,,,
 AP-6481,Expel 5 EC,,,,,,,,,,,,,,
-AP-6482,Salvage 5EC,,,,,,,,,,,,,,
+AP-6482,Salvage 5EC,FRAC,11,QoI — Strobilurins (mitochondrial complex III),Respiration,,,,,,,,,,
 AP-6483,Uzala 5 EC,,,,,,,,,,,,,,
 AP-6484,Quest 5 EC,,,,,,,,,,,,,,
 AP-6485,Lumax 12.5 EC,,,,,,,,,,,,,,
 AP-6486,Mingto 38SE,,,,,,,,,,,,,,
 AP-6488,Doras 55SC,,,,,,,,,,,,,,
 AP-6489,Atraz M 55SL,,,,,,,,,,,,,,
-AP-6490,Calaris Xtra 27.5SC,HRAC,,PS II inhibitors — Ureas / Amides (Isoproturon),Photosynthesis (PS II),,,,,Standard registration controls,STANDARD,,,,
-AP-6491,Naproguard 24 EC,,,,,,,,,,,,,,
+AP-6490,Calaris Xtra 27.5SC,HRAC,C1,Triazine PSII inhibitors,Photosynthesis,,,,,Standard registration controls,STANDARD,,,,
+AP-6491,Naproguard 24 EC,FRAC,11,QoI — Strobilurins (mitochondrial complex III),Respiration,,,,,,,,,,
 AP-6492,KG Hitler 28SL,,,,,,,,,,,,,,
 AP-6493,Mismass 20SL,,,,,,,,,,,,,,
 AP-6494,Jaha 20 SL,,,,,,,,,,,,,,
@@ -5857,12 +5857,12 @@ AP-6496,Triplet 30 SL,,,,,,,,,,,,,,
 AP-6497,Velvet 30 SL,,,,,,,,,,,,,,
 AP-6498,Gluter 20SL,,,,,,,,,,,,,,
 AP-6499,Fusinet 20SL,,,,,,,,,,,,,,
-AP-6500,Crash Down 200 SL,,,,,,,,,,,,,,
+AP-6500,Crash Down 200 SL,HRAC,A,ACCase inhibitors (Aryloxyphenoxy propionates / Cyclohexanediones),Lipid synthesis,,,,,,,,,,
 AP-6501,Fosin 20 SL,,,,,,,,,,,,,,
 AP-6502,Glutamine Super 50 SL,,,,,,,,,,,,,,
 AP-6503,Bullet 70 WP,,,,,,,,,,,,,,
 AP-6504,Magzin 70 WG,,,,,,,,,,,,,,
-AP-6505,Herbinger 10SL,,,,,,,,,,,,,,
+AP-6505,Herbinger 10SL,HRAC,B,"ALS inhibitors (Sulfonylureas, Imidazolinones)",Amino acid synthesis,,,,,,,,,,
 AP-6506,Banju 18WP,,,,,,,,,,,,,,
 AP-6507,Vomade 18 wp,,,,,,,,,,,,,,
 AP-6508,Pester 18WP,,,,,,,,,,,,,,
@@ -5927,7 +5927,7 @@ AP-6571,Ecoprid 20SP,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Ner
 AP-6572,Avail Top 95 SP,,,,,,,,,,,,,,
 AP-6573,Catamin 95SP,,,,,,,,,,,,,,
 AP-6574,Fulky 95SP,,,,,,,,,,,,,,
-AP-6575,Golden Up 95SP,,,,,,,,,,,,,,
+AP-6575,Golden Up 95SP,FRAC,M03,Dithiocarbamates — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-6576,Ibdaprid 95 SP,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6577,Kappa 95 SP,,,,,,,,,,,,,,
 AP-6578,Metro Plus 95 SP,,,,,,,,,,,,,,
@@ -5953,12 +5953,12 @@ AP-6599,Negada 50WDG,,,,,,,,,,,,,,
 AP-6600,Jiron 33 WDG,,,,,,,,,,,,,,
 AP-6601,Niten Star 70 WDG,,,,,,,,,,,,,,
 AP-6603,East Vanish 80 WDG,,,,,,,,,,,,,,
-AP-6604,Hopper killer 80WDG,,,,,,,,,,,,,,
+AP-6604,Hopper killer 80WDG,IRAC,9B,Pymetrozine — selective feeding blocker,Unknown,,,,,,,,,,
 AP-6605,Nitenzine 70WDG,,,,,,,,,,,,,,
 AP-6606,Lamp 80 WDG,,,,,,,,,,,,,,
 AP-6607,Adib 80 WDG,,,,,,,,,,,,,,
 AP-6608,Biofast 80 WDG,,,,,,,,,,,,,,
-AP-6609,Agrizin 80 WDG,,,,,,,,,,,,,,
+AP-6609,Agrizin 80 WDG,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
 AP-6610,Clever 80 WDG,,,,,,,,,,,,,,
 AP-6611,Joyjatra 80 WDG,,,,,,,,,,,,,,
 AP-6612,Mahir 80WDG,,,,,,,,,,,,,,
@@ -5974,7 +5974,7 @@ AP-6622,Farm Fresh 70WG,,,,,,,,,,,,,,
 AP-6623,Safe-Zine 75WDG,,,,,,,,,,,,,,
 AP-6624,Midizine 50 WDG,,,,,,,,,,,,,,
 AP-6625,Mahthrin 5SG,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
-AP-6626,Reminder 10WDG,,,,,,,,,,,,,,
+AP-6626,Reminder 10WDG,HRAC,O,"Synthetic auxins (Phenoxy, Pyridine carboxylic)",Growth regulation,,,,,,,,,,
 AP-6628,Tony 5 SG,,,,,,,,,,,,,,
 AP-6629,Suchitra 5SG,,,,,,,,,,,,,,
 AP-6630,Inzoate 5SG,,,,,,,,,,,,,,
@@ -6011,7 +6011,7 @@ AP-6662,Monada 2.5EC,,,,,,,,,,,,,,
 AP-6663,Sendex 2.5 EC,,,,,,,,,,,,,,
 AP-6664,Chury 2.5 EC,,,,,,,,,,,,,,
 AP-6665,Lamaid 2.5 EC,,,,,,,,,,,,,,
-AP-6667,Gunguni 60WDG,,,,,,,,,,,,,,
+AP-6667,Gunguni 60WDG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6668,Dinomet 55WG,,,,,,,,,,,,,,
 AP-6669,Araf  70 WDG,,,,,,,,,,,,,,
 AP-6670,Top Flor 24 SC,,,,,,,,,,,,,,
@@ -6046,13 +6046,13 @@ AP-6701,Kuasha 72WP,,,,,,,,,,,,,,
 AP-6702,Zebnil 72WP,,,,,,,,,,,,,,
 AP-6704,Manoxil 72 WP,,,,,,,,,,,,,,
 AP-6705,CMZ-72WP,,,,,,,,,,,,,,
-AP-6706,Baimyl Plus 72WP,,,,,,,,,,,,,,
-AP-6707,Amcomyl Plus 72WP,,,,,,,,,,,,,,
-AP-6708,Ecomyl Plus 72WP,,,,,,,,,,,,,,
+AP-6706,Baimyl Plus 72WP,FRAC,M03,Dithiocarbamates — multi-site contact,Multi-site contact,,,,,,,,,,
+AP-6707,Amcomyl Plus 72WP,FRAC,M03,Dithiocarbamates — multi-site contact,Multi-site contact,,,,,,,,,,
+AP-6708,Ecomyl Plus 72WP,FRAC,4 / FRAC M03,FRAC Group 4 / FRAC M03 — see IRAC/FRAC/HRAC table,Unknown,,,,,,,,,,
 AP-6709,Has Super 72WP,,,,,,,,,,,,,,
 AP-6710,Serfzate 72 WP,,,,,,,,,,,,,,
 AP-6712,Detach 69 WP,,,,,,,,,,,,,,
-AP-6713,Unimax 69WP,,,,,,,,,,,,,,
+AP-6713,Unimax 69WP,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6714,Deptozeb 73WP,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
 AP-6715,Agni 72WP,,,,,,,,,,,,,,
 AP-6716,Cyneb 76 WP,,,,,,,,,,,,,,
@@ -6061,15 +6061,15 @@ AP-6718,Jago Super 68WP,,,,,,,,,,,,,,
 AP-6719,NeedOn 82WP,,,,,,,,,,,,,,
 AP-6721,Sonozim 50 WP,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
 AP-6723,Mohazim 50WP,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
-AP-6724,shake 50WDG,,,,,,,,,,,,,,
+AP-6724,shake 50WDG,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6725,Newtec 300SC,,,,,,,,,,,,,,
 AP-6726,Chaity 75WP,,,,,,,,,,,,,,
 AP-6727,Trend 75WP,,,,,,,,,,,,,,
 AP-6728,Geri 40SC,,,,,,,,,,,,,,
 AP-6729,Jak 32.5 SC,,,,,,,,,,,,,,
-AP-6730,Delco Top 32.50 SC,,,,,,,,,,,,,,
+AP-6730,Delco Top 32.50 SC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-6731,Online 83 WP,,,,,,,,,,,,,,
-AP-6732,Agrinut 75WDG,,,,,,,,,,,,,,
+AP-6732,Agrinut 75WDG,HRAC,O,"Synthetic auxins (Phenoxy, Pyridine carboxylic)",Growth regulation,,,,,,,,,,
 AP-6733,Broom 75WDG,,,,,,,,,,,,,,
 AP-6734,Lalon 75WDG,,,,,,,,,,,,,,
 AP-6735,Unijoy 75WDG,,,,,,,,,,,,,,
@@ -6077,7 +6077,7 @@ AP-6737,Tobla 50 SC,,,,,,,,,,,,,,
 AP-6738,Cardion Super 50 WP,,,,,,,,,,,,,,
 AP-6740,Farmbin 32.5SC,,,,,,,,,,,,,,
 AP-6741,Cizophen 32.5SC,,,,,,,,,,,,,,
-AP-6742,Bagha 30EC,,,,,,,,,,,,,,
+AP-6742,Bagha 30EC,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6743,CyproGold 28SC,,,,,,,,,,,,,,
 AP-6744,Karina 28 SC,,,,,,,,,,,,,,
 AP-6745,Need Three 55 SC,,,,,,,,,,,,,,
@@ -6086,7 +6086,7 @@ AP-6747,Hitop Plus 35SC,,,,,,,,,,,,,,
 AP-6748,Devout 35SC,,,,,,,,,,,,,,
 AP-6749,AV-TOP 35 SC,,,,,,,,,,,,,,
 AP-6750,Technovit 50WP,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
-AP-6751,Bactroma 20WP,,,,,,,,,,,,,,
+AP-6751,Bactroma 20WP,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
 AP-6752,Kemo Zole 38SC,,,,,,,,,,,,,,
 AP-6753,Felicarb 50SC,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6754,NC-Flue 50SC,,,,,,,,,,,,,,
@@ -6103,14 +6103,14 @@ AP-6766,Mia Bhai 55SC,,,,,,,,,,,,,,
 AP-6767,Pryojon 55 SC,,,,,,,,,,,,,,
 AP-6768,East Killer 55SC,,,,,,,,,,,,,,
 AP-6769,Lalmezin 55SC,,,,,,,,,,,,,,
-AP-6770,Delco Super 55SC,,,,,,,,,,,,,,
+AP-6770,Delco Super 55SC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-6771,Klinz 50EC,,,,,,,,,,,,,,
 AP-6772,Clodina 24EC,,,,,,,,,,,,,,
 AP-6773,Glufosin 15 SL,,,,,,,,,,,,,,
 AP-6774,Bight 28SL,,,,,,,,,,,,,,
 AP-6775,Siconet 30 SL,,,,,,,,,,,,,,
 AP-6776,Sinam 20SL,,,,,,,,,,,,,,
-AP-6778,Babysate Star 20 SL,,,,,,,,,,,,,,
+AP-6778,Babysate Star 20 SL,HRAC,G,EPSP synthase inhibitors (Glyphosate),Amino acid synthesis,,,,,,,,,,
 AP-6779,Pora 20SL,,,,,,,,,,,,,,
 AP-6780,Burn 28SL,,,,,,,,,,,,,,
 AP-6781,Deadline 28SL,,,,,,,,,,,,,,
@@ -6128,9 +6128,9 @@ AP-6795,Shanti 22WP,,,,,,,,,,,,,,
 AP-6796,Blue Clean 18WP,,,,,,,,,,,,,,
 AP-6797,Weed Star 18WP,,,,,,,,,,,,,,
 AP-6798,Rafal 18Wp,,,,,,,,,,,,,,
-AP-6799,Chitaclor 18WP,,,,,,,,,,,,,,
+AP-6799,Chitaclor 18WP,HRAC,B,"ALS inhibitors (Sulfonylureas, Imidazolinones)",Amino acid synthesis,,,,,,,,,,
 AP-6800,Ethoking 15WG,,,,,,,,,,,,,,
-AP-6801,Redstar 25EC,,,,,,,,,,,,,,
+AP-6801,Redstar 25EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6802,Nishchinto 20 SC,,,,,,,,,,,,,,
 AP-6803,Best 40WP,,,,,,,,,,,,,,
 AP-6804,Traster 36WP,,,,,,,,,,,,,,
@@ -6140,7 +6140,7 @@ AP-6807,Kattor 20WDG,,,,,,,,,,,,,,
 AP-6808,Quick Wash 20WDG,,,,,,,,,,,,,,
 AP-6809,Neutral 20WDG,,,,,,,,,,,,,,
 AP-6810,Aim Create 20WDG,,,,,,,,,,,,,,
-AP-6811,Glyter-D-48SL,,,,,,,,,,,,,,
+AP-6811,Glyter-D-48SL,HRAC,G,EPSP synthase inhibitors (Glyphosate),Amino acid synthesis,,,,,,,,,,
 AP-6812,Lada 24 OD,,,,,,,,,,,,,,
 AP-6813,Mcout 39EC,,,,,,,,,,,,,,
 AP-6814,Zero Zero 33WG,,,,,,,,,,,,,,
@@ -6151,7 +6151,7 @@ AP-6818,Bashory 1.8ME,,,,,,,,,,,,,,
 AP-6819,Asma 1.8ME,,,,,,,,,,,,,,
 AP-6820,Thakaw 1.8ME,,,,,,,,,,,,,,
 AP-6821,S-Aba 1.8 EC,,,,,,,,,,,,,,
-AP-6822,Lintec 1.8ME,,,,,,,,,,,,,,
+AP-6822,Lintec 1.8ME,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP-6824,Dugdugi 8ME,,,,,,,,,,,,,,
 AP-6826,Need Biomix 8ME,,,,,,,,,,,,,,
 AP-6827,Win Biomix 8ME,,,,,,,,,,,,,,
@@ -6717,7 +6717,7 @@ AP-7520,Aaloron 32.5 SC,FRAC,11,QoI — Strobilurins (mitochondrial complex III)
 AP-7524,Azodibest 32.5 SC,FRAC,11,QoI — Strobilurins (mitochondrial complex III),Respiration,,,,,,,,,,
 AP-7525,Ostrazole Top 32.5 SC,FRAC,11,QoI — Strobilurins (mitochondrial complex III),Respiration,,,,,,,,,,
 AP-7526,Gigatop 32.5 SC,FRAC,11,QoI — Strobilurins (mitochondrial complex III),Respiration,,,,,,,,,,
-AP-7527,Niret plus 43SC,,,,,,,,,,,,,,
+AP-7527,Niret plus 43SC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-7528,Brand Top 32.5 SC,FRAC,11,QoI — Strobilurins (mitochondrial complex III),Respiration,,,,,,,,,,
 AP-7529,Sabuj 32.5 SC,FRAC,11,QoI — Strobilurins (mitochondrial complex III),Respiration,,,,,,,,,,
 AP-7530,Raw Tep 32.5 SC,FRAC,11,QoI — Strobilurins (mitochondrial complex III),Respiration,,,,,,,,,,
@@ -7206,10 +7206,10 @@ AP-8063,Candid 95SP,,,,,,,,,,,,,,
 AP-8064,Rimitap Super 78 SP,,,,,,,,,,,,,,
 AP-8065,Need Extra 25 WP,,,,,,,,,,,,,,
 AP-8066,ATAMIT 45 WP,,,,,,,,,,,,,,
-AP-8067,Cycholoro 55 EC,,,,,,,,,,,,,,
+AP-8067,Cycholoro 55 EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-8068,Agrimix 55EC,,,,,,,,,,,,,,
 AP-8069,Retina 55EC,,,,,,,,,,,,,,
-AP-8070,Chloromix 55 EC,,,,,,,,,,,,,,
+AP-8070,Chloromix 55 EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-8071,Shaccho Mix 55 EC,,,,,,,,,,,,,,
 AP-8072,Adiyan 55 EC,,,,,,,,,,,,,,
 AP-8073,Fincar 50 SP,,,,,,,,,,,,,,
@@ -7232,9 +7232,9 @@ AP-8090,Fenthin 20 EC,,,,,,,,,,,,,,
 AP-8091,Ghatak 20 EC,,,,,,,,,,,,,,
 AP-8092,Cinafen 20EC,,,,,,,,,,,,,,
 AP-8093,Pyfam 20 EC,,,,,,,,,,,,,,
-AP-8094,Locker 20SL,IRAC,,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,Standard registration controls,STANDARD,,,,
-AP-8095,Force 70 WG,,,,,,,,,,,,,,
-AP-8096,Fentom 30 SC,,,,,,,,,,,,,,
+AP-8094,Locker 20SL,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,Standard registration controls,STANDARD,,,,
+AP-8095,Force 70 WG,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
+AP-8096,Fentom 30 SC,HRAC,A,ACCase inhibitors (Aryloxyphenoxy propionates / Cyclohexanediones),Lipid synthesis,,,,,,,,,,
 AP-8097,Black Burn 29.5 SC,,,,,,,,,,,,,,
 AP-8098,Stranger 30SC,,,,,,,,,,,,,,
 AP-8099,Anilam 2.5EC,,,,,,,,,,,,,,
@@ -7291,7 +7291,7 @@ AP-8153,Land Dizeb 69 WP,,,,,,,,,,,,,,
 AP-8154,Arashexa 10 SC,,,,,,,,,,,,,,
 AP-8155,Dasvi 10 SC,,,,,,,,,,,,,,
 AP-8157,Neeshan 25 SC,,,,,,,,,,,,,,
-AP-8158,Composure 25 SC,,,,,,,,,,,,,,
+AP-8158,Composure 25 SC,HRAC,B,"ALS inhibitors (Sulfonylureas, Imidazolinones)",Amino acid synthesis,,,,,,,,,,
 AP-8159,Purbizeb 80 WP,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
 AP-8161,Patrobin Top 25 SC,,,,,,,,,,,,,,
 AP-8162,Legend Blast 38 SC,,,,,,,,,,,,,,
@@ -7300,28 +7300,28 @@ AP-8164,G-Force 75 WDG,,,,,,,,,,,,,,
 AP-8165,Mercy 75 WP,,,,,,,,,,,,,,
 AP-8166,Tunnel 75 WP,,,,,,,,,,,,,,
 AP-8168,Purbiconazole 40SC,,,,,,,,,,,,,,
-AP-8169,Properti 40 SC,,,,,,,,,,,,,,
+AP-8169,Properti 40 SC,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
 AP-8170,Urenus 55SC,,,,,,,,,,,,,,
 AP-8171,Attractive 50 SC,,,,,,,,,,,,,,
-AP-8172,Metrozin 55SC,,,,,,,,,,,,,,
+AP-8172,Metrozin 55SC,IRAC,9B,Pymetrozine — selective feeding blocker,Unknown,,,,,,,,,,
 AP-8173,Alpona 27.5 SC,,,,,,,,,,,,,,
 AP-8174,Fun-up 20 SL,,,,,,,,,,,,,,
-AP-8175,Nistej 24 SL,,,,,,,,,,,,,,
+AP-8175,Nistej 24 SL,FRAC,M03,Dithiocarbamates — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-8176,Supper Klear Plus 72 SL,,,,,,,,,,,,,,
 AP-8177,Falak 33 EC,,,,,,,,,,,,,,
 AP-8178,Result 30 WP,,,,,,,,,,,,,,
 AP-8179,Best Goal 65 WDG,,,,,,,,,,,,,,
 AP-8180,Broad Peak 80 WG,,,,,,,,,,,,,,
 AP-8181,Needoxin 80 WDG,,,,,,,,,,,,,,
-AP-8182,Knock out 80 WDG,,,,,,,,,,,,,,
+AP-8182,Knock out 80 WDG,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-8183,Aim Action 80 WDG,,,,,,,,,,,,,,
 AP-8184,Lagil 32 SC,,,,,,,,,,,,,,
 AP-8185,Impuls 32SC,,,,,,,,,,,,,,
 AP-8186,Legend Suf 63.5 SC,,,,,,,,,,,,,,
-AP-8187,Nafsan 43 SC,,,,,,,,,,,,,,
+AP-8187,Nafsan 43 SC,FRAC,M02,Inorganic sulphur — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-8188,Musa 63.5 SC,,,,,,,,,,,,,,
 AP-8189,Strip 26.5 SC,,,,,,,,,,,,,,
-AP-8190,Ristar 43SC,,,,,,,,,,,,,,
+AP-8190,Ristar 43SC,FRAC,3,DMIs — Sterol biosynthesis (C14-demethylase),Sterol biosynthesis,,,,,,,,,,
 AP-8191,TABALA 50 EC,,,,,,,,,,,,,,
 AP-8192,Green Shot 34 EC,,,,,,,,,,,,,,
 AP-8193,Hard Hitter 44 SC,,,,,,,,,,,,,,
@@ -7337,23 +7337,23 @@ AP-8202,Cameprid 30 WP,IRAC,4A,Neonicotinoids — nAChR competitive modulators,N
 AP-8203,Potato Guard 78 WP,,,,,,,,,,,,,,
 AP-8204,Tristar 78WP,,,,,,,,,,,,,,
 AP-8205,DMC 82 WP,,,,,,,,,,,,,,
-AP-8206,Bhatap Plus 95SP,,,,,,,,,,,,,,
-AP-8207,Filfil Plus 95SP,,,,,,,,,,,,,,
+AP-8206,Bhatap Plus 95SP,IRAC,14,"nAChR channel blockers (Cartap, Bensultap)",Nerve & Muscle,,,,,,,,,,
+AP-8207,Filfil Plus 95SP,IRAC,14,"nAChR channel blockers (Cartap, Bensultap)",Nerve & Muscle,,,,,,,,,,
 AP-8208,Pyrol 80 WDG,,,,,,,,,,,,,,
 AP-8209,Skyton 5 EC,,,,,,,,,,,,,,
 AP-8210,Zamdooth 55 EC,,,,,,,,,,,,,,
 AP-8211,Promix 55EC,,,,,,,,,,,,,,
 AP-8212,Bijoy 55 EC,,,,,,,,,,,,,,
-AP-8213,Chlorper 55 EC,,,,,,,,,,,,,,
-AP-8214,Safenoc 29EC,,,,,,,,,,,,,,
-AP-21,Basudin Io GR,,,,,,,,,,,,,,
+AP-8213,Chlorper 55 EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
+AP-8214,Safenoc 29EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
+AP-21,Basudin Io GR,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-22,Mimecson 100 SL,,,,,,,,,,,,,,
 AP-24,Neoron 50 EC,,,,,,,,,,,,,,
 AP-26,Nogos 100 Ec,,,,,,,,,,,,,,
 AP-43,Aerovin 85 WP,,,,,,,,,,,,,,
 AP-46,DDVP(phosvit)100 EC,,,,,,,,,,,,,,
 AP-47,Elsan 50Ec,,,,,,,,,,,,,,
-AP-50,Diazinon 90 ULVC,IRAC,,Organophosphate — AChE inhibitor,Nerve & Muscle,,,,,,,,,,
+AP-50,Diazinon 90 ULVC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-51,padan 50 SP,,,,,,,,,,,,,,
 AP-59,Actellic 50 ec,,,,,,,,,,,,,,
 AP-60,Cymbush 10 Ec,,,,,,,,,,,,,,
@@ -7363,7 +7363,7 @@ AP-64,Anthion,,,,,,,,,,,,,,
 AP-67,Zolone 35 Ec,,,,,,,,,,,,,,
 AP-73,Dieldrin 20Ec,,,,,,,,,,,,,,
 AP-74,Bidrin 24 WSC,,,,,,,,,,,,,,
-AP-77,Mipcin 75 WP,,,,,,,,,,,,,,
+AP-77,Mipcin 75 WP,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-78,Malathion 57 EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-79,Vapona 100ec,,,,,,,,,,,,,,
 AP-80,Bidria 85 WSC,,,,,,,,,,,,,,
@@ -7381,9 +7381,9 @@ AP-116,Torque 50 W/O,,,,,,,,,,,,,,
 AP-121,Rentokil CCATYPE-C 72%,,,,,,,,,,,,,,
 AP-123,Cupravit WP 50,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
 AP-126,2ithiol57Ec,,,,,,,,,,,,,,
-AP-129,Sevin 10% D,,,,,,,,,,,,,,
+AP-129,Sevin 10% D,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-136,Miral 3GR,,,,,,,,,,,,,,
-AP-138,Maladen 57EC (Malathion 57EC),IRAC,,Organophosphate — AChE inhibitor,Nerve & Muscle,,,,,,,,,,
+AP-138,Maladen 57EC (Malathion 57EC),IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-142,Bassa 50% EC,,,,,,,,,,,,,,
 AP-144,Tanalith CCA Oxide Type C Paste,,,,,,,,,,,,,,
 AP-148,Pillarcron 100SL,,,,,,,,,,,,,,
@@ -7392,7 +7392,7 @@ AP-151,DDVP 100 EC,,,,,,,,,,,,,,
 AP-156,Sumithion 3% Dust,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-158,Osmose K-33 C (72%),,,,,,,,,,,,,,
 AP-161,Trebon 10EC,,,,,,,,,,,,,,
-AP-165,RIDOMIL M272 WP,,,,,,,,,,,,,,
+AP-165,RIDOMIL M272 WP,FRAC,4 / FRAC M03,FRAC Group 4 / FRAC M03 — see IRAC/FRAC/HRAC table,Unknown,,,,,,,,,,
 AP-173,Tedion V 18 EC,,,,,,,,,,,,,,
 AP-175,Magafos 40L.C.,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-179,Homai 80 WP,,,,,,,,,,,,,,
@@ -7412,8 +7412,8 @@ AP-260,EKALUX 25EC,,,,,,,,,,,,,,
 AP-264,LIMITHION 57% EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-265,Basta,,,,,,,,,,,,,,
 AP-270,YASODION,,,,,,,,,,,,,,
-AP-279,FENDOR 5% GR,,,,,,,,,,,,,,
-AP-283,DIAZONYL T60,,,,,,,,,,,,,,
+AP-279,FENDOR 5% GR,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
+AP-283,DIAZONYL T60,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-284,KADETT 40% Wsc,,,,,,,,,,,,,,
 AP-286,MALATOX 57EC,,,,,,,,,,,,,,
 AP-299,STORMWAYBLOCK Bait 0.005%,,,,,,,,,,,,,,
@@ -7423,7 +7423,7 @@ AP-318,Ace. Xro 20 EC,,,,,,,,,,,,,,
 AP-325,DAMAN-100EC,,,,,,,,,,,,,,
 AP-328,Monophos 40 SC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-336,Azodrin 40 WSC.,,,,,,,,,,,,,,
-AP-337,Round Up,,,,,,,,,,,,,,
+AP-337,Round Up,HRAC,G,EPSP synthase inhibitors (Glyphosate),Amino acid synthesis,,,,,,,,,,
 AP-339,Phoskill 40 SL,,,,,,,,,,,,,,
 AP-341,Vitacron 40 SC,,,,,,,,,,,,,,
 AP-342,Corphos 40 SL,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
@@ -7431,45 +7431,45 @@ AP-359,Dicofal 18.5 EC,,,,,,,,,,,,,,
 AP-361,Sefoff 20 WG,,,,,,,,,,,,,,
 AP-364,Asset 41%,,,,,,,,,,,,,,
 AP-365,Chess 25 WP,,,,,,,,,,,,,,
-AP-368,Laphos 40 SL,,,,,,,,,,,,,,
+AP-368,Laphos 40 SL,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-370,Zinc Phosophide,,,,,,,,,,,,,,
 AP-371,Lorsban 15G,,,,,,,,,,,,,,
 AP-372,Padan 4G,,,,,,,,,,,,,,
-AP-376,Chlorpyrifos 20 EC,IRAC,,Organophosphate — AChE inhibitor,Nerve & Muscle,,,,,,,,,,
-AP-377,Ridomil Gold Mz,,,,,,,,,,,,,,
-AP-381,Pyriban 20% EC,,,,,,,,,,,,,,
-AP-385,Diazinone 10GR,IRAC,,Organophosphate — AChE inhibitor,Nerve & Muscle,,,,,,,,,,
+AP-376,Chlorpyrifos 20 EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
+AP-377,Ridomil Gold Mz,FRAC,4 / FRAC M03,FRAC Group 4 / FRAC M03 — see IRAC/FRAC/HRAC table,Unknown,,,,,,,,,,
+AP-381,Pyriban 20% EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
+AP-385,Diazinone 10GR,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-395,Crackdown,,,,,,,,,,,,,,
 AP-459,Filltouch 20 EC,,,,,,,,,,,,,,
 AP-472,Anvil 5 EC,,,,,,,,,,,,,,
 AP-476,Amitage 20 EC,,,,,,,,,,,,,,
 AP-493,Matasystox R 25 EC,,,,,,,,,,,,,,
-AP-523,Cypercid 10EC,,,,,,,,,,,,,,
-AP-532,Basudin 10SR,,,,,,,,,,,,,,
+AP-523,Cypercid 10EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
+AP-532,Basudin 10SR,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-533,Ricon 60EC,,,,,,,,,,,,,,
 AP-551,Neoron 500 EC,,,,,,,,,,,,,,
 AP-553,Silosan-50EC,,,,,,,,,,,,,,
-AP-554,Diazinon 14 G,IRAC,,Organophosphate — AChE inhibitor,Nerve & Muscle,,,,,,,,,,
+AP-554,Diazinon 14 G,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-555,Padan 50SP,,,,,,,,,,,,,,
 AP-556,Elsan 50 EC,,,,,,,,,,,,,,
-AP-557,Diazinone 60EC,IRAC,,Organophosphate — AChE inhibitor,Nerve & Muscle,,,,,,,,,,
+AP-557,Diazinone 60EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-558,Elsan 92ULVC,,,,,,,,,,,,,,
 AP-559,Vitavax 200B,,,,,,,,,,,,,,
-AP-560,Diazinon 90ULVC,IRAC,,Organophosphate — AChE inhibitor,Nerve & Muscle,,,,,,,,,,
+AP-560,Diazinon 90ULVC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-586,Bilshot-N-2/6EC,,,,,,,,,,,,,,
 AP-605,Phartap 50SP,,,,,,,,,,,,,,
-AP-624,Sicofen 20% EC,,,,,,,,,,,,,,
+AP-624,Sicofen 20% EC,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-631,Mighty 20EC,,,,,,,,,,,,,,
 AP-633,Lintur 70WS,,,,,,,,,,,,,,
 AP-637,Sinofen 20EC,,,,,,,,,,,,,,
-AP-648,Alert 50 EC,,,,,,,,,,,,,,
+AP-648,Alert 50 EC,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-689,SARFIUM 56% EC,,,,,,,,,,,,,,
 AP-728,Agridazim-50wp,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
 AP-784,Pharzeb-80wp,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
 AP-793,Ducord-17EC,,,,,,,,,,,,,,
 AP-794,KORANDA,,,,,,,,,,,,,,
 AP-828,FOCUS-50SC,,,,,,,,,,,,,,
-AP-873,TOUCHDOWN HiTECH-500SL,,,,,,,,,,,,,,
+AP-873,TOUCHDOWN HiTECH-500SL,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-896,Slyphar-41 SC,,,,,,,,,,,,,,
 AP-957,Femplus 20 EC,,,,,,,,,,,,,,
 AP-967,Farjim 50 WP,,,,,,,,,,,,,,
@@ -7493,9 +7493,9 @@ AP-1800,Bofen 20Ec,,,,,,,,,,,,,,
 AP-2083,Sistap 50SP,,,,,,,,,,,,,,
 AP-2093,K-Fan 20 EC,,,,,,,,,,,,,,
 AP-2301,Azole 250 EC,,,,,,,,,,,,,,
-AP-2328,Kazitap 50 SP,,,,,,,,,,,,,,
+AP-2328,Kazitap 50 SP,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-2451,Mabendazim 50 WP,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
-AP-2570,Ultima 40 WP,,,,,,,,,,,,,,
+AP-2570,Ultima 40 WP,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-2749,Etop 20 EC,,,,,,,,,,,,,,
 AP-2750,Zee-Fen 20 EC,,,,,,,,,,,,,,
 AP-3058,Shep 20 EC,,,,,,,,,,,,,,
@@ -7505,7 +7505,7 @@ AP-3267,Sarnifuran 5G,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,
 AP-3270,Bycodan 5G,,,,,,,,,,,,,,
 AP-3277,Zarafuran 3G,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-3280,Everfuran 5G,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
-AP-3284,Carboman 5G,,,,,,,,,,,,,,
+AP-3284,Carboman 5G,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-3285,Sapna 48EC,,,,,,,,,,,,,,
 AP-3288,Rekaphos 48EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-3292,Deviban 10GR,,,,,,,,,,,,,,
@@ -7520,7 +7520,7 @@ AP-3326,F-Zinon 10GR,,,,,,,,,,,,,,
 AP-3334,Chempire 20SL,,,,,,,,,,,,,,
 AP-3343,Adoral 20SL,,,,,,,,,,,,,,
 AP-3351,Napda 20SL,,,,,,,,,,,,,,
-AP-3355,Imidacare 20SL,,,,,,,,,,,,,,
+AP-3355,Imidacare 20SL,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-3373,Ket 85WP,,,,,,,,,,,,,,
 AP-3378,V-Gent 5SC,,,,,,,,,,,,,,
 AP-3380,Alphanil 5SC,,,,,,,,,,,,,,
@@ -7528,20 +7528,20 @@ AP-3381,Sepronil 5SC,,,,,,,,,,,,,,
 AP-3386,Dhakatap 50SP,IRAC,14,"nAChR channel blockers (Cartap, Bensultap)",Nerve & Muscle,,,,,,,,,,
 AP-3393,Udaylam 2.5EC,,,,,,,,,,,,,,
 AP-3409,Tatathrin 10 EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
-AP-3411,Shampatti 10 EC,,,,,,,,,,,,,,
+AP-3411,Shampatti 10 EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-3412,Seakil 10 EC,,,,,,,,,,,,,,
 AP-3416,Rizik 10 EC,,,,,,,,,,,,,,
 AP-3437,Keyguard SG,,,,,,,,,,,,,,
 AP-3439,Mamben 5 SG,,,,,,,,,,,,,,
-AP-3443,Sunclaim 5 SG,,,,,,,,,,,,,,
+AP-3443,Sunclaim 5 SG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-3450,Engine 5 SG,,,,,,,,,,,,,,
 AP-3465,Ashaphos 55 EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-3466,Phosthrin 50.5 EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
-AP-3472,Unito Plus 55EC,,,,,,,,,,,,,,
+AP-3472,Unito Plus 55EC,HRAC,A,ACCase inhibitors (Aryloxyphenoxy propionates / Cyclohexanediones),Lipid synthesis,,,,,,,,,,
 AP-3485,Droop 45SC,,,,,,,,,,,,,,
 AP-3491,Krimerin Super 44 EC,,,,,,,,,,,,,,
-AP-3493,Fento 20EC,,,,,,,,,,,,,,
-AP-3494,Tatafen 20EC,,,,,,,,,,,,,,
+AP-3493,Fento 20EC,HRAC,A,ACCase inhibitors (Aryloxyphenoxy propionates / Cyclohexanediones),Lipid synthesis,,,,,,,,,,
+AP-3494,Tatafen 20EC,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-3499,Pasafic 2.5 EC,,,,,,,,,,,,,,
 AP-3516,Fasalfume 57%,,,,,,,,,,,,,,
 AP-3520,M-Sulf 80WP,,,,,,,,,,,,,,
@@ -7549,7 +7549,7 @@ AP-3521,Zerosul 80WG,,,,,,,,,,,,,,
 AP-3525,Leafvit 80 WDG,,,,,,,,,,,,,,
 AP-3537,Elite 80 WDG,,,,,,,,,,,,,,
 AP-3541,Visulf 80 WP,,,,,,,,,,,,,,
-AP-3545,Chemo Care 30 EC,,,,,,,,,,,,,,
+AP-3545,Chemo Care 30 EC,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP-3546,Giltop 32.5 SC,,,,,,,,,,,,,,
 AP-3552,Bitzim 50 WP,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
 AP-3553,Byzim 50 WP,,,,,,,,,,,,,,
@@ -7574,8 +7574,8 @@ AP-3695,MU- Furan 5 G,,,,,,,,,,,,,,
 AP-3701,Abfuran 3G,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,Immediate Ban,RED,,,,
 AP-3724,Ble-Don 4.5SC,,,,,,,,,,,,,,
 AP-3725,Biddut 50 SP,,,,,,,,,,,,,,
-AP-3741,Imisafe 20SL,IRAC,,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,Standard registration controls,STANDARD,,,,
-AP-3767,Faith 10G,,,,,,,,,,,,,,
+AP-3741,Imisafe 20SL,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,Standard registration controls,STANDARD,,,,
+AP-3767,Faith 10G,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP-3768,Danadin 10G,,,,,,,,,,,,,,
 AP-3771,Hinodan 10G,,,,,,,,,,,,,,
 AP-3774,Diozodin 600 EW,,,,,,,,,,,,,,
@@ -7605,7 +7605,7 @@ AP-4164,Shiropa 80 WD,,,,,,,,,,,,,,
 AP-4165,Bonidon 80 WDG,,,,,,,,,,,,,,
 AP-4172,Sentavit 80 WDG,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
 AP-4225,Sistop 32.5 SC,,,,,,,,,,,,,,
-AP-4238,Aromax 3GR,,,,,,,,,,,,,,
+AP-4238,Aromax 3GR,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-4255,Maczim Super 50 SC,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors,Nucleic acid / Protein,,,,,,,,,,
 AP-4267,Rainodin 80 WDG,,,,,,,,,,,,,,
 AP-4271,G-Force-5EC,,,,,,,,,,,,,,
@@ -7618,12 +7618,12 @@ AP-4490,Gilthrin 55EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modula
 AP-4496,Beltap 4 GL,,,,,,,,,,,,,,
 AP-4516,E-thrin 2.5 EC,,,,,,,,,,,,,,
 AP-4542,Orginon 5.3GR,,,,,,,,,,,,,,
-AP-4543,Dalas 104,,,,,,,,,,,,,,
+AP-4543,Dalas 104,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-4546,Mujidan 104,,,,,,,,,,,,,,
 AP-4554,Emimethrin 10Ec,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-4556,Krimerin 10EC,,,,,,,,,,,,,,
 AP-4559,Pratik 20EC,,,,,,,,,,,,,,
-AP-4583,Autobuc 20WP,,,,,,,,,,,,,,
+AP-4583,Autobuc 20WP,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP-4597,Sinsin 55EC,,,,,,,,,,,,,,
 AP-4599,Aderab 25WP,,,,,,,,,,,,,,
 AP-4603,Gem 50WP,,,,,,,,,,,,,,
@@ -7643,7 +7643,7 @@ AP-4927,Kabir 3WD5,,,,,,,,,,,,,,
 AP-4928,Nipat 3WD5,,,,,,,,,,,,,,
 AP-4929,Mortin 3WD5,,,,,,,,,,,,,,
 AP-4932,Fiz 3WD5,,,,,,,,,,,,,,
-AP-4949,Kalfa 20SL,IRAC,,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,Standard registration controls,STANDARD,,,,
+AP-4949,Kalfa 20SL,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,Standard registration controls,STANDARD,,,,
 AP-4971,Nabid40WDG,,,,,,,,,,,,,,
 AP-4990,Finecus 10SG,,,,,,,,,,,,,,
 AP-4992,Ropose5SG,,,,,,,,,,,,,,
@@ -7669,13 +7669,13 @@ AP-5195,Yeah clean 18WP,,,,,,,,,,,,,,
 AP-5204,Acmears 10WP,,,,,,,,,,,,,,
 AP-5205,Prantoza 10WP,,,,,,,,,,,,,,
 AP-5213,Antarclean 20WP,,,,,,,,,,,,,,
-AP-5248,Rexidan 4G,,,,,,,,,,,,,,
+AP-5248,Rexidan 4G,IRAC,1A,Carbamates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-5260,Trifthrin 10EC,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP-5273,Redcon 5SG,,,,,,,,,,,,,,
 AP-5274,Bindu 80WDG,,,,,,,,,,,,,,
-AP-5284,Right Way 50WG,,,,,,,,,,,,,,
+AP-5284,Right Way 50WG,HRAC,A,ACCase inhibitors (Aryloxyphenoxy propionates / Cyclohexanediones),Lipid synthesis,,,,,,,,,,
 AP-5330,KB- Lam 2.5 Ec,,,,,,,,,,,,,,
-AP-5356,Dizim 50 WP,,,,,,,,,,,,,,
+AP-5356,Dizim 50 WP,FRAC,2,Dicarboximides — histidine kinase osmotic signal transduction,Nucleic acid / Protein,,,,,,,,,,
 AP-5377,Nokla 50 WP,,,,,,,,,,,,,,
 AP-5402,Titazeb 80 WP,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
 AP-5403,Norexzeb 80 WP,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,,,,,,
@@ -7687,14 +7687,14 @@ AP-5613,Gunzim 50WP,FRAC,1,MBC/Benzimidazoles — β-tubulin assembly inhibitors
 AP-5615,Nurzeb 80WP,FRAC,M3,FRAC Group M3 — see IRAC/FRAC/HRAC table,Multi-site contact,,,,,Phase-out & Substitute,AMBER,,,,
 AP-5651,Weedon 25WP,,,,,,,,,,,,,,
 AP-6160,Abacon 1.8 EC,,,,,,,,,,,,,,
-AP-6235,Automix 40 WDG,,,,,,,,,,,,,,
+AP-6235,Automix 40 WDG,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6343,Tasker 10G,,,,,,,,,,,,,,
-AP-6403,Genepanda 33 EC,,,,,,,,,,,,,,
+AP-6403,Genepanda 33 EC,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6436,Camping 50 WP,,,,,,,,,,,,,,
 AP-6447,S R Top 32.5 SC,,,,,,,,,,,,,,
 AP-6456,Ayan 28 SC,,,,,,,,,,,,,,
 AP-6459,Tamping 35 SC,,,,,,,,,,,,,,
-AP-6475,Council Activ 30WG,,,,,,,,,,,,,,
+AP-6475,Council Activ 30WG,HRAC,B,"ALS inhibitors (Sulfonylureas, Imidazolinones)",Amino acid synthesis,,,,,,,,,,
 AP-6479,Pat 5 EC,,,,,,,,,,,,,,
 AP-6534,fytin 1.8EC,,,,,,,,,,,,,,
 AP-6545,Macdor 70WG,,,,,,,,,,,,,,
@@ -7722,7 +7722,7 @@ AP-6777,Glufolink 30SL,,,,,,,,,,,,,,
 AP-6786,Stomp Xtra CS,,,,,,,,,,,,,,
 AP-6793,Arenaclor 18WP,,,,,,,,,,,,,,
 AP-6848,Abacare 1.8EC,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
-AP-6855,Magic plan guard,FRAC,,Multi-site — inorganic copper,,,,,,,,,,,
+AP-6855,Magic plan guard,FRAC,M01,Inorganic copper — multi-site contact,Multi-site contact,,,,,,,,,,
 AP-6859,Bioprid 70WG,IRAC,4A,Neonicotinoids — nAChR competitive modulators,Nerve & Muscle,,,,,,,,,,
 AP-6865,Zip 10G,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP-6885,Minecto Forte 48SC,IRAC,28,Diamides — Ryanodine receptor modulators,Unknown,,,,,,,,,,
@@ -7878,7 +7878,7 @@ AP-20234,new ss,,,,,,,,,,,,,,
 AP-20245,tes df,,,,,,,,,,,,,,
 AP-40001,test-108,,,,,,,,,,,,,,
 3852,Xu-Long 40 WG,,,,,,,,,,,,,,
-5816,Hasclean 72SL,HRAC,,"Synthetic auxins — Phenoxy / Pyridine / Benzoic (2,4-D, MCPA)",Growth Regulation (Auxin),,,,,Standard registration controls,STANDARD,,,,
+5816,Hasclean 72SL,HRAC,O,"Synthetic auxins (Phenoxy, Pyridine carboxylic)",Growth regulation,,,,,Standard registration controls,STANDARD,,,,
 6183,Digtal 70WDG,,,,,,,,,,,,,,
 6474,MetKlo Mix 20WP,,,,,,,,,,,,,,
 AP(Bio)-02,Q- Phero,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
@@ -7898,7 +7898,7 @@ AP(Bio)-33,Bio-Cure 1 EC,,,,,,,,,,,,,,
 AP(Bio)-34,Biotrin,,,,,,,,,,,,,,
 AP(Bio)-35,K-Mite,,,,,,,,,,,,,,
 AP(Bio)-36,Ratan Pheromone,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
-AP(Bio)-37,Apache,,,,,,,,,,,,,,
+AP(Bio)-37,Apache,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP(Bio)-38,Orolure,,,,,,,,,,,,,,
 AP(Bio)-41,Haylure Brinjal,,,,,,,,,,,,,,
 AP(Bio)-42,Bio-Lure,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
@@ -7923,7 +7923,7 @@ AP(Bio)-78,Biochem 16000WP,,,,,,,,,,,,,,
 AP(Bio)-79,Bio-Viride 1WP,FRAC,NC,Biological (multi-site / non-specific),Unknown,,,,,,,,,,
 AP(Bio)-80,Bio-Action,,,,,,,,,,,,,,
 AP(Bio)-81,Neemazal 1.2 EC,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
-AP(Bio)-82,Dynamic WP,IRAC,,Microbial — Bt crystal toxin,Unknown,,,,,,,,,,
+AP(Bio)-82,Dynamic WP,IRAC,1B,Organophosphates — AChE inhibitors,Nerve & Muscle,,,,,,,,,,
 AP(Bio)-83,Bio Shield,FRAC,P,Host plant defence induction (multiple mechanisms),Host plant defence,,,,,,,,,,
 AP(Bio)-84,BitGaurd,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
 AP(Bio)-86,Open,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
@@ -7973,7 +7973,7 @@ AP(Bio)-25,Monex 0.5 WP,IRAC,11A,Bacillus thuringiensis (kurstaki) — midgut me
 AP(Bio)-26,AT Fruit's Lure'69,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
 AP(Bio)-27,BSFB Lure'69,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
 AP(Bio)-28,AT Cuelure'69,IPM,,Pheromone — mating disruption,Unknown,,,,,,,,,,
-AP(Bio)-39,Supernet,,,,,,,,,,,,,,
+AP(Bio)-39,Supernet,IRAC,3A,Pyrethroids & Pyrethrins — Sodium channel modulators,Nerve & Muscle,,,,,,,,,,
 AP(Bio)-40,Fruit Magneto,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
 AP(Bio)-43,Cue Magneto,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
 AP(Bio)-44,Fawligen,IRAC,31,Baculoviruses — host-specific occluded pathogenic viruses,Midgut,,,,,,,,,,
@@ -7989,7 +7989,7 @@ AP(Bio)-103,Bio Power,IRAC,UNF,Fungal agents of unknown MoA,Unknown / Variable,,
 AP(Bio)-105,Bio-Derma,FRAC,NC,Biological (multi-site / non-specific),Unknown,,,,,,,,,,
 AP(Bio)-109,9.12- Sodo King SL Lure,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
 AP(Bio)-118,Clybio Gold,FRAC,NC,Biological (multi-site / non-specific),Unknown,,,,,,,,,,
-AP(Bio)-120,Matrxine 1EC,IRAC,,Botanical — Unknown/uncertain MoA,Unknown,,,,,,,,,,
+AP(Bio)-120,Matrxine 1EC,IRAC,6,Avermectins & Milbemycins — GluCl allosteric modulators,Nerve & Muscle,,,,,,,,,,
 AP(Bio)-121,Xlure SPL,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
 AP(Bio)-122,Tuta-Lure,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,
 AP(Bio)-123,Frugi-Lure,IRAC,UN,Compounds of unknown or uncertain MoA,Unknown / Variable,,,,,,,,,,

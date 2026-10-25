@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
+  AlertOctagon,
+  AlertTriangle,
   ArrowRight,
   ArrowUpRight,
   BookMarked,
@@ -189,7 +191,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
   // ---------------------------------------------------------------------
   // Real catalogue statistics — recomputed only when the database changes.
   // ---------------------------------------------------------------------
-  const { totalLabel, mappedLabel, groupCount } = useMemo(() => {
+  const { totalLabel, mappedLabel, mappedCount, groupCount, schemeCounts } = useMemo(() => {
     const total = products.length || 0;
     const withMoa = products.filter((p) => (p.moaCode || '').trim()).length;
     const pct = total ? Math.round((withMoa / total) * 1000) / 10 : 0;
@@ -197,10 +199,27 @@ export const HomeView: React.FC<HomeViewProps> = ({
     const groups = new Set(
       products.filter((p) => (p.moaCode || '').trim()).map((p) => p.moaCode as string)
     ).size;
+    // Per-scheme counts — IRAC / FRAC / HRAC / UN
+    const schemeCountsMap = { IRAC: 0, FRAC: 0, HRAC: 0, UN: 0 } as Record<string, number>;
+    for (const p of products) {
+      const code = (p.moaCode || '').trim();
+      if (!code) continue;
+      if (code.startsWith('IRAC')) {
+        schemeCountsMap.IRAC += 1;
+        if (code.includes('UN')) schemeCountsMap.UN += 1;
+      } else if (code.startsWith('FRAC')) {
+        schemeCountsMap.FRAC += 1;
+        if (code === 'FRAC NC') schemeCountsMap.UN += 1;
+      } else if (code.startsWith('HRAC')) {
+        schemeCountsMap.HRAC += 1;
+      }
+    }
     return {
       totalLabel: `${formatNum(total.toLocaleString('en-US'))}+`,
       mappedLabel: `${formatNum(pctStr)}%`,
+      mappedCount: formatNum(withMoa.toLocaleString('en-US')),
       groupCount: groups,
+      schemeCounts: schemeCountsMap,
     };
   }, [products, formatNum]);
 
@@ -492,7 +511,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <div className="acg-stat">
           <div className="acg-stat__value">{mappedLabel}</div>
           <div className="acg-stat__label">{copy.stat2Label}</div>
-          <div className="acg-stat__detail">{copy.stat2Detail}</div>
+          <div className="acg-stat__detail">
+            {bn
+              ? `${mappedCount} পণ্য · IRAC ${formatNum(schemeCounts.IRAC.toLocaleString('en-US'))} · FRAC ${formatNum(schemeCounts.FRAC.toLocaleString('en-US'))} · HRAC ${formatNum(schemeCounts.HRAC.toLocaleString('en-US'))}`
+              : `${mappedCount} products · IRAC ${formatNum(schemeCounts.IRAC.toLocaleString('en-US'))} · FRAC ${formatNum(schemeCounts.FRAC.toLocaleString('en-US'))} · HRAC ${formatNum(schemeCounts.HRAC.toLocaleString('en-US'))}`}
+          </div>
         </div>
         <div className="acg-stat">
           <div className="acg-stat__value">{formatNum(groupCount)}</div>
@@ -606,6 +629,84 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </div>
             </button>
           ))}
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────────────
+          MoA COMPLIANCE ENGINE CALLOUT — surfaces the IRAC MoA Rotation
+          Guide §4.2 decision engine from PR #50. The compliance engine
+          validates every spray against 5 IRAC rules: treatment window,
+          sub-group rotation risk, 50% seasonal exposure cap, per-window
+          app limit, and crop-phase advisory. Available in the My Field
+          tab where users log sprays.
+         ────────────────────────────────────────────────────────────────── */}
+      <section className="acg-shell" style={{ marginTop: 24 }}>
+        <div className="acg-section-head">
+          <div>
+            <span className="acg-kicker">
+              <ShieldCheck size={14} style={{ display: 'inline', marginRight: 4, verticalAlign: 'middle' }} />
+              {bn ? 'MoA কমপ্লায়েন্স ইঞ্জিন' : 'MoA Compliance Engine'}
+            </span>
+            <h2 className="acg-h2">
+              {bn ? (
+                <>প্রতিটি স্প্রে <em>IRAC নিয়ম দিয়ে যাচাই</em></>
+              ) : (
+                <>Every spray <em>validated against IRAC rules</em></>
+              )}
+            </h2>
+          </div>
+          <button className="acg-link" onClick={() => go('myfield')}>
+            {bn ? 'লগ শুরু করুন' : 'Open My Field'} <ArrowUpRight size={15} />
+          </button>
+        </div>
+        <p style={{
+          color: 'var(--muted, #475569)',
+          fontSize: 14,
+          lineHeight: 1.6,
+          maxWidth: 720,
+          margin: '0 0 16px',
+        }}>
+          {bn
+            ? 'নতুন স্প্রে লগ করলে অ্যাপ স্বয়ংক্রিয়ভাবে যাচাই করে: ট্রিটমেন্ট উইন্ডো (১৫/৩০ দিন), সাব-গ্রুপ ঘূর্ণন ঝুঁকি, ৫০% মৌসুমী এক্সপোজার ক্যাপ, উইন্ডো-প্রতি প্রয়োগ সীমা এবং ফসল পর্যায় সুপারিশ। লঙ্ঘন ধরা পড়লে একটি non-dismissible সতর্কতা মডাল সঠিক কারণটি দেখায় — IRAC MoA Rotation Guide §4.2 অনুযায়ী।'
+            : 'When you log a new spray, the app automatically validates it against: treatment windows (15/30 days), sub-group rotation risk, 50% seasonal exposure cap, per-window app limits, and crop-phase advisories. Violations trigger a non-dismissible warning modal with the exact failure mechanics — per IRAC MoA Rotation Guide §4.2.'}
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '4px 10px', borderRadius: 16,
+            background: '#fee2e2', color: '#b91c1c',
+            fontSize: 11, fontWeight: 600, letterSpacing: 0.04,
+          }}>
+            <AlertOctagon size={12} />
+            {bn ? 'ব্লক: একই গ্রুপ উইন্ডোর ভেতরে' : 'BLOCK: same group in window'}
+          </span>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '4px 10px', borderRadius: 16,
+            background: '#fef3c7', color: '#c2410c',
+            fontSize: 11, fontWeight: 600, letterSpacing: 0.04,
+          }}>
+            <AlertTriangle size={12} />
+            {bn ? 'ফ্ল্যাগ: সাব-গ্রুপ ঘূর্ণন' : 'FLAG: sub-group rotation'}
+          </span>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '4px 10px', borderRadius: 16,
+            background: '#fee2e2', color: '#b91c1c',
+            fontSize: 11, fontWeight: 600, letterSpacing: 0.04,
+          }}>
+            <AlertOctagon size={12} />
+            {bn ? 'ব্লক: ৫০% মৌসুমী ক্যাপ' : 'BLOCK: 50% seasonal cap'}
+          </span>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '4px 10px', borderRadius: 16,
+            background: '#f0fdf4', color: '#15803d',
+            fontSize: 11, fontWeight: 600, letterSpacing: 0.04,
+          }}>
+            <CheckCircle2 size={12} />
+            {bn ? 'অনুমোদিত: সব নিয়ম মানে' : 'PASS: all rules satisfied'}
+          </span>
         </div>
       </section>
 
