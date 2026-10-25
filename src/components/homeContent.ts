@@ -103,7 +103,7 @@ export const FEATURES: FeatureDossier[] = [
     tone: 'green',
     statLabelEn: 'Active Ingredients',
     statLabelBn: 'সক্রিয় উপাদান',
-    statValue: '5,750+',
+    statValue: '9,000+',
     highlightsEn: [
       'Verifiable DAE registration numbers',
       'PHI & REI Safety Windows',

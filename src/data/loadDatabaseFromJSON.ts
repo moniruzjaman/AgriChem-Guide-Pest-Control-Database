@@ -58,18 +58,29 @@ interface RawProduct {
  * If the fetch fails (e.g. offline before first cache), returns an empty
  * array so the app still loads with curated data only.
  */
-export async function loadDatabaseFromJSON(): Promise<ChemicalProduct[]> {
-  try {
+async function readRawProducts(): Promise<RawProduct[]> {
+  if (typeof window !== 'undefined') {
     const response = await fetch(DATABASE_JSON_URL, {
       headers: { Accept: 'application/json' },
     });
     if (!response.ok) {
-      console.warn(
-        `[loadDatabaseFromJSON] HTTP ${response.status} — falling back to empty DAE array`
-      );
-      return [];
+      throw new Error(`HTTP ${response.status}`);
     }
-    const raw: RawProduct[] = await response.json();
+    return (await response.json()) as RawProduct[];
+  }
+
+  const { readFile } = await import('node:fs/promises');
+  const { fileURLToPath } = await import('node:url');
+  const { dirname, resolve } = await import('node:path');
+  const here = dirname(fileURLToPath(import.meta.url));
+  const jsonPath = resolve(here, '../../public/downloads/pesticide_database.json');
+  const text = await readFile(jsonPath, 'utf8');
+  return JSON.parse(text) as RawProduct[];
+}
+
+export async function loadDatabaseFromJSON(): Promise<ChemicalProduct[]> {
+  try {
+    const raw = await readRawProducts();
 
     // Map raw JSON products to ChemicalProduct shape
     const products: ChemicalProduct[] = raw.map((r) => {
