@@ -1,7 +1,7 @@
 /**
  * allPesticidesData.ts
  *
- * Maps the full DAE registered pesticides list (5,452 rows sourced from
+ * Maps the full DAE registered pesticides list (9,000+ rows sourced from
  * `data_raw/all_pesticides.csv`, exposed via `./all_pesticides.ts`) into the
  * `ChemicalProduct[]` shape consumed by the rest of the app, then enriches
  * each entry with Mode-of-Action metadata, toxicity class, WHO color band,
@@ -403,7 +403,7 @@ function mergeProducts(a: ChemicalProduct, b: ChemicalProduct): ChemicalProduct 
  * multiple recommendation lines appears only once in the database.
  *
  * Includes agricultural products AND Public Health (vector-control) entries
- * from the DAE/PTAC register so the live catalogue matches the 5,711+
+ * from the DAE/PTAC register so the live catalogue matches the 9,000+
  * Vercel deploy.
  */
 export const ALL_PESTICIDES_DATABASE: ChemicalProduct[] = (() => {

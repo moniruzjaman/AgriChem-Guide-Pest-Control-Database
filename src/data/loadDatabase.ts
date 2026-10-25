@@ -6,8 +6,8 @@ import { loadDatabaseFromJSON } from './loadDatabaseFromJSON';
  *
  * Merges curated products (inline, ~1 MB) + the DAE register database
  * (fetched at runtime as JSON, ~2.4 MB gzipped) + extras from the
- * bdRegisterLatest overlay, then overlays measured toxicity / PHI /
- * formulation fields onto matching registration numbers.
+ * 5,485-row AgriChem/MoA PTAC master overlay, then overlays measured
+ * toxicity / PHI / formulation fields onto matching registration numbers.
  *
  * Architecture change (PR #46):
  *   Previously, the DAE register (9,462 products) + policy enrichment
@@ -93,7 +93,7 @@ function applyBdOverlay(
  * Build a deduplicated master database. Curated entries are emitted first;
  * DAE entries are appended only when their registration number is not
  * already present in the curated set. This avoids duplicate cards while
- * still exposing the full DAE register (5,000+ rows).
+ * still exposing the full DAE register (9,000+ rows).
  */
 function mergeWithCurated(
   curated: ChemicalProduct[],

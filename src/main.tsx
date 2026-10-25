@@ -13,7 +13,7 @@ import './components/brand-remap.css';
 migrateAgrichemToPesticideNext();
 
 // PWA cache cleanup: delete any cache whose name doesn't start with the
-// current `pn-v2` prefix. This purges the orphaned `workbox-precache-v2`
+// current `pn-v5` prefix. This purges the orphaned `workbox-precache-v2`
 // cache from the previous build so returning users always see the new
 // bundle (new OG image, new tagline, post-rename branding). Run BEFORE
 // the service worker registers so the old cache is gone by the time the

@@ -1185,7 +1185,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <FileDown size={15} />
               {bn ? 'এক্সেল (XLSX)' : 'Excel (XLSX)'}
               <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
-                {bn ? '~ ৮,৯৩৫ রেকর্ড' : '~ 8,935 records'}
+                {bn ? '~ ৯,০০০+ রেকর্ড' : '~ 9,000+ records'}
               </span>
             </a>
             {/* PDF */}

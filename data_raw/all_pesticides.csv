@@ -1,4 +1,4 @@
-﻿Pesticide Type,SL No (Common Name),Common Name,SL No (Products),Brand Name,Registration No,Registration Holder,Recommended Crops,Recommended Pests,Dosage Rate,Recommendations (Crop | Pest | Dosage),No. of Recommendations,MoA Code
+Pesticide Type,SL No (Common Name),Common Name,SL No (Products),Brand Name,Registration No,Registration Holder,Recommended Crops,Recommended Pests,Dosage Rate,Recommendations (Crop | Pest | Dosage),No. of Recommendations,MoA Code
 Miticide,1,Ethion,1,Pithion 46.5EC,AP-5242,Padma Oil Company Ltd.,Chilli,Mites,2 ml/L of water,Chilli | Mites | 2 ml/L of water,1,IRAC 1B
 Miticide,2,Ethion (5%) + Thiamethoxam (20%),1,Taba 25WDG,AP-4578,Alif Agro,"Chilli, Rice","Thrips, Aphid, BPH",100 g/ha; 0.2 g/L of water,"Chilli | Thrips | 100 g/ha
 Chilli | Aphid | 0.2 g/L of water
@@ -492,7 +492,7 @@ Fungicide,11,Carbendazim,18,Carbozim 50WP,AP-757,Reximco Insecticides Limited,Cu
 Fungicide,11,Carbendazim,19,Bendazim 50WP,AP-758,National AgriCare Import & Export Ltd,"Cucurbit, Onion","Powdery mildew, Purple blotch",1 g/L of water; 2 g /L of water,"Cucurbit | Powdery mildew | 1 g/L of water
 Onion | Purple blotch | 2 g /L of water",2,FRAC 1
 Fungicide,11,Carbendazim,20,Ecozim 50WP,AP-856,East West Chemicals Ltd.,Banana,Sigatoka,2 g /L of water,Banana | Sigatoka | 2 g /L of water,1,FRAC 1
-Fungicide,11,Carbendazim,21,Pearl 50DF,AP-980,MAP Agro Industries Limited,"Garden pea, Wheat","Powdery mildew, Late blight",2 g /L of water,"Garden pea | Powdery mildew | 2 g /L of water
+Fungicide,11,Mancozeb + Cymoxanil,21,Pearl 50DF,AP-980,MAP Agro Industries Limited,"Garden pea, Wheat","Powdery mildew, Late blight",2 g /L of water,"Garden pea | Powdery mildew | 2 g /L of water
 Wheat | Late blight | 2 g /L of water",2,FRAC 1
 Fungicide,11,Carbendazim,22,Gilzim 50WP,AP-981,Petrochem (Bangladesh) Limited,"Tomato, Sugarcane","Wilt, Sett rot",1 g/L of water,"Tomato | Wilt | 1 g/L of water
 Sugarcane | Sett rot | 1 g/L of water",2,FRAC 1
@@ -525,7 +525,7 @@ Fungicide,11,Carbendazim,39,Emidazim 50WP,AP-1429,Integrated Crop Solution Bangl
 Fungicide,11,Carbendazim,40,Towin 50WP,AP-1677,Marshal Agrovet Chemical Industries Ltd,"Chili, Tea","Anthracnose, Red rust, Black rot, Die back",1 g/L of water; 750 g/L of water,"Chili | Anthracnose | 1 g/L of water
 Tea | Red rust, Black rot, Die back | 750 g/L of water",2,FRAC 1
 Fungicide,11,Carbendazim,41,Regard 50WP,AP-1678,Agro Continent Bangladesh,Banana,Sigatoka,1 g/L of water,Banana | Sigatoka | 1 g/L of water,1,FRAC 1
-Fungicide,11,Carbendazim,42,Orgazim 50WP,AP-1680,Green Bangla Agrovet Ltd.,Sugarcane,Sett rot,1 g/L of water,Sugarcane | Sett rot | 1 g/L of water,1,FRAC 1
+Fungicide,11,Azoxystrobin + Difenoconazole,42,Orgazim 50WP,AP-1680,Green Bangla Agrovet Ltd.,Sugarcane,Sett rot,1 g/L of water,Sugarcane | Sett rot | 1 g/L of water,1,FRAC 1
 Fungicide,11,Carbendazim,43,Starzim 50WP,AP-1681,Pace Import & Export Ltd.,Sugarcane,Sett rot,1 g/L of water,Sugarcane | Sett rot | 1 g/L of water,1,FRAC 1
 Fungicide,11,Carbendazim,44,Dimbazim 50 WP,AP-1721,Dreamland Agro Products,"Rice, Tea","Sheath blight, Red rust, Black rot, Die back",1.00 kg/ha; 750 g/L of water,"Rice | Sheath blight | 1.00 kg/ha
 Tea | Red rust, Black rot, Die back | 750 g/L of water",2,FRAC 1
@@ -672,7 +672,7 @@ Fungicide,15,Carbendazim (10%) + Imidacloprid (10) + Metalaxyl (10%),2,Regiment 
 Fungicide,16,Imidacloprid (20) + Metalaxyl M (20%) + Tebuconazole (2%),1,Multiguard 42WS,AP-5579,Global Agrovet Limited,Bean,Aphid,1.25 Kg/ha,Bean | Aphid | 1.25 Kg/ha,1,IRAC 4A
 Fungicide,17,Tebuconazole (12.50%) Cyproconazole (40.00%) Azoxystrobin (11.00%),1,Troy 63.5SC,AP-5806,Babylon Agriscience Ltd.,Sweet gourd,Powdery mildew,1 ml/L of water,Sweet gourd | Powdery mildew | 1 ml/L of water,1,FRAC 3
 Fungicide,18,Carbendazim ( 25%) Flusilazole (12.5%),1,Lustre 37.5SC,AP-4596,Dhanuka Agri Solutions Pvt. Ltd.,Tea,Die back,750 ml/ha,Tea | Die back | 750 ml/ha,1,FRAC 1
-Fungicide,18,Carbendazim ( 25%) Flusilazole (12.5%),2,Pacer 37.5SC,AP-3141,Eon Agro Industries Limited,Wheat,Leaf blight,600 ml/ha,Wheat | Leaf blight | 600 ml/ha,1,FRAC 1
+Fungicide,18,Flusilazole + Carbendazim,2,Pacer 37.5SC,AP-3141,Eon Agro Industries Limited,Wheat,Leaf blight,600 ml/ha,Wheat | Leaf blight | 600 ml/ha,1,FRAC 1
 Fungicide,19,Carboxin (37.5%) + Thiram (37.5%),1,Provax 200WP,AP-1146,Hossain Enterprise C.C. Ltd.,"Wheat, Jute, Rice, Brinjal, Bottle gourd, Potato","Seedling blight, Foot rot, Seedling disease, Seed rot, Seedling disease,, Wilting, Soft rot, Anthracnose,, (Seed borne) Bipolaris oryzae, Black scarf",3 g/kg seed; 4 g/kg seed; 2 g/kg seed; 2.5 g/L of water,"Wheat | Seedling blight, Foot rot | 3 g/kg seed
 Wheat | Seedling disease | 4 g/kg seed
 Jute | Seed rot, Seedling disease,, Wilting, Soft rot, Anthracnose, | 4 g/kg seed
@@ -687,7 +687,7 @@ Maize | Leaf blight, head smut, Seedling wilt | 3.5 ml/kg seed
 Potato | Black scarf | 3.5 ml/kg seed",5,FRAC 7
 Fungicide,19,Carboxin (37.5%) + Thiram (37.5%),3,ACI Flo 75FS,AP-5383,ACI Formulations Limited,Jute,Seed borne disease,2.5 ml/L of water,Jute | Seed borne disease | 2.5 ml/L of water,1,FRAC 7
 Fungicide,20,Carboxin 20%+ Thiram 20%,1,Asavax 40WP,AP-5101,McDonald Bangladesh (Pvt) Limited,Wheat,Foot rot Seedling blight,3 g/L per kg seed,Wheat | Foot rot Seedling blight | 3 g/L per kg seed,1,FRAC 7
-Fungicide,21,Carbendazim (17.5%) Iprodione (35%),1,Shelter 52.5WP,AP-3251,Surovi Agro Industries Limited,Cucumber,Powdery mildew,2 g/L of water,Cucumber | Powdery mildew | 2 g/L of water,1,FRAC 1
+Fungicide,21,Iprodione + Carbendazim,1,Shelter 52.5WP,AP-3251,Surovi Agro Industries Limited,Cucumber,Powdery mildew,2 g/L of water,Cucumber | Powdery mildew | 2 g/L of water,1,FRAC 1
 Fungicide,21,Carbendazim (17.5%) Iprodione (35%),2,Hama 52.5WP,AP-4215,Intefa,"Tomato, Onion, Chili","Early blight, Purple blotch, Anthracnose",2 g/L of water; 1.5 g/L of water,"Tomato | Early blight | 2 g/L of water
 Onion | Purple blotch | 1.5 g/L of water
 Chili | Anthracnose | 1.5 g/L of water",3,FRAC 1
@@ -858,7 +858,7 @@ Fungicide,37,Edifenphos,1,Edifen 50EC,AP-268,Shetu Pesticides Limited,Rice,"Blas
 Fungicide,38,Epoxiconazole,1,Opal 7.5EC,AP-2314,BASF Bangladesh Limited,"Rice, Cucurbit, Banana","Sheath blight, Powder mildew, Sigatoka",1.25 L/ha; 2.5 ml/L of water; 2 ml/L of water,"Rice | Sheath blight | 1.25 L/ha
 Cucurbit | Powder mildew | 2.5 ml/L of water
 Banana | Sigatoka | 2 ml/L of water",3,FRAC 3
-Fungicide,39,Epoxiconazol (12.5%) Carbendazim (12.5%),1,Rista 25SC,AP-3226,Eon Agro Industries Limited,Cucumber,Powder mildew,800 ml/ha,Cucumber | Powder mildew | 800 ml/ha,1,FRAC 3
+Fungicide,39,Epoxiconazole + Carbendazim,1,Rista 25SC,AP-3226,Eon Agro Industries Limited,Cucumber,Powder mildew,800 ml/ha,Cucumber | Powder mildew | 800 ml/ha,1,FRAC 3
 Fungicide,40,Hexaconazole,1,Contaf 5EC,AP-460,Auto Crop Care Limited,"Rice, Banana, Cucurbits, Tea, Mango, Ground nut, Bettle Vine","Sheath blight, Sigatoka, Powdery mildew, Red rust disease, Powdery mildew and Anthracnose, Tikka disease, Leaf rot, Vine rot & blight",500 ml/ha; 1 ml/L of water; 750 ml/ha; 2 ml/L of water,"Rice | Sheath blight | 500 ml/ha
 Banana | Sigatoka | 1 ml/L of water
 Cucurbits | Powdery mildew | 1 ml/L of water
@@ -1189,7 +1189,7 @@ Fungicide,52,Mancozeb,,Naczeb 80WP,AP-1928,National AgriCare Import & Export Ltd
 Fungicide,52,Mancozeb,60,Jazz 80WP,AP-2001,Syngenta Bangladesh Limited,"Tomato, Potato, Mango","Late &Early blight, Late blight, Anthracnose",2 g/L of water,"Tomato | Late &Early blight | 2 g/L of water
 Potato | Late blight | 2 g/L of water
 Mango | Anthracnose | 2 g/L of water",3,FRAC M3
-Fungicide,52,Mancozeb,61,Rekazeb 80WP,AP-2140,T H Pesticides,"Tea, Potato","Die back, Black rot, Late blight",2.00 kg/ha; 1.5 g/L of water,"Tea | Die back, Black rot | 2.00 kg/ha
+Fungicide,52,Bensulfuron-methyl + Pretilachlor,61,Rekazeb 80WP,AP-2140,T H Pesticides,"Tea, Potato","Die back, Black rot, Late blight",2.00 kg/ha; 1.5 g/L of water,"Tea | Die back, Black rot | 2.00 kg/ha
 Potato | Late blight | 1.5 g/L of water",2,FRAC M3
 Fungicide,52,Mancozeb,62,Encozeb 80WP,AP-2142,Chemist Crop Care Ltd.,"Onion, Tomato","Purple Bloch, Late &Early blight",2 g/L of water,"Onion | Purple Bloch | 2 g/L of water
 Tomato | Late &Early blight | 2 g/L of water",2,FRAC M3
@@ -2326,7 +2326,7 @@ Insecticide,33,Carbaryl,23,Genevin 85WP,AP-3890,Genetica Industries Ltd.,Tea,Hel
 Insecticide,33,Carbaryl,24,Farmryl 85WP,AP-3892,Farmtech Bangladesh,Rice,BPH,1.50 kg/ha,Rice | BPH | 1.50 kg/ha,1,IRAC 1A
 Insecticide,33,Carbaryl,25,Cinaryl 85WP,AP-4068,Square Pharmaceuticals Limited,"Rice, Cotton","BPH, Bollworm",1.50 kg/ha; 1.70 kg/ha,"Rice | BPH | 1.50 kg/ha
 Cotton | Bollworm | 1.70 kg/ha",2,IRAC 1A
-Insecticide,33,Carbaryl,26,Robin 85WP,AP-6069,Sonali Krishi Seba Industries,Rice,BPH,1.50 kg/ha,Rice | BPH | 1.50 kg/ha,1,IRAC 1A
+Insecticide,33,Abamectin (3%) + Indoxacarb (6%),26,Robin 85WP,AP-6069,Sonali Krishi Seba Industries,Rice,BPH,1.50 kg/ha,Rice | BPH | 1.50 kg/ha,1,IRAC 1A
 Insecticide,33,Carbaryl,27,Drone 85WP,AP-4071,Nature & Care Agro Products Ltd.,Rice,BPH,1.50 kg/ha,Rice | BPH | 1.50 kg/ha,1,IRAC 1A
 Insecticide,33,Carbaryl,28,Ebaryl 85WP,AP-4573,East West Chemicals Ltd.,Tea,Helopeltis,1.00 kg/ha,Tea | Helopeltis | 1.00 kg/ha,1,IRAC 1A
 Insecticide,33,Carbaryl,29,Osbin 85WP,AP-5266,Ostrich Agro Chemicals Ltd.,"Mango, Rice","Hopper, BPH",2 g/L of water; 1.50 kg/ha,"Mango | Hopper | 2 g/L of water
@@ -2989,7 +2989,7 @@ Insecticide,48,Chlorpyrifos,51,Rifos 20EC,AP-1273,Rajib Agro Chemicals Ltd.,Tea,
 Insecticide,48,Chlorpyrifos,52,Kingphos 48EC,AP-1289,Aungkur Traders,"Tea, Bean, Rice","Termite, Aphid, BPH",4.00 L/ha; 1 ml/L of water; 500 ml/ha,"Tea | Termite | 4.00 L/ha
 Bean | Aphid | 1 ml/L of water
 Rice | BPH | 500 ml/ha",3,IRAC 1B
-Insecticide,48,Chlorpyrifos,53,Aristofos 20EC,AP-1290,Aristocrat Agro Services Ltd.,Tea,Termite,10.00 L/ha,Tea | Termite | 10.00 L/ha,1,IRAC 1B
+Insecticide,48,Chlorpyrifos + Cypermethrin,53,Aristofos 20EC,AP-1290,Aristocrat Agro Services Ltd.,Tea,Termite,10.00 L/ha,Tea | Termite | 10.00 L/ha,1,IRAC 1B
 Insecticide,48,Chlorpyrifos,54,Modart 48EC,AP-1302,Bismillah Corporation Limited,Rice,Hispa,0.5 L/ha,Rice | Hispa | 0.5 L/ha,1,IRAC 1B
 Insecticide,48,Chlorpyrifos,55,Firefos 48EC,AP-1303,D M Crop Care Limited,Rice,Hispa,0.5 L/ha,Rice | Hispa | 0.5 L/ha,1,IRAC 1B
 Insecticide,48,Chlorpyrifos,56,Thrive 48EC,AP-1305,Petrochem Agro Industries Ltd,"Rice, Bean, Potato","Hispa, Aphid, Cutworm",0.5 L/ha; 1 ml/L of water; 3 ml/L of water,"Rice | Hispa | 0.5 L/ha
@@ -3343,7 +3343,7 @@ Brinjal | Shoot & fruit borer | 1 ml/L of water",2,IRAC 3A
 Insecticide,53,Cypermethrin,15,Cymkil 10EC,AP-507,Naafco (Private) Limited,"Tea, Mango, Cotton","Mosquito bug, Hopper, S. Bollworm/A. Bollworm",500 ml/ha; 1 ml/L of water; 600 ml/ha,"Tea | Mosquito bug | 500 ml/ha
 Mango | Hopper | 1 ml/L of water
 Cotton | S. Bollworm/A. Bollworm | 600 ml/ha",3,IRAC 3A
-Insecticide,53,Cypermethrin,16,Cyperin 10EC,AP-512,Square Pharmaceuticals Limited,"Mango, Tea","Hopper, Helopeltis",1 ml/L of water; 500 ml/ha,"Mango | Hopper | 1 ml/L of water
+Insecticide,53,Mancozeb + Metalaxyl,16,Cyperin 10EC,AP-512,Square Pharmaceuticals Limited,"Mango, Tea","Hopper, Helopeltis",1 ml/L of water; 500 ml/ha,"Mango | Hopper | 1 ml/L of water
 Tea | Helopeltis | 500 ml/ha",2,IRAC 3A
 Insecticide,53,Cypermethrin,17,Sicorin 10EC,AP-522,SAMP Limited,"Mango, Brinjal","Hopper, Shoot & fruit borer",1 ml/L of water,"Mango | Hopper | 1 ml/L of water
 Brinjal | Shoot & fruit borer | 1 ml/L of water",2,IRAC 3A
@@ -3803,7 +3803,7 @@ Insecticide,63,Emamectin Benzoate,8,Saham 5SG,AP-2047,Intefa,"Tomato, Jute","Fru
 Jute | Hairy caterpillar | 1.50 kg/ha",2,IRAC 6
 Insecticide,63,Emamectin Benzoate,9,Dyna 5SG,AP-2048,S I Agro International,Tomato,Fruit borer,1 g/L of water,Tomato | Fruit borer | 1 g/L of water,1,IRAC 6
 Insecticide,63,Emamectin Benzoate,10,Maczoate 5SG,AP-2049,Shahid Enterprise,Brinjal,Shoot & fruit borer,1 g/L of water,Brinjal | Shoot & fruit borer | 1 g/L of water,1,IRAC 6
-Insecticide,63,Emamectin Benzoate,11,Autoben 5SG,AP-2050,Kohinoor Agro Chemicals,Brinjal,Shoot & fruit borer,1 g/L of water,Brinjal | Shoot & fruit borer | 1 g/L of water,1,IRAC 6
+Insecticide,63,Tebuconazole + Trifloxystrobin,11,Autoben 5SG,AP-2050,Kohinoor Agro Chemicals,Brinjal,Shoot & fruit borer,1 g/L of water,Brinjal | Shoot & fruit borer | 1 g/L of water,1,IRAC 6
 Insecticide,63,Emamectin Benzoate,12,Ricostar 5SG,AP-2051,Padma Agro Sprayers Co.,Tea,Red Spider Mite,500 gm/ha,Tea | Red Spider Mite | 500 gm/ha,1,IRAC 6
 Insecticide,63,Emamectin Benzoate,13,Dana Plus 5SG,AP-2052,Gurpukur Corporation,Tea,"Red Spider Mite, Aphid",500 gm/ha; 250 gm/ha,"Tea | Red Spider Mite | 500 gm/ha
 Tea | Aphid | 250 gm/ha",2,IRAC 6
@@ -4163,7 +4163,7 @@ Tea | Nematodes | 165 g/m3
 Sugarcane | Termite | 16.66 kg/ha",3,IRAC 3A
 Insecticide,80,Fipronil,9,Envoy 50SC,AP-1102,Haychem (Bangladesh) Limited,"Rice, Sugarcane","BPH, Hispa, YSB, Termite",0.5 L/ha; 1.00 L/ha,"Rice | BPH, Hispa, YSB | 0.5 L/ha
 Sugarcane | Termite | 1.00 L/ha",2,IRAC 3A
-Insecticide,80,Fipronil,10,Econil 3GR,AP-1180,East West Chemicals Ltd.,Sugarcane,Termites,16.66 kg/ha,Sugarcane | Termites | 16.66 kg/ha,1,FRAC 24
+Insecticide,80,Kasugamycin + Copper Oxychloride,10,Econil 3GR,AP-1180,East West Chemicals Ltd.,Sugarcane,Termites,16.66 kg/ha,Sugarcane | Termites | 16.66 kg/ha,1,FRAC 24
 Insecticide,80,Fipronil,11,Nema 50SC,AP-1183,Intefa,"Rice, Sugarcane","Hispa, Termite",500 ml/ha; 1.00 L/ha,"Rice | Hispa | 500 ml/ha
 Sugarcane | Termite | 1.00 L/ha",2,IRAC 3A
 Insecticide,80,Fipronil,12,Seagent 3GR,AP-1255,Sea Trade Fertilizer Limited,"Rice, Tea, Sugarcane","BPH, Termite",10.00 kg/ha; 33.00 kg/ha,"Rice | BPH | 10.00 kg/ha
@@ -5042,7 +5042,7 @@ Tea | Red Spider Mites | 2.00 L/ha",2,IRAC 1B
 Insecticide,122,Quinalphos (25%),2,Corolux 25EC,AP-391,Corbel International Limited,"Rice, Brinjal, Jute","Hispa, SB, GLH, GH, Gall midge, Shoot & fruitborer, Hairy caterpillar",1.50 L/ha; 840 ml/ha; 1.68 L/ha,"Rice | Hispa, SB, GLH, GH, Gall midge | 1.50 L/ha
 Brinjal | Shoot & fruitborer | 840 ml/ha
 Jute | Hairy caterpillar | 1.68 L/ha",3,IRAC 1B
-Insecticide,122,Quinalphos (25%),3,Deviquine 25EC,AP-509,The Limit Agroproducts Limited,Rice,BPH,1.50 L/ha,Rice | BPH | 1.50 L/ha,1,IRAC 1B
+Insecticide,122,Mancozeb + Metalaxyl,3,Deviquine 25EC,AP-509,The Limit Agroproducts Limited,Rice,BPH,1.50 L/ha,Rice | BPH | 1.50 L/ha,1,IRAC 1B
 Insecticide,122,Quinalphos (25%),4,Quilax 25EC,AP-536,Reximco Insecticides Limited,Rice,Hispa,1.00 L/ha,Rice | Hispa | 1.00 L/ha,1,IRAC 1B
 Insecticide,122,Quinalphos (25%),5,Konika 25EC,AP-606,SAM Agro Chemical,Rice,Hispa,1.00 L/ha,Rice | Hispa | 1.00 L/ha,1,IRAC 1B
 Insecticide,122,Quinalphos (25%),,Amcolux 25EC,AP-656,Atherton Imbros Company Ltd.,"Rice, Brinjal","BPH, Shoot & fruitborer",1.50 L/ha; 3 ml/L of water,"Rice | BPH | 1.50 L/ha
@@ -5894,7 +5894,7 @@ Herbicide,28,Metamifop,2,Metanil 10EC,AP-5860,Integrated Crop Solution Banglades
 Herbicide,29,Metribuzin,1,Neon 70WG,AP-1023,Auto Crop Care Limited,"Potato, Maize, Sugarcane","Weeds, Iteliotropium indicum,Commelina, bengalensis, Chenopodium album, Lindernia antipoda & Alternanathera, sessilis, Amaranthus viridis, Broad leaf weeds",750 gm/ha; 1.50 kg/ha,"Potato | Weeds | 750 gm/ha
 Maize | Iteliotropium indicum,Commelina, bengalensis, Chenopodium album, Lindernia antipoda & Alternanathera, sessilis, Amaranthus viridis | 750 gm/ha
 Sugarcane | Broad leaf weeds | 1.50 kg/ha",3,HRAC C1
-Herbicide,29,Metribuzin,2,Takkar 70WDG,AP-2110,United Phosphorus (Bangladesh) Ltd,"Soyabean, Potato","Echinochloa colonum, Chenopodium album, G.affine, C.album, E.colonum",1.00 kg/ha; 750 gm/ha,"Soyabean | Echinochloa colonum, Chenopodium album | 1.00 kg/ha
+Herbicide,29,Thiamethoxam + Chlorantraniliprole,2,Takkar 70WDG,AP-2110,United Phosphorus (Bangladesh) Ltd,"Soyabean, Potato","Echinochloa colonum, Chenopodium album, G.affine, C.album, E.colonum",1.00 kg/ha; 750 gm/ha,"Soyabean | Echinochloa colonum, Chenopodium album | 1.00 kg/ha
 Potato | G.affine, C.album, E.colonum | 750 gm/ha",2,HRAC C1
 Herbicide,29,Metribuzin,3,Sencor 70WP,AP-2576,Bayer CropScience Limited,Potato,"L.anagali (Panighas), G.affinal (Boncopy), E.colonum (Khude shama)",0.75 g/L of water,"Potato | L.anagali (Panighas), G.affinal (Boncopy), E.colonum (Khude shama) | 0.75 g/L of water",1,HRAC C1
 Herbicide,29,Metribuzin,4,Orchid 70WP,AP-2577,M S Agro Chemicals Company Ltd,Potato,"L.anagali (Panighas), G.affinal (Boncopy), E.colonum (Khude shama)",0.50 g/10 m3,"Potato | L.anagali (Panighas), G.affinal (Boncopy), E.colonum (Khude shama) | 0.50 g/10 m3",1,HRAC C1
@@ -7250,36 +7250,36 @@ Public Health,74,Novaluron (0.12%),1,Mosquiron 0.12 P,PHP-1071,Russell IPM Bangl
 Public Health,75,Metofluthrin+Imiprothin+Permethrin,1,Cannon Brand Aerosol,PHP-769,Erra Industrial Corporation,,Mosquit,18 Sce SP/100m,Mosquit | 18 Sce SP/100m,1,
 Public Health,76,Spinosad (7.48%),1,Natulat TM DT,PHP-1076,RiceCo International Bangladesh Ltd.,,Mosquito Larva,1 Tablet/200 Litre water,Mosquito Larva | 1 Tablet/200 Litre water,1,
 Public Health,77,D transflothrin (1.%) + Permethrin (0.5%) + Prallethrin (0.1%),1,Killer Mosquit Insecticides,PHP-1123,Forward International (BD) Ltd.,,Mosquito,40 Litre/100 Litre of water,Mosquito | 40 Litre/100 Litre of water,1,
-Insecticide,0,,0,Sunfos-20%EC,AP-764,Sunseed Pesticides,,,,,0,
-Insecticide,0,,0,Rexivit 80 WP,AP-996,Soft Agro Service,,,,,0,FRAC M02
-Insecticide,0,,0,TENUP 4G,AP-998,Auto Crop Care Limited,,,,,0,
-Insecticide,0,,0,Mancothane 80WP,AP-1037,Haychem (Bangladesh) Limited,,,,,0,
-Insecticide,0,,0,Krizole 5% EC,AP-1199,Mcdonald crop care limited,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Sunfos-20%EC,AP-764,Sunseed Pesticides,,,,,0,
+Insecticide,0,Sulphur,0,Rexivit 80 WP,AP-996,Soft Agro Service,,,,,0,FRAC M02
+Insecticide,0,Cartap,0,TENUP 4G,AP-998,Auto Crop Care Limited,,,,,0,
+Insecticide,0,Mancozeb,0,Mancothane 80WP,AP-1037,Haychem (Bangladesh) Limited,,,,,0,
+Insecticide,0,Hexaconazole,0,Krizole 5% EC,AP-1199,Mcdonald crop care limited,,,,,0,
 Insecticide,0,,0,Seamethrin 10EC,AP--1320,Babylon Agriscience Ltd,,,,,0,IRAC 3A
-Insecticide,0,,0,Afithrin 10 EC,AP-1432,Sundarbon Agro Products,,,,,0,
+Insecticide,0,Cypermethrin,0,Afithrin 10 EC,AP-1432,Sundarbon Agro Products,,,,,0,
 Insecticide,0,,0,McZinex 60 EC,AP-1434,Mcdonald crop care limited,,,,,0,
-Insecticide,0,,0,Afifos 20EC,AP-1722,Sundarbon Agro Products,,,,,0,
-Insecticide,0,,0,Little Star 2.5EC,AP-1936,Agrinet Crop Care Bangladesh,,,,,0,
-Insecticide,0,,0,Afizinon 10 G,AP-1993,Sundarbon Agro Products,,,,,0,
-Insecticide,0,,0,Fifavit 80 WG,AP-2082,china crop care ltd,,,,,0,
-Insecticide,0,,0,Afizeb 80 WP,AP-2154,Sundarbon Agro Products,,,,,0,M3
+Insecticide,0,Chlorpyrifos,0,Afifos 20EC,AP-1722,Sundarbon Agro Products,,,,,0,
+Insecticide,0,Lambda-cyhalothrin,0,Little Star 2.5EC,AP-1936,Agrinet Crop Care Bangladesh,,,,,0,
+Insecticide,0,Diazinon,0,Afizinon 10 G,AP-1993,Sundarbon Agro Products,,,,,0,
+Insecticide,0,Carbaryl,0,Fifavit 80 WG,AP-2082,china crop care ltd,,,,,0,
+Insecticide,0,Mancozeb,0,Afizeb 80 WP,AP-2154,Sundarbon Agro Products,,,,,0,M3
 Insecticide,0,,0,AP- Tab,AP-2277,Sadik Agrochemicals Co. Limited,,,,,0,
-Insecticide,0,,0,Adzoate 5WDG,AP-2322,Advanced Agricultural Solution Ltd,,,,,0,
-Insecticide,0,,0,Rexifos 55 EC,AP-2352,Soft Agro Service,,,,,0,IRAC 24A
-Insecticide,0,,0,Mascothrin 10 EC,AP-2391,Masco Agro Chemicals,,,,,0,IRAC 3A
-Insecticide,0,,0,Sulfomart 80 WDG,AP-2436,The Limit Agroproducts Ltd,,,,,0,
+Insecticide,0,Emamectin Benzoate,0,Adzoate 5WDG,AP-2322,Advanced Agricultural Solution Ltd,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Rexifos 55 EC,AP-2352,Soft Agro Service,,,,,0,IRAC 24A
+Insecticide,0,Cypermethrin,0,Mascothrin 10 EC,AP-2391,Masco Agro Chemicals,,,,,0,IRAC 3A
+Insecticide,0,Sulphur,0,Sulfomart 80 WDG,AP-2436,The Limit Agroproducts Ltd,,,,,0,
 Insecticide,0,,0,Mighter 25EC,AP-2505,Mosco Marketing Limited,,,,,0,FRAC 3
-Insecticide,0,,0,CM 75 WP,AP-2529,Mcdonald crop care limited,,,,,0,
-Insecticide,0,,0,Itaphos 48EC,AP-2631,Italy Agro Marketing Company,,,,,0,
-Insecticide,0,,0,Itathirin 10 EC,AP-2706,Italy Agro Marketing Company,,,,,0,
-Insecticide,0,,0,Tarazole 75 WP,AP-2773,Sunseed Pesticides,,,,,0,
-Insecticide,0,,0,Lintap 200 SL,AP-2843,Seed link Enterprise,,,,,0,IRAC 4A
-Insecticide,0,,0,Emachin 5 SG,AP-2845,Green Link International,,,,,0,
-Insecticide,0,,0,Filnon 10 G,AP-2948,AM Traders,,,,,0,
+Insecticide,0,Mancozeb + Carbendazim,0,CM 75 WP,AP-2529,Mcdonald crop care limited,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Itaphos 48EC,AP-2631,Italy Agro Marketing Company,,,,,0,
+Insecticide,0,Cypermethrin,0,Itathirin 10 EC,AP-2706,Italy Agro Marketing Company,,,,,0,
+Insecticide,0,Tricyclazole,0,Tarazole 75 WP,AP-2773,Sunseed Pesticides,,,,,0,
+Insecticide,0,Cartap,0,Lintap 200 SL,AP-2843,Seed link Enterprise,,,,,0,IRAC 4A
+Insecticide,0,Imidacloprid,0,Emachin 5 SG,AP-2845,Green Link International,,,,,0,
+Insecticide,0,Diazinon,0,Filnon 10 G,AP-2948,AM Traders,,,,,0,
 Insecticide,0,,0,Dhamaka 48 EC,AP-2956,S T Trading Corporation,,,,,0,
-Insecticide,0,,0,Krosin AG 10SP,AP-3204,Mcdonald crop care limited,,,,,0,25
-Insecticide,0,,0,Prithavit 80WDG,AP-3221,Green Link International,,,,,0,
-Insecticide,0,,0,Endavour 300EC,AP-3248,M/S. Atherton Imbros Co. Ltd.,,,,,0,FRAC 3
+Insecticide,0,Streptomycin + Tetracycline,0,Krosin AG 10SP,AP-3204,Mcdonald crop care limited,,,,,0,25
+Insecticide,0,Sulphur,0,Prithavit 80WDG,AP-3221,Green Link International,,,,,0,
+Insecticide,0,Propiconazole,0,Endavour 300EC,AP-3248,M/S. Atherton Imbros Co. Ltd.,,,,,0,FRAC 3
 Insecticide,0,,0,Umate 40EC,AP-3368,Unifarma Bangladesh Industries Ltd.,,,,,0,IRAC 1B
 Insecticide,0,,0,Abin 85WP,AP-3375,Raven Agro Chemicals Limited,,,,,0,IRAC 1A
 Insecticide,0,,0,Unique 5 SG,AP-3446,Sonali Krishi Sheba Industries,,,,,0,
@@ -9161,155 +9161,155 @@ Insecticide,0,,0,Bidria 85 WSC,AP-80,The Shell Compnay of Bangladesh,,,,,0,
 Insecticide,0,,0,Azodrin 40 WSC,AP-81,The International Services,,,,,0,
 Insecticide,0,,0,Dieldrin 50Wp,AP-82,The Shell Compnay of Bangladesh,,,,,0,
 Insecticide,0,,0,Dieldrin 40 WP,AP-83,The Shell Compnay of Bangladesh,,,,,0,
-Insecticide,0,,0,Ethion 46.5%,AP-84,FMC International S. A,,,,,0,IRAC 1B
+Insecticide,0,Diazinon,0,Ethion 46.5%,AP-84,FMC International S. A,,,,,0,IRAC 1B
 Insecticide,0,,0,Pirimor 50 DP,AP-100,Advance Chemical Industries LTD,,,,,0,
 Insecticide,0,,0,FERNIMINE,AP-107,M/S ICT Bangladesh Manufacturer LTD.,,,,,0,
 Insecticide,0,,0,Agrothion 50 EC,AP-108,M/S ICT Bangladesh Manufacturer LTD.,,,,,0,
 Insecticide,0,,0,"Fernoxone (2,4-D Sodium Salt)",AP-109,M/S ICT Bangladesh Manufacturer LTD.,,,,,0,
-Insecticide,0,,0,U 46 D Fluid,AP-110,BASF Bangladesh Limited,,,,,0,HRAC O
+Insecticide,0,Dimethoate,0,U 46 D Fluid,AP-110,BASF Bangladesh Limited,,,,,0,HRAC O
 Insecticide,0,,0,U 46D Powder,AP-111,BASF Bangladesh Limited,,,,,0,
 Insecticide,0,,0,Basfapon,AP-112,BASF Bangladesh Limited,,,,,0,
 Insecticide,0,,0,Thiodan 35 EC,AP-114,M/S Hoechst pharmaceuticals Co Ltd,,,,,0,
 Insecticide,0,,0,Torque 50 W/O,AP-116,The Shell Compnay of Bangladesh,,,,,0,
-Insecticide,0,,0,Thiovit 80 WG,AP-120,Bangladesh Pharmaceutical Company Ltd,,,,,0,FRAC M02
+Insecticide,0,Propineb,0,Thiovit 80 WG,AP-120,Bangladesh Pharmaceutical Company Ltd,,,,,0,FRAC M02
 Insecticide,0,,0,Rentokil CCATYPE-C 72%,AP-121,M/S Greenland Engineer & Tractors Company Ltd,,,,,0,
-Insecticide,0,,0,Phostoxin,AP-122,Broadways Chapmen Limited,,,,,0,
+Insecticide,0,Aluminium Phosphide,0,Phostoxin,AP-122,Broadways Chapmen Limited,,,,,0,
 Insecticide,0,,0,Cupravit WP 50,AP-123,M/S Bayer Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Cidial 50L,AP-124,The Limit Agroproducts Ltd,,,,,0,
-Insecticide,0,,0,Celphos,AP-125,M/S Excel Trading Company Ltd,,,,,0,
+Insecticide,0,Phenthoate,0,Cidial 50L,AP-124,The Limit Agroproducts Ltd,,,,,0,
+Insecticide,0,"2,4-D",0,Celphos,AP-125,M/S Excel Trading Company Ltd,,,,,0,
 Insecticide,0,,0,2ithiol57Ec,AP-126,Bangladesh Pharmaceutical Company Ltd,,,,,0,
 Insecticide,0,,0,Sevin 10% D,AP-129,Bangladesh Pharmaceutical Company Ltd,,,,,0,
 Insecticide,0,,0,Miral 3GR,AP-136,M/S Novartis (Bangladesh) Ltd,,,,,0,
 Insecticide,0,,0,Maladen 57EC (Malathion 57EC),AP-138,Padma Oil Company Ltd,,,,,0,IRAC 1B
-Insecticide,0,,0,Arrivo 10EC,AP-140,FMC Chemical International AG,,,,,0,
-Insecticide,0,,0,Rogor L-40,AP-141,M/S Rupali Sangstha Ltd,,,,,0,
+Insecticide,0,Cypermethrin,0,Arrivo 10EC,AP-140,FMC Chemical International AG,,,,,0,
+Insecticide,0,Dimethoate,0,Rogor L-40,AP-141,M/S Rupali Sangstha Ltd,,,,,0,
 Insecticide,0,,0,Bassa 50% EC,AP-142,M/S Data Enterprises Ltd,,,,,0,
 Insecticide,0,,0,Tanalith CCA Oxide Type C Paste,AP-144,M/S Sisco International Ltd,,,,,0,
 Insecticide,0,,0,Pillarcron 100SL,AP-148,,,,,,0,
 Insecticide,0,,0,Carbaryl 85 WP,AP-150,Mcdonald Bangladesh Pvt Ltd,,,,,0,IRAC 1A
 Insecticide,0,,0,DDVP 100 EC,AP-151,Mcdonald Bangladesh Pvt Ltd,,,,,0,
-Insecticide,0,,0,Malaton 57EC,AP-153,M/S Business Point Ltd,,,,,0,
+Insecticide,0,Malathion,0,Malaton 57EC,AP-153,M/S Business Point Ltd,,,,,0,
 Insecticide,0,,0,Sumithion 3% Dust,AP-156,Shetu Corporation Ltd,,,,,0,IRAC 1B
 Insecticide,0,,0,Osmose K-33 C (72%),AP-158,M/S Tristan International,,,,,0,
-Insecticide,0,,0,Sabion 10G,AP-159,Mcdonald Bangladesh Pvt Ltd,,,,,0,
+Insecticide,0,Diazinon,0,Sabion 10G,AP-159,Mcdonald Bangladesh Pvt Ltd,,,,,0,
 Insecticide,0,,0,Trebon 10EC,AP-161,M/S Data Enterprises Ltd,,,,,0,
-Insecticide,0,,0,Basathrin 10EC,AP-162,BASF Bangladesh Limited,,,,,0,
+Insecticide,0,Cypermethrin,0,Basathrin 10EC,AP-162,BASF Bangladesh Limited,,,,,0,
 Insecticide,0,,0,RIDOMIL M272 WP,AP-165,M/S Novartis (Bangladesh) Ltd,,,,,0,
 Insecticide,0,,0,Tedion V 18 EC,AP-173,Hossain Enterprise C.C. Limited,,,,,0,
 Insecticide,0,,0,Magafos 40L.C.,AP-175,Mcdonald Bangladesh Pvt Ltd,,,,,0,
-Insecticide,0,,0,Bavistiu DF,AP-176,BASF Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Ronstar 25EC,AP-177,Rhone Ponlene  Agrucel Bangladesh,,,,,0,
+Insecticide,0,Carbendazim,0,Bavistiu DF,AP-176,BASF Bangladesh Limited,,,,,0,
+Insecticide,0,Oxadiazon,0,Ronstar 25EC,AP-177,Rhone Ponlene  Agrucel Bangladesh,,,,,0,
 Insecticide,0,,0,Homai 80 WP,AP-179,M/S Data Enterprises Ltd,,,,,0,
 Insecticide,0,,0,Klerat,AP-183,Advance Chemical Industries LTD,,,,,0,
 Insecticide,0,,0,PESNON 57 EC,AP-189,M/S Sea trade Fertilizer Ltd,,,,,0,
 Insecticide,0,,0,EDFEN 50EC,AP-191,M/S Edgro (Pvt) Ltd,,,,,0,
-Insecticide,0,,0,FASTAC 2EC,AP-192,The Shell Compnay of Bangladesh,,,,,0,3A
+Insecticide,0,Alpha-cypermethrin,0,FASTAC 2EC,AP-192,The Shell Compnay of Bangladesh,,,,,0,3A
 Insecticide,0,,0,TOPSIN-M 70WP,AP-193,M/S Data Enterprises Ltd,,,,,0,
-Insecticide,0,,0,EDTHION 50 EC,AP-196,M/S Edgro (Pvt) Ltd,,,,,0,
+Insecticide,0,Fenitrothion,0,EDTHION 50 EC,AP-196,M/S Edgro (Pvt) Ltd,,,,,0,
 Insecticide,0,,0,NOVATHION 50EC,AP-197,Rhone Ponlene  Agrucel Bangladesh,,,,,0,
 Insecticide,0,,0,Basamid Granular,AP-205,BASF Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Polyram Comb,AP-206,BASF Bangladesh Limited,,,,,0,
+Insecticide,0,Metiram,0,Polyram Comb,AP-206,BASF Bangladesh Limited,,,,,0,
 Insecticide,0,,0,Drawizon 10G,AP-207,Hecco Pesticides Pvt Ltd,,,,,0,
 Insecticide,0,,0,KAP 50EC,AP-216,,,,,,0,
 Insecticide,0,,0,CHEMOCARB 50EC,AP-224,M/S Chemsfil Bangladesh Ltd,,,,,0,
-Insecticide,0,,0,Malamar 57EC,AP-231,M/S United Chemicals Industries,,,,,0,
-Insecticide,0,,0,Sovathion 50EC,AP-240,,,,,,0,
-Insecticide,0,,0,Microthiol Special 80WP,AP-252,,,,,,0,FRAC M02
+Insecticide,0,Malathion,0,Malamar 57EC,AP-231,M/S United Chemicals Industries,,,,,0,
+Insecticide,0,Thiram,0,Sovathion 50EC,AP-240,,,,,,0,
+Insecticide,0,Sulphur,0,Microthiol Special 80WP,AP-252,,,,,,0,FRAC M02
 Insecticide,0,,0,Sumilias 75EC,AP-255,Shetu Corporation Ltd,,,,,0,
 Insecticide,0,,0,DIPTEREX SL 50,AP-256,M/S Beximco Agrochemicals,,,,,0,
 Insecticide,0,,0,CEWFON 80SP,AP-257,,,,,,0,
-Insecticide,0,,0,PYRIFOS 20EC,AP-259,Mcdonald Bangladesh Pvt Ltd,,,,,0,
+Insecticide,0,Chlorpyrifos,0,PYRIFOS 20EC,AP-259,Mcdonald Bangladesh Pvt Ltd,,,,,0,
 Insecticide,0,,0,EKALUX 25EC,AP-260,Rhone Ponlene  Agrucel Bangladesh,,,,,0,
 Insecticide,0,,0,LIMITHION 57% EC,AP-264,ACI Formulations PLC,,,,,0,
 Insecticide,0,,0,Basta,AP-265,M/S Hoechst pharmaceuticals Co Ltd,,,,,0,
 Insecticide,0,,0,YASODION,AP-270,M/S Luna Enterprise,,,,,0,
 Insecticide,0,,0,FENDOR 5% GR,AP-279,M/S Bisco Pesticides and Chemicals Limited,,,,,0,
-Insecticide,0,,0,FURASUN 5G,AP-280,Serui Health,,,,,0,
+Insecticide,0,Carbaryl,0,FURASUN 5G,AP-280,Serui Health,,,,,0,
 Insecticide,0,,0,DIAZONYL T60,AP-283,M/S S. Amda and Company Limited,,,,,0,
 Insecticide,0,,0,KADETT 40% Wsc,AP-284,M/S Bisco Pesticides and Chemicals Limited,,,,,0,
 Insecticide,0,,0,MALATOX 57EC,AP-286,M/S Bisco Pesticides and Chemicals Limited,,,,,0,
-Insecticide,0,,0,RAZTHION 57EC,AP-288,M/S Brother Enterprise Ltd,,,,,0,
-Insecticide,0,,0,SETHION 46.5EC,AP-295,,,,,,0,IRAC 1B
-Insecticide,0,,0,COMSATE,AP-296,Omnichem Limited,,,,,0,
+Insecticide,0,Malathion,0,RAZTHION 57EC,AP-288,M/S Brother Enterprise Ltd,,,,,0,
+Insecticide,0,Ethion,0,SETHION 46.5EC,AP-295,,,,,,0,IRAC 1B
+Insecticide,0,Glyphosate,0,COMSATE,AP-296,Omnichem Limited,,,,,0,
 Insecticide,0,,0,STORMWAYBLOCK Bait 0.005%,AP-299,The International Services,,,,,0,
 Insecticide,0,,0,PERMAWOOD CCA Type C 72% Oxide,AP-300,M/S BD Associates & Co,,,,,0,
-Insecticide,0,,0,RAZFURAN 5G,AP-305,M/S Brother Enterprise Ltd,,,,,0,
-Insecticide,0,,0,Paaddy 50 EC,AP-306,M/S Krishi Rashayan (Pvt) Ltd,,,,,0,
+Insecticide,0,Carbaryl,0,RAZFURAN 5G,AP-305,M/S Brother Enterprise Ltd,,,,,0,
+Insecticide,0,Phenthoate,0,Paaddy 50 EC,AP-306,M/S Krishi Rashayan (Pvt) Ltd,,,,,0,
 Insecticide,0,,0,Edthoate 50 EC,AP-307,M/S Edgro (Pvt) Ltd,,,,,0,
-Insecticide,0,,0,Cythrin 10 EC,AP-310,ACI Formulations PLC,,,,,0,IRAC 1B
-Insecticide,0,,0,Somady 57 EC,AP-311,Mcdonald Bangladesh Pvt Ltd,,,,,0,
-Insecticide,0,,0,Palash 57 EC,AP-312,Petrochem (Bangladesh) Limited,,,,,0,
-Insecticide,0,,0,Malason 57 EC,AP-313,Map Agro Industries Ltd,,,,,0,
-Insecticide,0,,0,Fentox 20 EC,AP-314,Auto Crop Care Limited,,,,,0,
+Insecticide,0,Thiophanate-methyl,0,Cythrin 10 EC,AP-310,ACI Formulations PLC,,,,,0,IRAC 1B
+Insecticide,0,Malathion,0,Somady 57 EC,AP-311,Mcdonald Bangladesh Pvt Ltd,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Palash 57 EC,AP-312,Petrochem (Bangladesh) Limited,,,,,0,
+Insecticide,0,Malathion,0,Malason 57 EC,AP-313,Map Agro Industries Ltd,,,,,0,
+Insecticide,0,Fenvalerate,0,Fentox 20 EC,AP-314,Auto Crop Care Limited,,,,,0,
 Insecticide,0,,0,Ace. Xro 20 EC,AP-318,Mcdonald Bangladesh Pvt Ltd,,,,,0,
-Insecticide,0,,0,ARODHASN-5G,AP-323,United Phosphorus (Bangladesh) Ltd.,,,,,0,
+Insecticide,0,Carbaryl,0,ARODHASN-5G,AP-323,United Phosphorus (Bangladesh) Ltd.,,,,,0,
 Insecticide,0,,0,DAMAN-100EC,AP-325,Petrochem (Bangladesh) Limited,,,,,0,
-Insecticide,0,,0,Nugor 40 EC,AP-326,United Phosphorus (Bangladesh) Ltd.,,,,,0,
+Insecticide,0,Dimethoate,0,Nugor 40 EC,AP-326,United Phosphorus (Bangladesh) Ltd.,,,,,0,
 Insecticide,0,,0,Monophos 40 SC,AP-328,M/S Alpha Agro Limited,,,,,0,
-Insecticide,0,,0,MAlaphos 57 EC,AP-330,United Phosphorus (Bangladesh) Ltd.,,,,,0,
+Insecticide,0,Malathion,0,MAlaphos 57 EC,AP-330,United Phosphorus (Bangladesh) Ltd.,,,,,0,
 Insecticide,0,,0,Azodrin 40 WSC.,AP-336,BASF Bangladesh Limited,,,,,0,
 Insecticide,0,,0,Round Up,AP-337,Monsanto Bangladesh Limited,,,,,0,HRAC G
 Insecticide,0,,0,Phoskill 40 SL,AP-339,United Phosphorus (Bangladesh) Ltd.,,,,,0,
-Insecticide,0,,0,Amcodin 40% SL,AP-340,M/S. Atherton Imbros Co. Ltd.,,,,,0,
+Insecticide,0,Quinalphos,0,Amcodin 40% SL,AP-340,M/S. Atherton Imbros Co. Ltd.,,,,,0,
 Insecticide,0,,0,Vitacron 40 SC,AP-341,M/S Shetu Marketing Company,,,,,0,
 Insecticide,0,,0,Corphos 40 SL,AP-342,Corbel International Limited,,,,,0,
-Insecticide,0,,0,Classic 20 EC,AP-345,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Lithion 50 EC,AP-348,M/S Agro Care Limited,,,,,0,
-Insecticide,0,,0,RAzland 80 WP,AP-351,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Sulphotox 80% WP,AP-357,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Wettasw 80,AP-358,M/S Alpha Agro Limited,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Classic 20 EC,AP-345,ACI Formulations PLC,,,,,0,
+Insecticide,0,Fenitrothion,0,Lithion 50 EC,AP-348,M/S Agro Care Limited,,,,,0,
+Insecticide,0,Mancozeb,0,RAzland 80 WP,AP-351,ACI Formulations PLC,,,,,0,
+Insecticide,0,Sulphur,0,Sulphotox 80% WP,AP-357,ACI Formulations PLC,,,,,0,
+Insecticide,0,Sulphur,0,Wettasw 80,AP-358,M/S Alpha Agro Limited,,,,,0,
 Insecticide,0,,0,Dicofal 18.5 EC,AP-359,Mcdonald Bangladesh Pvt Ltd,,,,,0,
 Insecticide,0,,0,Sefoff 20 WG,AP-361,Syngenta Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Golter 5G,AP-363,Auto Crop Care Limited,,,,,0,
+Insecticide,0,Butachlor,0,Golter 5G,AP-363,Auto Crop Care Limited,,,,,0,
 Insecticide,0,,0,Asset 41%,AP-364,Agrodev Limited,,,,,0,
 Insecticide,0,,0,Chess 25 WP,AP-365,Syngenta Bangladesh Limited,,,,,0,IRAC 9B
-Insecticide,0,,0,Mc Sulphur 80% WP,AP-367,Mcdonald Bangladesh Pvt Ltd,,,,,0,FRAC M02
+Insecticide,0,Sulphur,0,Mc Sulphur 80% WP,AP-367,Mcdonald Bangladesh Pvt Ltd,,,,,0,FRAC M02
 Insecticide,0,,0,Laphos 40 SL,AP-368,ACI Limited,,,,,0,IRAC 1B
-Insecticide,0,,0,Marshal 6G,AP-369,FMC Switzerland II Gmbit,,,,,0,
+Insecticide,0,Carbosulfan,0,Marshal 6G,AP-369,FMC Switzerland II Gmbit,,,,,0,
 Insecticide,0,,0,Zinc Phosophide,AP-370,M/S Agrani Traders,,,,,0,IRAC 24A
 Insecticide,0,,0,Lorsban 15G,AP-371,Auto Crop Care Limited,,,,,0,
 Insecticide,0,,0,Padan 4G,AP-372,Krishi Kallyan,,,,,0,
 Insecticide,0,,0,Chlorpyrifos 20 EC,AP-376,Safeway Pest Control,,,,,0,IRAC 1B
 Insecticide,0,,0,Ridomil Gold Mz,AP-377,Syngenta Bangladesh Limited,,,,,0,FRAC 4
-Insecticide,0,,0,Lethal 20 EC,AP-379,Shetu Pesticides Ltd,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Lethal 20 EC,AP-379,Shetu Pesticides Ltd,,,,,0,
 Insecticide,0,,0,Pyriban 20% EC,AP-381,M/S Agro Development Services Co. Pvt. Ltd.,,,,,0,IRAC 1B
 Insecticide,0,,0,Diazinone 10GR,AP-385,Krishi Kallyan,,,,,0,IRAC 1B
-Insecticide,0,,0,Vitashield 20 EC,AP-386,SEMCO Corporation Ltd.,,,,,0,
-Insecticide,0,,0,Killer 50 EC,AP-387,Reximco Insecticides Limited,,,,,0,
-Insecticide,0,,0,Dimevest 40 EC,AP-390,Harvest International,,,,,0,
-Insecticide,0,,0,Fentro 50EC,AP-393,Map Agro Industries Ltd,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Vitashield 20 EC,AP-386,SEMCO Corporation Ltd.,,,,,0,
+Insecticide,0,Fenobucarb,0,Killer 50 EC,AP-387,Reximco Insecticides Limited,,,,,0,
+Insecticide,0,Validamycin,0,Dimevest 40 EC,AP-390,Harvest International,,,,,0,
+Insecticide,0,Fenitrothion,0,Fentro 50EC,AP-393,Map Agro Industries Ltd,,,,,0,
 Insecticide,0,,0,Crackdown,AP-395,Hesbestsons Bangladesh Ltd,,,,,0,
-Insecticide,0,,0,Razex 4G,AP-423,McDonald Crop Care Ltd,,,,,0,
-Insecticide,0,,0,Forwatap 4G,AP-425,Shetu Pesticides Ltd,,,,,0,IRAC 14
-Insecticide,0,,0,Talstar 2 WG,AP-427,FMC Chemical International AG,,,,,0,IRAC 3A
-Insecticide,0,,0,Shanon 10G,AP-433,McDonald Crop Care Ltd,,,,,0,
-Insecticide,0,,0,Ambofos 20EC,AP-434,M/S. Atherton Imbros Co. Ltd.,,,,,0,
-Insecticide,0,,0,Alpha Furer 5%,AP-440,M/S Alpha Agro Limited,,,,,0,1A
-Insecticide,0,,0,Cemitap 50 SP,AP-450,S.S. vision Limited,,,,,0,
-Insecticide,0,,0,Dragon 50 EC,AP-454,M/S Alpha Agro Limited,,,,,0,
+Insecticide,0,Cartap,0,Razex 4G,AP-423,McDonald Crop Care Ltd,,,,,0,
+Insecticide,0,Cartap,0,Forwatap 4G,AP-425,Shetu Pesticides Ltd,,,,,0,IRAC 14
+Insecticide,0,Bifenthrin,0,Talstar 2 WG,AP-427,FMC Chemical International AG,,,,,0,IRAC 3A
+Insecticide,0,Diazinon,0,Shanon 10G,AP-433,McDonald Crop Care Ltd,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Ambofos 20EC,AP-434,M/S. Atherton Imbros Co. Ltd.,,,,,0,
+Insecticide,0,Carbaryl,0,Alpha Furer 5%,AP-440,M/S Alpha Agro Limited,,,,,0,1A
+Insecticide,0,Cartap,0,Cemitap 50 SP,AP-450,S.S. vision Limited,,,,,0,
+Insecticide,0,Fenthion,0,Dragon 50 EC,AP-454,M/S Alpha Agro Limited,,,,,0,
 Insecticide,0,,0,Filltouch 20 EC,AP-459,M/S Naafco (Pvt) Ltd,,,,,0,
-Insecticide,0,,0,Akonazole 250EC,AP-467,Mcdonald Bangladesh Pvt Ltd,,,,,0,
-Insecticide,0,,0,Shinbuta 5G,AP-469,Petrochem (Bangladesh) Limited,,,,,0,
-Insecticide,0,,0,Cannon 5G,AP-471,SAM Agro Chemical,,,,,0,
+Insecticide,0,Propiconazole,0,Akonazole 250EC,AP-467,Mcdonald Bangladesh Pvt Ltd,,,,,0,
+Insecticide,0,Butachlor,0,Shinbuta 5G,AP-469,Petrochem (Bangladesh) Limited,,,,,0,
+Insecticide,0,Butachlor,0,Cannon 5G,AP-471,SAM Agro Chemical,,,,,0,
 Insecticide,0,,0,Anvil 5 EC,AP-472,Syngenta Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Tidephet 75 SA,AP-473,ACI Formulations PLC,,,,,0,
+Insecticide,0,Acephate,0,Tidephet 75 SA,AP-473,ACI Formulations PLC,,,,,0,
 Insecticide,0,,0,Amitage 20 EC,AP-476,McDonald Crop Care Ltd,,,,,0,
 Insecticide,0,,0,Matasystox R 25 EC,AP-493,United Phosphorus (Bangladesh) Ltd.,,,,,0,
-Insecticide,0,,0,Furadan 5G,AP-499,Padma Oil Company Ltd,,,,,0,
-Insecticide,0,,0,Sulban 20EC,AP-506,Axil Life Science Ltd,,,,,0,
-Insecticide,0,,0,Dimezyl 40EC,AP-514,Square Pharmaceuticals PLC.,,,,,0,
-Insecticide,0,,0,Sinulux 25EC,AP-517,Global Agrovet Ltd.,,,,,0,
-Insecticide,0,,0,Filcord 10EC,AP-518,Agritech,,,,,0,
-Insecticide,0,,0,Delmark 2.5EC,AP-519,Axil Life Science Ltd,,,,,0,
-Insecticide,0,,0,Accord 10EC,AP-521,M/S Agro Care Limited,,,,,0,
+Insecticide,0,Carbofuran,0,Furadan 5G,AP-499,Padma Oil Company Ltd,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Sulban 20EC,AP-506,Axil Life Science Ltd,,,,,0,
+Insecticide,0,Dimethoate,0,Dimezyl 40EC,AP-514,Square Pharmaceuticals PLC.,,,,,0,
+Insecticide,0,Quinalphos,0,Sinulux 25EC,AP-517,Global Agrovet Ltd.,,,,,0,
+Insecticide,0,Cypermethrin,0,Filcord 10EC,AP-518,Agritech,,,,,0,
+Insecticide,0,Deltamethrin,0,Delmark 2.5EC,AP-519,Axil Life Science Ltd,,,,,0,
+Insecticide,0,Cypermethrin,0,Accord 10EC,AP-521,M/S Agro Care Limited,,,,,0,
 Insecticide,0,,0,Cypercid 10EC,AP-523,Pharma and Firm,,,,,0,
 Insecticide,0,,0,Basudin 10SR,AP-532,Syngenta Bangladesh Limited,,,,,0,
 Insecticide,0,,0,Ricon 60EC,AP-533,Syngenta Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Sinocarb 20EC,AP-537,Global Agrovet Ltd.,,,,,0,
-Insecticide,0,,0,SRACE 50EC,AP-538,M/S Agro Care Limited,,,,,0,
-Insecticide,0,,0,Ethion 46.5%EC,AP-542,FMC Chemical International AG,,,,,0,IRAC 1B
-Insecticide,0,,0,Perfekthion 40EC,AP-549,BASF Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Calixin,AP-550,BASF Bangladesh Limited,,,,,0,5
+Insecticide,0,Carbaryl,0,Sinocarb 20EC,AP-537,Global Agrovet Ltd.,,,,,0,
+Insecticide,0,Phenthoate,0,SRACE 50EC,AP-538,M/S Agro Care Limited,,,,,0,
+Insecticide,0,Ethion,0,Ethion 46.5%EC,AP-542,FMC Chemical International AG,,,,,0,IRAC 1B
+Insecticide,0,Dimethoate,0,Perfekthion 40EC,AP-549,BASF Bangladesh Limited,,,,,0,
+Insecticide,0,Tridemorph,0,Calixin,AP-550,BASF Bangladesh Limited,,,,,0,5
 Insecticide,0,,0,Neoron 500 EC,AP-551,Syngenta Bangladesh Limited,,,,,0,
 Insecticide,0,,0,Silosan-50EC,AP-553,Syngenta Bangladesh Limited,,,,,0,
 Insecticide,0,,0,Diazinon 14 G,AP-554,M/S Data Enterprises Ltd,,,,,0,IRAC 1B
@@ -9319,471 +9319,471 @@ Insecticide,0,,0,Diazinone 60EC,AP-557,M/S Data Enterprises Ltd,,,,,0,IRAC 1B
 Insecticide,0,,0,Elsan 92ULVC,AP-558,M/S Data Enterprises Ltd,,,,,0,
 Insecticide,0,,0,Vitavax 200B,AP-559,Pioneer Equipment and Chemical CO.,,,,,0,
 Insecticide,0,,0,Diazinon 90ULVC,AP-560,M/S Data Enterprises Ltd,,,,,0,IRAC 1B
-Insecticide,0,,0,Alphide,AP-581,M/S New Look,,,,,0,
+Insecticide,0,Aluminium Phosphide,0,Alphide,AP-581,M/S New Look,,,,,0,
 Insecticide,0,,0,Bilshot-N-2/6EC,AP-586,Pharma and Firm,,,,,0,
-Insecticide,0,,0,AMCOZIN 60EC,AP-589,M/S. Atherton Imbros Co. Ltd.,,,,,0,IRAC 1B
-Insecticide,0,,0,Care 4G,AP-593,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Fortune 50SP,AP-596,M/S Agro Care Limited,,,,,0,
-Insecticide,0,,0,Filt 250,AP-602,M/S Agro Care Limited,,,,,0,
+Insecticide,0,Diazinon,0,AMCOZIN 60EC,AP-589,M/S. Atherton Imbros Co. Ltd.,,,,,0,IRAC 1B
+Insecticide,0,Cartap,0,Care 4G,AP-593,ACI Formulations PLC,,,,,0,
+Insecticide,0,Cartap,0,Fortune 50SP,AP-596,M/S Agro Care Limited,,,,,0,
+Insecticide,0,Propiconazole,0,Filt 250,AP-602,M/S Agro Care Limited,,,,,0,
 Insecticide,0,,0,Phartap 50SP,AP-605,Pharma and Firm,,,,,0,
 Insecticide,0,,0,Sicofen 20% EC,AP-624,Genetica Industries Limited,,,,,0,
-Insecticide,0,,0,Easy 250EC,AP-625,M/S Alpha Agro Limited,,,,,0,
-Insecticide,0,,0,Agrizinon 60EC,AP-629,M/S Agribusiness International,,,,,0,
+Insecticide,0,Propiconazole,0,Easy 250EC,AP-625,M/S Alpha Agro Limited,,,,,0,
+Insecticide,0,Diazinon,0,Agrizinon 60EC,AP-629,M/S Agribusiness International,,,,,0,
 Insecticide,0,,0,Mighty 20EC,AP-631,Agro Continent Bangaldesh,,,,,0,
-Insecticide,0,,0,Cyren-15S,AP-632,Shetu Corporation Ltd,,,,,0,IRAC 1B
+Insecticide,0,Chlorpyrifos,0,Cyren-15S,AP-632,Shetu Corporation Ltd,,,,,0,IRAC 1B
 Insecticide,0,,0,Lintur 70WS,AP-633,Syngenta Bangladesh Limited,,,,,0,
 Insecticide,0,,0,Sinofen 20EC,AP-637,Global Agrovet Ltd.,,,,,0,
-Insecticide,0,,0,Suncot 10 EC,AP-645,Padma Agro Sprayers Co,,,,,0,IRAC 3A
+Insecticide,0,Cypermethrin,0,Suncot 10 EC,AP-645,Padma Agro Sprayers Co,,,,,0,IRAC 3A
 Insecticide,0,,0,Alert 50 EC,AP-648,Auto Crop Care Limited,,,,,0,IRAC 4A
-Insecticide,0,,0,Superdan 50% SP,AP-649,Omnichem Limited,,,,,0,
-Insecticide,0,,0,Chemicide 20 EC,AP-655,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,Q-furan 5S,AP-672,Qadside Bangladesh LTD.,,,,,0,
-Insecticide,0,,0,Hextar 5S,AP-673,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,Mapathion 57 EC,AP-688,M/S Agribusiness International,,,,,0,
+Insecticide,0,Cartap,0,Superdan 50% SP,AP-649,Omnichem Limited,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Chemicide 20 EC,AP-655,M/S Agribusiness International,,,,,0,
+Insecticide,0,Carbaryl,0,Q-furan 5S,AP-672,Qadside Bangladesh LTD.,,,,,0,
+Insecticide,0,Carbaryl,0,Hextar 5S,AP-673,M/S Agribusiness International,,,,,0,
+Insecticide,0,Malathion,0,Mapathion 57 EC,AP-688,M/S Agribusiness International,,,,,0,
 Insecticide,0,,0,SARFIUM 56% EC,AP-689,M/S Sar Trading,,,,,0,
-Insecticide,0,,0,MIRACLE 25 EC,AP-691,Global Agrovet Ltd.,,,,,0,
-Insecticide,0,,0,Butakill 5S,AP-696,M/S Sea trade Fertilizer Ltd,,,,,0,
-Insecticide,0,,0,Anti-sika 250 EC,AP-709,National Agricare Import and Export Limited,,,,,0,
-Insecticide,0,,0,Flowin-HT,AP-712,Auto Crop Care Limited,,,,,0,
+Insecticide,0,Oxadiazon,0,MIRACLE 25 EC,AP-691,Global Agrovet Ltd.,,,,,0,
+Insecticide,0,Butachlor,0,Butakill 5S,AP-696,M/S Sea trade Fertilizer Ltd,,,,,0,
+Insecticide,0,Propiconazole,0,Anti-sika 250 EC,AP-709,National Agricare Import and Export Limited,,,,,0,
+Insecticide,0,Mancozeb,0,Flowin-HT,AP-712,Auto Crop Care Limited,,,,,0,
 Insecticide,0,,0,Agridazim-50wp,AP-728,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,Derifen-20EC,AP-740,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Durin-10%EC,AP-767,M/S. M.Hossain Enterprise,,,,,0,
-Insecticide,0,,0,Medituf-50SP,AP-772,M.N Huda & Co.,,,,,0,
-Insecticide,0,,0,Touch-20EC,AP-773,Gourab Industries Limited,,,,,0,IRAC 1A
-Insecticide,0,,0,Limidelta-2.5EC,AP-776,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Ethiosul-46.5%EC,AP-777,Hossain Enterprise C.C. Limited,,,,,0,
+Insecticide,0,Fosetyl-aluminium,0,Derifen-20EC,AP-740,ACI Formulations PLC,,,,,0,
+Insecticide,0,Cypermethrin,0,Durin-10%EC,AP-767,M/S. M.Hossain Enterprise,,,,,0,
+Insecticide,0,Cartap,0,Medituf-50SP,AP-772,M.N Huda & Co.,,,,,0,
+Insecticide,0,Carbosulfan,0,Touch-20EC,AP-773,Gourab Industries Limited,,,,,0,IRAC 1A
+Insecticide,0,Deltamethrin,0,Limidelta-2.5EC,AP-776,ACI Formulations PLC,,,,,0,
+Insecticide,0,Ethion,0,Ethiosul-46.5%EC,AP-777,Hossain Enterprise C.C. Limited,,,,,0,
 Insecticide,0,,0,Pharzeb-80wp,AP-784,Pharma and Firm,,,,,0,
 Insecticide,0,,0,Ducord-17EC,AP-793,BASF Bangladesh Limited,,,,,0,
 Insecticide,0,,0,KORANDA,AP-794,Auto Crop Care Limited,,,,,0,
-Insecticide,0,,0,NUTAP-4S,AP-807,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,PRAHAR-50EC,AP-810,Map Agro Industries Ltd,,,,,0,
-Insecticide,0,,0,Furamin-3SR,AP-813,Medicon Agrovet,,,,,0,
-Insecticide,0,,0,Carbine-5S,AP-816,M.B. Agro products Ltd.,,,,,0,
-Insecticide,0,,0,Rakbel-4s,AP-817,Map Agro Industries Ltd,,,,,0,
-Insecticide,0,,0,BIJOY-4S,AP-822,East West Chemicals Ltd.,,,,,0,IRAC 3A
-Insecticide,0,,0,MBChloro-20EC,AP-823,M.B. Agro products Ltd.,,,,,0,
-Insecticide,0,,0,LiHae-20%EC,AP-825,M/S. M.Hossain Enterprise,,,,,0,
+Insecticide,0,Cartap,0,NUTAP-4S,AP-807,ACI Formulations PLC,,,,,0,
+Insecticide,0,Difenoconazole,0,PRAHAR-50EC,AP-810,Map Agro Industries Ltd,,,,,0,
+Insecticide,0,Carbofuran,0,Furamin-3SR,AP-813,Medicon Agrovet,,,,,0,
+Insecticide,0,Carbaryl,0,Carbine-5S,AP-816,M.B. Agro products Ltd.,,,,,0,
+Insecticide,0,Cartap,0,Rakbel-4s,AP-817,Map Agro Industries Ltd,,,,,0,
+Insecticide,0,Cartap,0,BIJOY-4S,AP-822,East West Chemicals Ltd.,,,,,0,IRAC 3A
+Insecticide,0,Chlorpyrifos,0,MBChloro-20EC,AP-823,M.B. Agro products Ltd.,,,,,0,
+Insecticide,0,Chlorpyrifos,0,LiHae-20%EC,AP-825,M/S. M.Hossain Enterprise,,,,,0,
 Insecticide,0,,0,FOCUS-50SC,AP-828,Auto Crop Care Limited,,,,,0,
-Insecticide,0,,0,SHELTER-60EC,AP-829,LINUX PESTICIDE PVT LTD,,,,,0,FRAC 1
-Insecticide,0,,0,IMPACT-75SP,AP-836,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,Edchlor-500EC,AP-842,Nokon Limited,,,,,0,
-Insecticide,0,,0,HUNTER-500EC,AP-843,M/S Agro Care Limited,,,,,0,IRAC 3A
-Insecticide,0,,0,FASTMIX EW,AP-845,Auto Crop Care Limited,,,,,0,
-Insecticide,0,,0,omnichlor-5%S,AP-849,Omnichem Limited,,,,,0,
-Insecticide,0,,0,E-fan-20EC,AP-865,East West Chemicals Ltd.,,,,,0,
-Insecticide,0,,0,Acar-50SP,AP-866,Axil Life Science Ltd,,,,,0,
+Insecticide,0,Diazinon,0,SHELTER-60EC,AP-829,LINUX PESTICIDE PVT LTD,,,,,0,FRAC 1
+Insecticide,0,Acephate,0,IMPACT-75SP,AP-836,M/S Agribusiness International,,,,,0,
+Insecticide,0,Pretilachlor,0,Edchlor-500EC,AP-842,Nokon Limited,,,,,0,
+Insecticide,0,Pretilachlor,0,HUNTER-500EC,AP-843,M/S Agro Care Limited,,,,,0,IRAC 3A
+Insecticide,0,Butachlor,0,FASTMIX EW,AP-845,Auto Crop Care Limited,,,,,0,
+Insecticide,0,Butachlor,0,omnichlor-5%S,AP-849,Omnichem Limited,,,,,0,
+Insecticide,0,Carbosulfan,0,E-fan-20EC,AP-865,East West Chemicals Ltd.,,,,,0,
+Insecticide,0,Cartap,0,Acar-50SP,AP-866,Axil Life Science Ltd,,,,,0,
 Insecticide,0,,0,TOUCHDOWN HiTECH-500SL,AP-873,Syngenta Bangladesh Limited,,,,,0,
-Insecticide,0,,0,RALLY-20SL,AP-877,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,Aguisul-80DF,AP-884,M/S. M.Hossain Enterprise,,,,,0,
+Insecticide,0,Imidacloprid,0,RALLY-20SL,AP-877,M/S Agribusiness International,,,,,0,
+Insecticide,0,Sulphur,0,Aguisul-80DF,AP-884,M/S. M.Hossain Enterprise,,,,,0,
 Insecticide,0,,0,Slyphar-41 SC,AP-896,Pharma and Firm,,,,,0,
-Insecticide,0,,0,Nokfen 50 EC,AP-901,M/S Bony enterprise,,,,,0,
-Insecticide,0,,0,K-Obiol 2.5 WP,AP-902,M/S Bayer Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Edmethyl 50 EC,AP-906,M/S Bony enterprise,,,,,0,
-Insecticide,0,,0,Sirim 50 EC,AP-907,M/S New Look,,,,,0,
-Insecticide,0,,0,Astoxin -56%,AP-909,M/S Agro Care Limited,,,,,0,
-Insecticide,0,,0,Sarfium 56%,AP-911,M/S Sar Trading,,,,,0,
-Insecticide,0,,0,PrimiCare 50 EC,AP-912,M/S Agro Care Limited,,,,,0,
-Insecticide,0,,0,Quick Kill 80%,AP-914,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,Baicao No. 1,AP-921,M/S Isthmus (pvt) Ltd,,,,,0,
-Insecticide,0,,0,Super Shine 5S,AP-931,Axil Life Science Ltd,,,,,0,
-Insecticide,0,,0,Willfit 50 EC,AP-933,M/S. SAMP Limited,,,,,0,
-Insecticide,0,,0,Sinogold 69,AP-939,Oroni International Ltd,,,,,0,
-Insecticide,0,,0,Machete 5S,AP-940,Auto Crop Care Limited,,,,,0,
-Insecticide,0,,0,Kirifos 20 EC,AP-945,McDonald Crop Care Ltd,,,,,0,
-Insecticide,0,,0,SItap 10EC,AP-946,Green Care Bangladesh,,,,,0,
-Insecticide,0,,0,Diazol 60 EC,AP-953,Corbel International Limited,,,,,0,
-Insecticide,0,,0,MB Malathion 57 EC,AP-954,M.B. Agro products Ltd.,,,,,0,IRAC 1B
+Insecticide,0,Fenitrothion,0,Nokfen 50 EC,AP-901,M/S Bony enterprise,,,,,0,
+Insecticide,0,Deltamethrin,0,K-Obiol 2.5 WP,AP-902,M/S Bayer Bangladesh Limited,,,,,0,
+Insecticide,0,Pirimiphos Methyl,0,Edmethyl 50 EC,AP-906,M/S Bony enterprise,,,,,0,
+Insecticide,0,Pirimiphos Methyl,0,Sirim 50 EC,AP-907,M/S New Look,,,,,0,
+Insecticide,0,Aluminium Phosphide,0,Astoxin -56%,AP-909,M/S Agro Care Limited,,,,,0,
+Insecticide,0,Aluminium Phosphide,0,Sarfium 56%,AP-911,M/S Sar Trading,,,,,0,
+Insecticide,0,Pirimiphos Methyl,0,PrimiCare 50 EC,AP-912,M/S Agro Care Limited,,,,,0,
+Insecticide,0,Zinc Phosphide,0,Quick Kill 80%,AP-914,M/S Agribusiness International,,,,,0,
+Insecticide,0,Matrine,0,Baicao No. 1,AP-921,M/S Isthmus (pvt) Ltd,,,,,0,
+Insecticide,0,Butachlor,0,Super Shine 5S,AP-931,Axil Life Science Ltd,,,,,0,
+Insecticide,0,Pretilachlor,0,Willfit 50 EC,AP-933,M/S. SAMP Limited,,,,,0,
+Insecticide,0,Carbosulfan,0,Sinogold 69,AP-939,Oroni International Ltd,,,,,0,
+Insecticide,0,Butachlor,0,Machete 5S,AP-940,Auto Crop Care Limited,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Kirifos 20 EC,AP-945,McDonald Crop Care Ltd,,,,,0,
+Insecticide,0,Cartap,0,SItap 10EC,AP-946,Green Care Bangladesh,,,,,0,
+Insecticide,0,Diazinon,0,Diazol 60 EC,AP-953,Corbel International Limited,,,,,0,
+Insecticide,0,Malathion,0,MB Malathion 57 EC,AP-954,M.B. Agro products Ltd.,,,,,0,IRAC 1B
 Insecticide,0,,0,Femplus 20 EC,AP-957,East West Chemicals Ltd.,,,,,0,
-Insecticide,0,,0,Agrodan 5S,AP-961,M/S Agro Care Limited,,,,,0,
+Insecticide,0,Carbofuran,0,Agrodan 5S,AP-961,M/S Agro Care Limited,,,,,0,
 Insecticide,0,,0,Farjim 50 WP,AP-967,Pharma and Firm,,,,,0,
-Insecticide,0,,0,Seem Land 68% WP,AP-968,Shetu Pesticides Ltd,,,,,0,
-Insecticide,0,,0,Kinmazeb 80% WP,AP-973,Omnichem Limited,,,,,0,
-Insecticide,0,,0,Topgun 50 DF,AP-974,Global Agrochemicals Ltd,,,,,0,
-Insecticide,0,,0,Monarch 72 WP,AP-976,M.B. Agro products Ltd.,,,,,0,FRAC M3
-Insecticide,0,,0,Sunal 25% EC,AP-990,Agrimax Bangladesh Ltd.,,,,,0,
-Insecticide,0,,0,BAIFOS-20EC,AP-997,BAI AGRICULTURAL INDUSTRIES LIMITED,,,,,0,IRAC 1B
+Insecticide,0,Mancozeb + Metalaxyl,0,Seem Land 68% WP,AP-968,Shetu Pesticides Ltd,,,,,0,
+Insecticide,0,Mancozeb,0,Kinmazeb 80% WP,AP-973,Omnichem Limited,,,,,0,
+Insecticide,0,Copper Oxychloride,0,Topgun 50 DF,AP-974,Global Agrochemicals Ltd,,,,,0,
+Insecticide,0,Mancozeb + Metalaxyl,0,Monarch 72 WP,AP-976,M.B. Agro products Ltd.,,,,,0,FRAC M3
+Insecticide,0,Quinalphos,0,Sunal 25% EC,AP-990,Agrimax Bangladesh Ltd.,,,,,0,
+Insecticide,0,Chlorpyrifos,0,BAIFOS-20EC,AP-997,BAI AGRICULTURAL INDUSTRIES LIMITED,,,,,0,IRAC 1B
 Insecticide,0,,0,Linothrin 10 EC,AP-999,LINUX PESTICIDE PVT LTD,,,,,0,
-Insecticide,0,,0,MBCyper,AP-1002,M.B. Agro products Ltd.,,,,,0,
-Insecticide,0,,0,Hoppergone 50EC,AP-1019,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,Winner 25% EC,AP-1024,Global Agrochemicals Ltd,,,,,0,IRAC 3A
-Insecticide,0,,0,AntiRat,AP-1027,Global Agrovet Ltd.,,,,,0,
-Insecticide,0,,0,BAIZINON-60EC,AP-1031,BAI AGRICULTURAL INDUSTRIES LIMITED,,,,,0,IRAC 1B
-Insecticide,0,,0,AlphadelDF 10WS,AP-1033,M/S Alpha Agro Limited,,,,,0,
+Insecticide,0,Cypermethrin,0,MBCyper,AP-1002,M.B. Agro products Ltd.,,,,,0,
+Insecticide,0,Fenobucarb,0,Hoppergone 50EC,AP-1019,M/S Agribusiness International,,,,,0,
+Insecticide,0,Propiconazole,0,Winner 25% EC,AP-1024,Global Agrochemicals Ltd,,,,,0,IRAC 3A
+Insecticide,0,Aluminium Phosphide,0,AntiRat,AP-1027,Global Agrovet Ltd.,,,,,0,
+Insecticide,0,Diazinon,0,BAIZINON-60EC,AP-1031,BAI AGRICULTURAL INDUSTRIES LIMITED,,,,,0,IRAC 1B
+Insecticide,0,Deltamethrin,0,AlphadelDF 10WS,AP-1033,M/S Alpha Agro Limited,,,,,0,
 Insecticide,0,,0,FENDI-25EC,AP-1035,Nokon Limited,,,,,0,
-Insecticide,0,,0,HYGRO 40 EC,AP-1039,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,KRISBAN 50% WP,AP-1044,"M/S, MARP Bangladesh",,,,,0,
-Insecticide,0,,0,SEDO 20 LE,AP-1045,"M/S, MARP Bangladesh",,,,,0,
-Insecticide,0,,0,FENITON 50 EC,AP-1046,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,SAJID 72 WP,AP-1049,Reximco Insecticides Limited,,,,,0,
+Insecticide,0,Dimethoate,0,HYGRO 40 EC,AP-1039,M/S Agribusiness International,,,,,0,
+Insecticide,0,Carbendazim,0,KRISBAN 50% WP,AP-1044,"M/S, MARP Bangladesh",,,,,0,
+Insecticide,0,Hexaconazole,0,SEDO 20 LE,AP-1045,"M/S, MARP Bangladesh",,,,,0,
+Insecticide,0,Fenitrothion,0,FENITON 50 EC,AP-1046,ACI Formulations PLC,,,,,0,
+Insecticide,0,Mancozeb + Metalaxyl,0,SAJID 72 WP,AP-1049,Reximco Insecticides Limited,,,,,0,
 Insecticide,0,,0,Sulmathion 57 EC,AP-1066,Agrimax Bangladesh Ltd.,,,,,0,
-Insecticide,0,,0,AgroPhate 75 SP,AP-1080,M/S Agro Business Support Limited,,,,,0,1B
+Insecticide,0,Buprofezin,0,AgroPhate 75 SP,AP-1080,M/S Agro Business Support Limited,,,,,0,1B
 Insecticide,0,,0,Hitfen 20 EC,AP-1084,M/S Sea trade Fertilizer Ltd,,,,,0,
 Insecticide,0,,0,DREM-20EC,AP-1086,Kingtech Corporation (BD),,,,,0,
-Insecticide,0,,0,Rapid 72 WP,AP-1092,M/S. SAMP Limited,,,,,0,IRAC 14
-Insecticide,0,,0,Newsnil 72WP,AP-1103,M/S News Chemicals Industries,,,,,0,
+Insecticide,0,Mancozeb + Metalaxyl,0,Rapid 72 WP,AP-1092,M/S. SAMP Limited,,,,,0,IRAC 14
+Insecticide,0,Cartap,0,Newsnil 72WP,AP-1103,M/S News Chemicals Industries,,,,,0,
 Insecticide,0,,0,QUINSUARD 25EC,AP-1106,Auto Crop Care Limited,,,,,0,
-Insecticide,0,,0,Luciban 20 EC,AP-1107,M/S. Lucid Life Science,,,,,0,
-Insecticide,0,,0,CROWN 20 SC,AP-1109,Auto Crop Care Limited,,,,,0,IRAC 3A
+Insecticide,0,Chlorpyrifos,0,Luciban 20 EC,AP-1107,M/S. Lucid Life Science,,,,,0,
+Insecticide,0,Carbosulfan,0,CROWN 20 SC,AP-1109,Auto Crop Care Limited,,,,,0,IRAC 3A
 Insecticide,0,,0,DUAL SOLD 960 EC,AP-1111,Syngenta Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Vitanon 60 EC,AP-1114,SEMCO Corporation Ltd.,,,,,0,
-Insecticide,0,,0,G-Gurd 25 EC,AP-1118,Global Agrovet Ltd.,,,,,0,
-Insecticide,0,,0,Tilken 2.5 EC,AP-1123,S.I. Agro International,,,,,0,
-Insecticide,0,,0,Newoprid 20SL,AP-1131,M/S News Chemicals Industries,,,,,0,
+Insecticide,0,Diazinon,0,Vitanon 60 EC,AP-1114,SEMCO Corporation Ltd.,,,,,0,
+Insecticide,0,Propiconazole,0,G-Gurd 25 EC,AP-1118,Global Agrovet Ltd.,,,,,0,
+Insecticide,0,Propiconazole,0,Tilken 2.5 EC,AP-1123,S.I. Agro International,,,,,0,
+Insecticide,0,Cypermethrin,0,Newoprid 20SL,AP-1131,M/S News Chemicals Industries,,,,,0,
 Insecticide,0,,0,Folio Gold 440 SC,AP-1133,Syngenta Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Newsdin 3G,AP-1137,M/S News Chemicals Industries,,,,,0,
-Insecticide,0,,0,Navigator 48 EC,AP-1140,Auto Crop Care Limited,,,,,0,
+Insecticide,0,Carbaryl,0,Newsdin 3G,AP-1137,M/S News Chemicals Industries,,,,,0,
+Insecticide,0,Pendimethalin,0,Navigator 48 EC,AP-1140,Auto Crop Care Limited,,,,,0,
 Insecticide,0,,0,Nac-Fen-20 EC,AP-1142,National Agricare Import and Export Limited,,,,,0,
 Insecticide,0,,0,AutoGuard 25EC,AP-1147,Auto Crop Care Limited,,,,,0,
-Insecticide,0,,0,Queen-25 EC,AP-1154,East West Chemicals Ltd.,,,,,0,IRAC 1B
-Insecticide,0,,0,Rambo 10EC,AP-1156,TH Pesticide Ltd.,,,,,0,IRAC 3A
-Insecticide,0,,0,Abthrin 10EC,AP-1157,ABS Agro Products,,,,,0,
-Insecticide,0,,0,Charity 5% SR,AP-1160,Map Agro Industries Ltd,,,,,0,
-Insecticide,0,,0,Polyfit 500EC,AP-1171,McDonald Crop Care Ltd,,,,,0,
-Insecticide,0,,0,Nacstar 48% EC,AP-1172,National Agricare Import and Export Limited,,,,,0,
-Insecticide,0,,0,Fyfanon 44EW,AP-1179,Oroni International Ltd,,,,,0,IRAC 1B
-Insecticide,0,,0,200M 25WG,AP-1188,Larsen chemical industries (pvt.) ltd.,,,,,0,
-Insecticide,0,,0,Knilt 250 EC,AP-1200,Nokon Limited,,,,,0,
-Insecticide,0,,0,Guardian 50 SP,AP-1201,Larsen chemical industries (pvt.) ltd.,,,,,0,
-Insecticide,0,,0,Overpyrifos 48 EC,AP-1207,Overseas Trade Corporation (BD) Ltd.,,,,,0,
-Insecticide,0,,0,Overtap 4G,AP-1212,Overseas Trade Corporation (BD) Ltd.,,,,,0,
-Insecticide,0,,0,Predator 50 EC,AP-1214,Auto Crop Care Limited,,,,,0,
-Insecticide,0,,0,Popfen 50EC,AP-1219,Nokon Limited,,,,,0,
-Insecticide,0,,0,Four Star 75% 8P,AP-1224,LINUX PESTICIDE PVT LTD,,,,,0,
+Insecticide,0,Quinalphos,0,Queen-25 EC,AP-1154,East West Chemicals Ltd.,,,,,0,IRAC 1B
+Insecticide,0,Cypermethrin,0,Rambo 10EC,AP-1156,TH Pesticide Ltd.,,,,,0,IRAC 3A
+Insecticide,0,Cypermethrin,0,Abthrin 10EC,AP-1157,ABS Agro Products,,,,,0,
+Insecticide,0,Deltamethrin,0,Charity 5% SR,AP-1160,Map Agro Industries Ltd,,,,,0,
+Insecticide,0,Pretilachlor,0,Polyfit 500EC,AP-1171,McDonald Crop Care Ltd,,,,,0,
+Insecticide,0,Chlorpyrifos + Phoxim,0,Nacstar 48% EC,AP-1172,National Agricare Import and Export Limited,,,,,0,
+Insecticide,0,Malathion,0,Fyfanon 44EW,AP-1179,Oroni International Ltd,,,,,0,IRAC 1B
+Insecticide,0,Thiamethoxam,0,200M 25WG,AP-1188,Larsen chemical industries (pvt.) ltd.,,,,,0,
+Insecticide,0,Propiconazole,0,Knilt 250 EC,AP-1200,Nokon Limited,,,,,0,
+Insecticide,0,Cartap,0,Guardian 50 SP,AP-1201,Larsen chemical industries (pvt.) ltd.,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Overpyrifos 48 EC,AP-1207,Overseas Trade Corporation (BD) Ltd.,,,,,0,
+Insecticide,0,Cartap,0,Overtap 4G,AP-1212,Overseas Trade Corporation (BD) Ltd.,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Predator 50 EC,AP-1214,Auto Crop Care Limited,,,,,0,
+Insecticide,0,Fenitrothion,0,Popfen 50EC,AP-1219,Nokon Limited,,,,,0,
+Insecticide,0,Acephate,0,Four Star 75% 8P,AP-1224,LINUX PESTICIDE PVT LTD,,,,,0,
 Insecticide,0,,0,DOLMA 5B,AP-1226,Syngenta Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Hilphate 75 SP,AP-1237,M/S Sea trade Fertilizer Ltd,,,,,0,
-Insecticide,0,,0,Melux 25% EC,AP-1248,Blessing Agrovet Industries Ltd,,,,,0,
-Insecticide,0,,0,Carvan 4 SR,AP-1249,The Limit Agroproducts Ltd,,,,,0,
+Insecticide,0,Acephate,0,Hilphate 75 SP,AP-1237,M/S Sea trade Fertilizer Ltd,,,,,0,
+Insecticide,0,Quinalphos,0,Melux 25% EC,AP-1248,Blessing Agrovet Industries Ltd,,,,,0,
+Insecticide,0,Cartap,0,Carvan 4 SR,AP-1249,The Limit Agroproducts Ltd,,,,,0,
 Insecticide,0,,0,Paprika 50 EC,AP-1250,Syngenta Bangladesh Limited,,,,,0,
-Insecticide,0,,0,CADER 50 SP,AP-1251,M/S. Safe Crop Limited,,,,,0,
-Insecticide,0,,0,Pure Life 20 EC,AP-1256,M/S Pure Home,,,,,0,
-Insecticide,0,,0,Rekafos 20 EC,AP-1275,TH Pesticide Ltd.,,,,,0,
-Insecticide,0,,0,Convoy 25 EC,AP-1278,Square Pharmaceuticals PLC.,,,,,0,
+Insecticide,0,Cartap,0,CADER 50 SP,AP-1251,M/S. Safe Crop Limited,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Pure Life 20 EC,AP-1256,M/S Pure Home,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Rekafos 20 EC,AP-1275,TH Pesticide Ltd.,,,,,0,
+Insecticide,0,Quinalphos,0,Convoy 25 EC,AP-1278,Square Pharmaceuticals PLC.,,,,,0,
 Insecticide,0,,0,Omnivalerate,AP-1283,Omnichem Limited,,,,,0,
-Insecticide,0,,0,Ecofos-20 EC,AP-1291,AMCO AGRICULTURAL INDUSTRIES LIMITED,,,,,0,
-Insecticide,0,,0,Rephos 20 EC,AP-1292,Bengal Agro Chemical Industries,,,,,0,
-Insecticide,0,,0,Nishan 50 EC,AP-1324,Map Agro Industries Ltd,,,,,0,
-Insecticide,0,,0,Greenthoate 5EC,AP-1331,Green Care Bangladesh,,,,,0,
-Insecticide,0,,0,Neocidin 600EC,AP-1334,,,,,,0,
-Insecticide,0,,0,DIZITOL-105,AP-1344,M/S Mokow Limited,,,,,0,
-Insecticide,0,,0,Kencozeb M-45,AP-1373,S.I. Agro International,,,,,0,
-Insecticide,0,,0,Sundomil Plus68WP,AP-1375,Oroni International Ltd,,,,,0,FRAC M3
-Insecticide,0,,0,Sicazim 50WP,AP-1377,S.I. Agro International,,,,,0,
-Insecticide,0,,0,Hivit 80WDG,AP-1378,S.I. Agro International,,,,,0,
-Insecticide,0,,0,PUREZOLE25EC,AP-1382,M/S Pure Home,,,,,0,
-Insecticide,0,,0,AGRITHANE80WP,AP-1386,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,Hexarite5EC,AP-1388,M/S Naafco (Pvt) Ltd,,,,,0,10A
-Insecticide,0,,0,MAPVAX75WP,AP-1389,Map Agro Industries Ltd,,,,,0,FRAC 7/M03
-Insecticide,0,,0,Chemozim 50WP,AP-1395,Byco Agro Chemicals,,,,,0,
-Insecticide,0,,0,Rifos- 20 EC,AP-1398,M/S. Rico Agrovet,,,,,0,IRAC 1B
-Insecticide,0,,0,Mc. Sulphur Gold-80WG,AP-1400,Mcdonald Bangladesh Pvt Ltd,,,,,0,FRAC M02
-Insecticide,0,,0,Myron 500 EC,AP-1410,Aungkur Traders Agro Ltd.,,,,,0,UN
-Insecticide,0,,0,Power 80 WP,AP-1419,M/S. Standard Yes Co. Ltd.,,,,,0,FRAC M02
-Insecticide,0,,0,Smart Phos 20 EC,AP-1427,Smart Agrovet,,,,,0,
-Insecticide,0,,0,Cyperstand 10 EC,AP-1433,M/S. Standard Yes Co. Ltd.,,,,,0,
-Insecticide,0,,0,Krishchlor 50 EC,AP-1441,"M/S, MARP Bangladesh",,,,,0,
-Insecticide,0,,0,Limozin 50 EC,AP-1443,Larsen chemical industries (pvt.) ltd.,,,,,0,
-Insecticide,0,,0,Torpedo 48 EC,AP-1446,Global Agrovet Ltd.,,,,,0,
-Insecticide,0,,0,Super Sonic 50 EW,AP-1449,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Raid 50 EC,AP-1452,M/S Pure Home,,,,,0,
-Insecticide,0,,0,Select 500 EC,AP-1453,ACI Formulations PLC,,,,,0,FRAC 11
-Insecticide,0,,0,Agrifit 500 EC,AP-1455,M/S Agribusiness International,,,,,0,
-Insecticide,0,,0,Manage 10 WP,AP-1460,Grow More Agro Science.,,,,,0,HRAC 1
+Insecticide,0,Chlorpyrifos,0,Ecofos-20 EC,AP-1291,AMCO AGRICULTURAL INDUSTRIES LIMITED,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Rephos 20 EC,AP-1292,Bengal Agro Chemical Industries,,,,,0,
+Insecticide,0,Fenthion,0,Nishan 50 EC,AP-1324,Map Agro Industries Ltd,,,,,0,
+Insecticide,0,Dimethoate,0,Greenthoate 5EC,AP-1331,Green Care Bangladesh,,,,,0,
+Insecticide,0,Diazinon,0,Neocidin 600EC,AP-1334,,,,,,0,
+Insecticide,0,Diazinon,0,DIZITOL-105,AP-1344,M/S Mokow Limited,,,,,0,
+Insecticide,0,Mancozeb,0,Kencozeb M-45,AP-1373,S.I. Agro International,,,,,0,
+Insecticide,0,Mancozeb + Metalaxyl,0,Sundomil Plus68WP,AP-1375,Oroni International Ltd,,,,,0,FRAC M3
+Insecticide,0,Carbendazim,0,Sicazim 50WP,AP-1377,S.I. Agro International,,,,,0,
+Insecticide,0,Sulphur,0,Hivit 80WDG,AP-1378,S.I. Agro International,,,,,0,
+Insecticide,0,Propiconazole,0,PUREZOLE25EC,AP-1382,M/S Pure Home,,,,,0,
+Insecticide,0,Mancozeb,0,AGRITHANE80WP,AP-1386,M/S Agribusiness International,,,,,0,
+Insecticide,0,Hexythiazox,0,Hexarite5EC,AP-1388,M/S Naafco (Pvt) Ltd,,,,,0,10A
+Insecticide,0,Carboxin (17.5%) + Thiram,0,MAPVAX75WP,AP-1389,Map Agro Industries Ltd,,,,,0,FRAC 7/M03
+Insecticide,0,Carbendazim,0,Chemozim 50WP,AP-1395,Byco Agro Chemicals,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Rifos- 20 EC,AP-1398,M/S. Rico Agrovet,,,,,0,IRAC 1B
+Insecticide,0,Sulphur,0,Mc. Sulphur Gold-80WG,AP-1400,Mcdonald Bangladesh Pvt Ltd,,,,,0,FRAC M02
+Insecticide,0,Bromopropylate,0,Myron 500 EC,AP-1410,Aungkur Traders Agro Ltd.,,,,,0,UN
+Insecticide,0,Sulphur,0,Power 80 WP,AP-1419,M/S. Standard Yes Co. Ltd.,,,,,0,FRAC M02
+Insecticide,0,Chlorpyrifos,0,Smart Phos 20 EC,AP-1427,Smart Agrovet,,,,,0,
+Insecticide,0,Cypermethrin,0,Cyperstand 10 EC,AP-1433,M/S. Standard Yes Co. Ltd.,,,,,0,
+Insecticide,0,Pretilachlor,0,Krishchlor 50 EC,AP-1441,"M/S, MARP Bangladesh",,,,,0,
+Insecticide,0,Pretilachlor,0,Limozin 50 EC,AP-1443,Larsen chemical industries (pvt.) ltd.,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Torpedo 48 EC,AP-1446,Global Agrovet Ltd.,,,,,0,
+Insecticide,0,Butachlor,0,Super Sonic 50 EW,AP-1449,ACI Formulations PLC,,,,,0,
+Insecticide,0,Pretilachlor,0,Raid 50 EC,AP-1452,M/S Pure Home,,,,,0,
+Insecticide,0,Pretilachlor,0,Select 500 EC,AP-1453,ACI Formulations PLC,,,,,0,FRAC 11
+Insecticide,0,Pretilachlor,0,Agrifit 500 EC,AP-1455,M/S Agribusiness International,,,,,0,
+Insecticide,0,Fenoxaprop-p-ethyl,0,Manage 10 WP,AP-1460,Grow More Agro Science.,,,,,0,HRAC 1
 Insecticide,0,,0,Lily Quine 25 EC,AP-1469,Unifarma Bangladesh Industries Ltd.,,,,,0,
-Insecticide,0,,0,Benofit 6 G,AP-1471,Mcdonald Bangladesh Pvt Ltd,,,,,0,
-Insecticide,0,,0,C=Cyd 50 EC,AP-1473,Maitri Agro Industries,,,,,0,
-Insecticide,0,,0,Shakti 50 SP,AP-1474,Desh Pesticides,,,,,0,IRAC 3A
-Insecticide,0,,0,Sefron 5 G,AP-1482,M/S. Safe Crop Limited,,,,,0,
+Insecticide,0,Carbosulfan,0,Benofit 6 G,AP-1471,Mcdonald Bangladesh Pvt Ltd,,,,,0,
+Insecticide,0,Fenthion,0,C=Cyd 50 EC,AP-1473,Maitri Agro Industries,,,,,0,
+Insecticide,0,Cartap,0,Shakti 50 SP,AP-1474,Desh Pesticides,,,,,0,IRAC 3A
+Insecticide,0,Carbofuran,0,Sefron 5 G,AP-1482,M/S. Safe Crop Limited,,,,,0,
 Insecticide,0,,0,Sonnet 50 SP,AP-1488,Syngenta Bangladesh Limited,,,,,0,
-Insecticide,0,,0,Vital 25 EC,AP-1491,Mcdonald Bangladesh Pvt Ltd,,,,,0,
+Insecticide,0,Quinalphos,0,Vital 25 EC,AP-1491,Mcdonald Bangladesh Pvt Ltd,,,,,0,
 Insecticide,0,,0,Sheem Star 20 EC,AP-1495,Desh Pesticides,,,,,0,
-Insecticide,0,,0,Carbotop 3 G,AP-1515,Pace Agro International,,,,,0,
-Insecticide,0,,0,B-Fen 20 EC,AP-1520,Byco Agro Chemicals,,,,,0,
-Insecticide,0,,0,Nuster 40 EC,AP-1523,Petrochem Agro Industries Limited,,,,,0,
-Insecticide,0,,0,Hero 25% WDG,AP-1526,National Agricare Import and Export Limited,,,,,0,
-Insecticide,0,,0,Yesfos 20 EC,AP-1530,M/S. Standard Yes Co. Ltd.,,,,,0,
-Insecticide,0,,0,Standard 50 SP,AP-1531,M/S. Standard Yes Co. Ltd.,,,,,0,
-Insecticide,0,,0,Rekaquine 25 EC,AP-1533,TH Pesticide Ltd.,,,,,0,
-Insecticide,0,,0,Chasidam 4G,AP-1535,Byco Agro Chemicals,,,,,0,
-Insecticide,0,,0,Mortein Rat Kill Cake,AP-1560,Reckitt Benckiser (Bangladesh) Ltd,,,,,0,
-Insecticide,0,,0,Pillar-Alfa 10 EC,AP-1566,DM International,,,,,0,
-Insecticide,0,,0,Dice 2.5 EC,AP-1577,Blessing Agrovet Industries Ltd,,,,,0,
-Insecticide,0,,0,Quinal Green 25 EC,AP-1582,Green Care Bangladesh,,,,,0,
-Insecticide,0,,0,Orgathion 50 EC,AP-1587,Green Care Bangladesh,,,,,0,
-Insecticide,0,,0,Term,AP-1590,Alpha Zeta Crop,,,,,0,
-Insecticide,0,,0,Virtako 0.6 GR,AP-1617,Syngenta Bangladesh Limited,,,,,0,IRAC 4A
-Insecticide,0,,0,Sinlux 25 EC,AP-1639,Global Agrovet Ltd.,,,,,0,
-Insecticide,0,,0,Hexa 5EC,AP-1676,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Sinobral 50WP,AP-1701,Omnichem Limited,,,,,0,
-Insecticide,0,,0,Mixol 72WP,AP-1705,Medicon Agrovet,,,,,0,
-Insecticide,0,,0,Sulphin 80WG,AP-1707,Medicon Agrovet,,,,,0,
-Insecticide,0,,0,Ecozinon 60EC,AP-1718,AMCO AGRICULTURAL INDUSTRIES LIMITED,,,,,0,IRAC 1B
-Insecticide,0,,0,Termiban 48EC,AP-1727,Ashrafi Agro science,,,,,0,IRAC 1B
-Insecticide,0,,0,M-Fos 48EC,AP-1728,M/S M.H Gop Care Ltd.,,,,,0,
-Insecticide,0,,0,A Plus 5G,AP-1737,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Famous 53WP,AP-1739,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Dcarb 3G,AP-1742,DM International,,,,,0,
-Insecticide,0,,0,Selathrin 2.5EC,AP-1750,M/S. Sealand Agro Ind. Ltd.,,,,,0,
-Insecticide,0,,0,ACME Chlorpuriphos 48EC,AP-1751,ACME Pesticides Ltd.,,,,,0,
-Insecticide,0,,0,Mig-5,AP-1755,M/S Alpha Agro Limited,,,,,0,
-Insecticide,0,,0,Diffender 25EC,AP-1757,National Agricare Import and Export Limited,,,,,0,
-Insecticide,0,,0,Cobra 60EC,AP-1765,Map Agro Industries Ltd,,,,,0,IRAC 1B
-Insecticide,0,,0,M-thrin 10EC,AP-1769,M/S M.H Gop Care Ltd.,,,,,0,
-Insecticide,0,,0,Megha Thrin 10EC,AP-1782,meghna fertilizer & agro chemical industries,,,,,0,
-Insecticide,0,,0,S-Cyper 10Ec,AP-1791,S.H. Agro Science,,,,,0,
-Insecticide,0,,0,lam 2.5 Ec,AP-1796,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Sinbad 1.8 EC,AP-1799,S.I. Agro International,,,,,0,IRAC 3A
+Insecticide,0,Carbaryl,0,Carbotop 3 G,AP-1515,Pace Agro International,,,,,0,
+Insecticide,0,Fenpyroximate,0,B-Fen 20 EC,AP-1520,Byco Agro Chemicals,,,,,0,
+Insecticide,0,Flusilazole,0,Nuster 40 EC,AP-1523,Petrochem Agro Industries Limited,,,,,0,
+Insecticide,0,Thiamethoxam,0,Hero 25% WDG,AP-1526,National Agricare Import and Export Limited,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Yesfos 20 EC,AP-1530,M/S. Standard Yes Co. Ltd.,,,,,0,
+Insecticide,0,Cartap,0,Standard 50 SP,AP-1531,M/S. Standard Yes Co. Ltd.,,,,,0,
+Insecticide,0,Quinalphos,0,Rekaquine 25 EC,AP-1533,TH Pesticide Ltd.,,,,,0,
+Insecticide,0,Cartap,0,Chasidam 4G,AP-1535,Byco Agro Chemicals,,,,,0,
+Insecticide,0,Bromadiolone,0,Mortein Rat Kill Cake,AP-1560,Reckitt Benckiser (Bangladesh) Ltd,,,,,0,
+Insecticide,0,Alpha-cypermethrin,0,Pillar-Alfa 10 EC,AP-1566,DM International,,,,,0,
+Insecticide,0,Deltamethrin,0,Dice 2.5 EC,AP-1577,Blessing Agrovet Industries Ltd,,,,,0,
+Insecticide,0,Quinalphos,0,Quinal Green 25 EC,AP-1582,Green Care Bangladesh,,,,,0,
+Insecticide,0,Fenitrothion,0,Orgathion 50 EC,AP-1587,Green Care Bangladesh,,,,,0,
+Insecticide,0,Ethoxysulfuron,0,Term,AP-1590,Alpha Zeta Crop,,,,,0,
+Insecticide,0,Thiamethoxam + Chlorantraniliprole,0,Virtako 0.6 GR,AP-1617,Syngenta Bangladesh Limited,,,,,0,IRAC 4A
+Insecticide,0,Quinalphos,0,Sinlux 25 EC,AP-1639,Global Agrovet Ltd.,,,,,0,
+Insecticide,0,Hexaconazole,0,Hexa 5EC,AP-1676,ACI Formulations PLC,,,,,0,
+Insecticide,0,Iprodione,0,Sinobral 50WP,AP-1701,Omnichem Limited,,,,,0,
+Insecticide,0,Mancozeb + Metalaxyl,0,Mixol 72WP,AP-1705,Medicon Agrovet,,,,,0,
+Insecticide,0,Sulphur,0,Sulphin 80WG,AP-1707,Medicon Agrovet,,,,,0,
+Insecticide,0,Diazinon,0,Ecozinon 60EC,AP-1718,AMCO AGRICULTURAL INDUSTRIES LIMITED,,,,,0,IRAC 1B
+Insecticide,0,Chlorpyrifos,0,Termiban 48EC,AP-1727,Ashrafi Agro science,,,,,0,IRAC 1B
+Insecticide,0,Chlorpyrifos,0,M-Fos 48EC,AP-1728,M/S M.H Gop Care Ltd.,,,,,0,
+Insecticide,0,Butachlor,0,A Plus 5G,AP-1737,ACI Formulations PLC,,,,,0,
+Insecticide,0,Bensulfuron-methyl,0,Famous 53WP,AP-1739,ACI Formulations PLC,,,,,0,
+Insecticide,0,Carbaryl,0,Dcarb 3G,AP-1742,DM International,,,,,0,
+Insecticide,0,Bispyribac-sodium,0,Selathrin 2.5EC,AP-1750,M/S. Sealand Agro Ind. Ltd.,,,,,0,
+Insecticide,0,Chlorpyrifos,0,ACME Chlorpuriphos 48EC,AP-1751,ACME Pesticides Ltd.,,,,,0,
+Insecticide,0,Alpha-cypermethrin,0,Mig-5,AP-1755,M/S Alpha Agro Limited,,,,,0,
+Insecticide,0,Difenoconazole,0,Diffender 25EC,AP-1757,National Agricare Import and Export Limited,,,,,0,
+Insecticide,0,Diazinon,0,Cobra 60EC,AP-1765,Map Agro Industries Ltd,,,,,0,IRAC 1B
+Insecticide,0,Cypermethrin,0,M-thrin 10EC,AP-1769,M/S M.H Gop Care Ltd.,,,,,0,
+Insecticide,0,Cypermethrin,0,Megha Thrin 10EC,AP-1782,meghna fertilizer & agro chemical industries,,,,,0,
+Insecticide,0,Cypermethrin,0,S-Cyper 10Ec,AP-1791,S.H. Agro Science,,,,,0,
+Insecticide,0,Lambda-cyhalothrin,0,lam 2.5 Ec,AP-1796,ACI Formulations PLC,,,,,0,
+Insecticide,0,Abamectin,0,Sinbad 1.8 EC,AP-1799,S.I. Agro International,,,,,0,IRAC 3A
 Insecticide,0,,0,Bofen 20Ec,AP-1800,Agro Arena Associates Ltd,,,,,0,
-Insecticide,0,,0,Danafuran 5G,AP-1806,Byco Agro Chemicals,,,,,0,
-Insecticide,0,,0,I-furan 5G,AP-1808,Integrated Crop Solution Bangladesh,,,,,0,
-Insecticide,0,,0,Carbine 3G,AP-1809,Dreamland Agro Products,,,,,0,
-Insecticide,0,,0,Aristfuran 5G,AP-1811,Aristocrat Agro Services Ltd,,,,,0,
-Insecticide,0,,0,Afifuran 5G,AP-1813,Sundarbon Agro Products,,,,,0,1A
-Insecticide,0,,0,Sintar 48 Ec,AP-1823,Omnichem Limited,,,,,0,
-Insecticide,0,,0,Murcur 48 Ec,AP-1825,Byco Agro Chemicals,,,,,0,
-Insecticide,0,,0,Terafos 20 Ec,AP-1826,Jony Enterprise,,,,,0,
-Insecticide,0,,0,Aristograrfos 15 G,AP-1827,Aristocrat Agro Services Ltd,,,,,0,
-Insecticide,0,,0,Nurelle D-505 Ec,AP-1830,Auto Crop Care Limited,,,,,0,
-Insecticide,0,,0,Westup 50SP,AP-1835,Marshal Agrovet Chemical Industries Ltd,,,,,0,
-Insecticide,0,,0,Sunxatin 600 SC,AP-1838,Mcdonald Bangladesh Pvt Ltd,,,,,0,
-Insecticide,0,,0,Kandari 50 WP,AP-1849,Smart Agrovet,,,,,0,
-Insecticide,0,,0,Index 5EC,AP-1856,Byco Agro Chemicals,,,,,0,
-Insecticide,0,,0,Starvit 80 WDG,AP-1862,Omnichem Limited,,,,,0,
-Insecticide,0,,0,Gunner 50 WP,AP-1877,Global Agrovet Ltd.,,,,,0,
-Insecticide,0,,0,Pedephos 50 WP,AP-1972,Panchi Corporation,,,,,0,
-Insecticide,0,,0,Stronger 48 EC,AP-1973,Nathan Crop Care Ltd.,,,,,0,
-Insecticide,0,,0,Nimphos 48 EC,AP-1974,punam international,,,,,0,
-Insecticide,0,,0,Mabcofos 48 EC,AP-1980,Mabco Bangladesh,,,,,0,
-Insecticide,0,,0,Yeah Shot 80 WDG,AP-2024,YEAH BIOTECH,,,,,0,
-Insecticide,0,,0,Sistake 10WDG,AP-2027,Sisnova Agro international,,,,,0,
-Insecticide,0,,0,Newsvit 80 WDG,AP-2078,M/S News Chemicals Industries,,,,,0,
+Insecticide,0,Carbaryl,0,Danafuran 5G,AP-1806,Byco Agro Chemicals,,,,,0,
+Insecticide,0,Carbaryl,0,I-furan 5G,AP-1808,Integrated Crop Solution Bangladesh,,,,,0,
+Insecticide,0,Carbofuran,0,Carbine 3G,AP-1809,Dreamland Agro Products,,,,,0,
+Insecticide,0,Carbaryl,0,Aristfuran 5G,AP-1811,Aristocrat Agro Services Ltd,,,,,0,
+Insecticide,0,Carbaryl,0,Afifuran 5G,AP-1813,Sundarbon Agro Products,,,,,0,1A
+Insecticide,0,Chlorpyrifos,0,Sintar 48 Ec,AP-1823,Omnichem Limited,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Murcur 48 Ec,AP-1825,Byco Agro Chemicals,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Terafos 20 Ec,AP-1826,Jony Enterprise,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Aristograrfos 15 G,AP-1827,Aristocrat Agro Services Ltd,,,,,0,
+Insecticide,0,Fenamidone + Mancozeb,0,Nurelle D-505 Ec,AP-1830,Auto Crop Care Limited,,,,,0,
+Insecticide,0,Cartap,0,Westup 50SP,AP-1835,Marshal Agrovet Chemical Industries Ltd,,,,,0,
+Insecticide,0,Cyhexatin,0,Sunxatin 600 SC,AP-1838,Mcdonald Bangladesh Pvt Ltd,,,,,0,
+Insecticide,0,Carbendazim,0,Kandari 50 WP,AP-1849,Smart Agrovet,,,,,0,
+Insecticide,0,Hexaconazole,0,Index 5EC,AP-1856,Byco Agro Chemicals,,,,,0,
+Insecticide,0,Sulphur,0,Starvit 80 WDG,AP-1862,Omnichem Limited,,,,,0,
+Insecticide,0,Copper Oxychloride,0,Gunner 50 WP,AP-1877,Global Agrovet Ltd.,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Pedephos 50 WP,AP-1972,Panchi Corporation,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Stronger 48 EC,AP-1973,Nathan Crop Care Ltd.,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Nimphos 48 EC,AP-1974,punam international,,,,,0,
+Insecticide,0,Spiromesifen,0,Mabcofos 48 EC,AP-1980,Mabco Bangladesh,,,,,0,
+Insecticide,0,Imidacloprid,0,Yeah Shot 80 WDG,AP-2024,YEAH BIOTECH,,,,,0,
+Insecticide,0,Fenvalerate,0,Sistake 10WDG,AP-2027,Sisnova Agro international,,,,,0,
+Insecticide,0,Sulphur,0,Newsvit 80 WDG,AP-2078,M/S News Chemicals Industries,,,,,0,
 Insecticide,0,,0,Sistap 50SP,AP-2083,Sisnova Agro international,,,,,0,
 Insecticide,0,,0,K-Fan 20 EC,AP-2093,Mars Trade In Culture(Pvt.) Ltd.,,,,,0,
-Insecticide,0,,0,Xenon 50 WP,AP-2121,Joary Agro,,,,,0,
-Insecticide,0,,0,M-Metazyl 72 WP,AP-2138,MH Crop Care,,,,,0,
-Insecticide,0,,0,Tarazeb 80 WP,AP-2141,RK Agro Products Ltd.,,,,,0,
-Insecticide,0,,0,Ancozeb 80 WF,AP-2149,A.N corporation,,,,,0,
-Insecticide,0,,0,Mouzeb 80 WP,AP-2155,Mou International,,,,,0,
-Insecticide,0,,0,Orzeb 80 WP,AP-2160,M/S Orbit Agro Industry,,,,,0,
-Insecticide,0,,0,Fetter 80 WP,AP-2162,Joary Agro,,,,,0,
-Insecticide,0,,0,Phyto 80 WP,AP-2164,S.S. vision Limited,,,,,0,FRAC M02
-Insecticide,0,,0,Mancarb 75 WP,AP-2166,East West Chemicals Ltd.,,,,,0,
-Insecticide,0,,0,Rexigent 50 Sc,AP-2173,Reximco Insecticides Limited,,,,,0,
-Insecticide,0,,0,Fiprako 50 Sc,AP-2175,Mcdonald Bangladesh Pvt Ltd,,,,,0,
-Insecticide,0,,0,Prince 50 Sc,AP-2179,BASF Bangladesh Limited,,,,,0,IRAC 3A
-Insecticide,0,,0,Nil-gent 3GR,AP-2182,East West Chemicals Ltd.,,,,,0,
-Insecticide,0,,0,Nicothrin 10 EC,AP-2185,punam international,,,,,0,IRAC 3A
-Insecticide,0,,0,Cipfrin 3 GR,AP-2188,Hossain Enterprise C.C. Limited,,,,,0,
-Insecticide,0,,0,Higent 48 EC,AP-2189,Hi Care Agrovet,,,,,0,
-Insecticide,0,,0,Pedephos 48 Ec,AP-2194,Panchi Corporation,,,,,0,
-Insecticide,0,,0,Nabab 48 EC,AP-2195,New Sun Rise Bangladesh Private Limited,,,,,0,IRAC 3A
-Insecticide,0,,0,Harpoon 30 EC,AP-2206,M/S Sea trade Fertilizer Ltd,,,,,0,
-Insecticide,0,,0,Abtap 50 SP,AP-2207,ABS Agro Products,,,,,0,14
-Insecticide,0,,0,Ortap 50 SP,AP-2209,M/S Orbit Agro Industry,,,,,0,
-Insecticide,0,,0,Zee-Tap 50 Sp,AP-2211,KBS Brand Ltd,,,,,0,
-Insecticide,0,,0,Weaver 5 G,AP-2212,MH Crop Care,,,,,0,
-Insecticide,0,,0,Atopfuran 5G,AP-2215,Atop Agrovet,,,,,0,
-Insecticide,0,,0,Niddra 20SP,AP-2216,M/S News Chemicals Industries,,,,,0,
-Insecticide,0,,0,Mazufuran 5G,AP-2219,Agrinet Crop Care Bangladesh,,,,,0,
-Insecticide,0,,0,Asrafuran 5G,AP-2220,Ashrafi Agro science,,,,,0,
-Insecticide,0,,0,Hicart 3G,AP-2222,Hi Care Agrovet,,,,,0,
-Insecticide,0,,0,Calix 3 G,AP-2226,Byco Agro Chemicals,,,,,0,
-Insecticide,0,,0,Carbofan 20 EC,AP-2229,Placid Trading,,,,,0,
-Insecticide,0,,0,Bycovit 80 WDG,AP-2234,Byco Agro Chemicals,,,,,0,
-Insecticide,0,,0,Carb 50 WP,AP-2242,Agrinet Crop Care Bangladesh,,,,,0,
-Insecticide,0,,0,Tazamethrin 10 Q,AP-2255,RK Agro Products Ltd.,,,,,0,
-Insecticide,0,,0,Ambda 2.5 Ec,AP-2260,AN Corporation,,,,,0,
-Insecticide,0,,0,Rugby 2.5 Ec,AP-2261,Norther Crop Care Ltd,,,,,0,IRAC 1B
-Insecticide,0,,0,Rindel 2.5 Ec,AP-2267,Agro Arena Associates Ltd,,,,,0,
-Insecticide,0,,0,Verve 41 SL,AP-2270,Larsen chemical industries (pvt.) ltd.,,,,,0,
-Insecticide,0,,0,Hi Fume 56%,AP-2280,Hi Care Agrovet,,,,,0,
-Insecticide,0,,0,Rajteer 5 G,AP-2287,M/S Modern Agro Chemicals,,,,,0,IRAC 1A
-Insecticide,0,,0,Propiconazole 250 EC,AP-2299,PaIker Imports & Exports,,,,,0,FRAC 3
+Insecticide,0,Carbendazim,0,Xenon 50 WP,AP-2121,Joary Agro,,,,,0,
+Insecticide,0,Mancozeb + Metalaxyl,0,M-Metazyl 72 WP,AP-2138,MH Crop Care,,,,,0,
+Insecticide,0,Mancozeb,0,Tarazeb 80 WP,AP-2141,RK Agro Products Ltd.,,,,,0,
+Insecticide,0,Mancozeb,0,Ancozeb 80 WF,AP-2149,A.N corporation,,,,,0,
+Insecticide,0,Mancozeb,0,Mouzeb 80 WP,AP-2155,Mou International,,,,,0,
+Insecticide,0,Mancozeb,0,Orzeb 80 WP,AP-2160,M/S Orbit Agro Industry,,,,,0,
+Insecticide,0,Mancozeb,0,Fetter 80 WP,AP-2162,Joary Agro,,,,,0,
+Insecticide,0,Mancozeb,0,Phyto 80 WP,AP-2164,S.S. vision Limited,,,,,0,FRAC M02
+Insecticide,0,Mancozeb + Carbendazim,0,Mancarb 75 WP,AP-2166,East West Chemicals Ltd.,,,,,0,
+Insecticide,0,Fenvalerate,0,Rexigent 50 Sc,AP-2173,Reximco Insecticides Limited,,,,,0,
+Insecticide,0,Fenvalerate,0,Fiprako 50 Sc,AP-2175,Mcdonald Bangladesh Pvt Ltd,,,,,0,
+Insecticide,0,Fenvalerate,0,Prince 50 Sc,AP-2179,BASF Bangladesh Limited,,,,,0,IRAC 3A
+Insecticide,0,Fenvalerate,0,Nil-gent 3GR,AP-2182,East West Chemicals Ltd.,,,,,0,
+Insecticide,0,Cypermethrin,0,Nicothrin 10 EC,AP-2185,punam international,,,,,0,IRAC 3A
+Insecticide,0,Fenvalerate,0,Cipfrin 3 GR,AP-2188,Hossain Enterprise C.C. Limited,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Higent 48 EC,AP-2189,Hi Care Agrovet,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Pedephos 48 Ec,AP-2194,Panchi Corporation,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Nabab 48 EC,AP-2195,New Sun Rise Bangladesh Private Limited,,,,,0,IRAC 3A
+Insecticide,0,Chlorpyrifos + Methomyl,0,Harpoon 30 EC,AP-2206,M/S Sea trade Fertilizer Ltd,,,,,0,
+Insecticide,0,Cartap,0,Abtap 50 SP,AP-2207,ABS Agro Products,,,,,0,14
+Insecticide,0,Cartap,0,Ortap 50 SP,AP-2209,M/S Orbit Agro Industry,,,,,0,
+Insecticide,0,Cartap,0,Zee-Tap 50 Sp,AP-2211,KBS Brand Ltd,,,,,0,
+Insecticide,0,Carbaryl,0,Weaver 5 G,AP-2212,MH Crop Care,,,,,0,
+Insecticide,0,Carbofuran,0,Atopfuran 5G,AP-2215,Atop Agrovet,,,,,0,
+Insecticide,0,Carbaryl,0,Niddra 20SP,AP-2216,M/S News Chemicals Industries,,,,,0,
+Insecticide,0,Carbofuran,0,Mazufuran 5G,AP-2219,Agrinet Crop Care Bangladesh,,,,,0,
+Insecticide,0,Metarhizium Anisopliae,0,Asrafuran 5G,AP-2220,Ashrafi Agro science,,,,,0,
+Insecticide,0,Carbaryl,0,Hicart 3G,AP-2222,Hi Care Agrovet,,,,,0,
+Insecticide,0,Carbaryl,0,Calix 3 G,AP-2226,Byco Agro Chemicals,,,,,0,
+Insecticide,0,Carbosulfan,0,Carbofan 20 EC,AP-2229,Placid Trading,,,,,0,
+Insecticide,0,Sulphur,0,Bycovit 80 WDG,AP-2234,Byco Agro Chemicals,,,,,0,
+Insecticide,0,Carbendazim,0,Carb 50 WP,AP-2242,Agrinet Crop Care Bangladesh,,,,,0,
+Insecticide,0,Cypermethrin,0,Tazamethrin 10 Q,AP-2255,RK Agro Products Ltd.,,,,,0,
+Insecticide,0,Lambda-cyhalothrin,0,Ambda 2.5 Ec,AP-2260,AN Corporation,,,,,0,
+Insecticide,0,Lambda-cyhalothrin,0,Rugby 2.5 Ec,AP-2261,Norther Crop Care Ltd,,,,,0,IRAC 1B
+Insecticide,0,Deltamethrin,0,Rindel 2.5 Ec,AP-2267,Agro Arena Associates Ltd,,,,,0,
+Insecticide,0,Glyphosate,0,Verve 41 SL,AP-2270,Larsen chemical industries (pvt.) ltd.,,,,,0,
+Insecticide,0,Fluopicolide + Fosetyl-aluminium,0,Hi Fume 56%,AP-2280,Hi Care Agrovet,,,,,0,
+Insecticide,0,Butachlor,0,Rajteer 5 G,AP-2287,M/S Modern Agro Chemicals,,,,,0,IRAC 1A
+Insecticide,0,Propiconazole,0,Propiconazole 250 EC,AP-2299,PaIker Imports & Exports,,,,,0,FRAC 3
 Insecticide,0,,0,Azole 250 EC,AP-2301,A.N corporation,,,,,0,
-Insecticide,0,,0,Run 250 EC,AP-2305,East West Chemicals Ltd.,,,,,0,
-Insecticide,0,,0,Goldstar 75 SP,AP-2307,Nokon Limited,,,,,0,
-Insecticide,0,,0,All Clean 10 WP,AP-2318,ANM Agro Ltd,,,,,0,
-Insecticide,0,,0,Panacea 5 SG,AP-2321,General Agro Chemicals Ltd.,,,,,0,
-Insecticide,0,,0,Nicotap 50 SP,AP-2327,Nidus Agro,,,,,0,
+Insecticide,0,Difenoconazole,0,Run 250 EC,AP-2305,East West Chemicals Ltd.,,,,,0,
+Insecticide,0,Acephate,0,Goldstar 75 SP,AP-2307,Nokon Limited,,,,,0,
+Insecticide,0,Pyrazosulfuron-ethyl,0,All Clean 10 WP,AP-2318,ANM Agro Ltd,,,,,0,
+Insecticide,0,Emamectin Benzoate,0,Panacea 5 SG,AP-2321,General Agro Chemicals Ltd.,,,,,0,
+Insecticide,0,Cartap,0,Nicotap 50 SP,AP-2327,Nidus Agro,,,,,0,
 Insecticide,0,,0,Kazitap 50 SP,AP-2328,K.S. Agro Crop Care,,,,,0,
-Insecticide,0,,0,Nemok 50 SP,AP-2332,Ace Farming Solution,,,,,0,
-Insecticide,0,,0,P- Tap 50 SP,AP-2333,Paragon Agro Limited,,,,,0,
-Insecticide,0,,0,Orolam 2.5 Ec,AP-2342,M/S Orbit Agro Industry,,,,,0,
-Insecticide,0,,0,Search 2.5 Ec,AP-2343,kishan Agro Chemicals,,,,,0,
-Insecticide,0,,0,Meem 48 Ec,AP-2348,Adnan Corporation Ltd,,,,,0,
-Insecticide,0,,0,Neoclean 18WP,AP-2349,M/S News Chemicals Industries,,,,,0,
-Insecticide,0,,0,Chlorifsn20 Ec,AP-2350,Bongshe Moharaj & Agro Technology,,,,,0,
-Insecticide,0,,0,Aqiphos 480 Ec,AP-2354,Agri-Business And Advisory Service,,,,,0,
-Insecticide,0,,0,Dhanphoes 48 EC,AP-2355,Anandha Agnovet,,,,,0,
-Insecticide,0,,0,Necor 25 SC,AP-2364,M/S News Chemicals Industries,,,,,0,
-Insecticide,0,,0,Unito Plus 55 Ec,AP-2366,Unique Agro Technology Ltd,,,,,0,
-Insecticide,0,,0,Digituran 5 G,AP-2377,Digital Agro Crop Care Ltd,,,,,0,
-Insecticide,0,,0,Hethrin 10 Ec,AP-2386,Haque International,,,,,0,
-Insecticide,0,,0,Galaxy 10 Ec,AP-2387,Adnan Corporation Ltd,,,,,0,
-Insecticide,0,,0,Jaopot 10 Ec,AP-2388,Symbiosis Technology,,,,,0,
-Insecticide,0,,0,Barricade 10 Ec,AP-2389,Ashrafi Agro science,,,,,0,
-Insecticide,0,,0,Korothrin 10EC,AP-2393,Korotoa Agro Marketing Company,,,,,0,
-Insecticide,0,,0,Pertrrin 10 Ec,AP-2394,Perfect International Pvt Ltd,,,,,0,
-Insecticide,0,,0,Bicort 10 Ec,AP-2395,Byco Agro Chemicals,,,,,0,
-Insecticide,0,,0,Housethrin 10EC,AP-2396,Akota Pesticides Ltd,,,,,0,
-Insecticide,0,,0,Nikithrin 10 Ec,AP-2398,S.S. vision Limited,,,,,0,
-Insecticide,0,,0,Apronil 3 GR,AP-2406,ANM Agro Ltd,,,,,0,
-Insecticide,0,,0,Epsin 25 WG,AP-2411,East West Chemicals Ltd.,,,,,0,
-Insecticide,0,,0,Mc Tara 25 WG,AP-2412,Mcdonald crop care limited,,,,,0,
-Insecticide,0,,0,Solid Gold 10 Ec,AP-2414,M/S Sea trade Fertilizer Ltd,,,,,0,
-Insecticide,0,,0,Quevit 80 WDG,AP-2432,Unique Agro Technology Ltd,,,,,0,
-Insecticide,0,,0,Dekosulf 80 WG,AP-2441,Agrinet Crop Care Bangladesh,,,,,0,
-Insecticide,0,,0,Thiospecial 80 DF,AP-2442,Norther Crop Care Ltd,,,,,0,
+Insecticide,0,Cartap,0,Nemok 50 SP,AP-2332,Ace Farming Solution,,,,,0,
+Insecticide,0,Cartap,0,P- Tap 50 SP,AP-2333,Paragon Agro Limited,,,,,0,
+Insecticide,0,Lambda-cyhalothrin,0,Orolam 2.5 Ec,AP-2342,M/S Orbit Agro Industry,,,,,0,
+Insecticide,0,Quinalphos,0,Search 2.5 Ec,AP-2343,kishan Agro Chemicals,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Meem 48 Ec,AP-2348,Adnan Corporation Ltd,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Neoclean 18WP,AP-2349,M/S News Chemicals Industries,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Chlorifsn20 Ec,AP-2350,Bongshe Moharaj & Agro Technology,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Aqiphos 480 Ec,AP-2354,Agri-Business And Advisory Service,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Dhanphoes 48 EC,AP-2355,Anandha Agnovet,,,,,0,
+Insecticide,0,Chlorpyrifos + Cypermethrin,0,Necor 25 SC,AP-2364,M/S News Chemicals Industries,,,,,0,
+Insecticide,0,Chlorpyrifos + Cypermethrin,0,Unito Plus 55 Ec,AP-2366,Unique Agro Technology Ltd,,,,,0,
+Insecticide,0,Carbofuran,0,Digituran 5 G,AP-2377,Digital Agro Crop Care Ltd,,,,,0,
+Insecticide,0,Cypermethrin,0,Hethrin 10 Ec,AP-2386,Haque International,,,,,0,
+Insecticide,0,Cypermethrin,0,Galaxy 10 Ec,AP-2387,Adnan Corporation Ltd,,,,,0,
+Insecticide,0,Cypermethrin,0,Jaopot 10 Ec,AP-2388,Symbiosis Technology,,,,,0,
+Insecticide,0,Cypermethrin,0,Barricade 10 Ec,AP-2389,Ashrafi Agro science,,,,,0,
+Insecticide,0,Cypermethrin,0,Korothrin 10EC,AP-2393,Korotoa Agro Marketing Company,,,,,0,
+Insecticide,0,Cypermethrin,0,Pertrrin 10 Ec,AP-2394,Perfect International Pvt Ltd,,,,,0,
+Insecticide,0,Cypermethrin,0,Bicort 10 Ec,AP-2395,Byco Agro Chemicals,,,,,0,
+Insecticide,0,Cypermethrin,0,Housethrin 10EC,AP-2396,Akota Pesticides Ltd,,,,,0,
+Insecticide,0,Cypermethrin,0,Nikithrin 10 Ec,AP-2398,S.S. vision Limited,,,,,0,
+Insecticide,0,Fenvalerate,0,Apronil 3 GR,AP-2406,ANM Agro Ltd,,,,,0,
+Insecticide,0,Thiamethoxam,0,Epsin 25 WG,AP-2411,East West Chemicals Ltd.,,,,,0,
+Insecticide,0,Thiamethoxam,0,Mc Tara 25 WG,AP-2412,Mcdonald crop care limited,,,,,0,
+Insecticide,0,Imidacloprid + Methomyl,0,Solid Gold 10 Ec,AP-2414,M/S Sea trade Fertilizer Ltd,,,,,0,
+Insecticide,0,Sulphur,0,Quevit 80 WDG,AP-2432,Unique Agro Technology Ltd,,,,,0,
+Insecticide,0,Sulphur,0,Dekosulf 80 WG,AP-2441,Agrinet Crop Care Bangladesh,,,,,0,
+Insecticide,0,Sulphur,0,Thiospecial 80 DF,AP-2442,Norther Crop Care Ltd,,,,,0,
 Insecticide,0,,0,Mabendazim 50 WP,AP-2451,Mabco Bangladesh,,,,,0,
-Insecticide,0,,0,Starzim 50 WP,AP-2453,Astron Agree Care Bangladesh,,,,,0,FRAC 1
-Insecticide,0,,0,Megadazim 50 WP,AP-2456,Mars Trade In Culture(Pvt.) Ltd.,,,,,0,
-Insecticide,0,,0,Kishzeb 80 WP,AP-2463,kishan Agro Chemicals,,,,,0,
-Insecticide,0,,0,Mancozim 80 WP,AP-2471,Agrinet Crop Care Bangladesh,,,,,0,FRAC M03
-Insecticide,0,,0,Clorofil M- 45,AP-2474,S.M Agricutural Division,,,,,0,
-Insecticide,0,,0,Mancozeb MZ 80 WP,AP-2475,Gulf Fertilizer & Chemicals Ltd,,,,,0,FRAC M03
-Insecticide,0,,0,Rafizeb 80 WP,AP-2476,Ashrafi Agro science,,,,,0,
-Insecticide,0,,0,Mcozeb 80 WP,AP-2480,MH Crop Care,,,,,0,
-Insecticide,0,,0,Rozeb 80 WP,AP-2481,Roza Agro,,,,,0,
-Insecticide,0,,0,Aqizeb 80 WP,AP-2482,Agri-Business And Advisory Service,,,,,0,
-Insecticide,0,,0,Tencozeb,AP-2493,Marshal Agrovet Chemical Industries Ltd,,,,,0,
-Insecticide,0,,0,Adhezole 28 SC,AP-2501,Advanced Agricultural Solution Ltd,,,,,0,FRAC P1
-Insecticide,0,,0,Recometa 72 WP,AP-2513,Raina Associates,,,,,0,
-Insecticide,0,,0,Roxyl 72 WP,AP-2517,Roza Agro,,,,,0,
-Insecticide,0,,0,Sanil 72 WP,AP-2518,Sreejoni Agrochemical,,,,,0,
-Insecticide,0,,0,Mancodazim Plus 75 WP,AP-2524,Unique Agro Technology Ltd,,,,,0,FRAC M3
-Insecticide,0,,0,Hunchat 75 WP,AP-2527,Symbiosis Technology,,,,,0,
-Insecticide,0,,0,Eurothrin 10 Ec,AP-2537,Euro Bangla Agriculture Ltd,,,,,0,
-Insecticide,0,,0,RanaQuat 20 Ec,AP-2546,Runner Agro Products Limited,,,,,0,
-Insecticide,0,,0,Norphosat 480 SL,AP-2550,Norther Crop Care Ltd,,,,,0,
-Insecticide,0,,0,Chlotar 5 G,AP-2557,Adroit Agro Chemical,,,,,0,
-Insecticide,0,,0,Mega Clean 53 WP,AP-2559,East West Chemicals Ltd.,,,,,0,
-Insecticide,0,,0,Tough 30 Ec,AP-2560,Map Agro Industries Ltd,,,,,0,
+Insecticide,0,Carbendazim,0,Starzim 50 WP,AP-2453,Astron Agree Care Bangladesh,,,,,0,FRAC 1
+Insecticide,0,Carbendazim,0,Megadazim 50 WP,AP-2456,Mars Trade In Culture(Pvt.) Ltd.,,,,,0,
+Insecticide,0,Mancozeb,0,Kishzeb 80 WP,AP-2463,kishan Agro Chemicals,,,,,0,
+Insecticide,0,Mancozeb,0,Mancozim 80 WP,AP-2471,Agrinet Crop Care Bangladesh,,,,,0,FRAC M03
+Insecticide,0,Mancozeb,0,Clorofil M- 45,AP-2474,S.M Agricutural Division,,,,,0,
+Insecticide,0,Mancozeb,0,Mancozeb MZ 80 WP,AP-2475,Gulf Fertilizer & Chemicals Ltd,,,,,0,FRAC M03
+Insecticide,0,Mancozeb,0,Rafizeb 80 WP,AP-2476,Ashrafi Agro science,,,,,0,
+Insecticide,0,Mancozeb,0,Mcozeb 80 WP,AP-2480,MH Crop Care,,,,,0,
+Insecticide,0,Mancozeb,0,Rozeb 80 WP,AP-2481,Roza Agro,,,,,0,
+Insecticide,0,Mancozeb,0,Aqizeb 80 WP,AP-2482,Agri-Business And Advisory Service,,,,,0,
+Insecticide,0,Mancozeb,0,Tencozeb,AP-2493,Marshal Agrovet Chemical Industries Ltd,,,,,0,
+Insecticide,0,Hexaconazole,0,Adhezole 28 SC,AP-2501,Advanced Agricultural Solution Ltd,,,,,0,FRAC P1
+Insecticide,0,Mancozeb + Metalaxyl,0,Recometa 72 WP,AP-2513,Raina Associates,,,,,0,
+Insecticide,0,Mancozeb + Metalaxyl,0,Roxyl 72 WP,AP-2517,Roza Agro,,,,,0,
+Insecticide,0,Mancozeb + Cymoxanil,0,Sanil 72 WP,AP-2518,Sreejoni Agrochemical,,,,,0,
+Insecticide,0,Mancozeb + Carbendazim,0,Mancodazim Plus 75 WP,AP-2524,Unique Agro Technology Ltd,,,,,0,FRAC M3
+Insecticide,0,Mancozeb + Carbendazim,0,Hunchat 75 WP,AP-2527,Symbiosis Technology,,,,,0,
+Insecticide,0,Cypermethrin,0,Eurothrin 10 Ec,AP-2537,Euro Bangla Agriculture Ltd,,,,,0,
+Insecticide,0,Paraquat,0,RanaQuat 20 Ec,AP-2546,Runner Agro Products Limited,,,,,0,
+Insecticide,0,Glyphosate,0,Norphosat 480 SL,AP-2550,Norther Crop Care Ltd,,,,,0,
+Insecticide,0,Butachlor,0,Chlotar 5 G,AP-2557,Adroit Agro Chemical,,,,,0,
+Insecticide,0,Bensulfuron-methyl,0,Mega Clean 53 WP,AP-2559,East West Chemicals Ltd.,,,,,0,
+Insecticide,0,Pendimethalin,0,Tough 30 Ec,AP-2560,Map Agro Industries Ltd,,,,,0,
 Insecticide,0,,0,Ultima 40 WP,AP-2570,M/S Mimpex Agro Chemicals Ltd,,,,,0,IRAC 4A
-Insecticide,0,,0,Beema 53 WP,AP-2579,Partex Agro Ltd,,,,,0,
-Insecticide,0,,0,M-Fil 10 WP,AP-2582,MH Crop Care,,,,,0,
-Insecticide,0,,0,Rajfit 500 EC,AP-2584,Siraj Agro International Limited,,,,,0,HRAC K3
-Insecticide,0,,0,Hilton 50 Ec,AP-2625,Nidus Agro,,,,,0,
-Insecticide,0,,0,Dyfos 48 Ec,AP-2626,Diya Agrocare,,,,,0,
-Insecticide,0,,0,C-Top 48 Ec,AP-2630,Energy Agro Chemicals,,,,,0,
-Insecticide,0,,0,Zee- Fresh 48 Ec,AP-2633,KBS Brand Ltd,,,,,0,
-Insecticide,0,,0,Saiphos 48 Ec,AP-2634,Siraj Agro International Limited,,,,,0,
-Insecticide,0,,0,Ashrafuran 3G,AP-2637,Ashrafi Agro science,,,,,0,
-Insecticide,0,,0,Sarnifuran 3G,AP-2639,Sarni Crop Science Ltd.,,,,,0,
-Insecticide,0,,0,Bashidhan Plus 5G,AP-2640,BCC Agro Care,,,,,0,
-Insecticide,0,,0,Anidan 5G,AP-2641,M/S Nafis Crop Care,,,,,0,
-Insecticide,0,,0,Tzifun 5G,AP-2642,FCI Agro Ltd,,,,,0,
-Insecticide,0,,0,Limifuran 5G,AP-2645,CHEMOLIMPEX Agro,,,,,0,
-Insecticide,0,,0,Hifuran 5G,AP-2647,Hi Care Agrovet,,,,,0,
-Insecticide,0,,0,Megdut 5G,AP-2651,meghna fertilizer & agro chemical industries,,,,,0,
-Insecticide,0,,0,Orfuran,AP-2652,M/S Orbit Agro Industry,,,,,0,
-Insecticide,0,,0,Microfuran 5G,AP-2656,Micro Technology & Agro Product Ltd,,,,,0,
-Insecticide,0,,0,Sreejoni 5G,AP-2658,Sreejoni Agrochemical,,,,,0,
-Insecticide,0,,0,Itafuran 5G,AP-2659,Italy Agro Marketing Company,,,,,0,
-Insecticide,0,,0,Saipro 3 GR,AP-2660,Siraj Agro International Limited,,,,,0,
-Insecticide,0,,0,Reback 50 Sc,AP-2663,Anandha Agnovet,,,,,0,
-Insecticide,0,,0,Regiment 50 Sc,AP-2664,ACI Chemicals Limited,,,,,0,FRAC 1
-Insecticide,0,,0,Largent 3GR,AP-2667,Larsen chemical industries (pvt.) ltd.,,,,,0,
-Insecticide,0,,0,Aqinil 50 Sc,AP-2668,Agro Business & Advisory Service,,,,,0,
-Insecticide,0,,0,Saynik 50 Sc,AP-2670,Anandha Agnovet,,,,,0,
-Insecticide,0,,0,Afitap 50 SP,AP-2671,Sundarbon Agro Products,,,,,0,
-Insecticide,0,,0,Tazatap 50 SP,AP-2672,RK Agro Products Ltd.,,,,,0,
-Insecticide,0,,0,Dhanfan 20 Ec,AP-2681,Shugandha Traders,,,,,0,
-Insecticide,0,,0,Rotanil 500 Sc,AP-2701,Agro Arena Associates Ltd,,,,,0,
-Insecticide,0,,0,Sami 10 EC,AP-2709,Samin Agro Care,,,,,0,
-Insecticide,0,,0,T-Methrin 10 EC,AP-2710,Tajanal Agro Industries Ltd.,,,,,0,
-Insecticide,0,,0,Tendcord 10 EC,AP-2712,Marshal Agrovet Chemical Industries Ltd,,,,,0,
-Insecticide,0,,0,Ripfall 10 EC,AP-2713,Astron Agree Care Bangladesh,,,,,0,
-Insecticide,0,,0,Tosmethrin 10 EC,AP-2714,Sreejoni Agrochemical,,,,,0,
-Insecticide,0,,0,Stockade 55EC,AP-2735,RNT Agro Ltd,,,,,0,
-Insecticide,0,,0,Mabula 2.5 EC,AP-2741,Mabco Bangladesh,,,,,0,
+Insecticide,0,Bensulfuron-methyl,0,Beema 53 WP,AP-2579,Partex Agro Ltd,,,,,0,
+Insecticide,0,Pyrazosulfuron-ethyl,0,M-Fil 10 WP,AP-2582,MH Crop Care,,,,,0,
+Insecticide,0,Pretilachlor,0,Rajfit 500 EC,AP-2584,Siraj Agro International Limited,,,,,0,HRAC K3
+Insecticide,0,Chlorpyrifos,0,Hilton 50 Ec,AP-2625,Nidus Agro,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Dyfos 48 Ec,AP-2626,Diya Agrocare,,,,,0,
+Insecticide,0,Chlorpyrifos,0,C-Top 48 Ec,AP-2630,Energy Agro Chemicals,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Zee- Fresh 48 Ec,AP-2633,KBS Brand Ltd,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Saiphos 48 Ec,AP-2634,Siraj Agro International Limited,,,,,0,
+Insecticide,0,Carbofuran,0,Ashrafuran 3G,AP-2637,Ashrafi Agro science,,,,,0,
+Insecticide,0,Carbofuran,0,Sarnifuran 3G,AP-2639,Sarni Crop Science Ltd.,,,,,0,
+Insecticide,0,Carbaryl,0,Bashidhan Plus 5G,AP-2640,BCC Agro Care,,,,,0,
+Insecticide,0,Carbaryl,0,Anidan 5G,AP-2641,M/S Nafis Crop Care,,,,,0,
+Insecticide,0,Carbofuran,0,Tzifun 5G,AP-2642,FCI Agro Ltd,,,,,0,
+Insecticide,0,Carbaryl,0,Limifuran 5G,AP-2645,CHEMOLIMPEX Agro,,,,,0,
+Insecticide,0,Carbaryl,0,Hifuran 5G,AP-2647,Hi Care Agrovet,,,,,0,
+Insecticide,0,Carbaryl,0,Megdut 5G,AP-2651,meghna fertilizer & agro chemical industries,,,,,0,
+Insecticide,0,Carbofuran,0,Orfuran,AP-2652,M/S Orbit Agro Industry,,,,,0,
+Insecticide,0,Carbofuran,0,Microfuran 5G,AP-2656,Micro Technology & Agro Product Ltd,,,,,0,
+Insecticide,0,Carbofuran,0,Sreejoni 5G,AP-2658,Sreejoni Agrochemical,,,,,0,
+Insecticide,0,Carbaryl,0,Itafuran 5G,AP-2659,Italy Agro Marketing Company,,,,,0,
+Insecticide,0,Fenvalerate,0,Saipro 3 GR,AP-2660,Siraj Agro International Limited,,,,,0,
+Insecticide,0,Fenvalerate,0,Reback 50 Sc,AP-2663,Anandha Agnovet,,,,,0,
+Insecticide,0,Fenvalerate,0,Regiment 50 Sc,AP-2664,ACI Chemicals Limited,,,,,0,FRAC 1
+Insecticide,0,Fenvalerate,0,Largent 3GR,AP-2667,Larsen chemical industries (pvt.) ltd.,,,,,0,
+Insecticide,0,Fenvalerate,0,Aqinil 50 Sc,AP-2668,Agro Business & Advisory Service,,,,,0,
+Insecticide,0,Cartap,0,Saynik 50 Sc,AP-2670,Anandha Agnovet,,,,,0,
+Insecticide,0,Cartap,0,Afitap 50 SP,AP-2671,Sundarbon Agro Products,,,,,0,
+Insecticide,0,Cartap,0,Tazatap 50 SP,AP-2672,RK Agro Products Ltd.,,,,,0,
+Insecticide,0,Carbosulfan,0,Dhanfan 20 Ec,AP-2681,Shugandha Traders,,,,,0,
+Insecticide,0,Chlorothalonil,0,Rotanil 500 Sc,AP-2701,Agro Arena Associates Ltd,,,,,0,
+Insecticide,0,Cypermethrin,0,Sami 10 EC,AP-2709,Samin Agro Care,,,,,0,
+Insecticide,0,Cypermethrin,0,T-Methrin 10 EC,AP-2710,Tajanal Agro Industries Ltd.,,,,,0,
+Insecticide,0,Cypermethrin,0,Tendcord 10 EC,AP-2712,Marshal Agrovet Chemical Industries Ltd,,,,,0,
+Insecticide,0,Cypermethrin,0,Ripfall 10 EC,AP-2713,Astron Agree Care Bangladesh,,,,,0,
+Insecticide,0,Cypermethrin,0,Tosmethrin 10 EC,AP-2714,Sreejoni Agrochemical,,,,,0,
+Insecticide,0,Chlorpyrifos + Cypermethrin,0,Stockade 55EC,AP-2735,RNT Agro Ltd,,,,,0,
+Insecticide,0,Lambda-cyhalothrin,0,Mabula 2.5 EC,AP-2741,Mabco Bangladesh,,,,,0,
 Insecticide,0,,0,Etop 20 EC,AP-2749,Energy Agro Chemicals,,,,,0,
 Insecticide,0,,0,Zee-Fen 20 EC,AP-2750,Three Star Agrochemical Company,,,,,0,
-Insecticide,0,,0,Ricothion 54 EC,AP-2753,Raina Associates,,,,,0,
-Insecticide,0,,0,Sarazon 60 EC,AP-2758,Sara Chemicals Ltd.,,,,,0,IRAC 1B
-Insecticide,0,,0,Thisal 20WP,AP-2759,Invent Trading,,,,,0,
-Insecticide,0,,0,Geviquin 25 EC,AP-2768,Gourab Industries Limited,,,,,0,
-Insecticide,0,,0,Mituvit 80 WDG,AP-2771,Sabir Fertilizer & Chemical Coplex Ltd.,,,,,0,
-Insecticide,0,,0,Sainojole 75 WP,AP-2774,Siraj Agro International Limited,,,,,0,
-Insecticide,0,,0,Tebuzole 250 EC,AP-2787,ACI Formulations PLC,,,,,0,
-Insecticide,0,,0,Fungizeb 80 WP,AP-2789,Sabir Fertilizer & Chemical Coplex Ltd.,,,,,0,
-Insecticide,0,,0,Sabir Gold 72 WP,AP-2791,Sabir Fertilizer & Chemical Coplex Ltd.,,,,,0,
-Insecticide,0,,0,Totanil 50 SC,AP-2795,M/S  Total Agro Science,,,,,0,
-Insecticide,0,,0,Meemnil 50SC,AP-2796,Meem Agrotech,,,,,0,
-Insecticide,0,,0,Hottap 50 SP,AP-2821,Agro Service Bangladesh,,,,,0,
-Insecticide,0,,0,Maya Plus 20 SL,AP-2826,BCC Agro Care,,,,,0,
-Insecticide,0,,0,Kishanprid 20SL,AP-2833,kishan Agro Chemicals,,,,,0,
-Insecticide,0,,0,T.Tap 50 SP,AP-2834,Tajanal Agro Industries Ltd.,,,,,0,
-Insecticide,0,,0,Noeltap,AP-2835,Overseas Trade Corporation (BD) Ltd.,,,,,0,
-Insecticide,0,,0,Altap 50 SP,AP-2837,Ali Chemico,,,,,0,
-Insecticide,0,,0,Newsthrin 10EC,AP-2838,M/S News Chemicals Industries,,,,,0,
-Insecticide,0,,0,Rasatap 50 SP,AP-2839,Rasa Agro Care,,,,,0,
-Insecticide,0,,0,Kismot 48 EC,AP-2848,Ace Farming Solution,,,,,0,
-Insecticide,0,,0,Mamkiller 48 EC,AP-2853,Mam Agro Industries,,,,,0,
-Insecticide,0,,0,Chloram 48 EC,AP-2855,Fast mutual corporation,,,,,0,
-Insecticide,0,,0,Larkphos 50 EC,AP-2857,Balark Enterprise,,,,,0,
-Insecticide,0,,0,Shamphos 50 EC,AP-2865,Shams Feed & Medicin Shop,,,,,0,
-Insecticide,0,,0,Rasaphos 48 EC,AP-2866,Rasa Agro Care,,,,,0,
-Insecticide,0,,0,Mospy 2.5EC,AP-2871,Green Care Bangladesh,,,,,0,4A
-Insecticide,0,,0,lifuran 5G,AP-2878,B.R. Agro,,,,,0,
-Insecticide,0,,0,Kazudan 5 G,AP-2882,Agrochem Agri Business,,,,,0,
-Insecticide,0,,0,T-Furan 5 G,AP-2886,Tajanal Agro Industries Ltd.,,,,,0,
-Insecticide,0,,0,Bishaclan 5G,AP-2889,Agro Service Bangladesh,,,,,0,
-Insecticide,0,,0,Herifuran 5 G,AP-2895,Heritage Agro Care,,,,,0,
-Insecticide,0,,0,Starlit 5 G,AP-2898,Agro Link BD,,,,,0,
-Insecticide,0,,0,Ena 5 SG,AP-2907,Focus Agro ltd,,,,,0,
-Insecticide,0,,0,Dyfuran 5G,AP-2908,Diya Agrocare,,,,,0,
-Insecticide,0,,0,Nordan 5 G,AP-2909,Norther Crop Care Ltd,,,,,0,
-Insecticide,0,,0,Nanfuran 5 G,AP-2910,Adnan Corporation Ltd,,,,,0,
-Insecticide,0,,0,Emamec 5 SG,AP-2938,Desh Pesticides,,,,,0,
-Insecticide,0,,0,Suclin 10 G,AP-2946,Apex Agro Industry Ltd,,,,,0,
-Insecticide,0,,0,Esudin 60 EC,AP-2947,Shabuj Bangla Agro,,,,,0,
-Insecticide,0,,0,Sarnizinon 10 G,AP-2949,Sarni Crop Science Ltd.,,,,,0,
-Insecticide,0,,0,Byvin 85WP,AP-2965,Byco Crop Care,,,,,0,
-Insecticide,0,,0,Save One 85 wp,AP-2983,Astron Agree Care Bangladesh,,,,,0,
-Insecticide,0,,0,T-Mectin 1.8 EC,AP-2991,Tajanal Agro Industries Ltd.,,,,,0,
-Insecticide,0,,0,Larkphos Plus 55 EC,AP-3012,Balark Enterprise,,,,,0,
-Insecticide,0,,0,Trushoot 2.5 EC,AP-3031,Six Seasons Bangladesh,,,,,0,
-Insecticide,0,,0,T-lamcyhalo 2.5 EC,AP-3032,Tajanal Agro Industries Ltd.,,,,,0,
-Insecticide,0,,0,Lampard2.5EC,AP-3034,Green Bangla Formulations,,,,,0,IRAC 3A
-Insecticide,0,,0,Deamla 2.5 EC,AP-3036,S.M Agricutural Division,,,,,0,
-Insecticide,0,,0,Pinacord 10 EC,AP-3040,Paragon Agro Limited,,,,,0,
-Insecticide,0,,0,G-Methrin 10 EC,AP-3043,Gulf Fertilizer & Chemicals Ltd,,,,,0,
-Insecticide,0,,0,Microthrin 10 EC,AP-3045,Micro Technology & Agro Product Ltd,,,,,0,
-Insecticide,0,,0,Monithrin 10 EC,AP-3051,Agro Monitor,,,,,0,
-Insecticide,0,,0,Nanothrin 10 EC,AP-3053,M.K. Agro Products,,,,,0,
+Insecticide,0,Malathion,0,Ricothion 54 EC,AP-2753,Raina Associates,,,,,0,
+Insecticide,0,Diazinon,0,Sarazon 60 EC,AP-2758,Sara Chemicals Ltd.,,,,,0,IRAC 1B
+Insecticide,0,Bitertanol,0,Thisal 20WP,AP-2759,Invent Trading,,,,,0,
+Insecticide,0,Quinalphos,0,Geviquin 25 EC,AP-2768,Gourab Industries Limited,,,,,0,
+Insecticide,0,Sulphur,0,Mituvit 80 WDG,AP-2771,Sabir Fertilizer & Chemical Coplex Ltd.,,,,,0,
+Insecticide,0,Tricyclazole,0,Sainojole 75 WP,AP-2774,Siraj Agro International Limited,,,,,0,
+Insecticide,0,Tebuconazole,0,Tebuzole 250 EC,AP-2787,ACI Formulations PLC,,,,,0,
+Insecticide,0,Mancozeb,0,Fungizeb 80 WP,AP-2789,Sabir Fertilizer & Chemical Coplex Ltd.,,,,,0,
+Insecticide,0,Mancozeb + Metalaxyl,0,Sabir Gold 72 WP,AP-2791,Sabir Fertilizer & Chemical Coplex Ltd.,,,,,0,
+Insecticide,0,Fenvalerate,0,Totanil 50 SC,AP-2795,M/S  Total Agro Science,,,,,0,
+Insecticide,0,Fenvalerate,0,Meemnil 50SC,AP-2796,Meem Agrotech,,,,,0,
+Insecticide,0,Cartap,0,Hottap 50 SP,AP-2821,Agro Service Bangladesh,,,,,0,
+Insecticide,0,Imidacloprid,0,Maya Plus 20 SL,AP-2826,BCC Agro Care,,,,,0,
+Insecticide,0,Imidacloprid,0,Kishanprid 20SL,AP-2833,kishan Agro Chemicals,,,,,0,
+Insecticide,0,Cartap,0,T.Tap 50 SP,AP-2834,Tajanal Agro Industries Ltd.,,,,,0,
+Insecticide,0,Cartap,0,Noeltap,AP-2835,Overseas Trade Corporation (BD) Ltd.,,,,,0,
+Insecticide,0,Cartap,0,Altap 50 SP,AP-2837,Ali Chemico,,,,,0,
+Insecticide,0,Cartap,0,Newsthrin 10EC,AP-2838,M/S News Chemicals Industries,,,,,0,
+Insecticide,0,Cartap,0,Rasatap 50 SP,AP-2839,Rasa Agro Care,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Kismot 48 EC,AP-2848,Ace Farming Solution,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Mamkiller 48 EC,AP-2853,Mam Agro Industries,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Chloram 48 EC,AP-2855,Fast mutual corporation,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Larkphos 50 EC,AP-2857,Balark Enterprise,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Shamphos 50 EC,AP-2865,Shams Feed & Medicin Shop,,,,,0,
+Insecticide,0,Chlorpyrifos,0,Rasaphos 48 EC,AP-2866,Rasa Agro Care,,,,,0,
+Insecticide,0,Acetamiprid,0,Mospy 2.5EC,AP-2871,Green Care Bangladesh,,,,,0,4A
+Insecticide,0,Carbaryl,0,lifuran 5G,AP-2878,B.R. Agro,,,,,0,
+Insecticide,0,Carbofuran,0,Kazudan 5 G,AP-2882,Agrochem Agri Business,,,,,0,
+Insecticide,0,Carbaryl,0,T-Furan 5 G,AP-2886,Tajanal Agro Industries Ltd.,,,,,0,
+Insecticide,0,Carbofuran,0,Bishaclan 5G,AP-2889,Agro Service Bangladesh,,,,,0,
+Insecticide,0,Carbofuran,0,Herifuran 5 G,AP-2895,Heritage Agro Care,,,,,0,
+Insecticide,0,Carbaryl,0,Starlit 5 G,AP-2898,Agro Link BD,,,,,0,
+Insecticide,0,Emamectin Benzoate,0,Ena 5 SG,AP-2907,Focus Agro ltd,,,,,0,
+Insecticide,0,Carbaryl,0,Dyfuran 5G,AP-2908,Diya Agrocare,,,,,0,
+Insecticide,0,Carbofuran,0,Nordan 5 G,AP-2909,Norther Crop Care Ltd,,,,,0,
+Insecticide,0,Carbaryl,0,Nanfuran 5 G,AP-2910,Adnan Corporation Ltd,,,,,0,
+Insecticide,0,Emamectin Benzoate,0,Emamec 5 SG,AP-2938,Desh Pesticides,,,,,0,
+Insecticide,0,Diazinon,0,Suclin 10 G,AP-2946,Apex Agro Industry Ltd,,,,,0,
+Insecticide,0,Diazinon,0,Esudin 60 EC,AP-2947,Shabuj Bangla Agro,,,,,0,
+Insecticide,0,Diazinon,0,Sarnizinon 10 G,AP-2949,Sarni Crop Science Ltd.,,,,,0,
+Insecticide,0,Carbaryl,0,Byvin 85WP,AP-2965,Byco Crop Care,,,,,0,
+Insecticide,0,Carbaryl,0,Save One 85 wp,AP-2983,Astron Agree Care Bangladesh,,,,,0,
+Insecticide,0,Abamectin,0,T-Mectin 1.8 EC,AP-2991,Tajanal Agro Industries Ltd.,,,,,0,
+Insecticide,0,Chlorpyrifos + Cypermethrin,0,Larkphos Plus 55 EC,AP-3012,Balark Enterprise,,,,,0,
+Insecticide,0,Lambda-cyhalothrin,0,Trushoot 2.5 EC,AP-3031,Six Seasons Bangladesh,,,,,0,
+Insecticide,0,Lambda-cyhalothrin,0,T-lamcyhalo 2.5 EC,AP-3032,Tajanal Agro Industries Ltd.,,,,,0,
+Insecticide,0,Lambda-cyhalothrin,0,Lampard2.5EC,AP-3034,Green Bangla Formulations,,,,,0,IRAC 3A
+Insecticide,0,Lambda-cyhalothrin,0,Deamla 2.5 EC,AP-3036,S.M Agricutural Division,,,,,0,
+Insecticide,0,Cypermethrin,0,Pinacord 10 EC,AP-3040,Paragon Agro Limited,,,,,0,
+Insecticide,0,Cypermethrin,0,G-Methrin 10 EC,AP-3043,Gulf Fertilizer & Chemicals Ltd,,,,,0,
+Insecticide,0,Cypermethrin,0,Microthrin 10 EC,AP-3045,Micro Technology & Agro Product Ltd,,,,,0,
+Insecticide,0,Cypermethrin,0,Monithrin 10 EC,AP-3051,Agro Monitor,,,,,0,
+Insecticide,0,Cypermethrin,0,Nanothrin 10 EC,AP-3053,M.K. Agro Products,,,,,0,
 Insecticide,0,,0,Shep 20 EC,AP-3058,Shalleen Agro Chemicals Ltd,,,,,0,
 Insecticide,0,,0,Iback 20 EC,AP-3059,MS Agro Chemicals Co. Ltd.,,,,,0,
-Insecticide,0,,0,Anithion 57 EC,AP-3060,M/S Nafis Crop Care,,,,,0,
-Insecticide,0,,0,G-Tax 57% Tab,AP-3064,Taj Agro Enterprise,,,,,0,
-Insecticide,0,,0,T-sulphur 80 WDG,AP-3072,Tajanal Agro Industries Ltd.,,,,,0,FRAC M02
-Insecticide,0,,0,Dhaksulf 80,AP-3075,Dhaka Crop Care,,,,,0,
-Insecticide,0,,0,Towzole 30 EC,AP-3079,East West Chemicals Ltd.,,,,,0,
-Insecticide,0,,0,Astreate 5 EC,AP-3089,Astron Agree Care Bangladesh,,,,,0,
-Insecticide,0,,0,Parazeb 80 WP,AP-3095,Paragon Agro Limited,,,,,0,
-Insecticide,0,,0,F-Zeb 80 WP,AP-3097,FCI Agro Ltd,,,,,0,
-Insecticide,0,,0,Dmectin 1.8 EC,AP-3104,SS Agro Chemical,,,,,0,
-Insecticide,0,,0,Astothane M-45,AP-3109,Astron Agree Care Bangladesh,,,,,0,
-Insecticide,0,,0,MAhzeb 80 WP,AP-3110,M/S Mahabub Enterprise,,,,,0,
-Insecticide,0,,0,Paramil 42 WP,AP-3113,Pace Import & Export Ltd,,,,,0,
-Insecticide,0,,0,Aidmeal 72,AP-3116,M/S Agro Aid International,,,,,0,FRAC M03/4
-Insecticide,0,,0,Lias 72 WP,AP-3117,Shurzho Product,,,,,0,
-Insecticide,0,,0,Ranazim 50 WP,AP-3121,Runner Agro Products Limited,,,,,0,
-Insecticide,0,,0,Tajarat 50 WP,AP-3125,Tajanal Agro Industries Ltd.,,,,,0,
-Insecticide,0,,0,Minzim 50 WP,AP-3127,Meem Agrotech,,,,,0,
-Insecticide,0,,0,Barbiton 50 DF,AP-3132,S.M. Agro international,,,,,0,
-Insecticide,0,,0,Desconil 72 WP,AP-3139,Desh Agro Services Company Ltd,,,,,0,
-Insecticide,0,,0,Ruvi One 50WP,AP-3145,Astron Agree Care Bangladesh,,,,,0,
-Insecticide,0,,0,Noamectin 1.8 EC,AP-3154,Sisnova Agro international,,,,,0,
-Insecticide,0,,0,Bulbul 5G,AP-3156,Nokon Limited,,,,,0,
-Insecticide,0,,0,Butagin 5G,AP-3158,Shabuj Bangla Agro,,,,,0,
-Insecticide,0,,0,Tiptop 35WP,AP-3170,East West Chemicals Ltd.,,,,,0,FRAC 3
-Insecticide,0,,0,Cross 500EC,AP-3178,Byco Crop Care,,,,,0,HRAC B
-Insecticide,0,,0,Ananda Clean 10WP,AP-3183,Anandha Agnovet,,,,,0,
-Insecticide,0,,0,Pranha 25WP,AP-3205,Runner Agro Products Limited,,,,,0,IRAC 16+1A
-Insecticide,0,,0,Alphavet 80WPG,AP-3209,Alfa Agro Limited,,,,,0,
-Insecticide,0,,0,Monivit 80WDG,AP-3222,Agro Monitor,,,,,0,
-Insecticide,0,,0,Larkzim 50WP,AP-3239,Balark Enterprise,,,,,0,
-Insecticide,0,,0,Simcard 10EC,AP-3255,Green Agro Vision,,,,,0,
-Insecticide,0,,0,Wipe Out 41SL,AP-3262,M/s Agsin Bangladesh,,,,,0,
+Insecticide,0,Malathion,0,Anithion 57 EC,AP-3060,M/S Nafis Crop Care,,,,,0,
+Insecticide,0,Aluminium Phosphide,0,G-Tax 57% Tab,AP-3064,Taj Agro Enterprise,,,,,0,
+Insecticide,0,Sulphur,0,T-sulphur 80 WDG,AP-3072,Tajanal Agro Industries Ltd.,,,,,0,FRAC M02
+Insecticide,0,Sulphur,0,Dhaksulf 80,AP-3075,Dhaka Crop Care,,,,,0,
+Insecticide,0,Propiconazole,0,Towzole 30 EC,AP-3079,East West Chemicals Ltd.,,,,,0,
+Insecticide,0,Hexaconazole,0,Astreate 5 EC,AP-3089,Astron Agree Care Bangladesh,,,,,0,
+Insecticide,0,Mancozeb,0,Parazeb 80 WP,AP-3095,Paragon Agro Limited,,,,,0,
+Insecticide,0,Mancozeb,0,F-Zeb 80 WP,AP-3097,FCI Agro Ltd,,,,,0,
+Insecticide,0,Mancozeb,0,Dmectin 1.8 EC,AP-3104,SS Agro Chemical,,,,,0,
+Insecticide,0,Mancozeb,0,Astothane M-45,AP-3109,Astron Agree Care Bangladesh,,,,,0,
+Insecticide,0,Mancozeb,0,MAhzeb 80 WP,AP-3110,M/S Mahabub Enterprise,,,,,0,
+Insecticide,0,Mancozeb + Metalaxyl,0,Paramil 42 WP,AP-3113,Pace Import & Export Ltd,,,,,0,
+Insecticide,0,Mancozeb (64%) + Metalaxyl,0,Aidmeal 72,AP-3116,M/S Agro Aid International,,,,,0,FRAC M03/4
+Insecticide,0,Mancozeb + Metalaxyl,0,Lias 72 WP,AP-3117,Shurzho Product,,,,,0,
+Insecticide,0,Carbendazim,0,Ranazim 50 WP,AP-3121,Runner Agro Products Limited,,,,,0,
+Insecticide,0,Carbendazim,0,Tajarat 50 WP,AP-3125,Tajanal Agro Industries Ltd.,,,,,0,
+Insecticide,0,Carbendazim,0,Minzim 50 WP,AP-3127,Meem Agrotech,,,,,0,
+Insecticide,0,Carbendazim,0,Barbiton 50 DF,AP-3132,S.M. Agro international,,,,,0,
+Insecticide,0,Mancozeb + Cymoxanil,0,Desconil 72 WP,AP-3139,Desh Agro Services Company Ltd,,,,,0,
+Insecticide,0,Iprodione,0,Ruvi One 50WP,AP-3145,Astron Agree Care Bangladesh,,,,,0,
+Insecticide,0,Butachlor,0,Noamectin 1.8 EC,AP-3154,Sisnova Agro international,,,,,0,
+Insecticide,0,Butachlor,0,Bulbul 5G,AP-3156,Nokon Limited,,,,,0,
+Insecticide,0,Butachlor,0,Butagin 5G,AP-3158,Shabuj Bangla Agro,,,,,0,
+Insecticide,0,Pretilachlor,0,Tiptop 35WP,AP-3170,East West Chemicals Ltd.,,,,,0,FRAC 3
+Insecticide,0,Pretilachlor,0,Cross 500EC,AP-3178,Byco Crop Care,,,,,0,HRAC B
+Insecticide,0,Pyrazosulfuron-ethyl,0,Ananda Clean 10WP,AP-3183,Anandha Agnovet,,,,,0,
+Insecticide,0,Buprofezin (5%) + Isoprocarb,0,Pranha 25WP,AP-3205,Runner Agro Products Limited,,,,,0,IRAC 16+1A
+Insecticide,0,Chlorpyrifos,0,Alphavet 80WPG,AP-3209,Alfa Agro Limited,,,,,0,
+Insecticide,0,Sulphur,0,Monivit 80WDG,AP-3222,Agro Monitor,,,,,0,
+Insecticide,0,Carbendazim,0,Larkzim 50WP,AP-3239,Balark Enterprise,,,,,0,
+Insecticide,0,Cypermethrin,0,Simcard 10EC,AP-3255,Green Agro Vision,,,,,0,
+Insecticide,0,Glyphosate,0,Wipe Out 41SL,AP-3262,M/s Agsin Bangladesh,,,,,0,
 Insecticide,0,,0,Dunkun 5G,AP-3264,Redsun Agrochem (BD) Ltd,,,,,0,
 Insecticide,0,,0,Sarnifuran 5G,AP-3267,Sarni Crop Science Ltd.,,,,,0,
 Insecticide,0,,0,Bycodan 5G,AP-3270,Byco Agro Chemicals,,,,,0,
@@ -10249,8 +10249,8 @@ Bio Pesticide,0,z-9-Tetradecenyl Acetate 1%,0,Tera,AP(Bio)-138,M/S Aranya Crop C
 Bio Pesticide,0,Potassium salt of fatty acid 40%,0,Fytoclean,AP(Bio)-139,Russell IPM Bangladesh Limited,,,,,0,IRAC 24B
 Bio Pesticide,0,,0,Biolead,AP(Bio)-140,Pheromone Industries Ltd,,,,,0,
 Bio Pesticide,0,,0,Ricoderma 1.5 WP,AP(Bio)-141,Rajib Agro Chemicals Limited,,,,,0,
-Bio Pesticide,0,,0,Vegard 5 EC,AP(Bio)-04,SNS Agro Tec,,,,,0,
-Bio Pesticide,0,,0,Leomax,AP(Bio)-07,Russell IPM Bangladesh Limited,,,,,0,
+Bio Pesticide,0,Spodolure,0,Vegard 5 EC,AP(Bio)-04,SNS Agro Tec,,,,,0,
+Bio Pesticide,0,HaNPV (Viral Biopesticide),0,Leomax,AP(Bio)-07,Russell IPM Bangladesh Limited,,,,,0,
 Bio Pesticide,0,,0,Bioneem Plus 1 EC,AP(Bio)-08,Ispahani Agro Limited,,,,,0,
 Bio Pesticide,0,,0,Fytomax 3 EC,AP(Bio)-09,Russell IPM Bangladesh Limited,,,,,0,IRAC UN
 Bio Pesticide,0,,0,Spodo-NPV,AP(Bio)-22,Ispahani Agro Limited,,,,,0,
