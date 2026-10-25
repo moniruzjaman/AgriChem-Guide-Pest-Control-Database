@@ -1,0 +1,35 @@
+/* ─────────────────────────────────────────────────────────────────────
+ * MoA Group Badge — Guide §4.3 "Visual Badging Standards".
+ * The IRAC label standard requires the sub-group letter to be rendered
+ * in the SAME font size as the main number, so the badge uses a
+ * monospace stack where "28A" has the same visual weight as "28".
+ * ───────────────────────────────────────────────────────────────────── */
+
+.acg-moa-badge {
+  display: inline-block;
+  background: #475569;
+  color: #fff;
+  font-family: "JetBrains Mono", "Source Code Pro", "Courier New", monospace;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: 5px;
+  white-space: nowrap;
+  line-height: 1;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.acg-moa-badge--sm {
+  font-size: 10px;
+  padding: 3px 6px;
+}
+
+.acg-moa-badge--md {
+  font-size: 13px;
+  padding: 5px 9px;
+}
+
+.acg-moa-badge--lg {
+  font-size: 16px;
+  padding: 7px 12px;
+}

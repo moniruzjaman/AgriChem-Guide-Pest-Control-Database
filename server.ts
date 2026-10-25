@@ -4,6 +4,9 @@ import fs from "fs";
 import crypto from "crypto";
 import { createServer as createViteServer } from "vite";
 
+// fetch is global in Node 18+. Used by the /api/ppw/search proxy below.
+// (No import needed — `globalThis.fetch` is available in Node 18+ runtimes.)
+
 async function startServer() {
   const app = express();
   const PORT = 3000;
@@ -224,6 +227,104 @@ async function startServer() {
     } catch (error) {
       console.error("Error in visitor stats route:", error);
       res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  // -------------------------------------------------------------------------
+  // PPW (Plant Protection Wing) live-search proxy.
+  //
+  // The official site at https://ppw.krishi.gov.bd/ sends `X-Frame-Options:
+  // SAMEORIGIN`, so the pesticide-list page CANNOT be embedded directly in
+  // an iframe from our app. To give users an in-app "live official search"
+  // surface, we proxy the underlying JSON API at
+  // /pesticide-search?page=N&ajax_keyword=... through this server route.
+  //
+  // This avoids both CORS and X-Frame-Options restrictions while keeping
+  // the official source authoritative — every search hit comes from the
+  // live government database, not from our cached snapshot.
+  //
+  // Query params (all optional, all forwarded to the upstream API):
+  //   page           — 1-based page number (default 1)
+  //   keyword        — search keyword (forwarded as ajax_keyword)
+  //   ap_no          — registration number filter (forwarded as ajax_ap_no)
+  //   product_type   — pesticide type filter (forwarded as ajax_product_type)
+  //   company        — company filter (forwarded as ajax_company)
+  //   brand          — brand filter (forwarded as ajax_brand)
+  //   group          — MoA group filter (forwarded as ajax_group)
+  //   crop           — crop filter (forwarded as ajax_crop)
+  //   pest           — pest filter (forwarded as ajax_pest)
+  //   dose           — dose filter (forwarded as ajax_dose)
+  //   filter         — "expired" to include expired records
+  //
+  // Response: the upstream JSON body is forwarded unchanged.
+  // -------------------------------------------------------------------------
+  app.get("/api/ppw/search", async (req, res) => {
+    try {
+      const upstreamUrl = new URL("https://ppw.krishi.gov.bd/pesticide-search");
+      // Forward all supported query params, renaming our short names to the
+      // upstream's `ajax_*` names.
+      const page = (req.query.page as string) || "1";
+      upstreamUrl.searchParams.set("page", page);
+      if (req.query.keyword) {
+        upstreamUrl.searchParams.set("ajax_keyword", String(req.query.keyword));
+      }
+      if (req.query.ap_no) {
+        upstreamUrl.searchParams.set("ajax_ap_no", String(req.query.ap_no));
+      }
+      if (req.query.product_type) {
+        upstreamUrl.searchParams.set("ajax_product_type", String(req.query.product_type));
+      }
+      if (req.query.company) {
+        upstreamUrl.searchParams.set("ajax_company", String(req.query.company));
+      }
+      if (req.query.brand) {
+        upstreamUrl.searchParams.set("ajax_brand", String(req.query.brand));
+      }
+      if (req.query.group) {
+        upstreamUrl.searchParams.set("ajax_group", String(req.query.group));
+      }
+      if (req.query.crop) {
+        upstreamUrl.searchParams.set("ajax_crop", String(req.query.crop));
+      }
+      if (req.query.pest) {
+        upstreamUrl.searchParams.set("ajax_pest", String(req.query.pest));
+      }
+      if (req.query.dose) {
+        upstreamUrl.searchParams.set("ajax_dose", String(req.query.dose));
+      }
+      if (req.query.filter) {
+        upstreamUrl.searchParams.set("filter", String(req.query.filter));
+      }
+
+      // Forward the request with browser-like headers so the upstream
+      // Laravel server treats us like a real visitor.
+      const upstreamRes = await fetch(upstreamUrl.toString(), {
+        method: "GET",
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 " +
+            "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+          Accept: "application/json, text/plain, */*",
+          "X-Requested-With": "XMLHttpRequest",
+          Referer: "https://ppw.krishi.gov.bd/pesticide-list",
+        },
+      });
+      if (!upstreamRes.ok) {
+        res.status(upstreamRes.status).json({
+          error: "Upstream PPW API error",
+          status: upstreamRes.status,
+          url: upstreamUrl.toString(),
+        });
+        return;
+      }
+      const body = await upstreamRes.text();
+      res.type("application/json").send(body);
+    } catch (error) {
+      console.error("Error in /api/ppw/search proxy:", error);
+      res.status(502).json({
+        error: "Failed to reach the official PPW API",
+        detail: error instanceof Error ? error.message : String(error),
+      });
     }
   });
 

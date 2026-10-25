@@ -133,7 +133,10 @@ export default defineConfig(() => {
           // Bump this string on every breaking release so users never get
           // stuck on a stale cached bundle (old OG image, old tagline,
           // pre-rename branding, etc.).
-          cacheId: 'pn-v3',
+          cacheId: 'pn-v5',
+          // Only precache files the app needs to function: JS, CSS, HTML, fonts,
+          // icons, manifest, and the runtime database JSON. Download-only files
+          // (PDFs, XLSX, CSVs) are served on demand via runtime cache.
           globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2,json,webmanifest}'],
           // Take over from any previous service worker IMMEDIATELY and purge
           // old precaches. Without this, returning visitors keep getting the
@@ -142,12 +145,11 @@ export default defineConfig(() => {
           skipWaiting: true,
           clientsClaim: true,
           cleanupOutdatedCaches: true,
-          // The heavy product data now lives in dedicated async chunks
-          // (code-split via loadDatabase.ts). The policy enrichment sidecar
-          // adds ~3 MB of inline data to the allPesticidesData chunk, so we
-          // raise the precache ceiling to 8 MiB to keep the SW precache
-          // manifest complete for offline field use.
-          maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
+          // The runtime database JSON is ~7.5 MB and needs to be precached
+          // for offline use. 10 MiB gives headroom for the JSON + app shell.
+          // (Previously 16 MiB was needed for the 7.2 MB inline TS chunk;
+          // that chunk is now gone — the data is fetched as JSON at runtime.)
+          maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
           runtimeCaching: [
             {
               urlPattern: /^\/api\/.*/i,
@@ -161,6 +163,21 @@ export default defineConfig(() => {
                 cacheableResponse: {
                   statuses: [0, 200],
                 },
+              },
+            },
+            // Runtime cache for download-only files (PDFs, XLSX, CSVs).
+            // These are NOT precached (to save ~9 MB of precache space) but
+            // are cached on first download so subsequent downloads are instant.
+            {
+              urlPattern: /^\/downloads\/.*\.(?:pdf|xlsx|csv)$/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'downloads-cache',
+                expiration: {
+                  maxEntries: 20,
+                  maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+                },
+                cacheableResponse: { statuses: [0, 200] },
               },
             },
             // Safety-net runtime cache for any remaining cross-origin image

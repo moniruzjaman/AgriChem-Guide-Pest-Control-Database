@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
+  AlertOctagon,
+  AlertTriangle,
   ArrowRight,
   ArrowUpRight,
   BookMarked,
@@ -189,7 +191,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
   // ---------------------------------------------------------------------
   // Real catalogue statistics — recomputed only when the database changes.
   // ---------------------------------------------------------------------
-  const { totalLabel, mappedLabel, groupCount } = useMemo(() => {
+  const { totalLabel, mappedLabel, mappedCount, groupCount, schemeCounts } = useMemo(() => {
     const total = products.length || 0;
     const withMoa = products.filter((p) => (p.moaCode || '').trim()).length;
     const pct = total ? Math.round((withMoa / total) * 1000) / 10 : 0;
@@ -197,10 +199,27 @@ export const HomeView: React.FC<HomeViewProps> = ({
     const groups = new Set(
       products.filter((p) => (p.moaCode || '').trim()).map((p) => p.moaCode as string)
     ).size;
+    // Per-scheme counts — IRAC / FRAC / HRAC / UN
+    const schemeCountsMap = { IRAC: 0, FRAC: 0, HRAC: 0, UN: 0 } as Record<string, number>;
+    for (const p of products) {
+      const code = (p.moaCode || '').trim();
+      if (!code) continue;
+      if (code.startsWith('IRAC')) {
+        schemeCountsMap.IRAC += 1;
+        if (code.includes('UN')) schemeCountsMap.UN += 1;
+      } else if (code.startsWith('FRAC')) {
+        schemeCountsMap.FRAC += 1;
+        if (code === 'FRAC NC') schemeCountsMap.UN += 1;
+      } else if (code.startsWith('HRAC')) {
+        schemeCountsMap.HRAC += 1;
+      }
+    }
     return {
       totalLabel: `${formatNum(total.toLocaleString('en-US'))}+`,
       mappedLabel: `${formatNum(pctStr)}%`,
+      mappedCount: formatNum(withMoa.toLocaleString('en-US')),
       groupCount: groups,
+      schemeCounts: schemeCountsMap,
     };
   }, [products, formatNum]);
 
@@ -268,7 +287,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         ctaCalc: 'ট্যাংক ক্যালকুলেটর',
         ctaShare: 'শেয়ার করুন',
         ctaGuide: 'গাইড মেনু',
-        ctaLogSpray: 'স্প্রে লগ করুন',
+        ctaLogSpray: 'স্প্রে লগ ও MoA কমপ্লায়েন্স যাচাই',
         trust:
           'সুপারিশের আগে লেবেল, নিবন্ধন, PHI, REI ও PPE যাচাই করুন।',
         dialogKicker: 'মাঠের কথা',
@@ -325,7 +344,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         ctaCalc: 'Tank calculator',
         ctaShare: 'Share the app',
         ctaGuide: 'Guide menu',
-        ctaLogSpray: 'Log a spray',
+        ctaLogSpray: 'Log spray + MoA compliance check',
         trust:
           'Always verify the current label, registration status, PHI, REI, and PPE before recommending.',
         dialogKicker: 'FROM THE FIELD',
@@ -492,7 +511,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <div className="acg-stat">
           <div className="acg-stat__value">{mappedLabel}</div>
           <div className="acg-stat__label">{copy.stat2Label}</div>
-          <div className="acg-stat__detail">{copy.stat2Detail}</div>
+          <div className="acg-stat__detail">
+            {bn
+              ? `${mappedCount} পণ্য · IRAC ${formatNum(schemeCounts.IRAC.toLocaleString('en-US'))} · FRAC ${formatNum(schemeCounts.FRAC.toLocaleString('en-US'))} · HRAC ${formatNum(schemeCounts.HRAC.toLocaleString('en-US'))}`
+              : `${mappedCount} products · IRAC ${formatNum(schemeCounts.IRAC.toLocaleString('en-US'))} · FRAC ${formatNum(schemeCounts.FRAC.toLocaleString('en-US'))} · HRAC ${formatNum(schemeCounts.HRAC.toLocaleString('en-US'))}`}
+          </div>
         </div>
         <div className="acg-stat">
           <div className="acg-stat__value">{formatNum(groupCount)}</div>
@@ -606,6 +629,84 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </div>
             </button>
           ))}
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────────────
+          MoA COMPLIANCE ENGINE CALLOUT — surfaces the IRAC MoA Rotation
+          Guide §4.2 decision engine from PR #50. The compliance engine
+          validates every spray against 5 IRAC rules: treatment window,
+          sub-group rotation risk, 50% seasonal exposure cap, per-window
+          app limit, and crop-phase advisory. Available in the My Field
+          tab where users log sprays.
+         ────────────────────────────────────────────────────────────────── */}
+      <section className="acg-shell" style={{ marginTop: 24 }}>
+        <div className="acg-section-head">
+          <div>
+            <span className="acg-kicker">
+              <ShieldCheck size={14} style={{ display: 'inline', marginRight: 4, verticalAlign: 'middle' }} />
+              {bn ? 'MoA কমপ্লায়েন্স ইঞ্জিন' : 'MoA Compliance Engine'}
+            </span>
+            <h2 className="acg-h2">
+              {bn ? (
+                <>প্রতিটি স্প্রে <em>IRAC নিয়ম দিয়ে যাচাই</em></>
+              ) : (
+                <>Every spray <em>validated against IRAC rules</em></>
+              )}
+            </h2>
+          </div>
+          <button className="acg-link" onClick={() => go('myfield')}>
+            {bn ? 'লগ শুরু করুন' : 'Open My Field'} <ArrowUpRight size={15} />
+          </button>
+        </div>
+        <p style={{
+          color: 'var(--muted, #475569)',
+          fontSize: 14,
+          lineHeight: 1.6,
+          maxWidth: 720,
+          margin: '0 0 16px',
+        }}>
+          {bn
+            ? 'নতুন স্প্রে লগ করলে অ্যাপ স্বয়ংক্রিয়ভাবে যাচাই করে: ট্রিটমেন্ট উইন্ডো (১৫/৩০ দিন), সাব-গ্রুপ ঘূর্ণন ঝুঁকি, ৫০% মৌসুমী এক্সপোজার ক্যাপ, উইন্ডো-প্রতি প্রয়োগ সীমা এবং ফসল পর্যায় সুপারিশ। লঙ্ঘন ধরা পড়লে একটি non-dismissible সতর্কতা মডাল সঠিক কারণটি দেখায় — IRAC MoA Rotation Guide §4.2 অনুযায়ী।'
+            : 'When you log a new spray, the app automatically validates it against: treatment windows (15/30 days), sub-group rotation risk, 50% seasonal exposure cap, per-window app limits, and crop-phase advisories. Violations trigger a non-dismissible warning modal with the exact failure mechanics — per IRAC MoA Rotation Guide §4.2.'}
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '4px 10px', borderRadius: 16,
+            background: '#fee2e2', color: '#b91c1c',
+            fontSize: 11, fontWeight: 600, letterSpacing: 0.04,
+          }}>
+            <AlertOctagon size={12} />
+            {bn ? 'ব্লক: একই গ্রুপ উইন্ডোর ভেতরে' : 'BLOCK: same group in window'}
+          </span>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '4px 10px', borderRadius: 16,
+            background: '#fef3c7', color: '#c2410c',
+            fontSize: 11, fontWeight: 600, letterSpacing: 0.04,
+          }}>
+            <AlertTriangle size={12} />
+            {bn ? 'ফ্ল্যাগ: সাব-গ্রুপ ঘূর্ণন' : 'FLAG: sub-group rotation'}
+          </span>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '4px 10px', borderRadius: 16,
+            background: '#fee2e2', color: '#b91c1c',
+            fontSize: 11, fontWeight: 600, letterSpacing: 0.04,
+          }}>
+            <AlertOctagon size={12} />
+            {bn ? 'ব্লক: ৫০% মৌসুমী ক্যাপ' : 'BLOCK: 50% seasonal cap'}
+          </span>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '4px 10px', borderRadius: 16,
+            background: '#f0fdf4', color: '#15803d',
+            fontSize: 11, fontWeight: 600, letterSpacing: 0.04,
+          }}>
+            <CheckCircle2 size={12} />
+            {bn ? 'অনুমোদিত: সব নিয়ম মানে' : 'PASS: all rules satisfied'}
+          </span>
         </div>
       </section>
 
@@ -1049,6 +1150,239 @@ export const HomeView: React.FC<HomeViewProps> = ({
             ? '⚠️ সূত্র: বাংলাদেশ সরকার, কৃষি মন্ত্রণালয়, কৃষি সম্প্রসারণ অধিদপ্তর (DAE)। সর্বশেষ সংশোধনের জন্য অফিসিয়াল ওয়েবসাইট দেখুন। নথিগুলো শুধুমাত্র রেফারেন্স উদ্দেশ্যে।'
             : '⚠️ Source: Government of Bangladesh, Ministry of Agriculture, Dept. of Agricultural Extension (DAE). Check official websites for latest amendments. Provided for reference purposes only.'}
         </p>
+      </section>
+
+      {/* ------------------------- LATEST DATABASE DOWNLOADS ---------- */}
+      <section className="acg-shell">
+        <div className="acg-card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #006a4e 0%, #004d39 100%)',
+            color: 'white',
+            padding: '24px 28px',
+          }}>
+            <span className="acg-res__eyebrow acg-res__eyebrow--gold" style={{ color: '#e3b341' }}>
+              {bn ? 'সর্বশেষ ডাটাবেস' : 'Latest database'}
+            </span>
+            <h3 style={{ margin: '6px 0 4px 0', fontSize: 22, fontWeight: 800, color: 'white' }}>
+              {bn
+                ? 'নিবন্ধিত বালাইনাশক ডাটাবেস — ডাউনলোড'
+                : 'Registered Pesticide Database — Download'}
+            </h3>
+            <p style={{ margin: 0, fontSize: 13, color: '#d4ede0', maxWidth: 720 }}>
+              {bn
+                ? 'লাইভ API (ppw.krishi.gov.bd), ৮৬ ও ৮৭তম পিটিএসি গেজেট এবং MoA ম্যাপিং অডিট থেকে একত্রিত — সম্পূর্ণ ডাটাবেস, MoA রেফারেন্স ও প্রিন্টযোগ্য পিডিএফ।'
+                : 'Unified snapshot built from the live API (ppw.krishi.gov.bd), the 86th & 87th PTAC gazettes, and the MoA mapping audit — full database, MoA rotation reference, and a printable PDF.'}
+            </p>
+          </div>
+          <div style={{ padding: '20px 28px', display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            {/* XLSX */}
+            <a
+              href="/downloads/pesticide_database_latest.xlsx"
+              download
+              className="acg-btn"
+              style={{ background: '#0369a1', color: 'white', borderColor: '#0369a1' }}
+            >
+              <FileDown size={15} />
+              {bn ? 'এক্সেল (XLSX)' : 'Excel (XLSX)'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                {bn ? '~ ৮,৯৩৫ রেকর্ড' : '~ 8,935 records'}
+              </span>
+            </a>
+            {/* PDF */}
+            <a
+              href="/downloads/pesticide_database_latest.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#b91c1c', color: 'white', borderColor: '#b91c1c' }}
+            >
+              <FileText size={15} />
+              {bn ? 'পিডিএফ (PDF)' : 'PDF reference'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                {bn ? 'প্রিন্টযোগ্য' : 'Printable'}
+              </span>
+            </a>
+            {/* CSV */}
+            <a
+              href="/downloads/pesticide_database_latest.csv"
+              download
+              className="acg-btn"
+              style={{ background: '#15803d', color: 'white', borderColor: '#15803d' }}
+            >
+              <FileDown size={15} />
+              {bn ? 'সিএসভি (CSV)' : 'Flat CSV'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                {bn ? '২.৮ এমবি' : '2.8 MB'}
+              </span>
+            </a>
+            {/* MoA rotation reference */}
+            <a
+              href="/downloads/moa_rotation_quick_reference.csv"
+              download
+              className="acg-btn"
+              style={{ background: '#a16207', color: 'white', borderColor: '#a16207' }}
+            >
+              <FileDown size={15} />
+              {bn ? 'MoA রেফারেন্স' : 'MoA rotation ref'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                {bn ? '৭২ গ্রুপ' : '72 groups'}
+              </span>
+            </a>
+          </div>
+          <div style={{ padding: '12px 28px 20px 28px', fontSize: 12, color: '#475569', borderTop: '1px solid #e2e8f0' }}>
+            <strong style={{ color: '#006a4e' }}>
+              {bn ? 'তথ্যসূত্র: ' : 'Source: '}
+            </strong>
+            {bn
+              ? 'ppw.krishi.gov.bd লাইভ API + ৮৬/৮৭ তম পিটিএসি গেজেট + MoA ম্যাপিং অডিট। সর্বশেষ আপডেট করা হয়েছে প্রতিটি বিল্ডে।'
+              : 'Live ppw.krishi.gov.bd API + 86th/87th PTAC gazettes + MoA mapping audit. Refreshed on every build.'}
+            {' '}
+            <a
+              href="https://ppw.krishi.gov.bd/pesticide-list"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#0369a1', fontWeight: 600, textDecoration: 'underline' }}
+            >
+              {bn ? 'সরকারি সাইটে লাইভ সার্চ করুন →' : 'Search the official site live →'}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ----------------- OFFICIAL SOURCES & REFERENCE DOWNLOADS ------- */}
+      <section className="acg-shell">
+        <div className="acg-card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)',
+            color: 'white',
+            padding: '20px 28px',
+          }}>
+            <span className="acg-res__eyebrow" style={{ color: '#93c5fd' }}>
+              {bn ? 'অফিসিয়াল সূত্র ও রেফারেন্স' : 'Official sources & reference'}
+            </span>
+            <h3 style={{ margin: '6px 0 4px 0', fontSize: 20, fontWeight: 800, color: 'white' }}>
+              {bn ? 'সরকারি ডাটাবেস ও IRAC MoA ক্লাসিফিকেশন' : 'Government database & IRAC MoA classification'}
+            </h3>
+            <p style={{ margin: 0, fontSize: 12, color: '#bfdbfe', maxWidth: 720 }}>
+              {bn
+                ? 'বাংলাদেশ সরকারের উদ্ভিদ সংরক্ষণ উইং এবং IRAC-এর অফিসিয়াল সূত্র থেকে সরাসরি তথ্য যাচাই করুন।'
+                : 'Verify directly against the Government of Bangladesh Plant Protection Wing and the IRAC MoA Classification Scheme v11.5.'}
+            </p>
+          </div>
+          <div style={{ padding: '20px 28px', display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            {/* PPW Official */}
+            <a
+              href="https://ppw.krishi.gov.bd/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#006a4e', color: 'white', borderColor: '#006a4e' }}
+            >
+              <ExternalLink size={15} />
+              {bn ? 'সরকারি পিপিডাব্লিউ সাইট' : 'PPW Official Site'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                ppw.krishi.gov.bd
+              </span>
+            </a>
+            {/* IRAC Training */}
+            <a
+              href="https://irac-online.org/training/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#7c3aed', color: 'white', borderColor: '#7c3aed' }}
+            >
+              <ExternalLink size={15} />
+              {bn ? 'IRAC ট্রেনিং' : 'IRAC Training'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                irac-online.org
+              </span>
+            </a>
+            {/* IRAC MoA Classification v11.5 PDF */}
+            <a
+              href="/downloads/IRAC_MoA_Classification_v11.5.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#b91c1c', color: 'white', borderColor: '#b91c1c' }}
+            >
+              <FileText size={15} />
+              {bn ? 'IRAC MoA v11.5 PDF' : 'IRAC MoA v11.5 PDF'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                1.5 MB
+              </span>
+            </a>
+            {/* IRAC MoA Brochure v11.5 PDF */}
+            <a
+              href="/downloads/IRAC_MoA_Brochure_v11.5.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#be123c', color: 'white', borderColor: '#be123c' }}
+            >
+              <FileText size={15} />
+              {bn ? 'IRAC ব্রোশিউর' : 'IRAC Brochure'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                1.2 MB
+              </span>
+            </a>
+            {/* IRAC Resistance Monitoring Guide PDF */}
+            <a
+              href="/downloads/IRAC_Resistance_Monitoring_Guide.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#9333ea', color: 'white', borderColor: '#9333ea' }}
+            >
+              <FileText size={15} />
+              {bn ? 'প্রতিরোধ মনিটরিং' : 'Resistance Guide'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                473 KB
+              </span>
+            </a>
+            {/* PTAC 86th Gazette PDF */}
+            <a
+              href="/downloads/PTAC_86th_Gazette.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#0369a1', color: 'white', borderColor: '#0369a1' }}
+            >
+              <FileText size={15} />
+              {bn ? '৮৬তম গেজেট PDF' : '86th PTAC Gazette'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                440 KB
+              </span>
+            </a>
+            {/* MoA Rotation Guide */}
+            <a
+              href="/downloads/MoA_Rotation_Guide_IRAC.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="acg-btn"
+              style={{ background: '#15803d', color: 'white', borderColor: '#15803d' }}
+            >
+              <FileText size={15} />
+              {bn ? 'MoA রোটেশন গাইড' : 'MoA Rotation Guide'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                126 KB
+              </span>
+            </a>
+            {/* Live engine CTA — opens the My Field tab where the engine runs */}
+            <button
+              type="button"
+              className="acg-btn"
+              style={{ background: '#0f766e', color: 'white', borderColor: '#0f766e', cursor: 'pointer' }}
+              onClick={() => go('myfield')}
+            >
+              <ShieldCheck size={15} />
+              {bn ? 'MoA কমপ্লায়েন্স ইঞ্জিন (লাইভ)' : 'MoA Compliance Engine (live)'}
+              <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
+                {bn ? 'ইন-অ্যাপ' : 'In-app'}
+              </span>
+            </button>
+          </div>
+        </div>
       </section>
 
       {/* -------------------------------- SHARE BANNER (restored) ------- */}

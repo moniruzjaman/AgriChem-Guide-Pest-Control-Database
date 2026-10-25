@@ -11,14 +11,21 @@ A bilingual (Bangla / English) Progressive Web App that helps farmers, dealers, 
 
 ## ✨ Key Features
 
-- **Pesticide Database** — latest DAE-registered products (insecticides, fungicides, herbicides, miticides, bio-pesticides, rodenticides, stored-grain protectants), merged with the 5,485-row AgriChem/MoA PTAC master. Grouped by category section headers (color-coded by IRAC red / FRAC golden / HRAC green) with live counts of ingredients, brands, and MoA groups per category (`src/components/DatabaseView.tsx`).
+- **Pesticide Database** — latest DAE-registered products (9,000+ formulations including Public Health), merged with the 5,485-row AgriChem/MoA PTAC master (trade names and combination actives filled from that base) and refreshed with the live pesticide-search API snapshot (86th & 87th PTAC gazettes + MoA mapping audit). Grouped by category section headers (color-coded by IRAC red / FRAC golden / HRAC green) with live counts of ingredients, brands, and MoA groups per category (`src/components/DatabaseView.tsx`).
+- 🛰️ **Official PPW Live Search** — in-app live search proxy to `ppw.krishi.gov.bd/pesticide-search` (the official Plant Protection Wing JSON API). Search by brand, keyword, or registration number; results render natively inside the app, so users can verify any product against the live government database without leaving PesticideNext. The official site sends `X-Frame-Options: SAMEORIGIN`, so we proxy the JSON API through our backend (`server.ts → /api/ppw/search`) instead of iframing it (`src/components/DatabaseView.tsx → PpwLiveSearchPanel`).
+- 📥 **Latest Database Downloads** — the app now ships 4 downloadable artifacts in `/public/downloads/` that are served from the same origin and precached by the service worker for offline use:
+  - `pesticide_database_latest.xlsx` — multi-sheet XLSX (Latest Database, MoA Audit, MoA Rotation Reference, MoA Mapping Enriched, Summary)
+  - `pesticide_database_latest.pdf` — printable alphabetical PDF reference (landscape A4, sectioned by Pesticides / Biopesticides / Public Health)
+  - `pesticide_database_latest.csv` — flat CSV (8,935 rows × 20 cols)
+  - `moa_rotation_quick_reference.csv` — 72 MoA group rotation reference
+  Download buttons are surfaced on the home tab (`src/components/HomeView.tsx`) and linked from the database tab.
 - 🧮 **Knapsack Sprayer Tank Calculator** — computes the correct amount of product and water per tank from label doses (g/ha, g/L, ml/L etc.) ([`src/utils/calculator.ts`](src/utils/calculator.ts), [`DosageCalculatorModal.tsx`](src/components/DosageCalculatorModal.tsx)).
 - 🔄 **MoA Rotation Planner** — IRAC / FRAC / HRAC mode-of-action classification with a multi-step rotation sequence builder that flags back-to-back same-group applications as conflicts ([`src/data/moaData.ts`](src/data/moaData.ts), [`RotationPlanner.tsx`](src/components/RotationPlanner.tsx), [`NextSprayGuide.tsx`](src/components/NextSprayGuide.tsx)).
 - 🛡️ **Safety & PPE Checklists** — interactive 10-point pre-spray / during-spray / post-spray checklist with progress bar, WHO toxicity band cards (red / yellow / blue / green), and emergency first-aid protocols including specific antidotes ([`SafetyView.tsx`](src/components/SafetyView.tsx)).
 - 📖 **Field Guidebook** — 5 chapters: crop schedules (PDF export), sprayer calibration, resistance science, W.A.L.E.S. tank-mix simulator, and PHI / food-safety compliance ([`Guidebook.tsx`](src/components/Guidebook.tsx)).
 - 📄 **PDF Export** — generate crop guides and single-product safety sheets as PDF via jsPDF ([`src/utils/pdfExport.ts`](src/utils/pdfExport.ts)).
 - 🔔 **Regulatory & Seasonal Alerts** — push-notification center for bans, restrictions, and pest-outbreak warnings from the Department of Agricultural Extension, with a custom-alert composer ([`NotificationCenter.tsx`](src/components/NotificationCenter.tsx), [`src/data/regulatoryAlertsData.ts`](src/data/regulatoryAlertsData.ts), [`src/utils/notifications.ts`](src/utils/notifications.ts)).
-- 📱 **PWA & Offline Support** — installable, service-worker cached (Workbox with `cacheId: 'pn-v2'`), with an offline indicator, dynamic apple-touch icons per tab, and a one-shot cache-cleanup hook that purges stale precaches from previous builds ([`vite.config.ts`](vite.config.ts), [`src/utils/cleanupCaches.ts`](src/utils/cleanupCaches.ts)).
+- 📱 **PWA & Offline Support** — installable, service-worker cached (Workbox with `cacheId: 'pn-v5'`), with an offline indicator, dynamic apple-touch icons per tab, and a one-shot cache-cleanup hook that purges stale precaches from previous builds ([`vite.config.ts`](vite.config.ts), [`src/utils/cleanupCaches.ts`](src/utils/cleanupCaches.ts)).
 - 🌐 **Bangla / English i18n** — full language switching via context; Bengali numerals, crop/pest/dosage translations, and a Hind Siliguri + IBM Plex Mono typography stack ([`src/context/LanguageContext.tsx`](src/context/LanguageContext.tsx), [`src/utils/i18n.ts`](src/utils/i18n.ts)).
 - 👥 **Live Visitor Counter** — total / unique / active-user tracking backed by the Express server.
 - 🔗 **Social Sharing with correct OG previews** — the server rewrites an `OG_IMAGE_ORIGIN` placeholder per request so WhatsApp / Facebook / Telegram / X / LinkedIn crawlers always see absolute image URLs matching the deployed domain.
@@ -40,7 +47,7 @@ The app uses a "pain-point editorial" design language across all tabs:
 |------------|------------|
 | Frontend   | React 19, TypeScript, Vite 6, Tailwind CSS 4, Framer Motion (`motion`), lucide-react icons |
 | Backend    | Express (dev: Vite middleware mode; prod: static `dist/` + SPA fallback), `tsx` runner |
-| PWA        | `vite-plugin-pwa` (Workbox service worker, `cacheId: 'pn-v2'`, auto-update + cleanup) |
+| PWA        | `vite-plugin-pwa` (Workbox service worker, `cacheId: 'pn-v5'`, auto-update + cleanup) |
 | PDF        | `jspdf` + `jspdf-autotable` |
 | Analytics  | `@vercel/analytics` |
 | Data prep  | Python 3 (CSV → TypeScript codegen), Bun/TypeScript audit script |
@@ -50,11 +57,16 @@ The app uses a "pain-point editorial" design language across all tabs:
 ```
 ├── server.ts               # Express server: visitor API, Vite dev middleware, prod static + OG rewriting
 ├── index.html              # App shell with SEO/OG/Twitter meta tags (canonical = pesticide.krishiai.live)
-├── vite.config.ts          # Vite + PWA config (cacheId: 'pn-v2', skipWaiting, cleanupOutdatedCaches)
+├── vite.config.ts          # Vite + PWA config (cacheId: 'pn-v5', skipWaiting, cleanupOutdatedCaches)
 ├── metadata.json           # AI Studio app metadata (name = tagline)
 ├── data_raw/               # Source CSVs (DAE pesticide registers, product lists, policy enrichment sidecar)
-│   ├── all_pesticides.csv                       # 5,452-row DAE register (13 cols)
-│   └── pesticide_policy_enrichment.csv          # 5,485-row policy/HHP/MoA sidecar (16 cols)
+│   ├── all_pesticides.csv                       # 9,353-row DAE register (13 cols) — updated with 86th/87th PTAC live DB
+│   └── pesticide_policy_enrichment.csv          # 9,459-row policy/HHP/MoA sidecar (16 cols) — updated with MoA audit
+├── public/downloads/      # Latest downloadable artifacts (served from same origin, precached by SW)
+│   ├── pesticide_database_latest.xlsx           # 5-sheet XLSX (Latest DB + MoA Audit + MoA Rotation + MoA Enriched + Summary)
+│   ├── pesticide_database_latest.pdf            # Printable alphabetical PDF reference (landscape A4)
+│   ├── pesticide_database_latest.csv            # Flat CSV (9,000+ rows × 20 cols)
+│   └── moa_rotation_quick_reference.csv          # 72 MoA group rotation reference
 ├── scripts/
 │   ├── regenerate_all_pesticides.py             # data_raw/all_pesticides.csv → src/data/all_pesticides.ts
 │   ├── generate_policy_enrichment.py            # data_raw/pesticide_policy_enrichment.csv → src/data/policyEnrichmentData.ts
@@ -138,6 +150,15 @@ python3 scripts/generate_policy_enrichment.py  # regenerates src/data/policyEnri
 bun run scripts/audit_data.ts                  # audits merged catalogue counts by type/source
 ```
 
+To rebuild the entire latest database + downloadable artifacts (XLSX/PDF/CSV) from the live PPW API + 86th/87th PTAC gazettes + MoA mapping audit:
+
+```bash
+python3 scripts/build_latest_database.py     # builds data_raw CSVs + public/downloads/ artifacts
+python3 scripts/regenerate_data_modules.py   # regenerates src/data/all_pesticides.ts + policyEnrichmentData.ts
+```
+
+Both scripts are idempotent and safe to re-run on every PTAC update.
+
 `src/data/loadDatabase.ts` merges the generated dataset with curated data at load time; all views read through it so displayed counts stay consistent.
 
 ## 🌐 Deployment & Domains
@@ -162,11 +183,11 @@ This means:
 
 Returning users get the new build automatically because:
 1. The service worker is registered with `registerType: 'autoUpdate'` + `skipWaiting: true` + `clientsClaim: true` — the new SW takes over immediately on the next navigation.
-2. The Workbox `cacheId` is `'pn-v3'`. When bumped on a breaking release, the new SW populates a fresh `pn-v3-precache-v2` cache while the old cache becomes orphaned.
-3. `src/utils/cleanupCaches.ts` runs on every boot and deletes any cache whose name doesn't start with `pn-v3`, reclaiming disk space.
+2. The Workbox `cacheId` is `'pn-v5'`. When bumped on a breaking release, the new SW populates a fresh `pn-v5-precache-v2` cache while the old cache becomes orphaned.
+3. `src/utils/cleanupCaches.ts` runs on every boot and deletes any cache whose name doesn't start with `pn-v5`, reclaiming disk space.
 4. `cleanupOutdatedCaches: true` in the Workbox config also cleans up caches with the Workbox-recognized outdated format.
 
-To force a fresh cache on the next breaking release, bump the `cacheId` string in `vite.config.ts` (e.g. `pn-v3` → `pn-v4`).
+To force a fresh cache on the next breaking release, bump the `cacheId` string in `vite.config.ts` (e.g. `pn-v5` → `pn-v6`).
 
 ## 🤝 Partners
 
