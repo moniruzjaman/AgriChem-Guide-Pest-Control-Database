@@ -2,7 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { ChemicalProduct } from '../types';
 import { ProductCard } from './ProductCard';
 import { 
-  Search, 
+  Search,
+  ScanLine,
   Filter, 
   FileDown, 
   RotateCcw, 
@@ -37,6 +38,7 @@ import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
 import { MOA_DATABASE } from '../data/moaData';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
+import { LabelScannerModal } from './LabelScannerModal';
 import './DatabaseView.css';
 import './pn-tokens.css';
 import { Database as DatabaseIcon } from 'lucide-react';
@@ -431,6 +433,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   // — visually appealing and easy to scan, instead of a flat alphabetical list.
   const [viewMode, setViewMode] = useState<'table' | 'grouped' | 'grid'>('grouped');
   const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
+  const [scanOpen, setScanOpen] = useState<boolean>(false);
   const [expandedIngredients, setExpandedIngredients] = useState<Record<string, boolean>>({});
   const [visibleLimit, setVisibleLimit] = useState<number>(50);
 
@@ -1711,24 +1714,37 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
             <div className="flex flex-col md:flex-row items-center gap-3">
               
               {/* Dynamic Interactive Search Input */}
-              <div className="relative flex-1 w-full">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                <input
-                  id="db-search-input"
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={language === 'bn' ? 'বাণিজ্যিক ব্র্যান্ড বা উপাদান দিয়ে খুঁজুন...' : 'Search brands, ingredients, pests...'}
-                  className="w-full pl-10 pr-10 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition font-medium"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                )}
+              <div className="relative flex-1 w-full flex items-center gap-2">
+                <div className="relative flex-1">
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <input
+                    id="db-search-input"
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={language === 'bn' ? 'বাণিজ্যিক ব্র্যান্ড বা উপাদান দিয়ে খুঁজুন...' : 'Search brands, ingredients, pests...'}
+                    className="w-full pl-10 pr-10 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition font-medium"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  id="db-scan-btn"
+                  onClick={() => setScanOpen(true)}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl border border-emerald-600/30 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 text-xs font-bold"
+                  title={language === 'bn' ? 'লেবেল স্ক্যান / বাংলা OCR' : 'Scan label / Bangla OCR'}
+                  aria-label={language === 'bn' ? 'লেবেল স্ক্যান' : 'Scan label'}
+                >
+                  <ScanLine className="w-4 h-4" />
+                  <span className="hidden sm:inline">{language === 'bn' ? 'স্ক্যান' : 'Scan'}</span>
+                </button>
               </div>
 
               {/* Sorting & Formatting controls */}
@@ -2536,6 +2552,17 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       </div>
 
       </section>
+
+      <LabelScannerModal
+        open={scanOpen}
+        products={products}
+        onClose={() => setScanOpen(false)}
+        onSelectProduct={(p) => {
+          setScanOpen(false);
+          setSearchQuery(p.tradeName);
+          onSelectProduct(p);
+        }}
+      />
     </div>
   );
 };

@@ -267,3 +267,163 @@ export function scanOutcome(query: string, products: ChemicalProduct[]): ScanOut
     matches: matchScanResult(query, products),
   };
 }
+
+export interface ParsedLabelScan {
+  raw: string;
+  registrationNos: string[];
+  moaCodes: string[];
+  groupTokens: string[];
+  tradeHints: string[];
+  batchNo?: string;
+  jsonPayload?: Record<string, string>;
+}
+
+const REG_NO_RE = /\bAP(?:\s*\(\s*BIO\s*\))?[\s-]*\d+\b/gi;
+const MOA_CODE_RE = /\b(?:IRAC|FRAC|HRAC)\s+\d{1,2}[A-Z]?(?:\s*[+/]\s*(?:IRAC|FRAC|HRAC)?\s*\d{1,2}[A-Z]?)?\b/gi;
+const GROUP_LABEL_RE = /\bGROUP\s+(\d{1,2}[A-Z]?)\s+(INSECTICIDE|FUNGICIDE|HERBICIDE|MITICIDE|PESTICIDE)\b/gi;
+const BATCH_RE = /\b(?:BATCH|LOT|ব্যাচ)[:\s#.-]*([A-Z0-9-]{3,})\b/i;
+
+function normalizeRegNo(raw: string): string {
+  const compact = convertIndicDigits(raw).replace(/\s+/g, '').toUpperCase();
+  const digits = compact.replace(/[^0-9]/g, '');
+  if (!digits) return compact;
+  return /BIO/.test(compact) ? `AP(Bio)-${digits}` : `AP-${digits}`;
+}
+
+function unique(values: string[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const value of values) {
+    const key = value.trim();
+    if (!key) continue;
+    const folded = key.toLowerCase();
+    if (seen.has(folded)) continue;
+    seen.add(folded);
+    out.push(key);
+  }
+  return out;
+}
+
+function tryParseJsonPayload(raw: string): Record<string, string> | undefined {
+  const start = raw.indexOf('{');
+  const end = raw.lastIndexOf('}');
+  if (start < 0 || end <= start) return undefined;
+  try {
+    const parsed = JSON.parse(raw.slice(start, end + 1)) as Record<string, unknown>;
+    const out: Record<string, string> = {};
+    for (const [key, value] of Object.entries(parsed)) {
+      if (value == null) continue;
+      out[key] = String(value);
+    }
+    return Object.keys(out).length ? out : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export function extractRegistrationNos(text: string): string[] {
+  const converted = convertIndicDigits(text);
+  const hits = converted.match(REG_NO_RE) ?? [];
+  return unique(hits.map(normalizeRegNo));
+}
+
+export function parseLabelScan(raw: string): ParsedLabelScan {
+  const text = convertIndicDigits(raw || '');
+  const jsonPayload = tryParseJsonPayload(text);
+  const registrationNos = unique([
+    ...extractRegistrationNos(text),
+    jsonPayload?.registrationNo ? normalizeRegNo(jsonPayload.registrationNo) : '',
+    jsonPayload?.regNo ? normalizeRegNo(jsonPayload.regNo) : '',
+  ]);
+  const moaCodes = unique([
+    ...(text.match(MOA_CODE_RE) ?? []).map((x) => x.replace(/\s+/g, ' ').trim()),
+    jsonPayload?.moaCode ?? '',
+  ]);
+  const groupTokens = unique(
+    [...text.matchAll(GROUP_LABEL_RE)].map((m) => (m[1] || '').toUpperCase())
+  );
+  const tradeHints = unique([
+    jsonPayload?.tradeName ?? '',
+    jsonPayload?.brand ?? '',
+    jsonPayload?.productName ?? '',
+  ]);
+  const batchHit = text.match(BATCH_RE);
+  return {
+    raw,
+    registrationNos,
+    moaCodes,
+    groupTokens,
+    tradeHints,
+    batchNo: jsonPayload?.batchNo || jsonPayload?.batch || batchHit?.[1],
+    jsonPayload,
+  };
+}
+
+function matchByRegistration(regNos: string[], products: ChemicalProduct[]): ScanMatch[] {
+  if (!regNos.length) return [];
+  const wanted = new Set(regNos.map((r) => r.toLowerCase()));
+  return products
+    .filter((p) => wanted.has((p.registrationNo || '').toLowerCase()))
+    .map((product) => ({ product, field: 'registration' as const, confidence: 'exact' as const }));
+}
+
+export function matchParsedLabel(parsed: ParsedLabelScan, products: ChemicalProduct[]): ScanMatch[] {
+  const byReg = matchByRegistration(parsed.registrationNos, products);
+  if (byReg.length) return byReg;
+
+  const queries = unique([
+    ...parsed.tradeHints,
+    ...parsed.moaCodes,
+    parsed.raw,
+  ]);
+  const ranked: ScanMatch[] = [];
+  const seen = new Set<string>();
+  for (const query of queries) {
+    for (const hit of matchScanResult(query, products)) {
+      if (seen.has(hit.product.id)) continue;
+      seen.add(hit.product.id);
+      ranked.push(hit);
+    }
+  }
+  return ranked.sort((a, b) => RANK[a.confidence] - RANK[b.confidence]);
+}
+
+const SCAN_QUEUE_KEY = 'pesticidenext_scan_queue';
+
+export interface QueuedScan {
+  id: string;
+  ts: number;
+  mode: 'qr' | 'ocr';
+  raw: string;
+  registrationNos: string[];
+  synced: boolean;
+}
+
+export function enqueueOfflineScan(entry: Omit<QueuedScan, 'id' | 'ts' | 'synced'>): QueuedScan {
+  const full: QueuedScan = {
+    ...entry,
+    id: `scan-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    ts: Date.now(),
+    synced: false,
+  };
+  if (typeof window === 'undefined') return full;
+  try {
+    const raw = window.localStorage.getItem(SCAN_QUEUE_KEY);
+    const prev: QueuedScan[] = raw ? JSON.parse(raw) : [];
+    const next = [...prev, full].slice(-200);
+    window.localStorage.setItem(SCAN_QUEUE_KEY, JSON.stringify(next));
+  } catch {
+    /* quota / private mode */
+  }
+  return full;
+}
+
+export function readOfflineScanQueue(): QueuedScan[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = window.localStorage.getItem(SCAN_QUEUE_KEY);
+    return raw ? (JSON.parse(raw) as QueuedScan[]) : [];
+  } catch {
+    return [];
+  }
+}
