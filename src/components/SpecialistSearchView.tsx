@@ -1,8 +1,8 @@
 /**
  * SpecialistSearchView.tsx
  * ========================
- * Specialist policy/HHP search over the 5,485-row enriched pesticide
- * database. Lets an agronomist / extension officer / regulator:
+ * Specialist policy/HHP search over the 9,000+ DAE-registered pesticide
+ * catalogue. Lets an agronomist / extension officer / regulator:
  *   - filter by Policy Risk Tier (GREEN / AMBER / RED)
  *   - filter by HHP Status (WHO/FAO Highly Hazardous Pesticide)
  *   - filter by EU / Global Regulatory Status (banned, restricted, approved)

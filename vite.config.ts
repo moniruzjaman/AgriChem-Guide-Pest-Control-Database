@@ -133,7 +133,7 @@ export default defineConfig(() => {
           // Bump this string on every breaking release so users never get
           // stuck on a stale cached bundle (old OG image, old tagline,
           // pre-rename branding, etc.).
-          cacheId: 'pn-v5',
+          cacheId: 'pn-v6',
           // Only precache files the app needs to function: JS, CSS, HTML, fonts,
           // icons, manifest, and the runtime database JSON. Download-only files
           // (PDFs, XLSX, CSVs) are served on demand via runtime cache.
@@ -151,6 +151,18 @@ export default defineConfig(() => {
           // that chunk is now gone — the data is fetched as JSON at runtime.)
           maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
           runtimeCaching: [
+            {
+              urlPattern: /\/downloads\/pesticide_database\.json$/i,
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'pn-v6-catalogue',
+                expiration: {
+                  maxEntries: 2,
+                  maxAgeSeconds: 60 * 60 * 24,
+                },
+                cacheableResponse: { statuses: [0, 200] },
+              },
+            },
             {
               urlPattern: /^\/api\/.*/i,
               handler: 'NetworkFirst',
