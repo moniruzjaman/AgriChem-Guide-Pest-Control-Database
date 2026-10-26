@@ -8,17 +8,15 @@ import {
   Beaker,
   RotateCw,
   AlertTriangle,
-  CheckCircle2,
   Info,
   TrendingUp,
-  Bug,
   ShieldCheck,
-  ShieldAlert,
   ScanLine,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useSprayHistory, lastMoaByCrop, type SprayEntry } from '../hooks/useSprayHistory';
 import { ChemicalProduct, AppTab } from '../types';
+import { LabelScannerModal } from './LabelScannerModal';
 import {
   runComplianceCheck,
   type ComplianceResult,
@@ -65,6 +63,7 @@ export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigate
   const bn = language === 'bn';
   const { entries, addEntry, removeEntry, clearAll } = useSprayHistory();
   const [showForm, setShowForm] = useState(false);
+  const [scanOpen, setScanOpen] = useState(false);
 
   // Compliance engine state — the result of `runComplianceCheck` for the
   // most recent submit attempt. When non-null, the warning modal renders.
@@ -112,6 +111,13 @@ export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigate
     // Pre-fill pest from the product's pest list when available, to reduce
     // friction and improve the engine's pest-window selection accuracy.
     if (!fPest && p.pests.length > 0) setFPest(p.pests[0]);
+    if (!fCrop && p.crops.length > 0) setFCrop(p.crops[0]);
+  };
+
+  const handleScannedProduct = (p: ChemicalProduct) => {
+    handleSelectProduct(p);
+    setShowForm(true);
+    setScanOpen(false);
   };
 
   // Build the pending spray entry from the current form state. Used by
@@ -266,6 +272,7 @@ export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigate
     cropCycleStart: bn ? 'শুরু (রোপণ তারিখ)' : 'Start (sowing date)',
     cropCycleEnd: bn ? 'শেষ (কাটা তারিখ)' : 'End (harvest date)',
     saveWithCheck: bn ? 'কমপ্লায়েন্স যাচাই সহ সংরক্ষণ' : 'Save with compliance check',
+    scanLabel: bn ? 'লেবেল স্ক্যান' : 'Scan label',
   };
 
   const units = ['bigha', 'acre', 'hectare', 'katha'];
@@ -287,6 +294,9 @@ export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigate
           <button type="button" className="pn-btn" onClick={() => setShowForm((v) => !v)}>
             <Plus size={16} /> {copy.addBtn}
           </button>
+          <button type="button" className="pn-btn pn-btn--outline" onClick={() => setScanOpen(true)}>
+            <ScanLine size={16} /> {copy.scanLabel}
+          </button>
           <button type="button" className="pn-linkbtn" onClick={() => onNavigateTab('rotation')}>
             <RotateCw size={14} /> {copy.goRotation}
           </button>
@@ -300,13 +310,19 @@ export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigate
 
           <label className="acg-mf-field">
             <span>{copy.product}</span>
-            <input
-              value={fProduct}
-              onChange={(e) => setFProduct(e.target.value)}
-              required
-              placeholder={bn ? 'যেমন: Virtako' : 'e.g. Virtako'}
-              list="mf-products"
-            />
+            <div className="acg-mf-product-row">
+              <input
+                value={fProduct}
+                onChange={(e) => setFProduct(e.target.value)}
+                required
+                placeholder={bn ? 'যেমন: Virtako' : 'e.g. Virtako'}
+                list="mf-products"
+              />
+              <button type="button" className="acg-mf-scan-btn" onClick={() => setScanOpen(true)}>
+                <ScanLine size={16} />
+                {copy.scanLabel}
+              </button>
+            </div>
             {productMatches.length > 0 && (
               <div className="acg-mf-suggestions">
                 {productMatches.map((p) => (
@@ -348,7 +364,7 @@ export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigate
           {/* Crop cycle dates — optional, used by Logic 3 (50% seasonal cap) */}
           <div className="acg-mf-cycle">
             <p className="acg-mf-cycle-label">
-              <ScanLine size={13} />
+              <Calendar size={13} />
               {copy.cropCycle}
             </p>
             <div className="acg-mf-row2">
@@ -494,6 +510,13 @@ export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigate
           </div>
         </section>
       )}
+
+      <LabelScannerModal
+        open={scanOpen}
+        products={products || []}
+        onClose={() => setScanOpen(false)}
+        onSelectProduct={handleScannedProduct}
+      />
     </div>
   );
 };

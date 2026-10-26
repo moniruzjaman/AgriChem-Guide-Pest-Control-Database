@@ -18,7 +18,8 @@ import {
   Volume2,
   VolumeX,
   NotebookPen,
-  BrainCircuit
+  BrainCircuit,
+  ScanLine
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
@@ -40,6 +41,7 @@ interface NavbarProps {
   onToggleReadAloud?: () => void;
   totalProductsCount: number;
   onOpenDrawer: () => void;
+  onOpenScan?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -54,7 +56,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   readAloudSpeaking = false,
   onToggleReadAloud,
   totalProductsCount,
-  onOpenDrawer
+  onOpenDrawer,
+  onOpenScan
 }) => {
   const { language, toggleLanguage, t, formatNum } = useLanguage();
   const navRef = React.useRef<HTMLElement>(null);
@@ -138,8 +141,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('search_placeholder')}
-                className="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
+                className="w-full pl-9 pr-16 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
               />
+              {onOpenScan && (
+                <button
+                  type="button"
+                  id="header-scan-btn"
+                  onClick={onOpenScan}
+                  className="absolute right-8 top-1/2 -translate-y-1/2 text-emerald-700 hover:text-emerald-900"
+                  title={language === 'bn' ? 'লেবেল স্ক্যান / বাংলা OCR' : 'Scan label / Bangla OCR'}
+                  aria-label={language === 'bn' ? 'লেবেল স্ক্যান' : 'Scan label'}
+                >
+                  <ScanLine className="w-4 h-4" />
+                </button>
+              )}
               {searchQuery && (
                 <button 
                   onClick={() => setSearchQuery('')}
@@ -153,6 +168,19 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Action Items */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            {onOpenScan && (
+              <button
+                type="button"
+                id="header-scan-action"
+                onClick={onOpenScan}
+                className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-xl border border-emerald-600/30 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-semibold text-xs transition shadow-2xs cursor-pointer select-none md:hidden"
+                title={language === 'bn' ? 'লেবেল স্ক্যান / বাংলা OCR' : 'Scan label / Bangla OCR'}
+                aria-label={language === 'bn' ? 'লেবেল স্ক্যান' : 'Scan label'}
+              >
+                <ScanLine className="w-3.5 h-3.5 text-emerald-700" />
+                <span className="hidden xs:inline">{language === 'bn' ? 'স্ক্যান' : 'Scan'}</span>
+              </button>
+            )}
             {/* Share Platform Button */}
             <button
               id="header-share-btn"

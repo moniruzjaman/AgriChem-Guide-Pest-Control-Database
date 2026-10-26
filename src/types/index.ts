@@ -60,9 +60,9 @@ export interface ChemicalProduct {
   // ---------------------------------------------------------------------------
   //  Policy / HHP / MoA enrichment (from policyEnrichmentData.ts sidecar)
   //
-  //  These fields are populated from the AgriChem/MoA PTAC master database
-  //  (5,485 rows × 31 cols) keyed by Registration No. Products whose reg no
-  //  is not in the sidecar will have all of these as `undefined`.
+  //  These fields are populated from the live 9,000+ DAE/PTAC catalogue
+  //  (with AgriChem/MoA master overlay) keyed by Registration No. Products
+  //  whose reg no is not in the sidecar will have all of these as `undefined`.
   // ---------------------------------------------------------------------------
   /** IRAC / FRAC / HRAC scheme tag. */
   scheme?: string;

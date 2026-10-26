@@ -4,10 +4,11 @@ import { loadDatabaseFromJSON } from './loadDatabaseFromJSON';
 /**
  * loadDatabase.ts — the SINGLE source of truth for the product catalogue.
  *
- * Merges curated products (inline, ~1 MB) + the DAE register database
+ * Merges curated products (inline, ~1 MB) + the live 9,000+ DAE register
  * (fetched at runtime as JSON, ~2.4 MB gzipped) + extras from the
- * 5,485-row AgriChem/MoA PTAC master overlay, then overlays measured
+ * AgriChem/MoA PTAC master overlay, then overlays measured
  * toxicity / PHI / formulation fields onto matching registration numbers.
+ * The 5,485-row master is overlay-only and must never replace the JSON.
  *
  * Architecture change (PR #46):
  *   Previously, the DAE register (9,462 products) + policy enrichment

@@ -106,11 +106,11 @@ const TAB_META: Record<AppTab, {
   specialist: {
     en: {
       title: 'PesticideNext — Specialist Search (Policy / HHP / MoA)',
-      description: 'Specialist query tool: filter the 5,485-row enriched pesticide database by Policy Risk Tier, WHO/FAO HHP status, EU regulatory status, Bangladesh policy action, MoA scheme, and formulation code.'
+      description: 'Specialist query tool: filter the 9,000+ DAE-registered pesticide catalogue by Policy Risk Tier, WHO/FAO HHP status, EU regulatory status, Bangladesh policy action, MoA scheme, and formulation code.'
     },
     bn: {
       title: 'পেস্টিসাইডনেক্সট — স্পেশালিস্ট সার্চ (নীতি / HHP / MoA)',
-      description: 'নীতি ঝুঁকি স্তর, WHO/FAO HHP স্ট্যাটাস, EU নিয়ন্ত্রক স্ট্যাটাস, বাংলাদেশ নীতি কর্ম, MoA স্কিম এবং ফর্মুলেশন কোড অনুযায়ী ৫,৪৮৫-সারির সমৃদ্ধ ডাটাবেস ফিল্টার করুন।'
+      description: 'নীতি ঝুঁকি স্তর, WHO/FAO HHP স্ট্যাটাস, EU নিয়ন্ত্রক স্ট্যাটাস, বাংলাদেশ নীতি কর্ম, MoA স্কিম এবং ফর্মুলেশন কোড অনুযায়ী ৯,০০০+ নিবন্ধিত ক্যাটালগ ফিল্টার করুন।'
     }
   }
 };

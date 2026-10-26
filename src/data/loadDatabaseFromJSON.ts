@@ -116,6 +116,12 @@ export async function loadDatabaseFromJSON(): Promise<ChemicalProduct[]> {
       };
     });
 
+    if (products.length < 9000) {
+      throw new Error(
+        `[loadDatabaseFromJSON] catalogue too small (${products.length}); expected 9,000+ DAE/PTAC products`
+      );
+    }
+
     if (typeof console !== 'undefined' && console.debug) {
       console.debug(
         `[loadDatabaseFromJSON] Loaded ${products.length.toLocaleString()} products from JSON`
@@ -125,6 +131,6 @@ export async function loadDatabaseFromJSON(): Promise<ChemicalProduct[]> {
     return products;
   } catch (err) {
     console.warn('[loadDatabaseFromJSON] Failed to fetch database JSON:', err);
-    return [];
+    throw err;
   }
 }
