@@ -3,8 +3,11 @@ import { ChemicalProduct } from '../../types';
 import {
   convertIndicDigits,
   detectScript,
+  extractRegistrationNos,
+  matchParsedLabel,
   matchScanResult,
   normalizeScanText,
+  parseLabelScan,
   transliterateBnToEn,
 } from '../scanUtils';
 
@@ -224,5 +227,40 @@ describe('pipeline surface (regression)', () => {
     expect(m[0].confidence).toBe('exact');
     expect(detectScript('taslon 25wg')).toBe('en');
     expect(normalizeScanText('Pithion ৪৬.৫ EC')).toBe('pithion 46.5 ec');
+  });
+});
+
+describe('parseLabelScan / QR payload', () => {
+  it('extracts registration numbers including Bengali digits', () => {
+    expect(extractRegistrationNos('নিবন্ধন নং এপি-৪৫৭৮ AP-4578')).toContain('AP-4578');
+    expect(extractRegistrationNos('AP 5242')).toEqual(['AP-5242']);
+  });
+
+  it('parses GROUP 4A INSECTICIDE badges and MoA codes', () => {
+    const parsed = parseLabelScan('GROUP 4A INSECTICIDE  IRAC 4A  AP-4578  BATCH: L24-09');
+    expect(parsed.registrationNos).toContain('AP-4578');
+    expect(parsed.moaCodes.some((c) => /IRAC\s*4A/i.test(c))).toBe(true);
+    expect(parsed.groupTokens).toContain('4A');
+    expect(parsed.batchNo).toBe('L24-09');
+  });
+
+  it('matches a JSON QR payload by registration number', () => {
+    const raw = JSON.stringify({
+      registrationNo: 'AP-4578',
+      tradeName: 'Taslon 25WG',
+      moaCode: 'IRAC 4A',
+      batchNo: 'B-11',
+    });
+    const parsed = parseLabelScan(raw);
+    const hits = matchParsedLabel(parsed, fixtures);
+    expect(hits).toHaveLength(1);
+    expect(hits[0].field).toBe('registration');
+    expect(hits[0].product.tradeName).toBe('Taslon 25WG');
+  });
+
+  it('falls back to brand matching when no registration number is present', () => {
+    const parsed = parseLabelScan('Taslon 25WG GROUP 4A INSECTICIDE');
+    const hits = matchParsedLabel(parsed, fixtures);
+    expect(hits[0].product.tradeName).toBe('Taslon 25WG');
   });
 });

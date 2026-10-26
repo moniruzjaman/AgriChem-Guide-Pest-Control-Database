@@ -56,6 +56,9 @@ const ProductDetailModal = lazy(() =>
 const SafetyChecklistModal = lazy(() =>
   import('./components/SafetyChecklistModal').then((m) => ({ default: m.SafetyChecklistModal }))
 );
+const LabelScannerModal = lazy(() =>
+  import('./components/LabelScannerModal').then((m) => ({ default: m.LabelScannerModal }))
+);
 
 /** Lightweight brand splash shown while the product database chunk loads. */
 function DatabaseSplash({ language }: { language: 'bn' | 'en' }) {
@@ -146,6 +149,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isScanOpen, setIsScanOpen] = useState(false);
 
   // ---------------------------------------------------------------------------
   // Hash routing — lets shared deep links (e.g. `/?from=share#database`) land
@@ -368,6 +372,7 @@ export default function App() {
         onToggleReadAloud={handleReadAloudToggle}
         totalProductsCount={products.length}
         onOpenDrawer={() => setIsDrawerOpen(true)}
+        onOpenScan={() => setIsScanOpen(true)}
       />
 
       {/* Main View Area */}
@@ -550,6 +555,20 @@ export default function App() {
         onClose={() => setIsShareModalOpen(false)}
         activeTab={activeTab}
       />
+
+      <Suspense fallback={null}>
+        <LabelScannerModal
+          open={isScanOpen}
+          products={products}
+          onClose={() => setIsScanOpen(false)}
+          onSelectProduct={(p) => {
+            setIsScanOpen(false);
+            setSearchQuery(p.tradeName);
+            setDetailProduct(p);
+            setActiveTab('database');
+          }}
+        />
+      </Suspense>
 
       {/* PWA Floating Offline Indicator */}
       <OfflineIndicator />
