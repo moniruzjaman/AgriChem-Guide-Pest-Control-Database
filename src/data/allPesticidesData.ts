@@ -319,7 +319,7 @@ function toChemicalProduct(
     rotationNotes: moa?.rotationStrategy ?? '',
     recommendations: recommendationLines,
     source: 'dae-register',
-    // --- Policy / HHP / MoA enrichment from sidecar (5,485-row AgriChem/MoA PTAC master) ---
+    // --- Policy / HHP / MoA enrichment from sidecar (9,000+ DAE/PTAC catalogue) ---
     ...attachPolicyEnrichment(p.registrationNo),
   };
 }
