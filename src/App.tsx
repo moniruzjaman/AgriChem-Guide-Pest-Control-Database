@@ -14,6 +14,7 @@ import { useLanguage } from './context/LanguageContext';
 import { useReadAloud } from './hooks/useReadAloud';
 import { useOnlineStatus } from './hooks/useOnlineStatus';
 import { PesticideIntelligenceView } from './components/PesticideIntelligenceView';
+const MyFieldView = lazy(() => import('./components/MyFieldView').then(m => ({ default: m.MyFieldView })));
 const SpecialistSearchView = lazy(() => import('./components/SpecialistSearchView'));
 import { detectSharedVisit, flushPendingDownloads } from './utils/analytics';
 import {
@@ -167,13 +168,14 @@ export default function App() {
     savePersona(id);
   };
 
-  // Built-in intelligence badge for the My Field tab: show a dot once the
-  // user has spray history (the engine then has rotation/window advice ready)
-  // or has visited the intelligence view at least once this session.
+  // Built-in intelligence badge for the My Field tab: show a dot when there's
+  // spray history (rotation advice ready) OR the user is on the My Field tab
+  // OR the intelligence view (the engine has loaded at least once).
   const intelligenceReady =
     (typeof window !== 'undefined' &&
       !!window.localStorage.getItem('pesticidenext_spray_history')) ||
-    activeTab === 'intelligence';
+    activeTab === 'intelligence' ||
+    activeTab === 'myfield';
 
   // ---------------------------------------------------------------------------
   // Hash routing — lets shared deep links (e.g. `/?from=share#database`) land
@@ -546,7 +548,7 @@ export default function App() {
 
         {activeTab === 'myfield' && (
           <Suspense fallback={<DatabaseSplash language={language} />}>
-            <SprayLogView
+            <MyFieldView
               products={products}
               onNavigateTab={(tab) => setActiveTab(tab)}
             />
