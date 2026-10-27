@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
+import { PERSONAS, PERSONA_ORDER, type PersonaId } from '../utils/userCategories';
 import { PWAInstallButton } from './PWAInstallButton';
 
 interface NavbarProps {
@@ -42,6 +43,11 @@ interface NavbarProps {
   totalProductsCount: number;
   onOpenDrawer: () => void;
   onOpenScan?: () => void;
+  /** Opens the unified Search/Scan bottom sheet (mobile-friendly entry). */
+  onOpenSearchSheet?: () => void;
+  /** Declared user category — tunes placeholder + adds a persona chip. */
+  persona?: PersonaId;
+  onPersonaChange?: (id: PersonaId) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -57,10 +63,23 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleReadAloud,
   totalProductsCount,
   onOpenDrawer,
-  onOpenScan
+  onOpenScan,
+  onOpenSearchSheet,
+  persona = 'farmer',
+  onPersonaChange
 }) => {
   const { language, toggleLanguage, t, formatNum } = useLanguage();
   const navRef = React.useRef<HTMLElement>(null);
+  // Persona-aware placeholder: farmers see "type your crop or pest problem",
+  // specialists see technical placeholders. Same box, different guidance.
+  const personaInfo = PERSONAS[persona];
+  const searchPlaceholder =
+    language === 'bn' ? personaInfo.searchPlaceholderBn : personaInfo.searchPlaceholderEn;
+  const cyclePersona = () => {
+    if (!onPersonaChange) return;
+    const idx = PERSONA_ORDER.indexOf(persona);
+    onPersonaChange(PERSONA_ORDER[(idx + 1) % PERSONA_ORDER.length]);
+  };
 
   React.useEffect(() => {
     if (navRef.current) {
@@ -140,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t('search_placeholder')}
+                placeholder={searchPlaceholder}
                 className="w-full pl-9 pr-16 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
               />
               {onOpenScan && (
