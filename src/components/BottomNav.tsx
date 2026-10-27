@@ -51,6 +51,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   return (
     <nav
       aria-label={bn ? 'প্রধান নেভিগেশন' : 'Primary navigation'}
+      className="pn-bottomnav fixed bottom-0 inset-x-0 z-[60] md:hidden bg-white/95 backdrop-blur border-t border-slate-200 shadow-[0_-2px_12px_rgba(0,0,0,0.06)] pb-[env(safe-area-inset-bottom)]"
       className="pn-bottomnav fixed bottom-0 inset-x-0 z-40 md:hidden bg-white/95 backdrop-blur border-t border-slate-200 shadow-[0_-2px_12px_rgba(0,0,0,0.06)] pb-[env(safe-area-inset-bottom)]"
     >
       <div className="grid grid-cols-4 max-w-md mx-auto">

@@ -15,14 +15,17 @@
  * existing ProductDetailModal so specialists can drill into a product.
  */
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type * as React from 'react';
 import type { ChemicalProduct } from '../types';
 import { Search, Shield, ShieldCheck, ShieldAlert, Filter, X, Download } from 'lucide-react';
+import { specialistPresetFor, type PersonaId } from '../utils/userCategories';
 
 interface Props {
   products: ChemicalProduct[];
   onProductClick?: (p: ChemicalProduct) => void;
+  /** Declared user category — pre-applies a sensible starting filter. */
+  persona?: PersonaId;
 }
 
 type RiskTier = 'ALL' | 'GREEN' | 'AMBER' | 'RED';
@@ -37,7 +40,7 @@ const RISK_TIER_STYLES: Record<string, { bg: string; text: string; label: string
   RED: { bg: '#fee2e2', text: '#991b1b', label: 'RED', icon: ShieldAlert },
 };
 
-export default function SpecialistSearchView({ products, onProductClick }: Props) {
+export default function SpecialistSearchView({ products, onProductClick, persona = 'farmer' }: Props) {
   // --- Filter state ----------------------------------------------------------
   const [query, setQuery] = useState('');
   const [riskTier, setRiskTier] = useState<RiskTier>('ALL');
@@ -50,6 +53,17 @@ export default function SpecialistSearchView({ products, onProductClick }: Props
   const [sortKey, setSortKey] = useState<SortKey>('policyRiskTier');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
   const [page, setPage] = useState(0);
+
+  // --- Persona preset: cadre → phase-out watch, researcher → MoA grouping,
+  //     policy → RED-tier first. Applied once when the view opens; the user
+  //     can still change every filter manually afterwards.
+  useEffect(() => {
+    const preset = specialistPresetFor(persona);
+    if (preset.tier) setRiskTier(preset.tier as RiskTier);
+    if (preset.action) setPolicyActionFilter(preset.action);
+    if (preset.sort === 'moaCode') setSortKey('moaCode');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // --- Derived option lists --------------------------------------------------
   const schemes = useMemo(() => {

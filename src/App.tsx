@@ -539,6 +539,7 @@ export default function App() {
             <SpecialistSearchView
               products={products}
               onProductClick={(p) => setDetailProduct(p)}
+              persona={persona}
             />
           </Suspense>
         )}

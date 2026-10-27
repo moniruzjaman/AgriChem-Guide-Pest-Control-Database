@@ -187,6 +187,38 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Action Items */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            {/* Mobile search-sheet entry (same sheet as the bottom-nav center button) */}
+            {onOpenSearchSheet && (
+              <button
+                type="button"
+                id="header-searchsheet-btn"
+                onClick={onOpenSearchSheet}
+                className="flex items-center justify-center w-9 h-9 rounded-xl border border-emerald-600/30 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 transition shadow-2xs cursor-pointer select-none md:hidden"
+                title={language === 'bn' ? 'খুঁজুন বা স্ক্যান করুন' : 'Search or scan'}
+                aria-label={language === 'bn' ? 'খুঁজুন' : 'Open search'}
+              >
+                <Search className="w-4 h-4" />
+              </button>
+            )}
+            {/* Persona chip — tap to cycle user category (farmer → cadre → researcher → policy) */}
+            {onPersonaChange && (
+              <button
+                type="button"
+                id="header-persona-chip"
+                onClick={cyclePersona}
+                className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold text-xs transition shadow-2xs cursor-pointer select-none"
+                title={
+                  language === 'bn'
+                    ? 'ব্যবহারকারী ধরন বদলান (কৃষক / কর্মকর্তা / গবেষক / নীতি)'
+                    : 'Switch user category (Farmer / Cadre / Researcher / Policy)'
+                }
+              >
+                <span aria-hidden>{personaInfo.emoji}</span>
+                <span className="max-w-[120px] truncate">
+                  {language === 'bn' ? personaInfo.labelBn : personaInfo.labelEn}
+                </span>
+              </button>
+            )}
             {onOpenScan && (
               <button
                 type="button"
