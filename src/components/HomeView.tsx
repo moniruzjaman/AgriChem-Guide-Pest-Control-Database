@@ -290,6 +290,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
         ctaLogSpray: 'স্প্রে লগ ও MoA কমপ্লায়েন্স যাচাই',
         trust:
           'সুপারিশের আগে লেবেল, নিবন্ধন, PHI, REI ও PPE যাচাই করুন।',
+        dialogHead: 'সঠিক ওষুধ খুঁজুন, ভালো ওষুধ নয়।',
+        dialogBody: '- এটা দূর্ভাগ্য নয় এটা ভুলের চক্র।',
         dialogKicker: 'মাঠের কথা',
         farmer: 'কৃষক',
         farmerQuote: '“ওষুধ দিয়েছি, তবু পোকা মরছে না!”',
@@ -347,6 +349,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
         ctaLogSpray: 'Log spray + MoA compliance check',
         trust:
           'Always verify the current label, registration status, PHI, REI, and PPE before recommending.',
+        dialogHead: 'Find the right chemical, not a good chemical.',
+        dialogBody: "- It's not bad luck — it's the cycle of mistakes.",
         dialogKicker: 'FROM THE FIELD',
         farmer: 'Farmer',
         farmerQuote: '“I sprayed, but the pests still won’t die!”',
@@ -484,6 +488,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
           <figure className="acg-dialog">
             <span className="acg-dialog__kicker">{copy.dialogKicker}</span>
+            <div className="acg-dialog__head" role="heading" aria-level={3}>
+              {copy.dialogHead}
+            </div>
+            <p className="acg-dialog__body">{copy.dialogBody}</p>
             <div className="acg-dialog__row">
               <span className="acg-dialog__who">{copy.farmer}</span>
               <blockquote className="acg-dialog__quote" style={{ margin: 0 }}>
