@@ -77,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     language === 'bn' ? personaInfo.searchPlaceholderBn : personaInfo.searchPlaceholderEn;
   const cyclePersona = () => {
     if (!onPersonaChange) return;
-    const idx = PERSONA_ORDER.indexOf(persona);
+    const idx = PERSONA_ORDER.indexOf(persona as PersonaId);
     onPersonaChange(PERSONA_ORDER[(idx + 1) % PERSONA_ORDER.length]);
   };
 
