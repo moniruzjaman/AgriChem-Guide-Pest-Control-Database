@@ -12,7 +12,8 @@ const THEME_COLOR: Record<AppTab, string> = {
   alerts: '#f42a41',
   myfield: '#e3b341',
   intelligence: '#006a4e',
-  specialist: '#006a4e'
+  specialist: '#006a4e',
+  protection: '#065f46'
 };
 
 const TAB_META: Record<AppTab, {
@@ -111,6 +112,16 @@ const TAB_META: Record<AppTab, {
     bn: {
       title: 'পেস্টিসাইডনেক্সট — স্পেশালিস্ট সার্চ (নীতি / HHP / MoA)',
       description: 'নীতি ঝুঁকি স্তর, WHO/FAO HHP স্ট্যাটাস, EU নিয়ন্ত্রক স্ট্যাটাস, বাংলাদেশ নীতি কর্ম, MoA স্কিম এবং ফর্মুলেশন কোড অনুযায়ী ৯,০০০+ নিবন্ধিত ক্যাটালগ ফিল্টার করুন।'
+    }
+  },
+  protection: {
+    en: {
+      title: 'PesticideNext — Protection Intelligence Workflow',
+      description: 'Weather risk → scouting → explainable decision → verified product eligibility → application record → outcome follow-up. Weather risk alone never triggers a pesticide recommendation.'
+    },
+    bn: {
+      title: 'পেস্টিসাইডনেক্সট — সুরক্ষা ইন্টেলিজেন্স কর্মপ্রবাহ',
+      description: 'আবহাওয়ার ঝুঁকি → ক্ষেত পর্যবেক্ষণ → ব্যাখ্যাসহ সিদ্ধান্ত → যাচাইকৃত পণ্যের যোগ্যতা → প্রয়োগ রেকর্ড → ফলাফল ফলো-আপ। শুধু আবহাওয়ার ঝুঁকি কখনোই কীটনাশক সুপারিশ করে না।'
     }
   }
 };
