@@ -1,4 +1,5 @@
 import type {
+  PestForecast,
   ActiveCrop, CropConfig, DiseaseForecast, GeoLocation, RiskDashboard,
   WeatherData, Recommendation, CropCalendarEntry, DailyPlan, WeeklyPlan,
   Explanation, WeatherWindows, GrowthStageId,
@@ -7,6 +8,7 @@ import { createWeatherAdapter, type WeatherAdapter } from './providers/open-mete
 import { LruCache, validateLocation, validateIsoDate } from './utils/cache.js';
 import { computeRiskDashboard } from './engines/risk-engine.js';
 import { generateDiseaseForecast } from './engines/disease-engine.js';
+import { generatePestForecast } from './engines/pest-engine.js';
 import {
   generateRecommendations, generateDailyPlan, generateWeeklyPlan,
 } from './engines/recommendation-engine.js';
@@ -21,6 +23,7 @@ export * from './types/index.js';
 export * from './providers/open-meteo.js';
 export * from './engines/risk-engine.js';
 export * from './engines/disease-engine.js';
+export * from './engines/pest-engine.js';
 export * from './engines/recommendation-engine.js';
 export * from './engines/calendar-engine.js';
 export * from './engines/explanation-engine.js';
@@ -44,6 +47,7 @@ export interface WeatherIntelligenceResult {
   weather: WeatherData;
   risks: RiskDashboard;
   disease: DiseaseForecast;
+  pest: PestForecast;
   recommendations: Recommendation[];
   calendar: CropCalendarEntry[];
   dailyPlan: DailyPlan;
@@ -153,6 +157,7 @@ export class WeatherIntelligence {
     const crops = input.activeCrops ?? [];
     const risks = computeRiskDashboard(weather, crops);
     const disease = generateDiseaseForecast(weather, crops);
+    const pest = generatePestForecast(weather, crops);
     const calendar = generateCropCalendar(crops, weather);
     const recommendations = generateRecommendations(weather, crops, risks, calendar);
 
@@ -160,6 +165,7 @@ export class WeatherIntelligence {
       weather,
       risks,
       disease,
+      pest,
       recommendations,
       calendar,
       dailyPlan: generateDailyPlan(weather, recommendations),
