@@ -299,6 +299,19 @@
   margin-bottom: 6px;
 }
 
+/* Inputs carry an intrinsic min-width (~170px+) that overflows narrow
+   tracks — force fluid sizing so nothing can push past the viewport. */
+.acg-pv .form-grid label {
+  min-width: 0;
+}
+
+.acg-pv .form-grid input,
+.acg-pv .form-grid select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
 .acg-pv .form-grid label {
   display: flex;
   flex-direction: column;
@@ -559,8 +572,12 @@
 /* Mobile */
 @media (max-width: 640px) {
   .acg-pv .context-bar label {
-    flex: 1 1 45%;
+    flex: 1 1 100%;
     min-width: 0;
+  }
+
+  .acg-pv .context-bar label.grow {
+    flex: 1 1 100%;
   }
 
   .acg-pv .form-grid {
@@ -574,5 +591,25 @@
 
   .acg-pv .stat-row {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .acg-pv .stat-row .stat {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .acg-pv .stat-row .stat .num {
+    font-size: 0.9rem;
+  }
+}
+
+/* Very narrow phones: single-column forms */
+@media (max-width: 400px) {
+  .acg-pv .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .acg-pv .stat-row {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
