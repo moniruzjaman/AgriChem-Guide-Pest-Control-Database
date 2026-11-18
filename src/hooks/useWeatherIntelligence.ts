@@ -40,6 +40,12 @@ export interface UseWeatherIntelligenceOptions {
   crop?: string;
   /** Products to rank (required for pesticide candidate ranking) */
   products?: ChemicalProduct[];
+  /** Target pest/disease name for candidate ranking context (optional) */
+  pest?: string;
+  /** Crop sowing date (ISO) — activates KWI stage-aware disease/pest/calendar engines */
+  sowingDate?: string;
+  /** Current growth stage — activates KWI stage-aware engines */
+  growthStage?: string;
 }
 
 export function useWeatherIntelligence(
@@ -55,6 +61,9 @@ export function useWeatherIntelligence(
     refreshInterval = 300,
     crop = 'Rice',
     products = [],
+    pest,
+    sowingDate,
+    growthStage,
   } = options;
 
   const [state, setState] = useState<WeatherIntelligenceState>({
@@ -88,7 +97,10 @@ export function useWeatherIntelligence(
         },
         products,
         crop,
+        pest,
         lastMoa,
+        sowingDate,
+        growthStage,
       });
 
       if (!controller.signal.aborted) {
@@ -108,7 +120,7 @@ export function useWeatherIntelligence(
         }));
       }
     }
-  }, [state.latitude, state.longitude, crop, products, sprayHistory]);
+  }, [state.latitude, state.longitude, crop, pest, products, sprayHistory, sowingDate, growthStage]);
 
   const setLocation = useCallback((lat: number, lng: number) => {
     setState(prev => ({ ...prev, latitude: lat, longitude: lng }));

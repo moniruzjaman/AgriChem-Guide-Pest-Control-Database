@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-18T18:51:26.438127+00:00",
+  "source": {
+    "file": "data_raw/all_pesticides.csv",
+    "sha256": "270a3ffbac8a62f63dccb58dbcff849b9bf6625f8a6cdc5e32254466e71bac84",
+    "sizeBytes": 1382784,
+    "headers": [
+      "Pesticide Type",
+      "SL No (Common Name)",
+      "Common Name",
+      "SL No (Products)",
+      "Brand Name",
+      "Registration No",
+      "Registration Holder",
+      "Recommended Crops",
+      "Recommended Pests",
+      "Dosage Rate",
+      "Recommendations (Crop | Pest | Dosage)",
+      "No. of Recommendations",
+      "MoA Code"
+    ],
+    "encoding": "utf-8-sig (BOM tolerated)"
+  },
+  "runtimeDatabase": {
+    "file": "public/downloads/pesticide_database.json",
+    "sha256": "c670e68e88e39946f038392e670b010cdf054463f17d635634d494c18e189369",
+    "sizeBytes": 7638541,
+    "productCount": 9641,
+    "missingMoa": 2574,
+    "emptyCrops": 4684,
+    "emptyPests": 4013
+  },
+  "validationCounts": {
+    "totalRecords": 9462,
+    "duplicateRegNoGroups": 43,
+    "duplicateRegNoRows": 44,
+    "missingRegistrationNo": 1,
+    "invalidRegistrationNo": 16,
+    "missingActiveIngredient": 1687,
+    "missingCrops": 4685,
+    "missingTargetPests": 4013,
+    "missingDosage": 4014,
+    "invalidDosage": 0,
+    "missingMoa": 3026,
+    "importErrors": 0
+  },
+  "generator": "scripts/validate_registry.py",
+  "docs": "docs/protection-integration-audit.md"
+}

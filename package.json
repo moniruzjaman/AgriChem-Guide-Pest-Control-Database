@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "validate:registry": "python3 scripts/validate_registry.py",
+    "validate:registry:check": "python3 scripts/validate_registry.py --check"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",

@@ -239,6 +239,14 @@ export const ShareModal: React.FC<ShareModalProps> = ({
       descBn: 'নীতি ঝুঁকি স্তর, WHO/FAO HHP স্ট্যাটাস, EU নিয়ন্ত্রক স্ট্যাটাস, বাংলাদেশ নীতি কর্ম, MoA স্কিম এবং ফর্মুলেশন কোড অনুযায়ী ৯,০০০+ নিবন্ধিত ক্যাটালগ ফিল্টার করুন।',
       tag: '#SpecialistSearch #HHP #PolicyRiskTier',
       icon: ShieldCheck
+    },
+    protection: {
+      titleEn: 'PesticideNext — Protection Intelligence Workflow',
+      titleBn: 'পেস্টিসাইডনেক্সট — সুরক্ষা ইন্টেলিজেন্স কর্মপ্রবাহ',
+      descEn: 'Connected workflow: KWI weather risk, field scouting, explainable protection decision, verified product eligibility, MoA stewardship, application records and outcome follow-up.',
+      descBn: 'সংযুক্ত কর্মপ্রবাহ: KWI আবহাওয়ার ঝুঁকি, ক্ষেত পর্যবেক্ষণ, ব্যাখ্যাসহ সুরক্ষা সিদ্ধান্ত, যাচাইকৃত পণ্যের যোগ্যতা, MoA রোটেশন, প্রয়োগ রেকর্ড ও ফলাফল ফলো-আপ।',
+      tag: '#ProtectionIntelligence #IPM #ScoutFirst',
+      icon: ShieldCheck
     }
   };
 

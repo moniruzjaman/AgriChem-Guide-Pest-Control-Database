@@ -1,0 +1,467 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-18T18:51:26.438127+00:00",
+  "source": {
+    "file": "data_raw/all_pesticides.csv",
+    "sha256": "270a3ffbac8a62f63dccb58dbcff849b9bf6625f8a6cdc5e32254466e71bac84",
+    "sizeBytes": 1382784,
+    "headers": [
+      "Pesticide Type",
+      "SL No (Common Name)",
+      "Common Name",
+      "SL No (Products)",
+      "Brand Name",
+      "Registration No",
+      "Registration Holder",
+      "Recommended Crops",
+      "Recommended Pests",
+      "Dosage Rate",
+      "Recommendations (Crop | Pest | Dosage)",
+      "No. of Recommendations",
+      "MoA Code"
+    ],
+    "encoding": "utf-8-sig (BOM tolerated)"
+  },
+  "counts": {
+    "totalRecords": 9462,
+    "duplicateRegNoGroups": 43,
+    "duplicateRegNoRows": 44,
+    "missingRegistrationNo": 1,
+    "invalidRegistrationNo": 16,
+    "missingActiveIngredient": 1687,
+    "missingCrops": 4685,
+    "missingTargetPests": 4013,
+    "missingDosage": 4014,
+    "invalidDosage": 0,
+    "missingMoa": 3026,
+    "importErrors": 0
+  },
+  "details": {
+    "duplicates": [
+      {
+        "regNo": "AP-3612",
+        "count": 2,
+        "lines": [
+          716,
+          1066
+        ]
+      },
+      {
+        "regNo": "AP-6069",
+        "count": 2,
+        "lines": [
+          1464,
+          1586
+        ]
+      },
+      {
+        "regNo": "AP-4892",
+        "count": 2,
+        "lines": [
+          2204,
+          2205
+        ]
+      },
+      {
+        "regNo": "AP-5663",
+        "count": 2,
+        "lines": [
+          2406,
+          3296
+        ]
+      },
+      {
+        "regNo": "AP-5894",
+        "count": 2,
+        "lines": [
+          2410,
+          3756
+        ]
+      },
+      {
+        "regNo": "AP-5765",
+        "count": 2,
+        "lines": [
+          3298,
+          3341
+        ]
+      },
+      {
+        "regNo": "AP-4793",
+        "count": 2,
+        "lines": [
+          4124,
+          4125
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-02",
+        "count": 2,
+        "lines": [
+          4755,
+          8369
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-03",
+        "count": 2,
+        "lines": [
+          4756,
+          8370
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-28",
+        "count": 3,
+        "lines": [
+          4757,
+          4779,
+          8462
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-29",
+        "count": 2,
+        "lines": [
+          4758,
+          8379
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-05",
+        "count": 2,
+        "lines": [
+          4759,
+          8371
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-06",
+        "count": 2,
+        "lines": [
+          4760,
+          8372
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-11",
+        "count": 2,
+        "lines": [
+          4761,
+          8374
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-42",
+        "count": 2,
+        "lines": [
+          4762,
+          8389
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-43",
+        "count": 2,
+        "lines": [
+          4763,
+          8465
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-10",
+        "count": 2,
+        "lines": [
+          4764,
+          8373
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-33",
+        "count": 2,
+        "lines": [
+          4765,
+          8382
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-14",
+        "count": 2,
+        "lines": [
+          4766,
+          8375
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-40",
+        "count": 2,
+        "lines": [
+          4767,
+          8464
+        ]
+      },
+      {
+        "regNo": "AP (Bio) -17",
+        "count": 2,
+        "lines": [
+          4768,
+          8376
+        ]
+      },
+      {
+        "regNo": "AP (Bio) -18",
+        "count": 2,
+        "lines": [
+          4769,
+          8377
+        ]
+      },
+      {
+        "regNo": "AP (Bio) -22",
+        "count": 2,
+        "lines": [
+          4772,
+          8457
+        ]
+      },
+      {
+        "regNo": "AP (Bio) -44",
+        "count": 2,
+        "lines": [
+          4773,
+          8466
+        ]
+      },
+      {
+        "regNo": "AP (Bio) -23",
+        "count": 2,
+        "lines": [
+          4774,
+          8458
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-24",
+        "count": 2,
+        "lines": [
+          4775,
+          8378
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-25",
+        "count": 2,
+        "lines": [
+          4776,
+          8459
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-27",
+        "count": 2,
+        "lines": [
+          4777,
+          8461
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-41",
+        "count": 2,
+        "lines": [
+          4778,
+          8388
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-36",
+        "count": 2,
+        "lines": [
+          4780,
+          8385
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-37",
+        "count": 2,
+        "lines": [
+          4781,
+          8386
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-38",
+        "count": 2,
+        "lines": [
+          4782,
+          8387
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-39",
+        "count": 2,
+        "lines": [
+          4783,
+          8463
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-34",
+        "count": 2,
+        "lines": [
+          4785,
+          8383
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-35",
+        "count": 2,
+        "lines": [
+          4786,
+          8384
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-31",
+        "count": 2,
+        "lines": [
+          4787,
+          8380
+        ]
+      },
+      {
+        "regNo": "AP (Bio)-32",
+        "count": 2,
+        "lines": [
+          4788,
+          8381
+        ]
+      },
+      {
+        "regNo": "PHP-868",
+        "count": 2,
+        "lines": [
+          4853,
+          5393
+        ]
+      },
+      {
+        "regNo": "PHP-22",
+        "count": 2,
+        "lines": [
+          4910,
+          5164
+        ]
+      },
+      {
+        "regNo": "PHP-925",
+        "count": 2,
+        "lines": [
+          4945,
+          5269
+        ]
+      },
+      {
+        "regNo": "PHP-743",
+        "count": 2,
+        "lines": [
+          5008,
+          5389
+        ]
+      },
+      {
+        "regNo": "PHP-1010",
+        "count": 2,
+        "lines": [
+          5073,
+          5074
+        ]
+      },
+      {
+        "regNo": "PHP-1082",
+        "count": 2,
+        "lines": [
+          5317,
+          5324
+        ]
+      }
+    ],
+    "missingRegistrationNo": [
+      {
+        "line": 5167,
+        "brand": "Golder Aerosol"
+      }
+    ],
+    "invalidRegistrationNo": [
+      {
+        "line": 891,
+        "regNo": "AP5615"
+      },
+      {
+        "line": 2340,
+        "regNo": "AP-2391 / AP-2393"
+      },
+      {
+        "line": 2538,
+        "regNo": "AP--3368"
+      },
+      {
+        "line": 4681,
+        "regNo": "AP--2277"
+      },
+      {
+        "line": 5218,
+        "regNo": "PHP508"
+      },
+      {
+        "line": 5459,
+        "regNo": "AP--1320"
+      },
+      {
+        "line": 8192,
+        "regNo": "AP--6628"
+      },
+      {
+        "line": 8193,
+        "regNo": "AP--6634"
+      },
+      {
+        "line": 8365,
+        "regNo": "3852"
+      },
+      {
+        "line": 8366,
+        "regNo": "5816"
+      },
+      {
+        "line": 8367,
+        "regNo": "6183"
+      },
+      {
+        "line": 8368,
+        "regNo": "6474"
+      },
+      {
+        "line": 8503,
+        "regNo": "PHP--803"
+      },
+      {
+        "line": 8591,
+        "regNo": "PHP--1251"
+      },
+      {
+        "line": 8592,
+        "regNo": "PHP--1252"
+      },
+      {
+        "line": 8900,
+        "regNo": "PHP-"
+      }
+    ],
+    "importErrors": []
+  },
+  "notes": [
+    "PHI/REI are NOT present in the DAE CSV — they come from the curated overlay only.",
+    "Missing crops/pests (~50%) means those products cannot pass crop/target eligibility verification.",
+    "Missing MoA (~32%) limits resistance stewardship for those products.",
+    "This report is generated at data-build time; the app reads it, never parses the CSV at runtime."
+  ]
+}

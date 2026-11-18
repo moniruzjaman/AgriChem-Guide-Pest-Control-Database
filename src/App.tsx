@@ -36,6 +36,9 @@ const DatabaseView = lazy(() =>
 const Guidebook = lazy(() =>
   import('./components/Guidebook').then((m) => ({ default: m.Guidebook }))
 );
+const ProtectionView = lazy(() =>
+  import('./components/ProtectionView').then((m) => ({ default: m.ProtectionView }))
+);
 const RotationPlanner = lazy(() =>
   import('./components/RotationPlanner').then((m) => ({ default: m.RotationPlanner }))
 );
@@ -186,7 +189,7 @@ export default function App() {
   // We also push the hash back into the URL when the user switches tabs
   // in-app, so the browser back/forward buttons and copy-url keep working.
   // ---------------------------------------------------------------------------
-  const VALID_TABS: AppTab[] = ['home', 'database', 'calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'myfield', 'intelligence', 'specialist'];
+  const VALID_TABS: AppTab[] = ['home', 'database', 'calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'myfield', 'intelligence', 'protection', 'specialist'];
 
   useEffect(() => {
     const tabFromHash = (hash: string): AppTab | null => {
@@ -535,6 +538,13 @@ export default function App() {
         )}
 
         {activeTab === 'intelligence' && (<Suspense fallback={<DatabaseSplash language={language} />}><PesticideIntelligenceView products={products} /></Suspense>)}
+
+        {/* ── PROTECTION — integrated protection workflow ── */}
+        {activeTab === 'protection' && (
+          <Suspense fallback={<DatabaseSplash language={language} />}>
+            <ProtectionView />
+          </Suspense>
+        )}
 
         {activeTab === 'specialist' && (
           <Suspense fallback={<DatabaseSplash language={language} />}>

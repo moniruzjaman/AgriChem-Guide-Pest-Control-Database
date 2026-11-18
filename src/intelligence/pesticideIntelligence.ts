@@ -87,6 +87,68 @@ export interface PesticideIntelligenceResult {
   /** NEW: cache metadata for transparency */
   cacheHit: boolean;
   generatedAt: string;
+  // ── Protection Intelligence extension (Task 2) ──────────────────────
+  /** KWI per-category risk assessments (disease, spray_window, wind_damage, …) with confidence + evidence */
+  riskCategories: KwiRiskCategory[] | null;
+  /** Weather-driven insect-pest forecast (BPH, stem borer, …) — null when no crop context */
+  pestForecast: KwiPestSummary | null;
+  /** Overall KWI risk score 0-100 (weighted top-5 categories) */
+  overallRiskScore: number | null;
+  /** Active weather alerts from the risk engine */
+  riskAlerts: KwiRiskAlert[] | null;
+  /** Data source + freshness (provider, fetchedAt, age in minutes, stale flag) */
+  dataFreshness: KwiDataFreshness;
+  /** Engine confidence summary (disease/pest forecast confidence when available) */
+  confidence: KwiConfidenceSummary;
+}
+
+export interface KwiRiskCategory {
+  category: string;
+  score: number;
+  level: string;
+  confidence: number;
+  explanation: string;
+  explanationBn: string;
+  evidence: string[];
+}
+
+export interface KwiPestSummary {
+  overallFavorability: number;
+  spreadRisk: string;
+  confidence: number;
+  pests: Array<{
+    name: string;
+    nameBn: string;
+    risk: number;
+    level: string;
+    symptoms: string[];
+    economicThreshold: string;
+    preventiveActions: string[];
+    curativeActions: string[];
+  }>;
+}
+
+export interface KwiRiskAlert {
+  category: string;
+  level: string;
+  title: string;
+  titleBn: string;
+  message: string;
+  messageBn: string;
+}
+
+export interface KwiDataFreshness {
+  provider: string;
+  fetchedAt: string;
+  ageMinutes: number;
+  stale: boolean;
+  cacheHit: boolean;
+}
+
+export interface KwiConfidenceSummary {
+  diseaseForecast: number | null;
+  pestForecast: number | null;
+  note: string;
 }
 
 export interface KwiDiseaseSummary {
@@ -427,6 +489,76 @@ export async function runPesticideIntelligence(input: {
     };
   }
 
+  // ── Protection Intelligence extension (Task 2): expose the structured
+  // KWI outputs that were previously computed then discarded.
+  // Per-category risk assessments (with confidence + evidence), the pest
+  // forecast, overall score, alerts, freshness and confidence summary.
+
+  // Crop stage is needed for the pest forecast to make sense; only surface
+  // pests for crops the KWI engine actually knows (activeCrops non-empty).
+  const pestForecast: KwiPestSummary | null =
+    activeCrops.length > 0 && kwiResult.pest?.pests?.length
+      ? {
+          overallFavorability: kwiResult.pest.overallFavorability,
+          spreadRisk: kwiResult.pest.spreadRisk,
+          confidence: kwiResult.pest.confidence,
+          pests: kwiResult.pest.pests.map((p) => ({
+            name: p.pest.name,
+            nameBn: p.pest.nameBn,
+            risk: p.risk,
+            level: p.level,
+            symptoms: p.pest.symptomsBn,
+            economicThreshold: p.pest.economicThreshold,
+            preventiveActions: p.preventiveActions,
+            curativeActions: p.curativeActions,
+          })),
+        }
+      : null;
+
+  const riskCategories: KwiRiskCategory[] =
+    kwiResult.risks?.risks?.map((r) => ({
+      category: r.category,
+      score: r.score,
+      level: r.level,
+      confidence: r.confidence,
+      explanation: r.explanation,
+      explanationBn: r.explanationBn,
+      evidence: r.evidence,
+    })) ?? null;
+
+  const riskAlerts: KwiRiskAlert[] =
+    kwiResult.risks?.alerts?.map((a) => ({
+      category: a.category,
+      level: a.level,
+      title: a.title,
+      titleBn: a.titleBn,
+      message: a.message,
+      messageBn: a.messageBn,
+    })) ?? null;
+
+  const fetchedAt = kwiResult.weather.fetchedAt || kwiResult.metadata.fetchedAt;
+  const ageMinutes = fetchedAt
+    ? Math.max(0, Math.round((Date.now() - new Date(fetchedAt).getTime()) / 60000))
+    : 0;
+  // Freshness rule: weather older than 2 hours (the KWI web app's stale-cache
+  // threshold) is flagged so the UI can show a freshness warning.
+  const dataFreshness: KwiDataFreshness = {
+    provider: kwiResult.metadata.provider,
+    fetchedAt,
+    ageMinutes,
+    stale: ageMinutes > 120,
+    cacheHit: kwiResult.metadata.cacheHit,
+  };
+
+  const confidence: KwiConfidenceSummary = {
+    diseaseForecast: kwiResult.disease?.confidence ?? null,
+    pestForecast: pestForecast?.confidence ?? null,
+    note:
+      activeCrops.length > 0
+        ? 'Crop context provided — disease/pest forecasts are stage-aware.'
+        : 'No sowing date/growth stage provided — disease/pest forecasts use generic weather favorability only.',
+  };
+
   return {
     weather,
     sprayWindows,
@@ -439,6 +571,12 @@ export async function runPesticideIntelligence(input: {
     cropCalendar,
     cacheHit: kwiResult.metadata.cacheHit,
     generatedAt: kwiResult.metadata.generatedAt,
+    riskCategories,
+    pestForecast,
+    overallRiskScore: kwiResult.risks?.overallRiskScore ?? null,
+    riskAlerts,
+    dataFreshness,
+    confidence,
   };
 }
 
@@ -496,15 +634,7 @@ export async function fetchWeather(
     district: location.district,
     country: location.country || 'Bangladesh',
   });
-  return toWeatherSnapshot({
-    weather,
-    risks: {} as never,
-    disease: {} as never,
-    recommendations: [],
-    calendar: [],
-    dailyPlan: {} as never,
-    weeklyPlan: {} as never,
-    operationWindows: {} as never,
-    metadata: {} as never,
-  });
+  // toWeatherSnapshot only reads the `weather` field of the intelligence
+  // result — pass a minimal carrier rather than fabricating engine outputs.
+  return toWeatherSnapshot({ weather } as WeatherIntelligenceResult);
 }

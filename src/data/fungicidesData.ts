@@ -6848,7 +6848,7 @@ export const FUNGICIDES_DATABASE: ChemicalProduct[] = [
     "type": "Fungicide",
     "commonName": "Isoprothiolane",
     "tradeName": "Fuji-one 40 EC / Isopro 40 EC",
-    "registrationNo": "AP-580",
+    "registrationNo": "AP-665",
     "registrationHolder": "Nihon Nohyaku / Padma Agro Ltd",
     "crops": [
       "Rice"
