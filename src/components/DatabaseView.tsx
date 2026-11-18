@@ -37,6 +37,7 @@ import {
 import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
 import { MOA_DATABASE } from '../data/moaData';
+import { smartSearch } from '../utils/smartSearch';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 import { LabelScannerModal } from './LabelScannerModal';
 import './DatabaseView.css';
@@ -425,7 +426,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   // Advanced filters (collapsible)
   const [selectedMoA, setSelectedMoA] = useState<string>('all');
   const [selectedRisk, setSelectedRisk] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'name' | 'type' | 'phi' | 'reg'>('name');
+  const [sortBy, setSortBy] = useState<'relevance' | 'name' | 'type' | 'phi' | 'reg'>('relevance');
   
   // View mode & UX controls
   // Default to 'grouped' so users see products organized by active ingredient
@@ -463,19 +464,31 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     return ['all', ...Array.from(set).sort()];
   }, [products]);
 
+  // ---------------------------------------------------------------------------
+  // Smart search (layman-first): token-AND matching across brand / ingredient
+  // / crop / pest (Bangla too) / company / reg-no / label rows, with typo
+  // tolerance and safety-aware ranking. One pass feeds every facet counter
+  // below so the chips show honest "every aspect" numbers for the query.
+  // ---------------------------------------------------------------------------
+  const smart = useMemo(
+    () => (searchQuery.trim() ? smartSearch(searchQuery, products) : null),
+    [searchQuery, products]
+  );
+  const smartIds = useMemo(() => {
+    if (!smart) return null;
+    return new Set(smart.items.map((i) => i.product.id));
+  }, [smart]);
+  const smartReasonsById = useMemo(() => {
+    const m = new Map<string, string[]>();
+    if (smart) smart.items.forEach((i) => m.set(i.product.id, i.reasons.map((r) => `${r.en}|||${r.bn}`)));
+    return m;
+  }, [smart]);
+
   // Compute live category counts based on other current filters (crop, search query, MoA, Risk)
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { 'all': 0 };
     products.forEach((p) => {
-      const matchesSearch = !searchQuery.trim() || (() => {
-        const q = searchQuery.toLowerCase().trim();
-        return p.tradeName.toLowerCase().includes(q) ||
-               p.commonName.toLowerCase().includes(q) ||
-               p.registrationHolder.toLowerCase().includes(q) ||
-               p.registrationNo.toLowerCase().includes(q) ||
-               p.crops.some((c) => c.toLowerCase().includes(q) || transCrop(c).toLowerCase().includes(q)) ||
-               p.pests.some((pest) => pest.toLowerCase().includes(q));
-      })();
+      const matchesSearch = !smartIds || smartIds.has(p.id);
       const matchesCrop = selectedCrop === 'all' || p.crops.includes(selectedCrop);
       const matchesRisk = selectedRisk === 'all' || p.resistanceRisk === selectedRisk;
       const matchesMoA = selectedMoA === 'all' || p.moaCode === selectedMoA;
@@ -486,21 +499,13 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       }
     });
     return counts;
-  }, [products, searchQuery, selectedCrop, selectedRisk, selectedMoA, transCrop]);
+  }, [products, smartIds, selectedCrop, selectedRisk, selectedMoA]);
 
   // Compute live active ingredients present in currently filtered items (helps user see subcategories)
   const activeIngredientsInSelectedCategory = useMemo(() => {
     const map: Record<string, number> = {};
     products.forEach((p) => {
-      const matchesSearch = !searchQuery.trim() || (() => {
-        const q = searchQuery.toLowerCase().trim();
-        return p.tradeName.toLowerCase().includes(q) ||
-               p.commonName.toLowerCase().includes(q) ||
-               p.registrationHolder.toLowerCase().includes(q) ||
-               p.registrationNo.toLowerCase().includes(q) ||
-               p.crops.some((c) => c.toLowerCase().includes(q) || transCrop(c).toLowerCase().includes(q)) ||
-               p.pests.some((pest) => pest.toLowerCase().includes(q));
-      })();
+      const matchesSearch = !smartIds || smartIds.has(p.id);
       const matchesCrop = selectedCrop === 'all' || p.crops.includes(selectedCrop);
       const matchesCategory = selectedType === 'all' || p.type === selectedType;
       const matchesRisk = selectedRisk === 'all' || p.resistanceRisk === selectedRisk;
@@ -511,26 +516,15 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       }
     });
     return Object.entries(map).sort((a, b) => b[1] - a[1]); // Sort by brand count descending
-  }, [products, searchQuery, selectedCrop, selectedType, selectedRisk, selectedMoA, transCrop]);
+  }, [products, smartIds, selectedCrop, selectedType, selectedRisk, selectedMoA]);
 
   // Filter and sort the commercial products
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
-      // Search matches brand name, active ingredient, registrant, reg no, crop, pest or MoA Group
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase().trim();
-        const matchesName = p.tradeName.toLowerCase().includes(q);
-        const matchesCommon = p.commonName.toLowerCase().includes(q);
-        const matchesHolder = p.registrationHolder.toLowerCase().includes(q);
-        const matchesReg = p.registrationNo.toLowerCase().includes(q);
-        const matchesCrops = p.crops.some((c) => c.toLowerCase().includes(q) || transCrop(c).toLowerCase().includes(q));
-        const matchesPests = p.pests.some((pest) => pest.toLowerCase().includes(q));
-        const matchesMoA = (p.moaCode && p.moaCode.toLowerCase().includes(q)) || 
-                           (p.moaGroup && p.moaGroup.toLowerCase().includes(q));
-
-        if (!matchesName && !matchesCommon && !matchesHolder && !matchesReg && !matchesCrops && !matchesPests && !matchesMoA) {
-          return false;
-        }
+      // Smart layman-first match: brand / ingredient / crop / pest (Bangla
+      // included), company, reg-no, label rows, MoA shortcuts, typos.
+      if (smartIds && !smartIds.has(p.id)) {
+        return false;
       }
 
       // Category filter
@@ -560,13 +554,20 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
 
       return true;
     }).sort((a, b) => {
+      // Relevance-first while searching: keep the smart-score order so the
+      // safest / most selective effective products float to the top.
+      if (smart && (sortBy === 'relevance' || sortBy === 'name')) {
+        const sa = smart.items.find((i) => i.product.id === a.id)?.score ?? 0;
+        const sb = smart.items.find((i) => i.product.id === b.id)?.score ?? 0;
+        if (sa !== sb) return sb - sa;
+      }
       if (sortBy === 'name') return a.tradeName.localeCompare(b.tradeName);
       if (sortBy === 'type') return a.type.localeCompare(b.type);
       if (sortBy === 'phi') return (a.phiDays || 0) - (b.phiDays || 0);
       if (sortBy === 'reg') return a.registrationNo.localeCompare(b.registrationNo);
       return 0;
     });
-  }, [products, searchQuery, selectedType, selectedCrop, selectedIngredient, selectedMoA, selectedRisk, sortBy, transCrop]);
+  }, [products, smartIds, smart, selectedType, selectedCrop, selectedIngredient, selectedMoA, selectedRisk, sortBy]);
 
   // Group filtered products by Active Ingredient
   const groupedByIngredient = useMemo(() => {
@@ -1759,6 +1760,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                     onChange={(e) => setSortBy(e.target.value as any)}
                     className="bg-transparent border-none text-xs font-semibold text-slate-700 focus:outline-none focus:ring-0 py-0.5 cursor-pointer"
                   >
+                    <option value="relevance">{language === 'bn' ? 'সবচেয়ে উপযোগী আগে' : 'Best matches first'}</option>
                     <option value="name">{t('sort_name')}</option>
                     <option value="type">{t('sort_type')}</option>
                     <option value="phi">{t('sort_phi')}</option>
@@ -1809,6 +1811,50 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
               </div>
 
             </div>
+
+            {/* Smart-search "every aspect" summary — layman friendly: shows
+                what the query touched (pests, crops, ingredients) and offers
+                one-tap refinements. */}
+            {smart && smart.items.length > 0 && (
+              <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4 shadow-3xs">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-bold text-emerald-900">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                    {language === 'bn'
+                      ? `${formatNum(smart.items.length)}টি পণ্য আপনার সমস্যার সাথে মিলেছে`
+                      : `${formatNum(smart.items.length)} products match your problem`}
+                  </span>
+                  {smart.matchedPests.length > 0 && (
+                    <span className="font-medium text-emerald-800">
+                      {(language === 'bn' ? 'পোকা/রোগ: ' : 'pests/diseases: ') + smart.matchedPests.slice(0, 4).map((x) => (language === 'bn' ? transPest(x) : x)).join(', ')}
+                    </span>
+                  )}
+                  {smart.matchedCrops.length > 0 && (
+                    <span className="font-medium text-emerald-800">
+                      {(language === 'bn' ? 'ফসল: ' : 'crops: ') + smart.matchedCrops.slice(0, 4).map((x) => transCrop(x)).join(', ')}
+                    </span>
+                  )}
+                </div>
+                {smart.matchedIngredients.length > 0 && (
+                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                    <span className="text-[10px] font-extrabold uppercase text-emerald-700">{language === 'bn' ? 'উপাদানে ছাঁকুন:' : 'Narrow by ingredient:'}</span>
+                    {smart.matchedIngredients.slice(0, 6).map((ing) => (
+                      <button
+                        key={ing}
+                        onClick={() => setSelectedIngredient(selectedIngredient === ing ? 'all' : ing)}
+                        className={`text-[10px] px-2 py-0.5 rounded-full border font-bold transition cursor-pointer ${
+                          selectedIngredient === ing
+                            ? 'bg-emerald-700 text-white border-emerald-700'
+                            : 'bg-white text-emerald-800 border-emerald-300 hover:bg-emerald-100'
+                        }`}
+                      >
+                        {ing}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Active Filters Pill Row */}
             {hasActiveFilters && (
@@ -2425,13 +2471,30 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
               <div className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredProducts.slice(0, visibleLimit).map((product) => (
-                    <ProductCard
-                      key={product.id}
-                      product={product}
-                      onSelectProduct={onSelectProduct}
-                      onOpenCalculator={onOpenCalculator}
-                      onOpenSafety={onOpenSafety}
-                    />
+                    <div key={product.id} className="flex flex-col gap-1">
+                      {/* Layman "why this appeared" chips from the smart engine */}
+                      {smartReasonsById.get(product.id)?.length ? (
+                        <div className="flex flex-wrap gap-1 px-0.5">
+                          {smartReasonsById.get(product.id)!.slice(0, 2).map((rpair) => {
+                            const [enR, bnR] = rpair.split('|||');
+                            return (
+                              <span
+                                key={enR}
+                                className="text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-md px-1.5 py-0.5"
+                              >
+                                {language === 'bn' ? bnR : enR}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      ) : null}
+                      <ProductCard
+                        product={product}
+                        onSelectProduct={onSelectProduct}
+                        onOpenCalculator={onOpenCalculator}
+                        onOpenSafety={onOpenSafety}
+                      />
+                    </div>
                   ))}
                 </div>
 

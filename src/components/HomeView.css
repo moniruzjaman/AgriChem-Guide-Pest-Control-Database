@@ -246,6 +246,25 @@
   text-transform: uppercase;
 }
 
+/* dialog header — "সঠিক ওষুধ খুঁজুন, ভালো ওষুধ নয়।" */
+.acg-dialog__head {
+  margin-top: 10px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--green-900);
+}
+
+/* dialog body — "- এটা দূর্ভাগ্য নয় এটা ভুলের চক্র।" */
+.acg-dialog__body {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
 .acg-dialog__row {
   display: flex;
   align-items: flex-start;

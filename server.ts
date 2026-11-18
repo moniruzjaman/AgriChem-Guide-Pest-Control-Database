@@ -328,6 +328,58 @@ async function startServer() {
     }
   });
 
+  // -------------------------------------------------------------------------
+  // Weather Intelligence API — powered by Krishi Weather Intelligence (KWI)
+  //
+  // POST /api/intelligence
+  //   { latitude, longitude, crop, pest?, lastMoa?, sowingDate?, growthStage? }
+  //
+  // Returns: weather snapshot, spray windows, disease pressure, pesticide
+  // candidates, KWI disease forecast, and crop calendar info.
+  //
+  // The KWI engine fetches from Open-Meteo (free, no API key) with an
+  // LRU-bounded cache (5-minute TTL, 256 entries). The spray window scoring
+  // uses the same FAO-corrected VPD formula and precipitationProbability
+  // backfill that was fixed in the KWI repo.
+  // -------------------------------------------------------------------------
+  app.post("/api/intelligence", async (req, res) => {
+    try {
+      const { latitude, longitude, crop, pest, lastMoa, sowingDate, growthStage } = req.body || {};
+
+      if (typeof latitude !== "number" || typeof longitude !== "number") {
+        res.status(400).json({ error: "latitude and longitude must be numbers" });
+        return;
+      }
+
+      // Dynamically import the intelligence module so Vite can resolve it
+      // in dev mode without bundling it into the server build.
+      const { runPesticideIntelligence } = await import("./src/intelligence/pesticideIntelligence.ts");
+
+      // Load the full pesticide database for candidate ranking.
+      // In production this is a static import; in dev Vite handles it.
+      const { pesticides } = await import("./src/data/all_pesticides.ts");
+      const ALL_PESTICIDES = pesticides as any;
+
+      const result = await runPesticideIntelligence({
+        location: { latitude, longitude, name: "", country: "Bangladesh" },
+        products: ALL_PESTICIDES,
+        crop: crop || "",
+        pest: pest || "",
+        lastMoa: lastMoa,
+        sowingDate: sowingDate,
+        growthStage: growthStage,
+      });
+
+      res.json(result);
+    } catch (error) {
+      console.error("Error in /api/intelligence:", error);
+      res.status(502).json({
+        error: "Weather intelligence error",
+        detail: error instanceof Error ? error.message : String(error),
+      });
+    }
+  });
+
   // Vite middleware setup
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({

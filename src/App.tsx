@@ -3,7 +3,10 @@ import { ChemicalProduct, RegulatoryAlert, AppTab } from './types';
 import { loadDatabase } from './data/loadDatabase';
 import { INITIAL_REGULATORY_ALERTS } from './data/regulatoryAlertsData';
 import { Navbar } from './components/Navbar';
+import { BottomNav } from './components/BottomNav';
+import { SearchSheet } from './components/SearchSheet';
 import { HomeView } from './components/HomeView';
+import { loadPersona, savePersona, type PersonaId } from './utils/userCategories';
 import { ShareModal } from './components/ShareModal';
 import { DocumentMeta } from './components/DocumentMeta';
 import { OfflineIndicator } from './components/OfflineIndicator';
@@ -11,6 +14,7 @@ import { useLanguage } from './context/LanguageContext';
 import { useReadAloud } from './hooks/useReadAloud';
 import { useOnlineStatus } from './hooks/useOnlineStatus';
 import { PesticideIntelligenceView } from './components/PesticideIntelligenceView';
+const MyFieldView = lazy(() => import('./components/MyFieldView').then(m => ({ default: m.MyFieldView })));
 const SpecialistSearchView = lazy(() => import('./components/SpecialistSearchView'));
 import { detectSharedVisit, flushPendingDownloads } from './utils/analytics';
 import {
@@ -31,6 +35,9 @@ const DatabaseView = lazy(() =>
 );
 const Guidebook = lazy(() =>
   import('./components/Guidebook').then((m) => ({ default: m.Guidebook }))
+);
+const ProtectionView = lazy(() =>
+  import('./components/ProtectionView').then((m) => ({ default: m.ProtectionView }))
 );
 const RotationPlanner = lazy(() =>
   import('./components/RotationPlanner').then((m) => ({ default: m.RotationPlanner }))
@@ -150,6 +157,28 @@ export default function App() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isScanOpen, setIsScanOpen] = useState(false);
+  const [isSearchSheetOpen, setIsSearchSheetOpen] = useState(false);
+
+  // ---------------------------------------------------------------------------
+  // User category (persona) — Farmer / Cadre officer / Researcher / Policy.
+  // Persisted locally; drives search placeholders, quick-search chips, and
+  // preset Specialist filters. Farmers get the simple bottom-nav experience;
+  // specialists get "Special Search" shortcuts.
+  // ---------------------------------------------------------------------------
+  const [persona, setPersona] = useState<PersonaId>(() => loadPersona());
+  const handlePersonaChange = (id: PersonaId) => {
+    setPersona(id);
+    savePersona(id);
+  };
+
+  // Built-in intelligence badge for the My Field tab: show a dot when there's
+  // spray history (rotation advice ready) OR the user is on the My Field tab
+  // OR the intelligence view (the engine has loaded at least once).
+  const intelligenceReady =
+    (typeof window !== 'undefined' &&
+      !!window.localStorage.getItem('pesticidenext_spray_history')) ||
+    activeTab === 'intelligence' ||
+    activeTab === 'myfield';
 
   // ---------------------------------------------------------------------------
   // Hash routing — lets shared deep links (e.g. `/?from=share#database`) land
@@ -160,7 +189,7 @@ export default function App() {
   // We also push the hash back into the URL when the user switches tabs
   // in-app, so the browser back/forward buttons and copy-url keep working.
   // ---------------------------------------------------------------------------
-  const VALID_TABS: AppTab[] = ['home', 'database', 'calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'myfield', 'intelligence', 'specialist'];
+  const VALID_TABS: AppTab[] = ['home', 'database', 'calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'myfield', 'intelligence', 'protection', 'specialist'];
 
   useEffect(() => {
     const tabFromHash = (hash: string): AppTab | null => {
@@ -373,10 +402,39 @@ export default function App() {
         totalProductsCount={products.length}
         onOpenDrawer={() => setIsDrawerOpen(true)}
         onOpenScan={() => setIsScanOpen(true)}
+        onOpenSearchSheet={() => setIsSearchSheetOpen(true)}
+        persona={persona}
+        onPersonaChange={handlePersonaChange}
+      />
+
+      {/* Mobile Bottom Nav — Home · Search/Scan · My Field (intelligence) · More */}
+      <BottomNav
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onOpenSearch={() => setIsSearchSheetOpen(true)}
+        onOpenDrawer={() => setIsDrawerOpen(true)}
+        intelligenceReady={intelligenceReady}
+      />
+
+      {/* Unified Search / Scan sheet with layman-first smart results */}
+      <SearchSheet
+        isOpen={isSearchSheetOpen}
+        onClose={() => setIsSearchSheetOpen(false)}
+        products={products}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        onOpenScan={() => {
+          setIsSearchSheetOpen(false);
+          setIsScanOpen(true);
+        }}
+        onSelectProduct={(p) => setDetailProduct(p)}
+        persona={persona}
+        onPersonaChange={handlePersonaChange}
+        onNavigateTab={(tab) => setActiveTab(tab)}
       />
 
       {/* Main View Area */}
-      <main className="flex-1" ref={mainContentRef}>
+      <main className="flex-1 pn-main" ref={mainContentRef}>
         {activeTab === 'home' && (
           <HomeView
             products={products}
@@ -481,18 +539,26 @@ export default function App() {
 
         {activeTab === 'intelligence' && (<Suspense fallback={<DatabaseSplash language={language} />}><PesticideIntelligenceView products={products} /></Suspense>)}
 
+        {/* ── PROTECTION — integrated protection workflow ── */}
+        {activeTab === 'protection' && (
+          <Suspense fallback={<DatabaseSplash language={language} />}>
+            <ProtectionView />
+          </Suspense>
+        )}
+
         {activeTab === 'specialist' && (
           <Suspense fallback={<DatabaseSplash language={language} />}>
             <SpecialistSearchView
               products={products}
               onProductClick={(p) => setDetailProduct(p)}
+              persona={persona}
             />
           </Suspense>
         )}
 
         {activeTab === 'myfield' && (
           <Suspense fallback={<DatabaseSplash language={language} />}>
-            <SprayLogView
+            <MyFieldView
               products={products}
               onNavigateTab={(tab) => setActiveTab(tab)}
             />

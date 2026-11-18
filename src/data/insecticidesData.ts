@@ -2747,7 +2747,7 @@ export const INSECTICIDES_DATABASE: ChemicalProduct[] = [
     "type": "Insecticide",
     "commonName": "Triazophos",
     "tradeName": "Hostathion 40 EC / Truphos 40 EC",
-    "registrationNo": "AP-410",
+    "registrationNo": "AP-1889",
     "registrationHolder": "Bayer CropScience Ltd / Shetu Pesticides",
     "crops": [
       "Cotton",
