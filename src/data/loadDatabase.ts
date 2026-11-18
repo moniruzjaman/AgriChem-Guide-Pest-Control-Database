@@ -104,7 +104,7 @@ function mergeWithCurated(
   // DAE-only fields during the merge (see below).
   const daeByRegNo = new Map<string, ChemicalProduct>();
   for (const p of daeProducts) {
-    const regNo = (p.registrationNo ?? '').toLowerCase().trim();
+    const regNo = normalizeRegKey(p.registrationNo);
     if (regNo && !daeByRegNo.has(regNo)) {
       daeByRegNo.set(regNo, p);
     }
@@ -119,7 +119,7 @@ function mergeWithCurated(
   //    DAE twin — otherwise the detail modal would show "no recommendations"
   //    for ~1,000 curated products that ARE in the official register.
   for (const product of curated) {
-    const regNo = (product.registrationNo ?? '').toLowerCase().trim();
+    const regNo = normalizeRegKey(product.registrationNo);
     if (regNo && !seenRegNos.has(regNo)) {
       seenRegNos.add(regNo);
     }
@@ -146,7 +146,7 @@ function mergeWithCurated(
 
   // 2. DAE register dump — skip duplicates by registration number.
   for (const product of daeProducts) {
-    const regNo = (product.registrationNo ?? '').toLowerCase().trim();
+    const regNo = normalizeRegKey(product.registrationNo);
     if (regNo && seenRegNos.has(regNo)) {
       continue;
     }
@@ -213,11 +213,11 @@ function loadCustomProducts(baseline: ChemicalProduct[]): ChemicalProduct[] {
   try {
     const parsed = JSON.parse(saved) as ChemicalProduct[];
     const existingNos = new Set(
-      baseline.map((p) => p.registrationNo.toLowerCase().trim())
+      baseline.map((p) => normalizeRegKey(p.registrationNo))
     );
     return parsed.filter(
       (p) =>
-        p.registrationNo && !existingNos.has(p.registrationNo.toLowerCase().trim())
+        p.registrationNo && !existingNos.has(normalizeRegKey(p.registrationNo))
     );
   } catch (e) {
     console.warn('Failed to parse custom products:', e);
@@ -232,6 +232,15 @@ function loadCustomProducts(baseline: ChemicalProduct[]): ChemicalProduct[] {
  * user-imported custom products. The result is memoised so repeated calls
  * (e.g. StrictMode double-mount) share a single fetch.
  */
+/**
+ * Strong registration-number normalizer shared by every dedupe gate:
+ * uppercase, collapse ALL whitespace (the register carries 'AP (BIO)-02',
+ * 'AP(BIO)-02', 'AP-3612 ' variants for the same registration).
+ */
+function normalizeRegKey(raw: string | undefined | null): string {
+  return (raw ?? '').trim().toUpperCase().replace(/\s+/g, '');
+}
+
 export function loadDatabase(): Promise<LoadedDatabase> {
   if (loadPromise) return loadPromise;
 
@@ -246,35 +255,64 @@ export function loadDatabase(): Promise<LoadedDatabase> {
         loadDatabaseFromJSON(),
       ]);
 
+    // The DAE register JSON itself contains duplicate registration numbers
+    // (43 groups — e.g. AP-3612 Gonder 50WP vs Rosa 72SL; the register
+    // legitimately lists multiple brands per reg no in some rows and has
+    // whitespace variants). Deduplicate intra-JSON by normalized regNo,
+    // keeping the FIRST record (deterministic) so the merged catalogue
+    // never shows the same registration twice.
+    const seenJson = new Set<string>();
+    const dedupedDae = daeProducts.filter((p) => {
+      const key = (p.registrationNo ?? '').trim().toUpperCase().replace(/\s+/g, '');
+      if (!key) return true; // keep records without regNo (disclosed by eligibility)
+      if (seenJson.has(key)) return false;
+      seenJson.add(key);
+      return true;
+    });
+
     const merged = applyBdOverlay(
-      mergeWithCurated(CURATED_DATABASE, daeProducts),
+      mergeWithCurated(CURATED_DATABASE, dedupedDae),
       BD_OVERLAY_BY_REG
     );
 
     const seenRegNos = new Set(
-      merged.map((p) => (p.registrationNo ?? '').toLowerCase().trim()).filter(Boolean)
+      merged.map((p) => normalizeRegKey(p.registrationNo)).filter(Boolean)
     );
     for (const extra of BD_REGISTER_EXTRAS) {
-      const regNo = (extra.registrationNo ?? '').toLowerCase().trim();
+      const regNo = normalizeRegKey(extra.registrationNo);
       if (regNo && seenRegNos.has(regNo)) continue;
       if (regNo) seenRegNos.add(regNo);
       merged.push({ ...extra, type: normalizeType(extra.type) });
     }
 
-    const custom = loadCustomProducts(merged);
+    // Final unified dedupe pass over the merged catalogue. The layered
+    // merge above dedupes DAE-vs-curated and extras-vs-merged, but curated
+    // itself can contain duplicate registrations (e.g. two Isoprothiolane
+    // 40EC entries both carrying AP-665). Keep the FIRST occurrence
+    // deterministically so one registration number == one product record.
+    const seenFinal = new Set<string>();
+    const dedupedMerged = merged.filter((p) => {
+      const key = normalizeRegKey(p.registrationNo);
+      if (!key) return true;
+      if (seenFinal.has(key)) return false;
+      seenFinal.add(key);
+      return true;
+    });
+
+    const custom = loadCustomProducts(dedupedMerged);
 
     if (typeof console !== 'undefined' && console.debug) {
       console.debug(
         `[loadDatabase] curated=${CURATED_DATABASE.length} ` +
           `daeJSON=${daeProducts.length} extras=${BD_REGISTER_EXTRAS.length} ` +
-          `merged=${merged.length} custom=${custom.length}`
+          `merged=${dedupedMerged.length} custom=${custom.length}`
       );
     }
 
     return {
-      products: [...merged, ...custom],
-      baselineCount: merged.length,
-      cropList: buildCropList(merged),
+      products: [...dedupedMerged, ...custom],
+      baselineCount: dedupedMerged.length,
+      cropList: buildCropList(dedupedMerged),
     };
   })();
 
