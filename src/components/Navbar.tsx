@@ -63,6 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleReadAloud,
   totalProductsCount,
   onOpenDrawer,
+  onOpenScan
   onOpenScan,
   onOpenSearchSheet,
   persona = 'farmer',
@@ -159,6 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={t('search_placeholder')}
                 placeholder={searchPlaceholder}
                 className="w-full pl-9 pr-16 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition"
               />
