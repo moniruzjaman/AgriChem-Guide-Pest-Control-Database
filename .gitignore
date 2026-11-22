@@ -8,3 +8,6 @@ npm-debug.log*
 # Visitor counter state — runtime-generated, should never be committed (contains visitor hashes)
 visitor_counts.json
 visitor_counts.json.tmp
+
+# Build artefact written by scripts/integrate_canonical_registry.py
+data_raw/*.csv.bak
