@@ -154,10 +154,42 @@ To rebuild the entire latest database + downloadable artifacts (XLSX/PDF/CSV) fr
 
 ```bash
 python3 scripts/build_latest_database.py     # builds data_raw CSVs + public/downloads/ artifacts
+python3 scripts/integrate_canonical_registry.py  # folds the canonical MoA layer into the register
 python3 scripts/regenerate_data_modules.py   # regenerates src/data/all_pesticides.ts + policyEnrichmentData.ts
+python3 scripts/generate_runtime_json.py     # regenerates public/downloads/pesticide_database.json
 ```
 
 Both scripts are idempotent and safe to re-run on every PTAC update.
+
+### Canonical MoA layer
+
+`data_raw/moa_overlay.csv` is the single source of truth for how a product's
+mode-of-action code was arrived at. It carries the canonical code, **every**
+code for a mixture product, a confidence tier and the provenance:
+
+| Provenance | Meaning |
+|---|---|
+| `recorded` | the register names the active ingredient — high confidence |
+| `inferred` | recovered from the brand's declared formulation strength (e.g. `Sundari 72WP` → 64 % + 8 %) — medium confidence |
+| `corrected` | the stored code contradicted the authoritative classification (e.g. fipronil filed under IRAC 3A) |
+
+`scripts/integrate_canonical_registry.py` applies the overlay to
+`data_raw/all_pesticides.csv` and writes `data_raw/moa_overlay_audit.csv` —
+every row that changed and why. It also folds the four notations the register
+used into one:
+
+* compound codes packed into a single cell (`IRAC 1A / IRAC 6`) → split into
+  separate bridge links
+* HRAC in the modern numeric namespace (`HRAC 15`) → legacy letter (`HRAC K3`)
+* FRAC multi-site groups zero-padded (`FRAC M03`) → `FRAC M3`
+* registrations the register did not have yet → appended
+
+Without this, the rotation engine groups by exact code string and misses
+products that plainly belong to the group the user asked for. `src/utils/moaUtils.ts`
+is the TypeScript counterpart — one place that knows how MoA codes are written,
+used by both the search engine and the UI.
+
+Run `npm run integrate:registry:check` to preview the changes without writing.
 
 `src/data/loadDatabase.ts` merges the generated dataset with curated data at load time; all views read through it so displayed counts stay consistent.
 
