@@ -1,5 +1,4 @@
-
-#!/data/data/com.termux/files/usr/bin/bash
+#!/usr/bin/env bash
 
 set -e
 cd "$(dirname "$0")"
@@ -12,4 +11,3 @@ echo "=== Running database synchronization ==="
 python database_sync.py
 
 echo "=== Synchronization completed ==="
-
