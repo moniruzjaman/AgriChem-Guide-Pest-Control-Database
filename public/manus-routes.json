@@ -1,0 +1,15 @@
+{
+  "routes": [
+    { "path": "/", "title": "PesticideNext" },
+    { "path": "/#database", "title": "Chemical Database" },
+    { "path": "/#calculator", "title": "Dosage Calculator" },
+    { "path": "/#rotation", "title": "MoA Rotation Planner" },
+    { "path": "/#safety", "title": "Safety & PPE" },
+    { "path": "/#guidebook", "title": "Field Guidebook" },
+    { "path": "/#alerts", "title": "Regulatory Alerts" },
+    { "path": "/#myfield", "title": "My Field" },
+    { "path": "/#intelligence", "title": "Pesticide Intelligence" },
+    { "path": "/#protection", "title": "Protection Intelligence" },
+    { "path": "/#specialist", "title": "Specialist Search" }
+  ]
+}

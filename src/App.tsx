@@ -13,7 +13,9 @@ import { OfflineIndicator } from './components/OfflineIndicator';
 import { useLanguage } from './context/LanguageContext';
 import { useReadAloud } from './hooks/useReadAloud';
 import { useOnlineStatus } from './hooks/useOnlineStatus';
-import { PesticideIntelligenceView } from './components/PesticideIntelligenceView';
+const PesticideIntelligenceView = lazy(() =>
+  import('./components/PesticideIntelligenceView').then((m) => ({ default: m.PesticideIntelligenceView }))
+);
 const MyFieldView = lazy(() => import('./components/MyFieldView').then(m => ({ default: m.MyFieldView })));
 const SpecialistSearchView = lazy(() => import('./components/SpecialistSearchView'));
 import { detectSharedVisit, flushPendingDownloads } from './utils/analytics';

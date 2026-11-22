@@ -111,7 +111,7 @@ export default defineConfig(() => {
           dir: 'ltr',
           categories: ['agriculture', 'reference', 'productivity'],
           theme_color: '#006a4e',
-          background_color: '#000000',
+          background_color: '#f5f8f5',
           display: 'standalone',
           orientation: 'portrait',
           // start_url + scope track `base` so PWA install works on both the

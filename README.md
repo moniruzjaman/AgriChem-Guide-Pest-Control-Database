@@ -170,6 +170,12 @@ Both scripts are idempotent and safe to re-run on every PTAC update.
 | **GitHub Pages** | `moniruzjaman.github.io/AgriChem-Guide-Pest-Control-Database` | Built by `.github/workflows/deploy.yml`. Custom-domain CNAME is stripped so Pages does not claim `pesticide.krishiai.live`. |
 | **Local dev** | `localhost:3000` | `tsx server.ts` — Vite middleware mode. |
 
+### Managed/runtime integration notes
+
+- `public/manus-routes.json` declares every hash-routed product surface for crawlers and managed previews.
+- `app.config.ts` points project metadata at the live PesticideNext icon so the managed project and the public app use the same brand asset.
+- The weather intelligence view is lazy-loaded and the Express server honors `PORT`, keeping the initial shell lighter and making the existing server portable across hosts without adding a new runtime service or polling loop.
+
 ### How OG URL rewriting works
 
 `index.html` is built with `https://pesticide.krishiai.live` as the placeholder origin in every OG / Twitter / canonical tag. At runtime in production mode, `server.ts` reads `X-Forwarded-Proto` and `X-Forwarded-Host` (or falls back to `req.protocol` + `req.headers.host`) to compute the actual origin the request was served from, then string-replaces `https://pesticide.krishiai.live` with that origin before responding.
