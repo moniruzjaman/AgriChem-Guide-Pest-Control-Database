@@ -18,6 +18,7 @@
 
 import type { ChemicalProduct } from '../types';
 import { normKey, translateCrop, translatePest } from './bnAgri';
+import { parseMoaQuery, productMoaCodes } from './moaUtils';
 
 export interface MatchReason {
   /** Machine key, e.g. 'pest' | 'crop' | 'brand' | 'ingredient' | 'moa' | 'fuzzy'. */
@@ -96,6 +97,16 @@ export function extractMoaNumber(q: string): number | null {
 const moaMatchesNumber = (p: ChemicalProduct, num: number): boolean => {
   const codes = [p.moaCode, p.moaGroup, p.moaSubGroup].filter(Boolean).join(' ');
   return new RegExp(`\\b${num}\\b`).test(codes);
+};
+
+/**
+ * Every MoA code in play, so a query can be expanded against the real
+ * catalogue (e.g. "FRAC 16" knows whether "FRAC 16.1" exists).
+ */
+const collectMoaCodes = (products: ChemicalProduct[]): string[] => {
+  const seen = new Set<string>();
+  for (const p of products) for (const c of productMoaCodes(p)) seen.add(c);
+  return [...seen];
 };
 
 /* ------------------------------------------------------------------ */
@@ -241,6 +252,10 @@ export function smartSearch(rawQuery: string, products: ChemicalProduct[]): Smar
   const tokens = normKey(cleaned).split(' ').filter(Boolean);
   const fullPhrase = normKey(cleaned);
   const moaNum = extractMoaNumber(fullPhrase);
+  // A query that names a mode-of-action group is matched on the group alone:
+  // "FRAC 16" must not also hit every product whose MoA merely contains the
+  // word "frac".
+  const moaQuery = parseMoaQuery(rawQuery, collectMoaCodes(products));
 
   const scored: ScoredProduct[] = [];
   const cropSet = new Set<string>();
@@ -259,6 +274,17 @@ export function smartSearch(rawQuery: string, products: ChemicalProduct[]): Smar
     if (fullPhrase && b.category.includes(fullPhrase)) {
       score += 8;
       reasons.push(reason('category', '', { en: p.type, bn: CATEGORY_BN[p.type] ?? p.type }));
+    }
+
+    // --- MoA group query: match the group (and its sub-groups) and stop.
+    if (moaQuery) {
+      if (productMoaCodes(p).some((c) => moaQuery.codes.includes(c))) {
+        score += 15;
+        reasons.push(reason('moa', moaQuery.label));
+      }
+      if (score <= 0) continue;
+      scored.push({ product: p, score, reasons });
+      continue;
     }
 
     // --- Per-token AND matching across buckets
@@ -308,8 +334,9 @@ export function smartSearch(rawQuery: string, products: ChemicalProduct[]): Smar
       if (hit) score += hit;
     }
 
-    // --- MoA numeric shortcut
-    if (moaNum != null && moaMatchesNumber(p, moaNum)) {
+    // --- MoA numeric shortcut (only for queries that were not parsed as a
+    // full group reference above)
+    if (moaQuery == null && moaNum != null && moaMatchesNumber(p, moaNum)) {
       score += 15;
       reasons.push(reason('moa', String(moaNum)));
     }
