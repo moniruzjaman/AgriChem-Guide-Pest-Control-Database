@@ -26,6 +26,7 @@ REPO = Path(__file__).resolve().parent.parent
 DAE_CSV = REPO / "data_raw" / "all_pesticides.csv"
 POLICY_CSV = REPO / "data_raw" / "pesticide_policy_enrichment.csv"
 OUT_JSON = REPO / "public" / "downloads" / "pesticide_database.json"
+OVERLAY_CSV = REPO / "data_raw" / "moa_overlay.csv"
 
 
 def log(msg: str) -> None:
@@ -102,6 +103,22 @@ def main():
             }
     log(f"  Policy lookup: {len(policy_by_reg):,} unique reg#s")
 
+    log("Loading canonical MoA overlay...")
+    overlay_by_reg = {}
+    if OVERLAY_CSV.exists():
+        ov = pd.read_csv(OVERLAY_CSV, dtype=str).fillna("")
+        ov["Registration No"] = ov["Registration No"].apply(normalize_reg_no)
+        for _, r in ov.iterrows():
+            reg = r["Registration No"].strip()
+            if not reg or reg in overlay_by_reg:
+                continue
+            codes = [c.strip() for c in str(r.get("MoA Codes", "")).split("+") if c.strip()]
+            overlay_by_reg[reg] = {
+                "codes": codes or None,
+                "confidence": (r.get("MoA Confidence", "") or "").strip() or None,
+            }
+    log(f"  Canonical overlay: {len(overlay_by_reg):,} unique reg#s")
+
     # Transform DAE rows into ChemicalProduct-like objects
     log("Transforming products...")
     products = []
@@ -175,6 +192,8 @@ def main():
 
         # Policy enrichment
         pol = policy_by_reg.get(reg, {})
+        # Canonical MoA overlay (multi-group codes + confidence tier)
+        ov = overlay_by_reg.get(reg.upper(), {})
 
         # Build the product object (matching ChemicalProduct interface)
         product = {
@@ -189,6 +208,8 @@ def main():
             "pests": pests,
             "dosageRate": dosage_rate,
             "moaCode": moa_code,
+            "moaCodes": ov.get("codes") or ([moa_code] if moa_code else None),
+            "moaConfidence": ov.get("confidence"),
             "recommendations": recommendation_lines if recommendation_lines else None,
             "source": "dae-register",
             # Policy enrichment
