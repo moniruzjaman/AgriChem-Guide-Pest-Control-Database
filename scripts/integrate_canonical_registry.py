@@ -41,6 +41,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 REGISTER_CSV = REPO / "data_raw" / "all_pesticides.csv"
 OVERLAY_CSV = REPO / "data_raw" / "moa_overlay.csv"
+OVERLAY_PRODUCTS_CSV = REPO / "data_raw" / "moa_overlay_products.csv"
 POLICY_CSV = REPO / "data_raw" / "pesticide_policy_enrichment.csv"
 AUDIT_CSV = REPO / "data_raw" / "moa_overlay_audit.csv"
 
@@ -112,7 +113,9 @@ def main():
 
     reg_header, reg_rows = read_csv(REGISTER_CSV)
     ov_header, ov_rows = read_csv(OVERLAY_CSV)
-    log(f"register rows: {len(reg_rows)} | overlay rows: {len(ov_rows)}")
+    prod_header, prod_rows = read_csv(OVERLAY_PRODUCTS_CSV)
+    log(f"register rows: {len(reg_rows)} | overlay rows: {len(ov_rows)} "
+        f"| supplementary products: {len(prod_rows)}")
 
     reg_i = {h: i for i, h in enumerate(reg_header)}
     ov_i = {h: i for i, h in enumerate(ov_header)}
@@ -128,6 +131,13 @@ def main():
         k = norm_reg(row[ov_i["Registration No"]])
         if k:
             overlay[k] = row
+
+    prod_i = {h: i for i, h in enumerate(prod_header)} if prod_header else {}
+    supplement = {}
+    for row in prod_rows:
+        k = norm_reg(row[prod_i["Registration No"]])
+        if k:
+            supplement[k] = {h: row[i] for i, h in enumerate(prod_header) if i < len(row)}
 
     # ---- rewrite the register's MoA column -------------------------------
     audit = []
@@ -188,10 +198,11 @@ def main():
         if "MoA Code" not in ov_i:
             continue
         row = [""] * len(reg_header)
+        sup = supplement.get(k, {})
         row[reg_i["Registration No"]] = reg
-        row[reg_i["Brand Name"]] = ov[ov_i["Trade Name"]] if "Trade Name" in ov_i else ""
-        row[reg_i["Common Name"]] = ov[ov_i["Common Name"]] if "Common Name" in ov_i else ""
-        row[reg_i["Pesticide Type"]] = ov[ov_i["Category"]] if "Category" in ov_i else ""
+        row[reg_i["Brand Name"]] = sup.get("Trade Name", "")
+        row[reg_i["Common Name"]] = sup.get("Common Name", "")
+        row[reg_i["Pesticide Type"]] = sup.get("Category", "")
         row[reg_i["MoA Code"]] = (ov[ov_i["MoA Code"]] or "").strip()
         new_rows.append(row)
         audit.append([reg, "(absent)", row[reg_i["MoA Code"]],
