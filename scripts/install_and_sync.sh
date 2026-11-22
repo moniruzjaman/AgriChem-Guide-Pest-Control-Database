@@ -11,3 +11,4 @@ echo "=== Running database synchronization ==="
 python database_sync.py
 
 echo "=== Synchronization completed ==="
+
