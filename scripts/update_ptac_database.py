@@ -215,8 +215,4 @@ if __name__ == "__main__":
     create_master_database_workbook()
     create_moa_mapping_workbook()
 
-O
-
-X
-
 
