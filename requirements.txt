@@ -1,0 +1,25 @@
+# Python dependencies for the data pipeline in scripts/.
+#
+# Pinned to the versions the pipeline is verified against, so a rebuild
+# reproduces the same artefacts rather than tracking the latest release.
+# CI (.github/workflows/regenerate-data.yml) installs this file.
+#
+# pandas is pinned deliberately at 3.x: pandera's pandas-3 compatibility must
+# be verified against this exact pin before pandera is adopted for schema
+# validation (see the gem scan in the adoption plan).
+
+# Catalogue / register handling — every pipeline script
+pandas==3.0.2
+numpy==2.4.6
+
+# XLSX deliverables and workbook styling
+openpyxl==3.1.5
+
+# Printable PDF reference (build_latest_database.py -> build_pdf)
+reportlab==4.5.0
+
+# IRAC PDF table extraction (irac_v11_5_backfill.py)
+pdfplumber==0.11.9
+
+# HTML parsing for the MoA Master exports (parse_moa_master_html.py)
+beautifulsoup4==4.12.3
