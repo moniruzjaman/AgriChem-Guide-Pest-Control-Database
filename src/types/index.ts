@@ -68,6 +68,19 @@ export interface ChemicalProduct {
   scheme?: string;
   /** MoA group number within the scheme (e.g. "1B", "11"). */
   groupNo?: string;
+  /**
+   * Every mode-of-action group the product carries. A mixture product
+   * belongs to several groups (e.g. mancozeb + metalaxyl -> FRAC M3 + FRAC 4),
+   * and rotation advice needs all of them, not just the first.
+   */
+  moaCodes?: string[];
+  /**
+   * How the MoA code was arrived at:
+   *   high     the register records the active ingredient
+   *   medium   resolved through the authoritative classification
+   *   inferred recovered from the brand's declared formulation strength
+   */
+  moaConfidence?: 'high' | 'medium' | 'inferred';
   /** Human-readable MoA description. */
   moaDescription?: string;
   /** WHO/FAO Highly Hazardous Pesticide status (e.g. "YES — HHP", "No"). */

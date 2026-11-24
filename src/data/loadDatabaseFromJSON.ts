@@ -34,6 +34,10 @@ interface RawProduct {
   pests: string[];
   dosageRate: string;
   moaCode?: string | null;
+  /** Every MoA group the product carries (mixtures have several). */
+  moaCodes?: string[] | null;
+  /** Provenance tier for the MoA code. */
+  moaConfidence?: 'high' | 'medium' | 'inferred' | null;
   recommendations?: string[] | null;
   source?: string;
   scheme?: string | null;
@@ -98,6 +102,8 @@ export async function loadDatabaseFromJSON(): Promise<ChemicalProduct[]> {
         pests: r.pests,
         dosageRate: r.dosageRate,
         moaCode,
+        moaCodes: r.moaCodes ?? undefined,
+        moaConfidence: r.moaConfidence ?? undefined,
         recommendations: r.recommendations ?? undefined,
         source: (r.source as 'curated' | 'dae-register') ?? 'dae-register',
         // Policy enrichment fields

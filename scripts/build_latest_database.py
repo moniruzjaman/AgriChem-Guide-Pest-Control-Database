@@ -35,8 +35,12 @@ import pandas as pd
 from datetime import datetime
 
 REPO = Path(__file__).resolve().parent.parent
-DOWNLOAD_DIR = Path(os.environ.get("AGRICHEM_DOWNLOAD_DIR", "/home/z/my-project/download"))
-UPLOAD_DIR = Path(os.environ.get("AGRICHEM_UPLOAD_DIR", "/home/z/my-project/upload"))
+# Optional external inputs. These default to repo-relative folders so a fresh
+# clone runs; point them at the maintainer's working copies with
+# AGRICHEM_DOWNLOAD_DIR / AGRICHEM_UPLOAD_DIR when you want the live sources.
+# Every one of them is OPTIONAL — the build now runs from committed data alone.
+DOWNLOAD_DIR = Path(os.environ.get("AGRICHEM_DOWNLOAD_DIR", REPO / "data_raw" / "external" / "download"))
+UPLOAD_DIR = Path(os.environ.get("AGRICHEM_UPLOAD_DIR", REPO / "data_raw" / "external" / "upload"))
 OUT_DOWNLOADS = REPO / "public" / "downloads"
 OUT_DOWNLOADS.mkdir(parents=True, exist_ok=True)
 
@@ -56,6 +60,11 @@ MOA_MASTER_ZIP = MOA_MASTER_REPO_DIR / "Pesticide_MoA_Database_PTAC_2026.xlsx.zi
 
 # Existing repo data
 EXISTING_DAE_CSV = REPO / "data_raw" / "all_pesticides.csv"
+# The previously published flat CSV is committed, and it is the ONLY place the
+# live-API-only fields survive (Record ID, Status, Section, registrant contact,
+# Source Edition, Combination, RM Note). It seeds those fields for the rows it
+# covers; the row spine itself comes from the DAE register.
+COMMITTED_FLAT_CSV = OUT_DOWNLOADS / "pesticide_database_latest.csv"
 EXISTING_POLICY_CSV = REPO / "data_raw" / "pesticide_policy_enrichment.csv"
 EXISTING_MASTER_CSV = REPO / "data_raw" / "bangladesh_pesticide_database.csv"
 
@@ -92,6 +101,19 @@ def normalize_reg_no(s) -> str:
     return s
 
 
+def app_key(s: str) -> str:
+    """Registration key exactly as the app computes it (src/data/loadDatabase.ts).
+
+    Uppercase, trim, collapse ALL whitespace. The register carries
+    'AP (BIO)-02', 'AP(BIO)-02' and 'AP-3612 ' for the same registration, so
+    the published catalogue must use the same key as the app or the two
+    row universes will not compare.
+    """
+    if s is None or pd.isna(s):
+        return ""
+    return re.sub(r"\s+", "", str(s).strip().upper())
+
+
 def section_to_pesticide_type(section: str) -> str:
     """Map API Section to DAE Pesticide Type."""
     if not section:
@@ -107,32 +129,95 @@ def section_to_pesticide_type(section: str) -> str:
     return "Insecticide"
 
 
+def read_csv_opt(path: Path, label: str) -> pd.DataFrame:
+    """Read a CSV if it exists, else return an empty frame and say so.
+
+    Every external source is optional. The row spine is the committed DAE
+    register, so the build completes on a fresh clone; each missing source
+    only means one enrichment layer is skipped.
+    """
+    if not path.exists():
+        log(f"  {label}: not present ({path}) — skipping this enrichment layer")
+        return pd.DataFrame()
+    df = pd.read_csv(path, dtype=str).fillna("")
+    log(f"  {label}: {len(df):,} rows")
+    return df
+
+
 def load_live_db() -> pd.DataFrame:
-    """Load the live API database."""
+    """Load the live API database (optional)."""
     log("Loading live database...")
-    df = pd.read_csv(LIVE_DB_CSV, dtype=str).fillna("")
+    df = read_csv_opt(LIVE_DB_CSV, "live API dump")
+    if df.empty:
+        return df
+    if "Registration No" not in df.columns:
+        return df
     df["Registration No"] = df["Registration No"].apply(normalize_reg_no)
     log(f"  Live DB: {len(df):,} rows")
     return df
 
 
 def load_gazettes() -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Load 86th and 87th gazette CSVs (for Common Name + Section enrichment)."""
+    """Load 86th and 87th gazette CSVs (optional — Common Name + Section)."""
     log("Loading 86th & 87th gazettes...")
-    g86 = pd.read_csv(GAZ_86_CSV, dtype=str).fillna("")
-    g87 = pd.read_csv(GAZ_87_CSV, dtype=str).fillna("")
+    g86 = read_csv_opt(GAZ_86_CSV, "86th gazette")
+    g87 = read_csv_opt(GAZ_87_CSV, "87th gazette")
+    if g86.empty or g87.empty:
+        empty = pd.DataFrame()
+        return g86, g87
     g86["Registration No"] = g86["Registration No"].apply(normalize_reg_no)
     g87["Registration No"] = g87["Registration No"].apply(normalize_reg_no)
     log(f"  86th: {len(g86):,} rows, 87th: {len(g87):,} rows")
     return g86, g87
 
 
-def load_audit() -> pd.DataFrame:
+def load_audit() -> pd.DataFrame:  # optional — the MoA mapping audit
     """Load the MoA mapping audit CSV."""
     log("Loading MoA audit CSV...")
-    df = pd.read_csv(AUDIT_CSV, dtype=str).fillna("")
+    df = read_csv_opt(AUDIT_CSV, "MoA mapping audit")
+    if df.empty:
+        df = read_committed_sheet("MoA Audit")
+        if df.empty:
+            return df
     df["registration_no"] = df["registration_no"].apply(normalize_reg_no)
-    log(f"  Audit: {len(df):,} rows")
+    return df
+
+
+def read_committed_sheet(sheet_name: str) -> pd.DataFrame:
+    """Read a sheet back out of the committed published workbook.
+
+    Several inputs of this pipeline are optional external files, but their
+    CONTENT is already committed inside public/downloads/pesticide_database_latest.xlsx.
+    Reading the committed sheet back means a rebuild on a fresh clone keeps
+    every sheet instead of silently writing an empty one.
+    """
+    if not OUT_LATEST_XLSX.exists():
+        return pd.DataFrame()
+    try:
+        with pd.ExcelFile(OUT_LATEST_XLSX) as xl:
+            if sheet_name not in xl.sheet_names:
+                return pd.DataFrame()
+            df = xl.parse(sheet_name, dtype=str).fillna("")
+    except Exception as exc:
+        log(f"  committed sheet {sheet_name!r}: could not read ({exc})")
+        return pd.DataFrame()
+    log(f"  committed sheet {sheet_name!r}: {len(df):,} rows")
+    return df
+
+
+def load_committed_flat() -> pd.DataFrame:
+    """Load the previously published flat CSV — the seed for the live-only fields.
+
+    Record ID, Status, Section, registrant contact, Source Edition,
+    Combination and RM Note exist nowhere else in the repo. This file is the
+    only place they survive, so it seeds them for the rows it covers.
+    """
+    log("Loading committed flat catalogue (live-field seed)...")
+    df = read_csv_opt(COMMITTED_FLAT_CSV, "committed flat catalogue")
+    if df.empty:
+        return df
+    if "Registration No" in df.columns:
+        df["_key"] = df["Registration No"].map(app_key)
     return df
 
 
@@ -307,6 +392,7 @@ def build_moa_master_lookup(moa_master: pd.DataFrame, moa_combos: pd.DataFrame) 
 # Step 3: Build the latest flat database (live DB + gazette orphans, gazette-priority dedup)
 # ----------------------------------------------------------------------------
 def build_latest_flat(
+    register_df: pd.DataFrame,
     live_df: pd.DataFrame,
     g86: pd.DataFrame,
     g87: pd.DataFrame,
@@ -314,80 +400,101 @@ def build_latest_flat(
     audit_lookup: dict,
     moa_master_lookup: dict,
     moa_combo_lookup: dict,
+    seed_df: pd.DataFrame,
 ) -> pd.DataFrame:
     """
-    Build the flat user-facing CSV applying these rules:
+    Build the flat user-facing CSV.
 
-      1. **Gazette-priority dedup**: for any reg# that appears in BOTH the
-         live DB AND the 86th/87th gazette, the gazette record is preferred
-         for Common Name, Section, Trade Name fields. The live DB record
-         is still kept (one row per live record) but its fields are
-         overwritten by the gazette values where the gazette is non-empty.
-         If the live DB has 2+ records with the same reg# AND the gazette
-         has 1, the gazette record replaces the first live duplicate and
-         the rest are dropped (to avoid inflating the count).
+    ROW SPINE — the committed DAE register (data_raw/all_pesticides.csv).
+    One flat row per register row, so a registration that legitimately lists
+    several brands keeps a row for each. This makes the published catalogue
+    cover the same registrations as the runtime database, which is the whole
+    point: a user who downloads the CSV must get the catalogue the app shows.
 
-      2. **Orphan gazette preservation**: reg#s that appear in the 86th or
-         87th gazette but NOT in the live DB are ADDED to the output as
-         new rows, marked with Source Edition = "86th orphan" or
-         "87th orphan" and Status = "Active (Gazette only)". This preserves
-         products that may have been filtered out of the live API but are
-         still registered according to the gazettes.
+    Everything else is a LEFT-JOIN enrichment keyed on the app's own
+    registration key. Sources are optional; a missing one just drops its
+    enrichment layer.
 
-      3. **MoA enrichment priority**:
-         a) MoA Master 2026 XLSX (per-product) — highest priority, 77 records
-            with full MoA mapping including combinations
-         b) MoA mapping audit CSV — 5,437 records with policy/risk tier
-         c) Gazette Common Name (which often contains the AI%) — fallback
-         d) Empty "Unknown" — final fallback
-
-      4. **Combination products**: if a reg# is in the MoA Master
-         combination lookup, the Full_MoA_String (e.g. "IRAC 1B+4A") is
-         used as the MoA Code, and a "Combination" column is added with
-         the mix type and rotation management note.
+    Field precedence:
+      Common Name    gazette > MoA Master > register > seed
+      Section        gazette > seed
+      Trade Name     gazette > seed > register brand
+      Brand Name     seed > gazette > register brand
+      Company        seed > gazette > register holder
+      MoA Code       MoA Master > combination > register > audit > seed
+      Scheme / Group No. / MoA Description / Target Site /
+      Policy Action / Policy Risk Tier
+                      MoA Master > combination > audit   (filled even when a
+                      MoA code is already present, so the audit's group and
+                      target-site detail is not lost)
+      Status / Record ID / registrant contact / Source Edition /
+      Combination / RM Note
+                      seed only — these survive nowhere else in the repo
+      Pesticide Type  register (the DAE vocabulary) > MoA Master > Section map
     """
-    log("Building latest flat database (gazette-priority dedup + orphans preserved)...")
-    rows = []
-    seen_reg_nos = set()
+    rows: list[dict] = []
+    seen_reg_nos: set[str] = set()
 
-    # Pre-compute gazette reg# sets once for fast lookup
-    g86_reg_set = set(g86["Registration No"].unique())
-    g87_reg_set = set(g87["Registration No"].unique())
+    # ---- lookup tables, all keyed on the app's registration key ----------
+    def _index(df: pd.DataFrame, key_col: str) -> dict:
+        out: dict = {}
+        if df is None or df.empty:
+            return out
+        for r in df.to_dict("records"):
+            k = app_key(r.get(key_col, ""))
+            if k and k not in out:
+                out[k] = r
+        return out
 
-    # --- Pass 1: walk the live DB, prefer gazette values when available ---
-    live_by_reg = {}
-    for _, r in live_df.iterrows():
-        reg = r["Registration No"].strip()
-        live_by_reg.setdefault(reg, []).append(r)
+    seed_by_key = _index(seed_df, "Registration No")
+    live_by_key: dict = {}
+    if live_df is not None and not live_df.empty:
+        for r in live_df.to_dict("records"):
+            k = app_key(r.get("Registration No", ""))
+            if k:
+                live_by_key.setdefault(k, []).append(r)
 
-    for reg, live_records in live_by_reg.items():
+    g86_reg_set = {app_key(x) for x in g86.get("Registration No", [])} if not g86.empty else set()
+    g87_reg_set = {app_key(x) for x in g87.get("Registration No", [])} if not g87.empty else set()
+
+    # ---- Pass 1: one row per register row --------------------------------
+    for r in register_df.to_dict("records"):
+        reg_raw = (r.get("Registration No") or "").strip()
+        if not reg_raw:
+            continue
+        reg = app_key(reg_raw)
         if not reg:
             continue
         seen_reg_nos.add(reg)
+
+        seed = seed_by_key.get(reg, {})
+        liv = (live_by_key.get(reg) or [{}])[0]
         gaz = gaz_lookup.get(reg, {})
         aud = audit_lookup.get(reg, {})
         moa_master = moa_master_lookup.get(reg, {})
         moa_combo = moa_combo_lookup.get(reg, {})
 
-        # Use the first live record as the base (live DB has 1 record per reg# in
-        # the normal case; if there are 2+, we keep the first and drop the rest
-        # to avoid duplicates — the audit script reports any genuine source
-        # duplicates separately).
-        r = live_records[0]
+        # --- Common Name: gazette (hand-cleaned) > MoA Master > register ---
+        common_name = (gaz.get("common_name", "")
+                       or moa_master.get("common_name_ai", "")
+                       or r.get("Common Name", "")
+                       or seed.get("Common Name", ""))
 
-        # --- Common Name: prefer gazette (86th/87th cleaned), then MoA master AI ---
-        common_name = gaz.get("common_name", "") or moa_master.get("common_name_ai", "") or ""
+        # --- Section: gazette > seed ---------------------------------------
+        section = gaz.get("section", "") or seed.get("Section", "")
 
-        # --- Section: prefer gazette, fallback to live ---
-        section = gaz.get("section", "") or r.get("Section", "")
+        # --- Trade Name: gazette > seed > register brand --------------------
+        trade_name = (gaz.get("trade_name", "")
+                      or seed.get("Trade Name", "")
+                      or r.get("Brand Name", ""))
 
-        # --- Trade Name: prefer gazette (cleaned), then live Brand Name ---
-        trade_name = gaz.get("trade_name", "") or r.get("Trade Name", "") or r.get("Brand Name", "")
+        # --- Brand Name: seed > gazette > register brand --------------------
+        brand_name = seed.get("Brand Name", "") or gaz.get("trade_name", "") or r.get("Brand Name", "")
 
-        # --- Company: prefer live (richer), fallback to gazette ---
-        company = r.get("Company", "") or gaz.get("company", "")
+        # --- Company: seed (live dump) > gazette > register holder ---------
+        company = seed.get("Company", "") or gaz.get("company", "") or r.get("Registration Holder", "")
 
-        # --- MoA Code priority: MoA Master > Audit > Gazette-derived > empty ---
+        # --- MoA Code: MoA Master > combination > register > audit > seed --
         moa_code = ""
         scheme = ""
         group_no = ""
@@ -399,45 +506,47 @@ def build_latest_flat(
         rm_note = ""
 
         if moa_master:
-            # MoA Master 2026 has the cleanest per-product MoA
             moa_code = moa_master.get("moa_code", "")
             scheme = moa_master.get("scheme", "")
             moa_description = moa_master.get("moa_group_name", "")
             risk_level = moa_master.get("risk_level", "")
-            # Map risk level to standard risk tier
             risk_map = {"High": "RED", "Medium": "AMBER", "Low": "GREEN", "Very Low": "GREEN"}
             policy_risk_tier = risk_map.get(risk_level, "")
 
         if moa_combo:
-            # Combination product — use the full MoA string (e.g. "IRAC 1B+4A")
             full_moa = moa_combo.get("full_moa_string", "")
             if full_moa:
                 moa_code = full_moa
             combination_flag = moa_combo.get("mix_type", "")
             rm_note = moa_combo.get("rm_note", "")
 
-        if not moa_code and aud:
-            # Fall back to the audit CSV
-            aud_moa = aud.get("moa_code", "")
-            if aud_moa:
-                moa_code = aud_moa.split("/")[0].strip()
+        # The register carries the canonical classification (one namespace,
+        # compound codes already split), so it outranks the raw audit.
+        if not moa_code:
+            moa_code = r.get("MoA Code", "") or seed.get("MoA Code", "")
+
+        # The audit still supplies group / target site / policy detail, and is
+        # applied even when a MoA code is already known.
+        if aud:
+            if not moa_code:
+                aud_moa = aud.get("moa_code", "")
+                if aud_moa:
+                    moa_code = aud_moa.split("/")[0].strip()
             scheme = scheme or aud.get("scheme", "")
-            group_no = aud.get("group_no", "")
+            group_no = group_no or aud.get("group_no", "")
             moa_description = moa_description or aud.get("moa_description", "")
-            target_site = aud.get("target_site", "")
-            policy_action = aud.get("policy_action", "")
+            target_site = target_site or aud.get("target_site", "")
+            policy_action = policy_action or aud.get("policy_action", "")
             policy_risk_tier = policy_risk_tier or aud.get("policy_risk_tier", "")
 
-        # If still no MoA, try to derive from the gazette common name (e.g. "Abamectin 1.8%")
-        # This is a weak heuristic — the audit CSV is the authoritative source.
-        # (We don't attempt AI→MoA matching here because the MoA Database in
-        # src/data/moaData.ts already does that at app load time.)
-
-        # Map Section to Pesticide Type (also prefer MoA Master if available)
-        if moa_master.get("pesticide_type"):
-            pesticide_type = moa_master["pesticide_type"]
-            # Normalize to DAE's Pesticide Type vocabulary
-            pt = pesticide_type.lower()
+        # --- Pesticide Type: the register's DAE vocabulary wins ------------
+        # "Stored Grain" is the legacy label the app normalises at load time;
+        # the published catalogue uses the canonical name directly.
+        pesticide_type = r.get("Pesticide Type", "") or ""
+        if pesticide_type == "Stored Grain":
+            pesticide_type = "Store Grain Insecticide"
+        if not pesticide_type and moa_master.get("pesticide_type"):
+            pt = moa_master["pesticide_type"].lower()
             if "insecticide" in pt:
                 pesticide_type = "Insecticide"
             elif "fungicide" in pt:
@@ -450,34 +559,32 @@ def build_latest_flat(
                 pesticide_type = "Rodenticide"
             elif "bio" in pt:
                 pesticide_type = "Bio Pesticide"
-        else:
+        if not pesticide_type:
             pesticide_type = section_to_pesticide_type(section)
 
-        # Determine source edition (gazette presence upgrades "Live only")
-        in_86 = reg in g86_reg_set
-        in_87 = reg in g87_reg_set
-        if in_86 and in_87:
+        # --- Source Edition: gazette membership > seed ---------------------
+        if reg in g86_reg_set and reg in g87_reg_set:
             source_edition = "86th + 87th"
-        elif in_87:
+        elif reg in g87_reg_set:
             source_edition = "87th"
-        elif in_86:
+        elif reg in g86_reg_set:
             source_edition = "86th"
         else:
-            source_edition = r.get("Source Edition", "Live only")
+            source_edition = seed.get("Source Edition", "") or "Live only"
 
         rows.append({
-            "Record ID": r.get("Record ID", ""),
-            "Registration No": reg,
+            "Record ID": seed.get("Record ID", ""),
+            "Registration No": reg_raw,
             "Pesticide Type": pesticide_type,
             "Section": section,
-            "Status": r.get("Status", ""),
+            "Status": seed.get("Status", ""),
             "Common Name": common_name,
             "Trade Name": trade_name,
-            "Brand Name": r.get("Brand Name", ""),
+            "Brand Name": brand_name,
             "Company": company,
-            "Company Email": r.get("Company Email", ""),
-            "Company Phone": r.get("Company Phone", ""),
-            "Company Address": r.get("Company Address", ""),
+            "Company Email": seed.get("Company Email", ""),
+            "Company Phone": seed.get("Company Phone", ""),
+            "Company Address": seed.get("Company Address", ""),
             "MoA Code": moa_code,
             "Scheme": scheme,
             "Group No.": group_no,
@@ -485,63 +592,38 @@ def build_latest_flat(
             "Target Site": target_site,
             "Policy Action": policy_action,
             "Policy Risk Tier": policy_risk_tier,
-            "Combination": combination_flag,
-            "RM Note": rm_note,
+            "Combination": combination_flag or seed.get("Combination", ""),
+            "RM Note": rm_note or seed.get("RM Note", ""),
             "Source Edition": source_edition,
         })
 
-    # --- Pass 2: add orphan gazette records (in gazettes but NOT in live DB) ---
+    # --- Pass 2: gazette records the register does not carry -------------
     all_gaz_reg_nos = g86_reg_set | g87_reg_set
     orphans = all_gaz_reg_nos - seen_reg_nos
     orphan_count = 0
     for reg in orphans:
         if not reg:
             continue
-        # Find the gazette row(s) — prefer 87th, then 86th
-        gaz_row = None
-        source_edition = ""
-        if reg in g87_reg_set:
-            matches = g87[g87["Registration No"] == reg]
-            if len(matches) > 0:
-                gaz_row = matches.iloc[0]
-                source_edition = "87th orphan"
-        if gaz_row is None and reg in g86_reg_set:
-            matches = g86[g86["Registration No"] == reg]
-            if len(matches) > 0:
-                gaz_row = matches.iloc[0]
-                source_edition = "86th orphan"
-        if gaz_row is None:
-            continue
-
-        # Apply MoA enrichment to orphans too
-        moa_master = moa_master_lookup.get(reg, {})
-        moa_combo = moa_combo_lookup.get(reg, {})
+        gaz_row = {}
+        if not g87.empty:
+            hit = g87[g87["Registration No"].map(app_key) == reg]
+            if not hit.empty:
+                gaz_row = hit.iloc[0].to_dict()
+        if not gaz_row and not g86.empty:
+            hit = g86[g86["Registration No"].map(app_key) == reg]
+            if not hit.empty:
+                gaz_row = hit.iloc[0].to_dict()
         aud = audit_lookup.get(reg, {})
-
+        section = gaz_row.get("Section", "")
         moa_code = ""
         scheme = ""
         moa_description = ""
-        combination_flag = ""
-        rm_note = ""
-
-        if moa_master:
-            moa_code = moa_master.get("moa_code", "")
-            scheme = moa_master.get("scheme", "")
-            moa_description = moa_master.get("moa_group_name", "")
-        if moa_combo:
-            full_moa = moa_combo.get("full_moa_string", "")
-            if full_moa:
-                moa_code = full_moa
-            combination_flag = moa_combo.get("mix_type", "")
-            rm_note = moa_combo.get("rm_note", "")
-        if not moa_code and aud:
+        if aud:
             aud_moa = aud.get("moa_code", "")
             if aud_moa:
                 moa_code = aud_moa.split("/")[0].strip()
-            scheme = scheme or aud.get("scheme", "")
-            moa_description = moa_description or aud.get("moa_description", "")
-
-        section = gaz_row.get("Section", "")
+            scheme = aud.get("scheme", "")
+            moa_description = aud.get("moa_description", "")
         rows.append({
             "Record ID": f"ORPHAN-{reg}",
             "Registration No": reg,
@@ -552,26 +634,24 @@ def build_latest_flat(
             "Trade Name": gaz_row.get("Trade Name", ""),
             "Brand Name": gaz_row.get("Trade Name", ""),
             "Company": gaz_row.get("Company", ""),
-            "Company Email": "",
-            "Company Phone": "",
-            "Company Address": "",
-            "MoA Code": moa_code,
-            "Scheme": scheme,
+            "Company Email": "", "Company Phone": "", "Company Address": "",
+            "MoA Code": moa_code, "Scheme": scheme,
             "Group No.": aud.get("group_no", "") if aud else "",
             "MoA Description": moa_description,
             "Target Site": aud.get("target_site", "") if aud else "",
             "Policy Action": aud.get("policy_action", "") if aud else "",
             "Policy Risk Tier": aud.get("policy_risk_tier", "") if aud else "",
-            "Combination": combination_flag,
-            "RM Note": rm_note,
-            "Source Edition": source_edition,
+            "Combination": "", "RM Note": "",
+            "Source Edition": "86th" if reg in g86_reg_set else "87th",
         })
         orphan_count += 1
 
     out = pd.DataFrame(rows)
-    log(f"  Latest flat: {len(out):,} rows × {len(out.columns)} cols")
-    log(f"    Live DB records: {len(out[out['Source Edition'].str.contains('Live|86th|87th', na=False)]):,}")
+    log(f"  Latest flat: {len(out):,} rows x {len(out.columns)} cols")
+    log(f"    Rows from the DAE register spine: {len(out) - orphan_count:,}")
     log(f"    Orphan gazette records: {orphan_count:,}")
+    log(f"    With a MoA code: {int((out['MoA Code'].astype(str).str.strip() != '').sum()):,}")
+    log(f"    With a Status: {int((out['Status'].astype(str).str.strip() != '').sum()):,}")
     return out
 
 
@@ -906,37 +986,60 @@ def main():
     log("Building latest pesticide database for AgriChem-Guide-Pest-Control-Database")
     log("=" * 70)
 
-    # Load all sources
+    # Load all sources. Only the DAE register is required; everything else
+    # is an optional enrichment layer and is skipped when absent.
+    register_df = load_existing_dae()
+    seed_df = load_committed_flat()
     live_df = load_live_db()
     g86, g87 = load_gazettes()
     audit_df = load_audit()
-    existing_dae = load_existing_dae()
+    existing_dae = register_df
     existing_policy = load_existing_policy()
     # existing_master = load_existing_master()  # not needed for now
 
-    # Load MoA reference XLSXs (for the XLSX deliverable)
-    moa_enriched = pd.read_excel(MOA_ENRICHED_XLSX, sheet_name=0).fillna("")
-    moa_rotation = pd.read_excel(MOA_ROTATION_XLSX, sheet_name=0).fillna("")
+    # Load MoA reference XLSXs (for the XLSX deliverable) — optional, and each
+    # falls back to the copy already committed in the published workbook, so a
+    # rebuild without the external files keeps every sheet populated.
+    moa_enriched = (pd.read_excel(MOA_ENRICHED_XLSX, sheet_name=0).fillna("")
+                     if MOA_ENRICHED_XLSX.exists() else pd.DataFrame())
+    if moa_enriched.empty:
+        moa_enriched = read_committed_sheet("MoA Mapping Enriched")
+    moa_rotation = (pd.read_excel(MOA_ROTATION_XLSX, sheet_name=0).fillna("")
+                    if MOA_ROTATION_XLSX.exists() else pd.DataFrame())
+    if moa_rotation.empty:
+        moa_rotation = read_committed_sheet("MoA Rotation Reference")
 
     # Load MoA Master 2026 (parsed from the uploaded zip's HTML exports)
     moa_master_df, moa_combos_df = load_moa_master()
+    if moa_master_df.empty:
+        moa_master_df = read_committed_sheet("MoA Master Products 2026")
+    if moa_combos_df.empty:
+        moa_combos_df = read_committed_sheet("MoA Master Combos 2026")
     moa_master_lookup, moa_combo_lookup = build_moa_master_lookup(moa_master_df, moa_combos_df)
 
     # Build lookups
     gaz_lookup = build_gazette_lookup(g86, g87)
     audit_lookup = build_audit_lookup(audit_df)
 
-    # Build latest flat database (live DB + gazette orphans, gazette-priority dedup)
-    latest_flat = build_latest_flat(live_df, g86, g87, gaz_lookup, audit_lookup, moa_master_lookup, moa_combo_lookup)
+    # Build latest flat database on the DAE-register spine, with every other
+    # source joined in as optional enrichment.
+    latest_flat = build_latest_flat(register_df, live_df, g86, g87, gaz_lookup,
+                                    audit_lookup, moa_master_lookup,
+                                    moa_combo_lookup, seed_df)
 
     # Save flat CSV deliverable
     log("Writing flat CSV deliverable...")
     latest_flat.to_csv(OUT_LATEST_CSV, index=False, encoding="utf-8-sig")
     log(f"  Wrote {OUT_LATEST_CSV} ({OUT_LATEST_CSV.stat().st_size:,} bytes)")
 
-    # Also save MoA rotation reference as CSV
-    moa_rotation.to_csv(OUT_MOA_ROTATION_CSV, index=False, encoding="utf-8-sig")
-    log(f"  Wrote {OUT_MOA_ROTATION_CSV}")
+    # Also save MoA rotation reference as CSV. The source workbook is an
+    # optional external input, so only overwrite the committed file when we
+    # actually have rows — otherwise a run without that input would blank it.
+    if moa_rotation.empty:
+        log(f"  MoA rotation quick reference: no source workbook — keeping the committed {OUT_MOA_ROTATION_CSV.name}")
+    else:
+        moa_rotation.to_csv(OUT_MOA_ROTATION_CSV, index=False, encoding="utf-8-sig")
+        log(f"  Wrote {OUT_MOA_ROTATION_CSV}")
 
     # Update repo data_raw CSVs (for the TS regen)
     update_policy_csv(latest_flat, existing_policy, audit_lookup)

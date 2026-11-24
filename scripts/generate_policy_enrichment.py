@@ -17,10 +17,15 @@ build_enhanced_database.py) and emits:
 
 import csv
 import sys
+import os
 from pathlib import Path
 
-REPO_ROOT = Path("/home/z/my-project/AgriChem-Guide-Pest-Control-Database")
-SOURCE_CSV = Path("/home/z/my-project/download/cleaned_database_enriched.csv")
+# Repo-relative by default; override with AGRICHEM_ENRICHED_CSV when the
+# enriched source lives elsewhere.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+SOURCE_CSV = Path(os.environ.get(
+    "AGRICHEM_ENRICHED_CSV",
+    REPO_ROOT / "data_raw" / "external" / "download" / "cleaned_database_enriched.csv"))
 OUT_CSV = REPO_ROOT / "data_raw" / "pesticide_policy_enrichment.csv"
 OUT_TS = REPO_ROOT / "src" / "data" / "policyEnrichmentData.ts"
 

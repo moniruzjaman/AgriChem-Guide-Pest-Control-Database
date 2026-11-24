@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T18:51:26.438127+00:00",
+  "generatedAt": "2026-11-23T16:54:26.276991+00:00",
   "source": {
     "file": "data_raw/all_pesticides.csv",
-    "sha256": "270a3ffbac8a62f63dccb58dbcff849b9bf6625f8a6cdc5e32254466e71bac84",
-    "sizeBytes": 1382784,
+    "sha256": "69a9460e2e1229b7b08b4af43d7de47d47d3e993796faa687de23dec43bd4460",
+    "sizeBytes": 1395191,
     "headers": [
       "Pesticide Type",
       "SL No (Common Name)",
@@ -23,17 +23,17 @@
     "encoding": "utf-8-sig (BOM tolerated)"
   },
   "counts": {
-    "totalRecords": 9462,
+    "totalRecords": 9642,
     "duplicateRegNoGroups": 43,
     "duplicateRegNoRows": 44,
     "missingRegistrationNo": 1,
-    "invalidRegistrationNo": 16,
+    "invalidRegistrationNo": 18,
     "missingActiveIngredient": 1687,
-    "missingCrops": 4685,
-    "missingTargetPests": 4013,
-    "missingDosage": 4014,
+    "missingCrops": 4865,
+    "missingTargetPests": 4193,
+    "missingDosage": 4194,
     "invalidDosage": 0,
-    "missingMoa": 3026,
+    "missingMoa": 1753,
     "importErrors": 0
   },
   "details": {
@@ -454,6 +454,14 @@
       {
         "line": 8900,
         "regNo": "PHP-"
+      },
+      {
+        "line": 9464,
+        "regNo": "(not recorded)"
+      },
+      {
+        "line": 9643,
+        "regNo": "Asia Trade International"
       }
     ],
     "importErrors": []

@@ -12,7 +12,10 @@
     "lint": "tsc --noEmit",
     "test": "vitest run",
     "validate:registry": "python3 scripts/validate_registry.py",
-    "validate:registry:check": "python3 scripts/validate_registry.py --check"
+    "validate:registry:check": "python3 scripts/validate_registry.py --check",
+    "integrate:registry": "python3 scripts/integrate_canonical_registry.py",
+    "integrate:registry:check": "python3 scripts/integrate_canonical_registry.py --check",
+    "regenerate:runtime": "python3 scripts/generate_runtime_json.py"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",

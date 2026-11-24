@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T18:51:26.438127+00:00",
+  "generatedAt": "2026-11-23T16:54:26.276991+00:00",
   "source": {
     "file": "data_raw/all_pesticides.csv",
-    "sha256": "270a3ffbac8a62f63dccb58dbcff849b9bf6625f8a6cdc5e32254466e71bac84",
-    "sizeBytes": 1382784,
+    "sha256": "69a9460e2e1229b7b08b4af43d7de47d47d3e993796faa687de23dec43bd4460",
+    "sizeBytes": 1395191,
     "headers": [
       "Pesticide Type",
       "SL No (Common Name)",
@@ -24,25 +24,25 @@
   },
   "runtimeDatabase": {
     "file": "public/downloads/pesticide_database.json",
-    "sha256": "c670e68e88e39946f038392e670b010cdf054463f17d635634d494c18e189369",
-    "sizeBytes": 7638541,
+    "sha256": "273eaf044cb370ab6db76f74c67a0b1bac10b59c97886bf76c0b5fb95c84a7d3",
+    "sizeBytes": 8120126,
     "productCount": 9641,
-    "missingMoa": 2574,
-    "emptyCrops": 4684,
-    "emptyPests": 4013
+    "missingMoa": 1752,
+    "emptyCrops": 4864,
+    "emptyPests": 4193
   },
   "validationCounts": {
-    "totalRecords": 9462,
+    "totalRecords": 9642,
     "duplicateRegNoGroups": 43,
     "duplicateRegNoRows": 44,
     "missingRegistrationNo": 1,
-    "invalidRegistrationNo": 16,
+    "invalidRegistrationNo": 18,
     "missingActiveIngredient": 1687,
-    "missingCrops": 4685,
-    "missingTargetPests": 4013,
-    "missingDosage": 4014,
+    "missingCrops": 4865,
+    "missingTargetPests": 4193,
+    "missingDosage": 4194,
     "invalidDosage": 0,
-    "missingMoa": 3026,
+    "missingMoa": 1753,
     "importErrors": 0
   },
   "generator": "scripts/validate_registry.py",
