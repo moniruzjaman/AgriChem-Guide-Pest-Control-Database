@@ -112,7 +112,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                 </div>
                 <div className="text-right">
                   <span className="text-[10px] uppercase text-emerald-400 font-bold block">
-                    {language === 'bn' ? 'অফলাইন অ্যাক্সেস' : 'PWA Compliance'}
+                    {language === 'bn' ? 'অফলাইন অ্যাক্সেস' : 'Offline access'}
                   </span>
                   <span className="font-extrabold text-emerald-300 text-sm flex items-center justify-end gap-1">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>
