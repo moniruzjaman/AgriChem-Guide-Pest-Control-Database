@@ -103,7 +103,9 @@ export const FEATURES: FeatureDossier[] = [
     tone: 'green',
     statLabelEn: 'Active Ingredients',
     statLabelBn: 'সক্রিয় উপাদান',
-    statValue: '9,000+',
+    // HomeView overrides this with the live count from the merged catalogue;
+    // 1,073 = unique active ingredients in the current database.
+    statValue: '1,073',
     highlightsEn: [
       'Verifiable DAE registration numbers',
       'PHI & REI Safety Windows',

@@ -611,8 +611,13 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   // Live Summary Dashboard metrics calculations
   const totalBrandsCount = filteredProducts.length;
   const uniqueIngredientsCount = useMemo(() => {
+    // Trim and skip blank common names so unnamed register rows (Public
+    // Health etc.) never inflate the unique-ingredient count.
     const set = new Set<string>();
-    filteredProducts.forEach((p) => set.add(p.commonName));
+    filteredProducts.forEach((p) => {
+      const name = (p.commonName || '').trim();
+      if (name) set.add(name);
+    });
     return set.size;
   }, [filteredProducts]);
 

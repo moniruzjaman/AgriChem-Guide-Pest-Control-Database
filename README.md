@@ -11,7 +11,7 @@ A bilingual (Bangla / English) Progressive Web App that helps farmers, dealers, 
 
 ## ✨ Key Features
 
-- **Pesticide Database** — latest DAE-registered products (9,000+ formulations including Public Health), merged with the 5,485-row AgriChem/MoA PTAC master (trade names and combination actives filled from that base) and refreshed with the live pesticide-search API snapshot (86th & 87th PTAC gazettes + MoA mapping audit). Grouped by category section headers (color-coded by IRAC red / FRAC golden / HRAC green) with live counts of ingredients, brands, and MoA groups per category (`src/components/DatabaseView.tsx`).
+- **Pesticide Database** — latest DAE-registered products (9,641 formulations including Public Health; 9,611 after dedupe in the merged in-app catalogue), merged with the 5,485-row AgriChem/MoA PTAC master (trade names and combination actives filled from that base) and refreshed with the live pesticide-search API snapshot (86th & 87th PTAC gazettes + MoA mapping audit). Grouped by category section headers (color-coded by IRAC red / FRAC golden / HRAC green) with live counts of ingredients, brands, and MoA groups per category (`src/components/DatabaseView.tsx`).
 - 🛰️ **Official PPW Live Search** — in-app live search proxy to `ppw.krishi.gov.bd/pesticide-search` (the official Plant Protection Wing JSON API). Search by brand, keyword, or registration number; results render natively inside the app, so users can verify any product against the live government database without leaving PesticideNext. The official site sends `X-Frame-Options: SAMEORIGIN`, so we proxy the JSON API through our backend (`server.ts → /api/ppw/search`) instead of iframing it (`src/components/DatabaseView.tsx → PpwLiveSearchPanel`).
 - 📥 **Latest Database Downloads** — the app now ships 4 downloadable artifacts in `/public/downloads/` that are served from the same origin and precached by the service worker for offline use:
   - `pesticide_database_latest.xlsx` — multi-sheet XLSX (Latest Database, MoA Audit, MoA Rotation Reference, MoA Mapping Enriched, Summary)
@@ -65,7 +65,7 @@ The app uses a "pain-point editorial" design language across all tabs:
 ├── public/downloads/      # Latest downloadable artifacts (served from same origin, precached by SW)
 │   ├── pesticide_database_latest.xlsx           # 5-sheet XLSX (Latest DB + MoA Audit + MoA Rotation + MoA Enriched + Summary)
 │   ├── pesticide_database_latest.pdf            # Printable alphabetical PDF reference (landscape A4)
-│   ├── pesticide_database_latest.csv            # Flat CSV (9,000+ rows × 20 cols)
+│   ├── pesticide_database_latest.csv            # Flat CSV (9,641 rows × 22 cols)
 │   └── moa_rotation_quick_reference.csv          # 72 MoA group rotation reference
 ├── scripts/
 │   ├── regenerate_all_pesticides.py             # data_raw/all_pesticides.csv → src/data/all_pesticides.ts

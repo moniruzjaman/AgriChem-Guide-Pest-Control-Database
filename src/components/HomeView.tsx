@@ -191,7 +191,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
   // ---------------------------------------------------------------------
   // Real catalogue statistics — recomputed only when the database changes.
   // ---------------------------------------------------------------------
-  const { totalLabel, mappedLabel, mappedCount, groupCount, schemeCounts } = useMemo(() => {
+  const { totalLabel, mappedLabel, mappedCount, groupCount, schemeCounts, ingredientLabel } = useMemo(() => {
     const total = products.length || 0;
     const withMoa = products.filter((p) => (p.moaCode || '').trim()).length;
     const pct = total ? Math.round((withMoa / total) * 1000) / 10 : 0;
@@ -199,6 +199,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
     const groups = new Set(
       products.filter((p) => (p.moaCode || '').trim()).map((p) => p.moaCode as string)
     ).size;
+    // Unique active ingredients (common names) — mirrors the DatabaseView
+    // dashboard metric so the Home feature card stays in sync with the body.
+    const ingredientSet = new Set<string>();
+    for (const p of products) {
+      const name = (p.commonName || '').trim();
+      if (name) ingredientSet.add(name);
+    }
     // Per-scheme counts — IRAC / FRAC / HRAC / UN
     const schemeCountsMap = { IRAC: 0, FRAC: 0, HRAC: 0, UN: 0 } as Record<string, number>;
     for (const p of products) {
@@ -219,6 +226,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
       mappedLabel: `${formatNum(pctStr)}%`,
       mappedCount: formatNum(withMoa.toLocaleString('en-US')),
       groupCount: groups,
+      ingredientLabel: formatNum(ingredientSet.size.toLocaleString('en-US')),
       schemeCounts: schemeCountsMap,
     };
   }, [products, formatNum]);
@@ -798,7 +806,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <div className="acg-feat__foot">
                   <span className="acg-feat__stat">
                     {bn ? feature.statLabelBn : feature.statLabelEn}
-                    <b>{feature.id === 'database' ? totalLabel : feature.statValue}</b>
+                    <b>{feature.id === 'database' ? ingredientLabel : feature.statValue}</b>
                   </span>
                   <span className="acg-feat__go">
                     {bn ? 'খুলুন' : 'Open'} <ArrowRight size={13} />
@@ -865,7 +873,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     {bn ? 'এই টুল খুলুন' : 'Open this tool'} <ArrowUpRight size={15} />
                   </button>
                   <span className="acg-preview__stat">
-                    {bn ? f.statLabelBn : f.statLabelEn}: <b>{f.id === 'database' ? totalLabel : f.statValue}</b>
+                    {bn ? f.statLabelBn : f.statLabelEn}: <b>{f.id === 'database' ? ingredientLabel : f.statValue}</b>
                   </span>
                 </div>
               </div>
@@ -1193,7 +1201,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <FileDown size={15} />
               {bn ? 'এক্সেল (XLSX)' : 'Excel (XLSX)'}
               <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.85 }}>
-                {bn ? '~ ৯,০০০+ রেকর্ড' : '~ 9,000+ records'}
+                {bn ? '~ ৯,৬৪১ রেকর্ড' : '~ 9,641 records'}
               </span>
             </a>
             {/* PDF */}
