@@ -120,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="navbar-drawer-hamburger"
               onClick={onOpenDrawer}
-              className="p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-emerald-800 transition shadow-2xs cursor-pointer select-none"
+              className="hidden p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-emerald-800 transition shadow-2xs cursor-pointer select-none"
               title={language === 'bn' ? 'নেভিগেশন গাইড ড্রয়ার খুলুন' : 'Open Navigation Guide Drawer'}
             >
               <Menu className="w-5 h-5 text-emerald-700" />
@@ -224,7 +224,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 type="button"
                 id="header-scan-action"
                 onClick={onOpenScan}
-                className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-xl border border-emerald-600/30 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-semibold text-xs transition shadow-2xs cursor-pointer select-none md:hidden"
+                className="hidden items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-xl border border-emerald-600/30 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-semibold text-xs transition shadow-2xs cursor-pointer select-none md:hidden"
                 title={language === 'bn' ? 'লেবেল স্ক্যান / বাংলা OCR' : 'Scan label / Bangla OCR'}
                 aria-label={language === 'bn' ? 'লেবেল স্ক্যান' : 'Scan label'}
               >
@@ -318,7 +318,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Navigation Tabs Bar */}
-        <nav ref={navRef} aria-label={language === 'bn' ? 'প্রধান বিভাগ' : 'Primary sections'} className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-sm font-medium border-t border-slate-100 pt-2">
+        <nav ref={navRef} aria-label={language === 'bn' ? 'প্রধান বিভাগ' : 'Primary sections'} className="hidden md:flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-sm font-medium border-t border-slate-100 pt-2">
           {([
             { id: 'home' as AppTab, label: language === 'bn' ? 'হোম' : 'Home', icon: Home },
             { id: 'database' as AppTab, label: language === 'bn' ? 'পণ্য খুঁজুন' : 'Find products', icon: Database },
