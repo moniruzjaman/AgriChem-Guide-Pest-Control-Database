@@ -81,6 +81,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 {product.moaCode}
               </span>
             )}
+            {!product.moaCode && (
+              <span
+                className="text-[11px] font-bold px-2 py-0.5 rounded border border-amber-200 bg-amber-50 text-amber-800 tracking-wide"
+                title={language === 'bn' ? 'এই উপাদানের MoA কোড এখনো ম্যাপ করা হয়নি' : 'No MoA code mapped for this ingredient yet'}
+              >
+                {language === 'bn' ? 'MoA ম্যাপহীন' : 'MoA unmapped'}
+              </span>
+            )}
             {product.resistanceRisk && (
               <span className={`text-[10px] font-medium px-2 py-0.5 rounded border ${getRiskColor(product.resistanceRisk)}`}>
                 {transRisk(product.resistanceRisk)} {language === 'bn' ? 'ঝুঁকি' : 'Risk'}

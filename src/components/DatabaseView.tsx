@@ -58,6 +58,56 @@ interface DatabaseViewProps {
   onResetProducts?: () => void;
 }
 
+// ===========================================================================
+// WHO toxicity band classifier — shared by the display board and the
+// toxicity facet filter. whoColor is authoritative (mapped wherever a class
+// exists); the class string is the fallback for rows carrying a class but no
+// colour. Bands: red = Ia/Ib, yellow = II, blue = III, green = U.
+// ===========================================================================
+type ToxBand = 'red' | 'yellow' | 'blue' | 'green' | 'none';
+const toxBand = (p: ChemicalProduct): ToxBand => {
+  const c = (p.whoColor || '').toLowerCase();
+  if (c === '#ef4444' || c === '#dc2626') return 'red';
+  if (c === '#eab308') return 'yellow';
+  if (c === '#3b82f6') return 'blue';
+  if (c === '#10b981' || c === '#22c55e') return 'green';
+  const t = p.toxicityClass || '';
+  if (/^I[ab]\b|extremely|highly/i.test(t)) return 'red';
+  if (/^III\b|slightly/i.test(t)) return 'blue';
+  if (/^II\b|moderately/i.test(t)) return 'yellow';
+  if (/^U\b|unlikely/i.test(t)) return 'green';
+  return 'none';
+};
+const TOX_BAND_COLOR: Record<ToxBand, string> = {
+  red: '#dc2626',
+  yellow: '#eab308',
+  blue: '#3b82f6',
+  green: '#10b981',
+  none: '#cbd5e1',
+};
+const TOX_BAND_LABEL_EN: Record<ToxBand, string> = {
+  red: 'Ia/Ib',
+  yellow: 'II',
+  blue: 'III',
+  green: 'U',
+  none: 'n/a',
+};
+const TOX_BAND_LABEL_BN: Record<ToxBand, string> = {
+  red: 'অতিমারাত্মক',
+  yellow: 'মাঝারি',
+  blue: 'সামান্য',
+  green: 'নিরাপদ',
+  none: 'শ্রেণিহীন',
+};
+
+// Does a product's atomic MoA set satisfy a scheme facet? 'other' means the
+// product carries a code outside the three authority schemes (bio extracts,
+// rodenticide classes, IPM labels...).
+const productHasScheme = (atoms: string[], moaCode: string | undefined, scheme: string): boolean => {
+  if (scheme === 'other') return !!moaCode && !atoms.some((a) => /^(IRAC|FRAC|HRAC)\b/.test(a));
+  return atoms.some((a) => a.startsWith(scheme));
+};
+
 const CROP_EMOJIS: Record<string, string> = {
   'all': '🌟',
   'Rice': '🌾',
@@ -427,6 +477,9 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   // Advanced filters (collapsible)
   const [selectedMoA, setSelectedMoA] = useState<string>('all');
   const [selectedRisk, setSelectedRisk] = useState<string>('all');
+  const [selectedScheme, setSelectedScheme] = useState<string>('all'); // IRAC | FRAC | HRAC | other
+  const [selectedTox, setSelectedTox] = useState<string>('all'); // red | yellow | blue | green | none
+  const [selectedMap, setSelectedMap] = useState<string>('all'); // mapped | unmapped
   const [sortBy, setSortBy] = useState<'relevance' | 'name' | 'type' | 'phi' | 'reg'>('relevance');
   
   // View mode & UX controls
@@ -457,12 +510,14 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     return ['all', ...Array.from(set).sort()];
   }, [products]);
 
-  const moaCodes = useMemo(() => {
-    const set = new Set<string>();
-    products.forEach((p) => {
-      if (p.moaCode) set.add(p.moaCode);
-    });
-    return ['all', ...Array.from(set).sort()];
+  // Atomic MoA groups per product, precomputed once per catalogue: combos
+  // split ("FRAC M03 + 4" -> FRAC M3 + FRAC 4), notation variants folded
+  // (M03 = M3, HRAC 15 = K3). Backbone of the atomic MoA facet matching, the
+  // scheme filter and the display-board scheme split.
+  const atomicByProduct = useMemo(() => {
+    const m = new Map<string, string[]>();
+    products.forEach((p) => m.set(p.id, atomicMoaGroups([p.moaCode])));
+    return m;
   }, [products]);
 
   // ---------------------------------------------------------------------------
@@ -485,22 +540,25 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     return m;
   }, [smart]);
 
-  // Compute live category counts based on other current filters (crop, search query, MoA, Risk)
+  // Compute live category counts based on other current filters (crop, search query, MoA, Risk, scheme, toxicity, mapping)
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { 'all': 0 };
     products.forEach((p) => {
       const matchesSearch = !smartIds || smartIds.has(p.id);
       const matchesCrop = selectedCrop === 'all' || p.crops.includes(selectedCrop);
       const matchesRisk = selectedRisk === 'all' || p.resistanceRisk === selectedRisk;
-      const matchesMoA = selectedMoA === 'all' || p.moaCode === selectedMoA;
+      const matchesMoA = selectedMoA === 'all' || atomicByProduct.get(p.id)?.includes(selectedMoA);
+      const matchesScheme = selectedScheme === 'all' || productHasScheme(atomicByProduct.get(p.id) ?? [], p.moaCode, selectedScheme);
+      const matchesTox = selectedTox === 'all' || toxBand(p) === selectedTox;
+      const matchesMap = selectedMap === 'all' || (selectedMap === 'mapped' ? !!p.moaCode : !p.moaCode);
 
-      if (matchesSearch && matchesCrop && matchesRisk && matchesMoA) {
+      if (matchesSearch && matchesCrop && matchesRisk && matchesMoA && matchesScheme && matchesTox && matchesMap) {
         counts[p.type] = (counts[p.type] || 0) + 1;
         counts['all'] += 1;
       }
     });
     return counts;
-  }, [products, smartIds, selectedCrop, selectedRisk, selectedMoA]);
+  }, [products, smartIds, selectedCrop, selectedRisk, selectedMoA, selectedScheme, selectedTox, selectedMap, atomicByProduct]);
 
   // Compute live active ingredients present in currently filtered items (helps user see subcategories)
   const activeIngredientsInSelectedCategory = useMemo(() => {
@@ -510,14 +568,47 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       const matchesCrop = selectedCrop === 'all' || p.crops.includes(selectedCrop);
       const matchesCategory = selectedType === 'all' || p.type === selectedType;
       const matchesRisk = selectedRisk === 'all' || p.resistanceRisk === selectedRisk;
-      const matchesMoA = selectedMoA === 'all' || p.moaCode === selectedMoA;
+      const matchesMoA = selectedMoA === 'all' || atomicByProduct.get(p.id)?.includes(selectedMoA);
+      const matchesScheme = selectedScheme === 'all' || productHasScheme(atomicByProduct.get(p.id) ?? [], p.moaCode, selectedScheme);
+      const matchesTox = selectedTox === 'all' || toxBand(p) === selectedTox;
+      const matchesMap = selectedMap === 'all' || (selectedMap === 'mapped' ? !!p.moaCode : !p.moaCode);
 
-      if (matchesSearch && matchesCrop && matchesCategory && matchesRisk && matchesMoA) {
+      if (matchesSearch && matchesCrop && matchesCategory && matchesRisk && matchesMoA && matchesScheme && matchesTox && matchesMap) {
         map[p.commonName] = (map[p.commonName] || 0) + 1;
       }
     });
     return Object.entries(map).sort((a, b) => b[1] - a[1]); // Sort by brand count descending
-  }, [products, smartIds, selectedCrop, selectedType, selectedRisk, selectedMoA]);
+  }, [products, smartIds, selectedCrop, selectedType, selectedRisk, selectedMoA, selectedScheme, selectedTox, selectedMap, atomicByProduct]);
+
+  // ---------------------------------------------------------------------------
+  // Facet-honest atomic MoA dropdown: counts computed under every current
+  // filter EXCEPT the MoA selection itself, so each number describes what you
+  // would actually see if you picked that option. Atomic codes only —
+  // combination strings are split, notation variants folded.
+  // ---------------------------------------------------------------------------
+  const moaOptions = useMemo(() => {
+    const counts = new Map<string, number>();
+    products.forEach((p) => {
+      const matchesSearch = !smartIds || smartIds.has(p.id);
+      const matchesCrop = selectedCrop === 'all' || p.crops.includes(selectedCrop);
+      const matchesCategory = selectedType === 'all' || p.type === selectedType;
+      const matchesIngredient = selectedIngredient === 'all' || p.commonName === selectedIngredient;
+      const matchesRisk = selectedRisk === 'all' || p.resistanceRisk === selectedRisk;
+      const matchesScheme = selectedScheme === 'all' || productHasScheme(atomicByProduct.get(p.id) ?? [], p.moaCode, selectedScheme);
+      const matchesTox = selectedTox === 'all' || toxBand(p) === selectedTox;
+      const matchesMap = selectedMap === 'all' || (selectedMap === 'mapped' ? !!p.moaCode : !p.moaCode);
+      if (!(matchesSearch && matchesCrop && matchesCategory && matchesIngredient && matchesRisk && matchesScheme && matchesTox && matchesMap)) return;
+      for (const a of atomicByProduct.get(p.id) ?? []) counts.set(a, (counts.get(a) ?? 0) + 1);
+    });
+    const schemeOrder = (c: string) => (c.startsWith('IRAC') ? 0 : c.startsWith('FRAC') ? 1 : c.startsWith('HRAC') ? 2 : 3);
+    return Array.from(counts.entries()).sort((a, b) => {
+      const sa = schemeOrder(a[0]);
+      const sb = schemeOrder(b[0]);
+      if (sa !== sb) return sa - sb;
+      if (a[1] !== b[1]) return b[1] - a[1];
+      return a[0].localeCompare(b[0]);
+    });
+  }, [products, smartIds, selectedCrop, selectedType, selectedIngredient, selectedRisk, selectedScheme, selectedTox, selectedMap, atomicByProduct]);
 
   // Filter and sort the commercial products
   const filteredProducts = useMemo(() => {
@@ -543,8 +634,25 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
         return false;
       }
 
-      // MoA code filter
-      if (selectedMoA !== 'all' && p.moaCode !== selectedMoA) {
+      // MoA code filter — atomic: a mixture carrying "IRAC 6 + IRAC 3A"
+      // matches either of its component groups.
+      const atoms = atomicByProduct.get(p.id) ?? [];
+      if (selectedMoA !== 'all' && !atoms.includes(selectedMoA)) {
+        return false;
+      }
+
+      // MoA scheme facet (IRAC / FRAC / HRAC / bio & other)
+      if (selectedScheme !== 'all' && !productHasScheme(atoms, p.moaCode, selectedScheme)) {
+        return false;
+      }
+
+      // WHO toxicity band facet (red Ia-Ib / yellow II / blue III / green U / unclassified)
+      if (selectedTox !== 'all' && toxBand(p) !== selectedTox) {
+        return false;
+      }
+
+      // MoA mapping facet: mapped (carries any code) vs unmapped
+      if (selectedMap !== 'all' && (selectedMap === 'mapped' ? !p.moaCode : !!p.moaCode)) {
         return false;
       }
 
@@ -568,7 +676,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       if (sortBy === 'reg') return a.registrationNo.localeCompare(b.registrationNo);
       return 0;
     });
-  }, [products, smartIds, smart, selectedType, selectedCrop, selectedIngredient, selectedMoA, selectedRisk, sortBy]);
+  }, [products, smartIds, smart, selectedType, selectedCrop, selectedIngredient, selectedMoA, selectedScheme, selectedTox, selectedMap, selectedRisk, sortBy, atomicByProduct]);
 
   // Group filtered products by Active Ingredient
   const groupedByIngredient = useMemo(() => {
@@ -642,6 +750,9 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     setSelectedIngredient('all');
     setSelectedMoA('all');
     setSelectedRisk('all');
+    setSelectedScheme('all');
+    setSelectedTox('all');
+    setSelectedMap('all');
     setSortBy('name');
     setVisibleLimit(48);
   };
@@ -1102,6 +1213,31 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     return atomicMoaGroups(filteredProducts.map((p) => p.moaCode)).length;
   }, [filteredProducts]);
 
+  // ---------------------------------------------------------------------------
+  // Display-board metrics — every panel is computed from the CURRENT filter
+  // result, so the board doubles as a live summary of what you are looking at.
+  // ---------------------------------------------------------------------------
+  const mappedCount = useMemo(() => filteredProducts.filter((p) => !!p.moaCode).length, [filteredProducts]);
+  const coveragePct = totalBrandsCount > 0 ? Math.round((mappedCount / totalBrandsCount) * 100) : 0;
+
+  const toxCounts = useMemo(() => {
+    const c: Record<ToxBand, number> = { red: 0, yellow: 0, blue: 0, green: 0, none: 0 };
+    filteredProducts.forEach((p) => { c[toxBand(p)] += 1; });
+    return c;
+  }, [filteredProducts]);
+
+  const schemeCounts = useMemo(() => {
+    const c = { IRAC: 0, FRAC: 0, HRAC: 0, other: 0 };
+    filteredProducts.forEach((p) => {
+      const atoms = atomicByProduct.get(p.id) ?? [];
+      if (atoms.some((a) => a.startsWith('IRAC'))) c.IRAC += 1;
+      if (atoms.some((a) => a.startsWith('FRAC'))) c.FRAC += 1;
+      if (atoms.some((a) => a.startsWith('HRAC'))) c.HRAC += 1;
+      if (p.moaCode && !atoms.some((a) => /^(IRAC|FRAC|HRAC)\b/.test(a))) c.other += 1;
+    });
+    return c;
+  }, [filteredProducts, atomicByProduct]);
+
   return (
     <div className="acg-db pn-tokens">
       {/* -------------------------------------------- editorial hero */}
@@ -1183,6 +1319,92 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
             <div className="pn-stat__value">{formatNum(safePickCount.toLocaleString('en-US'))}</div>
             <div className="pn-stat__label">{copy.stat4Label}</div>
             <div className="pn-stat__detail">{copy.stat4Detail}</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------- display board */}
+      {/* Master-class filter dashboard: MoA coverage, WHO toxicity
+          distribution and MoA scheme split. Every figure is computed from the
+          CURRENT filter result, and each segment is click-through to its
+          facet filter — the board doubles as the fastest filter path. */}
+      <section className="pn-shell">
+        <div className="acg-db-board">
+          {/* Panel 1: MoA coverage — clicking toggles the unmapped facet */}
+          <button
+            type="button"
+            className={`acg-db-board__panel ${selectedMap === 'unmapped' ? 'acg-db-board__panel--active' : ''}`}
+            onClick={() => setSelectedMap(selectedMap === 'unmapped' ? 'all' : 'unmapped')}
+            title={bn ? 'ক্লিক করলে শুধু MoA-ম্যাপহীন পণ্য দেখাবে' : 'Click to show only products without a MoA code'}
+          >
+            <div className="acg-db-board__top">
+              <span className="acg-db-board__kicker">{bn ? 'MoA কভারেজ' : 'MoA coverage'}</span>
+              <span className="acg-db-board__num">{formatNum(coveragePct)}%</span>
+            </div>
+            <div className="acg-db-board__bar">
+              <span className="acg-db-board__fill" style={{ width: `${coveragePct}%` }} />
+            </div>
+            <p className="acg-db-board__foot">
+              {formatNum(mappedCount)} {bn ? 'টি ম্যাপড' : 'mapped'} · {formatNum(totalBrandsCount - mappedCount)} {bn ? 'টি ম্যাপহীন' : 'unmapped'}
+            </p>
+          </button>
+
+          {/* Panel 2: WHO toxicity distribution — legend chips are facets */}
+          <div className="acg-db-board__panel">
+            <div className="acg-db-board__top">
+              <span className="acg-db-board__kicker">{bn ? 'WHO বিষাক্ততা বণ্টন' : 'WHO toxicity distribution'}</span>
+              <span className="acg-db-board__num">{formatNum(totalBrandsCount)}</span>
+            </div>
+            <div className="acg-db-board__bar acg-db-board__bar--seg">
+              {(['red', 'yellow', 'blue', 'green', 'none'] as ToxBand[]).map((band) =>
+                toxCounts[band] > 0 ? (
+                  <span
+                    key={band}
+                    className="acg-db-board__seg"
+                    style={{ width: `${(toxCounts[band] / Math.max(totalBrandsCount, 1)) * 100}%`, background: TOX_BAND_COLOR[band] }}
+                    title={`${TOX_BAND_LABEL_EN[band]}: ${toxCounts[band]}`}
+                  />
+                ) : null
+              )}
+            </div>
+            <div className="acg-db-board__legend">
+              {(['red', 'yellow', 'blue', 'green', 'none'] as ToxBand[]).map((band) => (
+                <button
+                  key={band}
+                  type="button"
+                  className={`acg-db-board__legend-item ${selectedTox === band ? 'acg-db-board__legend-item--active' : ''}`}
+                  onClick={() => setSelectedTox(selectedTox === band ? 'all' : band)}
+                  title={bn ? `${TOX_BAND_LABEL_BN[band]} — ফিল্টার করতে ক্লিক করুন` : `${TOX_BAND_LABEL_EN[band]} — click to filter`}
+                >
+                  <span className="acg-db-board__swatch" style={{ background: TOX_BAND_COLOR[band] }} />
+                  {bn ? TOX_BAND_LABEL_BN[band] : TOX_BAND_LABEL_EN[band]} <b>{formatNum(toxCounts[band])}</b>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Panel 3: MoA scheme split — chips are facets */}
+          <div className="acg-db-board__panel">
+            <div className="acg-db-board__top">
+              <span className="acg-db-board__kicker">{bn ? 'MoA স্কিম বিভাজন' : 'MoA scheme split'}</span>
+              <span className="acg-db-board__num">{formatNum(uniqueMoACodesInFilter)}</span>
+            </div>
+            <p className="acg-db-board__foot">
+              {bn ? 'স্বতন্ত্র প্রতিরোধ-গ্রুপ — মিক্সচার ভেঙে গণনা করা' : 'unique resistance groups — mixtures split'}
+            </p>
+            <div className="acg-db-board__chips">
+              {([['IRAC', schemeCounts.IRAC], ['FRAC', schemeCounts.FRAC], ['HRAC', schemeCounts.HRAC], ['other', schemeCounts.other]] as const).map(([scheme, n]) => (
+                <button
+                  key={scheme}
+                  type="button"
+                  className={`acg-db-board__chip acg-db-board__chip--${scheme} ${selectedScheme === scheme ? 'acg-db-board__chip--active' : ''}`}
+                  onClick={() => setSelectedScheme(selectedScheme === scheme ? 'all' : scheme)}
+                  title={bn ? 'এই স্কিমে ফিল্টার করতে ক্লিক করুন' : 'Click to filter by this scheme'}
+                >
+                  <b>{formatNum(n)}</b> {scheme === 'other' ? (bn ? 'জৈব/অন্য' : 'Bio·Other') : scheme}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -1645,8 +1867,10 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                     className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   >
                     <option value="all">{t('filter_all_moa')}</option>
-                    {moaCodes.filter((m) => m !== 'all').map((m) => (
-                      <option key={m} value={m}>{m}</option>
+                    {moaOptions.map(([code, count]) => (
+                      <option key={code} value={code}>
+                        {`${code} · ${count}`}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -1666,6 +1890,62 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                     <option value="High">{transRisk('High')}</option>
                     <option value="Medium">{transRisk('Medium')}</option>
                     <option value="Low">{transRisk('Low')}</option>
+                  </select>
+                </div>
+
+                {/* MoA Scheme Filter — pest / disease / weed code families */}
+                <div className="space-y-1">
+                  <label className="text-[11px] font-semibold text-slate-500 block">
+                    {language === 'bn' ? 'MoA স্কিম (কীট / ছত্রাক / আগাছা)' : 'MoA Scheme (insect / fungi / weed)'}
+                  </label>
+                  <select
+                    id="scheme-select"
+                    value={selectedScheme}
+                    onChange={(e) => setSelectedScheme(e.target.value)}
+                    className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  >
+                    <option value="all">{language === 'bn' ? 'সব স্কিম' : 'All schemes'}</option>
+                    <option value="IRAC">IRAC — {language === 'bn' ? 'কীটনাশক' : 'Insecticide'}</option>
+                    <option value="FRAC">FRAC — {language === 'bn' ? 'ছত্রাকনাশক' : 'Fungicide'}</option>
+                    <option value="HRAC">HRAC — {language === 'bn' ? 'আগাছানাশক' : 'Herbicide'}</option>
+                    <option value="other">{language === 'bn' ? 'জৈব / অন্যান্য কোড' : 'Bio & other codes'}</option>
+                  </select>
+                </div>
+
+                {/* WHO Toxicity Band Filter */}
+                <div className="space-y-1">
+                  <label className="text-[11px] font-semibold text-slate-500 block">
+                    {language === 'bn' ? 'WHO বিষাক্ততা ব্যান্ড' : 'WHO Toxicity Band'}
+                  </label>
+                  <select
+                    id="tox-select"
+                    value={selectedTox}
+                    onChange={(e) => setSelectedTox(e.target.value)}
+                    className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  >
+                    <option value="all">{language === 'bn' ? 'সব ব্যান্ড' : 'All bands'}</option>
+                    <option value="red">{language === 'bn' ? 'লাল — অতি মারাত্মক (Ia/Ib)' : 'Red — extremely/highly hazardous (Ia/Ib)'}</option>
+                    <option value="yellow">{language === 'bn' ? 'হলুদ — মাঝারি ঝুঁকি (II)' : 'Yellow — moderately hazardous (II)'}</option>
+                    <option value="blue">{language === 'bn' ? 'নীল — সামান্য (III)' : 'Blue — slightly hazardous (III)'}</option>
+                    <option value="green">{language === 'bn' ? 'সবুজ — নিরাপদ (U)' : 'Green — unlikely hazard (U)'}</option>
+                    <option value="none">{language === 'bn' ? 'শ্রেণিবহির্ভূত' : 'Not classified'}</option>
+                  </select>
+                </div>
+
+                {/* MoA Mapping Status Filter */}
+                <div className="space-y-1">
+                  <label className="text-[11px] font-semibold text-slate-500 block">
+                    {language === 'bn' ? 'MoA ম্যাপিং স্ট্যাটাস' : 'MoA Mapping Status'}
+                  </label>
+                  <select
+                    id="map-select"
+                    value={selectedMap}
+                    onChange={(e) => setSelectedMap(e.target.value)}
+                    className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  >
+                    <option value="all">{language === 'bn' ? 'সব পণ্য' : 'All products'}</option>
+                    <option value="mapped">{language === 'bn' ? 'ম্যাপড — MoA কোড আছে' : 'Mapped — MoA code present'}</option>
+                    <option value="unmapped">{language === 'bn' ? 'ম্যাপহীন — MoA কোড নেই' : 'Unmapped — no MoA code'}</option>
                   </select>
                 </div>
               </div>
@@ -2230,13 +2510,25 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                     return { border: '#5d6f64', emoji: '🧪', descBn: 'অন্যান্য বালাইনাশক', descEn: 'Other pesticides', tone: 'acg-db-dash-card--muted' };
                   };
 
-                  // Pre-compute per-category metrics for the dashboard strip
+                  // Pre-compute per-category metrics for the dashboard strip.
+                  // MoA groups are ATOMIC (mixtures split, notation folded)
+                  // and the unmapped-brand count travels with the metrics so
+                  // the display board can flag coverage gaps per category.
                   const catMetrics = sortedCats.map((cat) => {
                     const groups = byCategory.get(cat)!;
                     const totalBrands = groups.reduce((sum, g) => sum + g.products.length, 0);
                     const uniqueMoAs = new Set<string>();
-                    groups.forEach((g) => { if (g.moaCode) uniqueMoAs.add(g.moaCode); });
-                    return { cat, groups, totalBrands, uniqueMoAs: uniqueMoAs.size, theme: catTheme(cat) };
+                    let unmappedBrands = 0;
+                    groups.forEach((g) => {
+                      g.products.forEach((p) => {
+                        if (p.moaCode) {
+                          (atomicByProduct.get(p.id) ?? [p.moaCode]).forEach((a) => uniqueMoAs.add(a));
+                        } else {
+                          unmappedBrands += 1;
+                        }
+                      });
+                    });
+                    return { cat, groups, totalBrands, uniqueMoAs: uniqueMoAs.size, unmappedBrands, theme: catTheme(cat) };
                   });
 
                   return (
@@ -2246,7 +2538,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                           clickable snapshot cards. Click → smooth-scroll.
                           ───────────────────────────────────────────────────── */}
                       <div className="acg-db-dashboard">
-                        {catMetrics.map(({ cat, groups, totalBrands, uniqueMoAs, theme }) => (
+                        {catMetrics.map(({ cat, groups, totalBrands, uniqueMoAs, unmappedBrands, theme }) => (
                           <button
                             key={cat}
                             type="button"
@@ -2273,6 +2565,12 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                 <b>{formatNum(uniqueMoAs)}</b>
                                 MoA
                               </span>
+                              {unmappedBrands > 0 && (
+                                <span className="acg-db-dash-card__metric acg-db-dash-card__metric--warn" title={bn ? 'MoA-ম্যাপহীন ব্র্যান্ড' : 'Brands without a MoA code'}>
+                                  <b>{formatNum(unmappedBrands)}</b>
+                                  {bn ? 'ম্যাপহীন' : 'unmap'}
+                                </span>
+                              )}
                             </div>
                           </button>
                         ))}
@@ -2282,7 +2580,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                           CATEGORY SECTIONS — each category gets a colored
                           section header + its ingredient groups underneath.
                           ───────────────────────────────────────────────────── */}
-                      {catMetrics.map(({ cat, groups, totalBrands, uniqueMoAs, theme }) => (
+                      {catMetrics.map(({ cat, groups, totalBrands, uniqueMoAs, unmappedBrands, theme }) => (
                         <section
                           key={cat}
                           id={`cat-section-${cat.replace(/\s+/g, '-')}`}
@@ -2317,6 +2615,17 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                   </span>
                                 </>
                               )}
+                              {unmappedBrands > 0 && (
+                                <>
+                                  <span className="acg-db-cat-head__sep">·</span>
+                                  <span
+                                    className="acg-db-cat-head__unmapped"
+                                    title={bn ? 'MoA-ম্যাপহীন ব্র্যান্ড' : 'Brands without a MoA code'}
+                                  >
+                                    <b>{formatNum(unmappedBrands)}</b> {bn ? 'ম্যাপহীন' : 'unmapped'}
+                                  </span>
+                                </>
+                              )}
                             </div>
                           </header>
 
@@ -2345,6 +2654,14 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                         {group.moaCode && (
                                           <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-emerald-300 tracking-wide">
                                             MoA {group.moaCode}
+                                          </span>
+                                        )}
+                                        {!group.moaCode && (
+                                          <span
+                                            className="acg-db-moa-unmapped"
+                                            title={bn ? 'এই উপাদানের MoA কোড এখনো ম্যাপ করা হয়নি' : 'No MoA code mapped for this ingredient yet'}
+                                          >
+                                            {bn ? 'MoA ম্যাপহীন' : 'MoA unmapped'}
                                           </span>
                                         )}
                                         {group.resistanceRisk && (
@@ -2417,11 +2734,22 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                             <span className="acg-db-brand-moa__label">
                                               {brand.moaCode?.startsWith('IRAC') ? 'IRAC MoA' : brand.moaCode?.startsWith('FRAC') ? 'FRAC MoA' : brand.moaCode?.startsWith('HRAC') ? 'HRAC MoA' : (bn ? 'MoA নম্বর' : 'MoA')}
                                             </span>
-                                            <span className="acg-db-brand-moa__code" title={brand.moaCode}>
-                                              {brand.moaCode || 'IRAC UN'}
-                                            </span>
-                                            <span className="acg-db-brand-moa__group" title={brand.moaGroup}>
-                                              {bn ? (moaInfoMap[brand.moaCode || '']?.nameBn || brand.moaGroup) : brand.moaGroup}
+                                            {brand.moaCode ? (
+                                              <span className="acg-db-brand-moa__code" title={brand.moaCode}>
+                                                {brand.moaCode}
+                                              </span>
+                                            ) : (
+                                              <span
+                                                className="acg-db-brand-moa__code acg-db-brand-moa__code--unmapped"
+                                                title={bn ? 'এই উপাদানের MoA কোড এখনো ম্যাপ করা হয়নি' : 'No MoA code mapped for this ingredient yet'}
+                                              >
+                                                {bn ? 'ম্যাপহীন' : 'unmapped'}
+                                              </span>
+                                            )}
+                                            <span className="acg-db-brand-moa__group" title={brand.moaGroup || brand.moaCode}>
+                                              {brand.moaCode
+                                                ? (bn ? (moaInfoMap[brand.moaCode]?.nameBn || brand.moaGroup) : brand.moaGroup)
+                                                : (bn ? 'এখনো শ্রেণিবদ্ধ হয়নি' : 'not yet classified')}
                                             </span>
                                           </div>
                                           {/* Col 3: Dosage + PHI (fixed 180px) */}

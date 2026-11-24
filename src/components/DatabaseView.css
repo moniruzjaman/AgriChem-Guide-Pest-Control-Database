@@ -569,3 +569,152 @@
   color: var(--green-900);
 }
 .acg-db-cat-head__sep { color: var(--line); }
+.acg-db-cat-head__unmapped,
+.acg-db-cat-head__unmapped b { color: #b45309; }
+
+/* ===========================================================================
+   DISPLAY BOARD — master-class filter dashboard (MoA coverage, WHO toxicity
+   distribution, MoA scheme split). Panels are computed from the current
+   filter result and every segment is click-through to its facet filter.
+   =========================================================================== */
+.acg-db-board {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 760px) {
+  .acg-db-board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.acg-db-board__panel {
+  background: var(--paper, #fff);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  text-align: left;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+button.acg-db-board__panel { cursor: pointer; }
+button.acg-db-board__panel:hover { border-color: var(--green-900); }
+.acg-db-board__panel--active {
+  border-color: var(--green-900);
+  box-shadow: 0 0 0 2px rgba(0, 106, 78, 0.18);
+}
+.acg-db-board__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.acg-db-board__kicker {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.acg-db-board__num {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--green-900);
+  line-height: 1;
+}
+.acg-db-board__bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--paper-muted, #f1f5f9);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  display: flex;
+}
+.acg-db-board__fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--green, #006a4e), #10b981);
+  border-radius: 999px;
+}
+.acg-db-board__seg { display: block; height: 100%; }
+.acg-db-board__foot {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 0;
+}
+.acg-db-board__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+.acg-db-board__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #334155;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+.acg-db-board__legend-item:hover { border-color: var(--line); }
+.acg-db-board__legend-item--active {
+  border-color: var(--green-900);
+  color: var(--green-900);
+  background: rgba(0, 106, 78, 0.06);
+}
+.acg-db-board__swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.acg-db-board__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.acg-db-board__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #334155;
+  background: var(--paper-muted, #f8fafc);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+.acg-db-board__chip b { font-weight: 800; color: var(--green-900); }
+.acg-db-board__chip:hover { border-color: var(--green-900); }
+.acg-db-board__chip--IRAC b { color: var(--red, #f42a41); }
+.acg-db-board__chip--FRAC b { color: var(--golden, #e3b341); }
+.acg-db-board__chip--HRAC b { color: var(--green, #006a4e); }
+.acg-db-board__chip--active {
+  border-color: var(--green-900);
+  background: rgba(0, 106, 78, 0.08);
+}
+
+/* Unmapped MoA states — ingredient headers, brand rows, dashboard cards */
+.acg-db-moa-unmapped {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  white-space: nowrap;
+}
+.acg-db-brand-moa__code--unmapped {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+.acg-db-dash-card__metric--warn b { color: #b45309; }
