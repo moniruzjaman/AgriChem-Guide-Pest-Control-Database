@@ -1,0 +1,79 @@
+name: Regenerate registry artefacts
+
+# The generated data artefacts (the DAE register CSV, the TypeScript data
+# modules and the runtime JSON) are several megabytes each — too large to
+# hand-edit and too large to review line by line. They are produced from
+# data_raw/ by the scripts in scripts/, so this workflow rebuilds them and
+# commits the result. Review the scripts and the overlay, not the output.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data_raw/**'
+      - 'scripts/integrate_canonical_registry.py'
+      - 'scripts/regenerate_data_modules.py'
+      - 'scripts/generate_runtime_json.py'
+      - 'scripts/validate_registry.py'
+      - '.github/workflows/regenerate-data.yml'
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'data_raw/**'
+      - 'scripts/integrate_canonical_registry.py'
+      - 'scripts/regenerate_data_modules.py'
+      - 'scripts/generate_runtime_json.py'
+      - 'scripts/validate_registry.py'
+      - '.github/workflows/regenerate-data.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: regenerate-data-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fold the canonical MoA layer into the register
+        run: python3 scripts/integrate_canonical_registry.py
+
+      - name: Rebuild the latest database from the register spine
+        run: python3 scripts/build_latest_database.py
+
+      - name: Regenerate the TypeScript data modules
+        run: python3 scripts/regenerate_data_modules.py
+
+      - name: Regenerate the runtime database
+        run: python3 scripts/generate_runtime_json.py
+
+      - name: Validate the registry
+        run: python3 scripts/validate_registry.py
+
+      - name: Commit the regenerated artefacts
+        run: |
+          if git diff --quiet; then
+            echo "No artefact changes — nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data_raw src/data public/downloads
+          git commit -m "chore(data): regenerate registry artefacts"
+          git push
