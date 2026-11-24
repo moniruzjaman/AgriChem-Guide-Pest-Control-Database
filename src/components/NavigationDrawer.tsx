@@ -181,7 +181,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                   </span>
                   <span className="font-extrabold text-emerald-300 text-sm flex items-center justify-end gap-1">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>
-                    {language === 'bn' ? '১০০% অফলাইন' : '100% Offline'}
+                    {language === 'bn' ? 'অফলাইন সুবিধা আছে' : 'Offline-ready'}
                   </span>
                 </div>
               </div>
@@ -190,200 +190,86 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
             {/* Drawer Scrollable Navigation Content */}
             <div className="flex-1 overflow-y-auto p-5 space-y-6 scrollbar-thin">
               
-              {/* SECTION 1: Standard Route Tabs list */}
-              <div className="space-y-2.5">
-                <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block px-1">
-                  {language === 'bn' ? 'প্রধান মেনু' : 'Primary Tabs'}
-                </h3>
-                
-                <div className="grid grid-cols-1 gap-2">\n                <button onClick={() => handleTabClick('intelligence')} className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${activeTab === 'intelligence' ? 'bg-emerald-50 text-emerald-900 border-emerald-200' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}`}><div className="flex items-center gap-3"><BrainCircuit className={`w-4 h-4 ${activeTab === 'intelligence' ? 'text-emerald-700' : 'text-slate-500'}`} /><span>{language === 'bn' ? 'স্প্রে ইন্টেলিজেন্স' : 'Spray Intelligence'}</span></div>{getStepStatus('intelligence')}</button>
-                <button onClick={() => handleTabClick('protection')} className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${activeTab === 'protection' ? 'bg-emerald-50 text-emerald-900 border-emerald-200' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}`}><div className="flex items-center gap-3"><ShieldCheck className={`w-4 h-4 ${activeTab === 'protection' ? 'text-emerald-700' : 'text-slate-500'}`} /><span>{language === 'bn' ? 'সুরক্ষা কর্মপ্রবাহ' : 'Protection Workflow'}</span></div>{getStepStatus('protection')}</button>
-
-                <button onClick={() => handleTabClick('specialist')} className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${activeTab === 'specialist' ? 'bg-emerald-50 text-emerald-900 border-emerald-200' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}`}><div className="flex items-center gap-3"><ShieldCheck className={`w-4 h-4 ${activeTab === 'specialist' ? 'text-emerald-700' : 'text-slate-500'}`} /><span>{language === 'bn' ? 'স্পেশালিস্ট সার্চ' : 'Specialist Search'}</span></div>{getStepStatus('specialist')}</button>
-
-
-                  <button
-                    onClick={() => handleTabClick('home')}
-                    className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${
-                      activeTab === 'home'
-                        ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Home className={`w-4 h-4 ${activeTab === 'home' ? 'text-emerald-700' : 'text-slate-500'}`} />
-                      <span>{t('tab_home')}</span>
-                    </div>
-                    {getStepStatus('home')}
-                  </button>
-
-                  <button
-                    onClick={() => handleTabClick('database')}
-                    className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${
-                      activeTab === 'database'
-                        ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Database className={`w-4 h-4 ${activeTab === 'database' ? 'text-emerald-700' : 'text-slate-500'}`} />
-                      <span>{t('tab_database')}</span>
-                    </div>
-                    {getStepStatus('database')}
-                  </button>
-
-                  <button
-                    onClick={() => handleTabClick('calculator')}
-                    className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${
-                      activeTab === 'calculator'
-                        ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Calculator className={`w-4 h-4 ${activeTab === 'calculator' ? 'text-emerald-700' : 'text-slate-500'}`} />
-                      <span>{t('tab_calculator')}</span>
-                    </div>
-                    {getStepStatus('calculator')}
-                  </button>
-
-                  <button
-                    onClick={() => handleTabClick('rotation')}
-                    className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${
-                      activeTab === 'rotation'
-                        ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <RotateCw className={`w-4 h-4 ${activeTab === 'rotation' ? 'text-emerald-700' : 'text-slate-500'}`} />
-                      <span>{t('tab_rotation')}</span>
-                    </div>
-                    {getStepStatus('rotation')}
-                  </button>
-
-                  <button
-                    onClick={() => handleTabClick('safety')}
-                    className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${
-                      activeTab === 'safety'
-                        ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <ShieldCheck className={`w-4 h-4 ${activeTab === 'safety' ? 'text-emerald-700' : 'text-slate-500'}`} />
-                      <span>{t('tab_safety')}</span>
-                    </div>
-                    {getStepStatus('safety')}
-                  </button>
-
-                  <button
-                    onClick={() => handleTabClick('guidebook')}
-                    className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${
-                      activeTab === 'guidebook'
-                        ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <BookOpen className={`w-4 h-4 ${activeTab === 'guidebook' ? 'text-emerald-700' : 'text-slate-500'}`} />
-                      <span>{t('tab_guidebook')}</span>
-                    </div>
-                    {getStepStatus('guidebook')}
-                  </button>
-
-                  <button
-                    onClick={() => handleTabClick('alerts')}
-                    className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${
-                      activeTab === 'alerts'
-                        ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Bell className={`w-4 h-4 ${activeTab === 'alerts' ? 'text-emerald-700' : 'text-slate-500'}`} />
-                      <span>{t('tab_alerts')}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      {unreadAlertCount > 0 && (
-                        <span className="bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full text-[10px] border border-amber-200 animate-pulse">
-                          {formatNum(unreadAlertCount)} {language === 'bn' ? 'টি নতুন' : 'new'}
-                        </span>
-                      )}
-                      {getStepStatus('alerts')}
-                    </div>
-                  </button>
-
-                  <button
-                    onClick={() => handleTabClick('myfield')}
-                    className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold transition-all ${
-                      activeTab === 'myfield'
-                        ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <NotebookPen className={`w-4 h-4 ${activeTab === 'myfield' ? 'text-emerald-700' : 'text-slate-500'}`} />
-                      <span>{language === 'bn' ? 'আমার জমি ও স্প্রে ইতিহাস' : 'My Field & Spray History'}</span>
-                    </div>
-                    {getStepStatus('myfield' as AppTab)}
-                  </button>
-                </div>
-              </div>
-
-              {/* SECTION 2: What to do next (Structured Field Roadmap) */}
-              <div className="space-y-3 pt-2">
-                <div className="flex items-center gap-1.5 px-1">
-                  <Zap className="w-3.5 h-3.5 text-emerald-600" />
-                  <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                    {language === 'bn' ? 'ফিল্ড কন্ট্রোল কাজের বৈজ্ঞানিক ধাপ' : 'Recommended Spray Workflow'}
+              <div className="space-y-5">
+                <section className="space-y-2">
+                  <h3 className="px-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    {language === 'bn' ? 'শুরু করুন' : 'Start here'}
                   </h3>
-                </div>
+                  <button onClick={() => handleTabClick('protection')} className="w-full flex items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-left hover:bg-emerald-100 transition">
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-700 text-white"><ShieldCheck className="h-5 w-5" /></span>
+                    <span className="min-w-0 flex-1">
+                      <strong className="block text-sm text-emerald-950">{language === 'bn' ? 'ফসলের সমস্যা বুঝুন' : 'Understand a crop problem'}</strong>
+                      <span className="mt-0.5 block text-xs leading-relaxed text-emerald-900/75">{language === 'bn' ? 'মাঠ পর্যবেক্ষণ, ঝুঁকি, করণীয় ও পণ্য যাচাই—ধাপে ধাপে' : 'Field observations, risk, next steps and product checks in one guided flow'}</span>
+                    </span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-emerald-700" />
+                  </button>
+                  <button onClick={() => handleTabClick('database')} className="w-full flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left hover:bg-slate-50 transition">
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-slate-100 text-slate-700"><Database className="h-5 w-5" /></span>
+                    <span className="min-w-0 flex-1">
+                      <strong className="block text-sm text-slate-900">{language === 'bn' ? 'নিবন্ধিত পণ্য খুঁজুন' : 'Find registered products'}</strong>
+                      <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{language === 'bn' ? 'ব্র্যান্ড, সক্রিয় উপাদান বা নিবন্ধন নম্বর দিয়ে খুঁজুন' : 'Search by brand, active ingredient or registration number'}</span>
+                    </span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-slate-400" />
+                  </button>
+                </section>
 
-                <div className="relative border-l-2 border-slate-200 pl-3 ml-2 space-y-4">
-                  {roadmapSteps.map((step) => {
-                    const StepIcon = step.icon;
-                    const isActive = activeTab === step.id;
-                    return (
-                      <div 
-                        key={step.id}
-                        onClick={() => handleTabClick(step.id)}
-                        className={`group relative pl-2 cursor-pointer transition-all ${isActive ? 'scale-101' : 'hover:scale-100.5'}`}
-                      >
-                        {/* Step Marker Circle */}
-                        <div className={`absolute -left-[23px] top-1.5 w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold shadow-2xs transition-colors ${
-                          isActive 
-                            ? 'bg-emerald-700 border-emerald-700 text-white font-extrabold' 
-                            : 'bg-white border-slate-300 text-slate-400 group-hover:border-emerald-600 group-hover:bg-emerald-50'
-                        }`}>
-                          {step.step}
-                        </div>
+                <section className="space-y-2">
+                  <h3 className="px-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    {language === 'bn' ? 'মাঠের কাজের সরঞ্জাম' : 'Field tools'}
+                  </h3>
+                  <div className="grid grid-cols-1 gap-2">
+                    {([
+                      { id: 'myfield' as AppTab, icon: NotebookPen, bn: 'আমার জমি ও স্প্রে ইতিহাস', en: 'My field & spray history', descBn: 'জমি ও প্রয়োগের রেকর্ড রাখুন', descEn: 'Keep field and application records' },
+                      { id: 'calculator' as AppTab, icon: Calculator, bn: 'ডোজ হিসাব', en: 'Dose calculator', descBn: 'লেবেলের মাত্রা অনুযায়ী ট্যাংকের হিসাব করুন', descEn: 'Calculate tank quantities from label rates' },
+                      { id: 'safety' as AppTab, icon: ShieldCheck, bn: 'নিরাপদ ব্যবহার', en: 'Safe use', descBn: 'PPE, PHI, REI ও জরুরি নিরাপত্তা নির্দেশনা', descEn: 'PPE, PHI, REI and emergency guidance' },
+                    ]).map(item => (
+                      <button key={item.id} onClick={() => handleTabClick(item.id)} className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 text-left hover:border-emerald-300 hover:bg-emerald-50/50 transition">
+                        <item.icon className="h-5 w-5 shrink-0 text-emerald-700" />
+                        <span className="min-w-0 flex-1">
+                          <strong className="block text-xs text-slate-800">{language === 'bn' ? item.bn : item.en}</strong>
+                          <span className="mt-0.5 block text-[11px] text-slate-500">{language === 'bn' ? item.descBn : item.descEn}</span>
+                        </span>
+                        <ArrowRight className="h-3.5 w-3.5 shrink-0 text-slate-400" />
+                      </button>
+                    ))}
+                  </div>
+                </section>
 
-                        <div className={`border p-3 rounded-xl transition ${
-                          isActive 
-                            ? 'bg-emerald-50/50 border-emerald-300/80 shadow-3xs' 
-                            : 'bg-white border-slate-200 group-hover:border-slate-300'
-                        }`}>
-                          <div className="flex items-center gap-2">
-                            <div className={`p-1.5 rounded-lg border ${step.color}`}>
-                              <StepIcon className="w-3.5 h-3.5" />
-                            </div>
-                            <h4 className={`text-[12px] font-bold ${isActive ? 'text-emerald-950' : 'text-slate-800'}`}>
-                              {language === 'bn' ? step.titleBn : step.titleEn}
-                            </h4>
-                          </div>
-                          <p className="text-[11px] text-slate-500 mt-1.5 leading-normal">
-                            {language === 'bn' ? step.descBn : step.descEn}
-                          </p>
-                          <div className="mt-2 flex items-center justify-end text-[10px] text-emerald-700 font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-                            <span>{language === 'bn' ? 'যান' : 'Go to Tab'}</span>
-                            <ArrowRight className="w-3 h-3 ml-1" />
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                <section className="space-y-2">
+                  <h3 className="px-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    {language === 'bn' ? 'শিখুন ও পরিকল্পনা করুন' : 'Learn & plan'}
+                  </h3>
+                  <div className="grid grid-cols-1 gap-2">
+                    {([
+                      { id: 'rotation' as AppTab, icon: RotateCw, bn: 'স্প্রে গ্রুপ পরিবর্তন', en: 'Plan spray-group rotation', descBn: 'IRAC, FRAC ও HRAC গ্রুপ বুঝুন', descEn: 'Understand IRAC, FRAC and HRAC groups' },
+                      { id: 'guidebook' as AppTab, icon: BookOpen, bn: 'মাঠ নির্দেশিকা', en: 'Field handbook', descBn: 'ক্যালিব্রেশন, IPM ও নিরাপত্তা শিখুন', descEn: 'Learn calibration, IPM and safety' },
+                      { id: 'alerts' as AppTab, icon: Bell, bn: 'সতর্কবার্তা ও আপডেট', en: 'Alerts & updates', descBn: 'নিয়ন্ত্রক ও মৌসুমি তথ্য দেখুন', descEn: 'Review regulatory and seasonal updates' },
+                    ]).map(item => (
+                      <button key={item.id} onClick={() => handleTabClick(item.id)} className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 text-left hover:border-emerald-300 hover:bg-emerald-50/50 transition">
+                        <item.icon className="h-5 w-5 shrink-0 text-emerald-700" />
+                        <span className="min-w-0 flex-1">
+                          <strong className="block text-xs text-slate-800">{language === 'bn' ? item.bn : item.en}</strong>
+                          <span className="mt-0.5 block text-[11px] text-slate-500">{language === 'bn' ? item.descBn : item.descEn}</span>
+                        </span>
+                        <ArrowRight className="h-3.5 w-3.5 shrink-0 text-slate-400" />
+                      </button>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="space-y-2">
+                  <h3 className="px-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    {language === 'bn' ? 'বিশেষজ্ঞদের জন্য' : 'For specialists'}
+                  </h3>
+                  <button onClick={() => handleTabClick('specialist')} className="w-full flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 text-left hover:border-emerald-300 hover:bg-emerald-50/50 transition">
+                    <Compass className="h-5 w-5 shrink-0 text-emerald-700" />
+                    <span className="min-w-0 flex-1">
+                      <strong className="block text-xs text-slate-800">{language === 'bn' ? 'বিশেষজ্ঞ অনুসন্ধান' : 'Specialist search'}</strong>
+                      <span className="mt-0.5 block text-[11px] text-slate-500">{language === 'bn' ? 'নীতিমালা, HHP, MoA ও নিয়ন্ত্রক তথ্য' : 'Policy, HHP, MoA and regulatory information'}</span>
+                    </span>
+                    <ArrowRight className="h-3.5 w-3.5 shrink-0 text-slate-400" />
+                  </button>
+                </section>
               </div>
 
               {/* SECTION 3: System / PWA Check */}
@@ -404,7 +290,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                       </span>
                     </div>
                     <p className="text-[10px] text-slate-400">
-                      {language === 'bn' ? 'অফলাইন ডেটাবেজ ও ইনস্টলেশন সম্পন্ন' : 'Fully cached for offline field operations'}
+                      {language === 'bn' ? 'ক্যাশ করা অংশ অফলাইনে চলে; লাইভ তথ্যের জন্য ইন্টারনেট লাগবে' : 'Cached tools work offline; live information needs internet'}
                     </p>
                   </div>
                 </div>
