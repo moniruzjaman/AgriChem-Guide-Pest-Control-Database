@@ -82,7 +82,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             <ScanSearch className="w-7 h-7 text-white" />
           </span>
           <span className={`text-[10px] font-bold -mt-1 ${activeTab === 'database' ? 'text-[#f42a41]' : 'text-slate-600'}`}>
-            {bn ? 'খুঁজুন/স্ক্যান' : 'Search/Scan'}
+            {bn ? 'খুঁজুন' : 'Search'}
           </span>
         </button>
 
@@ -114,7 +114,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           className={`${itemBase} ${MORE_TABS.includes(activeTab) ? active : inactive}`}
         >
           <Menu className="w-6 h-6" />
-          <span>{bn ? 'আরও' : 'More'}</span>
+          <span>{bn ? 'টুলস' : 'Tools'}</span>
         </button>
       </div>
     </nav>
