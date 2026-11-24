@@ -64,9 +64,15 @@ jobs:
         run: python3 scripts/generate_runtime_json.py
 
       - name: Validate the registry
+        if: github.event_name != 'pull_request'
         run: python3 scripts/validate_registry.py
 
+      - name: Check the registry
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/validate_registry.py --check
+
       - name: Commit the regenerated artefacts
+        if: github.event_name != 'pull_request'
         run: |
           if git diff --quiet; then
             echo "No artefact changes — nothing to commit."

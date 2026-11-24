@@ -1,5 +1,6 @@
 {
   "schemaVersion": 1,
+  "generatedAt": "2026-11-23T16:54:26.276991+00:00",
   "generatedAt": "2026-11-24T06:42:54.142566+00:00",
   "source": {
     "file": "data_raw/all_pesticides.csv",
@@ -24,6 +25,8 @@
   },
   "runtimeDatabase": {
     "file": "public/downloads/pesticide_database.json",
+    "sha256": "273eaf044cb370ab6db76f74c67a0b1bac10b59c97886bf76c0b5fb95c84a7d3",
+    "sizeBytes": 8120126,
     "sha256": "13dd59342a8a6fea1dde454d64096c79f4edda8b1bc40041020bbe3225703e32",
     "sizeBytes": 8131918,
     "productCount": 9641,
