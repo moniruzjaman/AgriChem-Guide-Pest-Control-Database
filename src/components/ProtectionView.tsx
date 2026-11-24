@@ -379,7 +379,7 @@ export function ProtectionView() {
         </div>
       </header>
 
-      {/* Context bar: crop / field / target */}
+      {/* Essential context first; optional field details stay collapsed. */}
       <section className="pn-card context-bar">
         <label>
           <span>{t('Crop', 'ফসল')}</span>
@@ -389,39 +389,44 @@ export function ProtectionView() {
             ))}
           </select>
         </label>
-        <label>
-          <span>{t('Field (optional)', 'জমি (ঐচ্ছিক)')}</span>
-          <select value={fieldId ?? ''} onChange={(e) => setFieldId(e.target.value || null)}>
-            <option value="">{t('— crop only —', '— শুধু ফসল —')}</option>
-            {ledger.data.fields.map((f: FieldProfile) => (
-              <option key={f.id} value={f.id}>{f.name} · {f.crop}</option>
-            ))}
-          </select>
-        </label>
         <label className="grow">
-          <span>{t('Target pest / disease', 'লক্ষ্য পোকা / রোগ')}</span>
+          <span>{t('What problem do you see?', 'কী সমস্যা দেখছেন?')}</span>
           <input
             value={target}
             onChange={(e) => setTarget(e.target.value)}
-            placeholder={t('e.g. Rice Blast, Brown Planthopper', 'যেমন ধানের ব্লাস্ট, বাদামী গাছ ফড়িং')}
+            placeholder={t('Enter pest or disease, if known', 'পোকা বা রোগের নাম জানা থাকলে লিখুন')}
           />
         </label>
-        <label>
-          <span>{t('Growth stage', 'গতিশীল পর্যায়')}</span>
-          <select value={growthStage} onChange={(e) => setGrowthStage(e.target.value)}>
-            <option value="">{t('Unknown', 'অজানা')}</option>
-            {['sowing', 'seedling', 'vegetative', 'flowering', 'harvest'].map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
-        </label>
-        <label className="gps-toggle">
-          <input type="checkbox" checked={useGps} onChange={(e) => setUseGps(e.target.checked)} />
-          <span>{t('Use GPS', 'GPS ব্যবহার')}</span>
-        </label>
         <button className="pn-btn" onClick={runIntel} disabled={intelLoading}>
-          {intelLoading ? t('Refreshing…', 'হালনাগাদ হচ্ছে…') : t('Refresh intelligence', 'ইন্টেলিজেন্স হালনাগাদ')}
+          {intelLoading ? t('Updating…', 'হালনাগাদ হচ্ছে…') : t('Update field information', 'তথ্য হালনাগাদ করুন')}
         </button>
+        <details className="context-more">
+          <summary>{t('Optional field details', 'অতিরিক্ত তথ্য (ঐচ্ছিক)')}</summary>
+          <div className="context-more-grid">
+            <label>
+              <span>{t('Field', 'জমি')}</span>
+              <select value={fieldId ?? ''} onChange={(e) => setFieldId(e.target.value || null)}>
+                <option value="">{t('— crop only —', '— শুধু ফসল —')}</option>
+                {ledger.data.fields.map((f: FieldProfile) => (
+                  <option key={f.id} value={f.id}>{f.name} · {f.crop}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <span>{t('Growth stage', 'ফসলের পর্যায়')}</span>
+              <select value={growthStage} onChange={(e) => setGrowthStage(e.target.value)}>
+                <option value="">{t('Unknown', 'অজানা')}</option>
+                {['sowing', 'seedling', 'vegetative', 'flowering', 'harvest'].map((stage) => (
+                  <option key={stage} value={stage}>{stage}</option>
+                ))}
+              </select>
+            </label>
+            <label className="gps-toggle">
+              <input type="checkbox" checked={useGps} onChange={(e) => setUseGps(e.target.checked)} />
+              <span>{t('Use device location', 'ডিভাইসের অবস্থান ব্যবহার')}</span>
+            </label>
+          </div>
+        </details>
       </section>
 
       {/* ── SECTION A — Risk Overview ─────────────────────── */}
