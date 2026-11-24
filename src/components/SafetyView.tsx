@@ -132,10 +132,10 @@ export const SafetyView: React.FC<SafetyViewProps> = ({ products, onOpenSafetyMo
   const copy = bn
     ? {
         eyebrow: 'পেশাগত স্বাস্থ্য ও পরিবেশগত নিরাপত্তা নির্দেশিকা',
-        h1a: 'আপনার শরীরই',
-        h1b: 'সবচেয়ে গুরুত্বপূর্ণ যন্ত্র।',
+        h1a: 'সবচেয়ে বিপজ্জনক মুহূর্তটা মাঠে হয় না —',
+        h1b: 'হয় বালতিতে, মেশানোর সময়।',
         lede:
-          'প্রতিটি স্প্রে বোতলে এমন একটি রাসায়নিক আছে যা পোকা মারে — কিন্তু ভুল করলে সেটা আপনাকেও মারে। চেকলিস্টটি ১০ দফায় সাজানো — প্রতিটি দফা এমন একটি বিন্দু যেখানে একজন কৃষকের চোখ থাকা দরকার, কারণ সেখানেই এক্সপোজার ঘটে।',
+          'আপনার শরীরই সবচেয়ে গুরুত্বপূর্ণ যন্ত্র। প্রতিটি স্প্রে বোতলে এমন একটি রাসায়নিক আছে যা পোকা মারে — কিন্তু ভুল করলে সেটা আপনাকেও মারে। চেকলিস্টটি ১০ দফায় সাজানো — প্রতিটি দফা এমন একটি বিন্দু যেখানে একজন কৃষকের চোখ থাকা দরকার, কারণ সেখানেই এক্সপোজার ঘটে।',
         ctaReset: 'চেকলিস্ট রিসেট',
         ctaPdf: 'পিডিএফ শিট ডাউনলোড',
         trust1: 'WHO শ্রেণিবিভাগ অনুসারে লাল ব্যান্ড মানে চরম বিপজ্জনক, সবুজ মানে তুলনামূলক নিরাপদ।',
@@ -201,10 +201,10 @@ export const SafetyView: React.FC<SafetyViewProps> = ({ products, onOpenSafetyMo
       }
     : {
         eyebrow: 'Field Occupational Health & Environmental Safety Directive',
-        h1a: 'Your body is',
-        h1b: "the field's most valuable tool.",
+        h1a: "The most dangerous moment isn't the spray —",
+        h1b: "it's the mixing, at the bucket.",
         lede:
-          'Every spray bottle contains a chemical that kills pests — but applied wrong, the same chemical can poison you. This checklist is organized into ten decision points — each one is a moment where a farmer needs eyes on, because that is exactly where exposure happens.',
+          'Your body is the field\u2019s most valuable tool. Every spray bottle contains a chemical that kills pests — but applied wrong, the same chemical can poison you. This checklist is organized into ten decision points — each one is a moment where a farmer needs eyes on, because that is exactly where exposure happens.',
         ctaReset: 'Reset checklist',
         ctaPdf: 'Download PDF sheet',
         trust1: 'WHO classification: the red band means extreme hazard, the green band means relatively safe.',

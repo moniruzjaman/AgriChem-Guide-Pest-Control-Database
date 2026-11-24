@@ -236,10 +236,10 @@ export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigate
   // ---- copy ----
   const copy = {
     eyebrow: bn ? 'আমার জমি ও স্প্রে ইতিহাস' : 'MY FIELD & SPRAY HISTORY',
-    h1: bn ? 'পরের স্প্রে কী হবে — জমি বলে দেবে।' : 'The next spray is decided by what the field remembers.',
+    h1: bn ? 'ভুলে যাওয়া প্রতিটা স্প্রে — পোকার বোনাস।' : 'Every spray you forget to log is a bonus for the pest.',
     lede: bn
-      ? 'প্রতিটি স্প্রে লগ করুন। অ্যাপ মনে রাখবে কোন গ্রুপ ব্যবহার হয়েছে — যাতে একই MoA বারবার না হয় এবং পোকা প্রতিরোধী না হয়।'
-      : 'Log every spray. The app remembers which group was used — so the same MoA is not repeated and pests cannot build resistance.',
+      ? 'পরের স্প্রে কী হবে — জমি বলে দেবে। প্রতিটি স্প্রে লগ করুন। অ্যাপ মনে রাখবে কোন গ্রুপ ব্যবহার হয়েছে — যাতে একই MoA বারবার না হয় এবং পোকা প্রতিরোধী না হয়।'
+      : 'The next spray is decided by what the field remembers. Log every spray. The app remembers which group was used — so the same MoA is not repeated and pests cannot build resistance.',
     empty: bn
       ? 'এখনো কোনো স্প্রে লগ করা হয়নি। প্রথম এন্ট্রি যোগ করুন।'
       : 'No sprays logged yet. Add your first entry to start tracking rotation.',

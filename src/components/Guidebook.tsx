@@ -78,11 +78,11 @@ export const Guidebook: React.FC<GuidebookProps> = ({ products }) => {
   const copy = bn
     ? {
         eyebrow: 'মাঠপর্যায়ের কৃষিবিদ ও সম্প্রসারণ কর্মকর্তা হ্যান্ডবুক',
-        h1a: 'স্প্রে বুম থেকে',
-        h1b: 'ফসল তোলার ঝুড়ি —',
-        h1c: 'সব এক নির্দেশিকায়।',
+        h1a: 'কম গেলে টাকা যায়,',
+        h1b: 'বেশি গেলে ফসল যায় —',
+        h1c: 'দুটোই আটকায় সঠিক হিসাব।',
         lede:
-          'এই হ্যান্ডবুক ফিল্ড অফিসারদের জন্য সাজানো — ক্যালিব্রেশন গণিত, প্রতিরোধ ভাঙার ঘূর্ণন বিজ্ঞান, ট্যাংক মিক্সিং নিয়মাবলী (W.A.L.E.S.), এবং অফলাইনে ব্যবহারের জন্য ফসলভিত্তিক পিডিএফ গাইড। প্রতিটি অধ্যায় এমন একটি সিদ্ধান্ত যা কৃষকের হাতে পৌঁছানোর আগে ফিল্ড অফিসারকে চিন্তা করতে হবে।',
+          'এই হ্যান্ডবুক ফিল্ড অফিসারদের জন্য সাজানো — ক্যালিব্রেশন গণিত, প্রতিরোধ ভাঙার ঘূর্ণন বিজ্ঞান, ট্যাংক মিক্সিং নিয়মাবলী (W.A.L.E.S.), এবং অফলাইনে ব্যবহারের জন্য ফসলভিত্তিক পিডিএফ গাইড। প্রতিটি অধ্যায় এমন একটি সিদ্ধান্ত যা কৃষকের হাতে পৌঁছানোর আগে ফিল্ড অফিসারকে চিন্তা করতে হবে। স্প্রে বুম থেকে ফসল তোলার ঝুড়ি — সব এক নির্দেশিকায়।',
         trust1: 'সকল প্রোটোকল BARI · BRRI · DAE এবং IRAC · FRAC কমিটির অনুমোদিত নির্দেশিকা অনুসরণে প্রণীত।',
         trust2: 'ফসলভিত্তিক প্রতিটি গাইড অফলাইন ব্যবহারের জন্য পিডিএফে রপ্তানি করা যায়।',
         stickerKicker: '৫টি অধ্যায়',
@@ -169,11 +169,11 @@ export const Guidebook: React.FC<GuidebookProps> = ({ products }) => {
       }
     : {
         eyebrow: 'Field Agronomist Handbook & Reference Manual',
-        h1a: 'From spray boom',
-        h1b: 'to harvest basket —',
-        h1c: 'one field-ready manual.',
+        h1a: 'Too little wastes money,',
+        h1b: 'too much loses the harvest —',
+        h1c: 'the right math stops both.',
         lede:
-          'This handbook is organized for field officers — calibration mathematics, anti-resistance rotation science, tank-mix sequences (W.A.L.E.S.), and crop-wise PDF guides for offline use. Each chapter is a decision the field officer has to think through before it reaches the farmer.',
+          'This handbook is organized for field officers — calibration mathematics, anti-resistance rotation science, tank-mix sequences (W.A.L.E.S.), and crop-wise PDF guides for offline use. Each chapter is a decision the field officer has to think through before it reaches the farmer. From spray boom to harvest basket — one field-ready manual.',
         trust1: 'Every protocol compiled from BARI · BRRI · DAE and IRAC · FRAC committee-approved guidelines.',
         trust2: 'Each crop guide is exportable as a print-ready PDF for offline extension visits.',
         stickerKicker: 'Five chapters',

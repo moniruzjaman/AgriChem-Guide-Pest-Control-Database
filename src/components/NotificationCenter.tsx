@@ -167,8 +167,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   const copy = bn
     ? {
         eyebrow: 'সরকারি নজরদারি ও ফিল্ড টেলিমেট্রি পুশ অ্যালার্ট',
-        h1a: 'নিয়ন্ত্রণ আদেশ আসবে —',
-        h1b: 'আপনাকে অবাক করবে না।',
+        h1a: 'নিষেধাজ্ঞার খবর সবাই শোনে —',
+        h1b: 'তখন, যখন দোকানের তাক খালি।',
         lede:
           'প্রতিটি মৌসুমে নতুন নিষেধাজ্ঞা, নতুন পোকা আক্রমণ, নতুন আবহাওয়া সতর্কতা — কৃষকের কাছে এগুলো অপ্রত্যাশিত নয়, শুধু তাকে আগে জানানো দরকার। এই ফিড সেই জানানোর জায়গা।',
         ctaEnable: 'পুশ নোটিফিকেশন চালু করুন',
@@ -231,8 +231,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
       }
     : {
         eyebrow: 'Compliance Watch & Field Telemetry Push Alerts',
-        h1a: 'Regulations will land —',
-        h1b: "they won't surprise you.",
+        h1a: 'Everyone hears about the ban —',
+        h1b: 'when the shelf is already empty.',
         lede:
           'Every season brings new bans, new pest outbreaks, new weather advisories — to a farmer these are never unexpected, they only need to be told ahead of time. This feed is where the telling happens.',
         ctaEnable: 'Enable device push notifications',
