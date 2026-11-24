@@ -345,7 +345,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             id="tab-btn-more"
             type="button"
             onClick={onOpenDrawer}
-            aria-expanded={false}
             className={`flex items-center gap-2 px-3 py-2 rounded-xl whitespace-nowrap border transition-colors cursor-pointer ${
               !['home', 'database', 'protection', 'myfield'].includes(activeTab)
                 ? 'bg-emerald-50 text-[#006a4e] border-emerald-200 font-bold'
