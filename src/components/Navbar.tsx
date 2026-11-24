@@ -318,132 +318,42 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Navigation Tabs Bar */}
-        <nav ref={navRef} className="flex space-x-1 sm:space-x-2 overflow-x-auto pb-2 scrollbar-none text-sm font-medium border-t border-slate-100 pt-2 items-center">
-          {/* Home Tab */}
+        <nav ref={navRef} aria-label={language === 'bn' ? 'প্রধান বিভাগ' : 'Primary sections'} className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-sm font-medium border-t border-slate-100 pt-2">
+          {([
+            { id: 'home' as AppTab, label: language === 'bn' ? 'হোম' : 'Home', icon: Home },
+            { id: 'database' as AppTab, label: language === 'bn' ? 'পণ্য খুঁজুন' : 'Find products', icon: Database },
+            { id: 'protection' as AppTab, label: language === 'bn' ? 'ফসল সুরক্ষা' : 'Crop protection', icon: ShieldCheck },
+            { id: 'myfield' as AppTab, label: language === 'bn' ? 'আমার জমি' : 'My field', icon: NotebookPen },
+          ]).map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              id={`tab-btn-${id}`}
+              type="button"
+              onClick={() => setActiveTab(id)}
+              aria-current={activeTab === id ? 'page' : undefined}
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl whitespace-nowrap transition-colors cursor-pointer ${
+                activeTab === id
+                  ? 'bg-[#006a4e] text-white shadow-xs font-bold'
+                  : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
+              }`}
+            >
+              <Icon className="w-4 h-4" />
+              <span>{label}</span>
+            </button>
+          ))}
           <button
-            id="tab-btn-home"
-            onClick={() => setActiveTab('home')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer ${
-              activeTab === 'home'
-                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
-                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
-            }`}
-          >
-            <Home className="w-4 h-4" />
-            <span>{t('tab_home')}</span>
-          </button>
-
-          <button
-            id="tab-btn-database"
-            onClick={() => setActiveTab('database')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer ${
-              activeTab === 'database'
-                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
-                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
-            }`}
-          >
-            <Database className="w-4 h-4" />
-            <span>{t('tab_database')}</span>
-          </button>
-
-          <button
-            id="tab-btn-calculator"
-            onClick={() => setActiveTab('calculator')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
-              activeTab === 'calculator'
-                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
-                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
-            }`}
-          >
-            <Calculator className="w-4 h-4" />
-            <span>{t('tab_calculator')}</span>
-          </button>
-
-          <button
-            id="tab-btn-rotation"
-            onClick={() => setActiveTab('rotation')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
-              activeTab === 'rotation'
-                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
-                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
-            }`}
-          >
-            <RotateCw className="w-4 h-4" />
-            <span>{t('tab_rotation')}</span>
-          </button>
-
-          <button
-            id="tab-btn-safety"
-            onClick={() => setActiveTab('safety')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
-              activeTab === 'safety'
-                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
-                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
-            }`}
-          >
-            <ShieldCheck className="w-4 h-4" />
-            <span>{t('tab_safety')}</span>
-          </button>
-
-          <button
-            id="tab-btn-guidebook"
-            onClick={() => setActiveTab('guidebook')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
-              activeTab === 'guidebook'
-                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
-                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
-            }`}
-          >
-            <BookOpen className="w-4 h-4" />
-            <span>{t('tab_guidebook')}</span>
-          </button>
-
-          <button
-            id="tab-btn-alerts"
-            onClick={() => setActiveTab('alerts')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
-              activeTab === 'alerts'
-                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
-                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
-            }`}
-          >
-            <Bell className="w-4 h-4" />
-            <span>{t('tab_alerts')}</span>
-            {unreadAlertCount > 0 && (
-              <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${
-                activeTab === 'alerts' ? 'bg-[#f42a41] text-white' : 'bg-[#f42a41] text-white'
-              }`}>
-                {formatNum(unreadAlertCount)}
-              </span>
-            )}
-          </button>
-
-          <button
-            id="tab-btn-myfield"
-            onClick={() => setActiveTab('myfield')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
-              activeTab === 'myfield'
-                ? 'bg-[#006a4e] text-white shadow-xs font-bold'
-                : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'
-            }`}
-          >
-            <NotebookPen className="w-4 h-4" />
-            <span>{language === 'bn' ? 'আমার জমি' : 'My Field'}</span>
-          </button>
-
-          <button id="tab-btn-intelligence" onClick={() => setActiveTab('intelligence')} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer ${activeTab === 'intelligence' ? 'bg-[#006a4e] text-white shadow-xs font-bold' : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'}`}><BrainCircuit className="w-4 h-4" /><span>{language === 'bn' ? 'ইন্টেলিজেন্স' : 'Intelligence'}</span></button>
-          <button id="tab-btn-protection" onClick={() => setActiveTab('protection')} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer ${activeTab === 'protection' ? 'bg-[#006a4e] text-white shadow-xs font-bold' : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'}`}><ShieldCheck className="w-4 h-4" /><span>{language === 'bn' ? 'সুরক্ষা' : 'Protection'}</span></button>
-
-          <button id="tab-btn-specialist" onClick={() => setActiveTab('specialist')} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer ${activeTab === 'specialist' ? 'bg-[#006a4e] text-white shadow-xs font-bold' : 'text-slate-600 hover:text-[#006a4e] hover:bg-slate-100'}`}><ShieldCheck className="w-4 h-4" /><span>{language === 'bn' ? 'স্পেশালিস্ট সার্চ' : 'Specialist'}</span></button>
-
-          {/* Quick Tab-Bar Compass Drawer Trigger */}
-          <button
+            id="tab-btn-more"
+            type="button"
             onClick={onOpenDrawer}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg whitespace-nowrap bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-extrabold transition cursor-pointer select-none shrink-0"
-            title={language === 'bn' ? 'দিকনির্দেশক মেনু ড্রয়ার খুলুন' : 'Open Quick Guide Drawer'}
+            aria-expanded={false}
+            className={`flex items-center gap-2 px-3 py-2 rounded-xl whitespace-nowrap border transition-colors cursor-pointer ${
+              !['home', 'database', 'protection', 'myfield'].includes(activeTab)
+                ? 'bg-emerald-50 text-[#006a4e] border-emerald-200 font-bold'
+                : 'text-slate-600 border-slate-200 hover:bg-slate-100'
+            }`}
           >
-            <Compass className="w-3.5 h-3.5 text-amber-600 animate-spin-slow" />
-            <span>{language === 'bn' ? 'গাইড মেনু 🧭' : 'Guide Menu 🧭'}</span>
+            <Menu className="w-4 h-4" />
+            <span>{language === 'bn' ? 'অন্যান্য সরঞ্জাম' : 'More tools'}</span>
           </button>
         </nav>
       </div>
