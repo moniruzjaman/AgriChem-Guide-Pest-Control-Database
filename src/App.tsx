@@ -24,8 +24,74 @@ import {
   Share2,
   Users,
   Eye,
-  Download
+  Download,
+  ExternalLink
 } from 'lucide-react';
+
+// ---------------------------------------------------------------------------
+// Footer OG-preview links — this app + the companion projects. Every card
+// embeds the target page's REAL og:image (fetched/verified from each page's
+// meta tags) so visitors see a visual preview of what they are opening.
+// Images fail gracefully: a gradient + emoji placeholder sits behind each
+// <img>, revealed by onError.
+// ---------------------------------------------------------------------------
+interface RelatedLink {
+  url: string;
+  image: string;
+  alt: string;
+  titleEn: string;
+  titleBn: string;
+  descEn: string;
+  descBn: string;
+  emoji: string;
+  badgeEn?: string;
+  badgeBn?: string;
+}
+
+const RELATED_LINKS: RelatedLink[] = [
+  {
+    url: 'https://pesticide.krishiai.live/',
+    image: 'https://pesticide.krishiai.live/og-image.png',
+    alt: 'পেস্টিসাইডনেক্সট (PesticideNext) — পরের স্প্রে, আর ভুল হবে না।',
+    titleEn: 'PesticideNext — this app',
+    titleBn: 'পেস্টিসাইডনেক্সট — এই অ্যাপ',
+    descEn: 'Registered pesticide directory built on the public DAE register — smart search, MoA rotation planner, tank-mix dosage calculator, field calibration, PPE checklists and compliance alerts.',
+    descBn: 'DAE-এর প্রকাশ্য নিবন্ধন তালিকার ভিত্তিতে নিবন্ধিত বালাইনাশক ডিরেক্টরি — স্মার্ট সার্চ, MoA ঘূর্ণন পরিকল্পনা, ট্যাংক-মিক্স ডোজ ক্যালকুলেটর, ফিল্ড ক্যালিব্রেশন, PPE চেকলিস্ট ও নিয়ন্ত্রক অ্যালার্ট।',
+    emoji: '🌾',
+    badgeEn: 'This app',
+    badgeBn: 'এই অ্যাপ',
+  },
+  {
+    url: 'https://moniruzjaman.github.io/pesticide-reform/',
+    image: 'https://raw.githubusercontent.com/moniruzjaman/pesticide-reform/main/social-preview.png',
+    alt: 'Pesticide Reform — MoA Group/Code on Pesticide Labels (Submission Dossier v4.0.0)',
+    titleEn: 'Pesticide Reform — label dossier',
+    titleBn: 'পেস্টিসাইড রিফর্ম — লেবেল ডজিয়ার',
+    descEn: 'Policy dossier proposing international IRAC/FRAC/HRAC MoA group codes on registered pesticide labels — DAE Kurigram submission under the Pesticides Act, 2018.',
+    descBn: 'নিবন্ধিত বালাইনাশকের লেবেলে আন্তর্জাতিক IRAC/FRAC/HRAC MoA গ্রুপ কোড যুক্ত করার নীতিগত প্রস্তাব — বালাইনাশক আইন ২০১৮-এর আওতায় DAE কুড়িগ্রাম সাবমিশন ডজিয়ার।',
+    emoji: '🏷️',
+  },
+  {
+    url: 'https://pesticideact2018.vercel.app/',
+    image: 'https://raw.githubusercontent.com/moniruzjaman/pesticide_act_2018/main/public/og-image.png',
+    alt: 'বালাইনাশক আইন, ২০১৮ — সমন্বিত ফিল্ড গাইড',
+    titleEn: 'Pesticide Act 2018 — field guide',
+    titleBn: 'বালাইনাশক আইন ২০১৮ — ফিল্ড গাইড',
+    descEn: 'Interactive legal reference for retailers and extension officers — all 36 sections, a 47-slide training deck, download centre and an offline AI assistant.',
+    descBn: 'খুচরা বিক্রেতা ও সম্প্রসারণ কর্মকর্তাদের জন্য ইন্টারঅ্যাকটিভ আইনি রেফারেন্স — ৩৬টি ধারা, ৪৭ স্লাইডের প্রশিক্ষণ ডেক, ডাউনলোড সেন্টার ও অফলাইন AI সহায়ক।',
+    emoji: '⚖️',
+  },
+  {
+    url: 'https://moniruzjaman.github.io/portfolio/',
+    image: 'https://moniruzjaman.github.io/portfolio/og/home.png',
+    alt: 'Abu Md. Moniruzjaman — Portfolio · Agricultural Extension & Digital Tools',
+    titleEn: "The developer's portfolio",
+    titleBn: 'নির্মাতার পোর্টফোলিও',
+    descEn: 'Abu Md. Moniruzjaman — Additional Deputy Director (Horticulture), DAE Bangladesh, building digital tools for smallholder farmers. Selected work, career and field writing.',
+    descBn: 'আবু এমডি মনিরুজ্জামান — উপ-পরিচালক (উদ্যান), DAE বাংলাদেশ; ক্ষুদ্র কৃষকের জন্য ডিজিটাল টুলস নির্মাতা। নির্বাচিত কাজ, ক্যারিয়ার ও মাঠ-লেখনী।',
+    emoji: '🌿',
+  },
+];
 
 // ---------------------------------------------------------------------------
 // Code-split views: each tab (and the heavy modals) lives in its own lazy
@@ -739,6 +805,57 @@ export default function App() {
               <Share2 className="w-3.5 h-3.5 text-emerald-600" />
               <span>{language === 'bn' ? 'শেয়ার করুন' : 'Share'}</span>
             </button>
+          </div>
+        </div>
+
+        {/* OG-image preview strip — this app + companion projects. Each card
+            shows the target page's real og:image with a one-line "what it is",
+            so the footer alone gives a clear understanding of the whole
+            ecosystem. Cards open in a new tab; images fail gracefully to a
+            gradient + emoji placeholder. */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-100 mt-6 pt-6">
+          <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-3">
+            {language === 'bn' ? 'এই অ্যাপ ও সম্পর্কিত প্রজেক্ট — এক নজরে' : 'This app & related projects — at a glance'}
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            {RELATED_LINKS.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-emerald-300 hover:shadow-md transition-all p-2.5 flex flex-col gap-2"
+              >
+                {/* Preview: real og:image over a graceful fallback */}
+                <div className="relative aspect-[1200/630] rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-slate-100">
+                    <span className="text-3xl" aria-hidden>{link.emoji}</span>
+                  </div>
+                  <img
+                    src={link.image}
+                    alt={link.alt}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    className="relative w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                  {link.badgeEn && (
+                    <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-bold shadow-sm">
+                      {language === 'bn' ? link.badgeBn : link.badgeEn}
+                    </span>
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <p className="font-bold text-slate-900 text-xs flex items-center gap-1.5 leading-snug">
+                    <span className="truncate">{language === 'bn' ? link.titleBn : link.titleEn}</span>
+                    <ExternalLink className="w-3 h-3 text-slate-400 shrink-0 opacity-60 group-hover:opacity-100 group-hover:text-emerald-600 transition-opacity" />
+                  </p>
+                  <p className="text-[11px] text-slate-500 leading-relaxed mt-1 line-clamp-3">
+                    {language === 'bn' ? link.descBn : link.descEn}
+                  </p>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </footer>
