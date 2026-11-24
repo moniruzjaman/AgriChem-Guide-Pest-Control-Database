@@ -429,7 +429,7 @@ export function ProtectionView() {
         <summary className="pn-step-summary">
           <span className="pn-step-number">01</span>
           <div className="pn-step-heading">
-            <h2>A · {t('Risk Overview', 'ঝুঁকির সারসংক্ষেপ')}</h2>
+            <h2>{t('Risk Overview', 'ঝুঁকির সারসংক্ষেপ')}</h2>
             <p>{t('Risk and weather', 'ফসল ও অবস্থান অনুযায়ী আবহাওয়ার তথ্য দেখুন। শুধু ঝুঁকি দেখে স্প্রে করবেন না।')}</p>
           </div>
           <span className="pn-step-chevron" aria-hidden="true">⌄</span>
@@ -550,7 +550,7 @@ export function ProtectionView() {
         <summary className="pn-step-summary">
           <span className="pn-step-number">02</span>
           <div className="pn-step-heading">
-            <h2>B · {t('Field Scouting', 'ক্ষেত পর্যবেক্ষণ')}</h2>
+            <h2>{t('Field Scouting', 'ক্ষেত পর্যবেক্ষণ')}</h2>
             <p>{t('Field observation', 'গাছ, পাতা ও বালাইয়ের লক্ষণ নিজে দেখে তথ্য লিখুন।')}</p>
           </div>
           <span className="pn-step-chevron" aria-hidden="true">⌄</span>
@@ -628,7 +628,7 @@ export function ProtectionView() {
         <summary className="pn-step-summary">
           <span className="pn-step-number">03</span>
           <div className="pn-step-heading">
-            <h2>C · {t('Protection Decision', 'সুরক্ষা সিদ্ধান্ত')}</h2>
+            <h2>{t('Protection Decision', 'সুরক্ষা সিদ্ধান্ত')}</h2>
             <p>{t('Understand the next step', 'পর্যবেক্ষণ, প্রমাণ ও অনুপস্থিত তথ্য দেখে পরবর্তী পদক্ষেপ বুঝুন।')}</p>
           </div>
           <span className="pn-step-chevron" aria-hidden="true">⌄</span>
@@ -690,7 +690,7 @@ export function ProtectionView() {
         <summary className="pn-step-summary">
           <span className="pn-step-number">04</span>
           <div className="pn-step-heading">
-            <h2>D · {t('Product Eligibility & Safety', 'পণ্যের যোগ্যতা ও নিরাপত্তা')}</h2>
+            <h2>{t('Product Eligibility & Safety', 'পণ্যের যোগ্যতা ও নিরাপত্তা')}</h2>
             <p>{t('Check products and labels', 'নিবন্ধন, ফসল-বালাই মিল, মাত্রা ও নিরাপত্তা যাচাই করুন।')}</p>
           </div>
           <span className="pn-step-chevron" aria-hidden="true">⌄</span>
@@ -760,7 +760,7 @@ export function ProtectionView() {
         <summary className="pn-step-summary">
           <span className="pn-step-number">05</span>
           <div className="pn-step-heading">
-            <h2>E · {t('Application Record', 'প্রয়োগ রেকর্ড')}</h2>
+            <h2>{t('Application Record', 'প্রয়োগ রেকর্ড')}</h2>
             <p>{t('Record an application', 'বাস্তবে যা প্রয়োগ করেছেন শুধু সেটিই সংরক্ষণ করুন।')}</p>
           </div>
           <span className="pn-step-chevron" aria-hidden="true">⌄</span>
@@ -825,7 +825,7 @@ export function ProtectionView() {
         <summary className="pn-step-summary">
           <span className="pn-step-number">06</span>
           <div className="pn-step-heading">
-            <h2>F · {t('Outcome & Follow-up', 'ফলাফল ও ফলো-আপ')}</h2>
+            <h2>{t('Outcome & Follow-up', 'ফলাফল ও ফলো-আপ')}</h2>
             <p>{t('Follow up', 'পরবর্তী পর্যবেক্ষণে কার্যকারিতা ও পুনরায় বালাই দেখা যাচ্ছে কি না লিখুন।')}</p>
           </div>
           <span className="pn-step-chevron" aria-hidden="true">⌄</span>
