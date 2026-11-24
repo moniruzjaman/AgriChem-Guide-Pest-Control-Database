@@ -93,7 +93,7 @@ export function ProtectionView() {
   const [target, setTarget] = useState('');
   const [growthStage, setGrowthStage] = useState('');
   const [sowingDate, setSowingDate] = useState('');
-  const [useGps, setUseGps] = useState(true);
+  const [useGps, setUseGps] = useState(false);
 
   const field = useMemo(() => ledger.data.fields.find((f) => f.id === fieldId) ?? null, [ledger.data.fields, fieldId]);
 
