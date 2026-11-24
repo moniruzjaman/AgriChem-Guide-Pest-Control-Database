@@ -1034,8 +1034,8 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   const copy = bn
     ? {
         eyebrow: `${catalogueCountLabel}+ নিবন্ধিত পণ্যের সম্পূর্ণ ডাটাবেস`,
-        h1a: 'সঠিক ওষুধ খুঁজুন,',
-        h1b: 'ভুল ওষুধ নয়।',
+        h1a: 'দোকানে শত শত বোতল ওষুধ —',
+        h1b: 'সঠিক ওষুধ খুঁজুন, ভালো ওষুধ নয়।',
         lede:
           'প্রতিটি কৃষক কখনো "সব থেকে ভালো ওষুধ" খোঁজে না — সে খোঁজে তার ফসলের পোকার জন্য নিবন্ধিত সঠিক ওষুধ। এই ডাটাবেস সেই সঠিক ওষুধ খুঁজে দেয় — ফসল, পোকা, MoA গ্রুপ ও WHO বিপদ ব্যান্ড দিয়ে।',
         trust1: 'সকল পণ্য DAE-নিবন্ধিত, রেজি. নম্বর সহ যাচাইযোগ্য।',
@@ -1058,8 +1058,8 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       }
     : {
         eyebrow: `${catalogueCountLabel}+ registered products, full catalogue`,
-        h1a: 'Find the right chemical,',
-        h1b: 'not just any chemical.',
+        h1a: 'Hundreds of bottles at the shop —',
+        h1b: 'find the right chemical, not just a good one.',
         lede:
           'No farmer asks for "the best pesticide" — they ask for the right registered chemical for their crop and pest. This database finds that right chemical, filtered by crop, pest, MoA group, and WHO hazard band.',
         trust1: 'Every product is DAE-registered, with verifiable registration numbers.',

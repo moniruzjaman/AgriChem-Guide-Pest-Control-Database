@@ -247,9 +247,9 @@ export const RotationPlanner: React.FC<RotationPlannerProps> = ({
             </p>
             <h1 className="acg-rp-h1">
               {language === 'bn' ? (
-                <>একই ওষুধ বারবার — <em>আর কাজ করে না।</em></>
+                <>একই গ্রুপ, আবার ও আবার — <em>আপনি পোকাকে শেখাচ্ছেন কীভাবে বাঁচতে হয়।</em></>
               ) : (
-                <>Same spray, again and again — <em>and it stops working.</em></>
+                <>Same group, spray after spray — <em>you're teaching the pest how to survive.</em></>
               )}
             </h1>
 

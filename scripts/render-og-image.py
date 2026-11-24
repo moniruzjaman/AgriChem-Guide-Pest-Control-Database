@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Regenerate the stats block of public/og-image.png (1200x630 social preview).
+"""Regenerate the stats block and hero-dialogue subline of public/og-image.png
+(1200x630 social preview).
 
 The artwork itself is static; this script keeps its NUMBERS in sync with the
 published runtime database (public/downloads/pesticide_database.json):
@@ -8,8 +9,9 @@ published runtime database (public/downloads/pesticide_database.json):
   stat 2  ৮২%      MoA-তে ম্যাপ করা / IRAC . FRAC . HRAC
   stat 3  ৬        ফিল্ড টুল / OFFLINE PWA . BILINGUAL   (unchanged here)
 
-It erases the two stale number lines (columns 1-2) and the column-1 label,
-then redraws them with the site fonts (Hind Siliguri 700/600 — the woff2
+It also refreshes the two-line hero-dialogue subline under the headline with
+the current tab hooks (Rotation Planner + Database), then redraws stats and
+the col-1 label with the site fonts (Hind Siliguri 700/600/400 — the woff2
 subsets in public/fonts are decompressed to TTF in a temp dir at runtime).
 Bengali glyph shaping uses libraqm (PIL must be built with it: it is, via
 pillow built with raqm on this machine and on GH Actions runners).
@@ -46,6 +48,14 @@ def bn(n: int) -> str:
 STAT1 = f"{bn(agri)}+"        # was ৫,০৫২+ — an old-register count
 STAT2 = f"{bn(moa_pct)}%"     # was ৯৬%
 LABEL1 = "DAE নিবন্ধিত পণ্য"   # was "DAE নিবন্ধিত ফসল"
+
+# --- hero-dialogue subline (the two small lines under the headline) ---------
+HOOK1 = "একই গ্রুপ আবার ও আবার স্প্রে করলেই — আপনি পোকাকে শেখাচ্ছেন কীভাবে বাঁচতে হয়।"  # Rotation Planner
+HOOK2 = "দোকানে শত শত বোতল ওষুধ — সঠিক ওষুধ খুঁজুন, ভালো ওষুধ নয়।"                     # Database
+SUBLINE_BOX = (45, 310, 625, 374)     # both rows; headline descends to ~305,
+                                      # divider rule starts ~388 — stay inside
+HOOK1_BASELINE, HOOK2_BASELINE = 336, 362
+SUBLINE_RIGHT = 618                   # right panel edge ~615 — hard stop
 # ----------------------------------------------------------------------------
 
 # erase zones (measured on the 1200x630 artwork; keep clear of neighbours)
@@ -128,6 +138,29 @@ def sample_ink_color(img, box, thr=350):
     return tuple(np.median(dark, axis=0).astype(int)) if len(dark) else (0, 0, 0)
 
 
+def split_runs(text, f_bn, f_lat):
+    """Split text into consecutive (chunk, font) runs by script: Bengali block
+    plus danda U+0964/U+0965 (they live in the Devanagari block!) -> f_bn;
+    comma / em-dash / latin -> f_lat. Spaces stick to the current run so words
+    never split mid-run."""
+    runs, cur, cur_is_bn = [], "", None
+    for ch in text:
+        if ch == " " and cur:
+            cur += ch
+            continue
+        is_bn = 0x0980 <= ord(ch) <= 0x09FF or ord(ch) in (0x0964, 0x0965)
+        if cur_is_bn is None:
+            cur, cur_is_bn = ch, is_bn
+        elif is_bn == cur_is_bn:
+            cur += ch
+        else:
+            runs.append((cur, f_bn if cur_is_bn else f_lat))
+            cur, cur_is_bn = ch, is_bn
+    if cur:
+        runs.append((cur, f_bn if cur_is_bn else f_lat))
+    return runs
+
+
 def main():
     with tempfile.TemporaryDirectory() as td:
         outdir = Path(td)
@@ -162,11 +195,40 @@ def main():
         lbl_runs = [("DAE ", f_lbl_lat), ("নিবন্ধিত পণ্য", f_lbl_bn)]
         draw_runs_at_ink(draw, lbl_runs, 57, LBL_BASELINE, label_col)
 
+        # hero-dialogue subline: the old truncated Home lede becomes the two
+        # tab hooks. Line 1 (Rotation hook) keeps the body-gray 400 weight;
+        # line 2 (Database hook) takes the brand green in 600 for emphasis.
+        sub_left, sub_col = 45, (70, 78, 72)
+        bb = ink_bbox(im.crop(SUBLINE_BOX))
+        if bb:
+            sub_left = SUBLINE_BOX[0] + bb[0]
+        old_sub_col = sample_ink_color(im, SUBLINE_BOX, thr=450)
+        if sum(old_sub_col) < 450:
+            sub_col = old_sub_col
+        draw.rectangle(SUBLINE_BOX, fill=white)
+
+        size_sub = fit_size("400", "bengali", HOOK1, 17, outdir)
+        f1b = load_font("400", "bengali", size_sub, outdir)
+        f1l = load_font("400", "latin", size_sub, outdir)
+        h1_runs = split_runs(HOOK1, f1b, f1l)
+        while size_sub > 8 and sum(f.getlength(t) for t, f in h1_runs) \
+                > SUBLINE_RIGHT - sub_left:
+            size_sub -= 1
+            f1b = load_font("400", "bengali", size_sub, outdir)
+            f1l = load_font("400", "latin", size_sub, outdir)
+            h1_runs = split_runs(HOOK1, f1b, f1l)
+        f2b = load_font("600", "bengali", size_sub, outdir)
+        f2l = load_font("600", "latin", size_sub, outdir)
+        h2_runs = split_runs(HOOK2, f2b, f2l)
+
+        draw_runs_at_ink(draw, h1_runs, sub_left, HOOK1_BASELINE, sub_col)
+        draw_runs_at_ink(draw, h2_runs, sub_left, HOOK2_BASELINE, green)
+
         im.save(IMG)
         print(f"og-image.png updated: stat1={STAT1} agri={agri}/{total} "
               f"stat2={STAT2} moa={moa_pct}% "
-              f"[num {size_num}px, label {size_lbl}px, green={green}, "
-              f"label_col={label_col}]")
+              f"[num {size_num}px, label {size_lbl}px, sub {size_sub}px "
+              f"@x{sub_left}, green={green}, sub_col={sub_col}]")
 
 
 if __name__ == "__main__":
