@@ -217,9 +217,10 @@ def main():
         "docs": "docs/protection-integration-audit.md",
     }
 
-    REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    REPORT_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-    META_PATH.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+    if not check_mode:
+        REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
+        REPORT_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+        META_PATH.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(f"CSV records:        {counts['totalRecords']}")
     print(f"Duplicate regNo:    {counts['duplicateRegNoGroups']} groups ({counts['duplicateRegNoRows']} extra rows)")
@@ -236,8 +237,9 @@ def main():
         print(f"Runtime JSON:       {runtime.get('productCount', '?')} products"
               f" (missing MoA: {runtime.get('missingMoa', '?')},"
               f" empty crops: {runtime.get('emptyCrops', '?')})")
-    print(f"\nWrote {REPORT_PATH.relative_to(ROOT)}")
-    print(f"Wrote {META_PATH.relative_to(ROOT)}")
+    if not check_mode:
+        print(f"\nWrote {REPORT_PATH.relative_to(ROOT)}")
+        print(f"Wrote {META_PATH.relative_to(ROOT)}")
 
     if check_mode:
         total = max(1, counts["totalRecords"])
