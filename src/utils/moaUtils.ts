@@ -102,7 +102,10 @@ export function atomicMoaGroups(codes: Iterable<string | undefined | null>): str
   for (const raw of codes) {
     const s = (raw ?? '').trim();
     if (!s) continue;
-    const stripped = s.replace(/\s*\([^)]*\)\s*/g, ' ').trim(); // "(B + K3)" = notation, not a group
+    const stripped = s
+      .replace(/\s*\([^)]*\)\s*/g, ' ') // "(B + K3)" = notation, not a group
+      .replace(/\s*\[[^\]]*\]\s*/g, ' ') // "2 [B]" — same, square-bracket form
+      .trim();
     let lastScheme = '';
     for (const part of stripped.split(MOA_COMBO_SPLIT)) {
       if (!part) continue;

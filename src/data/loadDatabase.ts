@@ -241,6 +241,41 @@ function normalizeRegKey(raw: string | undefined | null): string {
   return (raw ?? '').trim().toUpperCase().replace(/\s+/g, '');
 }
 
+/**
+ * Scheme-less MoA codes found in the register ("9", "24A", "3A", "2 [B]").
+ * The Category column cannot be trusted to complete them — 2,4-D is filed as
+ * an "Insecticide" and a bensulfuron+quinclorac herbicide mix likewise — so
+ * the correction is per active ingredient, mirroring the canonical registry
+ * extract's MoA_Corrections pass: Aluminium Phosphide -> IRAC 24A (phosphine
+ * fumigant), 2,4-D -> HRAC O (synthetic auxin), bensulfuron methyl -> HRAC B
+ * (ALS inhibitor), alpha-cypermethrin -> IRAC 3A (pyrethroid).
+ */
+const BARE_MOA_CORRECTIONS: Record<string, string> = {
+  'AP-7967': 'HRAC O', // 2,4-D Dimethyl Amine Salt (Zumar 72SL)
+  'AP-7968': 'HRAC O', // 2,4-D Dimethyl Amine Salt (Zoora 72 SL)
+  'AP-7971': 'HRAC O', // 2,4-D Dimethyl Amine Salt (KB Nash 72SL)
+  'AP-7380': 'IRAC 24A', // Aluminium Phosphide (Aziphos)
+  'AP-7382': 'IRAC 24A', // Aluminium Phosphide (Ramphos 56 TB)
+  'AP-7387': 'IRAC 24A', // Aluminium Phosphide (Congrip 56% TAB)
+  'AP-7388': 'IRAC 24A', // Aluminium Phosphide (Xtox Plus 56 TB)
+  'AP-7769': 'IRAC 24A', // Aluminium Phosphide (Greenphos 56 TB)
+  'AP-7772': 'IRAC 24A', // Aluminium Phosphide (Fuman 57 TB)
+  'AP-7770': 'HRAC B', // Bensulfuron methyl + Quinclorac (Tania 40WP)
+  'PHP-1228': 'IRAC 3A', // Alpha Cypermethrin (Cyper 10EC)
+};
+
+export function applyBareMoaCorrections(products: ChemicalProduct[]): ChemicalProduct[] {
+  return products.map((product) => {
+    const fix = BARE_MOA_CORRECTIONS[normalizeRegKey(product.registrationNo)];
+    // Only complete scheme-less codes; leave properly prefixed ones alone so
+    // a later upstream fix never fights this map.
+    if (fix && product.moaCode && !/^(IRAC|FRAC|HRAC)\b/i.test(product.moaCode)) {
+      return { ...product, moaCode: fix };
+    }
+    return product;
+  });
+}
+
 export function loadDatabase(): Promise<LoadedDatabase> {
   if (loadPromise) return loadPromise;
 
@@ -291,7 +326,7 @@ export function loadDatabase(): Promise<LoadedDatabase> {
     // 40EC entries both carrying AP-665). Keep the FIRST occurrence
     // deterministically so one registration number == one product record.
     const seenFinal = new Set<string>();
-    const dedupedMerged = merged.filter((p) => {
+    const dedupedMerged = applyBareMoaCorrections(merged).filter((p) => {
       const key = normalizeRegKey(p.registrationNo);
       if (!key) return true;
       if (seenFinal.has(key)) return false;

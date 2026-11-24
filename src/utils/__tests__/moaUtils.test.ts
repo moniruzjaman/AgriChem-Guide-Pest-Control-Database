@@ -173,6 +173,10 @@ describe('atomicMoaGroups', () => {
     expect(atomicMoaGroups(['IRAC UN (Botanical)', 'IRAC UN'])).toEqual(['IRAC UN']);
   });
 
+  it('treats square-bracket suffixes as notation too', () => {
+    expect(atomicMoaGroups(['HRAC 2 [B]', 'HRAC B'])).toEqual(['HRAC B']);
+  });
+
   it('splits scheme-mixed combinations and inherits the scheme on bare parts', () => {
     expect(atomicMoaGroups(['FRAC M02 / IRAC UN'])).toEqual(['FRAC M2', 'IRAC UN']);
     expect(atomicMoaGroups(['IRAC 1B + 3A', 'FRAC M03 + P07', 'FRAC 7 + M03'])).toEqual([
