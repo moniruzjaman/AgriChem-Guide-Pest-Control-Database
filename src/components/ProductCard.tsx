@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ChemicalProduct } from '../types';
-import { 
-  Calculator, 
-  ShieldCheck, 
-  FileDown, 
-  Info, 
-  Clock, 
-  Bug, 
-  Sprout, 
+import {
+  Calculator,
+  ShieldCheck,
+  FileDown,
+  Info,
+  Clock,
+  Bug,
+  Sprout,
   AlertTriangle,
   Building2,
-  Tag
+  Tag,
+  Crosshair
 } from 'lucide-react';
 import { exportSingleProductPDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
+import { MOA_DATABASE } from '../data/moaData';
+import { atomicMoaGroups, canonicalMoaCode } from '../utils/moaUtils';
+
+// Canonical MoA index for target-site lookups (module scope, built once) —
+// same source the rotation planner and DatabaseView use.
+const MOA_INFO_BY_CANON = new Map(
+  MOA_DATABASE.map((m) => [canonicalMoaCode(m.code), m])
+);
 
 interface ProductCardProps {
   product: ChemicalProduct;
@@ -29,6 +38,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onOpenSafety
 }) => {
   const { language, transCat, transRisk, transCrop, transPest, transDose, formatNum } = useLanguage();
+
+  // Target site: the product's own moaTargetSite field wins; otherwise the
+  // first atomic MoA group whose MOA_DATABASE entry carries a targetSite.
+  const targetSiteInfo = useMemo(() => {
+    if (product.moaTargetSite) return undefined;
+    for (const atom of atomicMoaGroups([product.moaCode, ...(product.moaCodes ?? [])])) {
+      const info = MOA_INFO_BY_CANON.get(atom);
+      if (info?.targetSite) return info;
+    }
+    return undefined;
+  }, [product]);
+  const targetSite = product.moaTargetSite || targetSiteInfo?.targetSite;
 
   const getCategoryBadgeClass = (type: ChemicalProduct['type']) => {
     switch (type) {
@@ -72,9 +93,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div>
         {/* Top Badges */}
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <span className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${getCategoryBadgeClass(product.type)}`}>
-            {transCat(product.type)}
-          </span>
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${getCategoryBadgeClass(product.type)}`}>
+              {transCat(product.type)}
+            </span>
+            {(product.formulation || product.formulationCode) && (
+              <span
+                className="text-[11px] font-mono font-bold px-2 py-0.5 rounded border border-slate-300 bg-slate-50 text-slate-700 tracking-wide truncate max-w-[120px]"
+                title={language === 'bn' ? 'ফর্মুলেশন টাইপ' : 'Formulation type'}
+              >
+                {product.formulation || product.formulationCode}
+              </span>
+            )}
+          </div>
           <div className="flex items-center gap-1.5">
             {product.moaCode && (
               <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-slate-800 text-white tracking-wide">
@@ -105,6 +136,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <Tag className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
           <span className="truncate">{product.commonName}</span>
         </p>
+
+        {/* Target site — the biochemical/physiological site the MoA groups attack */}
+        {targetSite && (
+          <p className="text-[11px] text-slate-500 mt-1.5 flex items-start gap-1.5 leading-relaxed">
+            <Crosshair className="w-3.5 h-3.5 text-violet-600 shrink-0 mt-0.5" />
+            <span className="line-clamp-2">
+              <span className="font-semibold text-slate-600">
+                {language === 'bn' ? 'লক্ষ্যস্থান:' : 'Target site:'}
+              </span>{' '}
+              {language === 'bn' ? (targetSiteInfo?.targetSiteBn || targetSite) : targetSite}
+            </span>
+          </p>
+        )}
 
         {/* Reg & Manufacturer */}
         <div className="mt-2.5 pt-2.5 border-t border-slate-100 text-xs text-slate-500 space-y-1">

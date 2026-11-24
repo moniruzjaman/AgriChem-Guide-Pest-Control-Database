@@ -263,6 +263,32 @@
   line-height: 1.5;
 }
 .acg-db-brand-name__meta strong { color: var(--ink); font-weight: 600; }
+
+/* Field facts on the brand card: recommended crops + target pests */
+.acg-db-brand-name__targets {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 5px;
+  font-size: 10.5px;
+  color: var(--muted);
+  min-width: 0;
+}
+.acg-db-brand-name__crops,
+.acg-db-brand-name__pests {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+.acg-db-brand-name__crops svg { color: #059669; }
+.acg-db-brand-name__pests svg { color: #d97706; }
+.acg-db-brand-name__crops b,
+.acg-db-brand-name__pests b {
+  color: var(--ink);
+  font-weight: 700;
+  flex-shrink: 0;
+}
 .acg-db-brand-name__meta .sep { color: var(--line); }
 
 /* MoA badge cell — fixed width, never fluctuates */

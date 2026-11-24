@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { ChemicalProduct } from '../types';
+import { ChemicalProduct, MoAClassification } from '../types';
 import { ProductCard } from './ProductCard';
-import { 
+import {
   Search,
   ScanLine,
-  Filter, 
+  SprayCan,
+  Filter,
   FileDown, 
   RotateCcw, 
   Sprout, 
@@ -38,7 +39,7 @@ import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
 import { MOA_DATABASE } from '../data/moaData';
 import { smartSearch } from '../utils/smartSearch';
-import { atomicMoaGroups } from '../utils/moaUtils';
+import { atomicMoaGroups, canonicalMoaCode } from '../utils/moaUtils';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 import { LabelScannerModal } from './LabelScannerModal';
 import './DatabaseView.css';
@@ -98,6 +99,58 @@ const TOX_BAND_LABEL_BN: Record<ToxBand, string> = {
   blue: 'সামান্য',
   green: 'নিরাপদ',
   none: 'শ্রেণিহীন',
+};
+
+// ---------------------------------------------------------------------------
+// Target-site facet — the biochemical/physiological site a product's atomic
+// MoA groups attack. Resolved through MOA_DATABASE (same source the rotation
+// planner uses); products with no mapped MoA fall into an "unmapped" bucket.
+// ---------------------------------------------------------------------------
+const SITE_UNMAPPED = '__unmapped__';
+const siteMatches = (site: string | undefined, selected: string): boolean =>
+  selected === 'all' || (selected === SITE_UNMAPPED ? !site : site === selected);
+
+// ---------------------------------------------------------------------------
+// Formulation-type helpers — power the "By Formulation" view mode.
+// Formulation strings arrive from several registers ("EC", "5% EC", "—"),
+// so buckets normalise: uppercase, strength prefix stripped, junk folded
+// to the unspecified bucket.
+// ---------------------------------------------------------------------------
+const normalizeFormulation = (p: ChemicalProduct): string => {
+  const raw = (p.formulation || p.formulationCode || '').trim().toUpperCase();
+  if (!raw || raw === 'UNKNOWN' || /^[—–-]+$/.test(raw)) return '';
+  return raw.replace(/^\d+(?:\.\d+)?%\s*/, '').trim() || '';
+};
+
+// Bilingual labels + emoji per formulation family for the view sections.
+const FORMULATION_META: Record<string, { emoji: string; en: string; bn: string }> = {
+  EC: { emoji: '💧', en: 'Emulsifiable Concentrate — liquid, mixes with water', bn: 'ইসি — তরল ঘনীভূত, পানিতে মিশ্রণযোগ্য' },
+  WP: { emoji: '🌫️', en: 'Wettable Powder — powder suspension spray', bn: 'ডব্লিউপি — পানিতে ভেজানো গুঁড়ো স্প্রে' },
+  WDG: { emoji: '🟣', en: 'Water Dispersible Granules — dust-free granule spray', bn: 'ডব্লিউডিজি — পানিতে ছড়ানো দানা, ধুলোমুক্ত' },
+  WG: { emoji: '🟣', en: 'Water Dispersible Granules — dust-free granule spray', bn: 'ডব্লিউজি — পানিতে ছড়ানো দানা, ধুলোমুক্ত' },
+  DF: { emoji: '🟣', en: 'Dry Flowable — dust-free granule spray', bn: 'ডিএফ — শুকনো প্রবাহী দানা' },
+  SC: { emoji: '🥛', en: 'Suspension Concentrate — milky flowable', bn: 'এসসি — সাসপেনশন ঘন তরল' },
+  SL: { emoji: '🧪', en: 'Soluble Liquid Concentrate', bn: 'এসএল — পানিতে দ্রবণীয় তরল' },
+  SP: { emoji: '🥄', en: 'Soluble Powder', bn: 'এসপি — পানিতে দ্রবণীয় গুঁড়ো' },
+  SG: { emoji: '🥄', en: 'Water Soluble Granules', bn: 'এসজি — পানিতে দ্রবণীয় দানা' },
+  GR: { emoji: '🧂', en: 'Granules — applied directly to soil or field', bn: 'জিআর — দানা, সরাসরি মাঠে প্রয়োগ' },
+  G: { emoji: '🧂', en: 'Granules — applied directly to soil or field', bn: 'জি — দানা, সরাসরি মাঠে প্রয়োগ' },
+  TABLET: { emoji: '💊', en: 'Tablet formulation', bn: 'ট্যাবলেট ফর্মুলেশন' },
+  TB: { emoji: '💊', en: 'Tablet formulation', bn: 'ট্যাবলেট ফর্মুলেশন' },
+  ULV: { emoji: '🚁', en: 'Ultra Low Volume concentrate', bn: 'আল্ট্রা লো ভলিউম ঘন তরল' },
+  AS: { emoji: '🧪', en: 'Aqueous Solution', bn: 'এএস — পানি-ভিত্তিক দ্রবণ' },
+  CS: { emoji: '🥛', en: 'Capsule Suspension', bn: 'সিএস — ক্যাপসুল সাসপেনশন' },
+  EW: { emoji: '💧', en: 'Emulsion in Water', bn: 'ইডব্লিউ — পানিতে ইমালশন' },
+  ME: { emoji: '💧', en: 'Micro-emulsion', bn: 'এমই — মাইক্রো-ইমালশন' },
+  DP: { emoji: '🌪️', en: 'Dustable Powder', bn: 'ডিপি — ধুলো গুঁড়ো' },
+  SE: { emoji: '🥛', en: 'Suspension & emulsion mix', bn: 'এসই — সাসপেনশন-ইমালশন মিশ্রণ' },
+  OD: { emoji: '🥛', en: 'Oil Dispersion', bn: 'ওডি — তেল ডিসপার্শন' },
+  RB: { emoji: '🪱', en: 'Rodenticide bait', bn: 'আরবি — ইঁদুরের টোপ' },
+};
+const formulationMeta = (form: string) => FORMULATION_META[form] || {
+  emoji: '🧴',
+  en: `${form || 'Unspecified'} formulation`,
+  bn: `${form || 'অনির্দিষ্ট'} ফর্মুলেশন`,
 };
 
 // Does a product's atomic MoA set satisfy a scheme facet? 'other' means the
@@ -480,13 +533,15 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
   const [selectedScheme, setSelectedScheme] = useState<string>('all'); // IRAC | FRAC | HRAC | other
   const [selectedTox, setSelectedTox] = useState<string>('all'); // red | yellow | blue | green | none
   const [selectedMap, setSelectedMap] = useState<string>('all'); // mapped | unmapped
+  const [selectedPest, setSelectedPest] = useState<string>('all'); // target-pest facet
+  const [selectedSite, setSelectedSite] = useState<string>('all'); // MoA target-site facet
   const [sortBy, setSortBy] = useState<'relevance' | 'name' | 'type' | 'phi' | 'reg'>('relevance');
-  
+
   // View mode & UX controls
   // Default to 'grouped' so users see products organized by active ingredient
   // under category section headers (Insecticide / Fungicide / Herbicide / etc.)
   // — visually appealing and easy to scan, instead of a flat alphabetical list.
-  const [viewMode, setViewMode] = useState<'table' | 'grouped' | 'grid'>('grouped');
+  const [viewMode, setViewMode] = useState<'table' | 'grouped' | 'grid' | 'formulation'>('grouped');
   const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
   const [scanOpen, setScanOpen] = useState<boolean>(false);
   const [expandedIngredients, setExpandedIngredients] = useState<Record<string, boolean>>({});
@@ -520,6 +575,32 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     return m;
   }, [products]);
 
+  // MOA_DATABASE keyed by canonical code ("FRAC M03" -> "FRAC M3") so
+  // atomic-group lookups hit the same entry regardless of register notation.
+  const moaInfoByCanonical = useMemo(() => {
+    const m = new Map<string, MoAClassification>();
+    MOA_DATABASE.forEach((entry) => {
+      const canon = canonicalMoaCode(entry.code);
+      if (canon && !m.has(canon)) m.set(canon, entry);
+    });
+    return m;
+  }, []);
+
+  // Target site per product: the product's own moaTargetSite field wins,
+  // otherwise the first atomic MoA group whose MOA_DATABASE entry carries a
+  // targetSite. Unresolved products land in the facet's "unmapped" bucket.
+  const targetSiteByProduct = useMemo(() => {
+    const m = new Map<string, string>();
+    products.forEach((p) => {
+      if (p.moaTargetSite) { m.set(p.id, p.moaTargetSite); return; }
+      for (const atom of atomicByProduct.get(p.id) ?? []) {
+        const info = moaInfoByCanonical.get(atom);
+        if (info?.targetSite) { m.set(p.id, info.targetSite); return; }
+      }
+    });
+    return m;
+  }, [products, atomicByProduct, moaInfoByCanonical]);
+
   // ---------------------------------------------------------------------------
   // Smart search (layman-first): token-AND matching across brand / ingredient
   // / crop / pest (Bangla too) / company / reg-no / label rows, with typo
@@ -540,7 +621,74 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     return m;
   }, [smart]);
 
-  // Compute live category counts based on other current filters (crop, search query, MoA, Risk, scheme, toxicity, mapping)
+  // Facet-honest option lists for the Field & Target filters — each list's
+  // counts are computed under every current filter EXCEPT its own facet, so
+  // every number describes what the option would actually yield.
+  const cropOptions = useMemo(() => {
+    const counts = new Map<string, number>();
+    products.forEach((p) => {
+      const ok =
+        (!smartIds || smartIds.has(p.id)) &&
+        (selectedType === 'all' || p.type === selectedType) &&
+        (selectedPest === 'all' || p.pests.includes(selectedPest)) &&
+        (siteMatches(targetSiteByProduct.get(p.id), selectedSite)) &&
+        (selectedIngredient === 'all' || p.commonName === selectedIngredient) &&
+        (selectedMoA === 'all' || (atomicByProduct.get(p.id) ?? []).includes(selectedMoA)) &&
+        (selectedScheme === 'all' || productHasScheme(atomicByProduct.get(p.id) ?? [], p.moaCode, selectedScheme)) &&
+        (selectedTox === 'all' || toxBand(p) === selectedTox) &&
+        (selectedMap === 'all' || (selectedMap === 'mapped' ? !!p.moaCode : !p.moaCode)) &&
+        (selectedRisk === 'all' || p.resistanceRisk === selectedRisk);
+      if (!ok) return;
+      for (const c of p.crops) counts.set(c, (counts.get(c) ?? 0) + 1);
+    });
+    return Array.from(counts.entries()).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  }, [products, smartIds, selectedType, selectedPest, selectedSite, selectedIngredient, selectedMoA, selectedScheme, selectedTox, selectedMap, selectedRisk, atomicByProduct, targetSiteByProduct]);
+
+  const pestOptions = useMemo(() => {
+    const counts = new Map<string, number>();
+    products.forEach((p) => {
+      const ok =
+        (!smartIds || smartIds.has(p.id)) &&
+        (selectedType === 'all' || p.type === selectedType) &&
+        (selectedCrop === 'all' || p.crops.includes(selectedCrop)) &&
+        (siteMatches(targetSiteByProduct.get(p.id), selectedSite)) &&
+        (selectedIngredient === 'all' || p.commonName === selectedIngredient) &&
+        (selectedMoA === 'all' || (atomicByProduct.get(p.id) ?? []).includes(selectedMoA)) &&
+        (selectedScheme === 'all' || productHasScheme(atomicByProduct.get(p.id) ?? [], p.moaCode, selectedScheme)) &&
+        (selectedTox === 'all' || toxBand(p) === selectedTox) &&
+        (selectedMap === 'all' || (selectedMap === 'mapped' ? !!p.moaCode : !p.moaCode)) &&
+        (selectedRisk === 'all' || p.resistanceRisk === selectedRisk);
+      if (!ok) return;
+      for (const pest of p.pests) counts.set(pest, (counts.get(pest) ?? 0) + 1);
+    });
+    return Array.from(counts.entries()).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  }, [products, smartIds, selectedType, selectedCrop, selectedSite, selectedIngredient, selectedMoA, selectedScheme, selectedTox, selectedMap, selectedRisk, atomicByProduct, targetSiteByProduct]);
+
+  const siteOptions = useMemo(() => {
+    const counts = new Map<string, number>();
+    let unmapped = 0;
+    products.forEach((p) => {
+      const ok =
+        (!smartIds || smartIds.has(p.id)) &&
+        (selectedType === 'all' || p.type === selectedType) &&
+        (selectedCrop === 'all' || p.crops.includes(selectedCrop)) &&
+        (selectedPest === 'all' || p.pests.includes(selectedPest)) &&
+        (selectedIngredient === 'all' || p.commonName === selectedIngredient) &&
+        (selectedMoA === 'all' || (atomicByProduct.get(p.id) ?? []).includes(selectedMoA)) &&
+        (selectedScheme === 'all' || productHasScheme(atomicByProduct.get(p.id) ?? [], p.moaCode, selectedScheme)) &&
+        (selectedTox === 'all' || toxBand(p) === selectedTox) &&
+        (selectedMap === 'all' || (selectedMap === 'mapped' ? !!p.moaCode : !p.moaCode)) &&
+        (selectedRisk === 'all' || p.resistanceRisk === selectedRisk);
+      if (!ok) return;
+      const site = targetSiteByProduct.get(p.id);
+      if (site) counts.set(site, (counts.get(site) ?? 0) + 1);
+      else unmapped += 1;
+    });
+    const list = Array.from(counts.entries()).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+    return { list, unmapped };
+  }, [products, smartIds, selectedType, selectedCrop, selectedPest, selectedIngredient, selectedMoA, selectedScheme, selectedTox, selectedMap, selectedRisk, atomicByProduct, targetSiteByProduct]);
+
+  // Compute live category counts based on other current filters (crop, search query, MoA, Risk, scheme, toxicity, mapping, pest, target site)
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { 'all': 0 };
     products.forEach((p) => {
@@ -551,14 +699,16 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       const matchesScheme = selectedScheme === 'all' || productHasScheme(atomicByProduct.get(p.id) ?? [], p.moaCode, selectedScheme);
       const matchesTox = selectedTox === 'all' || toxBand(p) === selectedTox;
       const matchesMap = selectedMap === 'all' || (selectedMap === 'mapped' ? !!p.moaCode : !p.moaCode);
+      const matchesPest = selectedPest === 'all' || p.pests.includes(selectedPest);
+      const matchesSite = siteMatches(targetSiteByProduct.get(p.id), selectedSite);
 
-      if (matchesSearch && matchesCrop && matchesRisk && matchesMoA && matchesScheme && matchesTox && matchesMap) {
+      if (matchesSearch && matchesCrop && matchesRisk && matchesMoA && matchesScheme && matchesTox && matchesMap && matchesPest && matchesSite) {
         counts[p.type] = (counts[p.type] || 0) + 1;
         counts['all'] += 1;
       }
     });
     return counts;
-  }, [products, smartIds, selectedCrop, selectedRisk, selectedMoA, selectedScheme, selectedTox, selectedMap, atomicByProduct]);
+  }, [products, smartIds, selectedCrop, selectedRisk, selectedMoA, selectedScheme, selectedTox, selectedMap, selectedPest, selectedSite, atomicByProduct, targetSiteByProduct]);
 
   // Compute live active ingredients present in currently filtered items (helps user see subcategories)
   const activeIngredientsInSelectedCategory = useMemo(() => {
@@ -572,13 +722,15 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       const matchesScheme = selectedScheme === 'all' || productHasScheme(atomicByProduct.get(p.id) ?? [], p.moaCode, selectedScheme);
       const matchesTox = selectedTox === 'all' || toxBand(p) === selectedTox;
       const matchesMap = selectedMap === 'all' || (selectedMap === 'mapped' ? !!p.moaCode : !p.moaCode);
+      const matchesPest = selectedPest === 'all' || p.pests.includes(selectedPest);
+      const matchesSite = siteMatches(targetSiteByProduct.get(p.id), selectedSite);
 
-      if (matchesSearch && matchesCrop && matchesCategory && matchesRisk && matchesMoA && matchesScheme && matchesTox && matchesMap) {
+      if (matchesSearch && matchesCrop && matchesCategory && matchesRisk && matchesMoA && matchesScheme && matchesTox && matchesMap && matchesPest && matchesSite) {
         map[p.commonName] = (map[p.commonName] || 0) + 1;
       }
     });
     return Object.entries(map).sort((a, b) => b[1] - a[1]); // Sort by brand count descending
-  }, [products, smartIds, selectedCrop, selectedType, selectedRisk, selectedMoA, selectedScheme, selectedTox, selectedMap, atomicByProduct]);
+  }, [products, smartIds, selectedCrop, selectedType, selectedRisk, selectedMoA, selectedScheme, selectedTox, selectedMap, selectedPest, selectedSite, atomicByProduct, targetSiteByProduct]);
 
   // ---------------------------------------------------------------------------
   // Facet-honest atomic MoA dropdown: counts computed under every current
@@ -597,7 +749,9 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       const matchesScheme = selectedScheme === 'all' || productHasScheme(atomicByProduct.get(p.id) ?? [], p.moaCode, selectedScheme);
       const matchesTox = selectedTox === 'all' || toxBand(p) === selectedTox;
       const matchesMap = selectedMap === 'all' || (selectedMap === 'mapped' ? !!p.moaCode : !p.moaCode);
-      if (!(matchesSearch && matchesCrop && matchesCategory && matchesIngredient && matchesRisk && matchesScheme && matchesTox && matchesMap)) return;
+      const matchesPest = selectedPest === 'all' || p.pests.includes(selectedPest);
+      const matchesSite = siteMatches(targetSiteByProduct.get(p.id), selectedSite);
+      if (!(matchesSearch && matchesCrop && matchesCategory && matchesIngredient && matchesRisk && matchesScheme && matchesTox && matchesMap && matchesPest && matchesSite)) return;
       for (const a of atomicByProduct.get(p.id) ?? []) counts.set(a, (counts.get(a) ?? 0) + 1);
     });
     const schemeOrder = (c: string) => (c.startsWith('IRAC') ? 0 : c.startsWith('FRAC') ? 1 : c.startsWith('HRAC') ? 2 : 3);
@@ -608,7 +762,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       if (a[1] !== b[1]) return b[1] - a[1];
       return a[0].localeCompare(b[0]);
     });
-  }, [products, smartIds, selectedCrop, selectedType, selectedIngredient, selectedRisk, selectedScheme, selectedTox, selectedMap, atomicByProduct]);
+  }, [products, smartIds, selectedCrop, selectedType, selectedIngredient, selectedRisk, selectedScheme, selectedTox, selectedMap, selectedPest, selectedSite, atomicByProduct, targetSiteByProduct]);
 
   // Filter and sort the commercial products
   const filteredProducts = useMemo(() => {
@@ -626,6 +780,16 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
 
       // Crop filter
       if (selectedCrop !== 'all' && !p.crops.includes(selectedCrop)) {
+        return false;
+      }
+
+      // Target-pest facet
+      if (selectedPest !== 'all' && !p.pests.includes(selectedPest)) {
+        return false;
+      }
+
+      // Target-site facet (resolved from the product's atomic MoA groups)
+      if (!siteMatches(targetSiteByProduct.get(p.id), selectedSite)) {
         return false;
       }
 
@@ -676,7 +840,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
       if (sortBy === 'reg') return a.registrationNo.localeCompare(b.registrationNo);
       return 0;
     });
-  }, [products, smartIds, smart, selectedType, selectedCrop, selectedIngredient, selectedMoA, selectedScheme, selectedTox, selectedMap, selectedRisk, sortBy, atomicByProduct]);
+  }, [products, smartIds, smart, selectedType, selectedCrop, selectedIngredient, selectedMoA, selectedScheme, selectedTox, selectedMap, selectedRisk, selectedPest, selectedSite, sortBy, atomicByProduct, targetSiteByProduct]);
 
   // Group filtered products by Active Ingredient
   const groupedByIngredient = useMemo(() => {
@@ -753,6 +917,8 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     setSelectedScheme('all');
     setSelectedTox('all');
     setSelectedMap('all');
+    setSelectedPest('all');
+    setSelectedSite('all');
     setSortBy('name');
     setVisibleLimit(48);
   };
@@ -1237,6 +1403,124 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     });
     return c;
   }, [filteredProducts, atomicByProduct]);
+
+  // ---------------------------------------------------------------------------
+  // Shared brand row — one row per registered brand, used by the grouped view
+  // (inside expanded ingredient groups) and the formulation view. Every row
+  // carries the full field card: brand name, formulation, reg no + holder,
+  // recommended crops, target pests, MoA code (with honest unmapped state),
+  // dose/PHI and the quick-action buttons.
+  // ---------------------------------------------------------------------------
+  const renderBrandRow = (brand: ChemicalProduct) => (
+    <div key={brand.id} className="acg-db-brand-row">
+      {/* Col 1: Brand name + reg details (flexible, truncated) */}
+      <div className="acg-db-brand-name">
+        <div className="acg-db-brand-name__title">
+          <h4 title={brand.tradeName}>{brand.tradeName}</h4>
+          {brand.formulation && (
+            <span className="acg-db-brand-name__formulation">{brand.formulation}</span>
+          )}
+        </div>
+        <div className="acg-db-brand-name__meta">
+          <span>{bn ? 'নিবন্ধন নং:' : 'Reg:'} <strong className="font-mono">{brand.registrationNo}</strong></span>
+          <span className="sep">|</span>
+          <span title={brand.registrationHolder}>{bn ? 'আমদানিকারক:' : 'Holder:'} <strong>{brand.registrationHolder}</strong></span>
+        </div>
+        {/* Field facts: recommended crops + target pests on the card itself */}
+        {(brand.crops.length > 0 || brand.pests.length > 0) && (
+          <div className="acg-db-brand-name__targets">
+            {brand.crops.length > 0 && (
+              <span
+                className="acg-db-brand-name__crops"
+                title={bn ? `অনুমোদিত ফসল: ${brand.crops.map(transCrop).join(', ')}` : `Recommended crops: ${brand.crops.map(transCrop).join(', ')}`}
+              >
+                <Sprout className="w-3 h-3 text-emerald-600 shrink-0" />
+                <span className="truncate">{brand.crops.slice(0, 3).map(transCrop).join(' · ')}</span>
+                {brand.crops.length > 3 && <b>+{formatNum(brand.crops.length - 3)}</b>}
+              </span>
+            )}
+            {brand.pests.length > 0 && (
+              <span
+                className="acg-db-brand-name__pests"
+                title={bn ? `লক্ষ্য: ${brand.pests.map(transPest).join(', ')}` : `Targets: ${brand.pests.map(transPest).join(', ')}`}
+              >
+                <Bug className="w-3 h-3 text-amber-600 shrink-0" />
+                <span className="truncate">{brand.pests.slice(0, 2).map(transPest).join(' · ')}</span>
+                {brand.pests.length > 2 && <b>+{formatNum(brand.pests.length - 2)}</b>}
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+      {/* Col 2: MoA badge (fixed 130px) */}
+      <div className="acg-db-brand-moa">
+        <span className="acg-db-brand-moa__label">
+          {brand.moaCode?.startsWith('IRAC') ? 'IRAC MoA' : brand.moaCode?.startsWith('FRAC') ? 'FRAC MoA' : brand.moaCode?.startsWith('HRAC') ? 'HRAC MoA' : (bn ? 'MoA নম্বর' : 'MoA')}
+        </span>
+        {brand.moaCode ? (
+          <span className="acg-db-brand-moa__code" title={brand.moaCode}>
+            {brand.moaCode}
+          </span>
+        ) : (
+          <span
+            className="acg-db-brand-moa__code acg-db-brand-moa__code--unmapped"
+            title={bn ? 'এই উপাদানের MoA কোড এখনো ম্যাপ করা হয়নি' : 'No MoA code mapped for this ingredient yet'}
+          >
+            {bn ? 'ম্যাপহীন' : 'unmapped'}
+          </span>
+        )}
+        <span className="acg-db-brand-moa__group" title={brand.moaGroup || brand.moaCode}>
+          {brand.moaCode
+            ? (bn ? (moaInfoMap[brand.moaCode]?.nameBn || brand.moaGroup) : brand.moaGroup)
+            : (bn ? 'এখনো শ্রেণিবদ্ধ হয়নি' : 'not yet classified')}
+        </span>
+      </div>
+      {/* Col 3: Dosage + PHI (fixed 180px) */}
+      <div className="acg-db-brand-dose">
+        <div className="acg-db-brand-dose__cell">
+          <span className="acg-db-brand-dose__label">{bn ? 'মাত্রা' : 'Dose'}</span>
+          <span className="acg-db-brand-dose__value" title={brand.dosageRate}>
+            {transDose(brand.dosageRate) || '—'}
+          </span>
+        </div>
+        <div className="acg-db-brand-dose__cell">
+          <span className="acg-db-brand-dose__label">PHI</span>
+          <span className="acg-db-brand-dose__value">
+            {brand.phiDays ? `${formatNum(brand.phiDays)} ${bn ? 'দিন' : 'd'}` : '—'}
+          </span>
+        </div>
+      </div>
+      {/* Col 4: Action buttons (fixed 150px, never wraps) */}
+      <div className="acg-db-brand-actions">
+        <button
+          type="button"
+          className="acg-db-brand-btn acg-db-brand-btn--calc"
+          onClick={() => onOpenCalculator(brand)}
+          title={bn ? 'হিসাবকারী স্টেশন খুলুন' : 'Open Dosage Station'}
+        >
+          <Calculator className="w-3.5 h-3.5" />
+          <span>{bn ? 'ডোজ' : 'Dose'}</span>
+        </button>
+        <button
+          type="button"
+          className="acg-db-brand-btn acg-db-brand-btn--safe"
+          onClick={() => onOpenSafety(brand)}
+          title={bn ? 'নিরাপত্তা চেকলিস্ট' : 'Safety Protocols'}
+        >
+          <ShieldCheck className="w-3.5 h-3.5" />
+          <span>{bn ? 'নিরাপত্তা' : 'Safe'}</span>
+        </button>
+        <button
+          type="button"
+          className="acg-db-brand-btn acg-db-brand-btn--info"
+          onClick={() => onSelectProduct(brand)}
+          title={bn ? 'বিস্তারিত তথ্য' : 'Product Technical Datasheet'}
+        >
+          <Info className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <div className="acg-db pn-tokens">
@@ -1948,6 +2232,77 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                     <option value="unmapped">{language === 'bn' ? 'ম্যাপহীন — MoA কোড নেই' : 'Unmapped — no MoA code'}</option>
                   </select>
                 </div>
+
+                {/* D. Field & Target filters — recommended crop, target pest,
+                    MoA target site. Counts are facet-honest: computed under
+                    every other filter but never the facet's own selection. */}
+                <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2 pt-1">
+                  <Sprout className="w-3.5 h-3.5 text-slate-500" />
+                  {language === 'bn' ? 'ফসল, পোকা ও লক্ষ্যস্থান ফিল্টার' : 'Crop, Pest & Target-Site Filters'}
+                </h3>
+
+                {/* Recommended Crop Filter (mirror of the crop bar, with honest counts) */}
+                <div className="space-y-1">
+                  <label className="text-[11px] font-semibold text-slate-500 block">
+                    {language === 'bn' ? 'প্রস্তাবিত ফসল' : 'Recommended Crop'}
+                  </label>
+                  <select
+                    id="crop-select"
+                    value={selectedCrop}
+                    onChange={(e) => setSelectedCrop(e.target.value)}
+                    className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  >
+                    <option value="all">{language === 'bn' ? 'সব ফসল' : 'All crops'}</option>
+                    {cropOptions.map(([crop, count]) => (
+                      <option key={crop} value={crop}>
+                        {`${transCrop(crop)} · ${count}`}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Target Pest Filter */}
+                <div className="space-y-1">
+                  <label className="text-[11px] font-semibold text-slate-500 block">
+                    {language === 'bn' ? 'লক্ষ্য বালাই / রোগ / আগাছা' : 'Target Pest / Disease / Weed'}
+                  </label>
+                  <select
+                    id="pest-select"
+                    value={selectedPest}
+                    onChange={(e) => setSelectedPest(e.target.value)}
+                    className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  >
+                    <option value="all">{language === 'bn' ? 'সব লক্ষ্য' : 'All targets'}</option>
+                    {pestOptions.map(([pest, count]) => (
+                      <option key={pest} value={pest}>
+                        {`${transPest(pest)} · ${count}`}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Target Site Filter (MoA-level biochemical target) */}
+                <div className="space-y-1">
+                  <label className="text-[11px] font-semibold text-slate-500 block">
+                    {language === 'bn' ? 'লক্ষ্যস্থান (MoA টার্গেট সাইট)' : 'Target Site (MoA target)'}
+                  </label>
+                  <select
+                    id="site-select"
+                    value={selectedSite}
+                    onChange={(e) => setSelectedSite(e.target.value)}
+                    className="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  >
+                    <option value="all">{language === 'bn' ? 'সব লক্ষ্যস্থান' : 'All target sites'}</option>
+                    <option value={SITE_UNMAPPED}>
+                      {language === 'bn' ? 'ম্যাপহীন — MoA নেই' : 'Unmapped — no MoA'} · {formatNum(siteOptions.unmapped)}
+                    </option>
+                    {siteOptions.list.map(([site, count]) => (
+                      <option key={site} value={site}>
+                        {`${site.length > 64 ? `${site.slice(0, 64)}…` : site} · ${count}`}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -2096,13 +2451,25 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                     onClick={() => setViewMode('grid')}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-all ${
                       viewMode === 'grid'
-                        ? 'bg-white text-emerald-800 shadow-2xs' 
+                        ? 'bg-white text-emerald-800 shadow-2xs'
                         : 'text-slate-500 hover:text-slate-800'
                     }`}
                     title={language === 'bn' ? 'কার্ড গ্রিড তালিকা' : 'Card Grid View'}
                   >
                     <LayoutGrid className="w-3.5 h-3.5" />
                     <span className="hidden sm:inline">{language === 'bn' ? 'কার্ড গ্রিড' : 'Cards'}</span>
+                  </button>
+                  <button
+                    onClick={() => setViewMode('formulation')}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-all ${
+                      viewMode === 'formulation'
+                        ? 'bg-white text-emerald-800 shadow-2xs'
+                        : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                    title={language === 'bn' ? 'ফর্মুলেশন টাইপ অনুযায়ী গ্রুপ (ইসি, ডব্লিউপি, ডব্লিউডিজি...)' : 'Group by formulation type (EC, WP, WDG...)'}
+                  >
+                    <SprayCan className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">{language === 'bn' ? 'ফর্মুলেশন' : 'Formulation'}</span>
                   </button>
                 </div>
 
@@ -2713,91 +3080,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                         <span>{bn ? 'অনুমোদিত ব্রান্ড ফর্মুলেশনসমূহ' : 'Authorized Commercial Brands'}</span>
                                         <span>({formatNum(group.products.length)} {bn ? 'টি নিবন্ধিত ব্র্যান্ড' : 'brands registered'})</span>
                                       </div>
-                                      {group.products.map((brand) => (
-                                        <div key={brand.id} className="acg-db-brand-row">
-                                          {/* Col 1: Brand name + reg details (flexible, truncated) */}
-                                          <div className="acg-db-brand-name">
-                                            <div className="acg-db-brand-name__title">
-                                              <h4 title={brand.tradeName}>{brand.tradeName}</h4>
-                                              {brand.formulation && (
-                                                <span className="acg-db-brand-name__formulation">{brand.formulation}</span>
-                                              )}
-                                            </div>
-                                            <div className="acg-db-brand-name__meta">
-                                              <span>{bn ? 'নিবন্ধন নং:' : 'Reg:'} <strong className="font-mono">{brand.registrationNo}</strong></span>
-                                              <span className="sep">|</span>
-                                              <span title={brand.registrationHolder}>{bn ? 'আমদানিকারক:' : 'Holder:'} <strong>{brand.registrationHolder}</strong></span>
-                                            </div>
-                                          </div>
-                                          {/* Col 2: MoA badge (fixed 130px) */}
-                                          <div className="acg-db-brand-moa">
-                                            <span className="acg-db-brand-moa__label">
-                                              {brand.moaCode?.startsWith('IRAC') ? 'IRAC MoA' : brand.moaCode?.startsWith('FRAC') ? 'FRAC MoA' : brand.moaCode?.startsWith('HRAC') ? 'HRAC MoA' : (bn ? 'MoA নম্বর' : 'MoA')}
-                                            </span>
-                                            {brand.moaCode ? (
-                                              <span className="acg-db-brand-moa__code" title={brand.moaCode}>
-                                                {brand.moaCode}
-                                              </span>
-                                            ) : (
-                                              <span
-                                                className="acg-db-brand-moa__code acg-db-brand-moa__code--unmapped"
-                                                title={bn ? 'এই উপাদানের MoA কোড এখনো ম্যাপ করা হয়নি' : 'No MoA code mapped for this ingredient yet'}
-                                              >
-                                                {bn ? 'ম্যাপহীন' : 'unmapped'}
-                                              </span>
-                                            )}
-                                            <span className="acg-db-brand-moa__group" title={brand.moaGroup || brand.moaCode}>
-                                              {brand.moaCode
-                                                ? (bn ? (moaInfoMap[brand.moaCode]?.nameBn || brand.moaGroup) : brand.moaGroup)
-                                                : (bn ? 'এখনো শ্রেণিবদ্ধ হয়নি' : 'not yet classified')}
-                                            </span>
-                                          </div>
-                                          {/* Col 3: Dosage + PHI (fixed 180px) */}
-                                          <div className="acg-db-brand-dose">
-                                            <div className="acg-db-brand-dose__cell">
-                                              <span className="acg-db-brand-dose__label">{bn ? 'মাত্রা' : 'Dose'}</span>
-                                              <span className="acg-db-brand-dose__value" title={brand.dosageRate}>
-                                                {transDose(brand.dosageRate) || '—'}
-                                              </span>
-                                            </div>
-                                            <div className="acg-db-brand-dose__cell">
-                                              <span className="acg-db-brand-dose__label">PHI</span>
-                                              <span className="acg-db-brand-dose__value">
-                                                {brand.phiDays ? `${formatNum(brand.phiDays)} ${bn ? 'দিন' : 'd'}` : '—'}
-                                              </span>
-                                            </div>
-                                          </div>
-                                          {/* Col 4: Action buttons (fixed 150px, never wraps) */}
-                                          <div className="acg-db-brand-actions">
-                                            <button
-                                              type="button"
-                                              className="acg-db-brand-btn acg-db-brand-btn--calc"
-                                              onClick={() => onOpenCalculator(brand)}
-                                              title={bn ? 'হিসাবকারী স্টেশন খুলুন' : 'Open Dosage Station'}
-                                            >
-                                              <Calculator className="w-3.5 h-3.5" />
-                                              <span>{bn ? 'ডোজ' : 'Dose'}</span>
-                                            </button>
-                                            <button
-                                              type="button"
-                                              className="acg-db-brand-btn acg-db-brand-btn--safe"
-                                              onClick={() => onOpenSafety(brand)}
-                                              title={bn ? 'নিরাপত্তা চেকলিস্ট' : 'Safety Protocols'}
-                                            >
-                                              <ShieldCheck className="w-3.5 h-3.5" />
-                                              <span>{bn ? 'নিরাপত্তা' : 'Safe'}</span>
-                                            </button>
-                                            <button
-                                              type="button"
-                                              className="acg-db-brand-btn acg-db-brand-btn--info"
-                                              onClick={() => onSelectProduct(brand)}
-                                              title={bn ? 'বিস্তারিত তথ্য' : 'Product Technical Datasheet'}
-                                            >
-                                              <Info className="w-4 h-4" />
-                                            </button>
-                                          </div>
-                                        </div>
-                                      ))}
+                                      {group.products.map((brand) => renderBrandRow(brand))}
                                     </div>
                                   )}
                                 </div>
@@ -2810,6 +3093,158 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                   );
                 })()}
 
+              </div>
+            ) : viewMode === 'formulation' ? (
+
+              // View Mode 4: By Formulation Type.
+              //
+              // Layout (top → bottom):
+              //   1. FORMULATION DASHBOARD STRIP — clickable snapshot cards
+              //      per formulation bucket (emoji, ingredient/brand/MoA
+              //      counts). Click → smooth-scrolls to that section.
+              //   2. FORMULATION SECTIONS — one section per formulation type
+              //      (EC, WP, WDG, ...), ordered by brand count, the
+              //      unspecified bucket last. Rows share the same brand-row
+              //      grid as the grouped view via renderBrandRow().
+              //   3. A shared row budget (visibleLimit) paginates across
+              //      sections — "Load More" reveals the next tranche.
+              <div className="space-y-6">
+                {(() => {
+                  // Bucket the filtered products by normalised formulation.
+                  const byFormulation = new Map<string, ChemicalProduct[]>();
+                  for (const p of filteredProducts) {
+                    const f = normalizeFormulation(p);
+                    if (!byFormulation.has(f)) byFormulation.set(f, []);
+                    byFormulation.get(f)!.push(p);
+                  }
+                  const entries = Array.from(byFormulation.entries()).sort((a, b) => {
+                    if (!a[0]) return 1; // unspecified bucket last
+                    if (!b[0]) return -1;
+                    return b[1].length - a[1].length || a[0].localeCompare(b[0]);
+                  });
+
+                  // Per-bucket metrics for the dashboard strip.
+                  const metrics = entries.map(([form, prods]) => {
+                    const ingredients = new Set<string>();
+                    const moaSet = new Set<string>();
+                    let unmapped = 0;
+                    prods.forEach((p) => {
+                      if (p.commonName.trim()) ingredients.add(p.commonName);
+                      const atoms = atomicByProduct.get(p.id) ?? [];
+                      atoms.forEach((a) => moaSet.add(a));
+                      if (!p.moaCode) unmapped += 1;
+                    });
+                    return { form, prods, ingredients: ingredients.size, moa: moaSet.size, unmapped, meta: formulationMeta(form) };
+                  });
+
+                  // Shared row budget across sections — rows here are always
+                  // visible (no expand step), so paginating keeps the flat
+                  // list fast on the 9,000+ catalogue.
+                  let budget = visibleLimit;
+
+                  return (
+                    <>
+                      <div className="acg-db-dashboard">
+                        {metrics.map(({ form, prods, ingredients, moa, unmapped, meta }) => (
+                          <button
+                            key={form || 'unspecified'}
+                            type="button"
+                            className={`acg-db-dash-card ${form ? 'acg-db-dash-card--amber' : 'acg-db-dash-card--muted'}`}
+                            onClick={() => {
+                              const el = document.getElementById(`form-section-${form || 'unspecified'}`);
+                              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }}
+                          >
+                            <div className="acg-db-dash-card__head">
+                              <span className="acg-db-dash-card__emoji" aria-hidden>{meta.emoji}</span>
+                              <span className="acg-db-dash-card__name">{form || (bn ? 'অনির্দিষ্ট' : 'Unspecified')}</span>
+                            </div>
+                            <div className="acg-db-dash-card__metrics">
+                              <span className="acg-db-dash-card__metric">
+                                <b>{formatNum(ingredients)}</b>
+                                {bn ? 'উপাদান' : 'ing'}
+                              </span>
+                              <span className="acg-db-dash-card__metric">
+                                <b>{formatNum(prods.length)}</b>
+                                {bn ? 'ব্র্যান্ড' : 'brand'}
+                              </span>
+                              <span className="acg-db-dash-card__metric">
+                                <b>{formatNum(moa)}</b>
+                                MoA
+                              </span>
+                              {unmapped > 0 && (
+                                <span className="acg-db-dash-card__metric acg-db-dash-card__metric--warn" title={bn ? 'MoA-ম্যাপহীন ব্র্যান্ড' : 'Brands without a MoA code'}>
+                                  <b>{formatNum(unmapped)}</b>
+                                  {bn ? 'ম্যাপহীন' : 'unmap'}
+                                </span>
+                              )}
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+
+                      {metrics.map(({ form, prods, meta }) => {
+                        const shown = prods.slice(0, Math.max(0, budget));
+                        budget -= shown.length;
+                        if (shown.length === 0) return null;
+                        const hidden = prods.length - shown.length;
+                        return (
+                          <section
+                            key={form || 'unspecified'}
+                            id={`form-section-${form || 'unspecified'}`}
+                            className="acg-db-cat-section"
+                            style={{ borderTop: `3px solid ${form ? '#a16207' : '#94a3b8'}` }}
+                          >
+                            <header className="acg-db-cat-head">
+                              <div className="acg-db-cat-head__left">
+                                <span className="acg-db-cat-head__emoji" aria-hidden>{meta.emoji}</span>
+                                <div style={{ minWidth: 0 }}>
+                                  <div className="acg-db-cat-head__name">
+                                    {form || (bn ? 'ফর্মুলেশন অনির্দিষ্ট' : 'Formulation not specified')}
+                                  </div>
+                                  <p className="acg-db-cat-head__desc">{bn ? meta.bn : meta.en}</p>
+                                </div>
+                              </div>
+                              <div className="acg-db-cat-head__metrics">
+                                <span title={bn ? 'নিবন্ধিত ব্র্যান্ড' : 'Registered brands'}>
+                                  <b>{formatNum(prods.length)}</b> {bn ? 'ব্র্যান্ড' : 'brands'}
+                                </span>
+                              </div>
+                            </header>
+                            <div className="acg-db-brand-list" style={{ padding: '0 12px 12px' }}>
+                              <div className="acg-db-brand-list__head">
+                                <span>{bn ? 'অনুমোদিত ব্রান্ড ফর্মুলেশনসমূহ' : 'Authorized Commercial Brands'}</span>
+                                <span>
+                                  {hidden > 0
+                                    ? `(${formatNum(shown.length)} / ${formatNum(prods.length)} ${bn ? 'দেখানো হচ্ছে' : 'shown'} — ${bn ? 'নিচে "আরও লোড করুন" চাপুন' : 'use "Load More" below'})`
+                                    : `(${formatNum(prods.length)})`}
+                                </span>
+                              </div>
+                              {shown.map((brand) => renderBrandRow(brand))}
+                            </div>
+                          </section>
+                        );
+                      })}
+
+                      {filteredProducts.length > visibleLimit && (
+                        <div className="flex flex-col items-center justify-center pt-6 pb-4 space-y-3">
+                          <p className="text-xs font-semibold text-slate-500">
+                            {language === 'bn'
+                              ? `মোট ${formatNum(filteredProducts.length)} টির মধ্যে ${formatNum(Math.min(visibleLimit, filteredProducts.length))} টি পণ্য প্রদর্শিত হচ্ছে`
+                              : `Showing ${Math.min(visibleLimit, filteredProducts.length)} of ${formatNum(filteredProducts.length)} registered products`}
+                          </p>
+                          <button
+                            onClick={() => setVisibleLimit((prev) => prev + 120)}
+                            className="px-6 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 font-bold text-xs shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+                          >
+                            <SprayCan className="w-4 h-4 text-emerald-600" />
+                            <span>{language === 'bn' ? 'আরও পণ্য লোড করুন' : 'Load More Products'}</span>
+                          </button>
+                        </div>
+                      )}
+                    </>
+                  );
+                })()}
               </div>
             ) : (
               
