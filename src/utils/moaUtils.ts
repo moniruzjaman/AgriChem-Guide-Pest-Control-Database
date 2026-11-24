@@ -84,6 +84,41 @@ export function productMoaCodes(product: {
   return out;
 }
 
+/** Separators that join two groups inside one combination moaCode string. */
+const MOA_COMBO_SPLIT = /\s*(?:\+|&|;|,|\/|\band\b|\bor\b)\s*/i;
+
+/**
+ * Unique atomic MoA groups behind a set of (possibly combined) code strings.
+ *
+ * Combination products carry strings like "FRAC M03 + 4" or
+ * "HRAC 2 + 15 (B + K3)". Counting raw strings treats every combination and
+ * every notation variant as a group of its own; counting groups should not.
+ * This strips parenthetical alternate-notation suffixes, splits on combination
+ * separators, folds each part through canonicalMoaCode() and de-duplicates —
+ * so "FRAC M03", "FRAC M3" and the M03 inside "FRAC M03 + 4" all count once.
+ */
+export function atomicMoaGroups(codes: Iterable<string | undefined | null>): string[] {
+  const out: string[] = [];
+  for (const raw of codes) {
+    const s = (raw ?? '').trim();
+    if (!s) continue;
+    const stripped = s.replace(/\s*\([^)]*\)\s*/g, ' ').trim(); // "(B + K3)" = notation, not a group
+    let lastScheme = '';
+    for (const part of stripped.split(MOA_COMBO_SPLIT)) {
+      if (!part) continue;
+      const explicit = part.match(/^(IRAC|FRAC|HRAC)\b/i);
+      // combination notation omits the scheme on later parts ("FRAC M03 + 4"):
+      // inherit the scheme of the last part that carried one.
+      const canon = canonicalMoaCode(
+        explicit ? part : lastScheme ? `${lastScheme} ${part}` : part
+      );
+      if (explicit) lastScheme = explicit[1].toUpperCase();
+      if (canon && !out.includes(canon)) out.push(canon);
+    }
+  }
+  return out;
+}
+
 /**
  * All notations that denote the same group as `code`.
  * "FRAC M3" -> ["FRAC M3", "FRAC M03"]; "HRAC K3" -> ["HRAC K3", "HRAC 15"].

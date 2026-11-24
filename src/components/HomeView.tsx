@@ -22,6 +22,7 @@ import {
   NotebookPen,
 } from 'lucide-react';
 import { ChemicalProduct, AppTab, MoAClassification } from '../types';
+import { atomicMoaGroups } from '../utils/moaUtils';
 import { MOA_DATABASE } from '../data/moaData';
 import { useLanguage } from '../context/LanguageContext';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
@@ -196,9 +197,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
     const withMoa = products.filter((p) => (p.moaCode || '').trim()).length;
     const pct = total ? Math.round((withMoa / total) * 1000) / 10 : 0;
     const pctStr = Number.isInteger(pct) ? String(pct) : pct.toFixed(1);
-    const groups = new Set(
+    // Distinct MoA groups: split combination codes ("FRAC M03 + 4") into
+    // their component groups and fold notation variants (M03 = M3,
+    // HRAC 15 = K3) so mixtures and spellings don't inflate the count.
+    const groups = atomicMoaGroups(
       products.filter((p) => (p.moaCode || '').trim()).map((p) => p.moaCode as string)
-    ).size;
+    ).length;
     // Unique active ingredients (common names) — mirrors the DatabaseView
     // dashboard metric so the Home feature card stays in sync with the body.
     const ingredientSet = new Set<string>();

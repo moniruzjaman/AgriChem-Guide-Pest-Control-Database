@@ -5,6 +5,7 @@ import {
   expandMoaQuery,
   parseMoaQuery,
   productMoaCodes,
+  atomicMoaGroups,
 } from '../moaUtils';
 import { smartSearch } from '../smartSearch';
 import type { ChemicalProduct } from '../../types';
@@ -155,5 +156,35 @@ describe('smartSearch — mode-of-action queries', () => {
   it('still matches ordinary product searches', () => {
     const r = smartSearch('Abamectin', products);
     expect(r.items.length).toBeGreaterThan(0);
+  });
+});
+
+describe('atomicMoaGroups', () => {
+  it('splits combination codes and folds notation variants', () => {
+    expect(atomicMoaGroups(['FRAC M03 + 4', 'FRAC M3', 'FRAC 04'])).toEqual(['FRAC M3', 'FRAC 4']);
+  });
+
+  it('merges HRAC number and letter notations', () => {
+    expect(atomicMoaGroups(['HRAC 15', 'HRAC K3'])).toEqual(['HRAC K3']);
+  });
+
+  it('drops parenthetical alternate notations instead of creating junk groups', () => {
+    expect(atomicMoaGroups(['HRAC 2 + 15 (B + K3)', 'HRAC 15 + 2 (K3 + B)'])).toEqual(['HRAC B', 'HRAC K3']);
+    expect(atomicMoaGroups(['IRAC UN (Botanical)', 'IRAC UN'])).toEqual(['IRAC UN']);
+  });
+
+  it('splits scheme-mixed combinations and inherits the scheme on bare parts', () => {
+    expect(atomicMoaGroups(['FRAC M02 / IRAC UN'])).toEqual(['FRAC M2', 'IRAC UN']);
+    expect(atomicMoaGroups(['IRAC 1B + 3A', 'FRAC M03 + P07', 'FRAC 7 + M03'])).toEqual([
+      'IRAC 1B',
+      'IRAC 3A',
+      'FRAC M3',
+      'FRAC P07',
+      'FRAC 7',
+    ]);
+  });
+
+  it('ignores blanks', () => {
+    expect(atomicMoaGroups(['', undefined, null, '  '])).toEqual([]);
   });
 });

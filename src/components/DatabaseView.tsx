@@ -38,6 +38,7 @@ import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
 import { MOA_DATABASE } from '../data/moaData';
 import { smartSearch } from '../utils/smartSearch';
+import { atomicMoaGroups } from '../utils/moaUtils';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
 import { LabelScannerModal } from './LabelScannerModal';
 import './DatabaseView.css';
@@ -1095,11 +1096,10 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     [filteredProducts]
   );
   const uniqueMoACodesInFilter = useMemo(() => {
-    const set = new Set<string>();
-    filteredProducts.forEach((p) => {
-      if (p.moaCode) set.add(p.moaCode);
-    });
-    return set.size;
+    // Distinct MoA groups: combination codes ("FRAC M03 + 4") split into
+    // their component groups, notation variants folded (M03 = M3, HRAC
+    // 15 = K3) — mixtures and spellings don't inflate the group count.
+    return atomicMoaGroups(filteredProducts.map((p) => p.moaCode)).length;
   }, [filteredProducts]);
 
   return (
@@ -1189,6 +1189,19 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
 
       {/* -------------------------------------------- existing controls */}
       <section className="pn-shell acg-db-panels">
+
+      {/* catalogue section head: the hero leads with the shop-shelf line and
+          hands the finding-the-right-chemical dialogue to this h2 */}
+      <div className="pn-section-head">
+        <div>
+          <span className="pn-kicker">
+            {bn ? 'সম্পূর্ণ নিবন্ধিত ক্যাটালগ' : 'The full registered catalogue'}
+          </span>
+          <h2 className="pn-h2">
+            {bn ? 'সঠিক ওষুধ খুঁজুন, ভালো ওষুধ নয়।' : 'Find the right chemical, not just a good one.'}
+          </h2>
+        </div>
+      </div>
 
       {/* 🚀 1. Visual Crop Focus Bar (Horizontal scrolling Carousel) */}
       <div className="acg-db-cropbar space-y-2.5">
