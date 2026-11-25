@@ -13,6 +13,7 @@ import {
   RotateCw, 
   CheckCircle2, 
   AlertOctagon,
+  Crosshair,
   Droplet,
   ClipboardList
 } from 'lucide-react';
@@ -20,6 +21,8 @@ import { exportSingleProductPDF, exportDosagePrescriptionPDF } from '../utils/pd
 import { calculateDosage } from '../utils/calculator';
 import { useLanguage } from '../context/LanguageContext';
 import { MOA_DATABASE } from '../data/moaData';
+import { MOA_TARGET_SITES } from '../data/moaTargetSites';
+import { atomicMoaGroups, canonicalMoaCode } from '../utils/moaUtils';
 import { lookupNoteBn } from '../utils/i18n';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
@@ -51,14 +54,29 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
   if (!product) return null;
 
-  // MoA info lookup — prefer Bangla metadata in bn mode
-  const moaInfo = product.moaCode ? MOA_DATABASE.find(m => m.code === product.moaCode) : undefined;
+  // MoA info lookup — prefer Bangla metadata in bn mode. The canonical index
+  // merges MOA_DATABASE with the MOA_TARGET_SITES extension entries so EVERY
+  // atomic group of this product (mixtures split into their component groups)
+  // resolves a name, sub-group and target-site description.
+  const MOA_INFO_BY_CANON = new Map(
+    [...MOA_DATABASE, ...MOA_TARGET_SITES].map((m) => [canonicalMoaCode(m.code) ?? m.code, m])
+  );
+  const moaEntries = atomicMoaGroups([product.moaCode, ...(product.moaCodes ?? [])])
+    .map((code) => {
+      const info = MOA_INFO_BY_CANON.get(code);
+      return {
+        code,
+        info,
+        name: language === 'bn' ? (info?.nameBn || product.moaGroup) : (info?.name || product.moaGroup),
+      };
+    });
+  const primaryMoaInfo = product.moaCode ? MOA_INFO_BY_CANON.get(canonicalMoaCode(product.moaCode) ?? product.moaCode) : undefined;
   const moaGroupDisplay = language === 'bn'
-    ? (moaInfo?.nameBn || product.moaGroup || 'ক্রিয়ার লক্ষ্যস্থল-ভিত্তিক প্রক্রিয়া')
-    : (product.moaGroup || 'Target site physiological process');
+    ? (primaryMoaInfo?.nameBn || product.moaGroup || 'ক্রিয়ার লক্ষ্যস্থল-ভিত্তিক প্রক্রিয়া')
+    : (primaryMoaInfo?.name || product.moaGroup || 'Target site physiological process');
   const rotationDisplay = language === 'bn'
-    ? (lookupNoteBn(product.rotationNotes || '') || moaInfo?.rotationStrategyBn || 'প্রতিরোধ রোধে পরপর ২ বারের বেশি একই গ্রুপের ওষুধ প্রয়োগ করবেন না। ভিন্ন MoA গ্রুপের ওষুধ দিয়ে ঘূর্ণন করুন।')
-    : (product.rotationNotes || 'Do not make more than 2 consecutive applications. Rotate with a chemical from an alternate MoA family to prevent target-site resistance.');
+    ? (lookupNoteBn(product.rotationNotes || '') || primaryMoaInfo?.rotationStrategyBn || 'প্রতিরোধ রোধে পরপর ২ বারের বেশি একই গ্রুপের ওষুধ প্রয়োগ করবেন না। ভিন্ন MoA গ্রুপের ওষুধ দিয়ে ঘূর্ণন করুন।')
+    : (product.rotationNotes || primaryMoaInfo?.rotationStrategy || 'Do not make more than 2 consecutive applications. Rotate with a chemical from an alternate MoA family to prevent target-site resistance.');
 
   const quickDosage = calculateDosage(product, {
     areaValue: areaVal,
@@ -299,6 +317,39 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <p className="text-xs text-slate-700 leading-relaxed">
               <strong className="text-slate-900">{language === 'bn' ? 'MoA গ্রুপ:' : 'MoA Group:'}</strong> {moaGroupDisplay}.
             </p>
+            {/* Target site of attack per atomic MoA group — the biochemical/
+                physiological site (nerve, chitin, mitochondria…) each group
+                attacks. Mixtures list one row per component group so the
+                full dossier is visible without leaving the modal. */}
+            {moaEntries.length > 0 && (
+              <div className="bg-white rounded-lg border border-blue-100 p-3 space-y-1.5">
+                <span className="text-[10px] font-bold text-blue-800 uppercase tracking-wider flex items-center gap-1">
+                  <Crosshair className="w-3 h-3 text-violet-600" />
+                  {language === 'bn' ? 'আক্রমণের লক্ষ্যস্থান (গ্রুপভিত্তিক)' : 'Target Site of Attack (by MoA group)'}
+                </span>
+                {moaEntries.map(({ code, info, name }) => (
+                  <div key={code} className="flex items-start gap-1.5 text-xs text-slate-700 leading-relaxed">
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-violet-50 text-violet-700 border border-violet-100 font-mono tracking-wide shrink-0">
+                      {code}
+                    </span>
+                    <span className="min-w-0">
+                      {language === 'bn' ? (info?.targetSiteBn || info?.targetSite) : info?.targetSite}
+                      {info?.targetSite ? '' : (
+                        <span className="text-slate-400 italic">{language === 'bn' ? 'লক্ষ্যস্থান এখনো নথিভুক্ত নয়' : 'target site not documented yet'}</span>
+                      )}
+                      {info?.subGroup && (
+                        <span className="block text-[10px] text-slate-500 mt-0.5">
+                          {language === 'bn' ? 'উপগ্রুপ: ' : 'Sub-group: '}{info.subGroup}
+                        </span>
+                      )}
+                      <span className="block text-[10px] text-slate-400 mt-0.5">
+                        {language === 'bn' ? 'শ্রেণি: ' : 'Class: '}{name}
+                      </span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
             <p className="text-xs text-slate-600 bg-white p-3 rounded-lg border border-blue-100 leading-relaxed">
               <strong className="text-blue-900">{language === 'bn' ? 'আবর্তন নির্দেশিকা: ' : 'Rotation Directive: '}</strong>
               {rotationDisplay}

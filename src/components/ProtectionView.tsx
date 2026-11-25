@@ -48,6 +48,8 @@ import {
 } from '../data/registryMeta';
 import type { ChemicalProduct } from '../types';
 import { useLanguage } from '../context/LanguageContext';
+import { SearchableSelect } from './SearchableSelect';
+import { databaseCropOptions } from '../utils/cropSelectOptions';
 import './ProtectionView.css';
 
 const STATUS_STYLES: Record<string, { bg: string; fg: string; label: string; labelBn: string }> = {
@@ -63,7 +65,7 @@ const STATUS_STYLES: Record<string, { bg: string; fg: string; label: string; lab
 const CROPS = ['Rice', 'Wheat', 'Jute', 'Potato', 'Tomato', 'Brinjal', 'Chili', 'Onion', 'Maize', 'Cotton', 'Mango', 'Banana'];
 
 export function ProtectionView() {
-  const { language } = useLanguage();
+  const { language, transCrop } = useLanguage();
   const bn = language === 'bn';
   const t = (en: string, bnn: string) => (bn ? bnn : en);
 
@@ -94,6 +96,14 @@ export function ProtectionView() {
   const [growthStage, setGrowthStage] = useState('');
   const [sowingDate, setSowingDate] = useState('');
   const [useGps, setUseGps] = useState(false);
+
+  // Crop picker options — the FULL crop list from the loaded product
+  // database (not the 12 hardcoded rows), rendered through the shared
+  // type-to-filter combobox. Falls back to the native select pre-database.
+  const cropSelectOptions = useMemo(
+    () => databaseCropOptions(products, transCrop),
+    [products, transCrop]
+  );
 
   const field = useMemo(() => ledger.data.fields.find((f) => f.id === fieldId) ?? null, [ledger.data.fields, fieldId]);
 
@@ -383,11 +393,22 @@ export function ProtectionView() {
       <section className="pn-card context-bar">
         <label>
           <span>{t('Crop', 'ফসল')}</span>
-          <select value={crop} onChange={(e) => setCrop(e.target.value)}>
-            {Array.from(new Set([...CROPS, crop])).map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
+          {cropSelectOptions.length > 0 ? (
+            <SearchableSelect
+              value={crop}
+              onChange={setCrop}
+              options={cropSelectOptions}
+              placeholder={t('e.g. Rice — type to search', 'যেমন: ধান — টাইপ করে খুঁজুন')}
+              ariaLabel={t('Crop', 'ফসল')}
+              size="sm"
+            />
+          ) : (
+            <select value={crop} onChange={(e) => setCrop(e.target.value)}>
+              {Array.from(new Set([...CROPS, crop])).map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+          )}
         </label>
         <label className="grow">
           <span>{t('What problem do you see?', 'কী সমস্যা দেখছেন?')}</span>

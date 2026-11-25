@@ -23,6 +23,8 @@ import type { ChemicalProduct, AppTab } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { useWeatherIntelligence } from '../hooks/useWeatherIntelligence';
 import { useSprayHistory, lastMoaForCrop } from '../hooks/useSprayHistory';
+import { SearchableSelect } from './SearchableSelect';
+import { databaseCropOptions } from '../utils/cropSelectOptions';
 import './MyFieldView.css';
 
 // Lazy-load the spray log view (heavy: has label scanner + MoA compliance)
@@ -65,7 +67,7 @@ export const MyFieldView: React.FC<{
   products: ChemicalProduct[];
   onNavigateTab: (tab: AppTab) => void;
 }> = ({ products, onNavigateTab }) => {
-  const { language } = useLanguage();
+  const { language, transCrop } = useLanguage();
   const bn = language === 'bn';
   const { entries: sprayHistory } = useSprayHistory();
   const [crop, setCrop] = useState('Rice');
@@ -102,10 +104,16 @@ export const MyFieldView: React.FC<{
     );
   };
 
-  // Available crops from the product database
+  // Available crops from the product database — FULL list (the old select
+  // was capped at 80 rows), rendered through the shared type-to-filter
+  // combobox so every database crop is reachable.
   const availableCrops = React.useMemo(
-    () => Array.from(new Set(products.flatMap(p => p.crops))).filter(Boolean).sort().slice(0, 80),
+    () => Array.from(new Set(products.flatMap(p => p.crops))).filter(Boolean).sort(),
     [products],
+  );
+  const cropSelectOptions = React.useMemo(
+    () => databaseCropOptions(products, transCrop),
+    [products, transCrop],
   );
 
   const lastLogged = lastMoaForCrop(sprayHistory, crop);
@@ -172,9 +180,20 @@ export const MyFieldView: React.FC<{
       <section className="myfield-controls">
         <label className="myfield-control">
           <span className="myfield-control-label">{bn ? 'ফসল' : 'Crop'}</span>
-          <select value={crop} onChange={e => setCrop(e.target.value)} className="myfield-select">
-            {availableCrops.map(c => <option key={c} value={c}>{c}</option>)}
-          </select>
+          {cropSelectOptions.length > 0 ? (
+            <SearchableSelect
+              value={crop}
+              onChange={setCrop}
+              options={cropSelectOptions}
+              placeholder={bn ? 'যেমন: ধান — টাইপ করে খুঁজুন' : 'e.g. Rice — type to search'}
+              ariaLabel={bn ? 'ফসল' : 'Crop'}
+              size="sm"
+            />
+          ) : (
+            <select value={crop} onChange={e => setCrop(e.target.value)} className="myfield-select">
+              {availableCrops.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+          )}
         </label>
         <div className="myfield-coords">
           <span className="myfield-coord">{fmt(latitude, 4)}°, {fmt(longitude, 4)}°</span>

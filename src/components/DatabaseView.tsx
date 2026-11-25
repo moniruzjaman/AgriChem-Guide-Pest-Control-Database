@@ -33,11 +33,13 @@ import {
   HeartPulse,
   ExternalLink,
   FileText,
-  Download
+  Download,
+  Crosshair
 } from 'lucide-react';
 import { exportCropGuidePDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
 import { MOA_DATABASE } from '../data/moaData';
+import { MOA_TARGET_SITES } from '../data/moaTargetSites';
 import { smartSearch } from '../utils/smartSearch';
 import { atomicMoaGroups, canonicalMoaCode } from '../utils/moaUtils';
 import { CollapsibleUserGuide } from './CollapsibleUserGuide';
@@ -575,11 +577,13 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
     return m;
   }, [products]);
 
-  // MOA_DATABASE keyed by canonical code ("FRAC M03" -> "FRAC M3") so
-  // atomic-group lookups hit the same entry regardless of register notation.
+  // MOA_DATABASE + MOA_TARGET_SITES keyed by canonical code ("FRAC M03" ->
+  // "FRAC M3") so atomic-group lookups hit the same entry regardless of
+  // register notation. The extension entries close the coverage gap so every
+  // atomic group resolves a target-site description.
   const moaInfoByCanonical = useMemo(() => {
     const m = new Map<string, MoAClassification>();
-    MOA_DATABASE.forEach((entry) => {
+    [...MOA_DATABASE, ...MOA_TARGET_SITES].forEach((entry) => {
       const canon = canonicalMoaCode(entry.code);
       if (canon && !m.has(canon)) m.set(canon, entry);
     });
@@ -1426,6 +1430,31 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
           <span className="sep">|</span>
           <span title={brand.registrationHolder}>{bn ? 'আমদানিকারক:' : 'Holder:'} <strong>{brand.registrationHolder}</strong></span>
         </div>
+        {/* Target site of attack — every atomic MoA group of this brand,
+            each with its group code, so mixtures list all sites. Resolved
+            through MOA_DATABASE + MOA_TARGET_SITES (canonical index). */}
+        {(() => {
+          const siteEntries = brand.moaTargetSite
+            ? [{ group: brand.moaCode || '', site: brand.moaTargetSite, siteBn: undefined as string | undefined }]
+            : atomicMoaGroups([brand.moaCode, ...(brand.moaCodes ?? [])])
+                .map((atom) => {
+                  const info = moaInfoByCanonical.get(atom);
+                  return { group: atom, site: info?.targetSite, siteBn: info?.targetSiteBn };
+                })
+                .filter((e) => e.site);
+          if (siteEntries.length === 0) return null;
+          return (
+            <div className="acg-db-brand-name__targets">
+              {siteEntries.map((e) => (
+                <span key={e.group} className="acg-db-brand-name__moa-site" title={e.site}>
+                  <Crosshair className="w-3 h-3 text-violet-600 shrink-0" />
+                  <b className="font-mono shrink-0">{e.group}</b>
+                  <span className="truncate">{bn ? (e.siteBn || e.site) : e.site}</span>
+                </span>
+              ))}
+            </div>
+          );
+        })()}
         {/* Field facts: recommended crops + target pests on the card itself */}
         {(brand.crops.length > 0 || brand.pests.length > 0) && (
           <div className="acg-db-brand-name__targets">
@@ -3037,6 +3066,33 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({
                                           </span>
                                         )}
                                       </div>
+                                      {/* Target site of attack — the group's own
+                                          biochemical/physiological site (nerve,
+                                          chitin, mitochondria…), resolved per
+                                          atomic MoA group so mixtures show
+                                          every component site. */}
+                                      {(() => {
+                                        const siteEntries = group.moaCode
+                                          ? atomicMoaGroups([group.moaCode])
+                                              .map((atom) => {
+                                                const info = moaInfoByCanonical.get(atom);
+                                                return { group: atom, site: info?.targetSite, siteBn: info?.targetSiteBn };
+                                              })
+                                              .filter((e) => e.site)
+                                          : [];
+                                        if (siteEntries.length === 0) return null;
+                                        return (
+                                          <div className="acg-db-ingredient-head__site">
+                                            {siteEntries.map((e) => (
+                                              <span key={e.group} className="flex items-start gap-1 min-w-0">
+                                                <Crosshair className="w-3 h-3 shrink-0 mt-[2px]" />
+                                                <b>{e.group}</b>
+                                                <span className="min-w-0">{language === 'bn' ? (e.siteBn || e.site) : e.site}</span>
+                                              </span>
+                                            ))}
+                                          </div>
+                                        );
+                                      })()}
                                       {/* Ingredient name */}
                                       <h3 className="acg-db-ingredient-head__title">
                                         <Tag className="w-4 h-4 text-emerald-600 shrink-0" />

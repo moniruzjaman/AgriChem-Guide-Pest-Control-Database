@@ -16,6 +16,8 @@ import {
 import { useLanguage } from '../context/LanguageContext';
 import { useSprayHistory, lastMoaByCrop, type SprayEntry } from '../hooks/useSprayHistory';
 import { ChemicalProduct, AppTab } from '../types';
+import { SearchableSelect } from './SearchableSelect';
+import { databaseCropOptions, databasePestOptions } from '../utils/cropSelectOptions';
 import { LabelScannerModal } from './LabelScannerModal';
 import {
   runComplianceCheck,
@@ -59,7 +61,7 @@ function toLogEntry(e: SprayEntry): ApplicationLogEntry {
 }
 
 export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigateTab }) => {
-  const { language } = useLanguage();
+  const { language, transCrop, transPest } = useLanguage();
   const bn = language === 'bn';
   const { entries, addEntry, removeEntry, clearAll } = useSprayHistory();
   const [showForm, setShowForm] = useState(false);
@@ -93,6 +95,19 @@ export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigate
   const [fCropCycleEnd, setFCropCycleEnd] = useState('');       // window_id end
 
   const lastByCrop = useMemo(() => lastMoaByCrop(entries), [entries]);
+
+  // Crop / pest pickers — full database lists as type-to-filter options so
+  // the form is fill-by-pick instead of fill-from-memory. Both still accept
+  // free values (custom crop not in the register) via the combobox's typed
+  // input echo; empty options fall back to the plain input.
+  const cropOptions = useMemo(
+    () => databaseCropOptions(products, transCrop),
+    [products, transCrop]
+  );
+  const pestOptions = useMemo(
+    () => databasePestOptions(products, transPest),
+    [products, transPest]
+  );
 
   // Quick product search for the form
   const productMatches = useMemo(() => {
@@ -338,13 +353,35 @@ export const SprayLogView: React.FC<SprayLogViewProps> = ({ products, onNavigate
           <div className="acg-mf-row2">
             <label className="acg-mf-field">
               <span>{copy.crop}</span>
-              <input value={fCrop} onChange={(e) => setFCrop(e.target.value)} required
-                placeholder={bn ? 'যেমন: ধান' : 'e.g. Rice'} />
+              {cropOptions.length > 0 ? (
+                <SearchableSelect
+                  value={fCrop}
+                  onChange={setFCrop}
+                  options={cropOptions}
+                  placeholder={bn ? 'যেমন: ধান — টাইপ করে খুঁজুন' : 'e.g. Rice — type to search'}
+                  ariaLabel={copy.crop}
+                  size="sm"
+                />
+              ) : (
+                <input value={fCrop} onChange={(e) => setFCrop(e.target.value)} required
+                  placeholder={bn ? 'যেমন: ধান' : 'e.g. Rice'} />
+              )}
             </label>
             <label className="acg-mf-field">
               <span>{copy.pest}</span>
-              <input value={fPest} onChange={(e) => setFPest(e.target.value)}
-                placeholder={bn ? 'যেমন: ব্রাউন প্ল্যান্টহপার' : 'e.g. Brown Planthopper'} />
+              {pestOptions.length > 0 ? (
+                <SearchableSelect
+                  value={fPest}
+                  onChange={setFPest}
+                  options={pestOptions}
+                  placeholder={bn ? 'যেমন: ব্রাউন প্ল্যান্টহপার — টাইপ করে খুঁজুন' : 'e.g. Brown Planthopper — type to search'}
+                  ariaLabel={copy.pest}
+                  size="sm"
+                />
+              ) : (
+                <input value={fPest} onChange={(e) => setFPest(e.target.value)}
+                  placeholder={bn ? 'যেমন: ব্রাউন প্ল্যান্টহপার' : 'e.g. Brown Planthopper'} />
+              )}
             </label>
           </div>
 
