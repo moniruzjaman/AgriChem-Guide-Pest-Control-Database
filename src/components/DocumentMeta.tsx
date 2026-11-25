@@ -13,7 +13,8 @@ const THEME_COLOR: Record<AppTab, string> = {
   myfield: '#e3b341',
   intelligence: '#006a4e',
   specialist: '#006a4e',
-  protection: '#065f46'
+  protection: '#065f46',
+  more: '#006a4e'
 };
 
 const TAB_META: Record<AppTab, {
@@ -122,6 +123,16 @@ const TAB_META: Record<AppTab, {
     bn: {
       title: 'পেস্টিসাইডনেক্সট — সুরক্ষা ইন্টেলিজেন্স কর্মপ্রবাহ',
       description: 'আবহাওয়ার ঝুঁকি → ক্ষেত পর্যবেক্ষণ → ব্যাখ্যাসহ সিদ্ধান্ত → যাচাইকৃত পণ্যের যোগ্যতা → প্রয়োগ রেকর্ড → ফলাফল ফলো-আপ। শুধু আবহাওয়ার ঝুঁকি কখনোই কীটনাশক সুপারিশ করে না।'
+    }
+  },
+  more: {
+    en: {
+      title: 'PesticideNext — All Companion Apps',
+      description: 'Diagnostic ebook (read, listen, verify), CABI Plant Detective practice app, Pesticide Act 2018 legal guide, label-reform policy dossier — each with its real preview and purpose.'
+    },
+    bn: {
+      title: 'পেস্টিসাইডনেক্সট — সহযোগী সব অ্যাপ',
+      description: 'রোগনির্ণয় ই-বুক (পড়ুন, শুনুন, যাচাই), CABI উদ্ভিদ গোয়েন্দা অনুশীলন অ্যাপ, বালাইনাশক আইন ২০১৮, লেবেল সংস্কার ডজিয়ার — প্রতিটির প্রকৃত প্রিভিউ ও উদ্দেশ্যসহ।'
     }
   }
 };

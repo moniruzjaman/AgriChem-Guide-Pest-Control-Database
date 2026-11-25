@@ -200,9 +200,28 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                     <Compass className="h-5 w-5 shrink-0 text-emerald-700" />
                     <span className="min-w-0 flex-1">
                       <strong className="block text-xs text-slate-800">{language === 'bn' ? 'বিশেষজ্ঞ অনুসন্ধান' : 'Specialist search'}</strong>
-                      <span className="mt-0.5 block text-[11px] text-slate-500">{language === 'bn' ? 'নীতিমালা, HHP, MoA ও নিয়ন্ত্রক তথ্য' : 'Policy, HHP, MoA and regulatory information'}</span>
+                      <span className="mt-0.5 block text-[11px] text-slate-500">{language === 'bn' ? 'নীতিমালা, HHP, MoA ও নিয়ন্ত্রক তথ্য' : 'Policy, HHP, MoA and regulatory information'}</span>
                     </span>
                     <ArrowRight className="h-3.5 w-3.5 shrink-0 text-slate-400" />
+                  </button>
+                </section>
+
+                {/* Companion apps — the ecosystem under the "More" tab */}
+                <section className="space-y-2">
+                  <h3 className="px-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    {language === 'bn' ? 'সহযোগী সব অ্যাপ' : 'All companion apps'}
+                  </h3>
+                  <button onClick={() => handleTabClick('more')} className="w-full flex items-center gap-3 rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-4 text-left hover:border-emerald-400 hover:shadow-md transition">
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-700 text-white"><Smartphone className="h-5 w-5" /></span>
+                    <span className="min-w-0 flex-1">
+                      <strong className="block text-sm text-emerald-950">{language === 'bn' ? 'সব অ্যাপ এক জায়গায় — উদ্দেশ্যসহ' : 'All apps in one place — with purposes'}</strong>
+                      <span className="mt-0.5 block text-xs leading-relaxed text-emerald-900/75">
+                        {language === 'bn'
+                          ? 'রোগনির্ণয় ই-বুক (পড়ুন, শুনুন, যাচাই), CABI অনুশীলন অ্যাপ, বালাইনাশক আইন, নীতি ডজিয়ার — প্রতিটির নিজের প্রিভিউ ও কাজ বর্ণনাসহ'
+                          : 'Diagnostic ebook (read, listen, verify), CABI practice app, Pesticide Act, policy dossier — each with its real preview and purpose'}
+                      </span>
+                    </span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-emerald-700" />
                   </button>
                 </section>
               </div>

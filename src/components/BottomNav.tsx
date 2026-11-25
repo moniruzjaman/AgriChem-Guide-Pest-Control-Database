@@ -31,7 +31,7 @@ export interface BottomNavProps {
 }
 
 /** Tabs that should highlight the "More" button instead of a primary one. */
-const MORE_TABS: AppTab[] = ['calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'intelligence', 'protection', 'specialist'];
+const MORE_TABS: AppTab[] = ['calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'intelligence', 'protection', 'specialist', 'more'];
 
 export const BottomNav: React.FC<BottomNavProps> = ({
   activeTab,

@@ -15,7 +15,8 @@ import {
   BookOpen,
   QrCode,
   NotebookPen,
-  BrainCircuit
+  BrainCircuit,
+  LayoutGrid
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import QRCode from 'qrcode';
@@ -247,6 +248,14 @@ export const ShareModal: React.FC<ShareModalProps> = ({
       descBn: 'সংযুক্ত কর্মপ্রবাহ: KWI আবহাওয়ার ঝুঁকি, ক্ষেত পর্যবেক্ষণ, ব্যাখ্যাসহ সুরক্ষা সিদ্ধান্ত, যাচাইকৃত পণ্যের যোগ্যতা, MoA রোটেশন, প্রয়োগ রেকর্ড ও ফলাফল ফলো-আপ।',
       tag: '#ProtectionIntelligence #IPM #ScoutFirst',
       icon: ShieldCheck
+    },
+    more: {
+      titleEn: 'PesticideNext — All Companion Apps with Purposes',
+      titleBn: 'পেস্টিসাইডনেক্সট — উদ্দেশ্যসহ সহযোগী সব অ্যাপ',
+      descEn: 'Diagnostic ebook (read, listen, verify), CABI Plant Detective practice app, Pesticide Act 2018 legal guide and the label-reform dossier — each with its real preview.',
+      descBn: 'রোগনির্ণয় ই-বুক (পড়ুন, শুনুন, যাচাই), CABI উদ্ভিদ গোয়েন্দা অনুশীলন অ্যাপ, বালাইনাশক আইন ২০১৮ ও লেবেল সংস্কার ডজিয়ার — প্রতিটির প্রকৃত প্রিভিউসহ।',
+      tag: '#CompanionApps #AgriEcosystem #PlantDiagnosis',
+      icon: LayoutGrid
     }
   };
 

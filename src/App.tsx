@@ -132,6 +132,9 @@ const ProductDetailModal = lazy(() =>
 const SafetyChecklistModal = lazy(() =>
   import('./components/SafetyChecklistModal').then((m) => ({ default: m.SafetyChecklistModal }))
 );
+const MoreView = lazy(() =>
+  import('./components/MoreView').then((m) => ({ default: m.MoreView }))
+);
 const LabelScannerModal = lazy(() =>
   import('./components/LabelScannerModal').then((m) => ({ default: m.LabelScannerModal }))
 );
@@ -258,7 +261,7 @@ export default function App() {
   // We also push the hash back into the URL when the user switches tabs
   // in-app, so the browser back/forward buttons and copy-url keep working.
   // ---------------------------------------------------------------------------
-  const VALID_TABS: AppTab[] = ['home', 'database', 'calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'myfield', 'intelligence', 'protection', 'specialist'];
+  const VALID_TABS: AppTab[] = ['home', 'database', 'calculator', 'rotation', 'safety', 'guidebook', 'alerts', 'myfield', 'intelligence', 'protection', 'specialist', 'more'];
 
   useEffect(() => {
     const tabFromHash = (hash: string): AppTab | null => {
@@ -671,6 +674,12 @@ export default function App() {
             />
           </Suspense>
           </TabContentCollapsible>
+        )}
+
+        {activeTab === 'more' && (
+          <Suspense fallback={<DatabaseSplash language={language} />}>
+            <MoreView />
+          </Suspense>
         )}
 
         {activeTab === 'myfield' && (

@@ -19,7 +19,8 @@ import {
   VolumeX,
   NotebookPen,
   BrainCircuit,
-  ScanLine
+  ScanLine,
+  LayoutGrid
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { AppTab } from '../types';
@@ -345,6 +346,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             id="tab-btn-more"
             type="button"
             onClick={onOpenDrawer}
+            title={language === 'bn' ? 'সব সরঞ্জাম ও সহযোগী অ্যাপ' : 'All tools & companion apps'}
             className={`flex items-center gap-2 px-3 py-2 rounded-xl whitespace-nowrap border transition-colors cursor-pointer ${
               !['home', 'database', 'protection', 'myfield'].includes(activeTab)
                 ? 'bg-emerald-50 text-[#006a4e] border-emerald-200 font-bold'
@@ -353,6 +355,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <Menu className="w-4 h-4" />
             <span>{language === 'bn' ? 'অন্যান্য সরঞ্জাম' : 'More tools'}</span>
+          </button>
+          {/* All companion apps in one tab — og-image + purpose per app */}
+          <button
+            id="tab-btn-apps"
+            type="button"
+            onClick={() => setActiveTab('more')}
+            aria-current={activeTab === 'more' ? 'page' : undefined}
+            title={language === 'bn' ? 'রোগনির্ণয় ই-বুক, CABI অনুশীলন, আইন, নীতি — উদ্দেশ্যসহ' : 'Diagnostic ebook, CABI practice, Act, policy — with purposes'}
+            className={`flex items-center gap-2 px-3 py-2 rounded-xl whitespace-nowrap border transition-colors cursor-pointer ${
+              activeTab === 'more'
+                ? 'bg-[#006a4e] text-white border-[#006a4e] font-bold shadow-xs'
+                : 'text-slate-600 border-slate-200 hover:text-[#006a4e] hover:border-emerald-300 hover:bg-slate-100'
+            }`}
+          >
+            <LayoutGrid className="w-4 h-4" />
+            <span>{language === 'bn' ? 'সব অ্যাপ' : 'All apps'}</span>
           </button>
         </nav>
       </div>
