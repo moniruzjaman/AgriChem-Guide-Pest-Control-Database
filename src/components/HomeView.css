@@ -1178,3 +1178,13 @@
   .acg-share { padding: 24px 20px; }
   .acg-preview__card { padding: 20px 18px; }
 }
+
+
+/* Focused home actions: make the first decision obvious on phones. */
+.acg-cta--focused { gap: 10px; margin-top: 24px; }
+.acg-cta--focused .acg-btn { min-height: 46px; justify-content: center; }
+@media (max-width: 620px) {
+  .acg-cta--focused { display: grid; grid-template-columns: 1fr; gap: 9px; }
+  .acg-cta--focused .acg-btn { width: 100%; }
+  .acg-trust { margin-top: 24px; }
+}

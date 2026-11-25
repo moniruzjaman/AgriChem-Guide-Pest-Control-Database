@@ -93,7 +93,7 @@ export function ProtectionView() {
   const [target, setTarget] = useState('');
   const [growthStage, setGrowthStage] = useState('');
   const [sowingDate, setSowingDate] = useState('');
-  const [useGps, setUseGps] = useState(true);
+  const [useGps, setUseGps] = useState(false);
 
   const field = useMemo(() => ledger.data.fields.find((f) => f.id === fieldId) ?? null, [ledger.data.fields, fieldId]);
 
@@ -372,14 +372,14 @@ export function ProtectionView() {
           <h1>{t('Crop Protection Workflow', 'ফসল সুরক্ষা কর্মপ্রবাহ')}</h1>
           <p className="sub">
             {t(
-              'Weather risk → scouting → decision → verified products → application → outcome. Weather risk alone never triggers a pesticide recommendation.',
-              'আবহাওয়ার ঝুঁকি → ক্ষেত পর্যবেক্ষণ → সিদ্ধান্ত → যাচাইকৃত পণ্য → প্রয়োগ → ফলাফল। শুধু আবহাওয়ার ঝুঁকি কখনোই কীটনাশক সুপারিশ করে না।',
+              'Set your crop, inspect the field, review the evidence and follow the steps below. Weather risk alone never triggers a pesticide recommendation.',
+              'ফসল নির্বাচন করুন, মাঠ পর্যবেক্ষণ লিখুন, প্রমাণ যাচাই করুন এবং নিচের ধাপগুলো অনুসরণ করুন। শুধু আবহাওয়ার ঝুঁকি কখনোই বালাইনাশক প্রয়োগের নির্দেশনা নয়।',
             )}
           </p>
         </div>
       </header>
 
-      {/* Context bar: crop / field / target */}
+      {/* Essential context first; optional field details stay collapsed. */}
       <section className="pn-card context-bar">
         <label>
           <span>{t('Crop', 'ফসল')}</span>
@@ -389,44 +389,56 @@ export function ProtectionView() {
             ))}
           </select>
         </label>
-        <label>
-          <span>{t('Field (optional)', 'জমি (ঐচ্ছিক)')}</span>
-          <select value={fieldId ?? ''} onChange={(e) => setFieldId(e.target.value || null)}>
-            <option value="">{t('— crop only —', '— শুধু ফসল —')}</option>
-            {ledger.data.fields.map((f: FieldProfile) => (
-              <option key={f.id} value={f.id}>{f.name} · {f.crop}</option>
-            ))}
-          </select>
-        </label>
         <label className="grow">
-          <span>{t('Target pest / disease', 'লক্ষ্য পোকা / রোগ')}</span>
+          <span>{t('What problem do you see?', 'কী সমস্যা দেখছেন?')}</span>
           <input
             value={target}
             onChange={(e) => setTarget(e.target.value)}
-            placeholder={t('e.g. Rice Blast, Brown Planthopper', 'যেমন ধানের ব্লাস্ট, বাদামী গাছ ফড়িং')}
+            placeholder={t('Enter pest or disease, if known', 'পোকা বা রোগের নাম জানা থাকলে লিখুন')}
           />
         </label>
-        <label>
-          <span>{t('Growth stage', 'গতিশীল পর্যায়')}</span>
-          <select value={growthStage} onChange={(e) => setGrowthStage(e.target.value)}>
-            <option value="">{t('Unknown', 'অজানা')}</option>
-            {['sowing', 'seedling', 'vegetative', 'flowering', 'harvest'].map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
-        </label>
-        <label className="gps-toggle">
-          <input type="checkbox" checked={useGps} onChange={(e) => setUseGps(e.target.checked)} />
-          <span>{t('Use GPS', 'GPS ব্যবহার')}</span>
-        </label>
         <button className="pn-btn" onClick={runIntel} disabled={intelLoading}>
-          {intelLoading ? t('Refreshing…', 'হালনাগাদ হচ্ছে…') : t('Refresh intelligence', 'ইন্টেলিজেন্স হালনাগাদ')}
+          {intelLoading ? t('Updating…', 'হালনাগাদ হচ্ছে…') : t('Update field information', 'তথ্য হালনাগাদ করুন')}
         </button>
+        <details className="context-more">
+          <summary>{t('Optional field details', 'অতিরিক্ত তথ্য (ঐচ্ছিক)')}</summary>
+          <div className="context-more-grid">
+            <label>
+              <span>{t('Field', 'জমি')}</span>
+              <select value={fieldId ?? ''} onChange={(e) => setFieldId(e.target.value || null)}>
+                <option value="">{t('— crop only —', '— শুধু ফসল —')}</option>
+                {ledger.data.fields.map((f: FieldProfile) => (
+                  <option key={f.id} value={f.id}>{f.name} · {f.crop}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <span>{t('Growth stage', 'ফসলের পর্যায়')}</span>
+              <select value={growthStage} onChange={(e) => setGrowthStage(e.target.value)}>
+                <option value="">{t('Unknown', 'অজানা')}</option>
+                {['sowing', 'seedling', 'vegetative', 'flowering', 'harvest'].map((stage) => (
+                  <option key={stage} value={stage}>{stage}</option>
+                ))}
+              </select>
+            </label>
+            <label className="gps-toggle">
+              <input type="checkbox" checked={useGps} onChange={(e) => setUseGps(e.target.checked)} />
+              <span>{t('Use device location', 'ডিভাইসের অবস্থান ব্যবহার')}</span>
+            </label>
+          </div>
+        </details>
       </section>
 
       {/* ── SECTION A — Risk Overview ─────────────────────── */}
-      <section className="pn-card">
-        <h2>A · {t('Risk Overview', 'ঝুঁকির সারসংক্ষেপ')}</h2>
+      <details className="pn-card pn-step" open>
+        <summary className="pn-step-summary">
+          <span className="pn-step-number">01</span>
+          <div className="pn-step-heading">
+            <h2>{t('Risk Overview', 'ঝুঁকির সারসংক্ষেপ')}</h2>
+            <p>{t('Review crop and local conditions. Risk alone is never a spray instruction.', 'ফসল ও অবস্থান অনুযায়ী আবহাওয়ার তথ্য দেখুন। শুধু ঝুঁকি দেখে স্প্রে করবেন না।')}</p>
+          </div>
+          <span className="pn-step-chevron" aria-hidden="true">⌄</span>
+        </summary>
         {intelError && (
           <div className="callout warn">
             {t('Weather unavailable:', 'আবহাওয়া পাওয়া যাচ্ছে না:')} {intelError}
@@ -536,11 +548,18 @@ export function ProtectionView() {
             {' '}{t('source checksum', 'উৎস চেকসাম')} {meta.source.sha256.slice(0, 8)}…
           </p>
         )}
-      </section>
+      </details>
 
       {/* ── SECTION B — Field Scouting ────────────────────── */}
-      <section className="pn-card">
-        <h2>B · {t('Field Scouting', 'ক্ষেত পর্যবেক্ষণ')}</h2>
+      <details className="pn-card pn-step">
+        <summary className="pn-step-summary">
+          <span className="pn-step-number">02</span>
+          <div className="pn-step-heading">
+            <h2>{t('Field Scouting', 'ক্ষেত পর্যবেক্ষণ')}</h2>
+            <p>{t('Inspect the crop and record the symptoms you actually observe.', 'গাছ, পাতা ও বালাইয়ের লক্ষণ নিজে দেখে তথ্য লিখুন।')}</p>
+          </div>
+          <span className="pn-step-chevron" aria-hidden="true">⌄</span>
+        </summary>
         <p className="hint">
           {t(
             'Record what you see in the field. A scouting record is required before any chemical consideration.',
@@ -607,11 +626,18 @@ export function ProtectionView() {
             {latestScout.confirmedDiagnosis ? t('diagnosis confirmed', 'রোগ নিশ্চিত') : t('unconfirmed', 'অনিশ্চিত')}
           </div>
         )}
-      </section>
+      </details>
 
       {/* ── SECTION C — Protection Decision ───────────────── */}
-      <section className="pn-card">
-        <h2>C · {t('Protection Decision', 'সুরক্ষা সিদ্ধান্ত')}</h2>
+      <details className="pn-card pn-step">
+        <summary className="pn-step-summary">
+          <span className="pn-step-number">03</span>
+          <div className="pn-step-heading">
+            <h2>{t('Protection Decision', 'সুরক্ষা সিদ্ধান্ত')}</h2>
+            <p>{t('Review observations, evidence and missing information before acting.', 'পর্যবেক্ষণ, প্রমাণ ও অনুপস্থিত তথ্য দেখে পরবর্তী পদক্ষেপ বুঝুন।')}</p>
+          </div>
+          <span className="pn-step-chevron" aria-hidden="true">⌄</span>
+        </summary>
         <div className="verdict" style={{ background: statusStyle.bg, color: statusStyle.fg }}>
           <span className="status">{bn ? statusStyle.labelBn : statusStyle.label}</span>
           <span className="engine">protection-decision-1</span>
@@ -662,11 +688,18 @@ export function ProtectionView() {
         <button className="pn-btn secondary" onClick={saveDecision}>
           {t('Save decision to ledger', 'সিদ্ধান্ত লেজারে সংরক্ষণ')}
         </button>
-      </section>
+      </details>
 
       {/* ── SECTION D — Product Eligibility & Safety ──────── */}
-      <section className="pn-card">
-        <h2>D · {t('Product Eligibility & Safety', 'পণ্যের যোগ্যতা ও নিরাপত্তা')}</h2>
+      <details className="pn-card pn-step">
+        <summary className="pn-step-summary">
+          <span className="pn-step-number">04</span>
+          <div className="pn-step-heading">
+            <h2>{t('Product Eligibility & Safety', 'পণ্যের যোগ্যতা ও নিরাপত্তা')}</h2>
+            <p>{t('Check registration, crop-target match, dose and safety information.', 'নিবন্ধন, ফসল-বালাই মিল, মাত্রা ও নিরাপত্তা যাচাই করুন।')}</p>
+          </div>
+          <span className="pn-step-chevron" aria-hidden="true">⌄</span>
+        </summary>
         {!target.trim() ? (
           <p className="hint">{t('Enter a target pest/disease above to check products.', 'পণ্য দেখতে উপরে লক্ষ্য পোকা/রোগ লিখুন।')}</p>
         ) : eligibility.length === 0 ? (
@@ -725,11 +758,18 @@ export function ProtectionView() {
             ))}
           </details>
         )}
-      </section>
+      </details>
 
       {/* ── SECTION E — Application Record ────────────────── */}
-      <section className="pn-card">
-        <h2>E · {t('Application Record', 'প্রয়োগ রেকর্ড')}</h2>
+      <details className="pn-card pn-step">
+        <summary className="pn-step-summary">
+          <span className="pn-step-number">05</span>
+          <div className="pn-step-heading">
+            <h2>{t('Application Record', 'প্রয়োগ রেকর্ড')}</h2>
+            <p>{t('Record only what was actually applied in the field.', 'বাস্তবে যা প্রয়োগ করেছেন শুধু সেটিই সংরক্ষণ করুন।')}</p>
+          </div>
+          <span className="pn-step-chevron" aria-hidden="true">⌄</span>
+        </summary>
         <p className="hint">
           {t(
             'Record only what was actually applied. Dosage comes from the label — the app never invents it.',
@@ -783,11 +823,18 @@ export function ProtectionView() {
           {t('Record application', 'প্রয়োগ রেকর্ড করুন')}
         </button>
         {appSaved && <span className="saved-note">✓ {t('Recorded — add a follow-up outcome in section F', 'রেকর্ড হয়েছে — ফলাফল যোগ করুন (অংশ গ)')}</span>}
-      </section>
+      </details>
 
       {/* ── SECTION F — Outcome & Follow-up ───────────────── */}
-      <section className="pn-card">
-        <h2>F · {t('Outcome & Follow-up', 'ফলাফল ও ফলো-আপ')}</h2>
+      <details className="pn-card pn-step">
+        <summary className="pn-step-summary">
+          <span className="pn-step-number">06</span>
+          <div className="pn-step-heading">
+            <h2>{t('Outcome & Follow-up', 'ফলাফল ও ফলো-আপ')}</h2>
+            <p>{t('Record effectiveness and whether the problem returns.', 'পরবর্তী পর্যবেক্ষণে কার্যকারিতা ও পুনরায় বালাই দেখা যাচ্ছে কি না লিখুন।')}</p>
+          </div>
+          <span className="pn-step-chevron" aria-hidden="true">⌄</span>
+        </summary>
         {pendingOutcomes.length === 0 && ledger.data.applications.length === 0 ? (
           <p className="hint">{t('No applications recorded yet.', 'এখনো কোনো প্রয়োগ রেকর্ড নেই।')}</p>
         ) : pendingOutcomes.length === 0 ? (
@@ -877,7 +924,7 @@ export function ProtectionView() {
             )}
           </div>
         )}
-      </section>
+      </details>
 
       <p className="disclaimer">
         {t(

@@ -294,7 +294,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         h1a: 'পরের স্প্রে,',
         h1b: 'আর ভুল হবে না।',
         lede:
-          'একই পোকা, একই ওষুধ, একই ব্যর্থতা — এটা দুর্ভাগ্য নয়, এটা ভুলের চক্র। সমস্যা পণ্যে নয়; সমস্যা হলো বারবার একই ক্রিয়াপদ্ধতির (MoA) গ্রুপ স্প্রে করা — যতক্ষণ না পোকা আর মরে না।',
+          'ফসলের সমস্যা হলে আগে লক্ষণ দেখুন, মাঠের অবস্থা বুঝুন এবং সঠিক তথ্য যাচাই করুন। প্রয়োজন হলে নিবন্ধিত পণ্য, মাত্রা ও নিরাপত্তা নির্দেশনা এক জায়গায় খুঁজে নিন।',
         ctaSearch: 'পণ্য খুঁজুন',
         ctaCalc: 'ট্যাংক ক্যালকুলেটর',
         ctaShare: 'শেয়ার করুন',
@@ -353,7 +353,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         h1a: 'The next spray',
         h1b: "won't be a mistake.",
         lede:
-          "Same pest, same product, same failure — that's not bad luck, it's rotation debt. The problem isn't the product; it's spraying the same mode of action again and again until the pest stops dying.",
+          "Start with the crop problem. Check field conditions, understand the evidence, then review registered products, label directions and safety information before making a decision.",
         ctaSearch: 'Open product finder',
         ctaCalc: 'Tank calculator',
         ctaShare: 'Share the app',
@@ -422,22 +422,16 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <em>{copy.h1b}</em>
           </h1>
           <p className="acg-lede">{copy.lede}</p>
-          <div className="acg-cta">
-            <button className="acg-btn" onClick={() => go('database')}>
-              <Search size={16} /> {copy.ctaSearch}
+          <div className="acg-cta acg-cta--focused">
+            <button className="acg-btn" onClick={() => go('protection')}>
+              <ShieldCheck size={16} /> {bn ? 'ফসলের সমস্যা বুঝুন' : 'Understand a crop problem'}
               <ArrowUpRight size={15} />
             </button>
+            <button className="acg-btn acg-btn--outline" onClick={() => go('database')}>
+              <Search size={16} /> {bn ? 'নিবন্ধিত পণ্য খুঁজুন' : 'Find registered products'}
+            </button>
             <button className="acg-btn acg-btn--outline" onClick={() => go('calculator')}>
-              <Calculator size={16} /> {copy.ctaCalc}
-            </button>
-            <button className="acg-btn acg-btn--red" onClick={onOpenShareModal} title={copy.ctaShare}>
-              <Share2 size={16} /> {copy.ctaShare}
-            </button>
-            <button className="acg-btn acg-btn--gold" onClick={() => go('myfield')} title={copy.ctaLogSpray}>
-              <NotebookPen size={16} /> {copy.ctaLogSpray}
-            </button>
-            <button className="acg-btn acg-btn--outline" onClick={onOpenDrawer} title={copy.ctaGuide}>
-              <Compass size={16} /> {copy.ctaGuide}
+              <Calculator size={16} /> {bn ? 'ডোজ হিসাব করুন' : 'Calculate a dose'}
             </button>
           </div>
           <p className="acg-trust">
