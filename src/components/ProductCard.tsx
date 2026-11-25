@@ -16,12 +16,14 @@ import {
 import { exportSingleProductPDF } from '../utils/pdfExport';
 import { useLanguage } from '../context/LanguageContext';
 import { MOA_DATABASE } from '../data/moaData';
+import { MOA_TARGET_SITES } from '../data/moaTargetSites';
 import { atomicMoaGroups, canonicalMoaCode } from '../utils/moaUtils';
 
 // Canonical MoA index for target-site lookups (module scope, built once) —
-// same source the rotation planner and DatabaseView use.
+// MOA_DATABASE (curated) first, extension entries fill the remaining groups
+// so every atomic group in the catalogue resolves a target site.
 const MOA_INFO_BY_CANON = new Map(
-  MOA_DATABASE.map((m) => [canonicalMoaCode(m.code), m])
+  [...MOA_DATABASE, ...MOA_TARGET_SITES].map((m) => [canonicalMoaCode(m.code) ?? m.code, m])
 );
 
 interface ProductCardProps {
@@ -39,17 +41,27 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const { language, transCat, transRisk, transCrop, transPest, transDose, formatNum } = useLanguage();
 
-  // Target site: the product's own moaTargetSite field wins; otherwise the
-  // first atomic MoA group whose MOA_DATABASE entry carries a targetSite.
-  const targetSiteInfo = useMemo(() => {
-    if (product.moaTargetSite) return undefined;
-    for (const atom of atomicMoaGroups([product.moaCode, ...(product.moaCodes ?? [])])) {
-      const info = MOA_INFO_BY_CANON.get(atom);
-      if (info?.targetSite) return info;
+  // Target sites for EVERY atomic MoA group the product carries, each with
+  // its group code, so mixtures show all sites and single-group products stay
+  // compact. The product's own moaTargetSite field (if any) wins per-product.
+  const moaTargetEntries = useMemo(() => {
+    if (product.moaTargetSite) {
+      return [{
+        group: product.moaCode || '',
+        targetSite: product.moaTargetSite,
+        targetSiteBn: undefined as string | undefined,
+      }];
     }
-    return undefined;
+    return atomicMoaGroups([product.moaCode, ...(product.moaCodes ?? [])]).map((atom) => {
+      const info = MOA_INFO_BY_CANON.get(atom);
+      return {
+        group: atom,
+        targetSite: info?.targetSite,
+        targetSiteBn: info?.targetSiteBn,
+      };
+    }).filter((e) => e.targetSite);
   }, [product]);
-  const targetSite = product.moaTargetSite || targetSiteInfo?.targetSite;
+  const hasTargetSite = moaTargetEntries.length > 0;
 
   const getCategoryBadgeClass = (type: ChemicalProduct['type']) => {
     switch (type) {
@@ -137,17 +149,28 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <span className="truncate">{product.commonName}</span>
         </p>
 
-        {/* Target site — the biochemical/physiological site the MoA groups attack */}
-        {targetSite && (
-          <p className="text-[11px] text-slate-500 mt-1.5 flex items-start gap-1.5 leading-relaxed">
-            <Crosshair className="w-3.5 h-3.5 text-violet-600 shrink-0 mt-0.5" />
-            <span className="line-clamp-2">
-              <span className="font-semibold text-slate-600">
-                {language === 'bn' ? 'লক্ষ্যস্থান:' : 'Target site:'}
-              </span>{' '}
-              {language === 'bn' ? (targetSiteInfo?.targetSiteBn || targetSite) : targetSite}
+        {/* Target sites — the biochemical/physiological site each atomic MoA
+            group attacks, categorised by group code. Mixtures list one row
+            per component group; single-group products stay a compact line. */}
+        {hasTargetSite && (
+          <div className="text-[11px] mt-1.5 leading-relaxed">
+            <span className="text-slate-400 uppercase tracking-wider text-[10px] font-semibold flex items-center gap-1 mb-1">
+              <Crosshair className="w-3 h-3 text-violet-600" />
+              {language === 'bn' ? 'লক্ষ্যস্থান (গ্রুপভিত্তিক)' : 'Target Site (by MoA group)'}
             </span>
-          </p>
+            <ul className="space-y-1">
+              {moaTargetEntries.map((entry) => (
+                <li key={entry.group} className="flex items-start gap-1.5 text-slate-600">
+                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-violet-50 text-violet-700 border border-violet-100 font-mono tracking-wide shrink-0 mt-[1px]">
+                    {entry.group}
+                  </span>
+                  <span className="line-clamp-2">
+                    {language === 'bn' ? (entry.targetSiteBn || entry.targetSite) : entry.targetSite}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
 
         {/* Reg & Manufacturer */}

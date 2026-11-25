@@ -6,6 +6,7 @@ import { Navbar } from './components/Navbar';
 import { BottomNav } from './components/BottomNav';
 import { SearchSheet } from './components/SearchSheet';
 import { HomeView } from './components/HomeView';
+import { TabContentCollapsible } from './components/TabContentCollapsible';
 import { loadPersona, savePersona, type PersonaId } from './utils/userCategories';
 import { ShareModal } from './components/ShareModal';
 import { DocumentMeta } from './components/DocumentMeta';
@@ -518,6 +519,11 @@ export default function App() {
         )}
 
         {activeTab === 'database' && (
+          <TabContentCollapsible
+            tab="database"
+            title={language === 'bn' ? 'নিবন্ধিত বালাইনাশক ক্যাটালগ' : 'Registered pesticide catalogue'}
+            subtitle={language === 'bn' ? `${formatNum(products.length)} পণ্য` : `${formatNum(products.length)} products`}
+          >
           <Suspense fallback={<DatabaseSplash language={language} />}>
             <DatabaseView
               products={products}
@@ -531,10 +537,15 @@ export default function App() {
               onResetProducts={handleResetProducts}
             />
           </Suspense>
+          </TabContentCollapsible>
         )}
 
         {activeTab === 'calculator' && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+          <TabContentCollapsible
+            tab="calculator"
+            title={language === 'bn' ? 'মাত্রা ও ট্যাংক মিক্স স্টেশন' : 'Dosage & Tank Mix Station'}
+          >
             <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
@@ -565,10 +576,15 @@ export default function App() {
                 onSelectProduct={(p) => setCalcProduct(p)}
               />
             </Suspense>
+          </TabContentCollapsible>
           </div>
         )}
 
         {activeTab === 'rotation' && (
+          <TabContentCollapsible
+            tab="rotation"
+            title={language === 'bn' ? 'MoA ঘোরান পরিকল্পক' : 'MoA Rotation Planner'}
+          >
           <Suspense fallback={<DatabaseSplash language={language} />}>
             <RotationPlanner
               products={products}
@@ -577,24 +593,39 @@ export default function App() {
               onOpenSafety={(p) => setSafetyProduct(p)}
             />
           </Suspense>
+          </TabContentCollapsible>
         )}
 
         {activeTab === 'safety' && (
+          <TabContentCollapsible
+            tab="safety"
+            title={language === 'bn' ? 'নিরাপত্তা ও পিপিই' : 'Safety & PPE'}
+          >
           <Suspense fallback={<DatabaseSplash language={language} />}>
             <SafetyView
               products={products}
               onOpenSafetyModal={(p) => setSafetyProduct(p)}
             />
           </Suspense>
+          </TabContentCollapsible>
         )}
 
         {activeTab === 'guidebook' && (
+          <TabContentCollapsible
+            tab="guidebook"
+            title={language === 'bn' ? 'ক্ষেত হ্যান্ডবুক' : 'Field Guidebook'}
+          >
           <Suspense fallback={<DatabaseSplash language={language} />}>
             <Guidebook products={products} />
           </Suspense>
+          </TabContentCollapsible>
         )}
 
         {activeTab === 'alerts' && (
+          <TabContentCollapsible
+            tab="alerts"
+            title={language === 'bn' ? 'সতর্কতা কেন্দ্র' : 'Alert Center'}
+          >
           <Suspense fallback={<DatabaseSplash language={language} />}>
             <NotificationCenter
               alerts={alerts}
@@ -603,18 +634,35 @@ export default function App() {
               onDeleteAlert={handleDeleteAlert}
             />
           </Suspense>
+          </TabContentCollapsible>
         )}
 
-        {activeTab === 'intelligence' && (<Suspense fallback={<DatabaseSplash language={language} />}><PesticideIntelligenceView products={products} /></Suspense>)}
+        {activeTab === 'intelligence' && (
+          <TabContentCollapsible
+            tab="intelligence"
+            title={language === 'bn' ? 'কীটনাশক বুদ্ধিমত্তা' : 'Pesticide Intelligence'}
+          >
+            <Suspense fallback={<DatabaseSplash language={language} />}><PesticideIntelligenceView products={products} /></Suspense>
+          </TabContentCollapsible>
+        )}
 
         {/* ── PROTECTION — integrated protection workflow ── */}
         {activeTab === 'protection' && (
+          <TabContentCollapsible
+            tab="protection"
+            title={language === 'bn' ? 'সমন্বিত ফসল সুরক্ষা' : 'Integrated Protection'}
+          >
           <Suspense fallback={<DatabaseSplash language={language} />}>
             <ProtectionView />
           </Suspense>
+          </TabContentCollapsible>
         )}
 
         {activeTab === 'specialist' && (
+          <TabContentCollapsible
+            tab="specialist"
+            title={language === 'bn' ? 'বিশেষজ্ঞ অনুসন্ধান' : 'Specialist Search'}
+          >
           <Suspense fallback={<DatabaseSplash language={language} />}>
             <SpecialistSearchView
               products={products}
@@ -622,15 +670,21 @@ export default function App() {
               persona={persona}
             />
           </Suspense>
+          </TabContentCollapsible>
         )}
 
         {activeTab === 'myfield' && (
+          <TabContentCollapsible
+            tab="myfield"
+            title={language === 'bn' ? 'আমার মাঠ' : 'My Field'}
+          >
           <Suspense fallback={<DatabaseSplash language={language} />}>
             <MyFieldView
               products={products}
               onNavigateTab={(tab) => setActiveTab(tab)}
             />
           </Suspense>
+          </TabContentCollapsible>
         )}
       </main>
 
