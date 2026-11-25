@@ -1,0 +1,28 @@
+name: Compare attached CSV to live DB
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data_raw/attached_source.csv'
+      - 'scripts/compare_csv_to_live_db.py'
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Run comparison
+        run: |
+          python3 scripts/compare_csv_to_live_db.py \
+            --csv data_raw/attached_source.csv \
+            --json public/downloads/pesticide_database.json \
+            --out diff_report.json
+      - name: Upload diff report
+        uses: actions/upload-artifact@v4
+        with:
+          name: diff_report
+          path: diff_report.json
