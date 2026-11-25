@@ -17,7 +17,9 @@
     "validate:registry:check": "python3 scripts/validate_registry.py --check",
     "integrate:registry": "python3 scripts/integrate_canonical_registry.py",
     "integrate:registry:check": "python3 scripts/integrate_canonical_registry.py --check",
-    "regenerate:runtime": "python3 scripts/generate_runtime_json.py"
+    "regenerate:runtime": "python3 scripts/generate_runtime_json.py",
+    "compare:csv": "python3 scripts/compare_csv_to_live_db.py --csv data_raw/attached_source.csv --json public/downloads/pesticide_database.json --out /artifacts/diff_report.json",
+    "compare:csv:check": "python3 scripts/compare_csv_to_live_db.py --csv data_raw/attached_source.csv --json public/downloads/pesticide_database.json --out /tmp/kilo2/diff_report.json"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
