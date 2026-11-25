@@ -4,12 +4,12 @@ build_latest_database.py
 =========================
 
 Builds the unified "latest" pesticide database by merging:
-  1. Live pesticide-search API (8,959 records — /home/z/my-project/download/ptac_database.csv)
-  2. 86th PTAC gazette CSV (1,297 records — /home/z/my-project/download/ptac_gazette_86th_clean.csv)
-  3. 87th PTAC gazette CSV (507 records — /home/z/my-project/download/ptac_gazette_clean.csv)
-  4. MoA mapping audit CSV (5,437 records — /home/z/my-project/upload/moa_mapping_audit.csv)
-  5. MoA Mapping enriched XLSX (9 sample records — /home/z/my-project/upload/MoA_Mapping_*.xlsx)
-  6. MoA Rotation Quick Reference XLSX (72 records — /home/z/my-project/upload/MoA_Rotation_QuickReference.xlsx)
+  1. Live pesticide-search API (8,959 records — data_raw/external/download/ptac_database.csv)
+  2. 86th PTAC gazette CSV (1,297 records — data_raw/external/download/ptac_gazette_86th_clean.csv)
+  3. 87th PTAC gazette CSV (507 records — data_raw/external/download/ptac_gazette_clean.csv)
+  4. MoA mapping audit CSV (5,437 records — data_raw/external/upload/moa_mapping_audit.csv)
+  5. MoA Mapping enriched XLSX (9 sample records — data_raw/external/upload/MoA_Mapping_*.xlsx)
+  6. MoA Rotation Quick Reference XLSX (72 records — data_raw/external/upload/MoA_Rotation_QuickReference.xlsx)
   7. Existing repo data_raw CSVs (for crops/pests/dosage recommendations):
      - data_raw/all_pesticides.csv (7,252 rows — DAE recommendations)
      - data_raw/pesticide_policy_enrichment.csv (5,485 rows — policy/HHP/EU/formulation enrichment)

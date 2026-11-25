@@ -11,9 +11,11 @@ The original XLSX was published by the maintainer as a zip of HTML exports
 into CSVs that the build pipeline can use.
 
 Output:
-  /home/z/my-project/download/moa_master_products.csv     — 77 products with full MoA mapping
-  /home/z/my-project/download/moa_master_combinations.csv  — 19 combination products
-  /home/z/my-project/download/moa_master_ai_dictionary.csv — (if present in zip)
+  data_raw/external/download/moa_master_products.csv     — 77 products with full MoA mapping
+  data_raw/external/download/moa_master_combinations.csv  — 19 combination products
+  data_raw/external/download/moa_master_ai_dictionary.csv — (if present in zip)
+  (override with AGRICHEM_UPLOAD_DIR / AGRICHEM_DOWNLOAD_DIR; defaults are
+  repo-relative so a fresh clone runs without those directories)
 """
 
 import csv
@@ -21,8 +23,9 @@ import os
 from pathlib import Path
 from bs4 import BeautifulSoup
 
-UNZIP_DIR = Path("/home/z/my-project/upload/pest_moa_unzipped")
-DOWNLOAD_DIR = Path("/home/z/my-project/download")
+REPO = Path(__file__).resolve().parent.parent
+UNZIP_DIR = Path(os.environ.get("AGRICHEM_UPLOAD_DIR", REPO / "data_raw" / "external" / "upload")) / "pest_moa_unzipped"
+DOWNLOAD_DIR = Path(os.environ.get("AGRICHEM_DOWNLOAD_DIR", REPO / "data_raw" / "external" / "download"))
 DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 OUT_PRODUCTS = DOWNLOAD_DIR / "moa_master_products.csv"

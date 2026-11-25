@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security & safety-critical reports
+    url: https://github.com/moniruzjaman/AgriChem-Guide-Pest-Control-Database/security
+    about: Wrong doses, missing restrictions or exploitable bugs must NOT go into a public issue — use private vulnerability reporting (see SECURITY.md).

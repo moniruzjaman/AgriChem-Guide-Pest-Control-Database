@@ -23,8 +23,11 @@ import pandas as pd
 import pdfplumber
 
 REPO = Path(__file__).resolve().parent.parent
-DOWNLOAD_DIR = Path(os.environ.get("AGRICHEM_DOWNLOAD_DIR", "/home/z/my-project/download"))
-UPLOAD_DIR = Path(os.environ.get("AGRICHEM_UPLOAD_DIR", "/home/z/my-project/upload"))
+# Optional external inputs, same convention as build_latest_database.py:
+# repo-relative defaults so a fresh clone runs; point them at the maintainer's
+# working copies with AGRICHEM_DOWNLOAD_DIR / AGRICHEM_UPLOAD_DIR when needed.
+DOWNLOAD_DIR = Path(os.environ.get("AGRICHEM_DOWNLOAD_DIR", REPO / "data_raw" / "external" / "download"))
+UPLOAD_DIR = Path(os.environ.get("AGRICHEM_UPLOAD_DIR", REPO / "data_raw" / "external" / "upload"))
 
 LATEST_FLAT_CSV = REPO / "public" / "downloads" / "pesticide_database_latest.csv"
 AUDIT_CSV = UPLOAD_DIR / "moa_mapping_audit.csv"

@@ -1,7 +1,9 @@
 {
-  "name": "react-example",
+  "name": "pesticidenext",
+  "version": "1.0.0",
+  "description": "PesticideNext \u2014 bilingual (Bangla/English) pesticide database, dosage calculator and MoA rotation planner for Bangladeshi agriculture",
+  "license": "MIT",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",

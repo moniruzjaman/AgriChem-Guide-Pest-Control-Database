@@ -34,7 +34,7 @@ A new section near the bottom of the home tab with 4 large download buttons (XLS
 ### 🔧 Build pipeline
 - New `scripts/build_latest_database.py` — builds the unified latest DB + XLSX/PDF/CSV deliverables from the live API + 86th/87th gazettes + MoA audit (idempotent, safe to re-run on every PTAC update)
 - New `scripts/regenerate_data_modules.py` — regenerates the TypeScript data modules from the updated CSVs (uses repo-relative paths)
-- Both scripts use `Path(__file__).resolve().parent.parent` for the repo root and `AGRICHEM_DOWNLOAD_DIR` / `AGRICHEM_UPLOAD_DIR` env vars (defaulting to `/home/z/my-project/{download,upload}`) so they work in any environment
+- Both scripts use `Path(__file__).resolve().parent.parent` for the repo root and `AGRICHEM_DOWNLOAD_DIR` / `AGRICHEM_UPLOAD_DIR` env vars (defaulting to repo-relative `data_raw/external/{download,upload}` defaults (overridable)) so they work in any environment
 
 ### ⚙️ PWA / service worker
 - Bumped `cacheId` from `pn-v3` to `pn-v4` so returning users get the fresh precache on next boot (with `cleanupOutdatedCaches` purging the old `pn-v3-precache-v2`)

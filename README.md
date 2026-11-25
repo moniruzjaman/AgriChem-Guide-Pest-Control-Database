@@ -7,6 +7,8 @@ A bilingual (Bangla / English) Progressive Web App that helps farmers, dealers, 
 
 **Live:** [pesticide.krishiai.live](https://pesticide.krishiai.live/) (Vercel) · **Preview:** [agrichem-guide.vercel.app](https://agrichem-guide.vercel.app/)
 
+**Repo map:** [INDEX.md](INDEX.md) · **History:** [CHANGELOG.md](CHANGELOG.md) · **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md) · **License:** [MIT](LICENSE)
+
 ---
 
 ## ✨ Key Features
@@ -237,4 +239,32 @@ PesticideNext is an informational aid. Always follow the product label and Depar
 
 ## 📝 License
 
-This project is shared for educational and field-extension purposes. Verify current product labels and DAE registrations before any field application.
+Code and documentation are released under the **MIT License** — see [LICENSE](LICENSE). The DAE/PTAC registers and the IRAC / FRAC / HRAC classifications that the app repackages belong to their respective publishers and are not relicensed by the MIT grant (see the data attribution notice in [LICENSE](LICENSE)).
+
+PesticideNext is an informational aid, not a substitute for the label: always follow the product label and Department of Agricultural Extension (DAE) regulations, and consult a licensed agronomist or your local Sub-Assistant Agriculture Officer before applying any chemical.
+
+## 🧭 Repository map & contributing
+
+- [INDEX.md](INDEX.md) — a complete map of every directory and file, and where to make common changes.
+- [CHANGELOG.md](CHANGELOG.md) — release history.
+- [CONTRIBUTING.md](CONTRIBUTING.md) — ground rules (especially for data corrections), dev setup and the pre-PR checklist.
+- [SECURITY.md](SECURITY.md) — how to report safety-critical data errors or vulnerabilities.
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) — community standards.
+
+## 🗂️ Table of Contents
+
+1. [Key Features](#-key-features)
+2. [Design language](#-design-language)
+3. [Tech Stack](#-tech-stack)
+4. [Project Structure](#-project-structure)
+5. [Getting Started](#-getting-started)
+6. [Environment Variables](#%EF%B8%8F-environment-variables)
+7. [Data Pipeline](#-data-pipeline)
+8. [Canonical MoA layer](#canonical-moa-layer)
+9. [Deployment & Domains](#-deployment--domains)
+10. [How OG URL rewriting works](#how-og-url-rewriting-works)
+11. [PWA cache invalidation](#pwa-cache-invalidation)
+12. [Partners](#-partners)
+13. [Disclaimer](#%EF%B8%8F-disclaimer)
+14. [License](#%EF%B8%8F-license)
+15. [Repository map & contributing](#%EF%B8%8F-repository-map--contributing)
